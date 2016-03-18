@@ -1,5 +1,14 @@
 syntax: glob
 *.class
 */bin/*
+*/doc/*
 */Desktop.ini
 */Thumbs.db
+.checkstyle
+.classpath
+.pmd
+.project
+style.xml
+pmd.xml
+Save.txt
+Statistics.txt
