@@ -1,4 +1,4 @@
-package it.unibo.UnOrRPG.model.MenuAndBattle;
+package it.unibo.unori.model.menu;
 
 import java.io.File;
 

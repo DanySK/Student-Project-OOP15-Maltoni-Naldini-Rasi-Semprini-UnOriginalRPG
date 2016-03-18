@@ -1,9 +1,9 @@
-package it.unibo.UnOrRPG.controller;
+package it.unibo.unori.controller;
 
 public class MainController implements Control {
 
 	@Override
-	public void start() {
+	public void begin() {
 		// TODO Auto-generated method stub
 
 	}

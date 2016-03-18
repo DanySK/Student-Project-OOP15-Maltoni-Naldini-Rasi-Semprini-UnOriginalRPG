@@ -1,4 +1,4 @@
-package it.unibo.UnOrRPG.model.MapsAndCharacters;
+package it.unibo.unori.model.maps;
 
 import java.io.Serializable;
 
