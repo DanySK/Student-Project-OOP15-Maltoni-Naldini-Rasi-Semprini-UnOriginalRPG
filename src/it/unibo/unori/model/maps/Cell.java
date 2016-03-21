@@ -31,9 +31,18 @@ public interface Cell extends Serializable {
 
     /**
      * Set a specific Map in the cell as map to link.
+     * 
      * @param map
-     *          the map to link
+     *            the map to link
      */
     public void setLinkedMap(Map map);
+
+    /**
+     * Set a particular frame on the cell.
+     * 
+     * @param frame
+     *            frame to set from the view
+     */
+    public void setFrame(Object frame);
 
 }
