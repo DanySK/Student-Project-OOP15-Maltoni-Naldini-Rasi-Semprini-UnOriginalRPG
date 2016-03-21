@@ -2,6 +2,8 @@ package it.unibo.unori.model.maps;
 
 import java.io.Serializable;
 
+import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
+
 /**
  * 
  * A interface to define the basic method of a cell. A cell is the basic
@@ -27,7 +29,7 @@ public interface Cell extends Serializable {
      * 
      * @return the state of the Cell
      */
-    public Object getState();
+    public CellState getState();
 
     /**
      * Set a specific Map in the cell as map to link.
@@ -44,5 +46,14 @@ public interface Cell extends Serializable {
      *            frame to set from the view
      */
     public void setFrame(Object frame);
+
+    /**
+     * Get the map contained in the cell , if present.
+     * 
+     * @return the map contained in the cell
+     * @throws NoMapFoundException
+     *             notify the type of Exception
+     */
+    public Map getCellMap() throws NoMapFoundException;
 
 }
