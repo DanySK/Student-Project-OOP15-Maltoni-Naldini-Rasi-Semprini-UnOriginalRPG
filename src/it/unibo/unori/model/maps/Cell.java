@@ -20,7 +20,7 @@ public interface Cell extends Serializable {
      * @param state
      *            State to set on the cell
      */
-    public void setState(Object state);
+    public void setState(CellState state);
 
     /**
      * Get the state of the cell.
