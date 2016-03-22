@@ -6,7 +6,10 @@ import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
 
 /**
  * Implementation of the Cell interface.
- * 
+ * Has 3 private field : frame, state,and maptolink
+ * frame is the object to graphical represent the cell
+ * state is the current state of the cell 
+ * maptolink is the optional map to load if the party goes to a linking cell
  *
  */
 public class CellImpl implements Cell {

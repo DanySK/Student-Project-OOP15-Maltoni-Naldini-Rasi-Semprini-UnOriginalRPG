@@ -55,7 +55,7 @@ public interface Cell extends Serializable {
      *             notify the type of Exception
      */
     public Map getCellMap() throws NoMapFoundException;
-    
+
     /**
      * Return the frame associated with the Cell.
      * @return
