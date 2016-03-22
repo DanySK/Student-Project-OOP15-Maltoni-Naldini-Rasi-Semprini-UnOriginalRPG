@@ -8,4 +8,12 @@ package it.unibo.unori.model.maps.cell;
  */
 public class CellFactory {
 
+    /**
+     * create and return a Free cell object.
+     * @return
+     *        a standard free cell 
+     */
+    public Cell getFreeCell() {
+        return new CellImpl(new Object(), CellState.FREE);
+    }
 }
