@@ -1,6 +1,8 @@
 package it.unibo.unori.controller;
-
-public class MainController implements Control {
+/**
+ *
+ */
+public class StateMachine implements Controller {
 
     @Override
     public void begin() {
