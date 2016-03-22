@@ -46,6 +46,7 @@ public class CellImpl implements Cell {
        this.maptolink = Optional.of(map);
     }
 
+
     @Override
     public void setState(final CellState state) {
         this.state = state;
@@ -57,21 +58,26 @@ public class CellImpl implements Cell {
     }
 
     @Override
-    public void setLinkedMap(Map map) {
-        // TODO Auto-generated method stub
-
+    public void setLinkedMap(final Map map) {
+       this.maptolink = Optional.of(map);
     }
 
     @Override
-    public void setFrame(Object frame) {
-        // TODO Auto-generated method stub
-
+    public void setFrame(final Object frame) {
+        this.frame = frame;
     }
 
     @Override
     public Map getCellMap() throws NoMapFoundException {
-        // TODO Auto-generated method stub
-        return null;
+        if (!this.maptolink.isPresent()) {
+            throw new NoMapFoundException();
+        }
+        return this.maptolink.get();
+    }
+
+    @Override
+    public Object getFrame() {
+        return this.frame;
     }
 
 }
