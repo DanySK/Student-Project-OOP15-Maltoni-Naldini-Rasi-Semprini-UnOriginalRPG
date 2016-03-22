@@ -2,7 +2,7 @@ package it.unibo.unori.model.maps.cell;
 
 import java.io.Serializable;
 
-import it.unibo.unori.model.maps.Map;
+import it.unibo.unori.model.maps.GameMap;
 import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
 
 /**
@@ -38,7 +38,7 @@ public interface Cell extends Serializable {
      * @param map
      *            the map to link
      */
-    public void setLinkedMap(Map map);
+    public void setLinkedMap(GameMap map);
 
     /**
      * Set a particular frame on the cell.
@@ -55,7 +55,7 @@ public interface Cell extends Serializable {
      * @throws NoMapFoundException
      *             notify the type of Exception
      */
-    public Map getCellMap() throws NoMapFoundException;
+    public GameMap getCellMap() throws NoMapFoundException;
 
     /**
      * Return the frame associated with the Cell.

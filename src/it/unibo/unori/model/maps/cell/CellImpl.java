@@ -2,7 +2,7 @@ package it.unibo.unori.model.maps.cell;
 
 import java.util.Optional;
 
-import it.unibo.unori.model.maps.Map;
+import it.unibo.unori.model.maps.GameMap;
 import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
 
 /**
@@ -21,7 +21,7 @@ public class CellImpl implements Cell {
     private static final long serialVersionUID = -8981471810277191248L;
     private Object frame;
     private CellState state;
-    private Optional<Map> maptolink = Optional.empty();
+    private Optional<GameMap> maptolink = Optional.empty();
 
     /**
      * Basic Constructor for CellImpl.
@@ -45,7 +45,7 @@ public class CellImpl implements Cell {
      * @param map
      *              the map to associate
      */
-    public CellImpl(final Object frame, final CellState state, final Map map) {
+    public CellImpl(final Object frame, final CellState state, final GameMap map) {
        this(frame, state);
        this.maptolink = Optional.of(map);
     }
@@ -62,7 +62,7 @@ public class CellImpl implements Cell {
     }
 
     @Override
-    public void setLinkedMap(final Map map) {
+    public void setLinkedMap(final GameMap map) {
        this.maptolink = Optional.of(map);
     }
 
@@ -72,7 +72,7 @@ public class CellImpl implements Cell {
     }
 
     @Override
-    public Map getCellMap() throws NoMapFoundException {
+    public GameMap getCellMap() throws NoMapFoundException {
         if (!this.maptolink.isPresent()) {
             throw new NoMapFoundException();
         }
