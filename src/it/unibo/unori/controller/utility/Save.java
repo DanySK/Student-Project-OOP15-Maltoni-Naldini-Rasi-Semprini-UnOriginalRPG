@@ -8,13 +8,26 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+/**
+ * Utility class that provides static methods for load/save data from/to file.
+ */
+public final class Save {
+    /**
+     * Static parameter for standard text save file.
+     */
+    public static final String SAVE_FILE = "Save.txt";
 
-public class Save {
-    public static final String SETTINGS_FILE = "Settings.txt";
-    public static final String STATISTICS_FILE = "Statistics.txt";
+    /**
+     * Static parameter for standard text statistics file.
+     */
+    public static final String STATISTICS_FILE = "Stats.txt";
 
     private static final String STARTING_STRING = "--START--";
     private static final String ENDING_STRING = "--END--";
+
+    private Save() {
+        //Empty private constructor, because this is an utility class
+    }
 
     /**
      * This method loads a text file and returns a list of lines contained
@@ -24,7 +37,7 @@ public class Save {
      * 
      * @param fileName
      *            the file name in default path; probably you should use
-     *            {@link #SETTINGS_FILE} or {@link #STATISTICS_FILE}
+     *            {@link #SAVE_FILE} or {@link #STATISTICS_FILE}
      * @return a list of the lines of the requested file
      * @throws CorruptedUtilityFileException
      *             if the file exists but does not contain the starting and/or
@@ -32,43 +45,45 @@ public class Save {
      * @throws IOException
      *             if the file does not exist
      */
-    public static List<String> loadFromUtilityFile(String fileName) throws CorruptedUtilityFileException, IOException {
+    public static List<String> loadFromUtilityFile(final String fileName) throws CorruptedUtilityFileException, IOException {
         ArrayList<String> lines;
-        List<String> outputLines = new ArrayList<>();
+        final List<String> outputLines = new ArrayList<>();
         int i = 0;
         boolean start = false;
 
         lines = new ArrayList<String>(
                         Files.lines(FileSystems.getDefault().getPath(fileName)).collect(Collectors.toList()));
-        while (start == false) {
+        while (!start) {
             if (lines.get(i).equals(STARTING_STRING)) {
                 start = true;
             } else if (i < lines.size()) {
                 i++;
-            }
-            /* if starting string is not found, throws exception */
-            else {
+            } else { /* if starting string is not found, throws exception */
                 throw new CorruptedUtilityFileException();
             }
         }
 
-        while (start == true) {
+        while (start) {
             if (lines.get(i).equals(ENDING_STRING)) {
                 start = false;
             } else if (i < lines.size()) {
                 outputLines.add(lines.get(i));
                 i++;
-            }
-            /* if ending string is not found, throws exception */
-            else {
+            } else { /* if ending string is not found, throws exception */
                 throw new CorruptedUtilityFileException();
             }
         }
         return outputLines;
     }
 
-    public static void createSettingsFile() throws IOException {
-        PrintWriter output = new PrintWriter(new FileWriter(SETTINGS_FILE));
+    /**
+     * This method creates a new Save file in default position with all parameters initialized to 0.
+     * 
+     * @throws IOException if the named file exists but is a directory rather than a regular file, does not exist but 
+     * cannot be created, or exist but cannot be opened
+     */
+    public static void createSaveFile() throws IOException {
+        final PrintWriter output = new PrintWriter(new FileWriter(SAVE_FILE));
 
         output.print(new StringBuilder().append("--START--").append('\n').append("currentMap:0").append('\n')
                         .append("mapPosition:0,0").append('\n').append("char1:,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
@@ -79,8 +94,14 @@ public class Save {
         output.close();
     }
 
-    public static void createStatisticsFile() throws IOException {
-        PrintWriter output = new PrintWriter(new FileWriter(STATISTICS_FILE));
+    /**
+     * This method creates a new Statistics file in default position with all statistics initialized to 0.
+     * 
+     * @throws IOException if the named file exists but is a directory rather than a regular file, does not exist but 
+     * cannot be created, or exist but cannot be opened
+     */
+    public static void createStatsFile() throws IOException {
+        final PrintWriter output = new PrintWriter(new FileWriter(STATISTICS_FILE));
 
         output.print(new StringBuilder().append("--START--").append('\n').append("newGames:0").append('\n')
                         .append("monstersMet:0").append('\n').append("monstersKilled:0").append('\n').append("bosses:0")
