@@ -9,7 +9,7 @@ public class InGameMenuState implements GameState {
      * {@inheritDoc}
      */
     @Override
-    public void update(final float elapsedTime) {
+    public void update(final double elapsedTime) {
         // TODO Auto-generated method stub
 
     }

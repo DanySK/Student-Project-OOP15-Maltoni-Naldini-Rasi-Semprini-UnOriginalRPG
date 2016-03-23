@@ -1,34 +1,55 @@
 package it.unibo.unori.controller;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.Stack;
+
 import it.unibo.unori.controller.state.GameState;
+import it.unibo.unori.controller.state.MainMenuState;
 
 public class StateMachineStack {
-    Map<String, GameState> mStates = new HashMap<>();
-    LinkedList<GameState> mStack = new LinkedList<>();
+    private final Stack<GameState> gsStack = new Stack<>();
 
-    public void update(float elapsedTime) {
-        // TODO check method
-        GameState top = mStack.peek();
-        top.update(elapsedTime);
+    public StateMachineStack() {
+        this.gsStack.push(new MainMenuState());
     }
 
+    /**
+     * The method calls the update method of the GameState at the top of the
+     * stack.
+     * 
+     * @param elapsedTime
+     *            the time elapsed from start of the game state
+     */
+    public void update(final double elapsedTime) {
+        // TODO check method
+        gsStack.peek().update(elapsedTime);
+    }
+
+    /**
+     * The method calls the render method of the GameState at the top of the
+     * stack.
+     */
     public void render() {
         // TODO check method
-        GameState top = mStack.peek();
-        top.render();
+        gsStack.peek().render();
     }
 
-    public void push(String name) {
+    /**
+     * Push a GameState at the top of the stack.
+     * 
+     * @param state the state to push
+     */
+    public void push(final GameState state) {
         // TODO check method
-        GameState state = mStates.get(name);
-        mStack.push(state);
+        gsStack.push(state);
     }
 
+    /**
+     * Pop a GameState from the top of the stack.
+     * 
+     * @return the state popped
+     */
     public GameState pop() {
         // TODO check method
-        return mStack.pop();
+        return gsStack.pop();
     }
 }

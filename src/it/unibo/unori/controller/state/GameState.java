@@ -10,7 +10,7 @@ public interface GameState {
      * 
      * @param elapsedTime the time elapsed from start of the game state
      */
-    public void update(final float elapsedTime);
+    public void update(final double elapsedTime);
 
     /**
      * Draws graphics information each frame of the game. 
