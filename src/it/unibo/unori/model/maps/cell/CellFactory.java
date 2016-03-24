@@ -22,7 +22,7 @@ public class CellFactory {
      * @return
      *         a standard blocked cell object
      */
-    public Cell getBlockedCell() {
+    public  Cell getBlockedCell() {
         return new CellImpl(new Object(), CellState.BLOCKED);
     }
 }
