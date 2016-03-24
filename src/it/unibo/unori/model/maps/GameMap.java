@@ -53,7 +53,7 @@ public interface GameMap extends Serializable {
      * @throws IllegalArgumentException if the row does not exist
      */
     public List<Cell> getRow(int posX) throws IllegalArgumentException;
-    
+
     /**
      * Get , as list , the column specified.
      * @param posY
