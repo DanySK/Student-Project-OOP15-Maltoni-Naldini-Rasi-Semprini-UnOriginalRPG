@@ -16,4 +16,13 @@ public class CellFactory {
     public Cell getFreeCell() {
         return new CellImpl(new Object(), CellState.FREE);
     }
+
+    /**
+     * create and return a Blocked cell object.
+     * @return
+     *         a standard blocked cell object
+     */
+    public Cell getBlockedCell() {
+        return new CellImpl(new Object(), CellState.BLOCKED);
+    }
 }
