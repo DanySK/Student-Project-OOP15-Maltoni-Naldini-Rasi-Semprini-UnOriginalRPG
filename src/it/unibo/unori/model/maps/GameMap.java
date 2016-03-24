@@ -14,15 +14,6 @@ import it.unibo.unori.model.maps.cell.Cell;
 public interface GameMap extends Serializable {
 
     /**
-     * Set the dimension of the current map. 
-     * @param width
-     *              the width of map in terms of number of cells
-     * @param length
-     *               the length of map in terms of number of cells
-     */
-    public void setDimension(int width, int length);
-
-    /**
      * Get the cell at the specified position.
      * @param posX
      *              X coordinate of the cell to get
