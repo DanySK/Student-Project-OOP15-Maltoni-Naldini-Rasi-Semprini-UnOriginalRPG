@@ -16,7 +16,7 @@ public final class View extends JFrame {
 	private static final String title = "UnRPG";
 	public static final Dimension size = new Dimension(800, 600);
 
-	public final JLayeredPane layeredPane;
+	private final JLayeredPane layeredPane;
 	private final Stack<GameLayer> layerStack = new Stack<>();
 
 	/**
