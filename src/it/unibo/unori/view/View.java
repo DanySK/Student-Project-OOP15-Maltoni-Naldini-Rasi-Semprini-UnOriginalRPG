@@ -9,7 +9,7 @@ import it.unibo.unori.view.layers.*;
 
 /**
  * 
- * The View class displays and contains game layers, behaving like a stack
+ * The View class displays and contains game layers, it behaves like a stack
  *
  */
 public final class View extends JFrame {	
@@ -20,7 +20,7 @@ public final class View extends JFrame {
 	private final Stack<GameLayer> layerStack = new Stack<>();
 
 	/**
-	 * Creates and instance of View
+	 * Creates an instance of View
 	 */
 	public View() {
 		super(title);
