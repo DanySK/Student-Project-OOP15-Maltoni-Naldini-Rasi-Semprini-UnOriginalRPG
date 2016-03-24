@@ -34,7 +34,8 @@ public class MainMenuLayer extends GameLayer {
 
 	public static void main(final String... args) throws MidiUnavailableException,
 	                                                     IOException,
-	                                                     InvalidMidiDataException {
+	                                                     InvalidMidiDataException,
+	                                                     InterruptedException {
 		MainMenuLayer layer = new MainMenuLayer();
 
 		View view = new View();
@@ -44,6 +45,8 @@ public class MainMenuLayer extends GameLayer {
 		InputStream is = new BufferedInputStream(new FileInputStream(new File("res/9.mid")));
 		sequencer.setSequence(is);
 		sequencer.open();
+		
+		Thread.sleep(2000);
 		sequencer.start();
 	}
 }
