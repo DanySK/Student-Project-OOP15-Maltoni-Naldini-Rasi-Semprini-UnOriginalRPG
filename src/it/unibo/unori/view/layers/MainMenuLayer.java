@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import it.unibo.unori.view.*;
 
 public class MainMenuLayer extends GameLayer {
-	
+
 	/**
 	 * Creates an instance of the MainMenu layer
 	 */
@@ -17,10 +17,10 @@ public class MainMenuLayer extends GameLayer {
 	/**
 	 * Draw the content of the main menu
 	 */
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-    }
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+	}
 
 	public static void main(final String... args) {
 		MainMenuLayer layer = new MainMenuLayer();
