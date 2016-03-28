@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import org.junit.Test;
 
+import it.unibo.unori.model.maps.cell.CellFactory;
 import it.unibo.unori.model.maps.cell.CellState;
 
 /**
@@ -62,6 +63,17 @@ public class MapTest {
         catch (Exception e) {
             fail("System throws another Exception");
         }
+    }
+
+    /**
+     * test the setting methods of the GameMap.
+     */
+    @Test
+    public void testCellSetting() {
+        final GameMap map = new GameMapImpl();
+        final CellFactory fc = new CellFactory();
+        map.setCell(50, 50, fc.getBlockedCell());
+        assertEquals(map.getCell(50, 50).getState(), CellState.BLOCKED);
     }
 
 }
