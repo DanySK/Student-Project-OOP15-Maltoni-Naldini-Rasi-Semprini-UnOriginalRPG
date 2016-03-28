@@ -1,5 +1,6 @@
 package it.unibo.unori.model.maps;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -29,8 +30,8 @@ public class GameMapImpl implements GameMap {
      * the standard dimension of a map is 100 x 100
      */
     public GameMapImpl() {
-        this.floorMap = new Cell[100][100];
-        this.initializeMap(STDCELLS);
+        this.floorMap = new Cell[STDCELLS][STDCELLS];
+        this.initializeMap();
     }
 
     /**
@@ -41,21 +42,23 @@ public class GameMapImpl implements GameMap {
      *              length of the map to build
      */
     public GameMapImpl(final int width, final int length) {
-        this.floorMap = new Cell[length][width];
-        this.initializeMap(width);
+        this.floorMap = new Cell[width][length];
+        this.initializeMap();
     }
 
-    @SuppressWarnings("unused")
+
     /**
      * private method to initialize the map
      * @param size
      *              the size of the row of the matrix
-     */
-    private void initializeMap(final int size) {
-        for (Cell[] elem : this.floorMap) {
-            elem = Stream.generate(new CellFactory() :: getFreeCell).limit(size)
-                                                    .toArray(Cell[] :: new);
+     */ 
+    private void initializeMap() {
+        for (int i = 0; i < this.floorMap.length; i++) {
+            this.floorMap[i] = Stream.generate(new CellFactory() :: getFreeCell)
+                                     .limit(this.floorMap[0].length)
+                                     .toArray(Cell[] :: new);
         }
+
     }
 
     /**
@@ -64,10 +67,10 @@ public class GameMapImpl implements GameMap {
      *              the first position
      * @param pos2
      *              the second position
-     * @return true if pos1 is greater than pos2
+     * @return true if pos1 is greater than pos2, or if pos1 is lower than 0
      */
     private boolean checkPosition(final int pos1, final int pos2) {
-        return pos1 > pos2;
+        return (pos1 >= pos2 || pos1 < 0);
     }
 
     @Override
@@ -102,7 +105,11 @@ public class GameMapImpl implements GameMap {
         if (checkPosition(posY, this.floorMap[0].length)) {
             throw new IllegalArgumentException();
         }
-        return Arrays.asList(this.floorMap[posY]);
+        final List<Cell> list = new ArrayList<>();
+        for (int i = 0; i < this.floorMap.length; i++) {
+           list.add(this.floorMap[i][posY]); 
+        }
+        return list;
     }
 
 }
