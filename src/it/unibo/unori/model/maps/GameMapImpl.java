@@ -67,10 +67,10 @@ public class GameMapImpl implements GameMap {
      *              the first position
      * @param pos2
      *              the second position
-     * @return true if pos1 is greater than pos2, or if pos1 is lower than 0
+     * @return true if pos1 is greater than pos2 or if pos1 is lower than 0.
      */
     private boolean checkPosition(final int pos1, final int pos2) {
-        return (pos1 >= pos2 || pos1 < 0);
+        return pos1 >= pos2 || pos1 < 0;
     }
 
     @Override
@@ -110,6 +110,26 @@ public class GameMapImpl implements GameMap {
            list.add(this.floorMap[i][posY]); 
         }
         return list;
+    }
+
+    @Override
+    public void setRow(final int posX, final Cell cell) throws IllegalArgumentException {
+        if (checkPosition(posX, this.floorMap.length)) {
+            throw new IllegalArgumentException();
+        }
+        for (int i = 0; i < this.floorMap[posX].length; i++) {
+            this.floorMap[posX][i] = cell;
+        }
+    }
+
+    @Override
+    public void setColumn(final int posY, final Cell cell) throws IllegalArgumentException {
+        if (checkPosition(posY, this.floorMap[0].length)) {
+            throw new IllegalArgumentException();
+        }
+        for (int i = 0; i < this.floorMap.length; i++) {
+            this.floorMap[i][posY] = cell;
+        }
     }
 
 }

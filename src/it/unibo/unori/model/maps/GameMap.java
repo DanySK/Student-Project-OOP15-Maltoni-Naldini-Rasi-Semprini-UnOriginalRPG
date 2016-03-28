@@ -54,4 +54,25 @@ public interface GameMap extends Serializable {
      */
     public List<Cell> getColumn(int posY) throws IllegalArgumentException;
 
+    /**
+     * Set an entire row with an instance of a Cell.
+     * it may be useful to set the border cell of the map
+     * @param posX
+     *              the row to set 
+     *@param cell
+     *              the cell to set 
+     *@throws IllegalArgumentException if the row index is referred to a non existing row
+     */
+    public void setRow(int posX, Cell cell) throws IllegalArgumentException;
+
+    /**
+     * Set an entire  column with an instance of a Cell.
+     * @param posY
+     *          the column to set
+     * @param cell
+     *          the cell to set
+     * @throws IllegalArgumentException if the row index is referred to a non existing column
+     */
+    public void setColumn(int posY, Cell cell)throws IllegalArgumentException;
+
 }

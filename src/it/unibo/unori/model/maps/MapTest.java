@@ -66,7 +66,7 @@ public class MapTest {
     }
 
     /**
-     * test the setting methods of the GameMap.
+     * test the setting methods of the GameMap for both the single cell and the group.
      */
     @Test
     public void testCellSetting() {
@@ -74,6 +74,10 @@ public class MapTest {
         final CellFactory fc = new CellFactory();
         map.setCell(50, 50, fc.getBlockedCell());
         assertEquals(map.getCell(50, 50).getState(), CellState.BLOCKED);
+        map.setColumn(50, fc.getBlockedCell());
+        assertTrue(map.getColumn(50).stream().allMatch(i -> i.getState().equals(CellState.BLOCKED)));
+        map.setRow(0, fc.getBlockedCell());
+        assertTrue(map.getRow(0).stream().allMatch(i -> i.getState().equals(CellState.BLOCKED)));
     }
 
 }
