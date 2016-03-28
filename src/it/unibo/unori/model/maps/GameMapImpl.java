@@ -1,5 +1,6 @@
 package it.unibo.unori.model.maps;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -32,6 +33,18 @@ public class GameMapImpl implements GameMap {
         this.initializeMap(STDCELLS);
     }
 
+    /**
+     * Constructor for specified width and length maps.
+     * @param width
+     *              width of the map to build
+     * @param length
+     *              length of the map to build
+     */
+    public GameMapImpl(final int width, final int length) {
+        this.floorMap = new Cell[length][width];
+        this.initializeMap(width);
+    }
+
     @SuppressWarnings("unused")
     /**
      * private method to initialize the map
@@ -44,34 +57,52 @@ public class GameMapImpl implements GameMap {
                                                     .toArray(Cell[] :: new);
         }
     }
-    
-    public GameMapImpl(final int width, final int length) {
-        this.floorMap = new Cell[length][width];
-        this.initializeMap(length);
+
+    /**
+     * Method to compare two length.
+     * @param pos1
+     *              the first position
+     * @param pos2
+     *              the second position
+     * @return true if pos1 is greater than pos2
+     */
+    private boolean checkPosition(final int pos1, final int pos2) {
+        return pos1 > pos2;
     }
 
     @Override
-    public Cell getCell(int posX, int posY) throws IllegalArgumentException {
-        // TODO Auto-generated method stub
-        return null;
+    public Cell getCell(final int posX, final int posY) throws IllegalArgumentException {
+        if (checkPosition(posX, this.floorMap.length) 
+                || checkPosition(posY, this.floorMap[0].length)) {
+            throw new IllegalArgumentException();
+        }
+        return this.floorMap[posX][posY];
     }
 
     @Override
-    public void setCell(int posX, int posY, Cell cell) throws IllegalArgumentException {
-        // TODO Auto-generated method stub
+    public void setCell(final int posX, final int posY, final Cell cell) throws IllegalArgumentException {
+        if (checkPosition(posX, this.floorMap.length) 
+                || checkPosition(posY, this.floorMap[0].length)) {
+            throw new IllegalArgumentException();
+        }
+        this.floorMap[posX][posY] = cell;
 
     }
 
     @Override
-    public List<Cell> getRow(int posX) throws IllegalArgumentException {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Cell> getRow(final int posX) throws IllegalArgumentException {
+        if (checkPosition(posX, this.floorMap.length)) {
+            throw new IllegalArgumentException();
+        }
+        return Arrays.asList(this.floorMap[posX]);
     }
 
     @Override
-    public List<Cell> getColumn(int posY) throws IllegalArgumentException {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Cell> getColumn(final int posY) throws IllegalArgumentException {
+        if (checkPosition(posY, this.floorMap[0].length)) {
+            throw new IllegalArgumentException();
+        }
+        return Arrays.asList(this.floorMap[posY]);
     }
 
 }
