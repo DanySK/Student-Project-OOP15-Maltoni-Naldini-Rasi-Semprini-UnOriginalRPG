@@ -13,4 +13,5 @@ public enum CellState {
      * LINKED : The cell contains a map , when the party walks on it, a new map will be loaded
      */
     FREE, BLOCKED, LINKER;
+
 }
