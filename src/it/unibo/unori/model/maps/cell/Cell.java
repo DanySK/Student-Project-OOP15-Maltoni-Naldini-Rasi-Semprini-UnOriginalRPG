@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import it.unibo.unori.model.maps.GameMap;
 import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
+import it.unibo.unori.model.maps.exceptions.NoObjectFoundException;
 
 /**
  * 
@@ -56,5 +57,12 @@ public interface Cell extends Serializable {
      *          a frame Object
      */
     public Object getFrame();
+
+    /**
+     * Get the object positioned in a cell, if present.
+     * @return the Object to add to the inventory of the party
+     * @throws NoObjectFoundException if the Object to get is absent.
+     */
+    public Object getObject() throws NoObjectFoundException;
 
 }
