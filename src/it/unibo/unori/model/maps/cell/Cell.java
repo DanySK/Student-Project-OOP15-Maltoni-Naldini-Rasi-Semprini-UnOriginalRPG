@@ -4,7 +4,9 @@ import java.io.Serializable;
 
 import it.unibo.unori.model.maps.GameMap;
 import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
+import it.unibo.unori.model.maps.exceptions.NoNPCFoundException;
 import it.unibo.unori.model.maps.exceptions.NoObjectFoundException;
+import it.unibo.unori.model.menu.DummyMenu;
 
 /**
  * 
@@ -42,14 +44,6 @@ public interface Cell extends Serializable {
      */
     public void setFrame(Object frame);
 
-    /**
-     * Get the map contained in the cell , if present.
-     * 
-     * @return the map contained in the cell
-     * @throws NoMapFoundException
-     *             notify the type of Exception
-     */
-    public GameMap getCellMap() throws NoMapFoundException;
 
     /**
      * Return the frame associated with the Cell.
@@ -64,5 +58,21 @@ public interface Cell extends Serializable {
      * @throws NoObjectFoundException if the Object to get is absent.
      */
     public Object getObject() throws NoObjectFoundException;
+
+    /**
+     * Created a dialogue with the NPC , if present.
+     * @return a dialogue window with the NPC
+     * @throws NoNPCFoundException if the NPC is not present
+     */
+    public DummyMenu talkToNpc() throws NoNPCFoundException;
+
+    /**
+     * Get the map contained in the cell , if present.
+     * 
+     * @return the map contained in the cell
+     * @throws NoMapFoundException
+     *             notify the type of Exception
+     */
+    public GameMap getCellMap() throws NoMapFoundException;
 
 }
