@@ -12,3 +12,4 @@ style.xml
 pmd.xml
 Save.txt
 Statistics.txt
+bin/*
