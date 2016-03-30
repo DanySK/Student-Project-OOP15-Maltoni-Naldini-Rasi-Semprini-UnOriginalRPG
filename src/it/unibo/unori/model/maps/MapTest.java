@@ -10,12 +10,15 @@ import org.junit.Test;
 
 import it.unibo.unori.model.maps.cell.CellFactory;
 import it.unibo.unori.model.maps.cell.CellState;
+import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
 
 /**
  * Class for testing method of the GameMap Class.
  * 
  *
  */
+
+//CHECKSTYLE DISABLE MagicNumber
 public class MapTest {
 
     /**
@@ -27,15 +30,17 @@ public class MapTest {
     public void testBasicFunction() {
         final GameMap map = new GameMapImpl();
         assertEquals(map.getRow(0).size(), 100);
+        assertEquals(map.getColumn(0).size(), 100);
         assertTrue(Optional.of(map.getCell(0, 0)).isPresent());
         assertTrue(Optional.of(map.getCell(99, 99)).isPresent());
         assertTrue(map.getCell(0, 0).getState().equals(CellState.FREE));
     }
 
     /**
-     * Test for the exception of the input.
-     * If the system throw exception for a wrong row input and a wrong column input in a single method,
-     *  it will work for the others methods 
+     * Test for Exception.
+     *This method tries to get a cell which do not belong to the Cell Matrix in the 
+     *GameMap instance.
+     *It also tries to get the map object of a cell which has no such item.
      */
     @Test
     public void testException() {
@@ -45,28 +50,38 @@ public class MapTest {
         try {
             map.getCell(50, 19);
             fail("System does not register the illegalargumentexception");
-        } catch (IllegalArgumentException e){}
-        catch (Exception e) {
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+        } catch (Exception e) {
             fail("System throws another Exception");
         }
         try {
             map.getCell(32, 22);
             fail("System does not register the illegalargumentexception");
-        } catch (IllegalArgumentException e){}
-        catch (Exception e) {
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+        } catch (Exception e) {
             fail("System throws another Exception");
         }
         try {
             map.getCell(-1, 19);
             fail("System does not register the illegalargumentexception");
-        } catch (IllegalArgumentException e){}
-        catch (Exception e) {
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+        } catch (Exception e) {
             fail("System throws another Exception");
         }
+        try {
+            map.getCell(0, 0).getCellMap();
+          } catch (NoMapFoundException e) {
+              System.out.println(e);
+          } catch (Exception e) {
+              fail("Wrong Exception thrown");
+          }
     }
 
     /**
-     * test the setting methods of the GameMap for both the single cell and the group.
+     * Test Setter methods for a single cell and a row/column.
      */
     @Test
     public void testCellSetting() {
