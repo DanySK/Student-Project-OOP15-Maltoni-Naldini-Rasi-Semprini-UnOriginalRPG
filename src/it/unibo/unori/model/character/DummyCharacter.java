@@ -1,5 +1,16 @@
 package it.unibo.unori.model.character;
 
-public class DummyCharacter {
+import java.io.Serializable;
+
+import it.unibo.unori.model.menu.DummyMenu;
+
+public class DummyCharacter implements Serializable{
+/**
+ * something.
+ * @return something.
+ */
+    public DummyMenu createMenu() {
+        return new DummyMenu();
+    }
 
 }
