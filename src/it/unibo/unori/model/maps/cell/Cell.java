@@ -32,13 +32,6 @@ public interface Cell extends Serializable {
      */
     public CellState getState();
 
-    /**
-     * Set a specific Map in the cell as map to link.
-     * 
-     * @param map
-     *            the map to link
-     */
-    public void setLinkedMap(GameMap map);
 
     /**
      * Set a particular frame on the cell.
