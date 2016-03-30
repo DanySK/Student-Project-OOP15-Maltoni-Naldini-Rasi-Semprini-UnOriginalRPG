@@ -2,6 +2,9 @@ package it.unibo.unori.model.maps.cell;
 
 import it.unibo.unori.model.maps.GameMap;
 import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
+import it.unibo.unori.model.maps.exceptions.NoNPCFoundException;
+import it.unibo.unori.model.maps.exceptions.NoObjectFoundException;
+import it.unibo.unori.model.menu.DummyMenu;
 
 /**
  * Implementation of the Cell interface.
@@ -57,6 +60,16 @@ public class CellImpl implements Cell {
     @Override
     public Object getFrame() {
         return this.frame;
+    }
+
+    @Override
+    public Object getObject() throws NoObjectFoundException {
+        throw new NoObjectFoundException();
+    }
+
+    @Override
+    public DummyMenu talkToNpc() throws NoNPCFoundException {
+        throw new NoNPCFoundException();
     }
 
 }
