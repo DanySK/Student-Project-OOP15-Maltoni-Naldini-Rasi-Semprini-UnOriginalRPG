@@ -14,7 +14,7 @@ public class CellFactory {
      *        a standard free cell 
      */
     public Cell getFreeCell() {
-        return new CellImpl(new Object(), CellState.FREE);
+        return new SimpleCellImpl(new Object(), CellState.FREE);
     }
 
     /**
@@ -23,6 +23,6 @@ public class CellFactory {
      *         a standard blocked cell object
      */
     public  Cell getBlockedCell() {
-        return new CellImpl(new Object(), CellState.BLOCKED);
+        return new SimpleCellImpl(new Object(), CellState.BLOCKED);
     }
 }
