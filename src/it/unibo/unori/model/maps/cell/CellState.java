@@ -7,7 +7,7 @@ package it.unibo.unori.model.maps.cell;
  */
 public enum CellState {
     /**
-     * Describe the 3 state of a Cell.
+     * Describe the 2 state of a Cell.
      * FREE : The cell is free and the party can walk on it
      * BLOCKED : The cell is blocked and the party can't walk on it
      */
