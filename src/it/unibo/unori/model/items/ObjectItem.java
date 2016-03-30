@@ -10,12 +10,12 @@ public class ObjectItem implements Item {
      * 
      */
     private static final long serialVersionUID = 3157546793105498392L;
-    private String name = "Generic Item";
-    private String description = "A generic Item, not useful";
+    private static final String NAME = "Generic Item";
+    private static final String DESCRIPTION = "A generic Item, not useful";
     private int quantity = 1;
     @Override
     public String getName() {
-        return this.name;
+        return ObjectItem.NAME;
     }
 
     @Override
@@ -25,7 +25,7 @@ public class ObjectItem implements Item {
 
     @Override
     public String getDescription() {
-        return this.description;
+        return ObjectItem.DESCRIPTION;
     }
 
 }
