@@ -33,7 +33,7 @@ public interface Battle {
     void openBag();
     
     /**
-     * Method that allows to throw a Special Attack.
+     * Method that allows to throw a Special Attack if the bar is full.
      * @return the damage inflicted to all enemies.
      */
     int specialAttack();
