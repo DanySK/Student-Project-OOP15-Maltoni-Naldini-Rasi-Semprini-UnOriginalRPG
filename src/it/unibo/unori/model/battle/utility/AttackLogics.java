@@ -9,16 +9,16 @@ import java.util.Random;
  *
  */
 public final class AttackLogics {
-    
+
     private static final int SHIFT = 30;
     private static final int MULT = 10;
     private static final int LUCKPERCENTAGE = 50;
     private static final int YOURELUCKY = 3;
-    
+
     private AttackLogics() {
         //Empty private constructor, because this is an utility class
     }
-    
+
     /**
      * This method generates the standard damage to inflict depending on
      * character's level.
@@ -35,9 +35,8 @@ public final class AttackLogics {
     public static int getStandardDamage(final int charLevel) {
         return AttackLogics.SHIFT 
                + (AttackLogics.MULT * charLevel * (charLevel - 1));
-        
     }
-    
+
     /**
      * This method tells me whose the first move is in the battle turn.
      * The magic numbers LUCKPERCENTAGE and YOURELUCKY help to implement
@@ -59,7 +58,7 @@ public final class AttackLogics {
             return myV > enemV;
         }
     }
-    
+
     /**
      * This method calculates the experience points acquired by each
      * Character of my team at the end of the battle, depending on 

@@ -1,11 +1,22 @@
 package it.unibo.unori.controller.state;
 
+import it.unibo.unori.model.maps.GameMap;
+import it.unibo.unori.model.maps.GameMapImpl;
+
 /**
  * This GameState models the state of exploring a map (world, town or dungeon
  * room).
  */
 public class MapState implements GameState {
+    private GameMap map;
 
+    /**
+     * Default constructor.
+     */
+    public MapState() {
+        this.map = new GameMapImpl();
+
+    }
     /**
      * {@inheritDoc}
      */

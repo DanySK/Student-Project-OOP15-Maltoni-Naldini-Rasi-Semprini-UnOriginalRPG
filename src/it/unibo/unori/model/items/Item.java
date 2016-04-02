@@ -7,19 +7,19 @@ import java.io.Serializable;
  */
 
 public interface Item extends Serializable {
-    
+
     /**
      * Gives the name of the Item.
      * @return the name of the Item.
      */
     String getName();
-    
+
     /**
      * Gives the available quantity of the Item.
      * @return the quantity of the Item.
      */
     int getQuantity();
-    
+
     /**
      * Gives the description of the Item.
      * @return the description of the Item.
