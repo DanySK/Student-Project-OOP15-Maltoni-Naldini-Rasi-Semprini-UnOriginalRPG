@@ -1,5 +1,6 @@
 package it.unibo.unori.model.battle.utility;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -57,5 +58,22 @@ public final class AttackLogics {
         } else {
             return myV > enemV;
         }
+    }
+    
+    /**
+     * This method calculates the experience points acquired by each
+     * Character of my team at the end of the battle, depending on 
+     * my Characters' levels and enemies' ones.
+     * @param charLev my team's levels presented as a List of Integer.
+     * @param enemLev enemies' levels presented as a List of Integer.
+     * @return the List of the experience points acquired by each member
+     * of my team.
+     */
+    public static ArrayList<Integer> expAcquired(
+     final ArrayList<Integer> charLev, final ArrayList<Integer> enemLev) {
+        charLev.forEach(i -> {
+            //TODO experience algorithm. Missing Characters' experience bar logic
+        });
+        return null;
     }
 }
