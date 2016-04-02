@@ -1,5 +1,7 @@
 package it.unibo.unori.model.battle.utility;
 
+import java.util.Random;
+
 /**
  * Utility class that contains static methods that allow to model 
  * the Battle Mode.
@@ -9,6 +11,8 @@ public final class AttackLogics {
     
     private static final int SHIFT = 30;
     private static final int MULT = 10;
+    private static final int LUCKPERCENTAGE = 50;
+    private static final int YOURELUCKY = 3;
     
     private AttackLogics() {
         //Empty private constructor, because this is an utility class
@@ -31,5 +35,27 @@ public final class AttackLogics {
         return AttackLogics.SHIFT 
                + (AttackLogics.MULT * charLevel * (charLevel - 1));
         
+    }
+    
+    /**
+     * This method tells me whose the first move is in the battle turn.
+     * The magic numbers LUCKPERCENTAGE and YOURELUCKY help to implement
+     * a sort of lucky possibility for my Character to move first even if
+     * his speed is lower than enemy's.
+     * Luck Percentage is 5%: if my random number (between 0 and 49)
+     * equals the number 3, then I'm allowed to move first anyways.
+     * Else, if I'm not lucky, the Character with highest speed moves first.
+     * @param myV my Character's speed.
+     * @param enemV enemy's speed.
+     * @return true if I may move first. False otherwise.
+     */
+    public static boolean whosFirst(final int myV, final int enemV) {
+        Random rand = new Random();
+        int luck = rand.nextInt(AttackLogics.LUCKPERCENTAGE);
+        if (luck == AttackLogics.YOURELUCKY) {
+            return true;
+        } else {
+            return myV > enemV;
+        }
     }
 }
