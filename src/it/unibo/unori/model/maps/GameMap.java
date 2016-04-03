@@ -75,4 +75,32 @@ public interface GameMap extends Serializable {
      */
     public void setColumn(int posY, Cell cell)throws IllegalArgumentException;
 
+    /**
+     * Set the X coordinate of the initial cell.
+     * @param initialX
+     *                  value of the X coordinate to set
+     * @throws IllegalArgumentException if the value does not belong to the map
+     */
+    public void setInitialX(int initialX) throws IllegalArgumentException;
+
+    /**
+     * method to return the X coordinate of the initial cell.
+     * @return X coordinate of the initial cell 
+     */
+    public int getInitialX();
+
+    /**
+     * Set the Y coordinate of the initial cell.
+     * @param initialY
+     *                  value of the Y coordinate to set
+     * @throws IllegalArgumentException if the value does not belong to the map
+     */
+    public void setInitialY(int initialY) throws IllegalArgumentException;
+
+    /**
+     *  method to return the Y coordinate of the initial cell.
+     * @return Y coordinate of the initial cell 
+     */
+    public int getInitialY();
+
 }
