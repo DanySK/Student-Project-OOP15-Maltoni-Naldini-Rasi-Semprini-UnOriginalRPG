@@ -1,4 +1,4 @@
-package it.unibo.unori.controller.utility;
+package it.unibo.unori.controller.exceptions;
 
 /**
  * Exception thrown when an utility text does not match the correct pattern.

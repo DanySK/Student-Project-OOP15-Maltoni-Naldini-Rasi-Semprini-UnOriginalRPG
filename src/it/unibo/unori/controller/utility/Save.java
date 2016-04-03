@@ -8,6 +8,8 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import it.unibo.unori.controller.exceptions.CorruptedUtilityFileException;
 /**
  * Utility class that provides static methods for load/save data from/to file.
  */
