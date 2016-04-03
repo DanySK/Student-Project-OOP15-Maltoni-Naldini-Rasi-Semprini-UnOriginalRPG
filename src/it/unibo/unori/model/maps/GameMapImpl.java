@@ -7,23 +7,31 @@ import java.util.stream.Stream;
 
 import it.unibo.unori.model.maps.cell.Cell;
 import it.unibo.unori.model.maps.cell.CellFactory;
+import it.unibo.unori.model.maps.cell.CellState;
 
 /**
  * 
  *Class to create a generic Map Object to customize later.
  *Every map in the game is a instance of this class
  *The map contains a matrix of Cell object, which represent the physical map for 
- *the party to walk in.
+ *the party to walk on.
  *
  */
 public class GameMapImpl implements GameMap {
 
     /**
-     * 
+     * Three of these fields are really important:
+     * floorMap is a matrix of Cells, whose size can be regulated, and it represent 
+     * the Map
+     * InitialX and InitialY are two coordinates to describe the cell
+     * on which the party will be when the map will be loaded.
+     * Initial Cell standard is (0,0)
      */
     private static final long serialVersionUID = -887928696341560842L;
     private static final int STDCELLS = 100; 
     private final Cell[][] floorMap;
+    private int initialX;
+    private int initialY;
 
     /**
      * Constructor for a standard map.
@@ -57,8 +65,22 @@ public class GameMapImpl implements GameMap {
             this.floorMap[i] = Stream.generate(new CellFactory() :: getFreeCell)
                                      .limit(this.floorMap[0].length)
                                      .toArray(Cell[] :: new);
-        }
+        } 
+    }
 
+    /**
+     * Method to change automatically the initial position of the map,
+     * if the previous initial cell is blocked(Party can't be on a Blocked cell)
+     */
+    private void fixInitialCellPosition() {
+        while (this.getCell(initialX, initialY).getState().equals(CellState.BLOCKED)) {
+            if (initialY == this.floorMap[0].length - 1) {
+                initialY = 0;
+                initialX++;
+            } else {
+                initialY++;
+            }
+        }
     }
 
     /**
@@ -89,6 +111,7 @@ public class GameMapImpl implements GameMap {
             throw new IllegalArgumentException();
         }
         this.floorMap[posX][posY] = cell;
+        this.fixInitialCell();
 
     }
 
@@ -120,6 +143,7 @@ public class GameMapImpl implements GameMap {
         for (int i = 0; i < this.floorMap[posX].length; i++) {
             this.floorMap[posX][i] = cell;
         }
+        this.fixInitialCellPosition();
     }
 
     @Override
@@ -130,6 +154,39 @@ public class GameMapImpl implements GameMap {
         for (int i = 0; i < this.floorMap.length; i++) {
             this.floorMap[i][posY] = cell;
         }
+        this.fixInitialCellPosition();
+    }
+
+
+    @Override
+    public int getInitialX() {
+        // TODO Auto-generated method stub
+        return this.initialX;
+    }
+
+
+    @Override
+    public int getInitialY() {
+        // TODO Auto-generated method stub
+        return this.initialY;
+    }
+
+    @Override
+    public void setInitialCell(final int initialX, final int initialY) 
+                                                   throws IllegalArgumentException {
+        if (this.checkPosition(initialX, this.floorMap.length)) {
+            throw new IllegalArgumentException();
+        }
+        if (this.checkPosition(initialY, this.floorMap[0].length)) {
+            throw new IllegalArgumentException();
+        }
+
+        if (this.getCell(initialX, initialY).getState().equals(CellState.BLOCKED)) {
+          throw new IllegalArgumentException();
+        }
+
+        this.initialX = initialX;
+        this.initialY = initialY;
     }
 
 }
