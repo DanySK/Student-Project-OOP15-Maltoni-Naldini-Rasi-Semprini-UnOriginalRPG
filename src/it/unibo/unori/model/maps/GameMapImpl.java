@@ -111,7 +111,7 @@ public class GameMapImpl implements GameMap {
             throw new IllegalArgumentException();
         }
         this.floorMap[posX][posY] = cell;
-        this.fixInitialCell();
+        this.fixInitialCellPosition();
 
     }
 
