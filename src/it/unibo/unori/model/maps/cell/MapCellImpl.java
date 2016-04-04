@@ -15,8 +15,6 @@ public class MapCellImpl extends SimpleCellImpl {
      */
     private static final long serialVersionUID = 7553361363890344023L;
     private final GameMap mapToLink;
-    private final int initialX;
-    private final int initialY;
 
     /**
      * Constructor.
@@ -36,9 +34,7 @@ public class MapCellImpl extends SimpleCellImpl {
                                throws IllegalArgumentException {
         super(frame, CellState.FREE);
         this.mapToLink = mapToLink;
-        this.initialX = initialX;
-        this.initialY = initialY;
-        this.mapToLink.getCell(initialX, initialY);
+        this.mapToLink.setInitialCell(initialX, initialY);
     }
 
     @Override

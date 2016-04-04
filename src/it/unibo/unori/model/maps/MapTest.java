@@ -1,6 +1,7 @@
 package it.unibo.unori.model.maps;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -93,6 +94,30 @@ public class MapTest {
         assertTrue(map.getColumn(50).stream().allMatch(i -> i.getState().equals(CellState.BLOCKED)));
         map.setRow(0, fc.getBlockedCell());
         assertTrue(map.getRow(0).stream().allMatch(i -> i.getState().equals(CellState.BLOCKED)));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testInitialCell() {
+        final GameMap map = new GameMapImpl();
+        final CellFactory fc = new CellFactory();
+        assertEquals(map.getInitialX(), 0);
+        assertEquals(map.getInitialY(), 0);
+        map.setRow(0, fc.getBlockedCell());
+        assertEquals(map.getInitialX(), 1);
+        assertEquals(map.getInitialY(), 0);
+        final GameMap map2 = new GameMapImpl(50,25);
+        try {
+            map2.setInitialCell(0, 40);
+            fail("Method should throw an Exception...");
+        } catch (IllegalArgumentException e) {
+            System.out.println("IllegalArgumentException awaited");
+        } catch (Exception e) {
+            fail("Wrong Exception thrown");
+        }
+
     }
 
 }
