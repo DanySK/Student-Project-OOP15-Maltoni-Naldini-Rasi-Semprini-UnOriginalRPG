@@ -71,7 +71,7 @@ public final class AttackLogics {
     public static ArrayList<Integer> expAcquired(
      final ArrayList<Integer> charLev, final ArrayList<Integer> enemLev) {
         charLev.forEach(i -> {
-            //TODO experience algorithm. Missing Characters' experience bar logic
+            //TODO experience algorithm.
         });
         return null;
     }
