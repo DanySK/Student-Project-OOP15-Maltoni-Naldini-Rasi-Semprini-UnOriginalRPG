@@ -1,6 +1,6 @@
 package it.unibo.unori.model.battle.utility;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -50,8 +50,8 @@ public final class AttackLogics {
      * @return true if I may move first. False otherwise.
      */
     public static boolean whosFirst(final int myV, final int enemV) {
-        Random rand = new Random();
-        int luck = rand.nextInt(AttackLogics.LUCKPERCENTAGE);
+        final Random rand = new Random();
+        final int luck = rand.nextInt(AttackLogics.LUCKPERCENTAGE);
         if (luck == AttackLogics.YOURELUCKY) {
             return true;
         } else {
@@ -68,8 +68,8 @@ public final class AttackLogics {
      * @return the List of the experience points acquired by each member
      * of my team.
      */
-    public static ArrayList<Integer> expAcquired(
-     final ArrayList<Integer> charLev, final ArrayList<Integer> enemLev) {
+    public static List<Integer> expAcquired(
+     final List<Integer> charLev, final List<Integer> enemLev) {
         charLev.forEach(i -> {
             //TODO experience algorithm.
         });
