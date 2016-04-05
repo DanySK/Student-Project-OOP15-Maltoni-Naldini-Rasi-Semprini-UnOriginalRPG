@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import org.junit.Test;
 
+import it.unibo.unori.model.maps.Party.CardinalPoints;
 import it.unibo.unori.model.maps.cell.CellFactory;
 import it.unibo.unori.model.maps.cell.CellState;
 import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
