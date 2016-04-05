@@ -1,12 +1,15 @@
 package it.unibo.unori.model.maps;
 
+import java.io.Serializable;
+
 /**
  * Party is the central object of the all map-related classes.
  * A object which implements party must be free to move on the game map, and interact
- * with Object on the GameMap
+ * with Object on the GameMap.
+ * Serializable interface is added in order to save the object on file.
  *
  */
-public interface Party {
+public interface Party extends Serializable {
     /**
      * set the current position of the party on the map.
      * @param posX
