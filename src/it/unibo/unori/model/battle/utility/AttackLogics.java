@@ -75,4 +75,17 @@ public final class AttackLogics {
         });
         return null;
     }
+    
+    /**
+     * This method calculates the damage to inflict to an enemy by throwing
+     * a special attack.
+     * The damage is obtained by doubling the standard damage and adding
+     * the Character's level multiplied by 10.
+     * @param charLev the level of my Character.
+     * @return the damage of the special attack.
+     */
+    public static int specialAttackCalculator(final int charLev) {
+        return AttackLogics.getStandardDamage(charLev) * 2
+                + charLev * AttackLogics.MULT;
+    }
 }
