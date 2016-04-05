@@ -2,6 +2,8 @@ package it.unibo.unori.model.maps;
 
 import java.io.Serializable;
 
+import it.unibo.unori.model.maps.exceptions.BlockedPathException;
+
 /**
  * Party is the central object of the all map-related classes.
  * A object which implements party must be free to move on the game map, and interact
@@ -10,6 +12,14 @@ import java.io.Serializable;
  *
  */
 public interface Party extends Serializable {
+
+    /**
+     * Party will be a Singleton Class, so it needs a public method to get 
+     * the instance.
+     * @return
+     *          the only instance of the class.
+     */
+    public Party getParty();
     /**
      * Set the current position of the party on the map.
      * @param posX
@@ -33,6 +43,14 @@ public interface Party extends Serializable {
      *              the frame to set
      */
     public void setCurrentFrame(Object frame);
+
+    /**
+     * Move the party in the specified direction, if possible.
+     * @param direction
+     *                  the direction for the party to move
+     * @throws BlockedPathException if the party can't move to that direction.
+     */
+    public void moveParty(CardinalPoints direction) throws BlockedPathException;
 
     /**
      * Enum to define the four cardinal points and their skidding 
