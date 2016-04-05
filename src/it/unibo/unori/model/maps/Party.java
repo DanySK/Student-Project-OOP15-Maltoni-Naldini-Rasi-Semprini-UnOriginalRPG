@@ -3,6 +3,7 @@ package it.unibo.unori.model.maps;
 import java.io.Serializable;
 
 import it.unibo.unori.model.maps.exceptions.BlockedPathException;
+import it.unibo.unori.model.menu.DummyMenu;
 
 /**
  * Party is the central object of the all map-related classes.
@@ -38,6 +39,13 @@ public interface Party extends Serializable {
     public void setCurrentMap(GameMap map);
 
     /**
+     * Get method for the current map.
+     * @return
+     *          the current map
+     */
+    public GameMap getCurrentGameMap();
+
+    /**
      * Set the current frame of party.
      * @param frame
      *              the frame to set
@@ -45,12 +53,26 @@ public interface Party extends Serializable {
     public void setCurrentFrame(Object frame);
 
     /**
+     * Get method for the frame Object.
+     * @return
+     *          the frame Object of the party
+     */
+    public Object getCurrentFrame();
+
+    /**
      * Move the party in the specified direction, if possible.
      * @param direction
      *                  the direction for the party to move
      * @throws BlockedPathException if the party can't move to that direction.
      */
+
     public void moveParty(CardinalPoints direction) throws BlockedPathException;
+
+    /**
+     * Method to interact with the looked Cell.
+     * @return a dialogue, related to the kind of Cell
+     */
+    public DummyMenu interact();
 
     /**
      * Enum to define the four cardinal points and their skidding 
