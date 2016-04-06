@@ -34,6 +34,7 @@ public interface Battle {
 
     /**
      * Method that allows to throw a Special Attack if the bar is full.
+     * @throws BarNotFullException if the bar is not filled.
      * @return the damage inflicted to all enemies.
      */
     int specialAttack();
