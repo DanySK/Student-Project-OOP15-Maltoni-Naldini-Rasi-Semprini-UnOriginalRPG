@@ -5,5 +5,11 @@ package it.unibo.unori.model.items;
  */
 public interface Weapon extends Item {
     
-  //TODO standard methods.
+    /**
+     * This method is a getter, and gives me the amount of
+     * damage that the Weapon can inflict.
+     * @return the damage.
+     */
+    int getDamage();
+    
 }
