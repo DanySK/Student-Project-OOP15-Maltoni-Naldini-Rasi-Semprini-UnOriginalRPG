@@ -1,4 +1,4 @@
-package it.unibo.unori.model.battle.utility;
+package it.unibo.unori.model.battle.exceptions;
 
 /**
  * Exception to be thrown when the character's level is too low to escape.
