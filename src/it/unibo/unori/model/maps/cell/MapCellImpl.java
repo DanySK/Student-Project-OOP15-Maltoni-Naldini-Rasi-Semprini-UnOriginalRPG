@@ -1,6 +1,7 @@
 package it.unibo.unori.model.maps.cell;
 
 import it.unibo.unori.model.maps.GameMap;
+import it.unibo.unori.model.maps.Position;
 
 /**
  * Cell implementation to handle a Map Switch.
@@ -22,19 +23,17 @@ public class MapCellImpl extends SimpleCellImpl {
      *        the frame object to set
      * @param mapToLink
      *        the map to set in party 
-     * @param initialX
-     *          X-Coordinate of the initial cell
-     * @param initialY
-     *          Y- coordinate of the initial cell
+     * @param initialPos
+     *          position of the initial cell
      *@throws IllegalArgumentException if the cell with the specified coordinates
      *                                  does not belong to the map
      */
     public MapCellImpl(final Object frame, final GameMap mapToLink, 
-                       final int initialX, final int initialY) 
+                       final Position initialPos) 
                                throws IllegalArgumentException {
         super(frame, CellState.FREE);
         this.mapToLink = mapToLink;
-        this.mapToLink.setInitialCell(initialX, initialY);
+        this.mapToLink.setInitialCellPosition(initialPos);
     }
 
     @Override

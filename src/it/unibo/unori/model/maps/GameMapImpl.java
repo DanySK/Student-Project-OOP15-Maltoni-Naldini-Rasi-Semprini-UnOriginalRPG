@@ -30,8 +30,7 @@ public class GameMapImpl implements GameMap {
     private static final long serialVersionUID = -887928696341560842L;
     private static final int STDCELLS = 100; 
     private final Cell[][] floorMap;
-    private int initialX;
-    private int initialY;
+    private Position initialPosition;
 
     /**
      * Constructor for a standard map.
@@ -66,6 +65,7 @@ public class GameMapImpl implements GameMap {
                                      .limit(this.floorMap[0].length)
                                      .toArray(Cell[] :: new);
         } 
+        this.initialPosition = new Position(0, 0);
     }
 
     /**
@@ -73,7 +73,9 @@ public class GameMapImpl implements GameMap {
      * if the previous initial cell is blocked(Party can't be on a Blocked cell)
      */
     private void fixInitialCellPosition() {
-        while (this.getCell(initialX, initialY).getState().equals(CellState.BLOCKED)) {
+        int initialX = this.initialPosition.getPosX();
+        int initialY = this.initialPosition.getPosY();
+        while (this.getCell(new Position(initialX, initialY)).getState().equals(CellState.BLOCKED)) {
             if (initialY == this.floorMap[0].length - 1) {
                 initialY = 0;
                 initialX++;
@@ -81,6 +83,7 @@ public class GameMapImpl implements GameMap {
                 initialY++;
             }
         }
+        this.initialPosition = new Position(initialX, initialY);
     }
 
     /**
@@ -96,21 +99,21 @@ public class GameMapImpl implements GameMap {
     }
 
     @Override
-    public Cell getCell(final int posX, final int posY) throws IllegalArgumentException {
-        if (checkPosition(posX, this.floorMap.length) 
-                || checkPosition(posY, this.floorMap[0].length)) {
+    public Cell getCell(final Position pos) throws IllegalArgumentException {
+        if (checkPosition(pos.getPosX(), this.floorMap.length) 
+                || checkPosition(pos.getPosY(), this.floorMap[0].length)) {
             throw new IllegalArgumentException();
         }
-        return this.floorMap[posX][posY];
+        return this.floorMap[pos.getPosX()][pos.getPosY()];
     }
 
     @Override
-    public void setCell(final int posX, final int posY, final Cell cell) throws IllegalArgumentException {
-        if (checkPosition(posX, this.floorMap.length) 
-                || checkPosition(posY, this.floorMap[0].length)) {
+    public void setCell(final Position pos, final Cell cell) throws IllegalArgumentException {
+        if (checkPosition(pos.getPosX(), this.floorMap.length) 
+                || checkPosition(pos.getPosY(), this.floorMap[0].length)) {
             throw new IllegalArgumentException();
         }
-        this.floorMap[posX][posY] = cell;
+        this.floorMap[pos.getPosX()][pos.getPosY()] = cell;
         this.fixInitialCellPosition();
 
     }
@@ -158,35 +161,27 @@ public class GameMapImpl implements GameMap {
     }
 
 
-    @Override
-    public int getInitialX() {
-        // TODO Auto-generated method stub
-        return this.initialX;
-    }
 
 
     @Override
-    public int getInitialY() {
-        // TODO Auto-generated method stub
-        return this.initialY;
-    }
-
-    @Override
-    public void setInitialCell(final int initialX, final int initialY) 
+    public void setInitialCellPosition(final Position pos) 
                                                    throws IllegalArgumentException {
-        if (this.checkPosition(initialX, this.floorMap.length)) {
+        if (this.checkPosition(pos.getPosX(), this.floorMap.length)) {
             throw new IllegalArgumentException();
         }
-        if (this.checkPosition(initialY, this.floorMap[0].length)) {
+        if (this.checkPosition(pos.getPosY(), this.floorMap[0].length)) {
             throw new IllegalArgumentException();
         }
 
-        if (this.getCell(initialX, initialY).getState().equals(CellState.BLOCKED)) {
+        if (this.getCell(pos).getState().equals(CellState.BLOCKED)) {
           throw new IllegalArgumentException();
         }
+        this.initialPosition = pos;
+    }
 
-        this.initialX = initialX;
-        this.initialY = initialY;
+    @Override
+    public Position getInitialCellPosition() {
+        return this.initialPosition;
     }
 
 }

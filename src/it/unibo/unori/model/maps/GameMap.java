@@ -15,26 +15,22 @@ public interface GameMap extends Serializable {
 
     /**
      * Get the cell at the specified position.
-     * @param posX
-     *              X coordinate of the cell to get
-     * @param posY
-     *              X coordinate of the cell to get
+     * @param pos
+     *              position of the cell to get
      * @return the cell at the specified coordinates
      * @throws IllegalArgumentException if the coordinates are invalid 
      */
-    public Cell getCell(int posX, int posY) throws IllegalArgumentException;
+    public Cell getCell(Position pos) throws IllegalArgumentException;
 
     /**
-     * Set the param Cell at the specified position.
-     * @param posX
-     *              X coordinate of the cell to get
-     * @param posY
-     *              X coordinate of the cell to get
+     * Set the Cell at the specified position.
+     * @param pos
+     *              position of the cell to set
      *@param cell
      *              cell to set
      * @throws IllegalArgumentException if the coordinates are invalid 
      */
-    public void setCell(int posX, int posY, Cell cell) throws IllegalArgumentException;
+    public void setCell(Position pos, Cell cell) throws IllegalArgumentException;
 
     /**
      * Get, as list, the row specified.
@@ -76,25 +72,18 @@ public interface GameMap extends Serializable {
     public void setColumn(int posY, Cell cell)throws IllegalArgumentException;
 
     /**
-     * Set the X coordinate of the initial cell.
-     * @param initialX
-     *                  value of the X coordinate to set
-     * @param initialY
-     *                  value of the Y coordinate to set
+     * Set the position of the initial cell.
+     * @param initialCell
+     *                  position of the initial cell
      * @throws IllegalArgumentException if the value does not belong to the map
      */
-    public void setInitialCell(int initialX, int initialY) throws IllegalArgumentException;
+    public void setInitialCellPosition(Position initialCell) throws IllegalArgumentException;
 
     /**
-     * method to return the X coordinate of the initial cell.
-     * @return X coordinate of the initial cell 
+     * method to return the position of the initial cell.
+     * @return position of the initial cell 
      */
-    public int getInitialX();
+    public Position getInitialCellPosition();
 
-    /**
-     *  method to return the Y coordinate of the initial cell.
-     * @return Y coordinate of the initial cell 
-     */
-    public int getInitialY();
 
 }
