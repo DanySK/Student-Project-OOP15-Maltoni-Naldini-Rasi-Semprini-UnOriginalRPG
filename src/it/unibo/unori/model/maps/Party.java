@@ -20,9 +20,7 @@ public interface Party extends Serializable {
      * @return
      *          the only instance of the class.
      */
-    public static Party getParty() {
-        return null;
-    }
+    public Party getParty();
     /**
      * Set the current position of the party on the map.
      * @param pos

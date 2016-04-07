@@ -109,7 +109,7 @@ public class MapTest {
         assertEquals(map.getInitialCellPosition(), pos0);
         map.setRow(0, fc.getBlockedCell());
         assertEquals(map.getInitialCellPosition(), new Position(1, 0));
-        final GameMap map2 = new GameMapImpl(50,25);
+        final GameMap map2 = new GameMapImpl(50, 25);
         try {
             map2.setInitialCellPosition(new Position(0, 40));
             fail("Method should throw an Exception...");
