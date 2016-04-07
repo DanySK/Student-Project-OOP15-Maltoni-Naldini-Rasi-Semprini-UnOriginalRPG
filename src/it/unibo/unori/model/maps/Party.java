@@ -20,16 +20,16 @@ public interface Party extends Serializable {
      * @return
      *          the only instance of the class.
      */
-    public Party getParty();
+    public static Party getParty() {
+        return null;
+    }
     /**
      * Set the current position of the party on the map.
-     * @param posX
-     *              X coordinate of the cell the party is on
-     * @param posY
-     *              Y coordinate of the cell the party is on
+     * @param pos
+     *              Position of the cell the party is on
      *@throws IllegalArgumentException if the cell specified is blocked or absent
      */
-    public void setCurrentPosition(int posX, int posY) throws IllegalArgumentException;
+    public void setCurrentPosition(Position pos) throws IllegalArgumentException;
 
     /**
      * Set the current map for the party to walk on.
