@@ -1,6 +1,9 @@
 package it.unibo.unori.model.maps;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.Optional;
 
@@ -18,7 +21,7 @@ import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
 
 //CHECKSTYLE DISABLE MagicNumber
 public class MapTest {
-    
+
     private final Position pos0 = new Position(0, 0);
 
     /**
