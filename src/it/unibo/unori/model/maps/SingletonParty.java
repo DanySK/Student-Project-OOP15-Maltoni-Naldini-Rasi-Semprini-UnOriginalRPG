@@ -59,10 +59,6 @@ public final class SingletonParty {
         }
 
 
-        @Override
-        public void setCurrentPosition(final Position pos) throws IllegalArgumentException {
-
-        }
 
         @Override
         public void setCurrentMap(final GameMap map) {

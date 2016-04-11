@@ -14,13 +14,6 @@ import it.unibo.unori.model.menu.DummyMenu;
  */
 public interface Party extends Serializable {
 
-    /**
-     * Set the current position of the party on the map.
-     * @param pos
-     *              Position of the cell the party is on
-     *@throws IllegalArgumentException if the cell specified is blocked or absent
-     */
-    public void setCurrentPosition(Position pos) throws IllegalArgumentException;
 
     /**
      * Set the current map for the party to walk on.
