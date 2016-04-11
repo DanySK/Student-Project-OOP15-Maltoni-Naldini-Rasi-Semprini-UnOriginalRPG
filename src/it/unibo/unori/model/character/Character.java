@@ -2,6 +2,8 @@ package it.unibo.unori.model.character;
 
 import java.io.Serializable;
 
+import it.unibo.unori.model.items.Weapon;
+
 /**
  * An interface modeling a generic Character of the game.
  *
@@ -76,4 +78,17 @@ public interface Character extends Serializable {
      * @return the amount of Experience Points needed to level up.
      */
     int getRemainingExp();
+    
+    /**
+     * This method allows me to give a Weapon to my Character.
+     * @param w the Weapon Item.
+     */
+    void setWeapon(Weapon w);
+    
+    /**
+     * A getter method that gives the Weapon that the Character is holding
+     * @throws NoWeaponException.
+     * @return the Weapon the Character is holding.
+     */
+    Weapon getWeapon();
 }

@@ -10,13 +10,6 @@ public class BarNotFullException extends Exception {
      * 
      */
     private static final long serialVersionUID = -1872344338627730987L;
-    
-    /**
-     * Standard constructor.
-     */
-    public BarNotFullException() {
-        super();
-    }
 
     @Override
     public String toString() {
