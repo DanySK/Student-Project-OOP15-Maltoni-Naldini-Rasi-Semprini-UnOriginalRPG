@@ -1,6 +1,8 @@
 package it.unibo.unori.model.battle;
 
 import java.util.List;
+
+import it.unibo.unori.model.battle.exceptions.CantEscapeException;
 import it.unibo.unori.model.character.Character;
 import it.unibo.unori.model.items.Weapon;
 
@@ -21,9 +23,8 @@ public class BattleImpl implements Battle {
     }
     
     @Override
-    public void runAway() {
+    public void runAway() throws CantEscapeException {
         // TODO Auto-generated method stub
-        
     }
 
     @Override

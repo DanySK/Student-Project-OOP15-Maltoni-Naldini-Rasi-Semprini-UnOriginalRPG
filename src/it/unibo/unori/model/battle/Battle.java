@@ -1,4 +1,5 @@
 package it.unibo.unori.model.battle;
+import it.unibo.unori.model.battle.exceptions.CantEscapeException;
 import it.unibo.unori.model.character.Character;
 import it.unibo.unori.model.items.Weapon;
 
@@ -13,7 +14,7 @@ public interface Battle {
      * Method that allows to escape from battle.
      * @throws CantEscapeException if the level is too low to escape.
      */
-    void runAway();
+    void runAway() throws CantEscapeException;
 
     /**
      * Method that allows to throw a regular attack (standard).

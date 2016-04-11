@@ -58,6 +58,17 @@ public final class BattleLogics {
             return myV > enemV;
         }
     }
+    
+    /**
+     * This method tells me if I can escape or not.
+     * Its logic is the same as the method {@link #whosFirst(int, int)}.
+     * @param myLev the level of my Character.
+     * @param enemLev Enemy's level.
+     * @return true if I can escape. False otherwise
+     */
+    public static boolean canEscape(final int myLev, final int enemLev) {
+        return BattleLogics.whosFirst(myLev, enemLev);
+    }
 
     /**
      * This method calculates the experience points acquired by each
