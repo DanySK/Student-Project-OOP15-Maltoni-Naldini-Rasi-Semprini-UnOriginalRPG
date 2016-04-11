@@ -1,5 +1,5 @@
 package it.unibo.unori.model.battle;
-
+import it.unibo.unori.model.character.Character;
 import it.unibo.unori.model.items.Weapon;
 
 /**
@@ -27,7 +27,7 @@ public interface Battle {
      * @param character the character to defend.
      * @return a confirmation String
      */
-    String defend(Object character);
+    String defend(Character character);
 
     /**
      * Method that allows to open the Item Bag.
