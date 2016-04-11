@@ -88,4 +88,15 @@ public final class BattleLogics {
         return BattleLogics.getStandardDamage(charLev) * 2
                 + charLev * BattleLogics.MULT;
     }
+    
+    /**
+     * This method calculates the damage to inflict to an enemy by throwing 
+     * a magic attack.
+     * @param magStat the magicAttack statistic of the Character.
+     * @return the damage of the magic attack.
+     */
+    public static int magicAttackCalculator(final int magStat) {
+        //TODO magic attack algorithm.
+        return 0;
+    }
 }
