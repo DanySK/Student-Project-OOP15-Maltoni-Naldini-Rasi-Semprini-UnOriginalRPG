@@ -4,7 +4,10 @@ import it.unibo.unori.model.maps.exceptions.BlockedPathException;
 import it.unibo.unori.model.menu.DummyMenu;
 
 /**
- *Testing singleton strategy.
+ * SingletonParty is a class to make the Party interface match the Singleton Pattern.
+ * SingletonParty has a Party object inside, which can be given with the GetParty
+ * methods
+ * SingletonParty is a final class in order to not be extended.
  */
 public final class SingletonParty {
 
@@ -14,8 +17,10 @@ public final class SingletonParty {
 
     }
     /**
-     * 
-     * @return robbe
+     * Method to get the party instance inside the class.
+     * Synchronized(SingletonParty.class)construct is added in order to prevent multiple
+     * allocation in a multi-thread system.
+     * @return the single instance of Party created.
      */
     public static Party getParty() {
         synchronized (SingletonParty.class) {
@@ -27,6 +32,11 @@ public final class SingletonParty {
     }
 
     private static class PartyImpl implements Party {
+
+        /**
+         * 
+         */
+        private static final long serialVersionUID = 5037069095324356034L;
 
         @Override
         public Party getParty() {
