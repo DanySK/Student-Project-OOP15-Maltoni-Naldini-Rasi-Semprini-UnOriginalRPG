@@ -2,6 +2,7 @@ package it.unibo.unori.model.character;
 
 import java.io.Serializable;
 
+import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.items.Weapon;
 
 /**
@@ -86,9 +87,11 @@ public interface Character extends Serializable {
     void setWeapon(Weapon w);
     
     /**
-     * A getter method that gives the Weapon that the Character is holding
-     * @throws NoWeaponException.
-     * @return the Weapon the Character is holding.
+     * 
+     *  A getter method that gives the Weapon that the Character is holding.
+     * @throws NoWeaponException if the Character is not equipped with any Weapon 
+     * @return the Weapon the Character is holding 
+     * 
      */
-    Weapon getWeapon();
+    Weapon getWeapon() throws NoWeaponException;
 }
