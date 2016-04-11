@@ -2,6 +2,10 @@ package it.unibo.unori.model.character;
 
 import it.unibo.unori.model.menu.DummyMenu;
 
+/**
+ * A Class that implements a generic Character.
+ *
+ */
 public class DummyCharacter implements Character {
 /**
      * 
@@ -71,7 +75,7 @@ public int getExpTot() {
 }
 
 @Override
-public void addExp(int expAcquired) {
+public void addExp(final int expAcquired) {
     // TODO Auto-generated method stub
     
 }

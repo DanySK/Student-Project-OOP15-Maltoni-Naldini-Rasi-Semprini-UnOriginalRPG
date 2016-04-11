@@ -47,4 +47,10 @@ public interface Battle {
      * @return the amount of damage inflicted.
      */
     int weaponAttack(Weapon w);
+    
+    /**
+     * Method that allows to throw an attack using Magic.
+     * @return the amount of damage inflicted.
+     */
+    int magicAttack();
 }

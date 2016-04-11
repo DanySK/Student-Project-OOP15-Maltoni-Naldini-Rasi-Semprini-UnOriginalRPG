@@ -8,14 +8,14 @@ import java.util.Random;
  * the Battle Mode.
  *
  */
-public final class AttackLogics {
+public final class BattleLogics {
 
     private static final int SHIFT = 30;
     private static final int MULT = 10;
     private static final int LUCKPERCENTAGE = 50;
     private static final int YOURELUCKY = 3;
 
-    private AttackLogics() {
+    private BattleLogics() {
         //Empty private constructor, because this is an utility class
     }
 
@@ -33,8 +33,8 @@ public final class AttackLogics {
      * @return the damage calculated by the algorithm.
      */
     public static int getStandardDamage(final int charLevel) {
-        return AttackLogics.SHIFT 
-               + (AttackLogics.MULT * charLevel * (charLevel - 1));
+        return BattleLogics.SHIFT 
+               + (BattleLogics.MULT * charLevel * (charLevel - 1));
     }
 
     /**
@@ -51,8 +51,8 @@ public final class AttackLogics {
      */
     public static boolean whosFirst(final int myV, final int enemV) {
         final Random rand = new Random();
-        final int luck = rand.nextInt(AttackLogics.LUCKPERCENTAGE);
-        if (luck == AttackLogics.YOURELUCKY) {
+        final int luck = rand.nextInt(BattleLogics.LUCKPERCENTAGE);
+        if (luck == BattleLogics.YOURELUCKY) {
             return true;
         } else {
             return myV > enemV;
@@ -85,7 +85,7 @@ public final class AttackLogics {
      * @return the damage of the special attack.
      */
     public static int specialAttackCalculator(final int charLev) {
-        return AttackLogics.getStandardDamage(charLev) * 2
-                + charLev * AttackLogics.MULT;
+        return BattleLogics.getStandardDamage(charLev) * 2
+                + charLev * BattleLogics.MULT;
     }
 }

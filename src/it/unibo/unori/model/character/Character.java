@@ -64,9 +64,9 @@ public interface Character extends Serializable {
     int getExpTot();
     
     /**
-     * A method that gives Experience Points to the Character, when an Enemy
-     * is beaten.
-     * @param expAcquired the amount of Experience Points.
+     * A method that gives Experience Points to the Character, when a Battle
+     * is over.
+     * @param expAcquired the amount of Experience Points acquired.
      */
     void addExp(int expAcquired);
     
