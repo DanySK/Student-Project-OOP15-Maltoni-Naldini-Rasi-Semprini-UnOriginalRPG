@@ -31,48 +31,63 @@ public final class SingletonParty {
         return party;
     }
 
+    /**
+     * PartyImpl is a class to implements the methods of Party interface.
+     * PartyImpl is declared private to help encapsulation : the only way to use
+     * an instance of partyImpl is by the methods getParty of the SingletonParty class
+     *
+     */
     private static class PartyImpl implements Party {
 
         /**
          * 
          */
         private static final long serialVersionUID = 5037069095324356034L;
+        private Position currentPosition;
+        private GameMap currentMap;
+        private Object frame;
+        private CardinalPoints orientation;
+
+        /**
+         * Constructor for PartyImpl, set a standard map, position, cell and frame.
+         */
+        private PartyImpl() {
+            this.currentMap = new GameMapImpl();
+            this.currentPosition = this.currentMap.getInitialCellPosition();
+            this.frame = new Object();
+            this.orientation = CardinalPoints.NORTH;
+        }
 
 
         @Override
-        public void setCurrentPosition(Position pos) throws IllegalArgumentException {
-            // TODO Auto-generated method stub
-            
+        public void setCurrentPosition(final Position pos) throws IllegalArgumentException {
+
         }
 
         @Override
-        public void setCurrentMap(GameMap map) {
-            // TODO Auto-generated method stub
-            
+        public void setCurrentMap(final GameMap map) {
+            this.currentMap = map;
+            this.currentPosition = this.currentMap.getInitialCellPosition();
         }
 
         @Override
         public GameMap getCurrentGameMap() {
-            // TODO Auto-generated method stub
-            return null;
+            return this.currentMap;
         }
 
         @Override
-        public void setCurrentFrame(Object frame) {
-            // TODO Auto-generated method stub
-            
+        public void setCurrentFrame(final Object frame) {
+            this.frame = frame;
         }
 
         @Override
         public Object getCurrentFrame() {
-            // TODO Auto-generated method stub
-            return null;
+            return this.frame;
         }
 
         @Override
-        public void moveParty(CardinalPoints direction) throws BlockedPathException {
-            // TODO Auto-generated method stub
-            
+        public void moveParty(final CardinalPoints direction) throws BlockedPathException {
+
         }
 
         @Override
@@ -80,7 +95,7 @@ public final class SingletonParty {
             // TODO Auto-generated method stub
             return null;
         }
-        
+
     }
-    
+
 }
