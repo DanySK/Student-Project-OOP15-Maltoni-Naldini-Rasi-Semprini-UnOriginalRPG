@@ -15,13 +15,6 @@ import it.unibo.unori.model.menu.DummyMenu;
 public interface Party extends Serializable {
 
     /**
-     * Party will be a Singleton Class, so it needs a public method to get 
-     * the instance.
-     * @return
-     *          the only instance of the class.
-     */
-    public Party getParty();
-    /**
      * Set the current position of the party on the map.
      * @param pos
      *              Position of the cell the party is on

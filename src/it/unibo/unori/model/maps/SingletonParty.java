@@ -38,11 +38,6 @@ public final class SingletonParty {
          */
         private static final long serialVersionUID = 5037069095324356034L;
 
-        @Override
-        public Party getParty() {
-            // TODO Auto-generated method stub
-            return null;
-        }
 
         @Override
         public void setCurrentPosition(Position pos) throws IllegalArgumentException {
