@@ -43,4 +43,37 @@ public interface Character extends Serializable {
      * @return Magic Defense statistic.
      */
     int getMagicDef();
+    
+    /**
+     * A getter method that gives Character's Speed statistic.
+     * @return Speed statistic.
+     */
+    int getSpeed();
+    
+    /**
+     * A getter method that gives Character's Level.
+     * @return Character's Level.
+     */
+    int getLevel();
+    
+    /**
+     * A getter method that gives Character's total Experience Points, assuming
+     * his Level.
+     * @return Character's total Experience Points in this Level.
+     */
+    int getExpTot();
+    
+    /**
+     * A method that gives Experience Points to the Character, when an Enemy
+     * is beaten.
+     * @param expAcquired the amount of Experience Points.
+     */
+    void addExp(int expAcquired);
+    
+    /**
+     * A getter method that gives the amount of Experience Points needed for the
+     * Character to level up.
+     * @return the amount of Experience Points needed to level up.
+     */
+    int getRemainingExp();
 }

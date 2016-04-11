@@ -52,4 +52,34 @@ public int getMagicDef() {
     return 0;
 }
 
+@Override
+public int getSpeed() {
+    // TODO Auto-generated method stub
+    return 0;
+}
+
+@Override
+public int getLevel() {
+    // TODO Auto-generated method stub
+    return 0;
+}
+
+@Override
+public int getExpTot() {
+    // TODO Auto-generated method stub
+    return 0;
+}
+
+@Override
+public void addExp(int expAcquired) {
+    // TODO Auto-generated method stub
+    
+}
+
+@Override
+public int getRemainingExp() {
+    // TODO Auto-generated method stub
+    return 0;
+}
+
 }
