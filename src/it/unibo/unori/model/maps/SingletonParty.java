@@ -1,6 +1,9 @@
 package it.unibo.unori.model.maps;
 
+import it.unibo.unori.model.maps.cell.Cell;
+import it.unibo.unori.model.maps.cell.CellState;
 import it.unibo.unori.model.maps.exceptions.BlockedPathException;
+import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
 import it.unibo.unori.model.menu.DummyMenu;
 
 /**
@@ -37,7 +40,7 @@ public final class SingletonParty {
      * an instance of partyImpl is by the methods getParty of the SingletonParty class
      *
      */
-    private static class PartyImpl implements Party {
+    private static final class PartyImpl implements Party {
 
         /**
          * 
@@ -51,7 +54,7 @@ public final class SingletonParty {
         /**
          * Constructor for PartyImpl, set a standard map, position, cell and frame.
          */
-        private PartyImpl() {
+        public PartyImpl() {
             this.currentMap = new GameMapImpl();
             this.currentPosition = this.currentMap.getInitialCellPosition();
             this.frame = new Object();
@@ -83,6 +86,21 @@ public final class SingletonParty {
 
         @Override
         public void moveParty(final CardinalPoints direction) throws BlockedPathException {
+            this.orientation = direction;
+            final Position nextPosition = new Position(this.currentPosition.getPosX() 
+                                                   + this.orientation.getXSkidding(), 
+                                                 this.currentPosition.getPosY()
+                                                   + this.orientation.getYSkidding());
+            final Cell tempCell = this.currentMap.getCell(nextPosition);
+            if (tempCell.getState().equals(CellState.BLOCKED)) {
+                try {
+                    this.setCurrentMap(tempCell.getCellMap());
+                } catch (NoMapFoundException e) {
+                    throw new BlockedPathException();
+                }
+            } else {
+                this.currentPosition = nextPosition;
+            }
 
         }
 
