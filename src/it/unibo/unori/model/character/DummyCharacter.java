@@ -1,5 +1,7 @@
 package it.unibo.unori.model.character;
 
+import java.util.Optional;
+
 import it.unibo.unori.model.items.Weapon;
 import it.unibo.unori.model.menu.DummyMenu;
 
@@ -12,7 +14,8 @@ public class DummyCharacter implements Character {
      * 
      */
     private static final long serialVersionUID = -1306119386793011379L;
-
+    private transient Optional<Weapon> weap;
+    
     /**
      * something.
      * @return something.
