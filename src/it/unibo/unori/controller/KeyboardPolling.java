@@ -5,7 +5,9 @@ package it.unibo.unori.controller;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -13,7 +15,7 @@ import java.util.stream.Stream;
  * This class is used to poll the keyboard and get input to do things in game.
  */
 public class KeyboardPolling extends KeyAdapter {
-    private static final int NUMBER_OF_KEYS = 256;
+    public static final int NUMBER_OF_KEYS = 256;
 
     // Current state of the keyboard
     private final List<Boolean> currentKeys;
@@ -25,8 +27,8 @@ public class KeyboardPolling extends KeyAdapter {
      * Default constructor.
      */
     public KeyboardPolling() {
-        currentKeys = Stream.of(Boolean.FALSE).limit(NUMBER_OF_KEYS).collect(Collectors.toList());
-        keys = Stream.of(KeyState.NOT_PRESSED).limit(NUMBER_OF_KEYS).collect(Collectors.toList());
+        this.currentKeys = Stream.generate(() -> Boolean.FALSE).limit(NUMBER_OF_KEYS).collect(Collectors.toList());
+        this.keys = Stream.generate(() -> KeyState.NOT_PRESSED).limit(NUMBER_OF_KEYS).collect(Collectors.toList());
     }
 
     /**
