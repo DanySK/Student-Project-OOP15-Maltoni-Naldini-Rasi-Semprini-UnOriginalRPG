@@ -2,8 +2,12 @@ package it.unibo.unori.model.maps;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
+
+import it.unibo.unori.model.maps.Party.CardinalPoints;
+import it.unibo.unori.model.maps.exceptions.BlockedPathException;
 
 /**
  * Test Class for the Party object.
@@ -29,6 +33,34 @@ public class PartyTest {
         party2.setCurrentMap(map);
         assertEquals(party2.getCurrentPosition(), map.getInitialCellPosition());
         assertTrue(party2.getCurrentPosition().equals(party.getCurrentPosition()));
+    }
+
+    /**
+     * Test for the simple movements of the party.
+     */
+    @Test
+    public void testSimpleMovements() {
+        final Party party = SingletonParty.getParty();
+        party.setCurrentMap(mapFactory.getStdRoom());
+        assertEquals(party.getCurrentPosition(), new Position(1, 1));
+        try {
+            party.moveParty(CardinalPoints.NORTH);
+            party.moveParty(CardinalPoints.NORTH);
+            party.moveParty(CardinalPoints.NORTH);
+            party.moveParty(CardinalPoints.NORTH);
+            assertEquals(party.getCurrentPosition(), new Position(5, 1));
+            party.moveParty(CardinalPoints.EST);
+            party.moveParty(CardinalPoints.EST);
+            party.moveParty(CardinalPoints.EST);
+            assertEquals(party.getCurrentPosition(), new Position(5, 4));
+            party.moveParty(CardinalPoints.WEST);
+            party.moveParty(CardinalPoints.SOUTH);
+            party.moveParty(CardinalPoints.SOUTH);
+            assertEquals(party.getCurrentPosition(), new Position(3, 3));
+        } catch (BlockedPathException e) {
+            fail("No exception should be thrown...");
+        }
+
     }
 
 }
