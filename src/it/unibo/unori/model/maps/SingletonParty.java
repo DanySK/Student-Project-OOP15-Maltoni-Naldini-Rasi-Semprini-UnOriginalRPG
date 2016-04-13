@@ -61,6 +61,10 @@ public final class SingletonParty {
             this.orientation = CardinalPoints.NORTH;
         }
 
+        @Override
+        public Position getCurrentPosition() {
+            return this.currentPosition;
+        }
 
 
         @Override

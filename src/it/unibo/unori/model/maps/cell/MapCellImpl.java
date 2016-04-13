@@ -16,6 +16,7 @@ public class MapCellImpl extends SimpleCellImpl {
      */
     private static final long serialVersionUID = 7553361363890344023L;
     private final GameMap mapToLink;
+    private final Position initialPos;
 
     /**
      * Constructor.
@@ -31,13 +32,14 @@ public class MapCellImpl extends SimpleCellImpl {
     public MapCellImpl(final Object frame, final GameMap mapToLink, 
                        final Position initialPos) 
                                throws IllegalArgumentException {
-        super(frame, CellState.FREE);
+        super(frame, CellState.BLOCKED);
         this.mapToLink = mapToLink;
-        this.mapToLink.setInitialCellPosition(initialPos);
+        this.initialPos = initialPos;
     }
 
     @Override
     public GameMap getCellMap() {
+        this.mapToLink.setInitialCellPosition(initialPos);
         return this.mapToLink;
     }
 

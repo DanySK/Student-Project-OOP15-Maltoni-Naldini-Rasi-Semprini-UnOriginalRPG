@@ -11,8 +11,10 @@ import it.unibo.unori.model.maps.cell.MapCellImpl;
  *
  */
 public class GameMapFactory {
-
-    private static final GameMap LINKINGMAP = new GameMapImpl();
+    /**
+     * Generic standard map.
+     */
+    public static final GameMap LINKINGMAP = new GameMapImpl();
     private static final CellFactory FACT = new CellFactory();
     private static final int MAXSIZE = 99;
 

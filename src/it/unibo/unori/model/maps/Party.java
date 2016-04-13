@@ -14,6 +14,12 @@ import it.unibo.unori.model.menu.DummyMenu;
  */
 public interface Party extends Serializable {
 
+    /**
+     * Getter for the current position.
+     * @return the current position of the party.
+     */
+    public Position getCurrentPosition();
+
 
     /**
      * Set the current map for the party to walk on.
