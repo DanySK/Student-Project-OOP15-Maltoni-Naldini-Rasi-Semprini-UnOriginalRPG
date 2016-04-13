@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import it.unibo.unori.model.maps.Party.CardinalPoints;
 import it.unibo.unori.model.maps.exceptions.BlockedPathException;
+import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
 
 /**
  * Test Class for the Party object.
@@ -78,6 +79,28 @@ public class PartyTest {
             System.out.println(e);
         } catch (Exception e) {
             fail("Throwed an unexpect kind of exception");
+        }
+    }
+
+    /**
+     * Test for switching map.
+     * @throws NoMapFoundException 
+     * @throws IllegalArgumentException 
+     */
+    @Test
+    public void testLinkingMap() throws IllegalArgumentException, NoMapFoundException {
+        final Party party = SingletonParty.getParty();
+        party.setCurrentMap(mapFactory.getSouthLinkedMap());
+        assertEquals(party.getCurrentPosition(), new Position(1, 1));
+        try {
+            party.moveParty(CardinalPoints.EST);
+            party.moveParty(CardinalPoints.EST);
+            party.moveParty(CardinalPoints.SOUTH);
+            assertEquals(party.getCurrentGameMap(), GameMapFactory.LINKINGMAP);
+            System.out.println(party.getCurrentPosition().getPosX() + ", " + party.getCurrentPosition().getPosY());
+            assertEquals(party.getCurrentPosition(), new Position(98, 3));
+        } catch (BlockedPathException e) {
+            fail("Party was supposed to change map");
         }
     }
 
