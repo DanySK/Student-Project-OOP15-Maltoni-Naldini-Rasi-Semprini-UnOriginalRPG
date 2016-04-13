@@ -63,4 +63,22 @@ public class PartyTest {
 
     }
 
+    /**
+     * Test for the movements Exceptions.
+     */
+    @Test
+    public void testMovementsExceptions() {
+        final Party party = SingletonParty.getParty();
+        party.setCurrentMap(mapFactory.getStdRoom());
+        try {
+            party.moveParty(CardinalPoints.NORTH);
+            party.moveParty(CardinalPoints.WEST);
+            fail("BlockedPathException expected!");
+        } catch (BlockedPathException e) {
+            System.out.println(e);
+        } catch (Exception e) {
+            fail("Throwed an unexpect kind of exception");
+        }
+    }
+
 }
