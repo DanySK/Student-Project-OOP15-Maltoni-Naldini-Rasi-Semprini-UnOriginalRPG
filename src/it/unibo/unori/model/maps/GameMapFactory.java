@@ -11,8 +11,10 @@ import it.unibo.unori.model.maps.cell.MapCellImpl;
  *
  */
 public class GameMapFactory {
-
-    private static final GameMap LINKINGMAP = new GameMapImpl();
+    /**
+     * Generic standard map.
+     */
+    public static final GameMap LINKINGMAP = new GameMapImpl();
     private static final CellFactory FACT = new CellFactory();
     private static final int MAXSIZE = 99;
 
@@ -41,7 +43,7 @@ public class GameMapFactory {
         IntStream.range(0, MAXSIZE).forEachOrdered(i -> {
             final Position pos = new Position(0, i);
             final Cell cell = new MapCellImpl(new Object(), LINKINGMAP,
-                                    new Position(MAXSIZE - 2, i));
+                                    new Position(MAXSIZE - 1, i));
             map.setCell(pos, cell);
         });
         return map;
