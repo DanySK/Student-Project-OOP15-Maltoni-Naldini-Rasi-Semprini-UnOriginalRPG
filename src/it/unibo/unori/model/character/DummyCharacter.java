@@ -20,9 +20,9 @@ public class DummyCharacter implements Character {
      * something.
      * @return something.
      */
-        public DummyMenu createMenu() {
-            return new DummyMenu();
-        }
+    public DummyMenu createMenu() {
+        return new DummyMenu();
+    }
     
     @Override
     public int getRemainingHP() {
@@ -91,7 +91,7 @@ public class DummyCharacter implements Character {
     }
     
     @Override
-    public void setWeapon(Weapon w) {
+    public void setWeapon(final Weapon w) {
         // TODO Auto-generated method stub
         
     }
