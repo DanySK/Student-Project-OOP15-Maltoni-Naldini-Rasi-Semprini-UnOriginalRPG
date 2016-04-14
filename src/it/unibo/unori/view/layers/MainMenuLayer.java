@@ -1,52 +1,72 @@
 package it.unibo.unori.view.layers;
 
 import java.awt.Graphics;
+import javax.swing.JPanel;
 
-import it.unibo.unori.view.*;
+import it.unibo.unori.view.View;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
+
 import java.io.InputStream;
-import javax.sound.midi.InvalidMidiDataException;
+import java.io.IOException;
+import java.io.BufferedInputStream;
+
+import javax.sound.midi.Sequencer;
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
-import javax.sound.midi.Sequencer;
+import javax.sound.midi.InvalidMidiDataException;
 
-public class MainMenuLayer extends GameLayer {
+/**
+ * 
+ * Main menu view layer.
+ *
+ */
+public class MainMenuLayer extends JPanel {
 
     /**
-     * Creates an instance of the MainMenu layer
+     * Creates an instance of the main menu layer.
      */
     public MainMenuLayer() {
-        setPreferredSize(View.size);
-        setBounds(0, 0, View.size.width, View.size.height);
+        super();
+
+        setPreferredSize(View.SIZE);
+        setBounds(0, 0, View.SIZE.width, View.SIZE.height);
     }
 
     /**
-     * Draw the content of the main menu
+     * Draw the content of the main menu.
      */
     @Override
-    public void paintComponent(Graphics g) {
+    public void paintComponent(final Graphics g) {
         super.paintComponent(g);
     }
 
+    /**
+     * MIDI playing main.
+     */
     public static void main(final String... args) throws MidiUnavailableException,
                                                          IOException,
                                                          InvalidMidiDataException,
                                                          InterruptedException {
-        MainMenuLayer layer = new MainMenuLayer();
+        final View view = new View();
+        final MainMenuLayer layer = new MainMenuLayer();
 
-        View view = new View();
         view.pushLayer(layer);
 
-        Sequencer sequencer = MidiSystem.getSequencer();
-        InputStream is = new BufferedInputStream(new FileInputStream(new File("res/9.mid")));
+        /*
+         * MIDI
+         */
+
+        final int delay = 20000;
+        final Sequencer sequencer = MidiSystem.getSequencer();
+        final InputStream is = new BufferedInputStream(new FileInputStream(new File("res/9.mid")));
+
         sequencer.setSequence(is);
+
         sequencer.open();
-        
-        Thread.sleep(2000);
+        Thread.sleep(delay);
+
         sequencer.start();
     }
 }
