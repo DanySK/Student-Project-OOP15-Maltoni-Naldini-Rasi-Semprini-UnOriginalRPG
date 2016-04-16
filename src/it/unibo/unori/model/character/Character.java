@@ -99,7 +99,7 @@ public interface Character extends Serializable {
     
     /**
      * This method allows me to give an Armor to my Character.
-     * @param w the Armor Item.
+     * @param ar the Armor Item.
      */
     void setArmor(Armor ar);
     

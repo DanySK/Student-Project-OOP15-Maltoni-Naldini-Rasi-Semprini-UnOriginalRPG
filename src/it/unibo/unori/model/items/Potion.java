@@ -7,9 +7,9 @@ package it.unibo.unori.model.items;
 public interface Potion extends Item {
     
     /**
-     * This method gives me the Amount of Health Points that the potion
+     * This method gives me the Amount of Statistic points that the potion
      * restores when is used.
-     * @return the amount of HPs to restore.
+     * @return the amount of Statistic Points to restore.
      */
     int getRestore();
 }
