@@ -16,26 +16,27 @@ import javax.swing.SwingUtilities;
  * In-game menu.
  *
  */
-public class GameMenu extends Menu {
+public class InGameMenu extends Menu {
     private final Color backgroundColor = Color.GRAY;
     private final Dimension size = new Dimension(200, 400);
 
     /**
-     * Creates the in-game menu.
+     * Creates an instance of the in-game menu.
      */
-    public GameMenu() {
+    public InGameMenu() {
         super();
 
         setOpaque(true);
         setPreferredSize(size);
         setBackground(backgroundColor);
         setBounds(0, 0, size.width, size.height);
+
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
 
         final Button[] button = new Button[4];
 
-        button[0] = new Button("Characters");
+        button[0] = new Button("Party");
         button[1] = new Button("Items");
         button[2] = new Button("Save");
         button[3] = new Button("Quit");
@@ -60,15 +61,16 @@ public class GameMenu extends Menu {
 
     /**
      * Tests this class.
+     * 
      * @param args main's arguments
      */
     public static void main(final String... args) {
         final View view = new View();
         final Menu mainMenu = new MainMenu();
-        final Menu gameMenu = new GameMenu();
+        final Menu inGameMenu = new InGameMenu();
 
         view.push(mainMenu);
-        view.resize(mainMenu);
+        view.resizeTo(mainMenu);
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override public void run() {
@@ -79,6 +81,6 @@ public class GameMenu extends Menu {
         view.center();
 
         mainMenu.disable();
-        view.push(gameMenu);
+        view.push(inGameMenu);
     }
 }
