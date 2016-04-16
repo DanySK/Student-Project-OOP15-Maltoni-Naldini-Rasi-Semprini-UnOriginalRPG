@@ -1,23 +1,20 @@
 package it.unibo.unori.view.layers;
 
-import it.unibo.unori.view.View;
 import it.unibo.unori.view.components.Button;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.BorderLayout;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyAdapter;
 
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+import javax.swing.BorderFactory;
 
 /**
  * 
  * Main menu.
  *
  */
-public class MainMenu extends JPanel {
+public class MainMenu extends Menu {
     private final Color backgroundColor = Color.BLACK;
     private final Dimension size = new Dimension(600, 400);
 
@@ -32,65 +29,21 @@ public class MainMenu extends JPanel {
         setBackground(backgroundColor);
         setBounds(0, 0, size.width, size.height);
 
-        /*
-         * BUTTONS
-         */
         final JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(backgroundColor);
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
 
-        final int buttons = 2;
-        final Button[] button = new Button[buttons];
+        final Button[] button = new Button[2];
 
         button[0] = new Button("New Game");
         button[1] = new Button("Load Game");
 
-        /* keyboard events */
-        for (int b = 0; b < buttons; b++) {
-            final int i = b; // current button
+        mapButtonsHorizontally(button);
 
-            button[i].addKeyListener(new KeyAdapter() {
-                @Override
-                public void keyPressed(final KeyEvent e) {
-                    if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-                        ((Button) e.getComponent()).doClick();
-                    }
-
-                    if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                           if (i > 0) {
-                               button[i - 1].requestFocus();
-                           }
-                    }
-                    if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                           if (i < buttons - 1) {
-                               button[i + 1].requestFocus();
-                           }
-                    }
-                }
-            });
-
-            buttonPanel.add(button[i]);
+        for (final Button b : button) {
+            buttonPanel.add(b);
         }
 
         add(buttonPanel, BorderLayout.PAGE_END);
     }
-
-     /**
-      * Tests this class.
-      * @param args main's arguments
-      */
-     public static void main(final String... args) {
-         final View view = new View();
-         final MainMenu mainMenu = new MainMenu();
-
-         view.push(mainMenu);
-         view.resize(mainMenu);
-
-         view.center();
-
-         SwingUtilities.invokeLater(new Runnable() {
-             @Override public void run() {
-                 view.setVisible(true);
-             }
-         });
-     }
 }

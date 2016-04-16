@@ -14,6 +14,8 @@ public final class View extends JFrame {
     private final JLayeredPane layeredPane;
     private static final String TITLE = "UnOriginal RPG";
 
+    private Integer index = 1;
+
     /**
      * Creates an instance of the view.
      */
@@ -55,6 +57,6 @@ public final class View extends JFrame {
      * @param layer the layer to be pushed onto the view
      */
     public void push(final JPanel layer) {
-        layeredPane.add(layer);
+        layeredPane.add(layer, index++);
     }
 }
