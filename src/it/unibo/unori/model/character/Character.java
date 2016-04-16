@@ -2,7 +2,9 @@ package it.unibo.unori.model.character;
 
 import java.io.Serializable;
 
+import it.unibo.unori.model.character.exceptions.NoArmorException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
+import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.Weapon;
 
 /**
@@ -94,4 +96,19 @@ public interface Character extends Serializable {
      * 
      */
     Weapon getWeapon() throws NoWeaponException;
+    
+    /**
+     * This method allows me to give an Armor to my Character.
+     * @param w the Armor Item.
+     */
+    void setArmor(Armor ar);
+    
+    /**
+     * 
+     *  A getter method that gives the Armor that the Character is wearing.
+     * @throws NoArmorException if the Character is not wearing any Armor 
+     * @return the Armor the Character is wearing 
+     * 
+     */
+    Weapon getArmor() throws NoArmorException;
 }

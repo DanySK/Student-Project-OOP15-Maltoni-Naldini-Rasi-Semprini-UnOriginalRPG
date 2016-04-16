@@ -2,6 +2,8 @@ package it.unibo.unori.model.character;
 
 import java.util.Optional;
 
+import it.unibo.unori.model.character.exceptions.NoArmorException;
+import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.Weapon;
 import it.unibo.unori.model.menu.DummyMenu;
 
@@ -98,6 +100,18 @@ public class DummyCharacter implements Character {
     
     @Override
     public Weapon getWeapon() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setArmor(Armor ar) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public Weapon getArmor() throws NoArmorException {
         // TODO Auto-generated method stub
         return null;
     }
