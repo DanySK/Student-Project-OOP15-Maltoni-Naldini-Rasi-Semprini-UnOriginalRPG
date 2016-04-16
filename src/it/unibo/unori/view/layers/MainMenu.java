@@ -19,7 +19,7 @@ import javax.swing.SwingUtilities;
  */
 public class MainMenu extends JPanel {
     private final Color backgroundColor = Color.BLACK;
-    private final Dimension size = new Dimension(800, 600);
+    private final Dimension size = new Dimension(600, 400);
 
     /**
      * Creates an instance of the main menu.
