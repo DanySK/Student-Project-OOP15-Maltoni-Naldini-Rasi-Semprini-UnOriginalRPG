@@ -27,10 +27,12 @@ public class BattleImpl implements Battle {
     }
     
     private int getNextChar() {
+        //TODO turns algorithm needed.
         return 0;
     }
     
     private int getNextEnemy() {
+      //TODO turns algorithm needed.
         return 0;
     }
     
