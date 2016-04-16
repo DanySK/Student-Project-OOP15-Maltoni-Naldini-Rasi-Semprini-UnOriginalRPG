@@ -2,8 +2,10 @@ package it.unibo.unori.model.character;
 
 import java.io.Serializable;
 
+import it.unibo.unori.model.character.exceptions.ArmorAlreadyException;
 import it.unibo.unori.model.character.exceptions.NoArmorException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
+import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
 import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.Weapon;
 
@@ -85,8 +87,9 @@ public interface Character extends Serializable {
     /**
      * This method allows me to give a Weapon to my Character.
      * @param w the Weapon Item.
+     * @throws WeaponAlreadyException if the Character already has a weapon.
      */
-    void setWeapon(Weapon w);
+    void setWeapon(Weapon w) throws WeaponAlreadyException;
     
     /**
      * 
@@ -100,8 +103,9 @@ public interface Character extends Serializable {
     /**
      * This method allows me to give an Armor to my Character.
      * @param ar the Armor Item.
+     * @throws ArmorAlreadyException if the Character is already wearing an armor.
      */
-    void setArmor(Armor ar);
+    void setArmor(Armor ar) throws ArmorAlreadyException;
     
     /**
      * 
@@ -110,5 +114,5 @@ public interface Character extends Serializable {
      * @return the Armor the Character is wearing 
      * 
      */
-    Weapon getArmor() throws NoArmorException;
+    Armor getArmor() throws NoArmorException;
 }
