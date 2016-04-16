@@ -45,8 +45,8 @@ public class MainMenu extends JPanel {
         button[1] = new Button("Load Game");
 
         /* keyboard events */
-        for (int i = 0; i < buttons; i++) {
-            final int cur = i; // current button
+        for (int b = 0; b < buttons; b++) {
+            final int i = b; // current button
 
             button[i].addKeyListener(new KeyAdapter() {
                 @Override
@@ -56,13 +56,13 @@ public class MainMenu extends JPanel {
                     }
 
                     if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                           if (cur > 0) {
-                               button[cur - 1].requestFocus();
+                           if (i > 0) {
+                               button[i - 1].requestFocus();
                            }
                     }
                     if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                           if (cur < buttons - 1) {
-                               button[cur + 1].requestFocus();
+                           if (i < buttons - 1) {
+                               button[i + 1].requestFocus();
                            }
                     }
                 }
@@ -80,15 +80,17 @@ public class MainMenu extends JPanel {
       */
      public static void main(final String... args) {
          final View view = new View();
+         final MainMenu mainMenu = new MainMenu();
 
-         view.push(new MainMenu());
+         view.push(mainMenu);
+         view.resize(mainMenu);
+
+         view.center();
 
          SwingUtilities.invokeLater(new Runnable() {
              @Override public void run() {
                  view.setVisible(true);
              }
          });
-
-         view.setLocationRelativeTo(null);
      }
 }

@@ -27,6 +27,23 @@ public final class View extends JFrame {
     }
 
     /**
+     * Centers the view in the screen.
+     */
+    public void center() {
+        setLocationRelativeTo(null);
+    }
+
+    /**
+     * Resizes the view according to the specified layer.
+     * @param layer the layer the view will resize to.
+     */
+    public void resize(final JPanel layer) {
+        getContentPane().setPreferredSize(layer.getSize());
+
+        pack();
+    }
+
+    /**
      * Removes the layer on top of the view.
      */
     public void pop() {
@@ -34,14 +51,10 @@ public final class View extends JFrame {
     }
 
     /**
-     * Pushes a layer onto the top of the view. Resize accordingly.
+     * Pushes a layer onto the top of the view.
      * @param layer the layer to be pushed onto the view
      */
     public void push(final JPanel layer) {
         layeredPane.add(layer);
-
-        getContentPane().setPreferredSize(layer.getSize());
-
-        pack();
     }
 }
