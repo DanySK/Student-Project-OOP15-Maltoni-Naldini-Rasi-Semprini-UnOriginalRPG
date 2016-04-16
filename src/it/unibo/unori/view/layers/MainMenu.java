@@ -14,10 +14,11 @@ import javax.swing.SwingUtilities;
 
 /**
  * 
- * Main menu layer.
+ * Main menu.
  *
  */
 public class MainMenu extends JPanel {
+    private final Color backgroundColor = Color.BLACK;
     private final Dimension size = new Dimension(800, 600);
 
     /**
@@ -25,16 +26,17 @@ public class MainMenu extends JPanel {
      */
      public MainMenu() {
         super();
+
         setPreferredSize(size);
+        setLayout(new BorderLayout());
+        setBackground(backgroundColor);
         setBounds(0, 0, size.width, size.height);
 
-        final Color background = Color.BLACK;
-
-        setBackground(background);
-        setLayout(new BorderLayout());
-
+        /*
+         * BUTTONS
+         */
         final JPanel buttonPanel = new JPanel();
-        buttonPanel.setBackground(background);
+        buttonPanel.setBackground(backgroundColor);
 
         final int buttons = 2;
         final Button[] button = new Button[buttons];
@@ -42,8 +44,10 @@ public class MainMenu extends JPanel {
         button[0] = new Button("New Game");
         button[1] = new Button("Load Game");
 
+        /* keyboard events */
         for (int i = 0; i < buttons; i++) {
-            final int cur = i;
+            final int cur = i; // current button
+
             button[i].addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(final KeyEvent e) {

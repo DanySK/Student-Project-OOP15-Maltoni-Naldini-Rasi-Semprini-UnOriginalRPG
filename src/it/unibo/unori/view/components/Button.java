@@ -21,10 +21,6 @@ public class Button extends JButton implements FocusListener {
      */
     public Button(final String label) {
         super(label);
-        setFocusPainted(false);
-        setBorderPainted(false);
-        setRolloverEnabled(false);
-        setContentAreaFilled(false);
 
         /* foreground */
         setIcon(icon);
@@ -35,6 +31,11 @@ public class Button extends JButton implements FocusListener {
         setForeground(Color.WHITE);
         setHorizontalTextPosition(JButton.CENTER);
         setFont(new Font("Arial", Font.PLAIN, fontSize));
+
+        setFocusPainted(false);
+        setBorderPainted(false);
+        setRolloverEnabled(false);
+        setContentAreaFilled(false);
 
         this.addFocusListener(this);
     }

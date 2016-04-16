@@ -37,8 +37,8 @@ public final class View extends JFrame {
      */
     public void push(final JPanel layer) {
         layeredPane.add(layer);
-
         getContentPane().setPreferredSize(layer.getSize());
+
         pack();
     }
 }
