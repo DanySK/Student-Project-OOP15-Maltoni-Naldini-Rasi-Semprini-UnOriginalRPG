@@ -21,7 +21,7 @@ public interface Battle {
      * @param enemy the enemy against which throw the attack
      * @return the damage inflicted to the specified enemy.
      */
-    int attack(Object enemy);
+    int attack(Character enemy);
 
     /**
      * Method that allows to defend a personal team's character at choice.

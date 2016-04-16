@@ -2,7 +2,11 @@ package it.unibo.unori.model.character;
 
 import java.io.Serializable;
 
+import it.unibo.unori.model.character.exceptions.ArmorAlreadyException;
+import it.unibo.unori.model.character.exceptions.NoArmorException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
+import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
+import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.Weapon;
 
 /**
@@ -83,8 +87,15 @@ public interface Character extends Serializable {
     /**
      * This method allows me to give a Weapon to my Character.
      * @param w the Weapon Item.
+     * @throws WeaponAlreadyException if the Character already has a weapon.
      */
-    void setWeapon(Weapon w);
+    void setWeapon(Weapon w) throws WeaponAlreadyException;
+    
+    /**
+     * This method allows to remove a Weapon from a Character equipment.
+     * @throws NoWeaponException if the Character is not equipped with any Weapon
+     */
+    void unsetWeapon() throws NoWeaponException;
     
     /**
      * 
@@ -94,4 +105,27 @@ public interface Character extends Serializable {
      * 
      */
     Weapon getWeapon() throws NoWeaponException;
+    
+    /**
+     * This method allows me to give an Armor to my Character.
+     * @param ar the Armor Item.
+     * @throws ArmorAlreadyException if the Character is already wearing
+     * an Armor.
+     */
+    void setArmor(Armor ar) throws ArmorAlreadyException;
+    
+    /**
+     * This method allows to remove an Armor from Character's equipment.
+     * @throws NoArmorException if the Character is not wearing any Armor
+     */
+    void unsetArmor() throws NoArmorException;
+    
+    /**
+     * 
+     *  A getter method that gives the Armor that the Character is wearing.
+     * @throws NoArmorException if the Character is not wearing any Armor 
+     * @return the Armor the Character is wearing 
+     * 
+     */
+    Armor getArmor() throws NoArmorException;
 }

@@ -6,5 +6,10 @@ package it.unibo.unori.model.items;
  */
 public interface Potion extends Item {
     
-  //TODO standard methods.
+    /**
+     * This method gives me the Amount of Statistic points that the potion
+     * restores when is used.
+     * @return the amount of Statistic Points to restore.
+     */
+    int getRestore();
 }

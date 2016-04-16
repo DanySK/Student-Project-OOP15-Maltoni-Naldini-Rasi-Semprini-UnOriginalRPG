@@ -2,6 +2,11 @@ package it.unibo.unori.model.character;
 
 import java.util.Optional;
 
+import it.unibo.unori.model.character.exceptions.ArmorAlreadyException;
+import it.unibo.unori.model.character.exceptions.NoArmorException;
+import it.unibo.unori.model.character.exceptions.NoWeaponException;
+import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
+import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.Weapon;
 import it.unibo.unori.model.menu.DummyMenu;
 
@@ -15,14 +20,15 @@ public class DummyCharacter implements Character {
      */
     private static final long serialVersionUID = -1306119386793011379L;
     private transient Optional<Weapon> weap;
+    private transient Optional<Armor> arm;
     
     /**
      * something.
      * @return something.
      */
-        public DummyMenu createMenu() {
-            return new DummyMenu();
-        }
+    public DummyMenu createMenu() {
+        return new DummyMenu();
+    }
     
     @Override
     public int getRemainingHP() {
@@ -91,15 +97,49 @@ public class DummyCharacter implements Character {
     }
     
     @Override
-    public void setWeapon(Weapon w) {
-        // TODO Auto-generated method stub
-        
+    public void setWeapon(final Weapon w) throws WeaponAlreadyException {
+        if (this.weap.isPresent()) {
+            throw new WeaponAlreadyException();
+        } else {
+            this.weap = Optional.of(w);
+        }
     }
     
     @Override
     public Weapon getWeapon() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.weap.get();
+    }
+
+    @Override
+    public void setArmor(final Armor ar) throws ArmorAlreadyException {
+        if (this.arm.isPresent()) {
+            throw new ArmorAlreadyException();
+        } else {
+            this.arm = Optional.of(ar);
+        }
+    }
+
+    @Override
+    public Armor getArmor() throws NoArmorException {
+        return this.arm.get();
+    }
+
+    @Override
+    public void unsetWeapon() throws NoWeaponException {
+        if (this.weap.isPresent()) {
+            this.weap = Optional.empty();
+        } else {
+            throw new NoWeaponException();
+        }
+    }
+
+    @Override
+    public void unsetArmor() throws NoArmorException {
+        if (this.arm.isPresent()) {
+            this.arm = Optional.empty();
+        } else {
+            throw new NoArmorException();
+        }
     }
 
 }
