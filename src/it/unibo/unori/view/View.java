@@ -3,7 +3,6 @@ package it.unibo.unori.view;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLayeredPane;
-import javax.swing.SwingUtilities;
 
 /**
  * 
@@ -25,12 +24,6 @@ public final class View extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         layeredPane = getLayeredPane();
-
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override public void run() {
-                setVisible(true);
-            }
-        });
     }
 
     /**

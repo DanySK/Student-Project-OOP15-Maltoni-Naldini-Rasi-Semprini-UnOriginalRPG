@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  * 
@@ -81,5 +82,13 @@ public class MainMenu extends JPanel {
          final View view = new View();
 
          view.push(new MainMenu());
+
+         SwingUtilities.invokeLater(new Runnable() {
+             @Override public void run() {
+                 view.setVisible(true);
+             }
+         });
+
+         view.setLocationRelativeTo(null);
      }
 }
