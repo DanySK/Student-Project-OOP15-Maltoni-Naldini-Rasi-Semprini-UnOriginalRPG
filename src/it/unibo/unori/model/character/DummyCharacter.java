@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import it.unibo.unori.model.character.exceptions.ArmorAlreadyException;
 import it.unibo.unori.model.character.exceptions.NoArmorException;
+import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
 import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.Weapon;
@@ -121,6 +122,24 @@ public class DummyCharacter implements Character {
     @Override
     public Armor getArmor() throws NoArmorException {
         return this.arm.get();
+    }
+
+    @Override
+    public void unsetWeapon() throws NoWeaponException {
+        if (this.weap.isPresent()) {
+            this.weap = Optional.empty();
+        } else {
+            throw new NoWeaponException();
+        }
+    }
+
+    @Override
+    public void unsetArmor() throws NoArmorException {
+        if (this.arm.isPresent()) {
+            this.arm = Optional.empty();
+        } else {
+            throw new NoArmorException();
+        }
     }
 
 }

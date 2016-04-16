@@ -92,6 +92,12 @@ public interface Character extends Serializable {
     void setWeapon(Weapon w) throws WeaponAlreadyException;
     
     /**
+     * This method allows to remove a Weapon from a Character equipment.
+     * @throws NoWeaponException if the Character is not equipped with any Weapon
+     */
+    void unsetWeapon() throws NoWeaponException;
+    
+    /**
      * 
      *  A getter method that gives the Weapon that the Character is holding.
      * @throws NoWeaponException if the Character is not equipped with any Weapon 
@@ -103,9 +109,16 @@ public interface Character extends Serializable {
     /**
      * This method allows me to give an Armor to my Character.
      * @param ar the Armor Item.
-     * @throws ArmorAlreadyException if the Character is already wearing an armor.
+     * @throws ArmorAlreadyException if the Character is already wearing
+     * an Armor.
      */
     void setArmor(Armor ar) throws ArmorAlreadyException;
+    
+    /**
+     * This method allows to remove an Armor from Character's equipment.
+     * @throws NoArmorException if the Character is not wearing any Armor
+     */
+    void unsetArmor() throws NoArmorException;
     
     /**
      * 
