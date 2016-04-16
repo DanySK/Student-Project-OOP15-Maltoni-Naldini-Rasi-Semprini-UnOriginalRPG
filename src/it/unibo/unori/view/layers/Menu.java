@@ -8,10 +8,14 @@ import java.awt.event.KeyAdapter;
 
 /**
  * 
- * Methods useful for menus.
+ * Menu.
  *
  */
 public abstract class Menu extends JPanel {
+    /**
+     * Disable all the controls inside this menu.
+     */
+    public void disable() { };
 
     private void mapButtons(final Button[] button,
                             final int key1, final int key2) {

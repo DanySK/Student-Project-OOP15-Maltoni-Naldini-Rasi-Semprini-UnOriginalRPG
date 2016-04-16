@@ -24,7 +24,7 @@ public class Button extends JButton implements FocusListener {
 
         /* foreground */
         setIcon(icon);
-        setPressedIcon(icon);
+        setPressedIcon(icon); // TODO disabled icon
 
         /* background */
         final int fontSize = 18;

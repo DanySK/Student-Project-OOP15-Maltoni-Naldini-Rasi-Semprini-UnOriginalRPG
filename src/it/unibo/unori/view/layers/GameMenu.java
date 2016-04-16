@@ -35,7 +35,7 @@ public class GameMenu extends Menu {
 
         final Button[] button = new Button[4];
 
-        button[0] = new Button("Character");
+        button[0] = new Button("Characters");
         button[1] = new Button("Items");
         button[2] = new Button("Save");
         button[3] = new Button("Quit");
@@ -46,6 +46,15 @@ public class GameMenu extends Menu {
             b.setAlignmentX(Component.CENTER_ALIGNMENT);
 
             add(b);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void disable() {
+        for (final Component component : getComponents()) {
+            component.setEnabled(false);
         }
     }
 
@@ -69,6 +78,7 @@ public class GameMenu extends Menu {
 
         view.center();
 
+        mainMenu.disable();
         view.push(gameMenu);
     }
 }
