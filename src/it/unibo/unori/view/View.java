@@ -1,60 +1,44 @@
 package it.unibo.unori.view;
 
-import java.util.Stack;
-
-import java.awt.Dimension;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import javax.swing.JLayeredPane;
-import javax.swing.SwingUtilities;
 
 /**
  * 
- * The View class displays and contains game layers, it behaves like a stack.
+ * The View class displays game layers with transparency, it behaves like a stack.
  *
  */
 public final class View extends JFrame {
-    private static final String TITLE = "UnoRPG";
-
-    /**
-     * Main window's dimension.
-     */
-    public static final Dimension SIZE = new Dimension(800, 600);
-
     private final JLayeredPane layeredPane;
-    private final Stack<JPanel> layerStack = new Stack<>();
+    private static final String TITLE = "UnOriginal RPG";
 
     /**
-     * Creates an instance of View.
+     * Creates an instance of the view.
      */
     public View() {
         super(TITLE);
-        setSize(SIZE.width, SIZE.height);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         layeredPane = getLayeredPane();
-
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override public void run() {
-                setVisible(true);
-            }
-        });
     }
 
     /**
-     * Removes the layer at the top of the stack.
-     * @throws EmptyStackException  if this stack is empty.
+     * Removes the layer on top of the view.
      */
-    public void popLayer() {
-        layeredPane.remove(layerStack.pop());
+    public void pop() {
+        layeredPane.remove(layeredPane.highestLayer());
     }
 
     /**
-     * Pushes a layer onto the top of the stack.
-     * @param gameLayer  the layer to be pushed onto the stack.
+     * Pushes a layer onto the top of the view. Resize the view accordingly.
+     * @param layer the layer to be pushed onto the view
      */
-    public void pushLayer(final JPanel gameLayer) {
-        layeredPane.add(layerStack.push(gameLayer));
+    public void push(final JPanel layer) {
+        layeredPane.add(layer);
+
+        getContentPane().setPreferredSize(layer.getSize());
+        pack();
     }
 }
