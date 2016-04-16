@@ -1,60 +1,62 @@
 package it.unibo.unori.view;
 
-import java.util.Stack;
-
-import java.awt.Dimension;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLayeredPane;
-import javax.swing.SwingUtilities;
 
 /**
  * 
- * The View class displays and contains game layers, it behaves like a stack.
+ * The View class displays game layers with transparency,
+ * it behaves like a stack.
  *
  */
 public final class View extends JFrame {
-    private static final String TITLE = "UnoRPG";
-
-    /**
-     * Main window's dimension.
-     */
-    public static final Dimension SIZE = new Dimension(800, 600);
-
     private final JLayeredPane layeredPane;
-    private final Stack<JPanel> layerStack = new Stack<>();
+    private static final String TITLE = "UnOriginal RPG";
+
+    private Integer index = 1;
 
     /**
-     * Creates an instance of View.
+     * Creates an instance of the view.
      */
     public View() {
         super(TITLE);
-        setSize(SIZE.width, SIZE.height);
+
+        this.setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         layeredPane = getLayeredPane();
-
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override public void run() {
-                setVisible(true);
-            }
-        });
     }
 
     /**
-     * Removes the layer at the top of the stack.
-     * @throws EmptyStackException  if this stack is empty.
+     * Centers the view in the screen.
      */
-    public void popLayer() {
-        layeredPane.remove(layerStack.pop());
+    public void center() {
+        setLocationRelativeTo(null);
     }
 
     /**
-     * Pushes a layer onto the top of the stack.
-     * @param gameLayer  the layer to be pushed onto the stack.
+     * Resizes the view according to the specified layer.
+     * @param layer the layer the view will resize to.
      */
-    public void pushLayer(final JPanel gameLayer) {
-        layeredPane.add(layerStack.push(gameLayer));
+    public void resize(final JPanel layer) {
+        getContentPane().setPreferredSize(layer.getSize());
+
+        pack();
+    }
+
+    /**
+     * Removes the layer on top of the view.
+     */
+    public void pop() {
+        layeredPane.remove(layeredPane.highestLayer()); // TODO exception
+    }
+
+    /**
+     * Pushes a layer onto the top of the view.
+     * @param layer the layer to be pushed onto the view
+     */
+    public void push(final JPanel layer) {
+        layeredPane.add(layer, index++);
     }
 }
