@@ -3,6 +3,7 @@ package it.unibo.unori.model.battle;
 import java.util.List;
 
 import it.unibo.unori.model.battle.exceptions.CantEscapeException;
+import it.unibo.unori.model.battle.utility.BattleLogics;
 import it.unibo.unori.model.character.Character;
 import it.unibo.unori.model.items.Weapon;
 
@@ -12,23 +13,41 @@ import it.unibo.unori.model.items.Weapon;
  */
 public class BattleImpl implements Battle {
     
-    private List<Character> squad;
+    private final List<Character> squad;
+    private final List<Character> enemies;
     
     /**
      * Standard constructor for Class BattleImpl.
      * @param team my team.
+     * @param en a List of Enemies.
      */
-    public BattleImpl(final List<Character> team) {
+    public BattleImpl(final List<Character> team, final List<Character> en) {
         this.squad = team;
+        this.enemies = en;
+    }
+    
+    private int getNextChar() {
+        return 0;
+    }
+    
+    private int getNextEnemy() {
+        return 0;
     }
     
     @Override
     public void runAway() throws CantEscapeException {
-        // TODO Auto-generated method stub
+        if (BattleLogics.canEscape(
+                this.squad.get(this.getNextChar()).getLevel(),
+                this.enemies.get(this.getNextEnemy()).getLevel())
+            ) {
+            //TODO end battle
+        } else {
+            throw new CantEscapeException();
+        }
     }
 
     @Override
-    public int attack(Object enemy) {
+    public int attack(Character enemy) {
         // TODO Auto-generated method stub
         return 0;
     }
