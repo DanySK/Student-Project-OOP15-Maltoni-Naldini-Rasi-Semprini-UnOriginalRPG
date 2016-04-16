@@ -11,7 +11,7 @@ import java.awt.event.KeyAdapter;
  * Menu.
  *
  */
-public abstract class Menu extends JPanel {
+public abstract class Menu extends JPanel { // TODO add buttons with mappings
     /**
      * Disable all the controls inside this menu.
      */
@@ -69,26 +69,16 @@ public abstract class Menu extends JPanel {
      */
     public void mapButtons(final Button[]... button) {
         for (int i = 0; i < button.length; i++) {
-            for (int j = 0; j < button[j].length; j++) {
-                final int x = i;
-                final int y = j;
+            mapButtonsHorizontally(button[i]);
+
+            for (int j = 0; j < button[i].length; j++) {
+                final int x = i, y = j;
 
                 button[x][y].addKeyListener(new KeyAdapter() {
                     @Override
                     public void keyPressed(final KeyEvent e) {
                         if (e.getKeyChar() == KeyEvent.VK_ENTER) {
                             ((Button) e.getComponent()).doClick();
-                        }
-
-                        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                               if (x > 0) {
-                                   button[x - 1][y].requestFocus();
-                               }
-                        }
-                        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                               if (x < button.length - 1) {
-                                   button[x + 1][y].requestFocus();
-                               }
                         }
 
                         if (e.getKeyCode() == KeyEvent.VK_UP) {

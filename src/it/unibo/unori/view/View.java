@@ -11,10 +11,9 @@ import javax.swing.JLayeredPane;
  *
  */
 public final class View extends JFrame {
+    private Integer layers = 0;
     private final JLayeredPane layeredPane;
     private static final String TITLE = "UnOriginal RPG";
-
-    private Integer index = 1;
 
     /**
      * Creates an instance of the view.
@@ -39,10 +38,19 @@ public final class View extends JFrame {
      * Resizes the view according to the specified layer.
      * @param layer the layer the view will resize to.
      */
-    public void resize(final JPanel layer) {
+    public void resizeTo(final JPanel layer) {
         getContentPane().setPreferredSize(layer.getSize());
 
         pack();
+    }
+
+    /**
+     * Pushes a layer on top of the view.
+     * 
+     * @param layer the layer to be pushed on top of the view.
+     */
+    public void push(final JPanel layer) {
+        layeredPane.add(layer, ++layers);
     }
 
     /**
@@ -50,13 +58,5 @@ public final class View extends JFrame {
      */
     public void pop() {
         layeredPane.remove(layeredPane.highestLayer()); // TODO exception
-    }
-
-    /**
-     * Pushes a layer onto the top of the view.
-     * @param layer the layer to be pushed onto the view
-     */
-    public void push(final JPanel layer) {
-        layeredPane.add(layer, index++);
     }
 }

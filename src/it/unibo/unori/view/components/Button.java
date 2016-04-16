@@ -17,6 +17,7 @@ public class Button extends JButton implements FocusListener {
 
     /**
      * Creates a button with the specified label.
+     * 
      * @param label text to be shown inside the button
      */
     public Button(final String label) {
@@ -40,13 +41,19 @@ public class Button extends JButton implements FocusListener {
         this.addFocusListener(this);
     }
 
-    @Override
-    public void focusLost(final FocusEvent e) {
-        setIcon(icon);
-    }
-
+    /**
+     * Changes the button appearance when focused.
+     */
     @Override
     public void focusGained(final FocusEvent e) {
         setIcon(iconFocus);
+    }
+
+    /**
+     * Reverts changes to the button appearance when unfocused.
+     */
+    @Override
+    public void focusLost(final FocusEvent e) {
+        setIcon(icon);
     }
 }
