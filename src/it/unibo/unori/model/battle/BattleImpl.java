@@ -92,9 +92,14 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public int weaponAttack(Weapon w) {
-        // TODO Auto-generated method stub
-        return 0;
+    public int weaponAttack(final Weapon w, final Character ch) {
+        final int damage = BattleLogics.weaponAttack(w.getDamage(), ch.getLevel());
+        final Character enem = this.getNextEnemy();
+        enem.attacking(damage);
+        if (this.isDefeated(enem)) {
+            this.defeated(enem);
+        }
+        return damage;
     }
 
     @Override

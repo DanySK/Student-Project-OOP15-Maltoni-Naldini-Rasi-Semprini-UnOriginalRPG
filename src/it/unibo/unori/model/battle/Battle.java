@@ -45,9 +45,10 @@ public interface Battle {
     /**
      * Method that allows to throw an attack using an available Weapon.
      * @param w the Weapon.
+     * @param ch the Character that throws the attack.
      * @return the amount of damage inflicted.
      */
-    int weaponAttack(Weapon w);
+    int weaponAttack(Weapon w, Character ch);
     
     /**
      * Method that allows to throw an attack using Magic.
