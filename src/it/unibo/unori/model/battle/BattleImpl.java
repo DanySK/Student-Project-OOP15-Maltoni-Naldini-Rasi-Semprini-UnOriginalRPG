@@ -26,21 +26,28 @@ public class BattleImpl implements Battle {
         this.enemies = en;
     }
     
-    private int getNextChar() {
-        //TODO turns algorithm needed.
-        return 0;
+    private void defeated(final Character ch) {
+        this.enemies.remove(ch);
     }
     
-    private int getNextEnemy() {
+    private boolean isDefeated(final Character ch) {
+        return ch.getRemainingHP() == 0;
+    }
+    
+    private Character getNextChar() {
+        //TODO turns algorithm needed.
+        return null;
+    }
+    
+    private Character getNextEnemy() {
       //TODO turns algorithm needed.
-        return 0;
+        return null;
     }
     
     @Override
     public void runAway() throws CantEscapeException {
-        if (BattleLogics.canEscape(
-                this.squad.get(this.getNextChar()).getLevel(),
-                this.enemies.get(this.getNextEnemy()).getLevel())
+        if (BattleLogics.canEscape(this.getNextChar().getLevel(), 
+                this.getNextEnemy().getLevel())
             ) {
             //TODO end battle
         } else {
@@ -49,9 +56,14 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public int attack(Character enemy) {
-        // TODO Auto-generated method stub
-        return 0;
+    public int attack(final Character enemy) {
+        final int damage = 
+                BattleLogics.getStandardDamage(this.getNextChar().getLevel());
+        enemy.attacking(damage);
+        if (this.isDefeated(enemy)) {
+            this.defeated(enemy);
+        }
+        return damage;
     }
 
     @Override
@@ -68,8 +80,15 @@ public class BattleImpl implements Battle {
 
     @Override
     public int specialAttack() {
-        // TODO Auto-generated method stub
-        return 0;
+        final int damage = 
+                BattleLogics.specialAttackCalc(this.getNextChar().getLevel());
+        this.enemies.forEach(e -> {
+            e.attacking(damage);
+            if (this.isDefeated(e)) {
+                this.defeated(e);
+            }
+        });
+        return damage;
     }
 
     @Override

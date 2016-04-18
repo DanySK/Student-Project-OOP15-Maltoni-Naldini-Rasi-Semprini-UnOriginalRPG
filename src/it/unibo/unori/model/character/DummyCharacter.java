@@ -21,6 +21,8 @@ public class DummyCharacter implements Character {
     private static final long serialVersionUID = -1306119386793011379L;
     private transient Optional<Weapon> weap;
     private transient Optional<Armor> arm;
+    private int HealthPoints;
+    private int remainingHP;
     
     /**
      * something.
@@ -32,8 +34,7 @@ public class DummyCharacter implements Character {
     
     @Override
     public int getRemainingHP() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.remainingHP;
     }
     
     @Override
@@ -139,6 +140,15 @@ public class DummyCharacter implements Character {
             this.arm = Optional.empty();
         } else {
             throw new NoArmorException();
+        }
+    }
+
+    @Override
+    public void attacking(final int damage) {
+        if (damage < this.getRemainingHP()) {
+            this.remainingHP = 0;
+        } else {
+            this.remainingHP -= damage;
         }
     }
 

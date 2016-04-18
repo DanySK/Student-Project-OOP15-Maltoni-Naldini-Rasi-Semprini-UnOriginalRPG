@@ -95,7 +95,7 @@ public final class BattleLogics {
      * @param charLev the level of my Character.
      * @return the damage of the special attack.
      */
-    public static int specialAttackCalculator(final int charLev) {
+    public static int specialAttackCalc(final int charLev) {
         return BattleLogics.getStandardDamage(charLev) * 2
                 + charLev * BattleLogics.MULT;
     }

@@ -28,6 +28,13 @@ public interface Character extends Serializable {
     int getTotalHP();
     
     /**
+     * This method is called in Battle when the Character is attacked
+     * and it modifies its HPs.
+     * @param damage the HPs to be removed.
+     */
+    void attacking(int damage);
+    
+    /**
      * A getter method that gives Character's Attack statistic.
      * @return Attack statistic.
      */
