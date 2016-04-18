@@ -12,16 +12,19 @@ public interface Battle {
 
     /**
      * Method that allows to escape from battle.
+     * @param enemy the enemy on turn.
+     * @param my my Character on turn.
      * @throws CantEscapeException if the level is too low to escape.
      */
-    void runAway() throws CantEscapeException;
+    void runAway(Character enemy, Character my) throws CantEscapeException;
 
     /**
      * Method that allows to throw a regular attack (standard).
-     * @param enemy the enemy against which throw the attack
+     * @param enemy the enemy against which throw the attack.
+     * @param my my Character on turn.
      * @return the damage inflicted to the specified enemy.
      */
-    int attack(Character enemy);
+    int attack(Character enemy, Character my);
 
     /**
      * Method that allows to defend a personal team's character at choice.
@@ -37,18 +40,20 @@ public interface Battle {
 
     /**
      * Method that allows to throw a Special Attack if the bar is full.
+     * @param my my Character on turn.
      * @throws BarNotFullException if the bar is not filled.
      * @return the damage inflicted to all enemies.
      */
-    int specialAttack();
+    int specialAttack(Character my);
     
     /**
      * Method that allows to throw an attack using an available Weapon.
      * @param w the Weapon.
      * @param ch the Character that throws the attack.
+     * @param enemy the enemy on turn.
      * @return the amount of damage inflicted.
      */
-    int weaponAttack(Weapon w, Character ch);
+    int weaponAttack(Weapon w, Character ch, Character enemy);
     
     /**
      * Method that allows to throw an attack using Magic.

@@ -45,9 +45,9 @@ public class BattleImpl implements Battle {
     }
     
     @Override
-    public void runAway() throws CantEscapeException {
-        if (BattleLogics.canEscape(this.getNextChar().getLevel(), 
-                this.getNextEnemy().getLevel())
+    public void runAway(final Character enemy, 
+            final Character my) throws CantEscapeException {
+        if (BattleLogics.canEscape(my.getLevel(), enemy.getLevel())
             ) {
             //TODO end battle
         } else {
@@ -56,9 +56,8 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public int attack(final Character enemy) {
-        final int damage = 
-                BattleLogics.getStandardDamage(this.getNextChar().getLevel());
+    public int attack(final Character enemy, final Character my) {
+        final int damage = BattleLogics.getStandardDamage(my.getLevel());
         enemy.attacking(damage);
         if (this.isDefeated(enemy)) {
             this.defeated(enemy);
@@ -79,9 +78,9 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public int specialAttack() {
+    public int specialAttack(final Character my) {
         final int damage = 
-                BattleLogics.specialAttackCalc(this.getNextChar().getLevel());
+                BattleLogics.specialAttackCalc(my.getLevel());
         this.enemies.forEach(e -> {
             e.attacking(damage);
             if (this.isDefeated(e)) {
@@ -92,12 +91,12 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public int weaponAttack(final Weapon w, final Character ch) {
+    public int weaponAttack(final Weapon w, final Character ch,
+            final Character enemy) {
         final int damage = BattleLogics.weaponAttack(w.getDamage(), ch.getLevel());
-        final Character enem = this.getNextEnemy();
-        enem.attacking(damage);
-        if (this.isDefeated(enem)) {
-            this.defeated(enem);
+        enemy.attacking(damage);
+        if (this.isDefeated(enemy)) {
+            this.defeated(enemy);
         }
         return damage;
     }
