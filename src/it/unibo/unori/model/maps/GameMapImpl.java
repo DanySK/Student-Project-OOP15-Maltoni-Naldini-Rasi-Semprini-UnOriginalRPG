@@ -37,8 +37,7 @@ public class GameMapImpl implements GameMap {
      * the standard dimension of a map is 100 x 100
      */
     public GameMapImpl() {
-        this.floorMap = new Cell[STDCELLS][STDCELLS];
-        this.initializeMap();
+        this(STDCELLS, STDCELLS);
     }
 
     /**
@@ -51,6 +50,24 @@ public class GameMapImpl implements GameMap {
     public GameMapImpl(final int width, final int length) {
         this.floorMap = new Cell[width][length];
         this.initializeMap();
+    }
+
+    /**
+     * Constructor for a map with specified dimensions and initial position.
+     * @param width
+     *              width of the map to build
+     * @param length
+     *              length of the map to build
+     * @param pos
+     *              initial cell of map.
+     * @throws IllegalArgumentException if the position does not belong to the map 
+     *                                  or if the party cannot be on that cell.
+     * 
+     */
+    public GameMapImpl(final int width, final int length, 
+                       final Position pos) throws IllegalArgumentException {
+        this(width, length);
+        this.setInitialCellPosition(pos);
     }
 
 
@@ -164,7 +181,7 @@ public class GameMapImpl implements GameMap {
 
 
     @Override
-    public void setInitialCellPosition(final Position pos) 
+    public final void setInitialCellPosition(final Position pos) 
                                                    throws IllegalArgumentException {
         if (this.checkPosition(pos.getPosX(), this.floorMap.length)) {
             throw new IllegalArgumentException();
