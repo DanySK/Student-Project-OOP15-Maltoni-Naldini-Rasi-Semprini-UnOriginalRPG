@@ -29,12 +29,16 @@ public final class BattleLogics {
      * Level 3 -> Damage = 90;
      * Level 4 -> Damage = 150;
      * Level 5 -> Damage = 230;
-     * @param charLevel the level of the character that throws the attack.
+     * And so on.
+     * The damage is improved by Character's Attack statistic. 
+     * @param charLevel the level of the Character that throws the attack.
+     * @param atck the Attack Statistic of the Character.
      * @return the damage calculated by the algorithm.
      */
-    public static int getStandardDamage(final int charLevel) {
+    public static int getStandardDamage(final int charLevel, final int atck) {
         return BattleLogics.SHIFT 
-               + (BattleLogics.MULT * charLevel * (charLevel - 1));
+               + (BattleLogics.MULT * charLevel * (charLevel - 1)
+               + (atck * BattleLogics.SHIFT) / 2);
     }
 
     /**
@@ -93,10 +97,11 @@ public final class BattleLogics {
      * The damage is obtained by doubling the standard damage and adding
      * the Character's level multiplied by 10.
      * @param charLev the level of my Character.
+     * @param atck the Attack Statistic of the Character.
      * @return the damage of the special attack.
      */
-    public static int specialAttackCalc(final int charLev) {
-        return BattleLogics.getStandardDamage(charLev) * 2
+    public static int specialAttackCalc(final int charLev, final int atck) {
+        return BattleLogics.getStandardDamage(charLev, atck) * 2
                 + charLev * BattleLogics.MULT;
     }
     
@@ -115,10 +120,11 @@ public final class BattleLogics {
      * This method simply calculates the damage to inflict to an enemy by
      * throwing a weapon-attack.
      * @param dam the damage that the Weapon can inflict.
+     * @param atck the Attack Statistic of the Character.
      * @param lev the level of my Character.
      * @return the total damage.
      */
-    public static int weaponAttack(final int dam, final int lev) {
-        return BattleLogics.getStandardDamage(lev) + dam;
+    public static int weaponAttack(final int dam, final int lev, final int atck) {
+        return BattleLogics.getStandardDamage(lev, atck) + dam;
     }
 }
