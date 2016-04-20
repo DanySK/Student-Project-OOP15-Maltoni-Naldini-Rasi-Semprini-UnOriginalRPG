@@ -17,6 +17,8 @@ import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
 public class PartyTest {
 
     private final GameMapFactory mapFactory = new GameMapFactory();
+    private static final int FIVE = 5; 
+    private static final int MAXPOS = 99;
 
     /**
      * Test for the singleton strategy.
@@ -49,11 +51,11 @@ public class PartyTest {
             party.moveParty(CardinalPoints.NORTH);
             party.moveParty(CardinalPoints.NORTH);
             party.moveParty(CardinalPoints.NORTH);
-            assertEquals(party.getCurrentPosition(), new Position(5, 1));
+            assertEquals(party.getCurrentPosition(), new Position(FIVE, 1));
             party.moveParty(CardinalPoints.EST);
             party.moveParty(CardinalPoints.EST);
             party.moveParty(CardinalPoints.EST);
-            assertEquals(party.getCurrentPosition(), new Position(5, 4));
+            assertEquals(party.getCurrentPosition(), new Position(FIVE, FIVE - 1));
             party.moveParty(CardinalPoints.WEST);
             party.moveParty(CardinalPoints.SOUTH);
             party.moveParty(CardinalPoints.SOUTH);
@@ -98,7 +100,7 @@ public class PartyTest {
             party.moveParty(CardinalPoints.SOUTH);
             assertEquals(party.getCurrentGameMap(), GameMapFactory.LINKINGMAP);
             System.out.println(party.getCurrentPosition().getPosX() + ", " + party.getCurrentPosition().getPosY());
-            assertEquals(party.getCurrentPosition(), new Position(98, 3));
+            assertEquals(party.getCurrentPosition(), new Position(MAXPOS - 1, 3));
         } catch (BlockedPathException e) {
             fail("Party was supposed to change map");
         }
