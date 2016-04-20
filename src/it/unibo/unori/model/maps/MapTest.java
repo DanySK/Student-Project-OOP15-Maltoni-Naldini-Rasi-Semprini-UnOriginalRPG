@@ -19,10 +19,13 @@ import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
  *
  */
 
-//CHECKSTYLE DISABLE MagicNumber
+
 public class MapTest {
 
     private final Position pos0 = new Position(0, 0);
+    private static final int MAXPOS = 99;
+    private static final int MIDPOS = 50;
+    private static final int TWENTY = 20;
 
     /**
      * Test for the basic function of the map.
@@ -35,7 +38,7 @@ public class MapTest {
         assertEquals(map.getRow(0).size(), 100);
         assertEquals(map.getColumn(0).size(), 100);
         assertTrue(Optional.of(map.getCell(pos0)).isPresent());
-        assertTrue(Optional.of(map.getCell(new Position(99, 99))).isPresent());
+        assertTrue(Optional.of(map.getCell(new Position(MAXPOS, MAXPOS))).isPresent());
         assertTrue(map.getCell(pos0).getState().equals(CellState.FREE));
     }
 
@@ -48,10 +51,10 @@ public class MapTest {
     @Test
     public void testException() {
         final GameMap map = new GameMapImpl(50, 20);
-        assertEquals(map.getRow(0).size(), 20);
-        assertEquals(map.getColumn(0).size(), 50);
+        assertEquals(map.getRow(0).size(), TWENTY);
+        assertEquals(map.getColumn(0).size(), MIDPOS);
         try {
-            map.getCell(new Position(50, 19));
+            map.getCell(new Position(MIDPOS, TWENTY - 1));
             fail("System does not register the illegalargumentexception");
         } catch (IllegalArgumentException e) {
             System.out.println(e);
@@ -59,7 +62,7 @@ public class MapTest {
             fail("System throws another Exception");
         }
         try {
-            map.getCell(new Position(32, 22));
+            map.getCell(new Position(32, MIDPOS));
             fail("System does not register the illegalargumentexception");
         } catch (IllegalArgumentException e) {
             System.out.println(e);
@@ -67,7 +70,7 @@ public class MapTest {
             fail("System throws another Exception");
         }
         try {
-            map.getCell(new Position(-1, 19));
+            map.getCell(new Position(-1, TWENTY - 1));
             fail("System does not register the illegalargumentexception");
         } catch (IllegalArgumentException e) {
             System.out.println(e);
@@ -93,8 +96,8 @@ public class MapTest {
         final Position p = new Position(50, 50);
         map.setCell(p, fc.getBlockedCell());
         assertEquals(map.getCell(p).getState(), CellState.BLOCKED);
-        map.setColumn(50, fc.getBlockedCell());
-        assertTrue(map.getColumn(50).stream().allMatch(i -> i.getState().equals(CellState.BLOCKED)));
+        map.setColumn(MIDPOS, fc.getBlockedCell());
+        assertTrue(map.getColumn(MIDPOS).stream().allMatch(i -> i.getState().equals(CellState.BLOCKED)));
         map.setRow(0, fc.getBlockedCell());
         assertTrue(map.getRow(0).stream().allMatch(i -> i.getState().equals(CellState.BLOCKED)));
     }
@@ -111,7 +114,7 @@ public class MapTest {
         assertEquals(map.getInitialCellPosition(), new Position(1, 0));
         final GameMap map2 = new GameMapImpl(50, 25);
         try {
-            map2.setInitialCellPosition(new Position(0, 40));
+            map2.setInitialCellPosition(new Position(0, MIDPOS));
             fail("Method should throw an Exception...");
         } catch (IllegalArgumentException e) {
             System.out.println("IllegalArgumentException awaited");
@@ -120,7 +123,6 @@ public class MapTest {
         }
         assertEquals(new Position(0, 0), new Position(0, 0));
         assertFalse(new Position(0, 0).equals(map2));
-        assertFalse(new Position(0, 0).equals(null));
         assertFalse(new Position(0, 0).equals(new Position(1, 0)));
         assertFalse(new Position(1, 0).equals(new Position(0, 1)));
     }
