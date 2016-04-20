@@ -26,14 +26,14 @@ public interface Cell extends Serializable {
      * @param state
      *            State to set on the cell
      */
-    public void setState(CellState state);
+    void setState(CellState state);
 
     /**
      * Get the state of the cell.
      * 
      * @return the state of the Cell
      */
-    public CellState getState();
+    CellState getState();
 
 
     /**
@@ -42,7 +42,7 @@ public interface Cell extends Serializable {
      * @param frame
      *            frame to set from the view
      */
-    public void setFrame(Object frame);
+    void setFrame(Object frame);
 
 
     /**
@@ -50,21 +50,21 @@ public interface Cell extends Serializable {
      * @return
      *          a frame Object
      */
-    public Object getFrame();
+    Object getFrame();
 
     /**
      * Get the object positioned in a cell, if present.
      * @return the Object to add to the inventory of the party
      * @throws NoObjectFoundException if the Object to get is absent.
      */
-    public Object getObject() throws NoObjectFoundException;
+    Object getObject() throws NoObjectFoundException;
 
     /**
      * Created a dialogue with the NPC , if present.
      * @return a dialogue window with the NPC
      * @throws NoNPCFoundException if the NPC is not present
      */
-    public DummyMenu talkToNpc() throws NoNPCFoundException;
+    DummyMenu talkToNpc() throws NoNPCFoundException;
 
     /**
      * Get the map contained in the cell , if present.
@@ -73,6 +73,6 @@ public interface Cell extends Serializable {
      * @throws NoMapFoundException
      *             notify the type of Exception
      */
-    public GameMap getCellMap() throws NoMapFoundException;
+    GameMap getCellMap() throws NoMapFoundException;
 
 }

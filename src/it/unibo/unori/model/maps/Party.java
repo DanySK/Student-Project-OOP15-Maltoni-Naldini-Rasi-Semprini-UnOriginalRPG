@@ -18,7 +18,7 @@ public interface Party extends Serializable {
      * Getter for the current position.
      * @return the current position of the party.
      */
-    public Position getCurrentPosition();
+    Position getCurrentPosition();
 
 
     /**
@@ -26,28 +26,28 @@ public interface Party extends Serializable {
      * @param map
      *          a map to walk on
      */
-    public void setCurrentMap(GameMap map);
+    void setCurrentMap(GameMap map);
 
     /**
      * Get method for the current map.
      * @return
      *          the current map
      */
-    public GameMap getCurrentGameMap();
+    GameMap getCurrentGameMap();
 
     /**
      * Set the current frame of party.
      * @param frame
      *              the frame to set
      */
-    public void setCurrentFrame(Object frame);
+    void setCurrentFrame(Object frame);
 
     /**
      * Get method for the frame Object.
      * @return
      *          the frame Object of the party
      */
-    public Object getCurrentFrame();
+    Object getCurrentFrame();
 
     /**
      * Move the party in the specified direction, if possible.
@@ -56,20 +56,20 @@ public interface Party extends Serializable {
      * @throws BlockedPathException if the party can't move to that direction.
      */
 
-    public void moveParty(CardinalPoints direction) throws BlockedPathException;
+    void moveParty(CardinalPoints direction) throws BlockedPathException;
 
     /**
      * Method to interact with the looked Cell.
      * @return a dialogue, related to the kind of Cell
      */
-    public DummyMenu interact();
+    DummyMenu interact();
 
     /**
      * Enum to define the four cardinal points and their skidding 
      * from the current cell.
      *
      */
-    public enum CardinalPoints {
+    enum CardinalPoints {
         /**
          * Four values for the cardinal points.
          */
@@ -81,7 +81,7 @@ public interface Party extends Serializable {
         private final int posX;
         private final int posY;
 
-        private CardinalPoints(final int posX, final int posY) {
+        CardinalPoints(final int posX, final int posY) {
            this.posX = posX;
            this.posY = posY;
         }

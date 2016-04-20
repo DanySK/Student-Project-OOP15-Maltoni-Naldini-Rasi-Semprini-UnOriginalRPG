@@ -54,7 +54,7 @@ public final class SingletonParty {
         /**
          * Constructor for PartyImpl, set a standard map, position, cell and frame.
          */
-        public PartyImpl() {
+            PartyImpl() {
             this.currentMap = new GameMapImpl();
             this.currentPosition = this.currentMap.getInitialCellPosition();
             this.frame = new Object();

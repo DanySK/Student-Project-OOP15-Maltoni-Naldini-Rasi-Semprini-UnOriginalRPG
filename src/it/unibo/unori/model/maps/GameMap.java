@@ -20,7 +20,7 @@ public interface GameMap extends Serializable {
      * @return the cell at the specified coordinates
      * @throws IllegalArgumentException if the coordinates are invalid 
      */
-    public Cell getCell(Position pos) throws IllegalArgumentException;
+    Cell getCell(Position pos) throws IllegalArgumentException;
 
     /**
      * Set the Cell at the specified position.
@@ -30,7 +30,7 @@ public interface GameMap extends Serializable {
      *              cell to set
      * @throws IllegalArgumentException if the coordinates are invalid 
      */
-    public void setCell(Position pos, Cell cell) throws IllegalArgumentException;
+    void setCell(Position pos, Cell cell) throws IllegalArgumentException;
 
     /**
      * Get, as list, the row specified.
@@ -39,7 +39,7 @@ public interface GameMap extends Serializable {
      * @return a list of cell
      * @throws IllegalArgumentException if the row does not exist
      */
-    public List<Cell> getRow(int posX) throws IllegalArgumentException;
+    List<Cell> getRow(int posX) throws IllegalArgumentException;
 
     /**
      * Get , as list , the column specified.
@@ -48,7 +48,7 @@ public interface GameMap extends Serializable {
      * @return a list of cell
      * @throws IllegalArgumentException if the column does not exist 
      */
-    public List<Cell> getColumn(int posY) throws IllegalArgumentException;
+    List<Cell> getColumn(int posY) throws IllegalArgumentException;
 
     /**
      * Set an entire row with an instance of a Cell.
@@ -59,7 +59,7 @@ public interface GameMap extends Serializable {
      *              the cell to set 
      *@throws IllegalArgumentException if the row index is referred to a non existing row
      */
-    public void setRow(int posX, Cell cell) throws IllegalArgumentException;
+    void setRow(int posX, Cell cell) throws IllegalArgumentException;
 
     /**
      * Set an entire  column with an instance of a Cell.
@@ -69,7 +69,7 @@ public interface GameMap extends Serializable {
      *          the cell to set
      * @throws IllegalArgumentException if the row index is referred to a non existing column
      */
-    public void setColumn(int posY, Cell cell)throws IllegalArgumentException;
+    void setColumn(int posY, Cell cell)throws IllegalArgumentException;
 
     /**
      * Set the position of the initial cell.
@@ -77,13 +77,13 @@ public interface GameMap extends Serializable {
      *                  position of the initial cell
      * @throws IllegalArgumentException if the value does not belong to the map
      */
-    public void setInitialCellPosition(Position initialCell) throws IllegalArgumentException;
+    void setInitialCellPosition(Position initialCell) throws IllegalArgumentException;
 
     /**
      * method to return the position of the initial cell.
      * @return position of the initial cell 
      */
-    public Position getInitialCellPosition();
+    Position getInitialCellPosition();
 
 
 }
