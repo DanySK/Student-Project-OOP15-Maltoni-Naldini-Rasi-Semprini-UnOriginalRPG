@@ -1,4 +1,4 @@
-package it.unibo.unori.model.character.exceptions;
+package it.unibo.unori.model.battle.exceptions;
 
 /**
  * Exception to be thrown when the character passed as a parameter to any
