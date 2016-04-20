@@ -63,7 +63,7 @@ public class BattleImpl implements Battle {
     public int attack(final Hero enemy, final Hero my) {
         final int damage = 
                 BattleLogics.getStandardDamage(my.getLevel(), my.getAttack());
-        enemy.attacking(damage);
+        enemy.takeDamage(damage);
         if (this.isDefeated(enemy)) {
             this.defeated(enemy);
         }
@@ -87,7 +87,7 @@ public class BattleImpl implements Battle {
         final int damage = 
                 BattleLogics.specialAttackCalc(my.getLevel(), my.getAttack());
         this.enemies.forEach(e -> {
-            e.attacking(damage);
+            e.takeDamage(damage);
             if (this.isDefeated(e)) {
                 this.defeated(e);
             }
@@ -101,7 +101,7 @@ public class BattleImpl implements Battle {
         final int damage = 
                 BattleLogics.weaponAttack(w.getDamage(), 
                         ch.getLevel(), ch.getAttack());
-        enemy.attacking(damage);
+        enemy.takeDamage(damage);
         if (this.isDefeated(enemy)) {
             this.defeated(enemy);
         }
