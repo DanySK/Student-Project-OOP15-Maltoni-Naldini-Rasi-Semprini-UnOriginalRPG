@@ -39,8 +39,7 @@ public class DummyCharacter implements Character {
     
     @Override
     public int getTotalHP() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.healthPoints;
     }
     
     @Override
