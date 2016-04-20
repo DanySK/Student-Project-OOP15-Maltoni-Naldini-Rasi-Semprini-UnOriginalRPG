@@ -100,7 +100,7 @@ public final class SingletonParty {
                 try {
                     this.setCurrentMap(tempCell.getCellMap());
                 } catch (NoMapFoundException e) {
-                    throw new BlockedPathException();
+                    throw new BlockedPathException(e);
                 }
             } else {
                 this.currentPosition = nextPosition;
