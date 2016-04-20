@@ -3,25 +3,26 @@ package it.unibo.unori.controller;
 /**
  * Runnable class for time counting purpose.
  */
-public class TimeCounter implements Runnable {
+public class TimeCounterThread implements Runnable {
     private double time = 0;
     private final double startingTime;
     private boolean cycle = false;
 
     /**
-     * Constructor that instantiate timer for a new game.
+     * Constructor that instantiate timer for a loaded game.
+     * 
+     * @param startingTime
+     *            the number of seconds played saved in the savegame loaded
      */
-    public TimeCounter() {
-        this.startingTime = 0;
+    public TimeCounterThread(final double startingTime) {
+        this.startingTime = startingTime;
     }
 
     /**
-     * Constructor that instantiate timer for a loaded game.
-     * 
-     * @param startingTime the number of seconds played saved in the savegame loaded
+     * Constructor that instantiate timer for a new game.
      */
-    public TimeCounter(final double startingTime) {
-        this.startingTime = startingTime;
+    public TimeCounterThread() {
+        this(0);
     }
 
     @Override
@@ -54,5 +55,19 @@ public class TimeCounter implements Runnable {
      */
     public double getPlayingTime() {
         return this.time;
+    }
+
+    /**
+     * This method stops the timer.
+     */
+    public void stopTimer() {
+        this.cycle = false;
+    }
+
+    /**
+     * This methods starts the timer if it was previously stopped.
+     */
+    public void startTimer() {
+        this.cycle = true;
     }
 }

@@ -4,7 +4,7 @@ package it.unibo.unori.controller;
  */
 public class StateMachine implements Controller {
     private StateMachineStack stack = new StateMachineStack();
-    private TimeCounter time;
+    private TimeCounterThread time;
 
     @Override
     public void begin() {
