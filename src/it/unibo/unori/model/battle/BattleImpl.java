@@ -15,6 +15,7 @@ public class BattleImpl implements Battle {
     
     private final List<Character> squad;
     private final List<Character> enemies;
+    private boolean over;
     
     /**
      * Standard constructor for Class BattleImpl.
@@ -24,6 +25,7 @@ public class BattleImpl implements Battle {
     public BattleImpl(final List<Character> team, final List<Character> en) {
         this.squad = team;
         this.enemies = en;
+        this.over = false;
     }
     
     private void defeated(final Character ch) {
@@ -34,22 +36,12 @@ public class BattleImpl implements Battle {
         return ch.getRemainingHP() == 0;
     }
     
-    private Character getNextChar() {
-        //TODO turns algorithm needed.
-        return null;
-    }
-    
-    private Character getNextEnemy() {
-      //TODO turns algorithm needed.
-        return null;
-    }
-    
     @Override
     public void runAway(final Character enemy, 
             final Character my) throws CantEscapeException {
         if (BattleLogics.canEscape(my.getLevel(), enemy.getLevel())
             ) {
-            //TODO end battle
+            this.over = true;
         } else {
             throw new CantEscapeException();
         }
@@ -105,6 +97,11 @@ public class BattleImpl implements Battle {
     public int magicAttack() {
         // TODO Auto-generated method stub
         return 0;
+    }
+
+    @Override
+    public boolean isOver() {
+        return this.over;
     }
 
 }

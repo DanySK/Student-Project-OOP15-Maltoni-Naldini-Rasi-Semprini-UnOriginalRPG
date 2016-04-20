@@ -60,4 +60,10 @@ public interface Battle {
      * @return the amount of damage inflicted.
      */
     int magicAttack();
+    
+    /**
+     * Method that tells me weather the Battle-mode is over or not.
+     * @return true if Battle is over; false otherwise.
+     */
+    boolean isOver();
 }
