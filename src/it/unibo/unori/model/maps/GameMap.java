@@ -13,6 +13,7 @@ import it.unibo.unori.model.maps.cell.Cell;
  */
 public interface GameMap extends Serializable {
 
+
     /**
      * Get the cell at the specified position.
      * @param pos
