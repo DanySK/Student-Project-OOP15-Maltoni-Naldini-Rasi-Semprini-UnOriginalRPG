@@ -23,7 +23,7 @@ public class DummyCharacter implements Character {
     private transient Optional<Armor> arm;
     private int healthPoints;
     private int remainingHP;
-    
+
     /**
      * something.
      * @return something.
@@ -143,7 +143,7 @@ public class DummyCharacter implements Character {
     }
 
     @Override
-    public void attacking(final int damage) {
+    public void takeDamage(final int damage) {
         if (damage < this.getRemainingHP()) {
             this.remainingHP = 0;
         } else {

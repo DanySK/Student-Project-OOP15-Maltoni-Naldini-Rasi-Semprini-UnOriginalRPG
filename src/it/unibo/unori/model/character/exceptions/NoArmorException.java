@@ -10,7 +10,7 @@ public class NoArmorException extends Exception {
      * 
      */
     private static final long serialVersionUID = -1168104680288246131L;
-    
+
     @Override
     public String toString() {
         return "Non stai indossando nessuna armatura!";

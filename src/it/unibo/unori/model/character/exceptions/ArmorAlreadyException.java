@@ -10,7 +10,7 @@ public class ArmorAlreadyException extends Exception {
      * 
      */
     private static final long serialVersionUID = 6996681628768029577L;
-    
+
     @Override
     public String toString() {
         return "Hai già un'armatura equipaggiata!";

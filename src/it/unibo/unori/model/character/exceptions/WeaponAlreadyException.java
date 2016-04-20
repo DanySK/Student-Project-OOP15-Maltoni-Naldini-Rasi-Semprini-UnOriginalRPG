@@ -10,7 +10,7 @@ public class WeaponAlreadyException extends Exception {
      * 
      */
     private static final long serialVersionUID = -3389244364444265351L;
-    
+
     @Override
     public String toString() {
         return "Hai già un'arma equipaggiata!";
