@@ -14,7 +14,7 @@ import it.unibo.unori.model.menu.DummyMenu;
  * A Class that implements a generic Character.
  *
  */
-public class DummyCharacter implements Character {
+public class DummyCharacter implements Hero {
     /**
      * 
      */
@@ -149,6 +149,18 @@ public class DummyCharacter implements Character {
         } else {
             this.remainingHP -= damage;
         }
+    }
+
+    @Override
+    public void consumeMP(int mpToConsume) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void restoreDamage(int hpToRestore) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

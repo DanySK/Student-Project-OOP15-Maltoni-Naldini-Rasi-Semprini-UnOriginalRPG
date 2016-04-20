@@ -5,7 +5,7 @@ import java.util.List;
 import it.unibo.unori.model.battle.exceptions.CantEscapeException;
 import it.unibo.unori.model.battle.exceptions.CharNotFoundException;
 import it.unibo.unori.model.battle.utility.BattleLogics;
-import it.unibo.unori.model.character.Character;
+import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.items.Weapon;
 
 /**
@@ -14,8 +14,8 @@ import it.unibo.unori.model.items.Weapon;
  */
 public class BattleImpl implements Battle {
     
-    private final List<Character> squad;
-    private final List<Character> enemies;
+    private final List<Hero> squad;
+    private final List<Hero> enemies;
     private boolean over;
     
     /**
@@ -23,29 +23,29 @@ public class BattleImpl implements Battle {
      * @param team my team.
      * @param en a List of Enemies.
      */
-    public BattleImpl(final List<Character> team, final List<Character> en) {
+    public BattleImpl(final List<Hero> team, final List<Hero> en) {
         this.squad = team;
         this.enemies = en;
         this.over = false;
     }
     
-    private void defeated(final Character ch) {
+    private void defeated(final Hero ch) {
         this.enemies.remove(ch);
     }
     
-    private boolean isDefeated(final Character ch) {
+    private boolean isDefeated(final Hero ch) {
         return ch.getRemainingHP() == 0;
     }
     
-    private void controlChar(final Character ch) throws CharNotFoundException {
+    private void controlChar(final Hero ch) throws CharNotFoundException {
         if (!this.squad.contains(ch)) {
             throw new CharNotFoundException();
         }
     }
     
     @Override
-    public void runAway(final Character enemy, 
-            final Character my) throws CantEscapeException {
+    public void runAway(final Hero enemy, 
+            final Hero my) throws CantEscapeException {
         try {
             this.controlChar(my);
         } catch (CharNotFoundException e) {
@@ -60,7 +60,7 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public int attack(final Character enemy, final Character my) {
+    public int attack(final Hero enemy, final Hero my) {
         final int damage = 
                 BattleLogics.getStandardDamage(my.getLevel(), my.getAttack());
         enemy.attacking(damage);
@@ -71,7 +71,7 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public String defend(final Character character) {
+    public String defend(final Hero character) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -83,7 +83,7 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public int specialAttack(final Character my) {
+    public int specialAttack(final Hero my) {
         final int damage = 
                 BattleLogics.specialAttackCalc(my.getLevel(), my.getAttack());
         this.enemies.forEach(e -> {
@@ -96,8 +96,8 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public int weaponAttack(final Weapon w, final Character ch,
-            final Character enemy) {
+    public int weaponAttack(final Weapon w, final Hero ch,
+            final Hero enemy) {
         final int damage = 
                 BattleLogics.weaponAttack(w.getDamage(), 
                         ch.getLevel(), ch.getAttack());

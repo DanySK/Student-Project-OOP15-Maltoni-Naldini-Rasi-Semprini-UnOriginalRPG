@@ -1,6 +1,6 @@
 package it.unibo.unori.model.battle;
 import it.unibo.unori.model.battle.exceptions.CantEscapeException;
-import it.unibo.unori.model.character.Character;
+import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.items.Weapon;
 
 /**
@@ -16,7 +16,7 @@ public interface Battle {
      * @param my my Character on turn.
      * @throws CantEscapeException if the level is too low to escape.
      */
-    void runAway(Character enemy, Character my) throws CantEscapeException;
+    void runAway(Hero enemy, Hero my) throws CantEscapeException;
 
     /**
      * Method that allows to throw a regular attack (standard).
@@ -24,14 +24,14 @@ public interface Battle {
      * @param my my Character on turn.
      * @return the damage inflicted to the specified enemy.
      */
-    int attack(Character enemy, Character my);
+    int attack(Hero enemy, Hero my);
 
     /**
      * Method that allows to defend a personal team's character at choice.
      * @param character the character to defend.
      * @return a confirmation String
      */
-    String defend(Character character);
+    String defend(Hero character);
 
     /**
      * Method that allows to open the Item Bag.
@@ -44,7 +44,7 @@ public interface Battle {
      * @throws BarNotFullException if the bar is not filled.
      * @return the damage inflicted to all enemies.
      */
-    int specialAttack(Character my);
+    int specialAttack(Hero my);
     
     /**
      * Method that allows to throw an attack using an available Weapon.
@@ -53,7 +53,7 @@ public interface Battle {
      * @param enemy the enemy on turn.
      * @return the amount of damage inflicted.
      */
-    int weaponAttack(Weapon w, Character ch, Character enemy);
+    int weaponAttack(Weapon w, Hero ch, Hero enemy);
     
     /**
      * Method that allows to throw an attack using Magic.
