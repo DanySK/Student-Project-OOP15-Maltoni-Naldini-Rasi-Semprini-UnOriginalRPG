@@ -1,14 +1,33 @@
 package it.unibo.unori.controller;
+
+import it.unibo.unori.controller.state.MainMenuState;
+
 /**
  *
  */
 public class StateMachine implements Controller {
-    private StateMachineStack stack = new StateMachineStack();
-    private TimeCounterThread time;
+    private final StateMachineStack stack;
+    private final TimeCounter time;
 
+    /**
+     * This default constructor creates a new
+     * {@link it.unibo.unori.Controller.StateMachineStack} and pushes a new
+     * {@link it.unibo.unori.controller.state.MainMenuState} at the top of the
+     * stack.
+     */
+    public StateMachine() {
+        stack = new StateMachineStack();
+        time = new TimeCounterImpl(false);
+    }
+
+    /**
+     * {@inheritDoc} This is done by pushing a new MainMenuState and updating
+     * and rendering it.
+     */
     @Override
     public void begin() {
-        // TODO Auto-generated method stub
+        // TODO
+        stack.push(new MainMenuState());
         stack.update(0);
         stack.render();
     }
