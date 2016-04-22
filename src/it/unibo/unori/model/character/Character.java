@@ -60,17 +60,6 @@ public interface Character extends Serializable {
      */
     int getDefense();
 
-    /**
-     * A getter method that gives Character's Magic Attack statistic.
-     * @return Magic Attack statistic.
-     */
-    int getMagicAtk();
-
-    /**
-     * A getter method that gives Character's Magic Defense statistic.
-     * @return Magic Defense statistic.
-     */
-    int getMagicDef();
 
     /**
      * A getter method that gives Character's Speed statistic.
