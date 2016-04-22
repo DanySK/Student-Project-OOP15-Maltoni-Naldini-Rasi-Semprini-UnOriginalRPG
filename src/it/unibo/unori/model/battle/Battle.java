@@ -14,9 +14,10 @@ public interface Battle {
      * Method that allows to escape from battle.
      * @param enemy the enemy on turn.
      * @param my my Character on turn.
+     * @return a confirmation String if I manage to escape.
      * @throws CantEscapeException if the level is too low to escape.
      */
-    void runAway(Hero enemy, Hero my) throws CantEscapeException;
+    String runAway(Hero enemy, Hero my) throws CantEscapeException;
 
     /**
      * Method that allows to throw a regular attack (standard).
