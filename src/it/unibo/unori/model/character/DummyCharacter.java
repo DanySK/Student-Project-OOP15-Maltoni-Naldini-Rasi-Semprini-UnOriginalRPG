@@ -163,4 +163,10 @@ public class DummyCharacter implements Hero {
         
     }
 
+    @Override
+    public String getName() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

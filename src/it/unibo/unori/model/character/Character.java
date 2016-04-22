@@ -10,6 +10,12 @@ import java.io.Serializable;
 public interface Character extends Serializable {
 
     /**
+     * Get the Character's name.
+     * @return Character's name
+     */
+    String getName();
+
+    /**
      * A getter method that gives Character's remaining Health Points.
      * @return the remaining Health Points.
      */
