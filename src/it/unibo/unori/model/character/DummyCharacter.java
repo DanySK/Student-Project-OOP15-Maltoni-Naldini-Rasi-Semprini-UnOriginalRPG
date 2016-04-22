@@ -169,4 +169,40 @@ public class DummyCharacter implements Hero {
         return null;
     }
 
+    @Override
+    public int getFireDefense() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public int getThunderDefense() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public int getIceDefense() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public int getFireAtk() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public int getThunderAttack() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public int getIceAttack() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
 }
