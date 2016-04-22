@@ -5,6 +5,7 @@ import java.util.List;
 import it.unibo.unori.model.battle.exceptions.CantEscapeException;
 import it.unibo.unori.model.battle.utility.BattleLogics;
 import it.unibo.unori.model.character.Hero;
+import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.Weapon;
 
 /**
@@ -17,15 +18,18 @@ public class BattleImpl implements Battle {
     private final List<Hero> enemies;
     private boolean over;
     private int beatenFriends;
+    private Bag itemBag;
     
     /**
      * Standard constructor for Class BattleImpl.
      * @param team my team.
      * @param en a List of Enemies.
+     * @param bag the Item Bag.
      */
-    public BattleImpl(final List<Hero> team, final List<Hero> en) {
+    public BattleImpl(final List<Hero> team, final List<Hero> en, final Bag bag) {
         this.squad = team;
         this.enemies = en;
+        this.itemBag = bag;
         this.over = false;
         this.beatenFriends = 0;
     }
