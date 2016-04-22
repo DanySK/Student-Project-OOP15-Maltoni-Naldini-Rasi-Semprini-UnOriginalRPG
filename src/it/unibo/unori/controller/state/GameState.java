@@ -10,22 +10,22 @@ public interface GameState {
      * 
      * @param elapsedTime the time elapsed from start of the game state
      */
-    public void update(final double elapsedTime);
+    void update(final double elapsedTime);
 
     /**
      * Draws graphics information each frame of the game. 
      * Called each frame for the currently active state.
      */
-    public void render();
+    void render();
 
     /**
      * Called when entering in the state.
      */
-    public void onEnter();
+    void onEnter();
 
     /**
      * Called when exiting from the state.
      */
-    public void onExit();
+    void onExit();
 
 }

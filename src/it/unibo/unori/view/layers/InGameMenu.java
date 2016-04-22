@@ -17,6 +17,9 @@ import javax.swing.SwingUtilities;
  *
  */
 public class InGameMenu extends Menu {
+    /**
+     * 
+     */
     private final Color backgroundColor = Color.GRAY;
     private final Dimension size = new Dimension(200, 400);
 
