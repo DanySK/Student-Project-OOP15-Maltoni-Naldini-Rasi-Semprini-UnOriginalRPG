@@ -3,7 +3,6 @@ package it.unibo.unori.model.battle;
 import java.util.List;
 
 import it.unibo.unori.model.battle.exceptions.CantEscapeException;
-import it.unibo.unori.model.battle.exceptions.CharNotFoundException;
 import it.unibo.unori.model.battle.utility.BattleLogics;
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.items.Weapon;
@@ -37,20 +36,9 @@ public class BattleImpl implements Battle {
         return ch.getRemainingHP() == 0;
     }
     
-    private void controlChar(final Hero ch) throws CharNotFoundException {
-        if (!this.squad.contains(ch)) {
-            throw new CharNotFoundException();
-        }
-    }
-    
     @Override
     public void runAway(final Hero enemy, 
             final Hero my) throws CantEscapeException {
-        try {
-            this.controlChar(my);
-        } catch (CharNotFoundException e) {
-            e.printStackTrace();
-        }
         if (BattleLogics.canEscape(my.getLevel(), enemy.getLevel())
             ) {
             this.over = true;
