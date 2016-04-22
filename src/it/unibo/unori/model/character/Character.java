@@ -115,4 +115,5 @@ public interface Character extends Serializable {
     int getIceAttack();
 
 
+
 }
