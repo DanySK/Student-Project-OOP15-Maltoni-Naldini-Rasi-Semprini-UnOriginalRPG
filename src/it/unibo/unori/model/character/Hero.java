@@ -13,7 +13,6 @@ import it.unibo.unori.model.items.Weapon;
  */
 public interface Hero extends Character {
 
-    
     /**
      * A getter method that gives Character's Level.
      * @return Character's Level.
