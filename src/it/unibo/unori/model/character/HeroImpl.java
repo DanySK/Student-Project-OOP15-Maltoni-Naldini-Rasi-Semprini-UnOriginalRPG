@@ -1,5 +1,7 @@
 package it.unibo.unori.model.character;
 
+import java.util.Map;
+
 import it.unibo.unori.model.character.exceptions.ArmorAlreadyException;
 import it.unibo.unori.model.character.exceptions.NoArmorException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
@@ -16,10 +18,23 @@ import it.unibo.unori.model.items.Weapon;
  */
 public class HeroImpl  extends CharacterImpl implements Hero {
 
+
     /**
      * 
      */
     private static final long serialVersionUID = 7538947993488315753L;
+
+    /**
+     * Standard constructor for HeroImpl.
+     * @param name
+     *              Hero's name
+     * @param map
+     *              Hero's parameters
+     */
+    public HeroImpl(final String name, final Map<Statistics, Integer> map) {
+        super(name, map);
+        // TODO Auto-generated constructor stub
+    }
 
     @Override
     public int getLevel() {
