@@ -32,4 +32,15 @@ public class StateMachine implements Controller {
         stack.render();
     }
 
+    @Override
+    public void startTimer() {
+        this.startTimer(0);
+    }
+
+    @Override
+    public void startTimer(final double alreadyPlayedTime) {
+        time.setAlreadyPlayedTime(alreadyPlayedTime);
+        time.startTimer();
+    }
+
 }
