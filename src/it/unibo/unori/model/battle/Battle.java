@@ -67,4 +67,10 @@ public interface Battle {
      * @return true if Battle is over; false otherwise.
      */
     boolean isOver();
+    
+    /**
+     * Method to be called at the end of the Battle.
+     * It adds the appropriate amount of exp points to each Character of my team.
+     */
+    void acquireExp();
 }

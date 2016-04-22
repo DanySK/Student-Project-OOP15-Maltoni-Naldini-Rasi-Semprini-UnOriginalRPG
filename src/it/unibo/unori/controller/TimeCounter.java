@@ -1,58 +1,45 @@
 package it.unibo.unori.controller;
 
 /**
- * Runnable class for time counting purpose.
+ *
  */
-public class TimeCounter implements Runnable {
-    private double time = 0;
-    private final double startingTime;
-    private boolean cycle = false;
-
+public interface TimeCounter {
     /**
-     * Constructor that instantiate timer for a new game.
-     */
-    public TimeCounter() {
-        this.startingTime = 0;
-    }
-
-    /**
-     * Constructor that instantiate timer for a loaded game.
-     * 
-     * @param startingTime the number of seconds played saved in the savegame loaded
-     */
-    public TimeCounter(final double startingTime) {
-        this.startingTime = startingTime;
-    }
-
-    @Override
-    public void run() {
-        cycle = true;
-        while (cycle) {
-            this.time++;
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                cycle = false;
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * Get the total time played in seconds.
+     * Get the total time played in milliseconds.
      * 
      * @return the time elapsed from when the player created new game
      */
-    public double getTotalTime() {
-        return this.startingTime + this.time;
-    }
+    double getTotalTime();
 
     /**
-     * Get the time played in seconds.
+     * Get the time played in milliseconds.
      * 
      * @return the time elapsed from when the player loaded the save
      */
-    public double getPlayingTime() {
-        return this.time;
-    }
+    double getPlayingTime();
+
+    /**
+     * Sets the time played in previous moments.
+     * 
+     * @param time
+     *            the played time in previous moments in milliseconds
+     */
+    void setAlreadyPlayedTime(final double time);
+
+    /**
+     * Gets the time played in previous moments.
+     * 
+     * @return the played time in previous moments in milliseconds
+     */
+    double getAlreadyPlayedTime();
+
+    /**
+     * This method stops the timer.
+     */
+    void stopTimer();
+
+    /**
+     * This methods starts the timer if it was previously stopped.
+     */
+    void startTimer();
 }
