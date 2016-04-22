@@ -121,5 +121,17 @@ public class BattleImpl implements Battle {
     public boolean isOver() {
         return this.over;
     }
+    
+    @Override
+    public void acquireExp() {
+        final List<Integer> points =
+                BattleLogics.expAcquired(this.squad, this.getMediumLevel(),
+                        this.squad.size() - this.beatenFriends);
+        //TODO use Streams instead.
+        final int index = 0;
+        for (final Hero h : this.squad) {
+            h.addExp(points.get(index));
+        }
+    }
 
 }
