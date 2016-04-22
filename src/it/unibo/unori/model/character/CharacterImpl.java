@@ -11,6 +11,7 @@ public class CharacterImpl implements Character {
      */
     private static final long serialVersionUID = -95447626445744515L;
 
+
     @Override
     public String getName() {
         // TODO Auto-generated method stub
@@ -113,4 +114,16 @@ public class CharacterImpl implements Character {
         return 0;
     }
 
+    /**
+     * Enumeration with names of statistics.
+     *
+     */
+    public enum Statistics {
+        /**
+         * Names of the statistics.
+         */
+        TOTALHP, TOTALMP, FIREATK, FIREDEF, THUNDERATK, THUNDERDEF, ICEATK, ICEDEF
+    }
 }
+
+
