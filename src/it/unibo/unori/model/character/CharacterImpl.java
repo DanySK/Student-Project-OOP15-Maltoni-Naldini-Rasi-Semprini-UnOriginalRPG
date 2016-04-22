@@ -1,5 +1,7 @@
 package it.unibo.unori.model.character;
 
+import java.util.Map;
+
 /**
  * Class to design a generic Character.
  *
@@ -10,108 +12,106 @@ public class CharacterImpl implements Character {
      * 
      */
     private static final long serialVersionUID = -95447626445744515L;
+    private final String name;
+    private int currentHP;
+    private int currentMP;
+    private final Map<Statistics, Integer> statistic;
+
+    /**
+     * Constructor for CharacterImpl.
+     * @param name
+     *              name of the character.
+     * @param map
+     *              statistics of the character.
+     */
+    public CharacterImpl(final String name, final Map<Statistics, Integer> map) {
+        this.name = name;
+        this.statistic = map;
+        this.currentHP = this.statistic.get(Statistics.TOTALHP);
+        this.currentMP = this.statistic.get(Statistics.TOTALMP);
+    }
 
 
     @Override
     public String getName() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.name;
     }
 
     @Override
     public int getRemainingHP() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.currentHP;
     }
 
     @Override
     public int getTotalHP() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.statistic.get(Statistics.TOTALHP);
     }
 
     @Override
-    public void consumeMP(int mpToConsume) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void takeDamage(int damage) {
-        // TODO Auto-generated method stub
+    public void consumeMP(final int mpToConsume) {
+        this.currentMP = this.currentMP - mpToConsume < 0 ? 0 
+                                 : this.currentMP - mpToConsume;
 
     }
 
     @Override
-    public void restoreDamage(int hpToRestore) {
-        // TODO Auto-generated method stub
+    public void takeDamage(final int damage) {
+        this.currentHP = this.currentHP - damage < 0 ? 0 
+                : this.currentHP - damage;
+
+    }
+
+    @Override
+    public void restoreDamage(final int hpToRestore) {
+        this.currentHP = this.currentHP + hpToRestore > this.getTotalHP() ? this.getTotalHP()
+                : this.currentHP + hpToRestore;
 
     }
 
     @Override
     public int getAttack() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.statistic.get(Statistics.PHYSICATK);
     }
 
     @Override
     public int getDefense() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.statistic.get(Statistics.PHYISICDEF);
     }
 
-    @Override
-    public int getMagicAtk() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int getMagicDef() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
 
     @Override
     public int getSpeed() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.statistic.get(Statistics.SPEED);
     }
 
     @Override
     public int getFireDefense() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.statistic.get(Statistics.FIREDEF);
     }
 
     @Override
     public int getThunderDefense() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.statistic.get(Statistics.THUNDERDEF);
     }
 
     @Override
     public int getIceDefense() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.statistic.get(Statistics.ICEDEF);
     }
 
     @Override
     public int getFireAtk() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.statistic.get(Statistics.FIREATK);
     }
 
     @Override
     public int getThunderAttack() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.statistic.get(Statistics.THUNDERATK);
     }
 
     @Override
     public int getIceAttack() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.statistic.get(Statistics.ICEDEF);
     }
 
     /**
@@ -122,7 +122,7 @@ public class CharacterImpl implements Character {
         /**
          * Names of the statistics.
          */
-        TOTALHP, TOTALMP, FIREATK, FIREDEF, THUNDERATK, THUNDERDEF, ICEATK, ICEDEF
+        TOTALHP, TOTALMP, SPEED, FIREATK, FIREDEF, THUNDERATK, THUNDERDEF, ICEATK, ICEDEF, PHYSICATK, PHYISICDEF 
     }
 }
 
