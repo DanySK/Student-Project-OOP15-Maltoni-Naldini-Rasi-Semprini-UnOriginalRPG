@@ -78,5 +78,41 @@ public interface Character extends Serializable {
      */
     int getSpeed();
 
+    /**
+     *  A getter method that gives Character's Fire Defense statistic.
+     * @return FireDefense statistic.
+     */
+    int getFireDefense();
+
+    /**
+     *  A getter method that gives Character's Thunder Defense statistic.
+     * @return ThunderDefense statistic.
+     */
+    int getThunderDefense();
+
+    /**
+     *  A getter method that gives Character's Fire Defense statistic.
+     * @return IceDefense statistic.
+     */
+    int getIceDefense();
+
+    /**
+     *  A getter method that gives Character's Fire Attack statistic.
+     * @return Character's fire attack.
+     */
+    int getFireAtk();
+
+    /**
+     * A getter method that gives Character's Thunder Attack statistic.
+     * @return Character's thunder attack
+     */
+    int getThunderAttack();
+
+    /**
+     * A getter method that gives Character's Ice Attack statistic.
+     * @return Character's ice attack
+     */
+    int getIceAttack();
+
 
 }
