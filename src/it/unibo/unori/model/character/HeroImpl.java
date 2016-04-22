@@ -14,115 +14,12 @@ import it.unibo.unori.model.items.Weapon;
  * take off pieces of equipments.
  *
  */
-public class HeroImpl implements Hero {
+public class HeroImpl  extends CharacterImpl implements Hero {
 
     /**
      * 
      */
     private static final long serialVersionUID = 7538947993488315753L;
-
-
-    @Override
-    public String getName() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public int getRemainingHP() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int getTotalHP() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public void consumeMP(int mpToConsume) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void takeDamage(int damage) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void restoreDamage(int hpToRestore) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public int getAttack() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int getDefense() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int getMagicAtk() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int getMagicDef() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int getSpeed() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int getFireDefense() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int getThunderDefense() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int getIceDefense() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int getFireAtk() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int getThunderAttack() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int getIceAttack() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
 
     @Override
     public int getLevel() {
@@ -139,7 +36,7 @@ public class HeroImpl implements Hero {
     @Override
     public void addExp(int expAcquired) {
         // TODO Auto-generated method stub
-
+        
     }
 
     @Override
@@ -151,13 +48,13 @@ public class HeroImpl implements Hero {
     @Override
     public void setWeapon(Weapon w) throws WeaponAlreadyException {
         // TODO Auto-generated method stub
-
+        
     }
 
     @Override
     public void unsetWeapon() throws NoWeaponException {
         // TODO Auto-generated method stub
-
+        
     }
 
     @Override
@@ -169,13 +66,13 @@ public class HeroImpl implements Hero {
     @Override
     public void setArmor(Armor ar) throws ArmorAlreadyException {
         // TODO Auto-generated method stub
-
+        
     }
 
     @Override
     public void unsetArmor() throws NoArmorException {
         // TODO Auto-generated method stub
-
+        
     }
 
     @Override
@@ -183,5 +80,8 @@ public class HeroImpl implements Hero {
         // TODO Auto-generated method stub
         return null;
     }
+
+
+    
 
 }
