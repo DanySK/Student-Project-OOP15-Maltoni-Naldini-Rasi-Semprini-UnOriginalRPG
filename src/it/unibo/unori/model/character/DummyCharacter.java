@@ -152,13 +152,13 @@ public class DummyCharacter implements Hero {
     }
 
     @Override
-    public void consumeMP(int mpToConsume) {
+    public void consumeMP(final int mpToConsume) {
         // TODO Auto-generated method stub
         
     }
 
     @Override
-    public void restoreDamage(int hpToRestore) {
+    public void restoreDamage(final int hpToRestore) {
         // TODO Auto-generated method stub
         
     }
