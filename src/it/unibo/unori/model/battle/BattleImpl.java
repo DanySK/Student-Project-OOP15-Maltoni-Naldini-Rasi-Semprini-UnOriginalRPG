@@ -16,6 +16,7 @@ public class BattleImpl implements Battle {
     private final List<Hero> squad;
     private final List<Hero> enemies;
     private boolean over;
+    private int beatenFriends;
     
     /**
      * Standard constructor for Class BattleImpl.
@@ -26,6 +27,7 @@ public class BattleImpl implements Battle {
         this.squad = team;
         this.enemies = en;
         this.over = false;
+        this.beatenFriends = 0;
     }
     
     private void defeated(final Hero ch) {
@@ -36,11 +38,19 @@ public class BattleImpl implements Battle {
         return ch.getRemainingHP() == 0;
     }
     
+    private int getMediumLevel() {
+        int mediumLevel = 0;
+        for (final Hero h : this.enemies) {
+            mediumLevel += h.getLevel();
+        }
+        mediumLevel /= this.enemies.size();
+        return mediumLevel;
+    }
+    
     @Override
     public void runAway(final Hero enemy, 
             final Hero my) throws CantEscapeException {
-        if (BattleLogics.canEscape(my.getLevel(), enemy.getLevel())
-            ) {
+        if (BattleLogics.canEscape(my.getLevel(), enemy.getLevel())) {
             this.over = true;
         } else {
             throw new CantEscapeException();
