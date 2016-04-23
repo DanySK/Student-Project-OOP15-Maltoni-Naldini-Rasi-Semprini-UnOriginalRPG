@@ -1,8 +1,9 @@
 package it.unibo.unori.controller.utility;
 
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -96,7 +97,8 @@ public final class Save {
      *             created, or exist but cannot be opened
      */
     public static void createSaveFile(final String folderPath) throws IOException {
-        final PrintWriter output = new PrintWriter(new FileWriter(folderPath + File.separator + SAVE_FILE));
+        final File saveFile = new File(folderPath + File.separator + SAVE_FILE);
+        final PrintWriter output = new PrintWriter(new OutputStreamWriter(new FileOutputStream(saveFile), "UTF-8"));
 
         output.print(new StringBuilder().append("--START--").append('\n').append("currentMap:0").append('\n')
                         .append("mapPosition:0,0").append('\n').append("char1:,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
@@ -117,7 +119,8 @@ public final class Save {
      *             created, or exist but cannot be opened
      */
     public static void createStatsFile(final String folderPath) throws IOException {
-        final PrintWriter output = new PrintWriter(new FileWriter(folderPath + File.separator + STATISTICS_FILE));
+        final File statsFile = new File(folderPath + File.separator + STATISTICS_FILE);
+        final PrintWriter output = new PrintWriter(new OutputStreamWriter(new FileOutputStream(statsFile), "UTF-8"));
 
         output.print(new StringBuilder().append("--START--").append('\n').append("newGames:0").append('\n')
                         .append("monstersMet:0").append('\n').append("monstersKilled:0").append('\n').append("bosses:0")
