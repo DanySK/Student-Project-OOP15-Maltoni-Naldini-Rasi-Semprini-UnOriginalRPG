@@ -10,10 +10,8 @@ public class StateMachine implements Controller {
     private final TimeCounter time;
 
     /**
-     * This default constructor creates a new
-     * {@link it.unibo.unori.Controller.StateMachineStack} and pushes a new
-     * {@link it.unibo.unori.controller.state.MainMenuState} at the top of the
-     * stack.
+     * This default constructor creates a new {@link it.unibo.unori.Controller.StateMachineStack} and pushes a new
+     * {@link it.unibo.unori.controller.state.MainMenuState} at the top of the stack.
      */
     public StateMachine() {
         stack = new StateMachineStack();
@@ -21,8 +19,7 @@ public class StateMachine implements Controller {
     }
 
     /**
-     * {@inheritDoc} This is done by pushing a new MainMenuState and updating
-     * and rendering it.
+     * {@inheritDoc} This is done by pushing a new MainMenuState and updating and rendering it.
      */
     @Override
     public void begin() {

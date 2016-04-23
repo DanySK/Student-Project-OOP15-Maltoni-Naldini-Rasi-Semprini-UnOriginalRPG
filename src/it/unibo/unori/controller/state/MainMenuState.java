@@ -1,8 +1,7 @@
 package it.unibo.unori.controller.state;
 
 /**
- * This GameState models the first state opened by the controller: the main
- * menu.
+ * This GameState models the first state opened by the controller: the main menu.
  */
 public class MainMenuState implements GameState {
 

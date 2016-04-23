@@ -33,9 +33,8 @@ public class KeyboardPolling extends KeyAdapter {
     }
 
     /**
-     * The method updates an internal container, giving the opportunity to have
-     * three key states: not pressed, pressed and holden down. It is
-     * synchronized with the method that manage KeyEvents.
+     * The method updates an internal container, giving the opportunity to have three key states: not pressed, pressed
+     * and holden down. It is synchronized with the method that manage KeyEvents.
      */
     public void poll() {
         synchronized (this) {
@@ -106,8 +105,7 @@ public class KeyboardPolling extends KeyAdapter {
     }
 
     /**
-     * Small, private, enumeration used in this class to model the state of the
-     * keys of the keyboard.
+     * Small, private, enumeration used in this class to model the state of the keys of the keyboard.
      */
     private enum KeyState {
         /** The key is not pressed */

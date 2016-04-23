@@ -14,8 +14,7 @@ import org.junit.Test;
  */
 public class KeyboardPollingTest {
     /**
-     * This test checks if the constructor initializes correctly the two
-     * internal lists.
+     * This test checks if the constructor initializes correctly the two internal lists.
      */
     @Test
     public void testPolling() {

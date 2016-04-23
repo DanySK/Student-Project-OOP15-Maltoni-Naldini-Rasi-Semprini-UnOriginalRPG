@@ -24,8 +24,7 @@ public class SaveTest {
     public final TemporaryFolder folder = new TemporaryFolder();
 
     /**
-     * This tests if loadFromUtilityFile method throws IOException if the file
-     * does not exist.
+     * This tests if loadFromUtilityFile method throws IOException if the file does not exist.
      * 
      * @throws IOException
      *             if the file does not exist
@@ -38,8 +37,7 @@ public class SaveTest {
     }
 
     /**
-     * This tests if loadFromUtilityFile method throws IOException if the file
-     * does not exist.
+     * This tests if loadFromUtilityFile method throws IOException if the file does not exist.
      * 
      * @throws IOException
      *             if the file does not exist
@@ -52,9 +50,8 @@ public class SaveTest {
     }
 
     /**
-     * This tests if loadFromUtilityFile method throws
-     * CorruptedUtilityFileException if the file does not match the expected
-     * pattern.
+     * This tests if loadFromUtilityFile method throws CorruptedUtilityFileException if the file does not match the
+     * expected pattern.
      * 
      * @throws IOException
      *             if the file does not exist
@@ -68,9 +65,8 @@ public class SaveTest {
     }
 
     /**
-     * This tests if loadFromUtilityFile method throws
-     * CorruptedUtilityFileException if the file does not match the expected
-     * pattern.
+     * This tests if loadFromUtilityFile method throws CorruptedUtilityFileException if the file does not match the
+     * expected pattern.
      * 
      * @throws IOException
      *             if the file does not exist

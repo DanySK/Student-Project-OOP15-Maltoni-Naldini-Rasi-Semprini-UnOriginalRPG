@@ -9,6 +9,7 @@ public class CorruptedUtilityFileException extends Exception {
      */
     private static final long serialVersionUID = -5424795998960050394L;
     private String corruptedFileName = "requested";
+
     /**
      * Standard, generic constructor.
      */
@@ -18,7 +19,9 @@ public class CorruptedUtilityFileException extends Exception {
 
     /**
      * Specific constructor.
-     * @param fileName the name of the corrupted file
+     * 
+     * @param fileName
+     *            the name of the corrupted file
      */
     public CorruptedUtilityFileException(final String fileName) {
         super();

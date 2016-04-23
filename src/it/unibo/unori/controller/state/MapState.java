@@ -5,8 +5,7 @@ import it.unibo.unori.model.maps.Party;
 import it.unibo.unori.model.maps.SingletonParty;
 
 /**
- * This GameState models the state of exploring a map (world, town or dungeon
- * room).
+ * This GameState models the state of exploring a map (world, town or dungeon room).
  */
 public class MapState implements GameState {
     private final Party party;
@@ -14,7 +13,8 @@ public class MapState implements GameState {
     /**
      * Default constructor.
      * 
-     * @param map the map to start from 
+     * @param map
+     *            the map to start from
      */
     public MapState(final GameMap map) {
         party = SingletonParty.getParty();
@@ -28,7 +28,6 @@ public class MapState implements GameState {
     @Override
     public void update(final double elapsedTime) {
         // TODO Auto-generated method stub
-
     }
 
     /**

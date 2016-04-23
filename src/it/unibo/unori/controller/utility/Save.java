@@ -34,18 +34,15 @@ public final class Save {
     }
 
     /**
-     * This method loads a text file and returns a list of lines contained
-     * between starting and terminating line. If the requested file does not
-     * exist, the method creates a void one and returns it; if it exists, but
-     * does not match the expected structure, throws an exception.
+     * This method loads a text file and returns a list of lines contained between starting and terminating line. If the
+     * requested file does not exist, the method creates a void one and returns it; if it exists, but does not match the
+     * expected structure, throws an exception.
      * 
      * @param fileName
-     *            the file name in default path; probably you should use
-     *            {@link #SAVE_FILE} or {@link #STATISTICS_FILE}
+     *            the file name in default path; probably you should use {@link #SAVE_FILE} or {@link #STATISTICS_FILE}
      * @return a list of the lines of the requested file
      * @throws CorruptedUtilityFileException
-     *             if the file exists but does not contain the starting and/or
-     *             the ending string
+     *             if the file exists but does not contain the starting and/or the ending string
      * @throws IOException
      *             if the file does not exist
      */
@@ -90,16 +87,13 @@ public final class Save {
     }
 
     /**
-     * This method creates a new Save file in given path with all parameters
-     * initialized to 0.
+     * This method creates a new Save file in given path with all parameters initialized to 0.
      * 
      * @param folderPath
-     *            the path in which you want to create the save file named
-     *            {@link #SAVE_FILE}
+     *            the path in which you want to create the save file named {@link #SAVE_FILE}
      * @throws IOException
-     *             if the named file exists but is a directory rather than a
-     *             regular file, does not exist but cannot be created, or exist
-     *             but cannot be opened
+     *             if the named file exists but is a directory rather than a regular file, does not exist but cannot be
+     *             created, or exist but cannot be opened
      */
     public static void createSaveFile(final String folderPath) throws IOException {
         final PrintWriter output = new PrintWriter(new FileWriter(folderPath + File.separator + SAVE_FILE));
@@ -114,16 +108,13 @@ public final class Save {
     }
 
     /**
-     * This method creates a new Statistics file in given path with all
-     * statistics initialized to 0.
+     * This method creates a new Statistics file in given path with all statistics initialized to 0.
      * 
      * @param folderPath
-     *            the path in which you want to create the save file named
-     *            {@link #STATISTICS_FILE}
+     *            the path in which you want to create the save file named {@link #STATISTICS_FILE}
      * @throws IOException
-     *             if the named file exists but is a directory rather than a
-     *             regular file, does not exist but cannot be created, or exist
-     *             but cannot be opened
+     *             if the named file exists but is a directory rather than a regular file, does not exist but cannot be
+     *             created, or exist but cannot be opened
      */
     public static void createStatsFile(final String folderPath) throws IOException {
         final PrintWriter output = new PrintWriter(new FileWriter(folderPath + File.separator + STATISTICS_FILE));

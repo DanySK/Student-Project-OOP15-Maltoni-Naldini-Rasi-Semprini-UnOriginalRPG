@@ -1,8 +1,7 @@
 package it.unibo.unori.controller;
 
 /**
- * This implementation of TimeCounter calculates elapsed time by saving the
- * starting time and calculating when needed.
+ * This implementation of TimeCounter calculates elapsed time by saving the starting time and calculating when needed.
  */
 public class TimeCounterImpl implements TimeCounter {
     private double alreadyPlayedTime;
