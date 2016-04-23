@@ -70,7 +70,7 @@ public final class Save {
 
         final List<String> outputLines = new ArrayList<>();
 
-        for (; i < lines.size(); i++) {
+        for (i++; i < lines.size(); i++) {
             if (lines.get(i).equals(ENDING_STRING)) {
                 check = false;
                 break;
