@@ -7,7 +7,9 @@ import it.unibo.unori.model.character.exceptions.NoArmorException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
 import it.unibo.unori.model.items.Armor;
+import it.unibo.unori.model.items.Armor.ArmorPieces;
 import it.unibo.unori.model.items.Weapon;
+
 
 /**
  * Implementation of Hero Interface.
@@ -23,35 +25,44 @@ public class HeroImpl  extends CharacterImpl implements Hero {
      * 
      */
     private static final long serialVersionUID = 7538947993488315753L;
+    private final Map<Armor.ArmorPieces, Armor> armor;
+    private final ArmorPieces p = ArmorPieces.ARMOR;
+    private Weapon weapon;
+    private int level;
+    private int totExp;
 
     /**
      * Standard constructor for HeroImpl.
      * @param name
-     *              Hero's name
+     *              Hero's name.
      * @param map
-     *              Hero's parameters
+     *              Hero's parameters.
+     *@param armor
+     *              Hero's initial equip.
+     *@param weapon
+     *              Hero's initial weapon.
      */
-    public HeroImpl(final String name, final Map<Statistics, Integer> map) {
+    public HeroImpl(final String name, final Map<Statistics, Integer> map, 
+                    final Map<Armor.ArmorPieces, Armor> armor, final Weapon weapon) {
         super(name, map);
-        // TODO Auto-generated constructor stub
+        this.armor = armor;
+        this.weapon = weapon;
+        this.level = 1;
     }
 
     @Override
     public int getLevel() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.level;
     }
 
     @Override
     public int getExpTot() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.totExp;
     }
 
     @Override
-    public void addExp(int expAcquired) {
-        // TODO Auto-generated method stub
-        
+    public void addExp(final int expAcquired) {
+        this.totExp += expAcquired;
     }
 
     @Override
