@@ -36,4 +36,14 @@ public interface Armor extends Item {
      * @return the status which the armor is immune to
      */
     Status getImmunity();
+
+    /**
+     * Enumeration to define the different kind of armors.
+     *
+     */
+    enum ArmorPieces {
+        SHIELD, HELMET, ARMOR, GLOVES, TROUSERS 
+     }
 }
+
+
