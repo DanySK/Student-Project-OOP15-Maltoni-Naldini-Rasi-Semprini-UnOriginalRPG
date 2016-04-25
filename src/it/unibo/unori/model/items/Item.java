@@ -13,7 +13,7 @@ public interface Item extends Serializable {
      * @return the name of the Item.
      */
     String getName();
-    
+
     /**
      * Gives the description of the Item.
      * @return the description of the Item.
