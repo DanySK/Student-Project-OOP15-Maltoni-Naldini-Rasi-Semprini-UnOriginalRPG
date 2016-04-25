@@ -25,8 +25,7 @@ public class HeroImpl  extends CharacterImpl implements Hero {
      * 
      */
     private static final long serialVersionUID = 7538947993488315753L;
-    private final Map<Armor.ArmorPieces, Armor> armor;
-    private final ArmorPieces p = ArmorPieces.ARMOR;
+    private final Map<ArmorPieces, Armor> armor;
     private Weapon weapon;
     private int level;
     private int totExp;
@@ -43,7 +42,7 @@ public class HeroImpl  extends CharacterImpl implements Hero {
      *              Hero's initial weapon.
      */
     public HeroImpl(final String name, final Map<Statistics, Integer> map, 
-                    final Map<Armor.ArmorPieces, Armor> armor, final Weapon weapon) {
+                    final Map<ArmorPieces, Armor> armor, final Weapon weapon) {
         super(name, map);
         this.armor = armor;
         this.weapon = weapon;
@@ -72,42 +71,41 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     }
 
     @Override
-    public void setWeapon(Weapon w) throws WeaponAlreadyException {
-        // TODO Auto-generated method stub
-        
+    public void setWeapon(final Weapon w) throws WeaponAlreadyException {
+        if (this.weapon.getName().equals("FISTS")) {
+            this.weapon = w;
+        } else {
+            throw new WeaponAlreadyException();
+        }
     }
 
     @Override
     public void unsetWeapon() throws NoWeaponException {
         // TODO Auto-generated method stub
-        
     }
 
     @Override
     public Weapon getWeapon() throws NoWeaponException {
-        // TODO Auto-generated method stub
-        return null;
+        return this.weapon;
     }
 
     @Override
-    public void setArmor(Armor ar) throws ArmorAlreadyException {
-        // TODO Auto-generated method stub
-        
+    public void setArmor(final Armor ar) throws ArmorAlreadyException {
+        if (this.armor.get(ar.getArmorClass()).getName().equals("NAKED")) {
+            this.armor.replace(ar.getArmorClass(), ar);
+        } else {
+            throw new ArmorAlreadyException();
+        }
     }
 
     @Override
     public void unsetArmor() throws NoArmorException {
         // TODO Auto-generated method stub
-        
     }
 
     @Override
-    public Armor getArmor() throws NoArmorException {
-        // TODO Auto-generated method stub
-        return null;
+    public Armor getArmor(final ArmorPieces p) throws NoArmorException {
+        return this.armor.get(p);
     }
-
-
-    
 
 }

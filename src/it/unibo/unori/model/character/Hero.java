@@ -5,6 +5,7 @@ import it.unibo.unori.model.character.exceptions.NoArmorException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
 import it.unibo.unori.model.items.Armor;
+import it.unibo.unori.model.items.Armor.ArmorPieces;
 import it.unibo.unori.model.items.Weapon;
 
 /**
@@ -81,7 +82,8 @@ public interface Hero extends Character {
      *  A getter method that gives the Armor that the Character is wearing.
      * @throws NoArmorException if the Character is not wearing any Armor 
      * @return the Armor the Character is wearing 
+     * @param p the specified piece of armor
      * 
      */
-    Armor getArmor() throws NoArmorException;
+    Armor getArmor(ArmorPieces p) throws NoArmorException;
 }
