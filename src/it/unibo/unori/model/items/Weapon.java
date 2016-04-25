@@ -7,11 +7,6 @@ import it.unibo.unori.model.character.Status;
  */
 public interface Weapon extends Item {
 
-    /**
-     * Get the weapon name.
-     * @return the weapon name
-     */
-    String getName();
 
     /**
      * Getter for PhysicalAtk parameter.
