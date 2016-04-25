@@ -30,7 +30,7 @@ public class CharacterImpl implements Character {
         this.statistic = map;
         this.currentHP = this.statistic.get(Statistics.TOTALHP);
         this.currentMP = this.statistic.get(Statistics.TOTALMP);
-        this.status = Status.OK;
+        this.status = Status.NONE;
     }
 
 
