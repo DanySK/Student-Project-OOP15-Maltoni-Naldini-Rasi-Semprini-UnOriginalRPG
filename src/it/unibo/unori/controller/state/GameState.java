@@ -1,5 +1,7 @@
 package it.unibo.unori.controller.state;
 
+import it.unibo.unori.view.View;
+
 /**
  * This interface models a game state (eg. local map, world map, main menu, battle) in the state machine controller
  */
@@ -28,4 +30,10 @@ public interface GameState {
      */
     void onExit();
 
+    /**
+     * The method returns the current view of the GameState. It is useful for layering the representations.
+     * 
+     * @return the current view of the GameState
+     */
+    View getView();
 }

@@ -3,6 +3,7 @@ package it.unibo.unori.controller.state;
 import it.unibo.unori.model.maps.GameMap;
 import it.unibo.unori.model.maps.Party;
 import it.unibo.unori.model.maps.SingletonParty;
+import it.unibo.unori.view.View;
 
 /**
  * This GameState models the state of exploring a map (world, town or dungeon room).
@@ -55,6 +56,12 @@ public class MapState implements GameState {
     public void onExit() {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public View getView() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

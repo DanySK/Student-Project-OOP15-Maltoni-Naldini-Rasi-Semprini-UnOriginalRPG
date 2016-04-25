@@ -10,12 +10,27 @@ public class StateMachine implements Controller {
     private final TimeCounter time;
 
     /**
-     * This default constructor creates a new {@link it.unibo.unori.Controller.StateMachineStack} and pushes a new
-     * {@link it.unibo.unori.controller.state.MainMenuState} at the top of the stack.
+     * This constructor instantiates a new StateMachine controller class and accept externally defined
+     * {@link it.unibo.unori.Controller.StateMachineStack} and {@link it.unibo.unori.controller.TimeCounter}.
+     * 
+     * @param stack
+     *            the externally defined StateMachineStack
+     * @param time
+     *            the externally defined TimeCounter
+     */
+    public StateMachine(final StateMachineStack stack, final TimeCounter time) {
+        this.stack = stack;
+        this.time = time;
+    }
+
+    /**
+     * This default constructor instantiates a new StateMachine controller class, adding a new
+     * {@link it.unibo.unori.Controller.StateMachineStack} with a new
+     * {@link it.unibo.unori.controller.state.MainMenuState} pushed at the top.
+     * It incorporates a TimeCounter, but needs to be started.
      */
     public StateMachine() {
-        stack = new StateMachineStack();
-        time = new TimeCounterImpl(false);
+        this(new StateMachineStack(), new TimeCounterImpl(false));
     }
 
     /**
