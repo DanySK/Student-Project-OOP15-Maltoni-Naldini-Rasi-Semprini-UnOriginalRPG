@@ -13,7 +13,7 @@ import it.unibo.unori.model.items.Weapon;
  * It implements Battle Interface.
  */
 public class BattleImpl implements Battle {
-    
+
     private final List<Hero> squad;
     private final List<Hero> enemies;
     private boolean over;
@@ -102,7 +102,7 @@ public class BattleImpl implements Battle {
     public int weaponAttack(final Weapon w, final Hero ch,
             final Hero enemy) {
         final int damage = 
-                BattleLogics.weaponAttack(w.getDamage(), 
+                BattleLogics.weaponAttack(w.getPhysicalAtk(), 
                         ch.getLevel(), ch.getAttack());
         enemy.takeDamage(damage);
         if (this.isDefeated(enemy)) {
@@ -121,7 +121,7 @@ public class BattleImpl implements Battle {
     public boolean isOver() {
         return this.over;
     }
-    
+
     @Override
     public void acquireExp() {
         final List<Integer> points =
