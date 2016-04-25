@@ -1,6 +1,6 @@
 package it.unibo.unori.model.maps.cell;
 
-import it.unibo.unori.model.character.DummyCharacter;
+import it.unibo.unori.model.character.Npc;
 import it.unibo.unori.model.maps.exceptions.NoNPCFoundException;
 import it.unibo.unori.model.menu.DummyMenu;
 
@@ -15,7 +15,8 @@ public class NPCCellImpl extends SimpleCellImpl {
      * 
      */
     private static final long serialVersionUID = 1377338158619069850L;
-    private final DummyCharacter npc;
+    private final Npc npc;
+
 
     /**
      * Constructor.
@@ -25,7 +26,7 @@ public class NPCCellImpl extends SimpleCellImpl {
      *@param npc
      *          the npc who will generate the dialogue with the party
      */
-    public NPCCellImpl(final Object frame, final DummyCharacter npc) {
+    public NPCCellImpl(final Object frame, final Npc npc) {
         super(frame, CellState.BLOCKED);
         this.npc = npc;
     }
@@ -38,7 +39,7 @@ public class NPCCellImpl extends SimpleCellImpl {
      */
     @Override
     public DummyMenu talkToNpc() throws NoNPCFoundException {
-        return npc.createMenu();
+        return npc.getDialogue();
     }
 
 }
