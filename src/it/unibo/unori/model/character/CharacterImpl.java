@@ -116,17 +116,6 @@ public class CharacterImpl implements Character {
         return this.statistic.get(Statistics.ICEDEF);
     }
 
-    /**
-     * Enumeration with names of statistics.
-     *
-     */
-    public enum Statistics {
-        /**
-         * Names of the statistics.
-         */
-        TOTALHP, TOTALMP, SPEED, FIREATK, FIREDEF, THUNDERATK, THUNDERDEF, ICEATK, ICEDEF, PHYSICATK, PHYISICDEF 
-    }
-
     @Override
     public void setStatus(final Status state) {
         this.status = state;
@@ -137,6 +126,19 @@ public class CharacterImpl implements Character {
     public Status getStatus() {
         return this.status;
     }
+
+
+}
+
+/**
+ * Enumeration with names of statistics.
+ *
+ */
+    enum Statistics {
+    /**
+     * Names of the statistics.
+     */
+    TOTALHP, TOTALMP, SPEED, FIREATK, FIREDEF, THUNDERATK, THUNDERDEF, ICEATK, ICEDEF, PHYSICATK, PHYISICDEF 
 }
 
 
