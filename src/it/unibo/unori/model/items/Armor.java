@@ -38,6 +38,12 @@ public interface Armor extends Item {
     Status getImmunity();
 
     /**
+     * Get the armor class of the piece.
+     * @return the kind of the piece of armor.
+     */
+    ArmorPieces getArmorClass();
+
+    /**
      * Enumeration to define the different kind of armors.
      *
      */
