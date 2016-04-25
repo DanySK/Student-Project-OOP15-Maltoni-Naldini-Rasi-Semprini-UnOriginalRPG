@@ -103,6 +103,18 @@ public interface Character extends Serializable {
      */
     int getIceAttack();
 
+    /**
+     * Set a status on the character.
+     * @param state
+     *              Status to set.
+     */
+    void setStatus(Status state);
+
+    /**
+     * Get the status of the character.
+     * @return the status of the character
+     */
+    Status getStatus();
 
 
 }

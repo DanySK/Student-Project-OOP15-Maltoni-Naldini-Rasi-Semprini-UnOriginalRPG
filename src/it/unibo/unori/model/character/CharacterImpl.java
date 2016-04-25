@@ -15,6 +15,7 @@ public class CharacterImpl implements Character {
     private final String name;
     private int currentHP;
     private int currentMP;
+    private Status status;
     private final Map<Statistics, Integer> statistic;
 
     /**
@@ -29,6 +30,7 @@ public class CharacterImpl implements Character {
         this.statistic = map;
         this.currentHP = this.statistic.get(Statistics.TOTALHP);
         this.currentMP = this.statistic.get(Statistics.TOTALMP);
+        this.status = Status.OK;
     }
 
 
@@ -123,6 +125,17 @@ public class CharacterImpl implements Character {
          * Names of the statistics.
          */
         TOTALHP, TOTALMP, SPEED, FIREATK, FIREDEF, THUNDERATK, THUNDERDEF, ICEATK, ICEDEF, PHYSICATK, PHYISICDEF 
+    }
+
+    @Override
+    public void setStatus(final Status state) {
+        this.status = state;
+    }
+
+
+    @Override
+    public Status getStatus() {
+        return this.status;
     }
 }
 
