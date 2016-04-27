@@ -128,10 +128,10 @@ public class BattleImpl implements Battle {
                 BattleLogics.expAcquired(this.squad, this.getMediumLevel(),
                         this.squad.size() - this.beatenFriends);
         //TODO use Streams instead.
-        final int index = 0;
+        int index = 0;
         for (final Hero h : this.squad) {
             h.addExp(points.get(index));
+            index++;
         }
     }
-
 }
