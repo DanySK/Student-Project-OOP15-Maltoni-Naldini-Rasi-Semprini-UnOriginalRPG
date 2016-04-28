@@ -13,10 +13,10 @@ import java.awt.event.FocusListener;
  * A custom game button.
  */
 public class Button extends JButton implements FocusListener {
-    private final ImageIcon icon = new ImageIcon("res/button/icon.png");
-    private final ImageIcon focusIcon = new ImageIcon("res/button/focusIcon.png");
-    private final ImageIcon rolloverIcon = new ImageIcon("res/button/rolloverIcon.png");
-    private final ImageIcon rolloverFocusIcon = new ImageIcon("res/button/rolloverFocusIcon.png");
+    private static final String FOCUS = "res/button/focus.png";
+    private static final String DEFAULT = "res/button/default.png";
+    private static final String ROLLOVER = "res/button/rollover.png";
+    private static final String ROLLOVER2 = "res/button/rollover2.png";
 
     /**
      * Creates a button with the specified label.
@@ -25,19 +25,20 @@ public class Button extends JButton implements FocusListener {
     public Button(final String label) {
         super(label);
 
-        setIcon(icon);
-        setPressedIcon(icon);
-        setRolloverIcon(rolloverIcon);
-        this.addFocusListener(this);
-
         setFocusPainted(false);
         setBorderPainted(false);
         setContentAreaFilled(false);
+
+        setIcon(new ImageIcon(DEFAULT));
+        setPressedIcon(new ImageIcon(DEFAULT));
+        setRolloverIcon(new ImageIcon(ROLLOVER));
 
         final int fontSize = 17;
         setForeground(Color.WHITE);
         setHorizontalTextPosition(JButton.CENTER);
         setFont(new Font("Arial", Font.PLAIN, fontSize));
+
+        this.addFocusListener(this);
     }
 
     /**
@@ -45,8 +46,8 @@ public class Button extends JButton implements FocusListener {
      */
     @Override
     public void focusGained(final FocusEvent e) {
-        setIcon(focusIcon);
-        setRolloverIcon(rolloverFocusIcon);
+        setIcon(new ImageIcon(FOCUS));
+        setRolloverIcon(new ImageIcon(ROLLOVER2));
     }
 
     /**
@@ -54,7 +55,7 @@ public class Button extends JButton implements FocusListener {
      */
     @Override
     public void focusLost(final FocusEvent e) {
-        setIcon(icon);
-        setRolloverIcon(rolloverIcon);
+        setIcon(new ImageIcon(DEFAULT));
+        setRolloverIcon(new ImageIcon(ROLLOVER));
     }
 }
