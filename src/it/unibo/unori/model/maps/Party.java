@@ -73,7 +73,7 @@ public interface Party extends Serializable {
         /**
          * Four values for the cardinal points.
          */
-        NORTH(1, 0), SOUTH(-1, 0), EAST(0, 1), WEST(0, -1);
+        NORTH(-1, 0), SOUTH(1, 0), EAST(0, 1), WEST(0, -1);
 
         /**
          * Parameters to save the skidding for each of the cardinal points.

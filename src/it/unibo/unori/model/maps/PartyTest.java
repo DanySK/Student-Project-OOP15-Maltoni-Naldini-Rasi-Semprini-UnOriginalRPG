@@ -47,18 +47,18 @@ public class PartyTest {
         party.setCurrentMap(mapFactory.getStdRoom());
         assertEquals(party.getCurrentPosition(), new Position(1, 1));
         try {
-            party.moveParty(CardinalPoints.NORTH);
-            party.moveParty(CardinalPoints.NORTH);
-            party.moveParty(CardinalPoints.NORTH);
-            party.moveParty(CardinalPoints.NORTH);
+            party.moveParty(CardinalPoints.SOUTH);
+            party.moveParty(CardinalPoints.SOUTH);
+            party.moveParty(CardinalPoints.SOUTH);
+            party.moveParty(CardinalPoints.SOUTH);
             assertEquals(party.getCurrentPosition(), new Position(FIVE, 1));
             party.moveParty(CardinalPoints.EAST);
             party.moveParty(CardinalPoints.EAST);
             party.moveParty(CardinalPoints.EAST);
             assertEquals(party.getCurrentPosition(), new Position(FIVE, FIVE - 1));
             party.moveParty(CardinalPoints.WEST);
-            party.moveParty(CardinalPoints.SOUTH);
-            party.moveParty(CardinalPoints.SOUTH);
+            party.moveParty(CardinalPoints.NORTH);
+            party.moveParty(CardinalPoints.NORTH);
             assertEquals(party.getCurrentPosition(), new Position(3, 3));
         } catch (BlockedPathException e) {
             fail("No exception should be thrown...");
@@ -97,7 +97,7 @@ public class PartyTest {
         try {
             party.moveParty(CardinalPoints.EAST);
             party.moveParty(CardinalPoints.EAST);
-            party.moveParty(CardinalPoints.SOUTH);
+            party.moveParty(CardinalPoints.NORTH);
             assertEquals(party.getCurrentGameMap(), GameMapFactory.LINKINGMAP);
             System.out.println(party.getCurrentPosition().getPosX() + ", " + party.getCurrentPosition().getPosY());
             assertEquals(party.getCurrentPosition(), new Position(MAXPOS - 1, 3));
