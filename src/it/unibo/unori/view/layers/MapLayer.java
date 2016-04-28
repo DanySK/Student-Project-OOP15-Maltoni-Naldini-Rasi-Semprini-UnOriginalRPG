@@ -56,7 +56,7 @@ public class MapLayer extends Layer {
 
         actionMap.put("UP", new MoveAction(Party.CardinalPoints.NORTH));
         actionMap.put("LEFT", new MoveAction(Party.CardinalPoints.WEST));
-        actionMap.put("RIGHT", new MoveAction(Party.CardinalPoints.EST));
+        actionMap.put("RIGHT", new MoveAction(Party.CardinalPoints.EAST));
         actionMap.put("DOWN", new MoveAction(Party.CardinalPoints.SOUTH));
 
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), "UP");
