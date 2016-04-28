@@ -21,7 +21,7 @@ public abstract class MenuLayer extends Layer {
     private final List<Button> buttonList = new ArrayList<Button>();
 
     /**
-     * Get the list of the buttons.
+     * Get the list of buttons.
      * @return the list of the buttons
      */
     protected List<Button> getButtonList() {
@@ -67,7 +67,7 @@ public abstract class MenuLayer extends Layer {
         private final int direction;
 
         /**
-         * @param direction the direction the focus will shift towards.
+         * @param direction the direction the focus will shift to.
          */
         public MoveAction(final int direction) {
             super();

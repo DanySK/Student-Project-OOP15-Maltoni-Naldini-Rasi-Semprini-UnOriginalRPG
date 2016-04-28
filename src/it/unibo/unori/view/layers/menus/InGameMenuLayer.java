@@ -26,7 +26,7 @@ public class InGameMenuLayer extends MenuLayer {
     private final Dimension size = new Dimension(200, 400);
 
     /**
-     * Creates an instance of the in-game menu.
+     * Creates the in-game menu.
      */
     public InGameMenuLayer() {
         super();
@@ -76,7 +76,7 @@ public class InGameMenuLayer extends MenuLayer {
     }
 
     /**
-     * Tests the class.
+     * Tests this class.
      * @param args arguments
      */
     public static void main(final String... args) {

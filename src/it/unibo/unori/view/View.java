@@ -13,7 +13,7 @@ import javax.swing.JLayeredPane;
 public final class View extends JFrame {
     private Integer layers = 0;
     private final JLayeredPane layeredPane;
-    private static final String TITLE = "UnOriginal RPG";
+    private static final String TITLE = "UnOriginal.RPG";
 
     /**
      * Creates an instance of the view.
