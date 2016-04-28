@@ -13,7 +13,16 @@ import it.unibo.unori.model.maps.cell.Cell;
  */
 public interface GameMap extends Serializable {
 
-
+    /**
+     * Getter for length of the map.
+     * @return length of the map
+     */
+    int getMapLength();
+    /**
+     * Getter for width of the map.
+     * @return width of the map
+     */
+    int getMapWidth();
     /**
      * Get the cell at the specified position.
      * @param pos

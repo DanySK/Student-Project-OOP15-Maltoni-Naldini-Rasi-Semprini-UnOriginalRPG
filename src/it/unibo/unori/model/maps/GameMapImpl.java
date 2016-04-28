@@ -201,4 +201,14 @@ public class GameMapImpl implements GameMap {
         return this.initialPosition;
     }
 
+    @Override
+    public int getMapLength() {
+        return this.getRow(0).size();
+    }
+
+    @Override
+    public int getMapWidth() {
+        return this.getColumn(0).size();
+    }
+
 }
