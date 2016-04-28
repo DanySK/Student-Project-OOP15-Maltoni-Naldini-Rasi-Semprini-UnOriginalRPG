@@ -3,7 +3,7 @@ package it.unibo.unori.view.layers;
 import it.unibo.unori.view.View;
 
 import it.unibo.unori.model.maps.GameMap;
-import it.unibo.unori.model.maps.GameMapImpl;
+import it.unibo.unori.model.maps.GameMapFactory;
 
 import it.unibo.unori.model.maps.Party;
 import it.unibo.unori.model.maps.SingletonParty;
@@ -16,15 +16,15 @@ import java.util.List;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
+import java.awt.event.ActionEvent;
 
-import javax.swing.AbstractAction;
-import javax.swing.ActionMap;
 import javax.swing.InputMap;
+import javax.swing.ActionMap;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
+import javax.swing.AbstractAction;
 
 /**
  * 
@@ -80,16 +80,16 @@ public class MapLayer extends Layer {
                     g.setColor(Color.RED);
                 }
 
-                g.fillRect(x * cellSize.width,
-                           y * cellSize.height,
+                g.fillRect(y * cellSize.height,
+                           x * cellSize.width,
                            cellSize.width, cellSize.height);
             }
         }
 
         g.setColor(Color.BLUE);
 
-        g.fillRect(party.getCurrentPosition().getPosX() * cellSize.width,
-                   party.getCurrentPosition().getPosY() * cellSize.height,
+        g.fillRect(party.getCurrentPosition().getPosY() * cellSize.height,
+                   party.getCurrentPosition().getPosX() * cellSize.width,
                    cellSize.width, cellSize.height);
     }
 
@@ -126,7 +126,9 @@ public class MapLayer extends Layer {
      * @param args arguments
      */
     public static void main(final String... args) {
-        final GameMap map = new GameMapImpl();
+        final GameMapFactory mapFactory = new GameMapFactory();
+
+        final GameMap map = mapFactory.getStdRoom();
         SingletonParty.getParty().setCurrentMap(map);
 
         final View view = new View();
