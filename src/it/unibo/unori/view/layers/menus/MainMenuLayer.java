@@ -24,15 +24,17 @@ import javax.swing.SwingUtilities;
  */
 public class MainMenuLayer extends MenuLayer {
     private final JPanel buttonPanel = new JPanel();
+
     private final Color backgroundColor = Color.BLACK;
     private final Dimension size = new Dimension(600, 400);
 
     /**
-     * Creates an instance of the main menu.
+     * Creates the main menu.
      */
      public MainMenuLayer() {
         super();
 
+        setPreferredSize(size);
         setLayout(new BorderLayout());
         setBackground(backgroundColor);
         setBounds(0, 0, size.width, size.height);
@@ -76,7 +78,7 @@ public class MainMenuLayer extends MenuLayer {
      }
 
      /**
-      * Tests the class.
+      * Tests this class.
       * @param args arguments
       */
      public static void main(final String... args) {
