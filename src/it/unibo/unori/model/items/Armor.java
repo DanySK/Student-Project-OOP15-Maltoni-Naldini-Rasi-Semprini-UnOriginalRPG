@@ -48,7 +48,7 @@ public interface Armor extends Item {
      *
      */
     enum ArmorPieces {
-        SHIELD, HELMET, ARMOR, GLOVES, TROUSERS 
+        SHIELD, HELMET, ARMOR, GLOVES, TROUSERS, NONE 
      }
 }
 
