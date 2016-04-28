@@ -20,34 +20,31 @@ public final class View extends JFrame {
      */
     public View() {
         super(TITLE);
-
         this.setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         layeredPane = getLayeredPane();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     /**
-     * Centers the view in the screen.
+     * Centers the view to the screen.
      */
     public void center() {
         setLocationRelativeTo(null);
     }
 
     /**
-     * Resizes the view according to the specified layer.
+     * Resizes the view to the specified layer.
      * @param layer the layer the view will resize to.
      */
     public void resizeTo(final JPanel layer) {
         getContentPane().setPreferredSize(layer.getSize());
 
-        pack();
+        this.pack();
     }
 
     /**
      * Pushes a layer on top of the view.
-     * 
-     * @param layer the layer to be pushed on top of the view.
+     * @param layer the layer to be pushed.
      */
     public void push(final JPanel layer) {
         layeredPane.add(layer, ++layers);
@@ -57,6 +54,6 @@ public final class View extends JFrame {
      * Removes the layer on top of the view.
      */
     public void pop() {
-        layeredPane.remove(layeredPane.highestLayer()); // TODO exception
+        layeredPane.remove(layeredPane.highestLayer());
     }
 }
