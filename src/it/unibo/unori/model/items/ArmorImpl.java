@@ -52,7 +52,8 @@ public class ArmorImpl implements Armor {
 
     private boolean hasLegitStats(final Set<Statistics> s) {
         return s.containsAll(Arrays.asList(Statistics.FIREATK, Statistics.ICEDEF, 
-                Statistics.THUNDERDEF, Statistics.PHYISICDEF));
+                Statistics.THUNDERDEF, Statistics.PHYISICDEF))
+                && s.size() == 4;
     }
 
 
