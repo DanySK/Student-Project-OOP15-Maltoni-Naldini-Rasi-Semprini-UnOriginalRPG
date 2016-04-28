@@ -52,9 +52,9 @@ public class PartyTest {
             party.moveParty(CardinalPoints.NORTH);
             party.moveParty(CardinalPoints.NORTH);
             assertEquals(party.getCurrentPosition(), new Position(FIVE, 1));
-            party.moveParty(CardinalPoints.EST);
-            party.moveParty(CardinalPoints.EST);
-            party.moveParty(CardinalPoints.EST);
+            party.moveParty(CardinalPoints.EAST);
+            party.moveParty(CardinalPoints.EAST);
+            party.moveParty(CardinalPoints.EAST);
             assertEquals(party.getCurrentPosition(), new Position(FIVE, FIVE - 1));
             party.moveParty(CardinalPoints.WEST);
             party.moveParty(CardinalPoints.SOUTH);
@@ -95,8 +95,8 @@ public class PartyTest {
         party.setCurrentMap(mapFactory.getSouthLinkedMap());
         assertEquals(party.getCurrentPosition(), new Position(1, 1));
         try {
-            party.moveParty(CardinalPoints.EST);
-            party.moveParty(CardinalPoints.EST);
+            party.moveParty(CardinalPoints.EAST);
+            party.moveParty(CardinalPoints.EAST);
             party.moveParty(CardinalPoints.SOUTH);
             assertEquals(party.getCurrentGameMap(), GameMapFactory.LINKINGMAP);
             System.out.println(party.getCurrentPosition().getPosX() + ", " + party.getCurrentPosition().getPosY());
