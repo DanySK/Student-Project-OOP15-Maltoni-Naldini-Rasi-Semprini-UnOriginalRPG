@@ -46,7 +46,7 @@ public class CharacterImpl implements Character {
     public CharacterImpl(final String name, final Map<Statistics, Integer> map, 
                           final int level) throws IllegalArgumentException {
         this.name = name;
-        if (level <= 0 || !map.keySet().containsAll(Arrays.asList(Statistics.values()))) {
+        if (checkParameters(map, level)) {
             throw new IllegalArgumentException();
         }
         this.statistic = map;
@@ -54,6 +54,11 @@ public class CharacterImpl implements Character {
         this.currentMP = this.statistic.get(Statistics.TOTALMP);
         this.status = Status.NONE;
         this.level = level;
+    }
+
+    // method to check the parameters.
+    private boolean checkParameters(final Map<Statistics, Integer> map, final int level) {
+        return level <= 0 || !map.keySet().containsAll(Arrays.asList(Statistics.values()));
     }
 
 
