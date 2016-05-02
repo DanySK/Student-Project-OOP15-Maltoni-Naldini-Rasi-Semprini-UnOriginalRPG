@@ -1,5 +1,6 @@
 package it.unibo.unori.model.character;
 
+import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -38,18 +39,20 @@ public class CharacterImpl implements Character {
      *              statistics of the character.
      * @param level
      *              the level of the character. 
-     * @throws IllegalArgumentException if the level is equal or less than 0.
+     * @throws IllegalArgumentException if the level is equal or less than 0
+     *                                  or the map does not define a value for all
+     *                                  the statistics
      */
     public CharacterImpl(final String name, final Map<Statistics, Integer> map, 
                           final int level) throws IllegalArgumentException {
         this.name = name;
+        if (level <= 0 || !map.keySet().containsAll(Arrays.asList(Statistics.values()))) {
+            throw new IllegalArgumentException();
+        }
         this.statistic = map;
         this.currentHP = this.statistic.get(Statistics.TOTALHP);
         this.currentMP = this.statistic.get(Statistics.TOTALMP);
         this.status = Status.NONE;
-        if (level <= 0) {
-            throw new IllegalArgumentException();
-        }
         this.level = level;
     }
 
