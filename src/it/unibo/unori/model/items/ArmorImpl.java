@@ -50,10 +50,11 @@ public class ArmorImpl implements Armor {
                 && STDDESC.equals(desc);
     }
 
-    private boolean hasLegitStats(final Set<Statistics> s) {
-        return s.containsAll(Arrays.asList(Statistics.FIREATK, Statistics.ICEDEF, 
+    private boolean hasLegitStats(final Set<Statistics> s, final ArmorPieces arm) {
+        return s.containsAll(Arrays.asList(Statistics.FIREDEF, Statistics.ICEDEF, 
                 Statistics.THUNDERDEF, Statistics.PHYISICDEF))
-                && s.size() == 4;
+                && s.size() == 4 
+                && !arm.equals(ArmorPieces.NONE);
     }
 
 
@@ -87,7 +88,7 @@ public class ArmorImpl implements Armor {
         if (this.isNakedConstruction(name, piece, desc, stats, immunity)) {
             this.stats = this.generateStdStats();
         } else {
-            if (this.hasLegitStats(stats.keySet())) {
+            if (this.hasLegitStats(stats.keySet(), piece)) {
                 this.stats = stats;
             } else {
                 throw new IllegalArgumentException();
