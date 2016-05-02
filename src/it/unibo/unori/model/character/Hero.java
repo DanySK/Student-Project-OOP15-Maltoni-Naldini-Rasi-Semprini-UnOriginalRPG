@@ -67,17 +67,17 @@ public interface Hero extends Character {
 
     /**
      * This method allows to remove an Armor from Character's equipment.
+     * @param p piece to unequip.
      * @throws NoArmorException if the Character is not wearing any Armor
      */
-    void unsetArmor() throws NoArmorException;
+    void unsetArmor(ArmorPieces p) throws NoArmorException;
 
     /**
      * 
-     *  A getter method that gives the Armor that the Character is wearing.
-     * @throws NoArmorException if the Character is not wearing any Armor 
+     *  A getter method that gives the Armor that the Character is wearing. 
      * @return the Armor the Character is wearing 
      * @param p the specified piece of armor
      * 
      */
-    Armor getArmor(ArmorPieces p) throws NoArmorException;
+    Armor getArmor(ArmorPieces p);
 }

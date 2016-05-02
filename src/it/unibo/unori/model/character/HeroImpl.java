@@ -8,7 +8,9 @@ import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
 import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.Armor.ArmorPieces;
+import it.unibo.unori.model.items.ArmorImpl;
 import it.unibo.unori.model.items.Weapon;
+import it.unibo.unori.model.items.WeaponImpl;
 
 
 /**
@@ -64,9 +66,17 @@ public class HeroImpl  extends CharacterImpl implements Hero {
         return 0;
     }
 
+    private boolean isNotPresentWeapon() {
+        return this.weapon.equals(WeaponImpl.FISTS);
+    }
+
+    private boolean isNotPresentArmor(final ArmorPieces ar) {
+        return this.armor.get(ar).equals(ArmorImpl.NAKED);
+    }
+
     @Override
     public void setWeapon(final Weapon w) throws WeaponAlreadyException {
-        if (this.weapon.getName().equals("FISTS")) {
+        if (this.isNotPresentWeapon()) {
             this.weapon = w;
         } else {
             throw new WeaponAlreadyException();
@@ -75,7 +85,11 @@ public class HeroImpl  extends CharacterImpl implements Hero {
 
     @Override
     public void unsetWeapon() throws NoWeaponException {
-        // TODO Auto-generated method stub
+        if (this.isNotPresentWeapon()) {
+           throw new NoWeaponException();
+        } else {
+            this.weapon = WeaponImpl.FISTS;
+        }
     }
 
     @Override
@@ -85,7 +99,7 @@ public class HeroImpl  extends CharacterImpl implements Hero {
 
     @Override
     public void setArmor(final Armor ar) throws ArmorAlreadyException {
-        if (this.armor.get(ar.getArmorClass()).getName().equals("NAKED")) {
+        if (this.isNotPresentArmor(ar.getArmorClass())) {
             this.armor.replace(ar.getArmorClass(), ar);
         } else {
             throw new ArmorAlreadyException();
@@ -93,12 +107,16 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     }
 
     @Override
-    public void unsetArmor() throws NoArmorException {
-        // TODO Auto-generated method stub
+    public void unsetArmor(final ArmorPieces p) throws NoArmorException {
+        if (this.isNotPresentArmor(p)) {
+            this.armor.replace(p, ArmorImpl.NAKED);
+        } else {
+            throw new NoArmorException();
+        }
     }
 
     @Override
-    public Armor getArmor(final ArmorPieces p) throws NoArmorException {
+    public Armor getArmor(final ArmorPieces p) {
         return this.armor.get(p);
     }
 
