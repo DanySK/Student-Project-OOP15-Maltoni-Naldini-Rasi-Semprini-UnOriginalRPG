@@ -27,7 +27,6 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     private static final long serialVersionUID = 7538947993488315753L;
     private final Map<ArmorPieces, Armor> armor;
     private Weapon weapon;
-    private int level;
     private int totExp;
 
     /**
@@ -46,13 +45,8 @@ public class HeroImpl  extends CharacterImpl implements Hero {
         super(name, map);
         this.armor = armor;
         this.weapon = weapon;
-        this.level = 1;
     }
 
-    @Override
-    public int getLevel() {
-        return this.level;
-    }
 
     @Override
     public int getExpTot() {

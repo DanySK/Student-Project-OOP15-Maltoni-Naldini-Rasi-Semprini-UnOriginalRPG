@@ -16,6 +16,19 @@ public interface Character extends Serializable {
     String getName();
 
     /**
+     * Set Character's level.
+     * @param level level to set
+     * @throws IllegalArgumentException if the level is equal or less than 0
+     */
+    void setLevel(int level) throws IllegalArgumentException;
+
+    /**
+     * A getter method that gives Character's Level.
+     * @return Character's Level.
+     */
+    int getLevel();
+
+    /**
      * A getter method that gives Character's remaining Health Points.
      * @return the remaining Health Points.
      */

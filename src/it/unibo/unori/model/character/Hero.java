@@ -15,12 +15,6 @@ import it.unibo.unori.model.items.Weapon;
 public interface Hero extends Character {
 
     /**
-     * A getter method that gives Character's Level.
-     * @return Character's Level.
-     */
-    int getLevel();
-
-    /**
      * A getter method that gives Character's total Experience Points, assuming
      * his Level.
      * @return Character's total Experience Points in this Level.
