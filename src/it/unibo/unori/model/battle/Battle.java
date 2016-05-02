@@ -1,5 +1,8 @@
 package it.unibo.unori.model.battle;
+import java.util.List;
+
 import it.unibo.unori.model.battle.exceptions.CantEscapeException;
+import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.items.Weapon;
 
@@ -73,4 +76,16 @@ public interface Battle {
      * It adds the appropriate amount of exp points to each Character of my team.
      */
     void acquireExp();
+    
+    /**
+     * Getter method that returns the List of Enemies involved in the Battle.
+     * @return List of Foes.
+     */
+    List<Foe> getEnemies();
+    
+    /**
+     * Getter method that returns the list of Characters representing my team.
+     * @return a List of Heroes: my team.
+     */
+    List<Hero> getSquad();
 }

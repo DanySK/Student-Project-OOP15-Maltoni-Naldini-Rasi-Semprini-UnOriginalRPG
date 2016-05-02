@@ -4,7 +4,9 @@ import java.util.List;
 
 import it.unibo.unori.model.battle.exceptions.CantEscapeException;
 import it.unibo.unori.model.battle.utility.BattleLogics;
+import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.Hero;
+import it.unibo.unori.model.character.Character;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.Weapon;
 
@@ -15,7 +17,7 @@ import it.unibo.unori.model.items.Weapon;
 public class BattleImpl implements Battle {
 
     private final List<Hero> squad;
-    private final List<Hero> enemies;
+    private final List<Foe> enemies;
     private boolean over;
     private int beatenFriends;
     private Bag itemBag;
@@ -26,7 +28,7 @@ public class BattleImpl implements Battle {
      * @param en a List of Enemies.
      * @param bag the Item Bag.
      */
-    public BattleImpl(final List<Hero> team, final List<Hero> en, final Bag bag) {
+    public BattleImpl(final List<Hero> team, final List<Foe> en, final Bag bag) {
         this.squad = team;
         this.enemies = en;
         this.itemBag = bag;
@@ -34,17 +36,17 @@ public class BattleImpl implements Battle {
         this.beatenFriends = 0;
     }
     
-    private void defeated(final Hero ch) {
+    private void defeated(final Character ch) {
         this.enemies.remove(ch);
     }
     
-    private boolean isDefeated(final Hero ch) {
+    private boolean isDefeated(final Character ch) {
         return ch.getRemainingHP() == 0;
     }
     
     private int getMediumLevel() {
         int mediumLevel = 0;
-        for (final Hero h : this.enemies) {
+        for (final Foe h : this.enemies) {
             mediumLevel += h.getLevel();
         }
         mediumLevel /= this.enemies.size();
