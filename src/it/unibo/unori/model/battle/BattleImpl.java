@@ -53,8 +53,7 @@ public class BattleImpl implements Battle {
     private int getMediumLevel() {
         int mediumLevel = 0;
         for (final Foe h : this.enemies) {
-            //TODO getLevel ???
-            mediumLevel += h.getIA();
+            mediumLevel += h.getLevel();
         }
         mediumLevel /= this.enemies.size();
         return mediumLevel;

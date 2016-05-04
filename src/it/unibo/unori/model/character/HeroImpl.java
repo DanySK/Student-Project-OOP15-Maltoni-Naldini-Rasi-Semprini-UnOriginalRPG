@@ -30,6 +30,7 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     private final Map<ArmorPieces, Armor> armor;
     private Weapon weapon;
     private int totExp;
+    private int currentExp;
 
     /**
      * Standard constructor for HeroImpl.
@@ -57,13 +58,18 @@ public class HeroImpl  extends CharacterImpl implements Hero {
 
     @Override
     public void addExp(final int expAcquired) {
-        this.totExp += expAcquired;
+        if (this.currentExp + expAcquired > this.totExp) {
+            final int plus = this.currentExp + expAcquired - this.totExp;
+            this.setLevel(this.getLevel() + 1);
+            this.currentExp += plus;
+        } else {
+            this.currentExp += expAcquired;
+        }
     }
 
     @Override
     public int getRemainingExp() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.currentExp;
     }
 
     private boolean isNotPresentWeapon() {
