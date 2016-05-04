@@ -1,5 +1,6 @@
 package it.unibo.unori.model.character;
 
+import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -15,6 +16,7 @@ public class CharacterImpl implements Character {
     private final String name;
     private int currentHP;
     private int currentMP;
+    private int level;
     private Status status;
     private final Map<Statistics, Integer> statistic;
 
@@ -26,17 +28,56 @@ public class CharacterImpl implements Character {
      *              statistics of the character.
      */
     public CharacterImpl(final String name, final Map<Statistics, Integer> map) {
+        this(name, map, 1);
+    }
+
+    /**
+     * Constructor for CharacterImpl.
+     * @param name
+     *              name of the character.
+     * @param map
+     *              statistics of the character.
+     * @param level
+     *              the level of the character. 
+     * @throws IllegalArgumentException if the level is equal or less than 0
+     *                                  or the map does not define a value for all
+     *                                  the statistics
+     */
+    public CharacterImpl(final String name, final Map<Statistics, Integer> map, 
+                          final int level) throws IllegalArgumentException {
         this.name = name;
+        if (checkParameters(map, level)) {
+            throw new IllegalArgumentException();
+        }
         this.statistic = map;
         this.currentHP = this.statistic.get(Statistics.TOTALHP);
         this.currentMP = this.statistic.get(Statistics.TOTALMP);
         this.status = Status.NONE;
+        this.level = level;
+    }
+
+    // method to check the parameters.
+    private boolean checkParameters(final Map<Statistics, Integer> map, final int level) {
+        return level <= 0 || !map.keySet().containsAll(Arrays.asList(Statistics.values()));
     }
 
 
     @Override
     public String getName() {
         return this.name;
+    }
+
+    @Override
+    public void setLevel(final int level) throws IllegalArgumentException {
+        if (level <= 0) {
+            throw new IllegalArgumentException();
+        }
+        this.level = level;
+    }
+
+    @Override
+    public int getLevel() {
+        return this.level;
     }
 
     @Override
