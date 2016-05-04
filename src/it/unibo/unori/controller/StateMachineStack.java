@@ -1,15 +1,8 @@
 package it.unibo.unori.controller;
 
-import java.util.Stack;
-
 import it.unibo.unori.controller.state.GameState;
 
-/**
- * This class models a stack of {@link it.unibo.unori.controller.state.GameState}, to manage the current state easily,
- * keeping track of the state of the last GameState.
- */
-public class StateMachineStack {
-    private final Stack<GameState> gsStack = new Stack<>();
+public interface StateMachineStack {
 
     /**
      * The method calls the update method of the GameState at the top of the stack. It is set final because firstly
@@ -18,19 +11,13 @@ public class StateMachineStack {
      * @param elapsedTime
      *            the time elapsed from start of the game state
      */
-    public final void update(final double elapsedTime) {
-        // TODO check method
-        gsStack.peek().update(elapsedTime);
-    }
+    void update(final double elapsedTime);
 
     /**
      * The method calls the render method of the GameState at the top of the stack. It is set final because firstly
      * called by the constructor, and it should not be overridden.
      */
-    public final void render() {
-        // TODO check method
-        gsStack.peek().render();
-    }
+    void render();
 
     /**
      * Push a GameState at the top of the stack.
@@ -38,18 +25,12 @@ public class StateMachineStack {
      * @param state
      *            the state to push
      */
-    public void push(final GameState state) {
-        // TODO check method
-        gsStack.push(state);
-    }
+    void push(final GameState state);
 
     /**
      * Pop a GameState from the top of the stack.
      * 
      * @return the state popped
      */
-    public GameState pop() {
-        // TODO check method
-        return gsStack.pop();
-    }
+    GameState pop();
 }

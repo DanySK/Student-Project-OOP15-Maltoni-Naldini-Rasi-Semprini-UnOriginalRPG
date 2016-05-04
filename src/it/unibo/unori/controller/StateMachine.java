@@ -30,7 +30,7 @@ public class StateMachine implements Controller {
      * It incorporates a TimeCounter, but needs to be started.
      */
     public StateMachine() {
-        this(new StateMachineStack(), new TimeCounterImpl(false));
+        this(new StateMachineStackImpl(), new TimeCounterImpl(false));
     }
 
     /**
