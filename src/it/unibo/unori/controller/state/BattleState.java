@@ -9,12 +9,14 @@ import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.maps.GameMap;
 import it.unibo.unori.view.View;
+import it.unibo.unori.view.layers.BattleLayer;
+import it.unibo.unori.view.layers.Layer;
 
 /**
  * This GameState models the state of battle with some encountered monsters.
  */
 public class BattleState implements GameState {
-    private View battleView;
+    private Layer battleLayer;
     private Battle battleModel;
 
     /**
@@ -25,10 +27,8 @@ public class BattleState implements GameState {
      * @param bag the bag containing the items of the party
      */
     public BattleState(final List<Hero> party, final GameMap map, final List<Foe> foes, final Bag bag) {
-        this.battleView = new View();
+        this.battleLayer = new BattleLayer();
         this.battleModel = new BattleImpl(party, null, bag); // TODO null will be replaced by Battle getter
-
-        this.battleView.push(null); // TODO null will be replaced by a Battle Menu Layer
     }
 
     /*
@@ -50,12 +50,6 @@ public class BattleState implements GameState {
     }
 
     @Override
-    public void render() {
-        // TODO Auto-generated method stub
-        this.battleView.setVisible(true);
-    }
-
-    @Override
     public void onEnter() {
         // TODO Auto-generated method stub
 
@@ -69,13 +63,10 @@ public class BattleState implements GameState {
         // TODO Probably useless method
     }
 
-    /**
-     * {@inheritDoc}. For this state, it is probably useless.
-     */
     @Override
-    public View getView() {
+    public Layer getLayer() {
         // TODO Auto-generated method stub
-        return this.battleView; // TODO probably it is better to use a defensive copy
+        return this.battleLayer; // TODO probably it is better to use a defensive copy
     }
 
 }

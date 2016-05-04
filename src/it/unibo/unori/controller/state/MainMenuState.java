@@ -1,21 +1,21 @@
 package it.unibo.unori.controller.state;
 
 import it.unibo.unori.view.View;
-import it.unibo.unori.view.layers.MainMenu;
+import it.unibo.unori.view.layers.Layer;
+import it.unibo.unori.view.layers.menus.MainMenuLayer;
 
 /**
  * This GameState models the first state opened by the controller: the main menu.
  */
 public class MainMenuState implements GameState {
-    private final View mainMenuView;
+    private final Layer mainMenuLayer;
     private final Object mainMenuModel; // TODO
 
     /**
      * Default constructor; it instantiates a new main menu GameState.
      */
     public MainMenuState() {
-        this.mainMenuView = new View();
-        this.mainMenuView.push(new MainMenu());
+        this.mainMenuLayer = new MainMenuLayer();
 
         /*
          * Potrebbe essere una buona opzione poter passare i bottoni alla view tramite una strategy esterna, magari
@@ -27,12 +27,6 @@ public class MainMenuState implements GameState {
     @Override
     public void update(final double elapsedTime) {
         // TODO Model implementation needed
-    }
-
-    @Override
-    public void render() {
-        // TODO Not final implementation of the method: it will be when Model and view implementations are ready
-        this.mainMenuView.setVisible(true);
     }
 
     @Override
@@ -49,13 +43,10 @@ public class MainMenuState implements GameState {
         // TODO Probably useless method
     }
 
-    /**
-     * {@inheritDoc}. For this state, it is probably useless.
-     */
     @Override
-    public View getView() {
+    public Layer getLayer() {
         // TODO Auto-generated method stub
-        return this.mainMenuView; // TODO probably it is better to use a defensive copy
+        return this.mainMenuLayer; // TODO probably it is better to use a defensive copy
     }
 
 }

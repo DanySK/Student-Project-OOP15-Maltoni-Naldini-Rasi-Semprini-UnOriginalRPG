@@ -1,13 +1,14 @@
 package it.unibo.unori.controller.state;
 
 import it.unibo.unori.view.View;
-import it.unibo.unori.view.layers.InGameMenu;
+import it.unibo.unori.view.layers.Layer;
+import it.unibo.unori.view.layers.menus.InGameMenuLayer;
 
 /**
  * This GameState models the state of an in-game menu opened during exploration.
  */
 public class InGameMenuState implements GameState {
-    private final View inGameMenuView;
+    private final Layer inGameMenuLayer;
     private final Object inGameMenuModel; // TODO
 
     /**
@@ -20,8 +21,7 @@ public class InGameMenuState implements GameState {
      */
     public InGameMenuState(final View mapStateView) {
         // I'd rather do that with a defensive copy, but for now it's nearly impossible
-        this.inGameMenuView = mapStateView;
-        this.inGameMenuView.push(new InGameMenu());
+        this.inGameMenuLayer = new InGameMenuLayer();
 
         /*
          * Potrebbe essere una buona opzione poter passare i bottoni alla view tramite una strategy esterna, magari
@@ -38,18 +38,6 @@ public class InGameMenuState implements GameState {
         // TODO Auto-generated method stub
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void render() {
-        // TODO Not final implementation of the method: it will be when Model and view implementations are ready
-        this.inGameMenuView.setVisible(true);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void onEnter() {
         // TODO Auto-generated method stub
@@ -57,9 +45,6 @@ public class InGameMenuState implements GameState {
         // TODO Probably useless method
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void onExit() {
         // TODO Auto-generated method stub
@@ -67,13 +52,10 @@ public class InGameMenuState implements GameState {
         // TODO Not sure, but probably useless method
     }
 
-    /**
-     * {@inheritDoc}. Useful while opening pop-up menu on another pop-up menu.
-     */
     @Override
-    public View getView() {
+    public Layer getLayer() {
         // TODO Auto-generated method stub
-        return this.inGameMenuView; // TODO probably it is better to use a defensive copy
+        return this.inGameMenuLayer; // TODO probably it is better to use a defensive copy
     }
 
 }

@@ -1,6 +1,7 @@
 package it.unibo.unori.controller.state;
 
 import it.unibo.unori.view.View;
+import it.unibo.unori.view.layers.Layer;
 
 /**
  * This interface models a game state (eg. local map, world map, main menu, battle) in the state machine controller
@@ -16,11 +17,6 @@ public interface GameState {
     void update(final double elapsedTime);
 
     /**
-     * Draws graphics information each frame of the game. Called each frame for the currently active state.
-     */
-    void render();
-
-    /**
      * Called when entering in the state.
      */
     void onEnter();
@@ -31,9 +27,9 @@ public interface GameState {
     void onExit();
 
     /**
-     * The method returns the current view of the GameState. It is useful for layering the representations.
+     * The method returns the current Layer of the GameState, that paints the state.
      * 
      * @return the current view of the GameState
      */
-    View getView();
+    Layer getLayer();
 }
