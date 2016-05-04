@@ -33,7 +33,7 @@ public class SaveTest {
      */
     @Test(expected = IOException.class)
     public void testSaveFileNotFound() throws IOException, CorruptedUtilityFileException {
-        Save.loadFromUtilityFile(folder.getRoot().getCanonicalPath() + File.separator + Save.SAVE_FILE);
+        Save.loadFromUtilityTextFile(folder.getRoot().getCanonicalPath() + File.separator + Save.SAVE_TEXT_FILE);
     }
 
     /**
@@ -46,7 +46,7 @@ public class SaveTest {
      */
     @Test(expected = IOException.class)
     public void testStatsFileNotFound() throws IOException, CorruptedUtilityFileException {
-        Save.loadFromUtilityFile(folder.getRoot().getCanonicalPath() + File.separator + Save.STATISTICS_FILE);
+        Save.loadFromUtilityTextFile(folder.getRoot().getCanonicalPath() + File.separator + Save.STATISTICS_TEXT_FILE);
     }
 
     /**
@@ -60,8 +60,8 @@ public class SaveTest {
      */
     @Test(expected = CorruptedUtilityFileException.class)
     public void testCorruptedSave() throws IOException, CorruptedUtilityFileException {
-        folder.newFile(Save.SAVE_FILE);
-        Save.loadFromUtilityFile(folder.getRoot().getCanonicalPath() + File.separator + Save.SAVE_FILE);
+        folder.newFile(Save.SAVE_TEXT_FILE);
+        Save.loadFromUtilityTextFile(folder.getRoot().getCanonicalPath() + File.separator + Save.SAVE_TEXT_FILE);
     }
 
     /**
@@ -75,8 +75,8 @@ public class SaveTest {
      */
     @Test(expected = CorruptedUtilityFileException.class)
     public void testCorruptedStats() throws IOException, CorruptedUtilityFileException {
-        folder.newFile(Save.STATISTICS_FILE);
-        Save.loadFromUtilityFile(folder.getRoot().getCanonicalPath() + File.separator + Save.STATISTICS_FILE);
+        folder.newFile(Save.STATISTICS_TEXT_FILE);
+        Save.loadFromUtilityTextFile(folder.getRoot().getCanonicalPath() + File.separator + Save.STATISTICS_TEXT_FILE);
     }
 
     /**
@@ -89,7 +89,7 @@ public class SaveTest {
      */
     @Test
     public void testCreateSaveFile() throws IOException, CorruptedUtilityFileException {
-        Save.createSaveFile(folder.getRoot().getCanonicalPath());
+        Save.createSaveTextFile(folder.getRoot().getCanonicalPath());
 
         final List<String> testList = new ArrayList<>();
         testList.add("currentMap:0");
@@ -102,7 +102,7 @@ public class SaveTest {
         testList.add("money:0");
 
         List<String> l;
-        l = Save.loadFromUtilityFile(folder.getRoot().getCanonicalPath() + File.separator + Save.SAVE_FILE);
+        l = Save.loadFromUtilityTextFile(folder.getRoot().getCanonicalPath() + File.separator + Save.SAVE_TEXT_FILE);
 
         assertEquals(l, testList);
     }
@@ -117,7 +117,7 @@ public class SaveTest {
      */
     @Test
     public void testCreateStatsFile() throws IOException, CorruptedUtilityFileException {
-        Save.createStatsFile(folder.getRoot().getCanonicalPath());
+        Save.createStatsTextFile(folder.getRoot().getCanonicalPath());
 
         final List<String> testList = new ArrayList<>();
 
@@ -131,7 +131,7 @@ public class SaveTest {
         testList.add("totalExp:0");
 
         List<String> l;
-        l = Save.loadFromUtilityFile(folder.getRoot().getCanonicalPath() + File.separator + Save.STATISTICS_FILE);
+        l = Save.loadFromUtilityTextFile(folder.getRoot().getCanonicalPath() + File.separator + Save.STATISTICS_TEXT_FILE);
 
         assertEquals(l, testList);
     }
