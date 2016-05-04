@@ -15,8 +15,7 @@ import it.unibo.unori.view.layers.Layer;
 /**
  * This GameState models the state of battle with some encountered monsters.
  */
-public class BattleState implements GameState {
-    private Layer battleLayer;
+public class BattleState extends AbstractGameState {
     private Battle battleModel;
 
     /**
@@ -27,7 +26,7 @@ public class BattleState implements GameState {
      * @param bag the bag containing the items of the party
      */
     public BattleState(final List<Hero> party, final GameMap map, final List<Foe> foes, final Bag bag) {
-        this.battleLayer = new BattleLayer();
+        super(new BattleLayer());
         this.battleModel = new BattleImpl(party, null, bag); // TODO null will be replaced by Battle getter
     }
 
@@ -40,9 +39,6 @@ public class BattleState implements GameState {
 
     */
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void update(final double elapsedTime) {
         // TODO Auto-generated method stub
@@ -61,12 +57,6 @@ public class BattleState implements GameState {
         // TODO Auto-generated method stub
 
         // TODO Probably useless method
-    }
-
-    @Override
-    public Layer getLayer() {
-        // TODO Auto-generated method stub
-        return this.battleLayer; // TODO probably it is better to use a defensive copy
     }
 
 }

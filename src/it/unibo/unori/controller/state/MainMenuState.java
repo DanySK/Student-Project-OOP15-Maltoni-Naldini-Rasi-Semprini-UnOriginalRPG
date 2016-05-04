@@ -7,15 +7,14 @@ import it.unibo.unori.view.layers.menus.MainMenuLayer;
 /**
  * This GameState models the first state opened by the controller: the main menu.
  */
-public class MainMenuState implements GameState {
-    private final Layer mainMenuLayer;
+public class MainMenuState extends AbstractGameState {
     private final Object mainMenuModel; // TODO
 
     /**
      * Default constructor; it instantiates a new main menu GameState.
      */
     public MainMenuState() {
-        this.mainMenuLayer = new MainMenuLayer();
+        super(new MainMenuLayer());
 
         /*
          * Potrebbe essere una buona opzione poter passare i bottoni alla view tramite una strategy esterna, magari
@@ -42,11 +41,4 @@ public class MainMenuState implements GameState {
 
         // TODO Probably useless method
     }
-
-    @Override
-    public Layer getLayer() {
-        // TODO Auto-generated method stub
-        return this.mainMenuLayer; // TODO probably it is better to use a defensive copy
-    }
-
 }

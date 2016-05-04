@@ -5,11 +5,12 @@ import it.unibo.unori.model.maps.Party;
 import it.unibo.unori.model.maps.SingletonParty;
 import it.unibo.unori.view.View;
 import it.unibo.unori.view.layers.Layer;
+import it.unibo.unori.view.layers.MapLayer;
 
 /**
  * This GameState models the state of exploring a map (world, town or dungeon room).
  */
-public class MapState implements GameState {
+public class MapState extends AbstractGameState {
     private final Party party;
 
     /**
@@ -19,6 +20,7 @@ public class MapState implements GameState {
      *            the map to start from
      */
     public MapState(final GameMap map) {
+        super(new MapLayer());
         party = SingletonParty.getParty();
         party.setCurrentMap(map);
         // TODO
@@ -48,12 +50,6 @@ public class MapState implements GameState {
     public void onExit() {
         // TODO Auto-generated method stub
 
-    }
-
-    @Override
-    public Layer getLayer() {
-        // TODO Auto-generated method stub
-        return null;
     }
 
 }
