@@ -1,36 +1,34 @@
 package it.unibo.unori.controller;
 
+import java.io.File;
+
 import it.unibo.unori.controller.state.MainMenuState;
+import it.unibo.unori.controller.utility.Save;
 
 /**
  *
  */
 public class StateMachine implements Controller {
     private final StateMachineStack stack;
-    private final TimeCounter time;
-
-    /**
-     * This constructor instantiates a new StateMachine controller class and accept externally defined
-     * {@link it.unibo.unori.Controller.StateMachineStack} and {@link it.unibo.unori.controller.TimeCounter}.
-     * 
-     * @param stack
-     *            the externally defined StateMachineStack
-     * @param time
-     *            the externally defined TimeCounter
-     */
-    public StateMachine(final StateMachineStack stack, final TimeCounter time) {
-        this.stack = stack;
-        this.time = time;
-    }
+    private final GameStatistics stats;
 
     /**
      * This default constructor instantiates a new StateMachine controller class, adding a new
      * {@link it.unibo.unori.Controller.StateMachineStack} with a new
-     * {@link it.unibo.unori.controller.state.MainMenuState} pushed at the top.
-     * It incorporates a TimeCounter, but needs to be started.
+     * {@link it.unibo.unori.controller.state.MainMenuState} pushed at the top. It incorporates a TimeCounter, but needs
+     * to be started.
      */
     public StateMachine() {
-        this(new StateMachineStackImpl(), new TimeCounterImpl(false));
+        this.stack = new StateMachineStackImpl();
+        this.stats = new GameStatistics();
+
+        if (new File(Save.STATISTICS_DAT_FILE).exists()) {
+            try {
+                this.stats.restore(Save.loadStats(""));
+            } catch (Exception e) {
+                e.printStackTrace(); // TODO
+            }
+        }
     }
 
     /**
@@ -46,13 +44,7 @@ public class StateMachine implements Controller {
 
     @Override
     public void startTimer() {
-        this.startTimer(0);
-    }
-
-    @Override
-    public void startTimer(final double alreadyPlayedTime) {
-        time.setAlreadyPlayedTime(alreadyPlayedTime);
-        time.startTimer();
+        this.stats.startCountingTime();
     }
 
 }

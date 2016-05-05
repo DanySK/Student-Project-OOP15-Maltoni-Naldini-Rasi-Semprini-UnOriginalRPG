@@ -4,6 +4,10 @@ package it.unibo.unori.controller;
  * This implementation of TimeCounter calculates elapsed time by saving the starting time and calculating when needed.
  */
 public class TimeCounterImpl implements TimeCounter {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -7207035105151035362L;
     private double alreadyPlayedTime;
     private double startingHour;
     private static final double NOT_STARTED = -1;

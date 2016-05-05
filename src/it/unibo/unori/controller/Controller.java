@@ -12,15 +12,7 @@ public interface Controller {
     void begin();
 
     /**
-     * Starts counting time played, starting from 0.
+     * Starts counting the time played.
      */
     void startTimer();
-
-    /**
-     * Starts counting time played, starting from a given value.
-     * 
-     * @param alreadyPlayedTime
-     *            the time played before in milliseconds
-     */
-    void startTimer(final double alreadyPlayedTime);
 }

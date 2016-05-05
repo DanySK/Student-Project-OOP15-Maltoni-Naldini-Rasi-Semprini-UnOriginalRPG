@@ -1,9 +1,11 @@
 package it.unibo.unori.controller;
 
+import java.io.Serializable;
+
 /**
  *
  */
-public interface TimeCounter {
+public interface TimeCounter extends Serializable {
     /**
      * Get the total time played in milliseconds.
      * 

@@ -17,9 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import it.unibo.unori.controller.GameStatistics;
 import it.unibo.unori.controller.exceptions.CorruptedUtilityFileException;
 import it.unibo.unori.model.maps.Party;
-import it.unibo.unori.model.maps.SingletonParty;
 
 /**
  * Utility class that provides static methods for load/save data from/to file.
@@ -114,20 +114,21 @@ public final class Save {
      * @throws IOException if any of the usual Input/Output related exceptions.
      * @throws ClassNotFoundException if class of a serialized object cannot be found.
      */
-    public static Double loadGame(final String folderPath) throws FileNotFoundException, IOException, ClassNotFoundException {
+    public static Party loadGame(final String folderPath) throws FileNotFoundException, IOException, ClassNotFoundException {
         final File saveFile = new File(folderPath + File.separator + SAVE_DAT_FILE);
         final ObjectInputStream input = new ObjectInputStream(new BufferedInputStream(new FileInputStream(saveFile)));
 
         final Object p = input.readObject();
-        if (p.getClass().equals(Party.class)) {
-            SingletonParty.loadParty((Party) p);
+        try {
+            if (p.getClass().equals(Party.class)) {
+                return (Party) p;
+            } else {
+                throw new IOException(); // TODO maybe a specific exception is better
+            }
+        } finally {
+            input.close();
         }
-
-        final Double d = input.readDouble();
-
-        input.close();
-
-        return d;
+        
     }
 
     /**
@@ -182,8 +183,6 @@ public final class Save {
      * 
      * @param party
      *            the party object
-     * @param playedTime
-     *            the time played in milliseconds
      * @param folderPath
      *            the path where to save file
      * @throws FileNotFoundException
@@ -195,13 +194,12 @@ public final class Save {
      *             if exist something (like a directory) that makes impossible to create an utility file (like the
      *             SaveGame) because of the name and the path are the same
      */
-    public static void saveGame(final Party party, final double playedTime, final String folderPath)
+    public static void saveGame(final Party party, final String folderPath)
                     throws FileNotFoundException, IOException, DefaultPathTakenException {
         final ObjectOutputStream output = new ObjectOutputStream(
                         new BufferedOutputStream(new FileOutputStream(createSaveDatFile(folderPath))));
 
         output.writeObject(party);
-        output.writeDouble(playedTime);
 
         output.close();
     }
@@ -212,8 +210,6 @@ public final class Save {
      * 
      * @param party
      *            the party object
-     * @param playedTime
-     *            the time played in milliseconds
      * @throws FileNotFoundException
      *             if the file exists but is a directory rather than a regular file, does not exist but cannot be
      *             created, or cannot be opened for any other reason
@@ -223,9 +219,51 @@ public final class Save {
      *             if exist something (like a directory) that makes impossible to create an utility file (like the
      *             SaveGame) because of the name and the path are the same
      */
-    public static void saveGame(final Party party, final double playedTime)
+    public static void saveGame(final Party party)
                     throws FileNotFoundException, IOException, DefaultPathTakenException {
-        saveGame(party, playedTime, "res"); // TODO not sure about "res"
+        saveGame(party, "res"); // TODO not sure about "res"
+    }
+    
+    // TODO
+    public static File createStatsDatFile(final String folderPath) throws IOException, DefaultPathTakenException {
+        final File statsFile = new File(folderPath + File.separator + STATISTICS_DAT_FILE);
+
+        while (!statsFile.createNewFile()) {
+            if (!statsFile.delete()) {
+                throw new DefaultPathTakenException();
+            }
+        }
+
+        return statsFile;
+    }
+    
+    // TODO check
+    public static void saveStats(final GameStatistics stats, final String folderPath)
+                    throws FileNotFoundException, IOException, DefaultPathTakenException {
+        final ObjectOutputStream output = new ObjectOutputStream(
+                        new BufferedOutputStream(new FileOutputStream(createStatsDatFile(folderPath))));
+
+        output.writeObject(stats);
+
+        output.close();
+    }
+    
+    // TODO
+    public static GameStatistics loadStats(final String folderPath) throws FileNotFoundException, IOException, ClassNotFoundException {
+        final File saveFile = new File(folderPath + File.separator + STATISTICS_DAT_FILE);
+        final ObjectInputStream input = new ObjectInputStream(new BufferedInputStream(new FileInputStream(saveFile)));
+
+        final Object s = input.readObject();
+        try {
+            if (s.getClass().equals(GameStatistics.class)) {
+                return (GameStatistics) s;
+            } else {
+                throw new IOException(); // TODO maybe a specific exception is better
+            }
+        } finally {
+            input.close();
+        }
+        
     }
 
     /**
