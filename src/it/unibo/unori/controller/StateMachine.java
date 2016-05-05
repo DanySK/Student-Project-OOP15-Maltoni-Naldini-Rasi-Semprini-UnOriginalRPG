@@ -21,8 +21,9 @@ public class StateMachine implements Controller {
     public StateMachine() {
         this.stack = new StateMachineStackImpl();
         this.stats = new GameStatistics();
+        final File dat = new File(Save.STATISTICS_DAT_FILE);
 
-        if (new File(Save.STATISTICS_DAT_FILE).exists()) {
+        if (dat.exists() && dat.isFile()) {
             try {
                 this.stats.restore(Save.loadStats(""));
             } catch (Exception e) {
