@@ -4,7 +4,6 @@ import java.util.List;
 import it.unibo.unori.model.battle.exceptions.CantEscapeException;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.Hero;
-import it.unibo.unori.model.items.Weapon;
 
 /**
  * An interface modeling a generic Battle.
