@@ -14,7 +14,7 @@ public interface Bag extends Serializable {
      * This method adds an Item to the Bag.
      * @param toAdd the Item to be added.
      */
-    void addItem(Item toAdd);
+    void storeItem(Item toAdd);
     
     /**
      * This method allows to remove an Item from the Bag.

@@ -51,15 +51,6 @@ public interface Battle {
     int specialAttack(Hero my);
     
     /**
-     * Method that allows to throw an attack using an available Weapon.
-     * @param w the Weapon.
-     * @param ch the Character that throws the attack.
-     * @param enemy the enemy on turn.
-     * @return the amount of damage inflicted.
-     */
-    int weaponAttack(Weapon w, Hero ch, Hero enemy);
-    
-    /**
      * Method that allows to throw an attack using Magic.
      * @return the amount of damage inflicted.
      */

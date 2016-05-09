@@ -107,19 +107,6 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public int weaponAttack(final Weapon w, final Hero ch,
-            final Hero enemy) {
-        final int damage = 
-                BattleLogics.weaponAttack(w.getPhysicalAtk(), 
-                        ch.getLevel(), ch.getAttack());
-        enemy.takeDamage(damage);
-        if (this.isDefeated(enemy)) {
-            this.defeated(enemy);
-        }
-        return damage;
-    }
-
-    @Override
     public int magicAttack() {
         // TODO Auto-generated method stub
         return 0;
@@ -135,7 +122,6 @@ public class BattleImpl implements Battle {
         final List<Integer> points =
                 BattleLogics.expAcquired(this.squad, this.getMediumLevel(),
                         this.squad.size() - this.beatenFriends);
-        //TODO use Streams instead.
         int index = 0;
         for (final Hero h : this.squad) {
             h.addExp(points.get(index));

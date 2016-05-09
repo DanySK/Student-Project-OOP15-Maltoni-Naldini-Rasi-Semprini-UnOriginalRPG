@@ -128,16 +128,4 @@ public final class BattleLogics {
         //TODO magic attack algorithm.
         return 0;
     }
-    
-    /**
-     * This method simply calculates the damage to inflict to an enemy by
-     * throwing a weapon-attack.
-     * @param dam the damage that the Weapon can inflict.
-     * @param atck the Attack Statistic of my Character.
-     * @param lev the level of my Character.
-     * @return the total damage.
-     */
-    public static int weaponAttack(final int dam, final int lev, final int atck) {
-        return BattleLogics.getStandardDamage(lev, atck) + dam;
-    }
 }
