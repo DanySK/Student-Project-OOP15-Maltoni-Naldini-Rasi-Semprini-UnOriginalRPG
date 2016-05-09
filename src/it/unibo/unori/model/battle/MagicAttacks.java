@@ -5,11 +5,14 @@ import java.util.Map;
 import it.unibo.unori.model.character.Statistics;
 
 /**
- * List of possible magic attacks available.
+ * List of possible magic attacks available, presented as an Enumeration.
  *
  */
 public enum MagicAttacks {
     
+    /**
+     * The different kinds of possible Magic Attacks.
+     */
     TUONO("Tuono", "Hai lanciato un Tuono!", "Descrizione", 0, 3, 0, 2, 7),
     TEMPESTA("Tempesta", "Hai generato una Tempesta!", "Descrizione", 0, 4, 1, 3, 7),
     COMETA("Cometa", "Hai lanciato una Cometa!", "Descrizione", 2, 7, 1, 4, 5),
@@ -45,5 +48,38 @@ public enum MagicAttacks {
         this.stats.put(Statistics.PHYSICATK, physicAtk);
         this.accuracy = accuracy;
         
+    }
+    
+    public String getDescription() {
+        return this.description;
+    }
+    
+    public String getStringToShow() {
+        return this.shownString;
+    }
+    
+    public int getFireAtk() {
+        return this.stats.get(Statistics.FIREATK);
+    }
+    
+    public int getThunderAtk() {
+        return this.stats.get(Statistics.THUNDERATK);
+    }
+    
+    public int getIceAtk() {
+        return this.stats.get(Statistics.ICEATK);
+    }
+    
+    public int getPhysicAtk() {
+        return this.stats.get(Statistics.PHYSICATK);
+    }
+    
+    public int getAccuracy() {
+        return this.accuracy;
+    }
+    
+    @Override
+    public String toString() {
+        return this.name();
     }
 }
