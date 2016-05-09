@@ -8,8 +8,9 @@ package it.unibo.unori.model.character.jobs;
  */
 public enum Jobs {
     /**
-     * jpoj.
+     * Basic jobs for the characters.
      */
     WARRIOR, PALADIN, MAGE, RANGER, COOK, CLOWN
+
 
 }
