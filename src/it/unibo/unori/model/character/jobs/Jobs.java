@@ -10,6 +10,6 @@ public enum Jobs {
     /**
      * jpoj.
      */
-    WARRIOR, PALADIN, WHITE_MAGE, DARK_MAGE, RANGER, CLOWN
+    WARRIOR, PALADIN, WHITE_MAGE, DARK_MAGE, RANGER, CLOWN, COOK
 
 }
