@@ -118,7 +118,7 @@ public class CharacterImpl implements Character {
 
     @Override
     public int getDefense() {
-        return this.statistic.get(Statistics.PHYISICDEF);
+        return this.statistic.get(Statistics.PHYSICDEF);
     }
 
 

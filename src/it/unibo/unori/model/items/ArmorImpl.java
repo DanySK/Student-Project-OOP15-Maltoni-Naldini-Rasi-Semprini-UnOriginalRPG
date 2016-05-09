@@ -36,7 +36,7 @@ public class ArmorImpl implements Armor {
 
     private Map<Statistics, Integer> generateStdStats() {
         final Map<Statistics, Integer> stats = new HashMap<>();
-        stats.put(Statistics.PHYISICDEF, 0);
+        stats.put(Statistics.PHYSICDEF, 0);
         stats.put(Statistics.FIREDEF, 0);
         stats.put(Statistics.ICEDEF, 0);
         stats.put(Statistics.THUNDERDEF, 0);
@@ -52,7 +52,7 @@ public class ArmorImpl implements Armor {
 
     private boolean hasLegitStats(final Set<Statistics> s, final ArmorPieces arm) {
         return s.containsAll(Arrays.asList(Statistics.FIREDEF, Statistics.ICEDEF, 
-                Statistics.THUNDERDEF, Statistics.PHYISICDEF))
+                Statistics.THUNDERDEF, Statistics.PHYSICDEF))
                 && s.size() == 4 
                 && !arm.equals(ArmorPieces.NONE);
     }
@@ -108,7 +108,7 @@ public class ArmorImpl implements Armor {
 
     @Override
     public int getPhysicalRes() {
-        return this.stats.get(Statistics.PHYISICDEF);
+        return this.stats.get(Statistics.PHYSICDEF);
     }
 
     @Override
