@@ -14,10 +14,11 @@ public class MagicAttack implements MagicAttackInterface {
     private final String description;
     private final Map<Statistics, Integer> stats;
     private final int accuracy;
+    private final int mpRequired;
     
     public MagicAttack(final String name, final String shownString, 
             final String description, final int fireAtk, final int thunderAtk,
-            final int iceAtk, final int physicAtk, final int accuracy) {
+            final int iceAtk, final int physicAtk, final int accuracy, final int MP) {
         
         this.name = name;
         this.shownString = shownString;
@@ -28,6 +29,7 @@ public class MagicAttack implements MagicAttackInterface {
         this.stats.put(Statistics.ICEATK, iceAtk);
         this.stats.put(Statistics.PHYSICATK, physicAtk);
         this.accuracy = accuracy;
+        this.mpRequired = MP;
         
     }
     
@@ -69,6 +71,11 @@ public class MagicAttack implements MagicAttackInterface {
     @Override
     public String toString() {
         return this.name;
+    }
+
+    @Override
+    public int getMPRequired() {
+        return this.mpRequired;
     }
     
 }

@@ -60,7 +60,7 @@ public class BattleImpl implements Battle {
     }
     
     @Override
-    public String runAway(final Hero enemy, 
+    public String runAway(final Foe enemy, 
             final Hero my) throws CantEscapeException {
         if (BattleLogics.canEscape(my.getLevel(), enemy.getLevel())) {
             this.over = true;
@@ -71,7 +71,7 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public int attack(final Hero enemy, final Hero my) {
+    public int attack(final Foe enemy, final Hero my) {
         final int damage = 
                 BattleLogics.getStandardDamage(my.getLevel(), my.getAttack());
         enemy.takeDamage(damage);
@@ -107,8 +107,10 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public int magicAttack() {
-        // TODO Auto-generated method stub
+    public int useMagicAttack(final MagicAttack m, final Hero my, final Foe enemy) {
+        //TODO Mana Points are enough? if yes then...
+        my.consumeMP(m.getMPRequired());
+        //TODO A lot of things.
         return 0;
     }
 

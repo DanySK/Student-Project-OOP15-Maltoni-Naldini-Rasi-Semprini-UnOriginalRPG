@@ -19,7 +19,7 @@ public interface Battle {
      * @return a confirmation String if I manage to escape.
      * @throws CantEscapeException if the level is too low to escape.
      */
-    String runAway(Hero enemy, Hero my) throws CantEscapeException;
+    String runAway(Foe enemy, Hero my) throws CantEscapeException;
 
     /**
      * Method that allows to throw a regular attack (standard).
@@ -27,7 +27,7 @@ public interface Battle {
      * @param my my Character on turn.
      * @return the damage inflicted to the specified enemy.
      */
-    int attack(Hero enemy, Hero my);
+    int attack(Foe enemy, Hero my);
 
     /**
      * Method that allows to defend a personal team's character at choice.
@@ -51,9 +51,12 @@ public interface Battle {
     
     /**
      * Method that allows to throw an attack using Magic.
+     * @param m the Magic Attack to use.
+     * @param my the Hero who uses the Magic Attack.
+     * @param enemy the enemy to which throw the attack.
      * @return the amount of damage inflicted.
      */
-    int magicAttack();
+    int useMagicAttack(MagicAttack m, Hero my, Foe enemy);
     
     /**
      * Method that tells me weather the Battle-mode is over or not.

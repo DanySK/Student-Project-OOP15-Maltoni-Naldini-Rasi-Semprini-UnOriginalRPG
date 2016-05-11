@@ -46,4 +46,10 @@ public interface MagicAttackInterface {
      * @return the accuracy of the attack.
      */
     int getAccuracy();
+    
+    /**
+     * A getter method giving the amount of MP required to throw the attack.
+     * @return the amount of MP required.
+     */
+    int getMPRequired();
 }
