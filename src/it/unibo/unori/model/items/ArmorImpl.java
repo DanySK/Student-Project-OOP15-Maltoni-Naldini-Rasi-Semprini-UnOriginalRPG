@@ -36,7 +36,7 @@ public class ArmorImpl implements Armor {
 
     private Map<Statistics, Integer> generateStdStats() {
         final Map<Statistics, Integer> stats = new HashMap<>();
-        stats.put(Statistics.PHYISICDEF, 0);
+        stats.put(Statistics.PHYSICDEF, 0);
         stats.put(Statistics.FIREDEF, 0);
         stats.put(Statistics.ICEDEF, 0);
         stats.put(Statistics.THUNDERDEF, 0);
