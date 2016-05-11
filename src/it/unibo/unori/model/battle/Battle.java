@@ -4,7 +4,6 @@ import java.util.List;
 import it.unibo.unori.model.battle.exceptions.CantEscapeException;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.Hero;
-import it.unibo.unori.model.items.Weapon;
 
 /**
  * An interface modeling a generic Battle.
@@ -49,15 +48,6 @@ public interface Battle {
      * @return the damage inflicted to all enemies.
      */
     int specialAttack(Hero my);
-    
-    /**
-     * Method that allows to throw an attack using an available Weapon.
-     * @param w the Weapon.
-     * @param ch the Character that throws the attack.
-     * @param enemy the enemy on turn.
-     * @return the amount of damage inflicted.
-     */
-    int weaponAttack(Weapon w, Hero ch, Hero enemy);
     
     /**
      * Method that allows to throw an attack using Magic.

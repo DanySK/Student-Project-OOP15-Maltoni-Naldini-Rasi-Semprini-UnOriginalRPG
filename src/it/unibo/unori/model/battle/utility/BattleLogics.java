@@ -121,23 +121,11 @@ public final class BattleLogics {
     /**
      * This method calculates the damage to inflict to an enemy by throwing 
      * a magic attack.
-     * @param magStat the magicAttack statistic of the Character.
+     * @param h the Hero involved in Battle.
      * @return the damage of the magic attack.
      */
-    public static int magicAttackCalc(final int magStat) {
-        //TODO magic attack algorithm.
+    public static int magicAttackCalc(final Hero h) {
+        
         return 0;
-    }
-    
-    /**
-     * This method simply calculates the damage to inflict to an enemy by
-     * throwing a weapon-attack.
-     * @param dam the damage that the Weapon can inflict.
-     * @param atck the Attack Statistic of my Character.
-     * @param lev the level of my Character.
-     * @return the total damage.
-     */
-    public static int weaponAttack(final int dam, final int lev, final int atck) {
-        return BattleLogics.getStandardDamage(lev, atck) + dam;
     }
 }
