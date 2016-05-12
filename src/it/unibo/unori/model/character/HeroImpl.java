@@ -51,6 +51,7 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     }
 
 
+
     @Override
     public int getExpTot() {
         return this.totExp;
