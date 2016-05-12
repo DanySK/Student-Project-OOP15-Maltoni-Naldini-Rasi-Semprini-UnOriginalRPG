@@ -131,4 +131,11 @@ public class HeroImpl  extends CharacterImpl implements Hero {
         return this.armor.get(p);
     }
 
+
+
+    @Override
+    public Jobs getJob() {
+        return this.heroJob;
+    }
+
 }

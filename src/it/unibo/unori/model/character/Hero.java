@@ -4,6 +4,7 @@ import it.unibo.unori.model.character.exceptions.ArmorAlreadyException;
 import it.unibo.unori.model.character.exceptions.NoArmorException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
+import it.unibo.unori.model.character.jobs.Jobs;
 import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.Armor.ArmorPieces;
 import it.unibo.unori.model.items.Weapon;
@@ -80,4 +81,10 @@ public interface Hero extends Character {
      * 
      */
     Armor getArmor(ArmorPieces p);
+
+    /**
+     * A getter method to give hero's job.
+     * @return hero's job
+     */
+    Jobs getJob();
 }
