@@ -6,6 +6,8 @@ import it.unibo.unori.model.character.exceptions.ArmorAlreadyException;
 import it.unibo.unori.model.character.exceptions.NoArmorException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
+import it.unibo.unori.model.character.jobs.Jobs;
+import it.unibo.unori.model.character.jobs.StatisticsFactory;
 import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.Armor.ArmorPieces;
 import it.unibo.unori.model.items.ArmorImpl;
@@ -29,6 +31,7 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     private static final long serialVersionUID = 7538947993488315753L;
     private final Map<ArmorPieces, Armor> armor;
     private Weapon weapon;
+    private final Jobs heroJob;
     private int totExp;
     private int currentExp;
 
@@ -36,18 +39,19 @@ public class HeroImpl  extends CharacterImpl implements Hero {
      * Standard constructor for HeroImpl.
      * @param name
      *              Hero's name.
-     * @param map
-     *              Hero's parameters.
+     * @param job
+     *              Hero's job.
      *@param armor
      *              Hero's initial equip.
      *@param weapon
      *              Hero's initial weapon.
      */
-    public HeroImpl(final String name, final Map<Statistics, Integer> map, 
-                    final Map<ArmorPieces, Armor> armor, final Weapon weapon) {
-        super(name, map);
+    public HeroImpl(final String name, final Jobs job, 
+            final Map<ArmorPieces, Armor> armor, final Weapon weapon) {
+        super(name, new StatisticsFactory().getJobStats(job));
         this.armor = armor;
         this.weapon = weapon;
+        this.heroJob = job;
     }
 
 
