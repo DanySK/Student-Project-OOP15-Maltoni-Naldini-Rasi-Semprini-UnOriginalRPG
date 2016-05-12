@@ -1,6 +1,9 @@
 package it.unibo.unori.model.character;
 
 import java.io.Serializable;
+import java.util.List;
+
+import it.unibo.unori.model.battle.MagicAttackInterface;
 
 /**
  * Interface to define methods for all the characters(party members and enemies).
@@ -128,6 +131,19 @@ public interface Character extends Serializable {
      * @return the status of the character
      */
     Status getStatus();
+
+    /**
+     * Get the list of the spells.
+     * @return the list of the spells
+     */
+    List<MagicAttackInterface> getMagics();
+
+    /**
+     * Add a spell to the character list.
+     * @param spell
+     *              the spell to add.
+     */
+    void addSpell(MagicAttackInterface spell);
 
 
 }
