@@ -16,7 +16,7 @@ import java.awt.event.ActionListener;
  * A game menu.
  *
  */
-public abstract class MenuLayer extends Layer {
+abstract class MenuLayer extends Layer {
     private int focusedButton;
     private final List<Button> buttonList = new ArrayList<Button>();
 

@@ -1,12 +1,11 @@
 package it.unibo.unori.view.layers;
 
 import it.unibo.unori.view.View;
-
-import it.unibo.unori.model.maps.GameMap;
-import it.unibo.unori.model.maps.GameMapFactory;
-
 import it.unibo.unori.model.maps.Party;
 import it.unibo.unori.model.maps.SingletonParty;
+
+import it.unibo.unori.model.maps.GameMap;
+import it.unibo.unori.model.maps.GameMapImpl;
 import it.unibo.unori.model.maps.exceptions.BlockedPathException;
 
 import it.unibo.unori.model.maps.cell.Cell;
@@ -36,7 +35,7 @@ public class MapLayer extends Layer {
     private final Party party = SingletonParty.getParty();
 
     private final Dimension size = new Dimension();
-    private final Dimension cellSize = new Dimension(5, 5);
+    private final Dimension cellSize = new Dimension(32, 32);
 
     /**
      * Creates the map layer.
@@ -80,16 +79,14 @@ public class MapLayer extends Layer {
                     g.setColor(Color.RED);
                 }
 
-                g.fillRect(y * cellSize.height,
-                           x * cellSize.width,
+                g.fillRect(y * cellSize.height, x * cellSize.width,
                            cellSize.width, cellSize.height);
             }
         }
 
         g.setColor(Color.BLUE);
-
-        g.fillRect(party.getCurrentPosition().getPosY() * cellSize.height,
-                   party.getCurrentPosition().getPosX() * cellSize.width,
+        g.fillRect(party.getCurrentPosition().getPosY() * cellSize.width,
+                   party.getCurrentPosition().getPosX() * cellSize.height,
                    cellSize.width, cellSize.height);
     }
 
@@ -115,7 +112,7 @@ public class MapLayer extends Layer {
             try {
                 party.moveParty(direction);
             } catch (BlockedPathException e1) {
-                // TODO
+                System.out.println("Blocked path");
             }
             MapLayer.this.repaint();
         }
@@ -124,11 +121,10 @@ public class MapLayer extends Layer {
     /**
      * Tests this class.
      * @param args arguments
+     * @throws IOException 
      */
     public static void main(final String... args) {
-        final GameMapFactory mapFactory = new GameMapFactory();
-
-        final GameMap map = mapFactory.getStdRoom();
+        final GameMapImpl map = new GameMapImpl(24, 24);
         SingletonParty.getParty().setCurrentMap(map);
 
         final View view = new View();
