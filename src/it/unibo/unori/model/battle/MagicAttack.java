@@ -9,6 +9,11 @@ import it.unibo.unori.model.character.Statistics;
  */
 public class MagicAttack implements MagicAttackInterface {
     
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -160010845074781246L;
+    
     private final String name;
     private final String shownString;
     private final String description;

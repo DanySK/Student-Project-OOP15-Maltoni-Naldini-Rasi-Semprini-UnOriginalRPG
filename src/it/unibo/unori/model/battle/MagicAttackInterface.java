@@ -1,9 +1,11 @@
 package it.unibo.unori.model.battle;
 
+import java.io.Serializable;
+
 /**
  * An Interface that gives the main methods for a Magic Attack.
  */
-public interface MagicAttackInterface {
+public interface MagicAttackInterface extends Serializable {
     
     /**
      * A getter method giving the description of the attack.
