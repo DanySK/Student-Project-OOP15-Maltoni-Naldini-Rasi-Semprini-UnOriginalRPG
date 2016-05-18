@@ -90,7 +90,6 @@ public class BattleImpl implements Battle {
     @Override
     public void openBag() {
         // TODO Auto-generated method stub
-        
     }
 
     @Override
