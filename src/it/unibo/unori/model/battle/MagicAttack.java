@@ -23,7 +23,7 @@ public class MagicAttack implements MagicAttackInterface {
     
     public MagicAttack(final String name, final String shownString, 
             final String description, final int fireAtk, final int thunderAtk,
-            final int iceAtk, final int physicAtk, final int accuracy, final int MP) {
+            final int iceAtk, final int physicAtk, final int accuracy, final int mp) {
         
         this.name = name;
         this.shownString = shownString;
@@ -34,7 +34,7 @@ public class MagicAttack implements MagicAttackInterface {
         this.stats.put(Statistics.ICEATK, iceAtk);
         this.stats.put(Statistics.PHYSICATK, physicAtk);
         this.accuracy = accuracy;
-        this.mpRequired = MP;
+        this.mpRequired = mp;
         
     }
     

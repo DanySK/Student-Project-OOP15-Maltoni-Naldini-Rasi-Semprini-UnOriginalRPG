@@ -3,6 +3,7 @@ package it.unibo.unori.model.items;
 import java.io.Serializable;
 
 import it.unibo.unori.model.character.Hero;
+import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
 
 /**
  * This Interface models the Item Bag.
@@ -13,6 +14,8 @@ public interface Bag extends Serializable {
     /**
      * This method adds an Item to the Bag.
      * @param toAdd the Item to be added.
+     * @throws IllegalArgumentException if the instance of Item isn't either Weapon
+     * either Potion either Armor.
      */
     void storeItem(Item toAdd);
     
@@ -20,8 +23,10 @@ public interface Bag extends Serializable {
      * This method allows to remove an Item from the Bag.
      * @param toRemove the Item to be removed.
      * @throws ItemNotFoundException if the Item is not contained in the Bag.
+     * @throws IllegalArgumentException if the instance of Item isn't either Weapon
+     * either Potion either Armor.
      */
-    void removeItem(Item toRemove);
+    void removeItem(Item toRemove) throws ItemNotFoundException;
     
     /**
      * This method allows to use a Potion on a specified Hero.
