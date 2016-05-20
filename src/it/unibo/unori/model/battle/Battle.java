@@ -4,6 +4,7 @@ import java.util.List;
 import it.unibo.unori.model.battle.exceptions.CantEscapeException;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.Hero;
+import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.Potion;
 import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
 
@@ -78,13 +79,19 @@ public interface Battle {
     
     /**
      * Getter method that returns the List of Enemies involved in the Battle.
-     * @return List of Foes.
+     * @return List of Foes. (A defensive copy).
      */
     List<Foe> getEnemies();
     
     /**
      * Getter method that returns the list of Characters representing my team.
-     * @return a List of Heroes: my team.
+     * @return a List of Heroes: my team. (A defensive copy).
      */
     List<Hero> getSquad();
+    
+    /**
+     * Getter method that returns an Instance of the Item Bag.
+     * @return an instance of the Item Bag. (A defensive copy).
+     */
+    Bag getItemBag();
 }

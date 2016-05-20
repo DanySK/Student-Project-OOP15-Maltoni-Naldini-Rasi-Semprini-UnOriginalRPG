@@ -1,5 +1,6 @@
 package it.unibo.unori.model.battle;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.unibo.unori.model.battle.exceptions.CantEscapeException;
@@ -8,6 +9,7 @@ import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.Character;
 import it.unibo.unori.model.items.Bag;
+import it.unibo.unori.model.items.BagImpl;
 import it.unibo.unori.model.items.Potion;
 import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
 
@@ -138,11 +140,16 @@ public class BattleImpl implements Battle {
 
     @Override
     public List<Foe> getEnemies() {
-        return this.enemies;
+        return new ArrayList<>(this.enemies);
     }
 
     @Override
     public List<Hero> getSquad() {
-        return this.squad;
+        return new ArrayList<>(this.squad);
+    }
+
+    @Override
+    public Bag getItemBag() {
+        return new BagImpl(this.itemBag);
     }
 }

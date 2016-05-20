@@ -1,6 +1,8 @@
 package it.unibo.unori.model.items;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
@@ -59,4 +61,21 @@ public interface Bag extends Serializable {
      */
     boolean contains(Item i);
     
+    /**
+     * This getter method returns the List of Armors present in the Bag.
+     * @return the Armors in the Bag, presented as a Map.
+     */
+    Map<Armor, Integer> getArmors();
+    
+    /**
+     * This getter method returns the List of Weapons present in the Bag.
+     * @return the Weapons in the Bag, presented as a Map.
+     */
+    Map<Weapon, Integer> getWeapons();
+    
+    /**
+     * This getter method returns the List of Potions present in the Bag.
+     * @return the Potions in the Bag, presented as a Map.
+     */
+    Map<Potion, Integer> getPotions();
 }

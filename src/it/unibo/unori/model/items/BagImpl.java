@@ -1,6 +1,8 @@
 package it.unibo.unori.model.items;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import it.unibo.unori.model.character.Hero;
@@ -29,6 +31,77 @@ public class BagImpl implements Bag {
         this.armors = new HashMap<>();
         this.weapons = new HashMap<>();
         this.potions = new HashMap<>();
+    }
+    
+    /**
+     * A Constructor that allows to create a Bag based on an already-existing one.
+     * @param existing the Bag that allows to initialize the new one.
+     */
+    public BagImpl(final Bag existing) {
+        this.armors = existing.getArmors();
+        this.weapons = existing.getWeapons();
+        this.potions = existing.getPotions();
+    }
+    
+
+    private void insertArmor(final Armor ar) {
+        if (this.armors.containsKey(ar)) {
+            this.armors.replace(ar, this.armors.get(ar) + 1);
+        } else {
+            this.armors.put(ar, 1);
+        }
+    }
+    
+    private void insertWeapon(final Weapon w) {
+        if (this.weapons.containsKey(w)) {
+            this.weapons.replace(w, this.weapons.get(w) + 1);
+        } else {
+            this.weapons.put(w, 1);
+        }
+    }
+    
+    private void insertPotion(final Potion p) {
+        if (this.potions.containsKey(p)) {
+            this.potions.replace(p, this.armors.get(p) + 1);
+        } else {
+            this.potions.put(p, 1);
+        }
+    }
+    
+    private void removeArmor(final Armor ar) throws ItemNotFoundException {
+        if (this.armors.containsKey(ar)) {
+            if (this.armors.get(ar).equals(1)) {
+                this.armors.remove(ar);
+            } else {
+                this.armors.replace(ar, this.armors.get(ar) - 1);
+            }
+        } else {
+            throw new ItemNotFoundException();
+        }
+    }
+    
+    private void removeWeapon(final Weapon w) throws ItemNotFoundException {
+        if (this.weapons.containsKey(w)) {
+            if (this.weapons.get(w).equals(1)) {
+                this.weapons.remove(w);
+            } else {
+                this.weapons.replace(w, this.weapons.get(w) - 1);
+            }
+        } else {
+            throw new ItemNotFoundException();
+        }
+    }
+    
+    private void removePotion(final Potion p) throws ItemNotFoundException {
+        if (this.potions.containsKey(p)) {
+            if (this.potions.get(p).equals(1)) {
+                this.potions.remove(p);
+            } else {
+                this.potions.replace(p, this.potions.get(p) - 1);
+            }
+        } else {
+            throw new ItemNotFoundException();
+        }
     }
     
     @Override
@@ -92,64 +165,20 @@ public class BagImpl implements Bag {
         }
         return false;
     }
-    
-    private void insertArmor(final Armor ar) {
-        if (this.armors.containsKey(ar)) {
-            this.armors.replace(ar, this.armors.get(ar) + 1);
-        } else {
-            this.armors.put(ar, 1);
-        }
+
+    @Override
+    public Map<Armor, Integer> getArmors() {
+        return new HashMap<>(this.armors);
+    }
+
+    @Override
+    public Map<Weapon, Integer> getWeapons() {
+        return new HashMap<>(this.weapons);
+    }
+
+    @Override
+    public Map<Potion, Integer> getPotions() {
+        return new HashMap<>(this.potions);
     }
     
-    private void insertWeapon(final Weapon w) {
-        if (this.weapons.containsKey(w)) {
-            this.weapons.replace(w, this.weapons.get(w) + 1);
-        } else {
-            this.weapons.put(w, 1);
-        }
-    }
-    
-    private void insertPotion(final Potion p) {
-        if (this.potions.containsKey(p)) {
-            this.potions.replace(p, this.armors.get(p) + 1);
-        } else {
-            this.potions.put(p, 1);
-        }
-    }
-    
-    private void removeArmor(final Armor ar) throws ItemNotFoundException {
-        if (this.armors.containsKey(ar)) {
-            if (this.armors.get(ar).equals(1)) {
-                this.armors.remove(ar);
-            } else {
-                this.armors.replace(ar, this.armors.get(ar) - 1);
-            }
-        } else {
-            throw new ItemNotFoundException();
-        }
-    }
-    
-    private void removeWeapon(final Weapon w) throws ItemNotFoundException {
-        if (this.weapons.containsKey(w)) {
-            if (this.weapons.get(w).equals(1)) {
-                this.weapons.remove(w);
-            } else {
-                this.weapons.replace(w, this.weapons.get(w) - 1);
-            }
-        } else {
-            throw new ItemNotFoundException();
-        }
-    }
-    
-    private void removePotion(final Potion p) throws ItemNotFoundException {
-        if (this.potions.containsKey(p)) {
-            if (this.potions.get(p).equals(1)) {
-                this.potions.remove(p);
-            } else {
-                this.potions.replace(p, this.potions.get(p) - 1);
-            }
-        } else {
-            throw new ItemNotFoundException();
-        }
-    }
 }
