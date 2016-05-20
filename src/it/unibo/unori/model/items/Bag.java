@@ -1,7 +1,6 @@
 package it.unibo.unori.model.items;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Map;
 
 import it.unibo.unori.model.character.Hero;
