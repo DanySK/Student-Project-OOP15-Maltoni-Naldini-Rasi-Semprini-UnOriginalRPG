@@ -1,8 +1,11 @@
 package it.unibo.unori.model.character;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import it.unibo.unori.model.character.exceptions.ArmorAlreadyException;
+import it.unibo.unori.model.character.exceptions.MagicNotFoundException;
 import it.unibo.unori.model.character.exceptions.NoArmorException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
@@ -13,6 +16,7 @@ import it.unibo.unori.model.items.Armor.ArmorPieces;
 import it.unibo.unori.model.items.ArmorImpl;
 import it.unibo.unori.model.items.Weapon;
 import it.unibo.unori.model.items.WeaponImpl;
+import it.unibo.unori.model.battle.MagicAttackInterface;;
 
 
 /**
@@ -34,6 +38,7 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     private final Jobs heroJob;
     private int totExp;
     private int currentExp;
+    private final List<MagicAttackInterface> magics;
 
     /**
      * Standard constructor for HeroImpl.
@@ -47,11 +52,13 @@ public class HeroImpl  extends CharacterImpl implements Hero {
      *              Hero's initial weapon.
      */
     public HeroImpl(final String name, final Jobs job, 
-            final Map<ArmorPieces, Armor> armor, final Weapon weapon) {
+            final Map<ArmorPieces, Armor> armor, final Weapon weapon, 
+            final List<MagicAttackInterface> magics) {
         super(name, new StatisticsFactory().getJobStats(job));
         this.armor = armor;
         this.weapon = weapon;
         this.heroJob = job;
+        this.magics = magics;
     }
 
 
@@ -136,6 +143,28 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     @Override
     public Jobs getJob() {
         return this.heroJob;
+    }
+
+
+
+    @Override
+    public void addMagic(final MagicAttackInterface mag) {
+        this.magics.add(mag);
+    }
+    
+    @Override
+    public void removeMagic(final MagicAttackInterface mag) 
+            throws MagicNotFoundException {
+        if (this.magics.contains(mag)) {
+            this.magics.remove(mag);
+        } else {
+            throw new MagicNotFoundException();
+        }
+    }
+    
+    @Override
+    public List<MagicAttackInterface> getMagics() {
+        return new ArrayList<>(this.magics);
     }
 
 }
