@@ -38,7 +38,7 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     private final Jobs heroJob;
     private int totExp;
     private int currentExp;
-    private final List<MagicAttackInterface> magics;
+    private final List<MagicAttackInterface> magics = new ArrayList<>();
 
     /**
      * Standard constructor for HeroImpl.
