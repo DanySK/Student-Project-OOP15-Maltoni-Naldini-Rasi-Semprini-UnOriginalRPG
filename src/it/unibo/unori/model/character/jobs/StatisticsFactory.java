@@ -83,7 +83,7 @@ public class StatisticsFactory {
         m.put(Statistics.SPEED, 1000);
         m.put(Statistics.FIREATK, 1200);
         m.put(Statistics.FIREDEF, 1200);
-        m.put(Statistics.THUNDERATK, 7500);
+        m.put(Statistics.THUNDERATK, 750);
         m.put(Statistics.THUNDERDEF, 750);
         m.put(Statistics.ICEATK, 1000);
         m.put(Statistics.ICEDEF, 1000);

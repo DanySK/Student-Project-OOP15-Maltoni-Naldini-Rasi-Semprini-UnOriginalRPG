@@ -53,7 +53,7 @@ public class HeroImpl  extends CharacterImpl implements Hero {
         this.armor = armor;
         this.weapon = weapon;
         this.heroJob = job;
-        this.addSpell(MagicAttackGenerator.getStandard());
+        this.addSpell(MagicAttackGenerator.getBasic());
     }
 
 
