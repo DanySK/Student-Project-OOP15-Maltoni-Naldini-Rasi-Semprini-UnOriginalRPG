@@ -8,7 +8,8 @@ import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.Character;
 import it.unibo.unori.model.items.Bag;
-import it.unibo.unori.model.items.Weapon;
+import it.unibo.unori.model.items.Potion;
+import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
 
 /**
  * The principal Class modeling the Battle Mode.
@@ -20,7 +21,7 @@ public class BattleImpl implements Battle {
     private final List<Foe> enemies;
     private boolean over;
     private int beatenFriends;
-    private Bag itemBag;
+    private final Bag itemBag;
     
     /**
      * Standard constructor for Class BattleImpl.
@@ -88,8 +89,13 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public void openBag() {
-        // TODO Auto-generated method stub
+    public int usePotion(final Hero my, final Potion toUse) throws ItemNotFoundException {
+        if (this.itemBag.contains(toUse)) {
+            my.restoreDamage(toUse.getRestore());
+            return toUse.getRestore();
+        } else {
+            throw new ItemNotFoundException();
+        }
     }
 
     @Override

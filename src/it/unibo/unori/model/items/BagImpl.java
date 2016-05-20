@@ -81,6 +81,17 @@ public class BagImpl implements Bag {
             System.out.println(e.toString());
         }
     }
+    @Override
+    public boolean contains(final Item i) {
+        if (i instanceof Armor) {
+            return this.armors.containsKey(i);
+        } else if (i instanceof Weapon) {
+            return this.weapons.containsKey(i);
+        } else if (i instanceof Potion) {
+            return this.potions.containsKey(i);
+        }
+        return false;
+    }
     
     private void insertArmor(final Armor ar) {
         if (this.armors.containsKey(ar)) {

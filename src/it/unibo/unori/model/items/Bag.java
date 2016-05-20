@@ -52,4 +52,11 @@ public interface Bag extends Serializable {
      */
     void arm(Hero my, Weapon w);
     
+    /**
+     * This method tells me weather the Bag contains a specified Item or not.
+     * @param i the Item to research.
+     * @return true if the Item is present in the Bag, false otherwise.
+     */
+    boolean contains(Item i);
+    
 }

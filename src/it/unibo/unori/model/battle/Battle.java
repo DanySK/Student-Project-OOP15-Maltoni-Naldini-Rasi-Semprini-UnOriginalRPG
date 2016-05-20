@@ -4,6 +4,8 @@ import java.util.List;
 import it.unibo.unori.model.battle.exceptions.CantEscapeException;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.Hero;
+import it.unibo.unori.model.items.Potion;
+import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
 
 /**
  * An interface modeling a generic Battle.
@@ -35,11 +37,15 @@ public interface Battle {
      * @return a confirmation String
      */
     String defend(Hero character);
-
+    
     /**
-     * Method that allows to open the Item Bag.
+     * Method that allows to use a Potion from the item Bag.
+     * @param my the Hero onto which use the Potion.
+     * @param toUse the Potion to use.
+     * @return the amount of HPs restored by the Potion.
+     * @throws ItemNotFoundException 
      */
-    void openBag();
+    int usePotion(Hero my, Potion toUse) throws ItemNotFoundException;
 
     /**
      * Method that allows to throw a Special Attack if the bar is full.
