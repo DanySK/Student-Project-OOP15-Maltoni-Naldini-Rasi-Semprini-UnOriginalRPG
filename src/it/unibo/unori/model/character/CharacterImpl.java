@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import it.unibo.unori.model.battle.MagicAttackInterface;
+import it.unibo.unori.model.character.exceptions.MagicNotFoundException;
 
 /**
  * Class to design a generic Character.
@@ -202,7 +203,16 @@ public class CharacterImpl implements Character {
     public void addSpell(final MagicAttackInterface spell) {
         this.spellList.add(spell);
     }
-
+    
+    @Override
+    public void removeSpell(final MagicAttackInterface mag) 
+            throws MagicNotFoundException {
+        if (this.spellList.contains(mag)) {
+            this.spellList.remove(mag);
+        } else {
+            throw new MagicNotFoundException();
+        }
+    }
 
 }
 

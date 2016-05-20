@@ -1,10 +1,6 @@
 package it.unibo.unori.model.character;
 
-import java.util.List;
-
-import it.unibo.unori.model.battle.MagicAttackInterface;
 import it.unibo.unori.model.character.exceptions.ArmorAlreadyException;
-import it.unibo.unori.model.character.exceptions.MagicNotFoundException;
 import it.unibo.unori.model.character.exceptions.NoArmorException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
@@ -92,23 +88,4 @@ public interface Hero extends Character {
      */
     Jobs getJob();
     
-    /**
-     * This method allows to add a MagicAttack.
-     * @param mag the MagicAttack to add to the List.
-     */
-    void addMagic(MagicAttackInterface mag);
-    
-    /**
-     * This method allows to remove a MagicAttack from the List.
-     * @param mag the MagicAtack to remove from the List.
-     * @throws MagicNotFoundException 
-     */
-    void removeMagic(MagicAttackInterface mag) throws MagicNotFoundException;
-    
-    /**
-     * This getter method gives the List of all the MagicAttacks that the Hero
-     * can throw.
-     * @return a List of MagicAttacks.
-     */
-    List<MagicAttackInterface> getMagics();
 }

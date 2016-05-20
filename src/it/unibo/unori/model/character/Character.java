@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import it.unibo.unori.model.battle.MagicAttackInterface;
+import it.unibo.unori.model.character.exceptions.MagicNotFoundException;
 
 /**
  * Interface to define methods for all the characters(party members and enemies).
@@ -145,5 +146,11 @@ public interface Character extends Serializable {
      */
     void addSpell(MagicAttackInterface spell);
 
+    /**
+     * This method allows to remove a MagicAttack from the List.
+     * @param mag the MagicAtack to remove from the List.
+     * @throws MagicNotFoundException 
+     */
+    void removeSpell(MagicAttackInterface mag) throws MagicNotFoundException;
 
 }

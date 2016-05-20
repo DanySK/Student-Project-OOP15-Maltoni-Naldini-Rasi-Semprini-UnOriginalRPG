@@ -39,7 +39,6 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     private final Jobs heroJob;
     private int totExp;
     private int currentExp;
-    private final List<MagicAttackInterface> magics;
 
     /**
      * Standard constructor for HeroImpl.
@@ -55,15 +54,11 @@ public class HeroImpl  extends CharacterImpl implements Hero {
      *              Hero's initial magic attacks.
      */
     public HeroImpl(final String name, final Jobs job, 
-            final Map<ArmorPieces, Armor> armor, final Weapon weapon, 
-            final List<MagicAttackInterface> magics) {
+            final Map<ArmorPieces, Armor> armor, final Weapon weapon) {
         super(name, new StatisticsFactory().getJobStats(job));
         this.armor = armor;
         this.weapon = weapon;
         this.heroJob = job;
-        this.magics = new ArrayList<>();
-        this.magics.add(MagicAttackGenerator.getStandard());
-        this.magics.addAll(magics);
     }
 
 
@@ -149,27 +144,4 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     public Jobs getJob() {
         return this.heroJob;
     }
-
-
-
-    @Override
-    public void addMagic(final MagicAttackInterface mag) {
-        this.magics.add(mag);
-    }
-    
-    @Override
-    public void removeMagic(final MagicAttackInterface mag) 
-            throws MagicNotFoundException {
-        if (this.magics.contains(mag)) {
-            this.magics.remove(mag);
-        } else {
-            throw new MagicNotFoundException();
-        }
-    }
-    
-    @Override
-    public List<MagicAttackInterface> getMagics() {
-        return new ArrayList<>(this.magics);
-    }
-
 }
