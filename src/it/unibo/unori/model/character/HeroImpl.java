@@ -16,7 +16,8 @@ import it.unibo.unori.model.items.Armor.ArmorPieces;
 import it.unibo.unori.model.items.ArmorImpl;
 import it.unibo.unori.model.items.Weapon;
 import it.unibo.unori.model.items.WeaponImpl;
-import it.unibo.unori.model.battle.MagicAttackInterface;;
+import it.unibo.unori.model.battle.MagicAttackInterface;
+import it.unibo.unori.model.battle.utility.MagicAttackGenerator;;
 
 
 /**
@@ -38,7 +39,7 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     private final Jobs heroJob;
     private int totExp;
     private int currentExp;
-    private final List<MagicAttackInterface> magics = new ArrayList<>();
+    private final List<MagicAttackInterface> magics;
 
     /**
      * Standard constructor for HeroImpl.
@@ -50,6 +51,8 @@ public class HeroImpl  extends CharacterImpl implements Hero {
      *              Hero's initial equip.
      *@param weapon
      *              Hero's initial weapon.
+     *@param magics
+     *              Hero's initial magic attacks.
      */
     public HeroImpl(final String name, final Jobs job, 
             final Map<ArmorPieces, Armor> armor, final Weapon weapon, 
@@ -58,7 +61,9 @@ public class HeroImpl  extends CharacterImpl implements Hero {
         this.armor = armor;
         this.weapon = weapon;
         this.heroJob = job;
-        this.magics = magics;
+        this.magics = new ArrayList<>();
+        this.magics.add(MagicAttackGenerator.getStandard());
+        this.magics.addAll(magics);
     }
 
 
