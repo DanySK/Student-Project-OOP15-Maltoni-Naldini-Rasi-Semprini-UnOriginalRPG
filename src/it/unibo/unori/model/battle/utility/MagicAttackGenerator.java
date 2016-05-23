@@ -27,7 +27,6 @@ public final class MagicAttackGenerator {
      * @return the MagicAttack depending on the Job.
      */
     public static MagicAttackInterface getStandard(final Jobs j) {
-        
         MagicAttackInterface mag = MagicAttackGenerator.getBasic();
         if (j == null) {
             throw new IllegalArgumentException();
@@ -44,7 +43,7 @@ public final class MagicAttackGenerator {
                 case MAGE : mag = new MagicAttack("Scettro magico", 
                         "Hai colpito con lo scettro magico!",
                         "Uno scettro magico, non molto efficace per i danni fisici",
-                        12, 12, 12, 8, 8, 45); break;
+                        12, 12, 12, 8, 8, 40); break;
                 case RANGER : mag = new MagicAttack("Frustata elettrica",
                         "Hai rilasciato una frustata elettrica!",
                         "Indiana Jones sarebbe fiero di questa frusta",
@@ -59,6 +58,49 @@ public final class MagicAttackGenerator {
                         "Abilità classica di un Clown,"
                         + "particolarmente efficace nel tipo ghiaccio",
                         10, 10, 12, 10, 8, 25); break;
+                default:
+                    break;
+            }
+        }
+        return mag;
+    }
+    
+    /**
+     * Method that generates a medium Magic Attack.
+     * @param j the Attack depends on the Job.
+     * @return the MagicAttack depending on the Job.
+     */
+    public static MagicAttackInterface getMedium(final Jobs j) {
+        MagicAttackInterface mag = MagicAttackGenerator.getBasic();
+        if (j == null) {
+            throw new IllegalArgumentException();
+        } else {
+            switch (j) {
+                case WARRIOR : mag = new MagicAttack("Mazzata Magica",
+                        "Hai usato una Mazza Magica per colpire!",
+                        "Una mazza chiodata che può causare gravi danni fisici",
+                        10, 10, 10, 45, 7, 30); break;
+                case PALADIN :mag = new MagicAttack("Urlo della Giustizia",
+                        "Hai usato un Urlo della Giustizia!",
+                        "Un urlo utile per redimere i nemici (e per fare male)",
+                        15, 15, 15, 38, 7, 38); break;
+                case MAGE : mag = new MagicAttack("Magia Bianca",
+                        "Hai colpito con la magia bianca", 
+                        "Un attacco magico per eccellenza. Efficace su tutto",
+                        22, 22, 22, 30, 7, 55); break;
+                case RANGER : mag = new MagicAttack("Stivali Magici",
+                        "Hai usato gli stivali magici per colpire!",
+                        "Un paio di stivali inusuali. Molto elettrizzanti",
+                        16, 26, 12, 36, 7, 35); break;
+                case COOK : mag = new MagicAttack("Coltellata del Destino",
+                        "Hai colpito con il coltello del destino!",
+                        "Un coltello che non taglia solo prosciutto,"
+                        + " ma brucia anche i nemici",
+                        26, 12, 16, 35, 7, 38); break;
+                case CLOWN : mag = new MagicAttack("BUH!",
+                        "Hai spaventato magicamente il nemico!",
+                        "Uno spavento che può far scendere il gelo",
+                        18, 18, 22, 33, 7, 35); break;
                 default:
                     break;
             }
