@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import it.unibo.unori.model.battle.MagicAttackInterface;
 import it.unibo.unori.model.character.Hero;
 
 /**
@@ -122,9 +123,10 @@ public final class BattleLogics {
      * This method calculates the damage to inflict to an enemy by throwing 
      * a magic attack.
      * @param h the Hero involved in Battle.
+     * @param toThrow the Magic Attack that is supposed to be thrown.
      * @return the damage of the magic attack.
      */
-    public static int magicAttackCalc(final Hero h) {
+    public static int magicAttackCalc(final Hero h, final MagicAttackInterface toThrow) {
         
         return 0;
     }

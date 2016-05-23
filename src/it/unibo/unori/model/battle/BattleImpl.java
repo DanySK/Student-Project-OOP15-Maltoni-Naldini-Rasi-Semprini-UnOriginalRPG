@@ -3,6 +3,7 @@ package it.unibo.unori.model.battle;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.unibo.unori.model.battle.exceptions.BarNotFullException;
 import it.unibo.unori.model.battle.exceptions.CantEscapeException;
 import it.unibo.unori.model.battle.utility.BattleLogics;
 import it.unibo.unori.model.character.Foe;
@@ -91,7 +92,8 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public int usePotion(final Hero my, final Potion toUse) throws ItemNotFoundException {
+    public int usePotion(final Hero my, final Potion toUse) 
+            throws ItemNotFoundException {
         if (this.itemBag.contains(toUse)) {
             my.restoreDamage(toUse.getRestore());
             return toUse.getRestore();
@@ -101,16 +103,21 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public int specialAttack(final Hero my) {
-        final int damage = 
-                BattleLogics.specialAttackCalc(my.getLevel(), my.getAttack());
-        this.enemies.forEach(e -> {
-            e.takeDamage(damage);
-            if (this.isDefeated(e)) {
-                this.defeated(e);
-            }
-        });
-        return damage;
+    public int specialAttack(final Hero my) throws BarNotFullException {
+        if (my.getCurrentBar() == my.getTotBar()) {
+            my.resetSpecialBar();
+            final int damage = 
+                    BattleLogics.specialAttackCalc(my.getLevel(), my.getAttack());
+            this.enemies.forEach(e -> {
+                e.takeDamage(damage);
+                if (this.isDefeated(e)) {
+                    this.defeated(e);
+                }
+            });
+            return damage;
+        } else {
+            throw new BarNotFullException();
+        }
     }
 
     @Override

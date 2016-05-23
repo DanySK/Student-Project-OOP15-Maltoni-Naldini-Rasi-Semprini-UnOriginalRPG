@@ -1,6 +1,7 @@
 package it.unibo.unori.model.battle;
 import java.util.List;
 
+import it.unibo.unori.model.battle.exceptions.BarNotFullException;
 import it.unibo.unori.model.battle.exceptions.CantEscapeException;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.Hero;
@@ -54,7 +55,7 @@ public interface Battle {
      * @throws BarNotFullException if the bar is not filled.
      * @return the damage inflicted to all enemies.
      */
-    int specialAttack(Hero my);
+    int specialAttack(Hero my) throws BarNotFullException;
     
     /**
      * Method that allows to throw an attack using Magic.

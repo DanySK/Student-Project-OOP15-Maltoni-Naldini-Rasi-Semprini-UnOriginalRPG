@@ -35,6 +35,9 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     private final Jobs heroJob;
     private int totExp;
     private int currentExp;
+    private final int specialBar;
+    private int currentBar;
+    
 
     /**
      * Standard constructor for HeroImpl.
@@ -53,6 +56,8 @@ public class HeroImpl  extends CharacterImpl implements Hero {
         this.armor = armor;
         this.weapon = weapon;
         this.heroJob = job;
+        this.specialBar = 100;
+        this.currentBar = 0;
         this.addSpell(MagicAttackGenerator.getBasic());
     }
 
@@ -136,5 +141,34 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     @Override
     public Jobs getJob() {
         return this.heroJob;
+    }
+
+    @Override
+    public int getTotBar() {
+        return this.specialBar;
+    }
+
+    @Override
+    public int getCurrentBar() {
+        return this.currentBar;
+    }
+
+    @Override
+    public boolean setCurrentBar(final int toFill) {
+        if (toFill < 0) {
+            throw new IllegalArgumentException();
+        }
+        if (this.currentBar + toFill >= this.specialBar) {
+            this.currentBar = this.specialBar;
+            return true;
+        } else {
+            this.currentBar += toFill;
+            return false;
+        }
+    }
+    
+    @Override
+    public void resetSpecialBar() {
+        this.currentBar = 0;
     }
 }
