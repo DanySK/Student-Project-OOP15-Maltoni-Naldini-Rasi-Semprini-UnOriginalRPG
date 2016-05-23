@@ -27,38 +27,42 @@ public final class MagicAttackGenerator {
      * @return the MagicAttack depending on the Job.
      */
     public static MagicAttackInterface getStandard(final Jobs j) {
-        if (j != null) {
+        
+        MagicAttackInterface mag = MagicAttackGenerator.getBasic();
+        if (j == null) {
+            throw new IllegalArgumentException();
+        } else {
             switch (j) {
-                case WARRIOR : return new MagicAttack("Spada Magica", 
+                case WARRIOR : mag = new MagicAttack("Spada Magica", 
                         "Hai colpito con la spada magica!", 
                         "Spada di basso livello, molto efficace per i danni fisici",
-                        7, 7, 7, 20, 8, 20);
-                case PALADIN : return new MagicAttack("Lancia Magica",
+                        7, 7, 7, 20, 8, 20); break;
+                case PALADIN : mag = new MagicAttack("Lancia Magica",
                         "Hai colpito con la spada magica!",
                         "Una lancia magica, efficace in tutti i campi",
-                        8, 8, 8, 14, 8, 30);
-                case MAGE : return new MagicAttack("Scettro magico", 
+                        8, 8, 8, 14, 8, 30); break;
+                case MAGE : mag = new MagicAttack("Scettro magico", 
                         "Hai colpito con lo scettro magico!",
                         "Uno scettro magico, non molto efficace per i danni fisici",
-                        12, 12, 12, 8, 8, 45);
-                case RANGER : return new MagicAttack("Frustata elettrica",
+                        12, 12, 12, 8, 8, 45); break;
+                case RANGER : mag = new MagicAttack("Frustata elettrica",
                         "Hai rilasciato una frustata elettrica!",
                         "Indiana Jones sarebbe fiero di questa frusta",
-                        9, 15, 6, 13, 8, 25);
-                case COOK : return new MagicAttack("Mestolo magico",
+                        9, 15, 6, 13, 8, 25); break;
+                case COOK : mag = new MagicAttack("Mestolo magico",
                         "Hai colpito con un mestolo magico!",
                         "Un mestolo forgiato da Antonino Cannavacciuolo, "
                         + "molto efficace nel tipo fuoco",
-                        15, 6, 9, 12, 8, 30);
-                case CLOWN : return new MagicAttack("Occhiata glaciale",
+                        15, 6, 9, 12, 8, 30); break;
+                case CLOWN : mag = new MagicAttack("Occhiata glaciale",
                         "Hai lanciato un'occhiata glaciale!",
                         "Abilità classica di un Clown,"
                         + "particolarmente efficace nel tipo ghiaccio",
-                        10, 10, 12, 10, 8, 25);
+                        10, 10, 12, 10, 8, 25); break;
                 default:
                     break;
             }
         }
-        return null;
+        return mag;
     }
 }

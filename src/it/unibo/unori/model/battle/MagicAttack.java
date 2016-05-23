@@ -21,6 +21,18 @@ public class MagicAttack implements MagicAttackInterface {
     private final int accuracy;
     private final int mpRequired;
     
+    /**
+     * A constructor for a Magic Attack.
+     * @param name the name of the attack.
+     * @param shownString the String to show in Battle.
+     * @param description the description of the attack.
+     * @param fireAtk the fire power of the attack.
+     * @param thunderAtk the thunder power of the attack.
+     * @param iceAtk the ice power of the attack.
+     * @param physicAtk the physic power of the attack.
+     * @param accuracy the accuracy of the attack (it goes from 1 to 10).
+     * @param mp the mp required to throw the attack.
+     */
     public MagicAttack(final String name, final String shownString, 
             final String description, final int fireAtk, final int thunderAtk,
             final int iceAtk, final int physicAtk, final int accuracy, final int mp) {
