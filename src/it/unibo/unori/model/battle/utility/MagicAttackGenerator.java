@@ -107,4 +107,49 @@ public final class MagicAttackGenerator {
         }
         return mag;
     }
+    
+    /**
+     * Method that generates a medium Magic Attack.
+     * @param j the Attack depends on the Job.
+     * @return the MagicAttack depending on the Job.
+     */
+    public static MagicAttackInterface getAdvanced(final Jobs j) {
+        MagicAttackInterface mag = MagicAttackGenerator.getBasic();
+        if (j == null) {
+            throw new IllegalArgumentException();
+        } else {
+            switch (j) {
+                case WARRIOR : mag = new MagicAttack("Furia Primitiva",
+                        "Hai colpito il nemico con furia primitiva!",
+                        "Dolore e distruzione",
+                        20, 20, 20, 80, 5, 60); break;
+                case PALADIN :mag = new MagicAttack("Guanto del Potere",
+                        "Hai usato il Guanto del Potere!",
+                        "Lanciare un guanto di sfida non è mai stato così doloroso",
+                        30, 30, 30, 75, 5, 68); break;
+                case MAGE : mag = new MagicAttack("Incantesimo Devastante",
+                        "Hai lanciato un incantesimo devastante!", 
+                        "Una magia molto avanzata e molto potente",
+                        40, 40, 40, 65, 5, 75); break;
+                case RANGER : mag = new MagicAttack("Autorità Imponente",
+                        "Hai usato la tua autorità per colpire!",
+                        "Un vero Ranger è molto orgoglioso della sua autorità."
+                        + " E la usa come arma",
+                        30, 45, 26, 71, 5, 65); break;
+                case COOK : mag = new MagicAttack("Urlo Anti-Vegano",
+                        "Hai lanciato un urlo Anti-Vegano!",
+                        "Un urlo che disprezza i cereali, "
+                        + "ed arrostisce la carne dei nemici",
+                        45, 26, 30, 70, 5, 68); break;
+                case CLOWN : mag = new MagicAttack("Giochiamo insieme",
+                        "Hai inquietato a morte il nemico!",
+                        "Non c'è nulla di più inquietante e glaciale"
+                        + " di una richiesta come questa",
+                        35, 35, 40, 68, 5, 65); break;
+                default:
+                    break;
+            }
+        }
+        return mag;
+    }
 }
