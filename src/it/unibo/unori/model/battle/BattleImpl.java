@@ -43,6 +43,11 @@ public class BattleImpl implements Battle {
     private Character defeated(final Character ch) {
         if (ch instanceof Foe) {
             this.enemies.remove(ch);
+            if (this.enemies.size() > 0) {
+                this.over = false;
+            } else {
+                this.over = true;
+            }
         } else if (ch instanceof Hero) {
             this.beatenFriends++;
             this.squad.remove(ch);
@@ -54,7 +59,7 @@ public class BattleImpl implements Battle {
         return ch.getRemainingHP() == 0;
     }
     
-    private int getMediumLevel() {
+    private int getMediumLevelFoes() {
         int mediumLevel = 0;
         for (final Foe h : this.enemies) {
             mediumLevel += h.getLevel();
@@ -136,7 +141,7 @@ public class BattleImpl implements Battle {
     @Override
     public void acquireExp() {
         final List<Integer> points =
-                BattleLogics.expAcquired(this.squad, this.getMediumLevel(),
+                BattleLogics.expAcquired(this.squad, this.getMediumLevelFoes(),
                         this.squad.size() - this.beatenFriends);
         int index = 0;
         for (final Hero h : this.squad) {
