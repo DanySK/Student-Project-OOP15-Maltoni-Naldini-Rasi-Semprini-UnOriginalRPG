@@ -119,12 +119,18 @@ public interface Character extends Serializable {
      * @return Character's ice attack
      */
     int getIceAttack();
-
+    
+    /**
+     * A getter method that gives Character's Experience-Growing Factor.
+     * @return the Experience-Growing Factor.
+     */
+    int getExpFactor();
     /**
      * Set a status on the character.
      * @param state
      *              Status to set.
      */
+    
     void setStatus(Status state);
 
     /**

@@ -95,12 +95,10 @@ public final class BattleLogics {
         
         final List<Integer> exp = new ArrayList<>();
         squad.forEach(i -> {
-            final int factor = 1;
-            //TODO base "factor" on Hero type ?
             exp.add(((mediumLevel / BattleLogics.LEVELER * notBeaten)
                     * ((2 * mediumLevel + BattleLogics.MULT) ^ 2)
                     / ((mediumLevel + i.getLevel() + BattleLogics.MULT) ^ 2) + 1)
-                    * factor);
+                    * i.getExpFactor());
         });
         return exp;
     }
@@ -127,7 +125,7 @@ public final class BattleLogics {
      * @return the damage of the magic attack.
      */
     public static int magicAttackCalc(final Hero h, final MagicAttackInterface toThrow) {
-        
+        //TODO
         return 0;
     }
 }

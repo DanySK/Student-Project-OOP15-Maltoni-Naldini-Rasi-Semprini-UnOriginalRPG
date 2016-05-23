@@ -182,6 +182,11 @@ public class CharacterImpl implements Character {
     public int getIceAttack() {
         return this.statistic.get(Statistics.ICEDEF);
     }
+    
+    @Override
+    public int getExpFactor() {
+        return this.statistic.get(Statistics.EXPFACTOR);
+    }
 
     @Override
     public void setStatus(final Status state) {
