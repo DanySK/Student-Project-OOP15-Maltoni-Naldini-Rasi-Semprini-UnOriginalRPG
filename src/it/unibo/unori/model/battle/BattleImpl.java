@@ -8,6 +8,8 @@ import it.unibo.unori.model.battle.exceptions.CantEscapeException;
 import it.unibo.unori.model.battle.utility.BattleLogics;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.Hero;
+import it.unibo.unori.model.character.Status;
+import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.character.Character;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.BagImpl;
@@ -80,12 +82,16 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public int attack(final Foe enemy, final Hero my) {
+    public int attack(final Foe enemy, final Hero my) throws NoWeaponException {
         final int damage = 
                 BattleLogics.getStandardDamage(my.getLevel(), my.getAttack());
         enemy.takeDamage(damage);
         if (this.isDefeated(enemy)) {
             this.defeated(enemy);
+        } else {
+            if (enemy.getStatus().equals(Status.NONE)) {
+                enemy.setStatus(BattleLogics.causingStatus(my, enemy));
+            }
         }
         return damage;
     }

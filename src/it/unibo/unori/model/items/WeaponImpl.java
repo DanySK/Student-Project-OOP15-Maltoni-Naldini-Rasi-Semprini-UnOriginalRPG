@@ -86,7 +86,6 @@ public class WeaponImpl implements Weapon {
         }
     }
 
-
     @Override
     public String getName() {
         return this.name;

@@ -182,5 +182,10 @@ public class HeroImpl  extends CharacterImpl implements Hero {
             s.replace(i, s.get(i) + m.get(i));
         });
     }
+    
+    @Override
+    public boolean hasWeapon() {
+        return this.weapon.equals(WeaponImpl.FISTS);
+    }
 
 }

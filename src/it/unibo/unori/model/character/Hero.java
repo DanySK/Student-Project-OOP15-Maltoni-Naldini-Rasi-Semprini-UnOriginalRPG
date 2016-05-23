@@ -118,5 +118,10 @@ public interface Hero extends Character {
      * Method to increase hero's statistics when his level grows.
      */
     void levelUp();
-
+    
+    /**
+     * Method that tells weather the Hero is holding a Weapon or not.
+     * @return true if the Hero is holding a Weapon, false otherwise.
+     */
+    boolean hasWeapon();
 }

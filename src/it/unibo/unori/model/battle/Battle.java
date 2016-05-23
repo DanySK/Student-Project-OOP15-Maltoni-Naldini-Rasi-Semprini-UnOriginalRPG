@@ -5,6 +5,7 @@ import it.unibo.unori.model.battle.exceptions.BarNotFullException;
 import it.unibo.unori.model.battle.exceptions.CantEscapeException;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.Hero;
+import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.Potion;
 import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
@@ -30,8 +31,9 @@ public interface Battle {
      * @param enemy the enemy against which throw the attack.
      * @param my my Character on turn.
      * @return the damage inflicted to the specified enemy.
+     * @throws NoWeaponException if the Hero isn't holding any Weapon.
      */
-    int attack(Foe enemy, Hero my);
+    int attack(Foe enemy, Hero my) throws NoWeaponException;
 
     /**
      * Method that allows to defend a personal team's character at choice.

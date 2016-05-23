@@ -5,7 +5,10 @@ import java.util.List;
 import java.util.Random;
 
 import it.unibo.unori.model.battle.MagicAttackInterface;
+import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.Hero;
+import it.unibo.unori.model.character.Status;
+import it.unibo.unori.model.character.exceptions.NoWeaponException;
 
 /**
  * Utility class that contains static methods that allow to model 
@@ -19,6 +22,8 @@ public final class BattleLogics {
     private static final int LUCKPERCENTAGE = 50;
     private static final int YOURELUCKY = 3;
     private static final int LEVELER = 5;
+    private static final int DIFFERENCE_MAX = 4;
+    private static final int PERCENTAGE_MEDIUM = 25;
 
     private BattleLogics() {
         //Empty private constructor, because this is an utility class
@@ -124,8 +129,42 @@ public final class BattleLogics {
      * @param toThrow the Magic Attack that is supposed to be thrown.
      * @return the damage of the magic attack.
      */
-    public static int magicAttackCalc(final Hero h, final MagicAttackInterface toThrow) {
+    public static int magicAttackCalc(final Hero h, 
+            final MagicAttackInterface toThrow) {
         //TODO
         return 0;
+    }
+    
+    /**
+     * This method is useful to determine if a Weapon has caused a Status changing.
+     * @param my the Hero who is attacking.
+     * @param en the Enemy being attacked.
+     * @return the Status that the attack causes, 
+     * depending on Hero and Enemy's level.
+     * @throws NoWeaponException if the Hero is not holding any Weapon
+     */
+    public static Status causingStatus(final Hero my, final Foe en) 
+            throws NoWeaponException {
+        final int diff = my.getLevel() - en.getLevel();
+        if (diff >= BattleLogics.DIFFERENCE_MAX) {
+            return my.getWeapon().getWeaponStatus();
+        } else if (diff > 2 && diff < BattleLogics.DIFFERENCE_MAX) {
+            final Random rand = new Random();
+            final int luck = rand.nextInt(BattleLogics.PERCENTAGE_MEDIUM);
+            if (luck == BattleLogics.YOURELUCKY) {
+                return my.getWeapon().getWeaponStatus();
+            } else {
+                return Status.NONE;
+            }
+        } else if (diff >= 0 && diff <= 2) {
+            final Random rand = new Random();
+            final int luck = rand.nextInt(BattleLogics.LUCKPERCENTAGE);
+            if (luck == BattleLogics.YOURELUCKY) {
+                return my.getWeapon().getWeaponStatus();
+            } else {
+                return Status.NONE;
+            }
+        }
+        return Status.NONE;
     }
 }
