@@ -103,7 +103,7 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public int specialAttack(final Hero my) throws BarNotFullException {
+    public String specialAttack(final Hero my) throws BarNotFullException {
         if (my.getCurrentBar() == my.getTotBar()) {
             my.resetSpecialBar();
             final int damage = 
@@ -114,7 +114,7 @@ public class BattleImpl implements Battle {
                     this.defeated(e);
                 }
             });
-            return damage;
+            return my.getName() + "ha usato l'attacco speciale!";
         } else {
             throw new BarNotFullException();
         }

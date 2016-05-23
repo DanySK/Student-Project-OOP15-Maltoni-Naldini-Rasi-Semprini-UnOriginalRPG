@@ -53,9 +53,9 @@ public interface Battle {
      * Method that allows to throw a Special Attack if the bar is full.
      * @param my my Character on turn.
      * @throws BarNotFullException if the bar is not filled.
-     * @return the damage inflicted to all enemies.
+     * @return a confirmation String.
      */
-    int specialAttack(Hero my) throws BarNotFullException;
+    String specialAttack(Hero my) throws BarNotFullException;
     
     /**
      * Method that allows to throw an attack using Magic.
