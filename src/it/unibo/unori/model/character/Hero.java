@@ -87,20 +87,20 @@ public interface Hero extends Character {
      * @return hero's job
      */
     Jobs getJob();
-    
+
     /**
      * This getter method returns the amount of points needed to fill the 
      * special attack bar.
      * @return the capacity of the bar.
      */
     int getTotBar();
-    
+
     /**
      * This getter method tells how much the special attack bar is filled.
      * @return the amount of points that currently fill the bar.
      */
     int getCurrentBar();
-    
+
     /**
      * This method allows to fill the special attack bar.
      * @param toFill is the amount of points to add to the bar.
@@ -108,9 +108,15 @@ public interface Hero extends Character {
      * @return true if the bar is full, false otherwise.
      */
     boolean setCurrentBar(int toFill);
-    
+
     /**
      * This method, to be called in Battle, resets the special attack bar.
      */
     void resetSpecialBar();
+
+    /**
+     * Method to increase hero's statistics when his level grows.
+     */
+    void levelUp();
+
 }

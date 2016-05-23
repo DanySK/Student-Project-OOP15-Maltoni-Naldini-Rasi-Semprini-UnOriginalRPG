@@ -203,7 +203,7 @@ public class CharacterImpl implements Character {
     public void addSpell(final MagicAttackInterface spell) {
         this.spellList.add(spell);
     }
-    
+
     @Override
     public void removeSpell(final MagicAttackInterface mag) 
             throws MagicNotFoundException {
@@ -213,6 +213,17 @@ public class CharacterImpl implements Character {
             throw new MagicNotFoundException();
         }
     }
+
+    /**
+     * Protected method to get all the statistics of the character.
+     * @return the statistics of the character
+     */
+    protected Map<Statistics, Integer> getStatistics() {
+        return this.statistic;
+    }
+
+
+
 
 }
 

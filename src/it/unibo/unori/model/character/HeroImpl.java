@@ -1,5 +1,6 @@
 package it.unibo.unori.model.character;
 
+import java.util.Arrays;
 import java.util.Map;
 
 import it.unibo.unori.model.battle.utility.MagicAttackGenerator;
@@ -37,7 +38,7 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     private int currentExp;
     private final int specialBar;
     private int currentBar;
-    
+
 
     /**
      * Standard constructor for HeroImpl.
@@ -166,9 +167,20 @@ public class HeroImpl  extends CharacterImpl implements Hero {
             return false;
         }
     }
-    
+
     @Override
     public void resetSpecialBar() {
         this.currentBar = 0;
     }
+
+    @Override
+    public void levelUp() {
+        this.setLevel(this.getLevel() + 1);
+        final Map<Statistics, Integer> m = this.heroJob.getGrowthStats();
+        Arrays.asList(Statistics.values()).forEach(i -> {
+            final Map<Statistics, Integer> s = this.getStatistics();
+            s.replace(i, s.get(i) + m.get(i));
+        });
+    }
+
 }
