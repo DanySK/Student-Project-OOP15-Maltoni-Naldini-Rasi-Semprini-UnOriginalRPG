@@ -124,4 +124,21 @@ public interface Hero extends Character {
      * @return true if the Hero is holding a Weapon, false otherwise.
      */
     boolean hasWeapon();
+    
+    /**
+     * Method that sets the Hero as "defended" for a turn in Battle.
+     */
+    void setDefended();
+    
+    /**
+     * Method that tells if the Hero is currently being defended.
+     * @return true if the Hero is being defended, false otherwise.
+     */
+    boolean isDefended();
+    
+    /**
+     * Method that sets the Hero as "undefended". To call at the end of the Battle
+     * turn if the Hero was previously defended.
+     */
+    void setUndefended();
 }

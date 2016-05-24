@@ -33,13 +33,7 @@ public final class BattleLogics {
      * This method generates the standard damage to inflict depending on
      * character's level.
      * The algorithm allows to generate a "fair" damage for a standard attack
-     * depending on character's level:
-     * Level 1 -> Damage = 30;
-     * Level 2 -> Damage = 50;
-     * Level 3 -> Damage = 90;
-     * Level 4 -> Damage = 150;
-     * Level 5 -> Damage = 230;
-     * And so on.
+     * depending on character's level.
      * The damage is improved by Character's Attack statistic. 
      * @param charLevel the level of the Character that throws the attack.
      * @param atck the Attack Statistic of the Character.

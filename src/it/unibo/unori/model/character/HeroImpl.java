@@ -26,7 +26,6 @@ import it.unibo.unori.model.items.WeaponImpl;
  */
 public class HeroImpl  extends CharacterImpl implements Hero {
 
-
     /**
      * 
      */
@@ -38,6 +37,7 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     private int currentExp;
     private final int specialBar;
     private int currentBar;
+    private boolean defended;
 
 
     /**
@@ -60,9 +60,8 @@ public class HeroImpl  extends CharacterImpl implements Hero {
         this.specialBar = 100;
         this.currentBar = 0;
         this.addSpell(MagicGenerator.getBasic());
+        this.defended = false;
     }
-
-
 
     @Override
     public int getExpTot() {
@@ -186,6 +185,21 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     @Override
     public boolean hasWeapon() {
         return this.weapon.equals(WeaponImpl.FISTS);
+    }
+    
+    @Override
+    public void setDefended() {
+        this.defended = true;
+    }
+    
+    @Override
+    public boolean isDefended() {
+        return this.defended;
+    }
+    
+    @Override
+    public void setUndefended() {
+        this.defended = false;
     }
 
 }

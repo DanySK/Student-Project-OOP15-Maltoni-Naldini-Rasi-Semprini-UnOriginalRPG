@@ -3,6 +3,7 @@ import java.util.List;
 
 import it.unibo.unori.model.battle.exceptions.BarNotFullException;
 import it.unibo.unori.model.battle.exceptions.CantEscapeException;
+import it.unibo.unori.model.battle.exceptions.NotDefendableException;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
@@ -36,11 +37,13 @@ public interface Battle {
     int attack(Foe enemy, Hero my) throws NoWeaponException;
 
     /**
-     * Method that allows to defend a personal team's character at choice.
-     * @param character the character to defend.
+     * Method that allows to defend a personal team's character at choice, just for
+     * one turn of Battle.
+     * @param friend the character to defend.
      * @return a confirmation String
+     * @throws NotDefendableException if the friend is not defendable.
      */
-    String defend(Hero character);
+    String defend(Hero friend) throws NotDefendableException;
     
     /**
      * Method that allows to use a Potion from the item Bag.

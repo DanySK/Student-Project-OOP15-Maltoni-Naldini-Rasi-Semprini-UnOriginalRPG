@@ -5,6 +5,7 @@ import java.util.List;
 
 import it.unibo.unori.model.battle.exceptions.BarNotFullException;
 import it.unibo.unori.model.battle.exceptions.CantEscapeException;
+import it.unibo.unori.model.battle.exceptions.NotDefendableException;
 import it.unibo.unori.model.battle.utility.BattleLogics;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.Hero;
@@ -97,9 +98,15 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public String defend(final Hero character) {
-        // TODO Auto-generated method stub
-        return null;
+    public String defend(final Hero friend) throws NotDefendableException {
+        if (friend.getStatus() == Status.NOT_DEFENDABLE) {
+            throw new NotDefendableException();
+        }
+        if (friend.isDefended()) {
+            return friend.getName() + " è già difeso! Peccato...";
+        } else {
+            return "Hai difeso " + friend.getName();
+        }
     }
 
     @Override
