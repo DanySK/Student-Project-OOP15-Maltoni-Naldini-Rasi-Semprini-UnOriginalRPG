@@ -6,6 +6,7 @@ import java.util.List;
 import it.unibo.unori.model.battle.exceptions.BarNotFullException;
 import it.unibo.unori.model.battle.exceptions.CantEscapeException;
 import it.unibo.unori.model.battle.exceptions.NotDefendableException;
+import it.unibo.unori.model.battle.exceptions.NotEnoughMPExcpetion;
 import it.unibo.unori.model.battle.utility.BattleLogics;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.Hero;
@@ -139,9 +140,13 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public int useMagicAttack(final MagicAttack m, final Hero my, final Foe enemy) {
-        //TODO Mana Points are enough? if yes then...
-        my.consumeMP(m.getMPRequired());
+    public int useMagicAttack(final MagicAttack m, final Hero my, final Foe enemy)
+            throws NotEnoughMPExcpetion {
+        if (my.getCurrentMP() > m.getMPRequired()) {
+            my.consumeMP(m.getMPRequired());
+        } else {
+            throw new NotEnoughMPExcpetion();
+        }
         //TODO A lot of things.
         return 0;
     }

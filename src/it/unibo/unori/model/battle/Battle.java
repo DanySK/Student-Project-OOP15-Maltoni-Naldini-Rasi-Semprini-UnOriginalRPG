@@ -4,6 +4,7 @@ import java.util.List;
 import it.unibo.unori.model.battle.exceptions.BarNotFullException;
 import it.unibo.unori.model.battle.exceptions.CantEscapeException;
 import it.unibo.unori.model.battle.exceptions.NotDefendableException;
+import it.unibo.unori.model.battle.exceptions.NotEnoughMPExcpetion;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
@@ -68,8 +69,10 @@ public interface Battle {
      * @param my the Hero who uses the Magic Attack.
      * @param enemy the enemy to which throw the attack.
      * @return the amount of damage inflicted.
+     * @throws NotEnoughMPExcpetion if the current MPs of the Character
+     * is not enough to throw the attack.
      */
-    int useMagicAttack(MagicAttack m, Hero my, Foe enemy);
+    int useMagicAttack(MagicAttack m, Hero my, Foe enemy) throws NotEnoughMPExcpetion;
     
     /**
      * Method that tells me weather the Battle-mode is over or not.

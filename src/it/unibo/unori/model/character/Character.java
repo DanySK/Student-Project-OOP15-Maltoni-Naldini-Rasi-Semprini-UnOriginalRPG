@@ -125,6 +125,7 @@ public interface Character extends Serializable {
      * @return the Experience-Growing Factor.
      */
     int getExpFactor();
+    
     /**
      * Set a status on the character.
      * @param state
@@ -158,5 +159,18 @@ public interface Character extends Serializable {
      * @throws MagicNotFoundException 
      */
     void removeSpell(MagicAttackInterface mag) throws MagicNotFoundException;
+    
+    /**
+     * This getter methods returns the total amount of MP expected for the Character.
+     * @return the total amount of MP.
+     */
+    int getTotMP();
+    
+    /**
+     * This getter method returns the amount of MP currently available for
+     * the Character.
+     * @return the current value of MP.
+     */
+    int getCurrentMP();
 
 }

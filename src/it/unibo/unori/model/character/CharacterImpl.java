@@ -198,7 +198,17 @@ public class CharacterImpl implements Character {
     public Status getStatus() {
         return this.status;
     }
-
+    
+    @Override
+    public int getTotMP() {
+        return this.statistic.get(Statistics.TOTALMP);
+    }
+    
+    @Override
+    public int getCurrentMP() {
+        return this.currentMP;
+    }
+    
     @Override
     public List<MagicAttackInterface> getMagics() {
         return new LinkedList<>(this.spellList);
