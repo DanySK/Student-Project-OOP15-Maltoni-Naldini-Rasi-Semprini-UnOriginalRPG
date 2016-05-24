@@ -3,7 +3,7 @@ package it.unibo.unori.model.character;
 import java.util.Arrays;
 import java.util.Map;
 
-import it.unibo.unori.model.battle.utility.MagicAttackGenerator;
+import it.unibo.unori.model.battle.utility.MagicGenerator;
 import it.unibo.unori.model.character.exceptions.ArmorAlreadyException;
 import it.unibo.unori.model.character.exceptions.NoArmorException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
@@ -59,7 +59,7 @@ public class HeroImpl  extends CharacterImpl implements Hero {
         this.heroJob = job;
         this.specialBar = 100;
         this.currentBar = 0;
-        this.addSpell(MagicAttackGenerator.getBasic());
+        this.addSpell(MagicGenerator.getBasic());
     }
 
 

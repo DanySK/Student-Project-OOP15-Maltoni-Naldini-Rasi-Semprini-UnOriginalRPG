@@ -7,9 +7,9 @@ import it.unibo.unori.model.character.jobs.Jobs;
 /**
  * This class generates MagicAttacks.
  */
-public final class MagicAttackGenerator {
+public final class MagicGenerator {
     
-    private MagicAttackGenerator() {
+    private MagicGenerator() {
         //Empty private constructor because this is an utility class.
     }
     /**
@@ -27,7 +27,7 @@ public final class MagicAttackGenerator {
      * @return the MagicAttack depending on the Job.
      */
     public static MagicAttackInterface getStandard(final Jobs j) {
-        MagicAttackInterface mag = MagicAttackGenerator.getBasic();
+        MagicAttackInterface mag = MagicGenerator.getBasic();
         if (j == null) {
             throw new IllegalArgumentException();
         } else {
@@ -71,7 +71,7 @@ public final class MagicAttackGenerator {
      * @return the MagicAttack depending on the Job.
      */
     public static MagicAttackInterface getMedium(final Jobs j) {
-        MagicAttackInterface mag = MagicAttackGenerator.getBasic();
+        MagicAttackInterface mag = MagicGenerator.getBasic();
         if (j == null) {
             throw new IllegalArgumentException();
         } else {
@@ -109,12 +109,12 @@ public final class MagicAttackGenerator {
     }
     
     /**
-     * Method that generates a medium Magic Attack.
+     * Method that generates an advanced Magic Attack.
      * @param j the Attack depends on the Job.
      * @return the MagicAttack depending on the Job.
      */
     public static MagicAttackInterface getAdvanced(final Jobs j) {
-        MagicAttackInterface mag = MagicAttackGenerator.getBasic();
+        MagicAttackInterface mag = MagicGenerator.getBasic();
         if (j == null) {
             throw new IllegalArgumentException();
         } else {
