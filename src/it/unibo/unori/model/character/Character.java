@@ -43,7 +43,9 @@ public interface Character extends Serializable {
      * @return total Health Points.
      */
     int getTotalHP();
-
+    
+    int getTotalMP();
+    
     /**
      * Method to consume character MP.
      * @param mpToConsume
@@ -64,7 +66,13 @@ public interface Character extends Serializable {
      *                  number of HP to restore
      */
     void restoreDamage(int hpToRestore);
-
+    
+    /**
+     * Method to restore character's MP.
+     * @param mpToRestore number of MP to restore.
+     */
+    void restoreMP(int mpToRestore);
+    
     /**
      * A getter method that gives Character's Attack statistic.
      * @return Attack statistic.

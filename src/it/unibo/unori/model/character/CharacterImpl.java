@@ -115,6 +115,11 @@ public class CharacterImpl implements Character {
     public int getTotalHP() {
         return this.statistic.get(Statistics.TOTALHP);
     }
+    
+    @Override
+    public int getTotalMP() {
+        return this.statistic.get(Statistics.TOTALMP);
+    }
 
     @Override
     public void consumeMP(final int mpToConsume) {
@@ -135,6 +140,12 @@ public class CharacterImpl implements Character {
         this.currentHP = this.currentHP + hpToRestore > this.getTotalHP() ? this.getTotalHP()
                 : this.currentHP + hpToRestore;
 
+    }
+    
+    @Override
+    public void restoreMP(final int mpToRestore) {
+        this.currentMP = this.currentMP + mpToRestore > this.getTotalHP() ? this.getTotalMP()
+                : this.currentHP + mpToRestore;
     }
 
     @Override
@@ -236,12 +247,4 @@ public class CharacterImpl implements Character {
     protected Map<Statistics, Integer> getStatistics() {
         return this.statistic;
     }
-
-
-
-
 }
-
-
-
-

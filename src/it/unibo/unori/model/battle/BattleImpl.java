@@ -106,16 +106,44 @@ public class BattleImpl implements Battle {
         if (friend.isDefended()) {
             return friend.getName() + " è già difeso! Peccato...";
         } else {
+            friend.setDefended();
             return "Hai difeso " + friend.getName();
         }
     }
 
     @Override
-    public int usePotion(final Hero my, final Potion toUse) 
+    public String usePotionHP(final Hero my, final Potion toUse) 
             throws ItemNotFoundException {
         if (this.itemBag.contains(toUse)) {
-            my.restoreDamage(toUse.getRestore());
-            return toUse.getRestore();
+            final int restore = toUse.getRestore();
+            switch(toUse.getStatisticToRestore()) {
+            case EXPFACTOR: break;
+            case FIREATK:
+                break;
+            case FIREDEF:
+                break;
+            case ICEATK:
+                break;
+            case ICEDEF:
+                break;
+            case PHYSICATK:
+                break;
+            case PHYSICDEF:
+                break;
+            case SPEED:
+                break;
+            case THUNDERATK:
+                break;
+            case THUNDERDEF:
+                break;
+            case TOTALHP: my.restoreDamage(restore);
+                break;
+            case TOTALMP: my.restoreMP(restore);
+                break;
+            default:
+                break;
+            }
+            return "Hai usato " + toUse.getName() + " su " + my.getName();
         } else {
             throw new ItemNotFoundException();
         }

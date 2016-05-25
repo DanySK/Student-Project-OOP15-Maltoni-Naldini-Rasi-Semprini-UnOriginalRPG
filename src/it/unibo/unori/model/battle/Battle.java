@@ -50,10 +50,10 @@ public interface Battle {
      * Method that allows to use a Potion from the item Bag.
      * @param my the Hero onto which use the Potion.
      * @param toUse the Potion to use.
-     * @return the amount of HPs restored by the Potion.
-     * @throws ItemNotFoundException 
+     * @return a confirmation String.
+     * @throws ItemNotFoundException if the Potion is not present in the Bag.
      */
-    int usePotion(Hero my, Potion toUse) throws ItemNotFoundException;
+    String usePotionHP(Hero my, Potion toUse) throws ItemNotFoundException;
 
     /**
      * Method that allows to throw a Special Attack if the bar is full.
