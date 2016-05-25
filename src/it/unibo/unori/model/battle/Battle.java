@@ -103,4 +103,29 @@ public interface Battle {
      * @return an instance of the Item Bag. (A defensive copy).
      */
     Bag getItemBag();
+    
+    /**
+     * Setter method to set the next Foe on turn.
+     * @param en the Foe to be set.
+     */
+    void setFoeOnTurn(Foe en);
+    
+    /**
+     * Setter method to set the next Hero on turn.
+     * @param h the Hero to be set.
+     * @return a confirmation String.
+     */
+    String setHeroOnTUrn(Hero h);
+    
+    /**
+     * Getter method that returns the next Hero on turn.
+     * @return the next Hero on turn.
+     */
+    Hero getHeroOnTurn();
+    
+    /**
+     * Getter method that returns the next Foe on turn.
+     * @return the next Foe on turn.
+     */
+    Foe getFoeOnTurn();
 }

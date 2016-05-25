@@ -26,6 +26,8 @@ public class BattleImpl implements Battle {
 
     private final List<Hero> squad;
     private final List<Foe> enemies;
+    private Foe foeOnTurn;
+    private Hero heroOnTurn;
     private boolean over;
     private int beatenFriends;
     private final Bag itemBag;
@@ -143,7 +145,7 @@ public class BattleImpl implements Battle {
             default:
                 break;
             }
-            return "Hai usato " + toUse.getName() + " su " + my.getName();
+            return "Hai usato " + toUse.getName() + " su " + my.getName() + "!";
         } else {
             throw new ItemNotFoundException();
         }
@@ -209,5 +211,26 @@ public class BattleImpl implements Battle {
     @Override
     public Bag getItemBag() {
         return new BagImpl(this.itemBag);
+    }
+    
+    @Override
+    public Foe getFoeOnTurn() {
+        return this.foeOnTurn;
+    }
+    
+    @Override
+    public Hero getHeroOnTurn() {
+        return this.heroOnTurn;
+    }
+    
+    @Override
+    public String setHeroOnTUrn(final Hero h) {
+        this.heroOnTurn = h;
+        return "E' il turno di" + h.getName();
+    }
+    
+    @Override
+    public void setFoeOnTurn(final Foe en) {
+        this.foeOnTurn = en;
     }
 }
