@@ -12,6 +12,7 @@ public class Dialogue extends DummyMenu {
     private static final int MAX_CHARS = 50;
     private final String sentence;
     private int nextToShow;
+    private final List<String> listRows;
     
     /**
      * Standard constructor.
@@ -19,6 +20,7 @@ public class Dialogue extends DummyMenu {
      */
     public Dialogue(final String toShow) {
         this.sentence = toShow;
+        this.listRows = this.showRows();
         this.nextToShow = 0;
     }
     
@@ -26,7 +28,7 @@ public class Dialogue extends DummyMenu {
      * This method returns the sentence in form of a List of Strings.
      * @return the sentence in form of a List of Strings.
      */
-    public List<String> showRows() {
+    private List<String> showRows() {
         final List<String> toShow = new ArrayList<>();
         int count = 0;
         for (final Character c : this.sentence.toCharArray()) {
@@ -48,7 +50,7 @@ public class Dialogue extends DummyMenu {
      * @return the next string to show.
      */
     public String showNext() {
-        final String show = this.showRows().get(this.nextToShow);
+        final String show = this.listRows.get(this.nextToShow);
         this.nextToShow++;
         return show;
     }
