@@ -15,14 +15,16 @@ public class FoeImpl extends CharacterImpl implements Foe {
     
     /**
      * Standard constructor for a Foe.
-     * @param ia the IA of the Foe.
+     * @param intelligence the IA of the Foe.
      * @param name the name of the Foe.
      * @param map the Statistics of the Foe.
      */
-    public FoeImpl(final int ia, final String name, final Map<Statistics, Integer> map) {
+    public FoeImpl(final int intelligence, final String name,
+            final Map<Statistics, Integer> map) {
         super(name, map);
-        this.ia = ia;
+        this.ia = intelligence;
     }
+    
     @Override
     public int getIA() {
         return this.ia;
