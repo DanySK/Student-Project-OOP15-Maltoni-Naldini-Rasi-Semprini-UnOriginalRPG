@@ -60,7 +60,7 @@ public class BagImpl implements Bag {
     
     private void insertPotion(final Potion p) {
         if (this.potions.containsKey(p)) {
-            this.potions.replace(p, this.armors.get(p) + 1);
+            this.potions.replace(p, this.potions.get(p) + 1);
         } else {
             this.potions.put(p, 1);
         }
