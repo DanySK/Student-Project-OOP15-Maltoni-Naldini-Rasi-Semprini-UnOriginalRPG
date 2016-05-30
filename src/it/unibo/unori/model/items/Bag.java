@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Map;
 
 import it.unibo.unori.model.character.Hero;
+import it.unibo.unori.model.character.exceptions.ArmorAlreadyException;
+import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
 import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
 
 /**
@@ -41,17 +43,19 @@ public interface Bag extends Serializable {
      * This method allows to equip a Hero with a specified Armor.
      * @param my the Hero to equip.
      * @param arm the Armor to equip the Hero with.
+     * @throws ArmorAlreadyException 
      * @throws ItemNotFoundException if the Armor is not contained in the Bag.
      */
-    void equip(Hero my, Armor arm);
+    void equip(Hero my, Armor arm) throws ArmorAlreadyException;
     
     /**
      * This method allows to equip a Hero with a specified Weapon.
      * @param my the Hero to equip.
      * @param w the Weapon to equip the Hero with.
+     * @throws WeaponAlreadyException 
      * @throws ItemNotFoundException if the Item is not contained in the Bag.
      */
-    void arm(Hero my, Weapon w);
+    void arm(Hero my, Weapon w) throws WeaponAlreadyException;
     
     /**
      * This method tells me weather the Bag contains a specified Item or not.

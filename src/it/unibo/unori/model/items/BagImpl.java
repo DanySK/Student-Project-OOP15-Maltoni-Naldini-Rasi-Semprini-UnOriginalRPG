@@ -23,7 +23,7 @@ public class BagImpl implements Bag {
     private final Map<Potion, Integer> potions;
     
     /**
-     * Constructor: it initializes the maps.
+     * Standard Constructor: it initializes the maps.
      */
     public BagImpl() {
         this.armors = new HashMap<>();
@@ -134,23 +134,13 @@ public class BagImpl implements Bag {
     }
 
     @Override
-    public void equip(final Hero my, final Armor arm) {
-        try {
-            my.setArmor(arm);
-        } catch (ArmorAlreadyException e) {
-            //TODO where to put the exception message??
-            System.out.println(e.toString());
-        }
+    public void equip(final Hero my, final Armor arm) throws ArmorAlreadyException {
+        my.setArmor(arm);
     }
 
     @Override
-    public void arm(final Hero my, final Weapon w) {
-        try {
-            my.setWeapon(w);
-        } catch (WeaponAlreadyException e) {
-            //TODO where to put the exception message??
-            System.out.println(e.toString());
-        }
+    public void arm(final Hero my, final Weapon w) throws WeaponAlreadyException {
+        my.setWeapon(w);
     }
     @Override
     public boolean contains(final Item i) {
