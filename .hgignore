@@ -8,6 +8,7 @@ syntax: glob
 .classpath
 .pmd
 .project
+.settings/*
 style.xml
 pmd.xml
 Save.txt
