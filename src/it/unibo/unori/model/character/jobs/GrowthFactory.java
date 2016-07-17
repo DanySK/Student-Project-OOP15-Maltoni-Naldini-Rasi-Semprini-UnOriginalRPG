@@ -114,6 +114,26 @@ public class GrowthFactory {
         m.put(Statistics.PHYSICDEF, GrowthParameters.MEDIUM.value);
         return m;
     }
+
+    /**
+     * Create dump stats for a dump job.
+     * @return dump stats
+     */
+    public Map<Statistics, Integer> createDumpGrowth() {
+        final Map<Statistics, Integer> m = new HashMap<>();
+        m.put(Statistics.TOTALHP, MEDIUMGROWTHPV);
+        m.put(Statistics.TOTALMP, GrowthParameters.LOW.value);
+        m.put(Statistics.SPEED, GrowthParameters.MEDIUM.value);
+        m.put(Statistics.FIREATK, GrowthParameters.MEDIUM_LOW.value);
+        m.put(Statistics.FIREDEF, GrowthParameters.MEDIUM_LOW.value);
+        m.put(Statistics.THUNDERATK, GrowthParameters.MEDIUM_LOW.value);
+        m.put(Statistics.THUNDERDEF, GrowthParameters.MEDIUM_LOW.value);
+        m.put(Statistics.ICEATK, GrowthParameters.MEDIUM_LOW.value);
+        m.put(Statistics.ICEDEF, GrowthParameters.MEDIUM_LOW.value);
+        m.put(Statistics.PHYSICATK, GrowthParameters.HIGH.value);
+        m.put(Statistics.PHYSICDEF, GrowthParameters.HIGH.value);
+        return m;
+    }
     /**
      * Getter for growth parameters of a job.
      * @param job the job specified 
@@ -134,6 +154,7 @@ public class GrowthFactory {
         }
         return new HashMap<>(JOBSMAP.get(job));
     }
+
 
     /**
      * Private enum with the growth values

@@ -7,7 +7,9 @@ import it.unibo.unori.controller.utility.JobsSetup;
 import it.unibo.unori.model.character.Statistics;
 import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.Armor.ArmorPieces;
+import it.unibo.unori.model.items.ArmorFactory;
 import it.unibo.unori.model.items.Weapon;
+import it.unibo.unori.model.items.WeaponFactory;
 
 /**
  * Enumeration to define the jobs of the party members.
@@ -28,11 +30,11 @@ public enum Jobs {
     /**
      * Clown and Cook.
      */
-    COOK(JobsSetup.COOK), CLOWN(JobsSetup.CLOWN);
+    COOK(JobsSetup.COOK), CLOWN(JobsSetup.CLOWN),
     /**
-     * Dump Job for testing reasons
+     * Dump Job for testing reasons.
      */
-    DUMP();
+    DUMP;
 
     private final Map<ArmorPieces, Armor> basicEquip;
     private final Map<Statistics, Integer> basicStats;
@@ -45,9 +47,12 @@ public enum Jobs {
         this.growthStats = JobsSetup.getDefaultIncrements(filePath);
         this.basicWeapon = JobsSetup.getDefaultWeapon(filePath);
     }
-     
-    Jobs(){
-        
+
+    Jobs() {
+       this.basicEquip = new ArmorFactory().getStdEquip();
+       this.basicWeapon = new WeaponFactory().getStdSword();
+       this.basicStats = new StatisticsFactory().createDumpStats();
+       this.growthStats = new GrowthFactory().createDumpGrowth();
     }
 
      /**

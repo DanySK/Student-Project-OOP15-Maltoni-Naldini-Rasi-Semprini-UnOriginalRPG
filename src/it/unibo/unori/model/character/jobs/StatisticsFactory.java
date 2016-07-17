@@ -128,5 +128,24 @@ public class StatisticsFactory {
         }
         return new HashMap<>(JOBSMAP.get(job));
     }
+    /**
+     * Method to create the dumpStats.
+     * @return dumpstats
+     */
+    public Map<Statistics, Integer> createDumpStats() {
+        final Map<Statistics, Integer> m = new HashMap<>();
+        m.put(Statistics.TOTALHP, 1500);
+        m.put(Statistics.TOTALMP, 500);
+        m.put(Statistics.SPEED, 1100);
+        m.put(Statistics.FIREATK, 800);
+        m.put(Statistics.FIREDEF, 750);
+        m.put(Statistics.THUNDERATK, 800);
+        m.put(Statistics.THUNDERDEF, 750);
+        m.put(Statistics.ICEATK, 800);
+        m.put(Statistics.ICEDEF, 750);
+        m.put(Statistics.PHYSICATK, 2000);
+        m.put(Statistics.PHYSICDEF, 2000);
+        return m;
+    }
 
 }
