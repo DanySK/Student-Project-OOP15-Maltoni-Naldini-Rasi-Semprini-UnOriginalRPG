@@ -1,8 +1,6 @@
 package it.unibo.unori.model.items;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import it.unibo.unori.model.character.Statistics;
@@ -19,22 +17,22 @@ public class ArmorFactory {
      * Create a standard equip for a character.
      * @return A list containing the equip
      */
-    public List<Armor> getStdEquip() {
-        final List<Armor> equip = new ArrayList<>();
+    public Map<ArmorPieces, Armor> getStdEquip() {
+        final Map<ArmorPieces, Armor> equip = new HashMap<>();
         final Map<Statistics, Integer> statsmap = new HashMap<>(); 
         statsmap.put(Statistics.PHYSICDEF, 100);
         statsmap.put(Statistics.FIREDEF, 0);
         statsmap.put(Statistics.ICEDEF, 0);
         statsmap.put(Statistics.THUNDERDEF, 0);
-        equip.add(new ArmorImpl("Elmo", ArmorPieces.HELMET, 
+        equip.put(ArmorPieces.HELMET, new ArmorImpl("Elmo", ArmorPieces.HELMET, 
                 "Elmo piuttosto brutto", statsmap, Status.NONE));
-        equip.add(new ArmorImpl("Cotta", ArmorPieces.ARMOR,
+        equip.put(ArmorPieces.ARMOR, new ArmorImpl("Cotta", ArmorPieces.ARMOR,
                 "Cotta piuttosto brutto", statsmap, Status.NONE));
-        equip.add(new ArmorImpl("Guanti", ArmorPieces.GLOVES,
+        equip.put(ArmorPieces.GLOVES, new ArmorImpl("Guanti", ArmorPieces.GLOVES,
                 "Guanti piuttosto brutti", statsmap, Status.NONE));
-        equip.add(new ArmorImpl("Schinieri", ArmorPieces.TROUSERS,
+        equip.put(ArmorPieces.TROUSERS, new ArmorImpl("Schinieri", ArmorPieces.TROUSERS,
                 "Schinieri piuttosto brutti", statsmap, Status.NONE));
-        equip.add(new ArmorImpl("Scudo", ArmorPieces.SHIELD,
+        equip.put(ArmorPieces.SHIELD, new ArmorImpl("Scudo", ArmorPieces.SHIELD,
                 "Scudo piuttosto brutto", statsmap, Status.NONE));
         return equip;
     }
