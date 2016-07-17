@@ -43,9 +43,12 @@ public interface Character extends Serializable {
      * @return total Health Points.
      */
     int getTotalHP();
-    
+    /**
+     * A getter method that gives Character's total Magic Points.
+     * @return total Magic Points
+     */
     int getTotalMP();
-    
+
     /**
      * Method to consume character MP.
      * @param mpToConsume
@@ -66,13 +69,13 @@ public interface Character extends Serializable {
      *                  number of HP to restore
      */
     void restoreDamage(int hpToRestore);
-    
+
     /**
      * Method to restore character's MP.
      * @param mpToRestore number of MP to restore.
      */
     void restoreMP(int mpToRestore);
-    
+
     /**
      * A getter method that gives Character's Attack statistic.
      * @return Attack statistic.
@@ -127,19 +130,19 @@ public interface Character extends Serializable {
      * @return Character's ice attack
      */
     int getIceAttack();
-    
+
     /**
      * A getter method that gives Character's Experience-Growing Factor.
      * @return the Experience-Growing Factor.
      */
     int getExpFactor();
-    
+
     /**
      * Set a status on the character.
      * @param state
      *              Status to set.
      */
-    
+
     void setStatus(Status state);
 
     /**
@@ -167,13 +170,13 @@ public interface Character extends Serializable {
      * @throws MagicNotFoundException 
      */
     void removeSpell(MagicAttackInterface mag) throws MagicNotFoundException;
-    
+
     /**
      * This getter methods returns the total amount of MP expected for the Character.
      * @return the total amount of MP.
      */
     int getTotMP();
-    
+
     /**
      * This getter method returns the amount of MP currently available for
      * the Character.

@@ -12,7 +12,7 @@ public class FoeImpl extends CharacterImpl implements Foe {
      */
     private static final long serialVersionUID = -1168567801329410379L;
     private final int ia;
-    
+
     /**
      * Standard constructor for a Foe.
      * @param intelligence the IA of the Foe.
@@ -24,7 +24,7 @@ public class FoeImpl extends CharacterImpl implements Foe {
         super(name, map);
         this.ia = intelligence;
     }
-    
+
     @Override
     public int getIA() {
         return this.ia;

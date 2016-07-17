@@ -115,7 +115,7 @@ public class CharacterImpl implements Character {
     public int getTotalHP() {
         return this.statistic.get(Statistics.TOTALHP);
     }
-    
+
     @Override
     public int getTotalMP() {
         return this.statistic.get(Statistics.TOTALMP);
@@ -141,7 +141,7 @@ public class CharacterImpl implements Character {
                 : this.currentHP + hpToRestore;
 
     }
-    
+
     @Override
     public void restoreMP(final int mpToRestore) {
         this.currentMP = this.currentMP + mpToRestore > this.getTotalHP() ? this.getTotalMP()
@@ -193,7 +193,7 @@ public class CharacterImpl implements Character {
     public int getIceAttack() {
         return this.statistic.get(Statistics.ICEDEF);
     }
-    
+
     @Override
     public int getExpFactor() {
         return this.statistic.get(Statistics.EXPFACTOR);
@@ -209,17 +209,17 @@ public class CharacterImpl implements Character {
     public Status getStatus() {
         return this.status;
     }
-    
+
     @Override
     public int getTotMP() {
         return this.statistic.get(Statistics.TOTALMP);
     }
-    
+
     @Override
     public int getCurrentMP() {
         return this.currentMP;
     }
-    
+
     @Override
     public List<MagicAttackInterface> getMagics() {
         return new LinkedList<>(this.spellList);
