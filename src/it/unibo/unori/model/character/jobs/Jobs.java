@@ -29,6 +29,10 @@ public enum Jobs {
      * Clown and Cook.
      */
     COOK(JobsSetup.COOK), CLOWN(JobsSetup.CLOWN);
+    /**
+     * Dump Job for testing reasons
+     */
+    DUMP();
 
     private final Map<ArmorPieces, Armor> basicEquip;
     private final Map<Statistics, Integer> basicStats;
@@ -40,6 +44,10 @@ public enum Jobs {
         this.basicStats = JobsSetup.getDefaultStats(filePath);
         this.growthStats = JobsSetup.getDefaultIncrements(filePath);
         this.basicWeapon = JobsSetup.getDefaultWeapon(filePath);
+    }
+     
+    Jobs(){
+        
     }
 
      /**
