@@ -46,14 +46,17 @@ public class HeroImpl  extends CharacterImpl implements Hero {
      *              Hero's name.
      * @param job
      *              Hero's job.
+     *@param params
+     *              Hero's basic parameters.
      *@param armor
      *              Hero's initial equip.
      *@param weapon
      *              Hero's initial weapon.
      */
     public HeroImpl(final String name, final Jobs job, 
+            final Map <Statistics, Integer> params,
             final Map<ArmorPieces, Armor> armor, final Weapon weapon) {
-        super(name, new StatisticsFactory().getJobStats(job));
+        super(name, params);
         this.armor = armor;
         this.weapon = weapon;
         this.heroJob = job;
@@ -61,6 +64,18 @@ public class HeroImpl  extends CharacterImpl implements Hero {
         this.currentBar = 0;
         this.addSpell(MagicGenerator.getBasic());
         this.defended = false;
+    }
+
+    /**
+     * Constructor with less parameters.
+     * @param name
+     *              Character's name
+     * @param job
+     *              Character's job
+     */
+    public HeroImpl(final String name, final Jobs job) {
+       this(name, job, job.getInitialStats(), job.getInitialArmor(),
+               job.getInitialWeapon()); 
     }
 
     @Override
