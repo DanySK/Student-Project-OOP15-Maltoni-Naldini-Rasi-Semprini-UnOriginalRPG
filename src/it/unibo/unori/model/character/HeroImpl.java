@@ -9,7 +9,6 @@ import it.unibo.unori.model.character.exceptions.NoArmorException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
 import it.unibo.unori.model.character.jobs.Jobs;
-import it.unibo.unori.model.character.jobs.StatisticsFactory;
 import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.Armor.ArmorPieces;
 import it.unibo.unori.model.items.ArmorImpl;
