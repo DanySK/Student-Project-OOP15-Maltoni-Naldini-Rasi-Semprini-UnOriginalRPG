@@ -1,6 +1,7 @@
 package it.unibo.unori.model.character.jobs;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
@@ -45,6 +46,16 @@ public class CharacterTest {
         } catch (NoArmorException e) {
             fail("No Exception should be thrown");
         }
+
+        try {
+            h.unsetArmor(ArmorPieces.SHIELD);
+            fail("Exception should be thrown!");
+        } catch (NoArmorException e) {
+           System.out.println("OK");
+        }
+
+        assertSame(h.getJob().getGrowthStats().size(), 11);
+        h.levelUp();
 
     }
 
