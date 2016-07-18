@@ -190,9 +190,11 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     public void levelUp() {
         this.setLevel(this.getLevel() + 1);
         final Map<Statistics, Integer> m = this.heroJob.getGrowthStats();
-        Arrays.asList(Statistics.values()).forEach(i -> {
+         Arrays.asList(Statistics.values()).stream().filter(i -> !i.equals(Statistics.EXPFACTOR))
+         .forEach(i -> {
             final Map<Statistics, Integer> s = this.getStatistics();
-            s.replace(i, s.get(i) + m.get(i));
+            final int k = s.get(i) + m.get(i);
+           s.replace(i, k);
         });
     }
 
