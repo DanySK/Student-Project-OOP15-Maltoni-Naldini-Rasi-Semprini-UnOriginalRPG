@@ -141,9 +141,9 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     @Override
     public void unsetArmor(final ArmorPieces p) throws NoArmorException {
         if (this.isNotPresentArmor(p)) {
-            this.armor.replace(p, ArmorImpl.NAKED);
-        } else {
             throw new NoArmorException();
+        } else {
+            this.armor.replace(p, ArmorImpl.NAKED);
         }
     }
 
