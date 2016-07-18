@@ -9,9 +9,12 @@ import org.junit.Test;
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.HeroImpl;
 import it.unibo.unori.model.character.Statistics;
+import it.unibo.unori.model.character.exceptions.ArmorAlreadyException;
 import it.unibo.unori.model.character.exceptions.NoArmorException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
+import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.Armor.ArmorPieces;
+import it.unibo.unori.model.items.ArmorFactory;
 import it.unibo.unori.model.items.ArmorImpl;
 import it.unibo.unori.model.items.WeaponImpl;
 
@@ -25,7 +28,7 @@ public class CharacterTest {
      * Test for the hero class.
      */
     @Test
-    public void heroTest() {
+    public void heroBasicTest() {
         assertEquals(Jobs.DUMP.getInitialStats().size(), Statistics.values().length);
         final Hero h = new HeroImpl("Boot", Jobs.DUMP);
         h.consumeMP(10);
@@ -36,6 +39,18 @@ public class CharacterTest {
         h.restoreDamage(1000);
         h.restoreDamage(1000);
         assertEquals(h.getRemainingHP(), h.getTotalHP());
+
+        h.levelUp();
+        assertEquals(h.getTotalHP(), 1600);
+        assertEquals(h.getFireAtk(), 820);
+        assertSame(h.getLevel(), 2);
+        }
+    /**
+     * Test for equipments.
+     */
+    @Test
+    public void heroEquipTest() {
+        final Hero h = new HeroImpl("Boot", Jobs.DUMP);
         try {
             h.unsetWeapon();
             assertEquals(h.getWeapon(), WeaponImpl.FISTS);
@@ -54,9 +69,12 @@ public class CharacterTest {
            System.out.println("OK");
         }
 
-        assertSame(h.getJob().getGrowthStats().size(), 11);
-        h.levelUp();
-
+        final Armor shield = new ArmorFactory().getStdEquip().get(ArmorPieces.SHIELD);
+        try {
+            h.setArmor(shield);
+        } catch (ArmorAlreadyException e) {
+            fail("Shield should be equipped");
+        }
     }
 
 }
