@@ -145,6 +145,7 @@ public class StatisticsFactory {
         m.put(Statistics.ICEDEF, 750);
         m.put(Statistics.PHYSICATK, 2000);
         m.put(Statistics.PHYSICDEF, 2000);
+        m.put(Statistics.EXPFACTOR, 100);
         return m;
     }
 

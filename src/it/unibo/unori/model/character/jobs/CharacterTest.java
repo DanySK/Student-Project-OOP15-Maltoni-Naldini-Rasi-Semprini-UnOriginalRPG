@@ -1,9 +1,12 @@
 package it.unibo.unori.model.character.jobs;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.HeroImpl;
+import it.unibo.unori.model.character.Statistics;
 
 /**
  * Test Class for Character,Hero and Foe.
@@ -16,8 +19,11 @@ public class CharacterTest {
      */
     @Test
     public void heroTest() {
-        final Hero h = new HeroImpl("Boot", Jobs.DUMP);
-
+       /* final Hero h = new HeroImpl("Boot", Jobs.DUMP);
+        h.consumeMP(10);
+        assertEquals(h.getCurrentMP(), Jobs.DUMP.getInitialStats().get(Statistics.TOTALMP) - 10);
+        */
+        assertEquals(Jobs.DUMP.getInitialStats().size(), Statistics.values().length);
     }
 
 }

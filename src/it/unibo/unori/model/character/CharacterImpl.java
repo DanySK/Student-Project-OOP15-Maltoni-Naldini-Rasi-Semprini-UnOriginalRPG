@@ -72,7 +72,7 @@ public class CharacterImpl implements Character {
             final int level, final List<MagicAttackInterface> spellList) {
         this.name = name;
         if (checkParameters(map, level)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Lancio qui");
         }
         this.statistic = map;
         this.currentHP = this.statistic.get(Statistics.TOTALHP);
