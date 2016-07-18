@@ -19,11 +19,14 @@ public class CharacterTest {
      */
     @Test
     public void heroTest() {
-       /* final Hero h = new HeroImpl("Boot", Jobs.DUMP);
+        assertEquals(Jobs.DUMP.getInitialStats().size(), Statistics.values().length);
+        final Hero h = new HeroImpl("Boot", Jobs.DUMP);
         h.consumeMP(10);
         assertEquals(h.getCurrentMP(), Jobs.DUMP.getInitialStats().get(Statistics.TOTALMP) - 10);
-        */
-        assertEquals(Jobs.DUMP.getInitialStats().size(), Statistics.values().length);
+        h.takeDamage(1000);
+        h.takeDamage(1000);
+        assertEquals(h.getRemainingHP(), 0);
+
     }
 
 }
