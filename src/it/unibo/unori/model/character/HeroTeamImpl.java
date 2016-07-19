@@ -1,6 +1,10 @@
 package it.unibo.unori.model.character;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import it.unibo.unori.model.character.exceptions.MaxHeroException;
 
 /**
  * Implementation of HeroTeam interface.
@@ -30,28 +34,43 @@ public class HeroTeamImpl implements HeroTeam {
         this.heroList = l;
     }
 
+    /**
+     * Create a list with a single hero.
+     * @param h
+     *          hero to add 
+     */
+    public HeroTeamImpl(final Hero h) {
+        this.heroList = new ArrayList<>();
+        this.heroList.add(h);
+    }
+
     @Override
-    public void addHero(Hero h) throws IndexOutOfBoundsException {
-        // TODO Auto-generated method stub
+    public void addHero(final Hero h) throws MaxHeroException {
+        if (this.heroList.size() == MAXHERO) {
+            throw new MaxHeroException();
+        }
+        this.heroList.add(h);
 
     }
 
     @Override
-    public void removeHero(Hero h) throws IllegalArgumentException {
-        // TODO Auto-generated method stub
+    public void removeHero(final Hero h) throws IllegalArgumentException {
+        if (!this.heroList.contains(h) || this.heroList.size() == 1) {
+            throw new IllegalArgumentException();
+        }
+        this.heroList.remove(h);
 
     }
 
     @Override
     public List<Hero> getAllHeroes() {
-        // TODO Auto-generated method stub
-        return null;
+        return new ArrayList<>(this.heroList);
     }
 
     @Override
     public List<Hero> getAliveHeroes() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.heroList.stream().filter(i -> !i.getStatus().equals(Status.DEAD))
+                .collect(Collectors.toList());
     }
 
 }
