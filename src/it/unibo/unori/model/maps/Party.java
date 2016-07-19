@@ -2,8 +2,9 @@ package it.unibo.unori.model.maps;
 
 import java.io.Serializable;
 
+import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.maps.exceptions.BlockedPathException;
-import it.unibo.unori.model.menu.DummyMenu;
+import it.unibo.unori.model.menu.Dialogue;
 
 /**
  * Party is the central object of the all map-related classes.
@@ -59,10 +60,16 @@ public interface Party extends Serializable {
     void moveParty(CardinalPoints direction) throws BlockedPathException;
 
     /**
+     * Get the bag of the party.
+     * @return bag of the party
+     */
+    Bag getPartyBag();
+
+    /**
      * Method to interact with the looked Cell.
      * @return a dialogue, related to the kind of Cell
      */
-    DummyMenu interact();
+    Dialogue interact();
 
     /**
      * Enum to define the four cardinal points and their skidding 

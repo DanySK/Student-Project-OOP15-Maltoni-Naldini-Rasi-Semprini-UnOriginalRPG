@@ -1,10 +1,14 @@
 package it.unibo.unori.model.maps;
 
+import it.unibo.unori.model.items.Bag;
+import it.unibo.unori.model.items.BagImpl;
 import it.unibo.unori.model.maps.cell.Cell;
 import it.unibo.unori.model.maps.cell.CellState;
 import it.unibo.unori.model.maps.exceptions.BlockedPathException;
 import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
-import it.unibo.unori.model.menu.DummyMenu;
+import it.unibo.unori.model.maps.exceptions.NoNPCFoundException;
+import it.unibo.unori.model.maps.exceptions.NoObjectFoundException;
+import it.unibo.unori.model.menu.Dialogue;
 
 /**
  * SingletonParty is a class to make the Party interface match the Singleton
@@ -63,6 +67,7 @@ public final class SingletonParty {
         private GameMap currentMap;
         private Object frame;
         private CardinalPoints orientation;
+        private final Bag partyBag;
 
         /**
          * Constructor for PartyImpl, set a standard map, position, cell and
@@ -73,6 +78,7 @@ public final class SingletonParty {
             this.currentPosition = this.currentMap.getInitialCellPosition();
             this.frame = new Object();
             this.orientation = CardinalPoints.NORTH;
+            this.partyBag = new BagImpl();
         }
 
         @Override
@@ -102,6 +108,11 @@ public final class SingletonParty {
         }
 
         @Override
+        public Bag getPartyBag() {
+            return this.partyBag;
+        }
+
+        @Override
         public void moveParty(final CardinalPoints direction) throws BlockedPathException {
             this.orientation = direction;
             final Position nextPosition = new Position(this.currentPosition.getPosX() + this.orientation.getXSkidding(),
@@ -120,9 +131,20 @@ public final class SingletonParty {
         }
 
         @Override
-        public DummyMenu interact() {
-            // TODO Auto-generated method stub
-            return null;
+        public Dialogue interact() {
+            final Position pos = new Position(this.currentPosition.getPosX() + this.orientation.getXSkidding(),
+                    this.currentPosition.getPosY() + this.orientation.getYSkidding());
+            final Cell c = this.currentMap.getCell(pos);
+            try {
+                return c.talkToNpc();
+            } catch (NoNPCFoundException e) {
+                try {
+                    this.partyBag.storeItem(c.getObject());
+                    return new Dialogue("Che fortuna! Hai trovato " + c.getObject().getName());
+                } catch (NoObjectFoundException e1) {
+                    return new Dialogue("Non hai trovato niente, è meglio andare!");
+                }
+            }
         }
 
     }
