@@ -2,7 +2,7 @@ package it.unibo.unori.model.maps.cell;
 
 import it.unibo.unori.model.character.Npc;
 import it.unibo.unori.model.maps.exceptions.NoNPCFoundException;
-import it.unibo.unori.model.menu.DummyMenu;
+import it.unibo.unori.model.menu.Dialogue;
 
 /**
  * An Extension of the SimpleCellImpl class to accomplish a dialogue with a
@@ -38,7 +38,7 @@ public class NPCCellImpl extends SimpleCellImpl {
      * 
      */
     @Override
-    public DummyMenu talkToNpc() throws NoNPCFoundException {
+    public Dialogue talkToNpc() throws NoNPCFoundException {
         return npc.getDialogue();
     }
 

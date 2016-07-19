@@ -4,7 +4,7 @@ import it.unibo.unori.model.maps.GameMap;
 import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
 import it.unibo.unori.model.maps.exceptions.NoNPCFoundException;
 import it.unibo.unori.model.maps.exceptions.NoObjectFoundException;
-import it.unibo.unori.model.menu.DummyMenu;
+import it.unibo.unori.model.menu.Dialogue;
 
 /**
  * Implementation of the Cell interface.
@@ -70,7 +70,7 @@ public class SimpleCellImpl implements Cell {
     }
 
     @Override
-    public DummyMenu talkToNpc() throws NoNPCFoundException {
+    public Dialogue talkToNpc() throws NoNPCFoundException {
         throw new NoNPCFoundException();
     }
 

@@ -6,7 +6,7 @@ import it.unibo.unori.model.maps.GameMap;
 import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
 import it.unibo.unori.model.maps.exceptions.NoNPCFoundException;
 import it.unibo.unori.model.maps.exceptions.NoObjectFoundException;
-import it.unibo.unori.model.menu.DummyMenu;
+import it.unibo.unori.model.menu.Dialogue;
 
 /**
  * 
@@ -64,7 +64,7 @@ public interface Cell extends Serializable {
      * @return a dialogue window with the NPC
      * @throws NoNPCFoundException if the NPC is not present
      */
-    DummyMenu talkToNpc() throws NoNPCFoundException;
+    Dialogue talkToNpc() throws NoNPCFoundException;
 
     /**
      * Get the map contained in the cell , if present.
