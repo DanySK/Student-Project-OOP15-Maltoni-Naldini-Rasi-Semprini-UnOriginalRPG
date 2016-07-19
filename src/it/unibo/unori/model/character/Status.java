@@ -8,5 +8,5 @@ public enum Status {
     /**
      * Altered states of the character.
      */
-    NONE, POISONED, ASLEEP, BLEEDING, CURSED, NOT_DEFENDABLE
+    NONE, POISONED, ASLEEP, BLEEDING, CURSED, NOT_DEFENDABLE, DEAD
 }
