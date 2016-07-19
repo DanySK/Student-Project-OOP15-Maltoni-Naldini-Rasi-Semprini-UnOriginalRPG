@@ -6,7 +6,6 @@ import it.unibo.unori.model.maps.GameMap;
 import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
 import it.unibo.unori.model.maps.exceptions.NoNPCFoundException;
 import it.unibo.unori.model.maps.exceptions.NoObjectFoundException;
-import it.unibo.unori.model.menu.Dialogue;
 import it.unibo.unori.model.menu.DummyMenu;
 
 /**
@@ -75,12 +74,6 @@ public interface Cell extends Serializable {
      *             notify the type of Exception
      */
     GameMap getCellMap() throws NoMapFoundException;
-    
-    /**
-     * Method for the party to interact with the cell
-     * @return
-     *         a dialogue from the cell
-     */
-    Dialogue interactCell();
+
 
 }

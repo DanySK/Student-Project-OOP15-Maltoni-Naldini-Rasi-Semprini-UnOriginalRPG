@@ -4,7 +4,6 @@ import it.unibo.unori.model.maps.GameMap;
 import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
 import it.unibo.unori.model.maps.exceptions.NoNPCFoundException;
 import it.unibo.unori.model.maps.exceptions.NoObjectFoundException;
-import it.unibo.unori.model.menu.Dialogue;
 import it.unibo.unori.model.menu.DummyMenu;
 
 /**
@@ -75,9 +74,5 @@ public class SimpleCellImpl implements Cell {
         throw new NoNPCFoundException();
     }
 
-    @Override
-    public Dialogue interactCell() {
-        return new Dialogue("Non c'è niente qui! Meglio andare avanti!");
-    }
 
 }
