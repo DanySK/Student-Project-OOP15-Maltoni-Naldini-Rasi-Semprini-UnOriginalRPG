@@ -1,5 +1,6 @@
 package it.unibo.unori.model.maps.cell;
 
+import it.unibo.unori.model.items.Item;
 import it.unibo.unori.model.maps.GameMap;
 import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
 import it.unibo.unori.model.maps.exceptions.NoNPCFoundException;
@@ -65,7 +66,7 @@ public class SimpleCellImpl implements Cell {
     }
 
     @Override
-    public Object getObject() throws NoObjectFoundException {
+    public Item getObject() throws NoObjectFoundException {
         throw new NoObjectFoundException();
     }
 

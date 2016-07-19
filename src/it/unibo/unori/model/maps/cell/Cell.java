@@ -2,6 +2,7 @@ package it.unibo.unori.model.maps.cell;
 
 import java.io.Serializable;
 
+import it.unibo.unori.model.items.Item;
 import it.unibo.unori.model.maps.GameMap;
 import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
 import it.unibo.unori.model.maps.exceptions.NoNPCFoundException;
@@ -57,7 +58,7 @@ public interface Cell extends Serializable {
      * @return the Object to add to the inventory of the party
      * @throws NoObjectFoundException if the Object to get is absent.
      */
-    Object getObject() throws NoObjectFoundException;
+    Item getObject() throws NoObjectFoundException;
 
     /**
      * Created a dialogue with the NPC , if present.
