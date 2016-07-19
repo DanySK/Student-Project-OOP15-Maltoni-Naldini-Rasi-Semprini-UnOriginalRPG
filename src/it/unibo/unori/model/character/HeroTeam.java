@@ -31,14 +31,16 @@ public interface HeroTeam extends Serializable {
     /**
      * Return the list of heroes.
      * @return a list containing all the heroes of the party
+     * @throws IllegalStateException if the list is empty
      */
-    List<Hero> getAllHeroes();
+    List<Hero> getAllHeroes() throws IllegalStateException;
 
     /**
      * Return a list of the alive heroes. 
      * @return
      *          a list containing the alive heroes
+     *@throws IllegalStateException if the list is empty
      */
-    List<Hero> getAliveHeroes();
+    List<Hero> getAliveHeroes() throws IllegalStateException;
 
 }

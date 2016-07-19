@@ -44,6 +44,19 @@ public class HeroTeamImpl implements HeroTeam {
         this.heroList.add(h);
     }
 
+    /**
+     * Create a list with no heroes.
+     */
+    public HeroTeamImpl() {
+        this.heroList = new ArrayList<>();
+    }
+
+    private void checkListSize() throws IllegalStateException {
+        if (this.heroList.size() == 0) {
+            throw new IllegalStateException();
+        }
+    }
+
     @Override
     public void addHero(final Hero h) throws MaxHeroException {
         if (this.heroList.size() == MAXHERO) {
@@ -63,12 +76,14 @@ public class HeroTeamImpl implements HeroTeam {
     }
 
     @Override
-    public List<Hero> getAllHeroes() {
+    public List<Hero> getAllHeroes() throws IllegalStateException {
+        this.checkListSize();
         return new ArrayList<>(this.heroList);
     }
 
     @Override
-    public List<Hero> getAliveHeroes() {
+    public List<Hero> getAliveHeroes() throws IllegalStateException {
+        this.checkListSize();
         return this.heroList.stream().filter(i -> !i.getStatus().equals(Status.DEAD))
                 .collect(Collectors.toList());
     }
