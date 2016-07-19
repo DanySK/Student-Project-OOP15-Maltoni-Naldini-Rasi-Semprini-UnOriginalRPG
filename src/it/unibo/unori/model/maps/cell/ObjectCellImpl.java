@@ -1,5 +1,6 @@
 package it.unibo.unori.model.maps.cell;
 
+import it.unibo.unori.model.items.Item;
 import it.unibo.unori.model.maps.exceptions.NoObjectFoundException;
 
 /**
@@ -12,7 +13,7 @@ public class ObjectCellImpl extends SimpleCellImpl {
      * 
      */
     private static final long serialVersionUID = 1077983786031256996L;
-    private final Object obj;
+    private final Item obj;
 
     /**
      * Constructor.
@@ -21,7 +22,7 @@ public class ObjectCellImpl extends SimpleCellImpl {
      * @param obj
      *              object to set in the cell
      */
-    public ObjectCellImpl(final Object frame, final Object obj) {
+    public ObjectCellImpl(final Object frame, final Item obj) {
         super(frame, CellState.BLOCKED);
         this.obj = obj;
     }
@@ -30,8 +31,9 @@ public class ObjectCellImpl extends SimpleCellImpl {
      * Override the getObject method of SimpleCellImpl.
      */
     @Override
-    public Object getObject() throws NoObjectFoundException {
+    public Item getObject() throws NoObjectFoundException {
         return this.obj;
     }
+
 
 }
