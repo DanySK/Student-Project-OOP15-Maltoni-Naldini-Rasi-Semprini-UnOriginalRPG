@@ -5,12 +5,11 @@ import javax.swing.JPanel;
 import javax.swing.JLayeredPane;
 
 /**
- * 
- * The View class displays game layers with transparency,
- * it behaves like a stack.
- *
+ * This class displays game layers with transparency,
+ * behaving like a stack.
  */
-public final class View extends JFrame {
+public final class View extends JFrame
+{
     private Integer layers = 0;
     private final JLayeredPane layeredPane;
     private static final String TITLE = "UnOriginal.RPG";
@@ -18,7 +17,8 @@ public final class View extends JFrame {
     /**
      * Creates an instance of the view.
      */
-    public View() {
+    public View()
+    {
         super(TITLE);
         this.setResizable(false);
         layeredPane = getLayeredPane();
@@ -28,15 +28,17 @@ public final class View extends JFrame {
     /**
      * Centers the view to the screen.
      */
-    public void center() {
+    public void center()
+    {
         setLocationRelativeTo(null);
     }
 
     /**
      * Resizes the view to the specified layer.
-     * @param layer the layer the view will resize to.
+     * @param layer the layer the view will resize to
      */
-    public void resizeTo(final JPanel layer) {
+    public void resizeTo(final JPanel layer)
+    {
         getContentPane().setPreferredSize(layer.getSize());
 
         this.pack();
@@ -44,16 +46,18 @@ public final class View extends JFrame {
 
     /**
      * Pushes a layer on top of the view.
-     * @param layer the layer to be pushed.
+     * @param layer the layer to be pushed
      */
-    public void push(final JPanel layer) {
+    public void push(final JPanel layer)
+    {
         layeredPane.add(layer, ++layers);
     }
 
     /**
      * Removes the layer on top of the view.
      */
-    public void pop() {
+    public void pop()
+    {
         layeredPane.remove(layeredPane.highestLayer());
     }
 }
