@@ -17,11 +17,12 @@ public class BagImpl implements Bag {
      * 
      */
     private static final long serialVersionUID = 1L;
-    
+
     private final Map<Armor, Integer> armors;
     private final Map<Weapon, Integer> weapons;
     private final Map<Potion, Integer> potions;
-    
+    private int keyNumber;
+
     /**
      * Standard Constructor: it initializes the maps.
      */
@@ -29,8 +30,8 @@ public class BagImpl implements Bag {
         this.armors = new HashMap<>();
         this.weapons = new HashMap<>();
         this.potions = new HashMap<>();
+        this.keyNumber = 0;
     }
-    
     /**
      * A Constructor that allows to create a Bag based on an already-existing one.
      * @param existing the Bag that allows to initialize the new one.
@@ -40,7 +41,7 @@ public class BagImpl implements Bag {
         this.weapons = existing.getWeapons();
         this.potions = existing.getPotions();
     }
-    
+
 
     private void insertArmor(final Armor ar) {
         if (this.armors.containsKey(ar)) {
