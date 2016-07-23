@@ -38,6 +38,7 @@ public class ChestCellImpl extends SimpleCellImpl {
      * @return
      *          the item in the chest
      * @throws NoObjectFoundException if the chest is empty.
+     * @throws NoKeyFoundException if the bag does not contain a key
      * 
      */
     public Item openChest(final Bag b) throws NoObjectFoundException, 
