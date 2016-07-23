@@ -1,15 +1,21 @@
 package it.unibo.unori.controller.state;
 
-import it.unibo.unori.view.layers.Layer;
+import javax.swing.JPanel;
 
-public abstract class AbstractGameState implements GameState{
-    private final Layer stateLayer;
+/**
+ * Abstarct class that models a game state in the state machine controller. It implements the interface and defines the
+ * shared method getLayer().
+ */
+public abstract class AbstractGameState implements GameState {
+    private final JPanel stateLayer;
 
     /**
      * Default constructor of GameState.
-     * @param stateLayer the Layer of this state
+     * 
+     * @param stateLayer
+     *            the Layer of this state
      */
-    public AbstractGameState(final Layer stateLayer) {
+    public AbstractGameState(final JPanel stateLayer) {
         this.stateLayer = stateLayer;
     }
 
@@ -23,7 +29,7 @@ public abstract class AbstractGameState implements GameState{
     public abstract void onExit();
 
     @Override
-    public Layer getLayer() {
+    public JPanel getLayer() {
         return this.stateLayer;
     }
 }

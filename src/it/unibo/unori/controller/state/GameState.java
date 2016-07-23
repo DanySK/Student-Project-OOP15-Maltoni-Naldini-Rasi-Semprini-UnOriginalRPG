@@ -1,6 +1,6 @@
 package it.unibo.unori.controller.state;
 
-import it.unibo.unori.view.layers.Layer;
+import javax.swing.JPanel;
 
 /**
  * This interface models a game state (eg. local map, world map, main menu, battle) in the state machine controller
@@ -30,5 +30,5 @@ public interface GameState {
      * 
      * @return the graphic part of the state as a layer
      */
-    Layer getLayer();
+    JPanel getLayer();
 }

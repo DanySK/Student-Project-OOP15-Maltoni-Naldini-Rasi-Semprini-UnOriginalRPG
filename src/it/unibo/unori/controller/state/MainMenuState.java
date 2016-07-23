@@ -1,9 +1,7 @@
 package it.unibo.unori.controller.state;
 
 import it.unibo.unori.model.menu.DummyMenu;
-import it.unibo.unori.view.View;
-import it.unibo.unori.view.layers.Layer;
-import it.unibo.unori.view.layers.menus.MainMenuLayer;
+import it.unibo.unori.view.layers.MainMenuLayer;
 
 /**
  * This GameState models the first state opened by the controller: the main menu.
@@ -15,7 +13,7 @@ public class MainMenuState extends AbstractGameState {
      * Default constructor; it instantiates a new main menu GameState.
      */
     public MainMenuState() {
-        super(new MainMenuLayer());
+        super(new MainMenuLayer(null)); // TODO
 
         /*
          * Potrebbe essere una buona opzione poter passare i bottoni alla view tramite una strategy esterna, magari

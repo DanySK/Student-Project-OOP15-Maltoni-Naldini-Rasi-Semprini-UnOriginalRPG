@@ -3,8 +3,6 @@ package it.unibo.unori.controller.state;
 import it.unibo.unori.model.maps.GameMap;
 import it.unibo.unori.model.maps.Party;
 import it.unibo.unori.model.maps.SingletonParty;
-import it.unibo.unori.view.View;
-import it.unibo.unori.view.layers.Layer;
 import it.unibo.unori.view.layers.MapLayer;
 
 /**

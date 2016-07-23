@@ -1,8 +1,6 @@
 package it.unibo.unori.controller.state;
 
-import it.unibo.unori.view.View;
-import it.unibo.unori.view.layers.Layer;
-import it.unibo.unori.view.layers.menus.InGameMenuLayer;
+import it.unibo.unori.view.layers.InGameMenuLayer;
 
 /**
  * This GameState models the state of an in-game menu opened during exploration.
@@ -15,7 +13,7 @@ public class InGameMenuState extends AbstractGameState {
      * of the {@link it.unibo.unori.controller.state.GameState} below in the stack.
      */
     public InGameMenuState() {
-        super(new InGameMenuLayer());
+        super(new InGameMenuLayer(null)); // TODO
 
         /*
          * Potrebbe essere una buona opzione poter passare i bottoni alla view tramite una strategy esterna, magari

@@ -8,9 +8,6 @@ import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.maps.GameMap;
-import it.unibo.unori.view.View;
-import it.unibo.unori.view.layers.BattleLayer;
-import it.unibo.unori.view.layers.Layer;
 
 /**
  * This GameState models the state of battle with some encountered monsters.
@@ -26,7 +23,7 @@ public class BattleState extends AbstractGameState {
      * @param bag the bag containing the items of the party
      */
     public BattleState(final List<Hero> party, final GameMap map, final List<Foe> foes, final Bag bag) {
-        super(new BattleLayer());
+        super(/* new BattleLayer() TODO */ null);
         this.battleModel = new BattleImpl(party, null, bag); // TODO null will be replaced by Battle getter
     }
 
