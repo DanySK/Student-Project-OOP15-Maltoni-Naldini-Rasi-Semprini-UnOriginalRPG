@@ -1,5 +1,7 @@
 package it.unibo.unori.model.maps;
 
+import it.unibo.unori.model.character.HeroTeam;
+import it.unibo.unori.model.character.HeroTeamImpl;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.BagImpl;
 import it.unibo.unori.model.maps.cell.Cell;
@@ -68,6 +70,7 @@ public final class SingletonParty {
         private Object frame;
         private CardinalPoints orientation;
         private final Bag partyBag;
+        private final HeroTeam heroteam;
 
         /**
          * Constructor for PartyImpl, set a standard map, position, cell and
@@ -79,6 +82,7 @@ public final class SingletonParty {
             this.frame = new Object();
             this.orientation = CardinalPoints.NORTH;
             this.partyBag = new BagImpl();
+            this.heroteam = new HeroTeamImpl();
         }
 
         @Override
@@ -110,6 +114,10 @@ public final class SingletonParty {
         @Override
         public Bag getPartyBag() {
             return this.partyBag;
+        }
+
+        public HeroTeam getHeroTeam() {
+            return this.heroteam;
         }
 
         @Override
