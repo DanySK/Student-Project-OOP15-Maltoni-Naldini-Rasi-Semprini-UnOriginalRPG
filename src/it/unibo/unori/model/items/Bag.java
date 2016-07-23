@@ -82,10 +82,4 @@ public interface Bag extends Serializable {
      */
     Map<Potion, Integer> getPotions();
 
-    /**
-     * Returns the number of keys in the bag.
-     * @return
-     *          the number of the key in the bag
-     */
-    int getKeysNumber();
 }
