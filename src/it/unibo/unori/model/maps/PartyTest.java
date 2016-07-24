@@ -6,9 +6,12 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import it.unibo.unori.model.items.WeaponFactory;
 import it.unibo.unori.model.maps.Party.CardinalPoints;
+import it.unibo.unori.model.maps.cell.CellFactory;
 import it.unibo.unori.model.maps.exceptions.BlockedPathException;
 import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
+import it.unibo.unori.model.maps.exceptions.NoObjectFoundException;
 
 /**
  * Test Class for the Party object.
@@ -17,6 +20,7 @@ import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
 public class PartyTest {
 
     private final GameMapFactory mapFactory = new GameMapFactory();
+    private final CellFactory cellFactory = new CellFactory();
     private static final int FIVE = 5; 
     private static final int MAXPOS = 99;
 
@@ -104,6 +108,31 @@ public class PartyTest {
         } catch (BlockedPathException e) {
             fail("Party was supposed to change map");
         }
+    }
+
+    /**
+     * Test for the interact Method.
+     * @throws NoObjectFoundException 
+     * @throws IllegalArgumentException 
+     */
+    @Test
+    public void testInteract() throws IllegalArgumentException, NoObjectFoundException {
+        final Party p = SingletonParty.getParty();
+        final GameMap m = mapFactory.getStdRoom();
+        m.setCell(new Position(2, 2), this.cellFactory.getObjectCell());
+        p.setCurrentMap(m);
+        assertEquals(p.getCurrentPosition(), new Position(1, 1));
+        try {
+            p.moveParty(CardinalPoints.EAST);
+            p.moveParty(CardinalPoints.SOUTH);
+            fail("It should not be able to walk on a object-container cell!");
+        } catch (BlockedPathException e) {
+            System.out.println(e);
+        }
+       final WeaponFactory wf = new WeaponFactory();
+       assertTrue(m.getCell(new Position(2, 2)).getObject().equals(wf.getStdSword()));
+       p.interact();
+       assertTrue(p.getPartyBag().contains(wf.getStdSword()));
     }
 
 }
