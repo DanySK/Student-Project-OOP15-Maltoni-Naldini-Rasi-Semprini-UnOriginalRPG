@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class to model a dialogue window.
+ * Class to model a Dialogue window.
  */
-public class Dialogue extends DummyMenu {
+public class Dialogue implements DialogueInterface {
     
     private static final int MAX_ROWS = 2;
     private static final int MAX_CHARS = 50;
@@ -31,35 +31,59 @@ public class Dialogue extends DummyMenu {
     private List<String> showRows() {
         final List<String> toShow = new ArrayList<>();
         int count = 0;
+        String s = "";
         for (final Character c : this.sentence.toCharArray()) {
-            String s = c.toString();
-            if (count > 0 && count < Dialogue.MAX_CHARS) {
+            if (count >= 0 && count < Dialogue.MAX_CHARS) {
                 s = s.concat(c.toString());            
             } 
             count++;
-            if (count == Dialogue.MAX_CHARS || count == this.sentence.length()) {
+            if (count == Dialogue.MAX_CHARS) {
                 count = 0;
                 toShow.add(s);
+                s = "";
             }
         }
+        toShow.add(s);
         return toShow;
     }
     
-    /**
-     * This method gives the next String to show in the dialogue window.
-     * @return the next string to show.
-     */
+    @Override
     public String showNext() {
         final String show = this.listRows.get(this.nextToShow);
         this.nextToShow++;
         return show;
     }
     
-    /**
-     * This method tells if the dialogue window is full of rows or not.
-     * @return true if the rows currently showed are 2, false otherwise.
-     */
+    @Override
     public boolean changeWindow() {
         return this.nextToShow % Dialogue.MAX_ROWS == 0; 
+    }
+    
+    @Override
+    public String getWholeDialogue() {
+        return this.sentence;
+    }
+    
+    @Override
+    public int getNumChars() {
+        return this.sentence.length();
+    }
+    
+    @Override
+    public List<String> getList() {
+        return this.listRows;
+    }
+    
+    /**
+     * Method that generates the Dialogue printing it on Console. Just to test. To be modified.
+     */
+    public void generate() {
+        //TODO Come vogliamo gestire il dialogo? Non so se è mio compito
+        this.listRows.forEach(e -> {
+            System.out.println(this.showNext());
+            if (this.changeWindow()) {
+                System.out.println();
+            }
+        });
     }
 }

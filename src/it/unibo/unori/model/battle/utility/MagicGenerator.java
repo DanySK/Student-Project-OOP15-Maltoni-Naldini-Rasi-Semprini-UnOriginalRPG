@@ -6,6 +6,7 @@ import it.unibo.unori.model.character.jobs.Jobs;
 
 /**
  * This class generates MagicAttacks.
+ * !! CheckStyle "Magic Numbers" violations cleared for this Class.
  */
 public final class MagicGenerator {
     

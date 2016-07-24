@@ -10,6 +10,7 @@ import it.unibo.unori.model.battle.exceptions.NotEnoughMPExcpetion;
 import it.unibo.unori.model.battle.utility.BattleLogics;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.Hero;
+import it.unibo.unori.model.character.HeroTeamImpl;
 import it.unibo.unori.model.character.Status;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.character.Character;
@@ -24,12 +25,11 @@ import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
  */
 public class BattleImpl implements Battle {
 
-    private final List<Hero> squad;
+    private final HeroTeamImpl squad;
     private final List<Foe> enemies;
     private Foe foeOnTurn;
     private Hero heroOnTurn;
     private boolean over;
-    private int beatenFriends;
     private final Bag itemBag;
     
     /**
@@ -39,11 +39,10 @@ public class BattleImpl implements Battle {
      * @param bag the Item Bag.
      */
     public BattleImpl(final List<Hero> team, final List<Foe> en, final Bag bag) {
-        this.squad = team;
+        this.squad = new HeroTeamImpl(team);
         this.enemies = en;
         this.itemBag = bag;
         this.over = false;
-        this.beatenFriends = 0;
     }
     
     private Character defeated(final Character ch) {
@@ -55,8 +54,8 @@ public class BattleImpl implements Battle {
                 this.over = true;
             }
         } else if (ch instanceof Hero) {
-            this.beatenFriends++;
-            this.squad.remove(ch);
+            final Hero toRemove = (Hero) ch;
+            this.squad.removeHero(toRemove);
         }
         return ch;
     }
@@ -190,9 +189,9 @@ public class BattleImpl implements Battle {
     public void acquireExp() {
         final List<Integer> points =
                 BattleLogics.expAcquired(this.squad, this.getMediumLevelFoes(),
-                        this.squad.size() - this.beatenFriends);
+                        this.squad.getAliveHeroes().size());
         int index = 0;
-        for (final Hero h : this.squad) {
+        for (final Hero h : this.squad.getAliveHeroes()) {
             h.addExp(points.get(index));
             index++;
         }
@@ -205,7 +204,7 @@ public class BattleImpl implements Battle {
 
     @Override
     public List<Hero> getSquad() {
-        return new ArrayList<>(this.squad);
+        return new ArrayList<>(this.squad.getAllHeroes());
     }
 
     @Override
