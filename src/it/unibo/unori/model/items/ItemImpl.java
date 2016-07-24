@@ -53,8 +53,7 @@ public class ItemImpl implements Item {
         }
         if (this.getClass().equals(o.getClass())) {
             final ItemImpl tmp = (ItemImpl) o;
-            return this.name.equals(tmp.getName()) 
-                    && this.desc.equals(tmp.getDescription());
+            return this.name.equals(tmp.getName());
         } else {
             return false;
         }

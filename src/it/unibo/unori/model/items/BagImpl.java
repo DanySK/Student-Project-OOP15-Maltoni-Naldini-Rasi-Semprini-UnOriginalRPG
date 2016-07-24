@@ -51,7 +51,7 @@ public class BagImpl implements Bag {
             this.armors.put(ar, 1);
         }
     }
-    
+
     private void insertWeapon(final Weapon w) {
         if (this.weapons.containsKey(w)) {
             this.weapons.replace(w, this.weapons.get(w) + 1);
@@ -59,7 +59,7 @@ public class BagImpl implements Bag {
             this.weapons.put(w, 1);
         }
     }
-    
+
     private void insertPotion(final Potion p) {
         if (this.potions.containsKey(p)) {
             this.potions.replace(p, this.potions.get(p) + 1);
@@ -67,7 +67,7 @@ public class BagImpl implements Bag {
             this.potions.put(p, 1);
         }
     }
-    
+
     private void removeArmor(final Armor ar) throws ItemNotFoundException {
         if (this.armors.containsKey(ar)) {
             if (this.armors.get(ar).equals(1)) {
@@ -79,7 +79,7 @@ public class BagImpl implements Bag {
             throw new ItemNotFoundException();
         }
     }
-    
+
     private void removeWeapon(final Weapon w) throws ItemNotFoundException {
         if (this.weapons.containsKey(w)) {
             if (this.weapons.get(w).equals(1)) {
@@ -91,7 +91,7 @@ public class BagImpl implements Bag {
             throw new ItemNotFoundException();
         }
     }
-    
+
     private void removePotion(final Potion p) throws ItemNotFoundException {
         if (this.potions.containsKey(p)) {
             if (this.potions.get(p).equals(1)) {
@@ -103,7 +103,7 @@ public class BagImpl implements Bag {
             throw new ItemNotFoundException();
         }
     }
-    
+
     @Override
     public void storeItem(final Item toAdd) {
         if (toAdd instanceof Armor) {
