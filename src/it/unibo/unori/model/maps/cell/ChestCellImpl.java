@@ -2,7 +2,9 @@ package it.unibo.unori.model.maps.cell;
 
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.Item;
+import it.unibo.unori.model.items.ItemImpl;
 import it.unibo.unori.model.items.ObjectItem;
+import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
 import it.unibo.unori.model.maps.exceptions.NoKeyFoundException;
 import it.unibo.unori.model.maps.exceptions.NoObjectFoundException;
 
@@ -39,10 +41,17 @@ public class ChestCellImpl extends SimpleCellImpl {
      *          the item in the chest
      * @throws NoObjectFoundException if the chest is empty.
      * @throws NoKeyFoundException if the bag does not contain a key
+     * @throws ItemNotFoundException if there's an error in the process of 
+     *  removing the key
      * 
      */
     public Item openChest(final Bag b) throws NoObjectFoundException, 
-                                              NoKeyFoundException {
+                                              NoKeyFoundException,
+                                              ItemNotFoundException {
+        if (!b.containsKey()) {
+            throw new NoKeyFoundException();
+        }
+        b.removeItem(ItemImpl.KEY);
         return o;
     }
 
