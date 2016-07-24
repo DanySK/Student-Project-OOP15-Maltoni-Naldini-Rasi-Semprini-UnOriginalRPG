@@ -68,6 +68,14 @@ public class BagImpl implements Bag {
         }
     }
 
+    private void insertGenericItem(final Item i) {
+        if (this.miscellaneous.containsKey(i)) {
+            this.miscellaneous.replace(i, this.miscellaneous.get(i) + 1);
+        } else {
+            this.miscellaneous.put(i, 1);
+        }
+    }
+
     private void removeArmor(final Armor ar) throws ItemNotFoundException {
         if (this.armors.containsKey(ar)) {
             if (this.armors.get(ar).equals(1)) {
@@ -104,6 +112,18 @@ public class BagImpl implements Bag {
         }
     }
 
+    private void removeGenericItem(final Item i) throws ItemNotFoundException {
+        if (this.miscellaneous.containsKey(i)) {
+            if (this.miscellaneous.get(i).equals(1)) {
+                this.miscellaneous.remove(i);
+            } else {
+                this.miscellaneous.replace(i, this.miscellaneous.get(i) - 1);
+            }
+        } else {
+            throw new ItemNotFoundException();
+        }
+    }
+
     @Override
     public void storeItem(final Item toAdd) {
         if (toAdd instanceof Armor) {
@@ -113,7 +133,7 @@ public class BagImpl implements Bag {
         } else if (toAdd instanceof Potion) {
             this.insertPotion((Potion) toAdd);
         } else {
-            throw new IllegalArgumentException();
+            this.insertGenericItem(toAdd);
         }
     }
 
@@ -126,7 +146,7 @@ public class BagImpl implements Bag {
         } else if (toRemove instanceof Potion) {
             this.removePotion((Potion) toRemove);
         } else {
-            throw new IllegalArgumentException();
+            this.removeGenericItem(toRemove);
         }
     }
 
