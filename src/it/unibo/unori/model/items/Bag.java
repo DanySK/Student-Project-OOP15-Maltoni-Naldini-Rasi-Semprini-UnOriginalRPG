@@ -82,4 +82,10 @@ public interface Bag extends Serializable {
      */
     Map<Potion, Integer> getPotions();
 
+    /**
+     * Return the map of the miscellaneous items.
+     * @return Miscellaneous in the bag, as a Map
+     */
+    Map<Item, Integer> getMiscellaneous();
+
 }

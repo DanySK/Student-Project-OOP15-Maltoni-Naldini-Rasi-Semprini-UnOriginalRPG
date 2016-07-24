@@ -21,6 +21,7 @@ public class BagImpl implements Bag {
     private final Map<Armor, Integer> armors;
     private final Map<Weapon, Integer> weapons;
     private final Map<Potion, Integer> potions;
+    private final Map<Item, Integer> miscellaneous;
 
     /**
      * Standard Constructor: it initializes the maps.
@@ -29,6 +30,7 @@ public class BagImpl implements Bag {
         this.armors = new HashMap<>();
         this.weapons = new HashMap<>();
         this.potions = new HashMap<>();
+        this.miscellaneous = new HashMap<>();
     }
     /**
      * A Constructor that allows to create a Bag based on an already-existing one.
@@ -38,6 +40,7 @@ public class BagImpl implements Bag {
         this.armors = existing.getArmors();
         this.weapons = existing.getWeapons();
         this.potions = existing.getPotions();
+        this.miscellaneous = existing.getMiscellaneous();
     }
 
 
@@ -167,5 +170,10 @@ public class BagImpl implements Bag {
     public Map<Potion, Integer> getPotions() {
         return new HashMap<>(this.potions);
     }
-    
+
+    @Override
+    public Map<Item, Integer> getMiscellaneous() {
+        return new HashMap<>(this.miscellaneous);
+    }
+
 }
