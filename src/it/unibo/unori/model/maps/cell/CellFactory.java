@@ -1,5 +1,7 @@
 package it.unibo.unori.model.maps.cell;
 
+import it.unibo.unori.model.items.WeaponFactory;
+
 /**
  * 
  * A Factory class to create the most common kind of Cells.
@@ -24,5 +26,15 @@ public class CellFactory {
      */
     public  Cell getBlockedCell() {
         return new SimpleCellImpl(new Object(), CellState.BLOCKED);
+    }
+
+    /**
+     * Create and return a Cell with a object inside.
+     * @return
+     *          a  cell containing a sword
+     */
+    public Cell getObjectCell() {
+        final WeaponFactory w = new WeaponFactory();
+        return new ObjectCellImpl(new Object(), w.getStdSword());
     }
 }
