@@ -4,9 +4,11 @@ import it.unibo.unori.model.character.HeroTeam;
 import it.unibo.unori.model.character.HeroTeamImpl;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.BagImpl;
+import it.unibo.unori.model.items.Item;
 import it.unibo.unori.model.maps.cell.Cell;
 import it.unibo.unori.model.maps.cell.CellState;
 import it.unibo.unori.model.maps.exceptions.BlockedPathException;
+import it.unibo.unori.model.maps.exceptions.NoKeyFoundException;
 import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
 import it.unibo.unori.model.maps.exceptions.NoNPCFoundException;
 import it.unibo.unori.model.maps.exceptions.NoObjectFoundException;
@@ -150,7 +152,16 @@ public final class SingletonParty {
                     this.partyBag.storeItem(c.getObject());
                     return new Dialogue("Che fortuna! Hai trovato " + c.getObject().getName());
                 } catch (NoObjectFoundException e1) {
-                    return new Dialogue("Non hai trovato niente, è meglio andare!");
+                    try {
+                        final Item i = c.openChest(partyBag);
+                        this.partyBag.storeItem(i);
+                        return new Dialogue("Hai aperto un baule! Hai trovato " + i.getName());
+                    } catch (NoKeyFoundException e2) {
+                        return new Dialogue("Non hai chiavi nell'inventario! "
+                                + "Cerca una chiave e ritorna");
+                    } catch (Exception e3) {
+                        return new Dialogue("Non c'è niente qui, meglio andare!");
+                    }
                 }
             }
         }
