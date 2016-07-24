@@ -1,7 +1,10 @@
 package it.unibo.unori.model.maps.cell;
 
+import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.Item;
+import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
 import it.unibo.unori.model.maps.GameMap;
+import it.unibo.unori.model.maps.exceptions.NoKeyFoundException;
 import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
 import it.unibo.unori.model.maps.exceptions.NoNPCFoundException;
 import it.unibo.unori.model.maps.exceptions.NoObjectFoundException;
@@ -73,6 +76,11 @@ public class SimpleCellImpl implements Cell {
     @Override
     public Dialogue talkToNpc() throws NoNPCFoundException {
         throw new NoNPCFoundException();
+    }
+
+    @Override
+    public Item openChest(final Bag b) throws NoObjectFoundException, NoKeyFoundException, ItemNotFoundException {
+        throw new NoObjectFoundException();
     }
 
 

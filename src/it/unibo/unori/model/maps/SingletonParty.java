@@ -1,10 +1,14 @@
 package it.unibo.unori.model.maps;
 
+import it.unibo.unori.model.character.HeroTeam;
+import it.unibo.unori.model.character.HeroTeamImpl;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.BagImpl;
+import it.unibo.unori.model.items.Item;
 import it.unibo.unori.model.maps.cell.Cell;
 import it.unibo.unori.model.maps.cell.CellState;
 import it.unibo.unori.model.maps.exceptions.BlockedPathException;
+import it.unibo.unori.model.maps.exceptions.NoKeyFoundException;
 import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
 import it.unibo.unori.model.maps.exceptions.NoNPCFoundException;
 import it.unibo.unori.model.maps.exceptions.NoObjectFoundException;
@@ -68,6 +72,7 @@ public final class SingletonParty {
         private Object frame;
         private CardinalPoints orientation;
         private final Bag partyBag;
+        private final HeroTeam heroteam;
 
         /**
          * Constructor for PartyImpl, set a standard map, position, cell and
@@ -79,6 +84,7 @@ public final class SingletonParty {
             this.frame = new Object();
             this.orientation = CardinalPoints.NORTH;
             this.partyBag = new BagImpl();
+            this.heroteam = new HeroTeamImpl();
         }
 
         @Override
@@ -112,6 +118,10 @@ public final class SingletonParty {
             return this.partyBag;
         }
 
+        public HeroTeam getHeroTeam() {
+            return this.heroteam;
+        }
+
         @Override
         public void moveParty(final CardinalPoints direction) throws BlockedPathException {
             this.orientation = direction;
@@ -136,13 +146,25 @@ public final class SingletonParty {
                     this.currentPosition.getPosY() + this.orientation.getYSkidding());
             final Cell c = this.currentMap.getCell(pos);
             try {
+                System.out.println("Provo a parlare con un NPC");
                 return c.talkToNpc();
             } catch (NoNPCFoundException e) {
                 try {
+                    System.out.println("Provo a raccogliere un oggetto");
                     this.partyBag.storeItem(c.getObject());
                     return new Dialogue("Che fortuna! Hai trovato " + c.getObject().getName());
                 } catch (NoObjectFoundException e1) {
-                    return new Dialogue("Non hai trovato niente, è meglio andare!");
+                    try {
+                        System.out.println("Provo a aprire una cassa");
+                        final Item i = c.openChest(partyBag);
+                        this.partyBag.storeItem(i);
+                        return new Dialogue("Hai aperto un baule! Hai trovato " + i.getName());
+                    } catch (NoKeyFoundException e2) {
+                        return new Dialogue("Non hai chiavi nell'inventario! "
+                                + "Cerca una chiave e ritorna");
+                    } catch (Exception e3) {
+                        return new Dialogue("Non c'è niente qui, meglio andare!");
+                    }
                 }
             }
         }

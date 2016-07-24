@@ -25,6 +25,7 @@ public class WeaponImpl implements Weapon {
     private final Status inflictedStatus;
     private static final String STDNAME = "Pugno";
     private static final String STDDESC = "Ma ti aspetta un pugno, ma è ovvio!";
+    private static final int PRIME = 31;
     /**
      * Basic weapon for every Character.
      */
@@ -119,6 +120,56 @@ public class WeaponImpl implements Weapon {
     @Override
     public Status getWeaponStatus() {
         return this.inflictedStatus;
+    }
+
+
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = PRIME * result + ((desc == null) ? 0 : desc.hashCode());
+        result = PRIME * result + ((inflictedStatus == null) ? 0 : inflictedStatus.hashCode());
+        result = PRIME * result + ((name == null) ? 0 : name.hashCode());
+        result = PRIME * result + ((stats == null) ? 0 : stats.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true; 
+        }
+        if (obj == null) {
+            return false; 
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final WeaponImpl other = (WeaponImpl) obj;
+        if (desc == null) {
+            if (other.desc != null) {
+                return false;
+            }
+        } else if (!desc.equals(other.desc)) {
+            return false;
+        }
+        if (inflictedStatus != other.inflictedStatus) {
+            return false;
+        }
+        if (name == null) {
+            if (other.name != null) {
+                return false;
+            }
+        } else if (!name.equals(other.name)) {
+            return false;
+        }
+        if (stats == null) {
+            if (other.stats != null) {
+                return false;
+            }
+        } else if (!stats.equals(other.stats)) {
+            return false;
+        }
+        return true;
     }
 
 }
