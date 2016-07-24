@@ -13,6 +13,11 @@ public class ItemImpl implements Item {
     private final String name;
     private final String desc;
     private static final int PRIME = 31;
+    /**
+     * Basic item for the game, a key.
+     */
+    public static final Item KEY = new ItemImpl("Chiave", "Una piccola chiave "
+            + "per ogni evenienza");
 
     /**
      * Constructor with two input string, one for the name and 
