@@ -172,10 +172,14 @@ public class BagImpl implements Bag {
             return this.weapons.containsKey(i);
         } else if (i instanceof Potion) {
             return this.potions.containsKey(i);
-        }
-        return false;
+        } 
+        return this.miscellaneous.containsKey(i);
     }
 
+    @Override
+    public boolean containsKey() {
+        return this.miscellaneous.containsKey(ItemImpl.KEY);
+    }
     @Override
     public Map<Armor, Integer> getArmors() {
         return new HashMap<>(this.armors);

@@ -88,4 +88,11 @@ public interface Bag extends Serializable {
      */
     Map<Item, Integer> getMiscellaneous();
 
+    /**
+     * Check if there are any keys in the bag.
+     * @return
+     *         true if there is at least a key in the bag, otherwise false
+     */
+    boolean containsKey();
+
 }
