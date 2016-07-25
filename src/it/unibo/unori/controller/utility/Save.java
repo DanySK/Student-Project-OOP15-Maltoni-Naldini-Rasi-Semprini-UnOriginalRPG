@@ -7,15 +7,26 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.Reader;
+import java.io.Writer;
+import java.lang.reflect.Type;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 
 import it.unibo.unori.controller.GameStatistics;
 import it.unibo.unori.controller.exceptions.CorruptedUtilityFileException;
@@ -108,13 +119,20 @@ public final class Save {
 
     /**
      * It restores a previously saved game.
-     * @param folderPath the path where to find the Save.dat file
+     * 
+     * @param folderPath
+     *            the path where to find the Save.dat file
      * @return the time played in milliseconds
-     * @throws FileNotFoundException if the file does not exist, is a directory rather than a regular file, or for some other reason cannot be opened for reading.
-     * @throws IOException if any of the usual Input/Output related exceptions.
-     * @throws ClassNotFoundException if class of a serialized object cannot be found.
+     * @throws FileNotFoundException
+     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
+     *             cannot be opened for reading.
+     * @throws IOException
+     *             if any of the usual Input/Output related exceptions.
+     * @throws ClassNotFoundException
+     *             if class of a serialized object cannot be found.
      */
-    public static Party loadGame(final String folderPath) throws FileNotFoundException, IOException, ClassNotFoundException {
+    public static Party loadGame(final String folderPath)
+                    throws FileNotFoundException, IOException, ClassNotFoundException {
         final File saveFile = new File(folderPath + File.separator + SAVE_DAT_FILE);
         final ObjectInputStream input = new ObjectInputStream(new BufferedInputStream(new FileInputStream(saveFile)));
 
@@ -128,7 +146,7 @@ public final class Save {
         } finally {
             input.close();
         }
-        
+
     }
 
     /**
@@ -223,7 +241,7 @@ public final class Save {
                     throws FileNotFoundException, IOException, DefaultPathTakenException {
         saveGame(party, "res"); // TODO not sure about "res"
     }
-    
+
     // TODO
     public static File createStatsDatFile(final String folderPath) throws IOException, DefaultPathTakenException {
         final File statsFile = new File(folderPath + File.separator + STATISTICS_DAT_FILE);
@@ -236,7 +254,7 @@ public final class Save {
 
         return statsFile;
     }
-    
+
     // TODO check
     public static void saveStats(final GameStatistics stats, final String folderPath)
                     throws FileNotFoundException, IOException, DefaultPathTakenException {
@@ -247,9 +265,10 @@ public final class Save {
 
         output.close();
     }
-    
+
     // TODO
-    public static GameStatistics loadStats(final String folderPath) throws FileNotFoundException, IOException, ClassNotFoundException {
+    public static GameStatistics loadStats(final String folderPath)
+                    throws FileNotFoundException, IOException, ClassNotFoundException {
         final File saveFile = new File(folderPath + File.separator + STATISTICS_DAT_FILE);
         final ObjectInputStream input = new ObjectInputStream(new BufferedInputStream(new FileInputStream(saveFile)));
 
@@ -263,7 +282,6 @@ public final class Save {
         } finally {
             input.close();
         }
-        
     }
 
     /**
@@ -287,4 +305,58 @@ public final class Save {
         output.close();
     }
 
+    /**
+     * This method serializes on a file in a given path a single object.
+     * 
+     * @param objectToSerialize
+     *            the object you want to serialize on the given file
+     * @param path
+     *            the path where to find or create the JSON file
+     * @throws IOException
+     *             if an error occurs
+     * @throws FileNotFoundException
+     *             if the file exists but is a directory rather than a regular file, does not exist but cannot be
+     *             created, or cannot be opened for any other reason
+     * @throws SecurityException
+     *             if a security manager exists and its checkWrite method denies write access to the file.
+     * @throws JsonIOException
+     *             - if there was a problem writing to the writer
+     */
+    public static void serializeJSON(final Object objectToSerialize, final String path) throws IOException {
+        Gson gson = new GsonBuilder().create();
+        Writer writer = new OutputStreamWriter(new FileOutputStream(path), "UTF-8");
+        gson.toJson(objectToSerialize, writer);
+        writer.close();
+    }
+
+    /**
+     * This method loads a file from a given path and returns a single object from what reads.
+     * 
+     * @param <T>
+     *            the type of the object serialized on the file
+     * @param path
+     *            the path where to find the JSON file
+     * @return the serialized object
+     * @throws IOException
+     *             if an error occurs
+     * @throws FileNotFoundException
+     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
+     *             cannot be opened for reading
+     * @throws JsonIOException
+     *             if there was a problem reading from the Reader
+     * @throws JsonSyntaxException
+     *             if the file does not contain a valid representation for an object of type
+     */
+    public static <T> T deserializeJSON(final String path) throws IOException {
+        Type type = new TypeToken<T>() {
+        }.getType();
+        Optional<T> returnObject = Optional.empty();
+        Gson gson = new GsonBuilder().create();
+
+        Reader reader = new InputStreamReader(new FileInputStream(path), "UTF-8");
+        returnObject = Optional.ofNullable(gson.fromJson(reader, type));
+        reader.close();
+
+        return returnObject.orElseThrow(() -> new JsonIOException("The file provided is corrupted or non valid"));
+    }
 }
