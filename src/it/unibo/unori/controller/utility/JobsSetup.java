@@ -1,90 +1,221 @@
 package it.unibo.unori.controller.utility;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
+
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
 
 import it.unibo.unori.model.character.Statistics;
+import it.unibo.unori.model.character.jobs.GrowthFactory;
+import it.unibo.unori.model.character.jobs.Jobs;
+import it.unibo.unori.model.character.jobs.StatisticsFactory;
 import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.Armor.ArmorPieces;
+import it.unibo.unori.model.items.ArmorFactory;
 import it.unibo.unori.model.items.Weapon;
+import it.unibo.unori.model.items.WeaponFactory;
+
 /**
- *  Utility class which provides default parameters for the jobs loading them from file.
+ * Utility class which provides default parameters for the jobs loading them from file.
  */
 public final class JobsSetup {
     /**
      * Path to the JSON file of the warrior's default statistics and armors/weapons.
      */
-    public static final String WARRIOR = "Warrior.js";
+    public static final String WARRIOR = "res/Warrior.json";
     /**
      * Path to the JSON file of the paladin's default statistics and armors/weapons.
      */
-    public static final String PALADIN = "Paladin.js";
+    public static final String PALADIN = "res/Paladin.json";
     /**
      * Path to the JSON file of the mage's default statistics and armors/weapons.
      */
-    public static final String MAGE = "Mage.js";
+    public static final String MAGE = "res/Mage.json";
     /**
      * Path to the JSON file of the ranger's default statistics and armors/weapons.
      */
-    public static final String RANGER = "Ranger.js";
+    public static final String RANGER = "res/Ranger.json";
     /**
      * Path to the JSON file of the cook's default statistics and armors/weapons.
      */
-    public static final String COOK = "Cook.js";
+    public static final String COOK = "res/Cook.json";
     /**
      * Path to the JSON file of the clown's default statistics and armors/weapons.
      */
-    public static final String CLOWN = "Clown.js";
+    public static final String CLOWN = "res/Clown.json";
 
     private JobsSetup() {
-        // Empty constructor
+        // Empty private constructor, because this is an utility class
     }
 
     /**
-     * Loads the default statistics of the job from JSON file. Suggeted to pass constants provided by this class.
+     * Loads the default statistics of the job from JSON file. Suggested to pass constants provided by this class.
      * 
      * @param path
      *            the path to the file of the desired job.
      * @return a map containing the values
+     * @throws IOException
+     *             if an error occurs
+     * @throws FileNotFoundException
+     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
+     *             cannot be opened for reading
+     * @throws JsonIOException
+     *             if there was a problem reading from the Reader
+     * @throws JsonSyntaxException
+     *             if the file does not contain a valid representation for an object of type
      */
-    public static Map<Statistics, Integer> getDefaultStats(final String path) {
-        // TODO
-        return null;
+    public static Map<Statistics, Integer> getDefaultStats(final String path) throws IOException {
+        final JsonJobParameter objFromFile = Save.deserializeJSON(path);
+        return new HashMap<>(objFromFile.getDefaultStats());
     }
 
     /**
-     * Loads the default statistics increments of the job from JSON file. Suggeted to pass constants provided by this
+     * Loads the default statistics increments of the job from JSON file. Suggested to pass constants provided by this
      * class.
      * 
      * @param path
      *            the path to the file of the desired job.
      * @return a map containing the values
+     * @throws IOException
+     *             if an error occurs
+     * @throws FileNotFoundException
+     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
+     *             cannot be opened for reading
+     * @throws JsonIOException
+     *             if there was a problem reading from the Reader
+     * @throws JsonSyntaxException
+     *             if the file does not contain a valid representation for an object of type
      */
-    public static Map<Statistics, Integer> getDefaultIncrements(final String path) {
-        // TODO
-        return null;
+    public static Map<Statistics, Integer> getDefaultIncrements(final String path) throws IOException {
+        final JsonJobParameter objFromFile = Save.deserializeJSON(path);
+        return new HashMap<>(objFromFile.getDefaultIncrement());
     }
 
     /**
-     * Loads the default armor of the job from JSON file. Suggeted to pass constants provided by this class.
+     * Loads the default armor of the job from JSON file. Suggested to pass constants provided by this class.
      * 
      * @param path
      *            the path to the file of the desired job.
      * @return a map containing the values
+     * @throws IOException
+     *             if an error occurs
+     * @throws FileNotFoundException
+     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
+     *             cannot be opened for reading
+     * @throws JsonIOException
+     *             if there was a problem reading from the Reader
+     * @throws JsonSyntaxException
+     *             if the file does not contain a valid representation for an object of type
      */
-    public static Map<ArmorPieces, Armor> getDefaultArmor(final String path) {
-        // TODO
-        return null;
+    public static Map<ArmorPieces, Armor> getDefaultArmor(final String path) throws IOException {
+        final JsonJobParameter objFromFile = Save.deserializeJSON(path);
+        return new HashMap<>(objFromFile.getDefaultArmor());
     }
 
     /**
-     * Loads the default weapon of the job from JSON file. Suggeted to pass constants provided by this class.
+     * Loads the default weapon of the job from JSON file. Suggested to pass constants provided by this class.
      * 
      * @param path
      *            the path to the file of the desired job.
      * @return a map containing the values
+     * @throws IOException
+     *             if an error occurs
+     * @throws FileNotFoundException
+     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
+     *             cannot be opened for reading
+     * @throws JsonIOException
+     *             if there was a problem reading from the Reader
+     * @throws JsonSyntaxException
+     *             if the file does not contain a valid representation for an object of type
      */
-    public static Weapon getDefaultWeapon(final String path) {
-        // TODO
-        return null;
+    public static Weapon getDefaultWeapon(final String path) throws IOException {
+        final JsonJobParameter objFromFile = Save.deserializeJSON(path);
+        return objFromFile.getDefaultWeapon();
+    }
+
+    /**
+     * Return the path of the JSON file that contains the default parameters of the Job.
+     * 
+     * @param job
+     *            the Job
+     * @return the path if the job is found, else returns null
+     */
+    public static String getPath(final Jobs job) {
+        Optional<String> jobPath = Optional.empty();
+
+        if (job.equals(Jobs.WARRIOR)) {
+            jobPath = Optional.of(WARRIOR);
+        } else if (job.equals(Jobs.PALADIN)) {
+            jobPath = Optional.of(PALADIN);
+        } else if (job.equals(Jobs.MAGE)) {
+            jobPath = Optional.of(MAGE);
+        } else if (job.equals(Jobs.RANGER)) {
+            jobPath = Optional.of(RANGER);
+        } else if (job.equals(Jobs.COOK)) {
+            jobPath = Optional.of(COOK);
+        } else if (job.equals(Jobs.CLOWN)) {
+            jobPath = Optional.of(CLOWN);
+        }
+
+        return jobPath.orElse(null);
+    }
+
+    /**
+     * Private static class that models an object used to serialize the Jobs
+     */
+    private static class JsonJobParameter {
+        private final Map<Statistics, Integer> defaultStats;
+        private final Map<Statistics, Integer> defaultIncrement;
+        private final Map<ArmorPieces, Armor> defaultArmor;
+        private final Weapon defaultWeapon;
+
+        JsonJobParameter(final Map<Statistics, Integer> defaultStats,
+                        final Map<Statistics, Integer> defaultIncrement, final Map<ArmorPieces, Armor> defaultArmor,
+                        final Weapon defaultWeapon) {
+            this.defaultStats = defaultStats;
+            this.defaultIncrement = defaultIncrement;
+            this.defaultArmor = defaultArmor;
+            this.defaultWeapon = defaultWeapon;
+        }
+
+        /**
+         * Get the initial equipments of a job.
+         * 
+         * @return a defensive copy of the equipments
+         */
+        public Map<ArmorPieces, Armor> getDefaultArmor() {
+            return new HashMap<>(this.defaultArmor);
+        }
+
+        /**
+         * Get the initial statistics of a job.
+         * 
+         * @return a defensive copy of the statistics
+         */
+        public Map<Statistics, Integer> getDefaultStats() {
+            return new HashMap<>(this.defaultStats);
+        }
+
+        /**
+         * Get the increment values of the job statistics .
+         * 
+         * @return a defensive copy of the statistics
+         */
+        public Map<Statistics, Integer> getDefaultIncrement() {
+            return new HashMap<>(this.defaultIncrement);
+        }
+
+        /**
+         * Get the starter weapon of the job.
+         * 
+         * @return the initial weapon of the job
+         */
+        public final Weapon getDefaultWeapon() {
+            return this.defaultWeapon;
+        }
     }
 }
