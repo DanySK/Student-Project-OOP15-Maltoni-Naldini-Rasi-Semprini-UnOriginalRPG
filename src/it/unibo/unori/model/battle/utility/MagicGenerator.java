@@ -19,7 +19,7 @@ public final class MagicGenerator {
      */
     public static MagicAttackInterface getBasic() {
         return new MagicAttack("Schiaffo", "Che schiaffo!", 
-                "Non c'Ã¨ nulla di magico in uno schiaffo", 0, 0, 0, 1, 10, 1);
+                "Non c'è nulla di magico in uno schiaffo", 0, 0, 0, 1, 10, 1);
     }
     
     /**
@@ -100,7 +100,7 @@ public final class MagicGenerator {
                         26, 12, 16, 35, 7, 38); break;
                 case CLOWN : mag = new MagicAttack("BUH!",
                         "Hai spaventato magicamente il nemico!",
-                        "Uno spavento che puÃ² far scendere il gelo",
+                        "Uno spavento che può far scendere il gelo",
                         18, 18, 22, 33, 7, 35); break;
                 default:
                     break;
