@@ -39,25 +39,41 @@ public final class Save {
     /**
      * Static parameter for standard text save file.
      */
+    @Deprecated
     public static final String SAVE_TEXT_FILE = "Save.txt";
 
     /**
      * Static parameter for standard DAT object serialization save file.
      */
+    @Deprecated
     public static final String SAVE_DAT_FILE = "Save.dat";
 
     /**
      * Static parameter for standard text statistics file.
      */
+    @Deprecated
     public static final String STATISTICS_TEXT_FILE = "Stats.txt";
 
     /**
      * Static parameter for standard DAT object serialization statistics file.
      */
+    @Deprecated
     public static final String STATISTICS_DAT_FILE = "Stats.dat";
 
+    @Deprecated
     private static final String STARTING_STRING = "--START--";
+    @Deprecated
     private static final String ENDING_STRING = "--END--";
+
+    /**
+     * Static parameter for standard JSON object serialization save file.
+     */
+    private static final String SAVE_FILE = "res/Save.json";
+
+    /**
+     * Static parameter for standard JSON object serialization statistics file.
+     */
+    private static final String STATS_FILE = "res/Stats.json";
 
     private Save() {
         // Empty private constructor, because this is an utility class
@@ -77,6 +93,7 @@ public final class Save {
      * @throws IOException
      *             if the file does not exist
      */
+    @Deprecated
     public static List<String> loadFromUtilityTextFile(final String fileName)
                     throws CorruptedUtilityFileException, IOException {
         ArrayList<String> lines;
@@ -158,6 +175,7 @@ public final class Save {
      *             if the named file exists but is a directory rather than a regular file, does not exist but cannot be
      *             created, or exist but cannot be opened
      */
+    @Deprecated
     public static void createSaveTextFile(final String folderPath) throws IOException {
         final File saveFile = new File(folderPath + File.separator + SAVE_TEXT_FILE);
         final PrintWriter output = new PrintWriter(new OutputStreamWriter(new FileOutputStream(saveFile), "UTF-8"));
@@ -183,6 +201,7 @@ public final class Save {
      *             if exist something (like a directory) that makes impossible to create an utility file (like the
      *             SaveGame) because of the name and the path are the same
      */
+    @Deprecated
     public static File createSaveDatFile(final String folderPath) throws IOException, DefaultPathTakenException {
         final File saveFile = new File(folderPath + File.separator + SAVE_DAT_FILE);
 
@@ -243,6 +262,7 @@ public final class Save {
     }
 
     // TODO
+    @Deprecated
     public static File createStatsDatFile(final String folderPath) throws IOException, DefaultPathTakenException {
         final File statsFile = new File(folderPath + File.separator + STATISTICS_DAT_FILE);
 
