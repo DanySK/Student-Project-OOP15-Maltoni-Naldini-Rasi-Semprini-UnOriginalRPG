@@ -86,8 +86,9 @@ public class BattleImpl implements Battle {
 
     @Override
     public int attack(final Foe enemy, final Hero my) throws NoWeaponException {
+        final int atkTot = my.getAttack() + my.getWeapon().getPhysicalAtk();
         final int damage = 
-                BattleLogics.getStandardDamage(my.getLevel(), my.getAttack());
+                BattleLogics.getStandardDamage(my.getLevel(), atkTot);
         enemy.takeDamage(damage);
         if (this.isDefeated(enemy)) {
             this.defeated(enemy);
