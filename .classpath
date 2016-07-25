@@ -5,6 +5,10 @@
 	<classpathentry kind="src" path="lib"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="lib/gson-2.7.jar"/>
+	<classpathentry kind="lib" path="lib/gson-2.7.jar" sourcepath="lib/src/gson-2.7-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/Unori_NO-BRANCH/lib/doc/gson-2.7-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
