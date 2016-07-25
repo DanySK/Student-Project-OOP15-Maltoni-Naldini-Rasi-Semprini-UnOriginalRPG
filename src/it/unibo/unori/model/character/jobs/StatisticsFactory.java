@@ -120,7 +120,7 @@ public class StatisticsFactory {
                 case PALADIN : JOBSMAP.put(Jobs.PALADIN, this.createPaladinStats()); break;
                 case MAGE : JOBSMAP.put(Jobs.MAGE, this.createMageStats()); break;
                 case RANGER : JOBSMAP.put(Jobs.RANGER, this.createRangerStats()); break;
-                case COOK : JOBSMAP.put(Jobs.MAGE, this.createCookStats()); break;
+                case COOK : JOBSMAP.put(Jobs.COOK, this.createCookStats()); break;
                 case CLOWN : JOBSMAP.put(Jobs.CLOWN, this.createClownStats()); break;
                 default:
                     break;

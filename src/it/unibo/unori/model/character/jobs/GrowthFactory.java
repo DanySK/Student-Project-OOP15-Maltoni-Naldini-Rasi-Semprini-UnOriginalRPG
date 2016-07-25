@@ -146,7 +146,7 @@ public class GrowthFactory {
                 case PALADIN : JOBSMAP.put(Jobs.PALADIN, this.createPaladinGrowth()); break;
                 case MAGE : JOBSMAP.put(Jobs.MAGE, this.createMageGrowth()); break;
                 case RANGER : JOBSMAP.put(Jobs.RANGER, this.createRangerGrowth()); break;
-                case COOK : JOBSMAP.put(Jobs.MAGE, this.createCookGrowth()); break;
+                case COOK : JOBSMAP.put(Jobs.COOK, this.createCookGrowth()); break;
                 case CLOWN : JOBSMAP.put(Jobs.CLOWN, this.createClownGrowth()); break;
                 default:
                     break;

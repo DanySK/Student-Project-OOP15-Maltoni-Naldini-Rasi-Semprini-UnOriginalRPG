@@ -53,6 +53,36 @@ public final class JobsSetup {
     }
 
     /**
+     * Main method. It creates JSON file starting from Factories of the model.
+     * @param args 
+     */
+    public static void main(final String[] args) {
+        final StatisticsFactory sf = new StatisticsFactory();
+        final GrowthFactory gf = new GrowthFactory();
+        final ArmorFactory af = new ArmorFactory();
+        final WeaponFactory wf = new WeaponFactory();
+        Optional<String> jobPath = Optional.empty();
+        JsonJobParameter jsonJob;
+
+        for (final Jobs j : Jobs.values()) {
+            jobPath = Optional.of(getPath(j));
+            if (jobPath.isPresent()) {
+                try {
+                    jsonJob = new JsonJobParameter(sf.getJobStats(j), gf.getJobGrowth(j), af.getStdEquip(),
+                                    wf.getStdSword());
+                    Save.serializeJSON(jsonJob, jobPath.get());
+                } catch (IOException e) {
+                    // TODO
+                    e.printStackTrace();
+                }
+
+            }
+
+        }
+
+    }
+
+    /**
      * Loads the default statistics of the job from JSON file. Suggested to pass constants provided by this class.
      * 
      * @param path
