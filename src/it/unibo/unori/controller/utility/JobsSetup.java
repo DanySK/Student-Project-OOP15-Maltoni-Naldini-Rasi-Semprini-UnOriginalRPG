@@ -54,6 +54,7 @@ public final class JobsSetup {
 
     /**
      * Main method. It creates JSON file starting from Factories of the model.
+     * 
      * @param args 
      */
     public static void main(final String[] args) {
@@ -65,7 +66,12 @@ public final class JobsSetup {
         JsonJobParameter jsonJob;
 
         for (final Jobs j : Jobs.values()) {
-            jobPath = Optional.of(getPath(j));
+            try {
+                jobPath = Optional.of(getPath(j));
+            } catch (FileNotFoundException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
             if (jobPath.isPresent()) {
                 try {
                     jsonJob = new JsonJobParameter(sf.getJobStats(j), gf.getJobGrowth(j), af.getStdEquip(),
@@ -104,6 +110,23 @@ public final class JobsSetup {
     }
 
     /**
+     * Loads the default statistics of the job from JSON file. Suggested to pass constants provided by this class. This
+     * method acts exactly the same as {@link #getDefaultStats(String)}, but instead of throwing exceptions, return an
+     * empty map if something wrong happens.
+     * 
+     * @param path
+     *            the path to the file of the desired job.
+     * @return a map containing the values, or an empty map if something wrong happens
+     */
+    public static Map<Statistics, Integer> getDefaultStatsMap(final String path) {
+        try {
+            return getDefaultStats(path);
+        } catch (IOException e) {
+            return new HashMap<>();
+        }
+    }
+
+    /**
      * Loads the default statistics increments of the job from JSON file. Suggested to pass constants provided by this
      * class.
      * 
@@ -123,6 +146,23 @@ public final class JobsSetup {
     public static Map<Statistics, Integer> getDefaultIncrements(final String path) throws IOException {
         final JsonJobParameter objFromFile = Save.deserializeJSON(path);
         return new HashMap<>(objFromFile.getDefaultIncrement());
+    }
+
+    /**
+     * Loads the default statistics increments of the job from JSON file. Suggested to pass constants provided by this
+     * class. This method acts exactly the same as {@link #getDefaultIncrements(String)}, but instead of throwing
+     * exceptions, return an empty map if something wrong happens.
+     * 
+     * @param path
+     *            the path to the file of the desired job.
+     * @return a map containing the values, or an empty map if something wrong happens
+     */
+    public static Map<Statistics, Integer> getDefaultIncrementsMap(final String path) {
+        try {
+            return JobsSetup.getDefaultIncrements(path);
+        } catch (IOException e) {
+            return new HashMap<>();
+        }
     }
 
     /**
@@ -147,11 +187,28 @@ public final class JobsSetup {
     }
 
     /**
+     * Loads the default armor of the job from JSON file. Suggested to pass constants provided by this class. This
+     * method acts exactly the same as {@link #getDefaultArmor(String)}, but instead of throwing exceptions, return an
+     * empty map if something wrong happens.
+     * 
+     * @param path
+     *            the path to the file of the desired job.
+     * @return a map containing the values, or an empty map if something wrong happens
+     */
+    public static Map<ArmorPieces, Armor> getDefaultArmorMap(final String path) {
+        try {
+            return JobsSetup.getDefaultArmor(path);
+        } catch (IOException e) {
+            return new HashMap<>();
+        }
+    }
+
+    /**
      * Loads the default weapon of the job from JSON file. Suggested to pass constants provided by this class.
      * 
      * @param path
      *            the path to the file of the desired job.
-     * @return a map containing the values
+     * @return the weapon
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
@@ -168,13 +225,32 @@ public final class JobsSetup {
     }
 
     /**
+     * Loads the default weapon of the job from JSON file. Suggested to pass constants provided by this class. This
+     * method acts exactly the same as {@link #getDefaultWeapon(String)}, but instead of throwing exceptions, returns
+     * null if something wrong happens.
+     * 
+     * @param path
+     *            the path to the file of the desired job.
+     * @return the weapon, or null if something wrong happens
+     */
+    public static Weapon getDefaultWeaponNullable(final String path) {
+        try {
+            return JobsSetup.getDefaultWeapon(path);
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    /**
      * Return the path of the JSON file that contains the default parameters of the Job.
      * 
      * @param job
      *            the Job
-     * @return the path if the job is found, else returns null
+     * @return the path if the job is found
+     * @throws FileNotFoundException
+     *             if it can't find any default provided file path for the given Job
      */
-    public static String getPath(final Jobs job) {
+    public static String getPath(final Jobs job) throws FileNotFoundException {
         Optional<String> jobPath = Optional.empty();
 
         if (job.equals(Jobs.WARRIOR)) {
@@ -191,7 +267,8 @@ public final class JobsSetup {
             jobPath = Optional.of(CLOWN);
         }
 
-        return jobPath.orElse(null);
+        return jobPath.orElseThrow(
+                        () -> new FileNotFoundException("It is not provided any default file path for this Job"));
     }
 
     /**
@@ -203,9 +280,8 @@ public final class JobsSetup {
         private final Map<ArmorPieces, Armor> defaultArmor;
         private final Weapon defaultWeapon;
 
-        JsonJobParameter(final Map<Statistics, Integer> defaultStats,
-                        final Map<Statistics, Integer> defaultIncrement, final Map<ArmorPieces, Armor> defaultArmor,
-                        final Weapon defaultWeapon) {
+        JsonJobParameter(final Map<Statistics, Integer> defaultStats, final Map<Statistics, Integer> defaultIncrement,
+                        final Map<ArmorPieces, Armor> defaultArmor, final Weapon defaultWeapon) {
             this.defaultStats = defaultStats;
             this.defaultIncrement = defaultIncrement;
             this.defaultArmor = defaultArmor;
