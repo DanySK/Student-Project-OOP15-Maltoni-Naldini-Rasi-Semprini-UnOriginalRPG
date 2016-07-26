@@ -43,8 +43,10 @@ public interface Party extends Serializable {
      * @param frames
      *              a map containig for each direction, 
      *              the path of the frame to load.
+     *@throws IllegalArgumentException if the map does not contain 4 path,
+     *                                        one for each cardinal point
      */
-    void setFrames(Map<CardinalPoints, String> frames);
+    void setFrames(Map<CardinalPoints, String> frames) throws IllegalArgumentException;
 
     /**
      * Get method for the current frame path.
