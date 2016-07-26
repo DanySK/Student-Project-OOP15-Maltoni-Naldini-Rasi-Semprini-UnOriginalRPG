@@ -1,5 +1,6 @@
 package it.unibo.unori.model.menu;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
  *
  */
 
-public interface DialogueInterface {
+public interface DialogueInterface extends Serializable {
     
     /**
      * This method gives the next String to show in the dialogue window.
