@@ -17,11 +17,12 @@ public class FoeImpl extends CharacterImpl implements Foe {
      * Standard constructor for a Foe.
      * @param intelligence the IA of the Foe.
      * @param name the name of the Foe.
+     * @param battleFrame path of frame to set for the battle interface
      * @param map the Statistics of the Foe.
      */
     public FoeImpl(final int intelligence, final String name,
-            final Map<Statistics, Integer> map) {
-        super(name, map);
+            final String battleFrame, final Map<Statistics, Integer> map) {
+        super(name, battleFrame, map);
         this.ia = intelligence;
     }
 
