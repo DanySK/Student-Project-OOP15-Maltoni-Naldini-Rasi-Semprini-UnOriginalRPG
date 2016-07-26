@@ -37,35 +37,6 @@ import it.unibo.unori.model.maps.Party;
  */
 public final class Save {
     /**
-     * Static parameter for standard text save file.
-     */
-    @Deprecated
-    public static final String SAVE_TEXT_FILE = "Save.txt";
-
-    /**
-     * Static parameter for standard DAT object serialization save file.
-     */
-    @Deprecated
-    public static final String SAVE_DAT_FILE = "Save.dat";
-
-    /**
-     * Static parameter for standard text statistics file.
-     */
-    @Deprecated
-    public static final String STATISTICS_TEXT_FILE = "Stats.txt";
-
-    /**
-     * Static parameter for standard DAT object serialization statistics file.
-     */
-    @Deprecated
-    public static final String STATISTICS_DAT_FILE = "Stats.dat";
-
-    @Deprecated
-    private static final String STARTING_STRING = "--START--";
-    @Deprecated
-    private static final String ENDING_STRING = "--END--";
-
-    /**
      * Static parameter for standard JSON object serialization save file.
      */
     private static final String SAVE_FILE = "res/Save.json";
@@ -80,165 +51,69 @@ public final class Save {
     }
 
     /**
-     * This method loads a text file and returns a list of lines contained between starting and terminating line. If the
-     * requested file does not exist, the method creates a void one and returns it; if it exists, but does not match the
-     * expected structure, throws an exception.
+     * The method restores a previously saved game from a given-path file.
      * 
-     * @param fileName
-     *            the file name in default path; probably you should use {@link #SAVE_TEXT_FILE} or
-     *            {@link #STATISTICS_TEXT_FILE}
-     * @return a list of the lines of the requested file
-     * @throws CorruptedUtilityFileException
-     *             if the file exists but does not contain the starting and/or the ending string
-     * @throws IOException
-     *             if the file does not exist
-     */
-    @Deprecated
-    public static List<String> loadFromUtilityTextFile(final String fileName)
-                    throws CorruptedUtilityFileException, IOException {
-        ArrayList<String> lines;
-
-        int i;
-        boolean check = false;
-
-        lines = new ArrayList<String>(
-                        Files.lines(FileSystems.getDefault().getPath(fileName)).collect(Collectors.toList()));
-        for (i = 0; i < lines.size(); i++) {
-            if (lines.get(i).equals(STARTING_STRING)) {
-                check = true;
-                break;
-            }
-        }
-
-        if (!check) {
-            /* if starting string is not found, throws exception */
-            throw new CorruptedUtilityFileException();
-        }
-
-        final List<String> outputLines = new ArrayList<>();
-
-        for (i++; i < lines.size(); i++) {
-            if (lines.get(i).equals(ENDING_STRING)) {
-                check = false;
-                break;
-            } else {
-                outputLines.add(lines.get(i));
-            }
-        }
-
-        if (check) {
-            /* if ending string is not found, throws exception */
-            throw new CorruptedUtilityFileException();
-        }
-
-        return outputLines;
-    }
-
-    /**
-     * It restores a previously saved game.
-     * 
-     * @param folderPath
-     *            the path where to find the Save.dat file
-     * @return the time played in milliseconds
+     * @param path
+     *            the path where of the file
+     * @return the Party object, which is the de facto savegame
      * @throws FileNotFoundException
      *             if the file does not exist, is a directory rather than a regular file, or for some other reason
-     *             cannot be opened for reading.
+     *             cannot be opened for reading
      * @throws IOException
-     *             if any of the usual Input/Output related exceptions.
-     * @throws ClassNotFoundException
-     *             if class of a serialized object cannot be found.
+     *             if an error occurs
+     * @throws FileNotFoundException
+     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
+     *             cannot be opened for reading
+     * @throws JsonIOException
+     *             if there was a problem reading from the Reader
+     * @throws JsonSyntaxException
+     *             if the file does not contain a valid representation for an object of type
      */
-    public static Party loadGame(final String folderPath)
-                    throws FileNotFoundException, IOException, ClassNotFoundException {
-        final File saveFile = new File(folderPath + File.separator + SAVE_DAT_FILE);
-        final ObjectInputStream input = new ObjectInputStream(new BufferedInputStream(new FileInputStream(saveFile)));
-
-        final Object p = input.readObject();
-        try {
-            if (p.getClass().equals(Party.class)) {
-                return (Party) p;
-            } else {
-                throw new IOException(); // TODO maybe a specific exception is better
-            }
-        } finally {
-            input.close();
-        }
-
+    public static Party loadGameFromPath(final String path) throws IOException {
+        return deserializeJSON(path);
     }
 
     /**
-     * This method creates a new Save file in given path with all parameters initialized to 0.
+     * The method restores a previously saved game from the default save file.
      * 
-     * @param folderPath
-     *            the path in which you want to create the save file named {@link #SAVE_TEXT_FILE}
+     * @return the Party object, which is the de facto savegame
+     * @throws FileNotFoundException
+     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
+     *             cannot be opened for reading
      * @throws IOException
-     *             if the named file exists but is a directory rather than a regular file, does not exist but cannot be
-     *             created, or exist but cannot be opened
+     *             if an error occurs
+     * @throws FileNotFoundException
+     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
+     *             cannot be opened for reading
+     * @throws JsonIOException
+     *             if there was a problem reading from the Reader
+     * @throws JsonSyntaxException
+     *             if the file does not contain a valid representation for an object of type
      */
-    @Deprecated
-    public static void createSaveTextFile(final String folderPath) throws IOException {
-        final File saveFile = new File(folderPath + File.separator + SAVE_TEXT_FILE);
-        final PrintWriter output = new PrintWriter(new OutputStreamWriter(new FileOutputStream(saveFile), "UTF-8"));
-
-        output.print(new StringBuilder().append("--START--").append('\n').append("currentMap:0").append('\n')
-                        .append("mapPosition:0,0").append('\n').append("char1:,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
-                        .append('\n').append("char2:,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0").append('\n')
-                        .append("char3:,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0").append('\n')
-                        .append("char4:,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0").append('\n').append("inventory:0x0")
-                        .append('\n').append("money:0").append('\n').append("--END--").append('\n').toString());
-        output.close();
-    }
-
-    /**
-     * This method creates a new binary empty Save file. If the file exists, it deletes it.
-     * 
-     * @param folderPath
-     *            the path in which you want to create the save file named {@link #SAVE_DAT_FILE}
-     * @return the newly created file
-     * @throws IOException
-     *             if an I/O error occurred
-     * @throws DefaultPathTakenException
-     *             if exist something (like a directory) that makes impossible to create an utility file (like the
-     *             SaveGame) because of the name and the path are the same
-     */
-    @Deprecated
-    public static File createSaveDatFile(final String folderPath) throws IOException, DefaultPathTakenException {
-        final File saveFile = new File(folderPath + File.separator + SAVE_DAT_FILE);
-
-        while (!saveFile.createNewFile()) {
-            if (!saveFile.delete()) {
-                throw new DefaultPathTakenException();
-            }
-        }
-
-        return saveFile;
+    public static Party loadGame() throws IOException {
+        return loadGameFromPath(SAVE_FILE);
     }
 
     /**
      * This method saves the state of the game by serializing the Party object (containing position on map, statistics,
-     * etc...) and the time played.
+     * etc...) and the time played. It saves in a given-path file.
      * 
      * @param party
      *            the party object
-     * @param folderPath
-     *            the path where to save file
+     * @param path
+     *            the path of the file
+     * @throws IOException
+     *             if an error occurs
      * @throws FileNotFoundException
      *             if the file exists but is a directory rather than a regular file, does not exist but cannot be
      *             created, or cannot be opened for any other reason
-     * @throws IOException
-     *             if an I/O error occurred in creating the save file
-     * @throws DefaultPathTakenException
-     *             if exist something (like a directory) that makes impossible to create an utility file (like the
-     *             SaveGame) because of the name and the path are the same
+     * @throws SecurityException
+     *             if a security manager exists and its checkWrite method denies write access to the file.
+     * @throws JsonIOException
+     *             if there was a problem writing to the writer
      */
-    public static void saveGame(final Party party, final String folderPath)
-                    throws FileNotFoundException, IOException, DefaultPathTakenException {
-        final ObjectOutputStream output = new ObjectOutputStream(
-                        new BufferedOutputStream(new FileOutputStream(createSaveDatFile(folderPath))));
-
-        output.writeObject(party);
-
-        output.close();
+    public static void saveGameToPath(final Party party, final String path) throws IOException {
+        serializeJSON(party, path);
     }
 
     /**
@@ -247,82 +122,63 @@ public final class Save {
      * 
      * @param party
      *            the party object
+     * @throws IOException
+     *             if an error occurs
      * @throws FileNotFoundException
      *             if the file exists but is a directory rather than a regular file, does not exist but cannot be
      *             created, or cannot be opened for any other reason
-     * @throws IOException
-     *             if an I/O error occurred in creating the save file
-     * @throws DefaultPathTakenException
-     *             if exist something (like a directory) that makes impossible to create an utility file (like the
-     *             SaveGame) because of the name and the path are the same
+     * @throws SecurityException
+     *             if a security manager exists and its checkWrite method denies write access to the file.
+     * @throws JsonIOException
+     *             if there was a problem writing to the writer
      */
-    public static void saveGame(final Party party)
-                    throws FileNotFoundException, IOException, DefaultPathTakenException {
-        saveGame(party, "res"); // TODO not sure about "res"
-    }
-
-    // TODO
-    @Deprecated
-    public static File createStatsDatFile(final String folderPath) throws IOException, DefaultPathTakenException {
-        final File statsFile = new File(folderPath + File.separator + STATISTICS_DAT_FILE);
-
-        while (!statsFile.createNewFile()) {
-            if (!statsFile.delete()) {
-                throw new DefaultPathTakenException();
-            }
-        }
-
-        return statsFile;
-    }
-
-    // TODO check
-    public static void saveStats(final GameStatistics stats, final String folderPath)
-                    throws FileNotFoundException, IOException, DefaultPathTakenException {
-        final ObjectOutputStream output = new ObjectOutputStream(
-                        new BufferedOutputStream(new FileOutputStream(createStatsDatFile(folderPath))));
-
-        output.writeObject(stats);
-
-        output.close();
-    }
-
-    // TODO
-    public static GameStatistics loadStats(final String folderPath)
-                    throws FileNotFoundException, IOException, ClassNotFoundException {
-        final File saveFile = new File(folderPath + File.separator + STATISTICS_DAT_FILE);
-        final ObjectInputStream input = new ObjectInputStream(new BufferedInputStream(new FileInputStream(saveFile)));
-
-        final Object s = input.readObject();
-        try {
-            if (s.getClass().equals(GameStatistics.class)) {
-                return (GameStatistics) s;
-            } else {
-                throw new IOException(); // TODO maybe a specific exception is better
-            }
-        } finally {
-            input.close();
-        }
+    public static void saveGame(final Party party) throws IOException {
+        saveGameToPath(party, SAVE_FILE);
     }
 
     /**
-     * This method creates a new Statistics file in given path with all statistics initialized to 0.
+     * The method restores a previously saved game statistics object. If the file is not found, returns a new
+     * {@link it.unibo.unori.controller.GameStatistics.java}, with all values set to 0.
      * 
-     * @param folderPath
-     *            the path in which you want to create the save file named {@link #STATISTICS_TEXT_FILE}
+     * @return the GameStatistics object
+     * @throws FileNotFoundException
+     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
+     *             cannot be opened for reading.
      * @throws IOException
-     *             if the named file exists but is a directory rather than a regular file, does not exist but cannot be
-     *             created, or exist but cannot be opened
+     *             if an error occurs
+     * @throws JsonIOException
+     *             if there was a problem reading from the Reader
+     * @throws JsonSyntaxException
+     *             if the file does not contain a valid representation for an object of type
      */
-    public static void createStatsTextFile(final String folderPath) throws IOException {
-        final File statsFile = new File(folderPath + File.separator + STATISTICS_TEXT_FILE);
-        final PrintWriter output = new PrintWriter(new OutputStreamWriter(new FileOutputStream(statsFile), "UTF-8"));
+    public static GameStatistics loadStats() throws IOException {
+        GameStatistics returnObj;
+        try {
+            returnObj = deserializeJSON(STATS_FILE);
+        } catch (FileNotFoundException e) {
+            returnObj = new GameStatistics();
+        }
 
-        output.print(new StringBuilder().append("--START--").append('\n').append("newGames:0").append('\n')
-                        .append("monstersMet:0").append('\n').append("monstersKilled:0").append('\n').append("bosses:0")
-                        .append('\n').append("finalBosses:0").append('\n').append("weapons:0").append('\n')
-                        .append("armors:0").append('\n').append("totalExp:0").append('\n').append("--END--")
-                        .append('\n').toString());
-        output.close();
+        return returnObj;
+    }
+
+    /**
+     * This method saves the statistics of the game. It saves in default path.
+     * 
+     * @param stats
+     *            the object which contains the game statistics
+     * @throws IOException
+     *             if an error occurs
+     * @throws FileNotFoundException
+     *             if the file exists but is a directory rather than a regular file, does not exist but cannot be
+     *             created, or cannot be opened for any other reason
+     * @throws SecurityException
+     *             if a security manager exists and its checkWrite method denies write access to the file
+     * @throws JsonIOException
+     *             if there was a problem writing to the writer
+     */
+    public static void saveStats(final GameStatistics stats) throws IOException {
+        serializeJSON(stats, STATS_FILE);
     }
 
     /**
@@ -338,9 +194,9 @@ public final class Save {
      *             if the file exists but is a directory rather than a regular file, does not exist but cannot be
      *             created, or cannot be opened for any other reason
      * @throws SecurityException
-     *             if a security manager exists and its checkWrite method denies write access to the file.
+     *             if a security manager exists and its checkWrite method denies write access to the file
      * @throws JsonIOException
-     *             - if there was a problem writing to the writer
+     *             if there was a problem writing to the writer
      */
     public static void serializeJSON(final Object objectToSerialize, final String path) throws IOException {
         Gson gson = new GsonBuilder().create();
