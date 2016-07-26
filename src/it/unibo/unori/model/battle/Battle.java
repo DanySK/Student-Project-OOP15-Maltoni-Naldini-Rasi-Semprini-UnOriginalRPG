@@ -107,8 +107,9 @@ public interface Battle {
     /**
      * Setter method to set the next Foe on turn.
      * @param en the Foe to be set.
+     * @return a confirmation String
      */
-    void setFoeOnTurn(Foe en);
+    String setFoeOnTurn(Foe en);
     
     /**
      * Setter method to set the next Hero on turn.

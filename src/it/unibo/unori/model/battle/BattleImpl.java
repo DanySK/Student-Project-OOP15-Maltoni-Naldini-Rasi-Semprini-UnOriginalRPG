@@ -42,6 +42,7 @@ public class BattleImpl implements Battle {
         this.squad = new HeroTeamImpl(team);
         this.enemies = en;
         this.itemBag = bag;
+        this.heroOnTurn = this.squad.getFirstHeroOnTurn();
         this.over = false;
     }
     
@@ -106,7 +107,7 @@ public class BattleImpl implements Battle {
             throw new NotDefendableException();
         }
         if (friend.isDefended()) {
-            return friend.getName() + " è già difeso! Peccato...";
+            return friend.getName() + " e' gia'� difeso! Peccato...";
         } else {
             friend.setDefended();
             return "Hai difeso " + friend.getName();
@@ -119,25 +120,6 @@ public class BattleImpl implements Battle {
         if (this.itemBag.contains(toUse)) {
             final int restore = toUse.getRestore();
             switch(toUse.getStatisticToRestore()) {
-            case EXPFACTOR: break;
-            case FIREATK:
-                break;
-            case FIREDEF:
-                break;
-            case ICEATK:
-                break;
-            case ICEDEF:
-                break;
-            case PHYSICATK:
-                break;
-            case PHYSICDEF:
-                break;
-            case SPEED:
-                break;
-            case THUNDERATK:
-                break;
-            case THUNDERDEF:
-                break;
             case TOTALHP: my.restoreDamage(restore);
                 break;
             case TOTALMP: my.restoreMP(restore);
@@ -226,11 +208,12 @@ public class BattleImpl implements Battle {
     @Override
     public String setHeroOnTUrn(final Hero h) {
         this.heroOnTurn = h;
-        return "E' il turno di" + h.getName();
+        return "E' il turno di " + h.getName();
     }
     
     @Override
-    public void setFoeOnTurn(final Foe en) {
+    public String setFoeOnTurn(final Foe en) {
         this.foeOnTurn = en;
+        return "E' il turno di " + en.getName(); 
     }
 }

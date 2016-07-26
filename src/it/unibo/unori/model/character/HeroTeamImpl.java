@@ -87,5 +87,10 @@ public class HeroTeamImpl implements HeroTeam {
         return this.heroList.stream().filter(i -> !i.getStatus().equals(Status.DEAD))
                 .collect(Collectors.toList());
     }
+    
+    @Override
+    public Hero getFirstHeroOnTurn() {
+        return this.heroList.get(0);
+    }
 
 }
