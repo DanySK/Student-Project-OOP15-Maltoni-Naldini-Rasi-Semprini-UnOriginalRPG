@@ -35,6 +35,6 @@ public class CellFactory {
      */
     public Cell getObjectCell() {
         final WeaponFactory w = new WeaponFactory();
-        return new ObjectCellImpl(new Object(), w.getStdSword());
+        return new ObjectCellImpl("", w.getStdSword());
     }
 }
