@@ -40,6 +40,10 @@ public class WeaponFactory {
                 Status.NONE);
     }
     
+    /**
+     * Create Pugnale.
+     * @return Weapon Pugnale.
+     */
     public Weapon getPugnale() {
         return new WeaponImpl("Pugnale",
                 "Un'arma adatta per gli attacchi fisici. Non ha nulla di magico",
@@ -52,18 +56,26 @@ public class WeaponFactory {
                 Status.BLEEDING);
     }
     
+    /**
+     * Create Clava.
+     * @return Weapon Clava.
+     */
     public Weapon getClava() {
         return new WeaponImpl("Clava Pesante",
                 "Una Clava può ferire nell'orgoglio e nel corpo",
                 this.generateMap(
                     Statistics.PHYSICATK, 350,
                     Statistics.FIREATK, 0,
-                    Statistics.ICEATK, 10,
+                    Statistics.ICEATK, 40,
                     Statistics.THUNDERATK, 0
                     ),
                 Status.NONE);
     }
     
+    /**
+     * Create Balestra.
+     * @return Weapon Balestra.
+     */
     public Weapon getBalestra() {
         return new WeaponImpl("Balestra Antica",
                 "Arma appartenuta a gloriosi guerrieri del passato",
@@ -73,9 +85,13 @@ public class WeaponFactory {
                     Statistics.ICEATK, 0,
                     Statistics.THUNDERATK, 20
                     ),
-                Status.NONE);
+                Status.BLEEDING);
     }
     
+    /**
+     * Create Maledizione.
+     * @return Weapon Maledizione.
+     */
     public Weapon getMaledizione() {
         return new WeaponImpl("Maledizione Verbale",
                 "Anche se è un'arma verbale, una maledizione non è da sottovalutare",
@@ -88,6 +104,10 @@ public class WeaponFactory {
                 Status.CURSED);
     }
     
+    /**
+     * Create Chiodo.
+     * @return Weapon Chiodo.
+     */
     public Weapon getChiodo() {
         return new WeaponImpl("Chiodo Arrugginito",
                 "Enorme chiodo appuntito in grado di avvelenare",
@@ -99,5 +119,149 @@ public class WeaponFactory {
                     ),
                 Status.POISONED);
     }
-    //TODO
+    
+    /**
+     * Create Lancia.
+     * @return Weapon Lancia.
+     */
+    public Weapon getLancia() {
+        return new WeaponImpl("Lancia Elettrica",
+                "Una lancia elettrificata che può causare gravi danni",
+                this.generateMap(
+                    Statistics.PHYSICATK, 260,
+                    Statistics.FIREATK, 10,
+                    Statistics.ICEATK, 5,
+                    Statistics.THUNDERATK, 30
+                    ),
+                Status.NOT_DEFENDABLE);
+    }
+    
+    /**
+     * Create Ocarina.
+     * @return Weapon Ocarina.
+     */
+    public Weapon getOcarina() {
+        return new WeaponImpl("Ocarina Maledetta",
+                "Suona una melodia maledetta che causa danni al corpo e allo spirito",
+                this.generateMap(
+                    Statistics.PHYSICATK, 200,
+                    Statistics.FIREATK, 10,
+                    Statistics.ICEATK, 25,
+                    Statistics.THUNDERATK, 20
+                    ),
+                Status.ASLEEP);
+    }
+    
+    /**
+     * Create Fionda.
+     * @return Weapon Fionda.
+     */
+    public Weapon getFionda() {
+        return new WeaponImpl("Fionda Incandescente",
+                "Un'arma molto potente nel tipo Fuoco",
+                this.generateMap(
+                    Statistics.PHYSICATK, 280,
+                    Statistics.FIREATK, 50,
+                    Statistics.ICEATK, 0,
+                    Statistics.THUNDERATK, 10
+                    ),
+                Status.NONE);
+
+    }
+    
+    /**
+     * Create Cannone.
+     * @return Weapon Cannone.
+     */
+    public Weapon getCannone() {
+        return new WeaponImpl("Cannone Espandibile",
+                "Un cannone portatile, che può essere, all'occorrenza, espanso per magia",
+                this.generateMap(
+                    Statistics.PHYSICATK, 480,
+                    Statistics.FIREATK, 30,
+                    Statistics.ICEATK, 0,
+                    Statistics.THUNDERATK, 0
+                    ),
+                Status.BLEEDING);
+    }
+    
+    /**
+     * Create Mazza.
+     * @return Weapon Mazza.
+     */
+    public Weapon getMazza() {
+        return new WeaponImpl("Mazza Chiodata",
+                "Una mazza molto speciale, che può anche provocare una maledizione",
+                this.generateMap(
+                    Statistics.PHYSICATK, 380,
+                    Statistics.FIREATK, 10,
+                    Statistics.ICEATK, 50,
+                    Statistics.THUNDERATK, 0
+                    ),
+                Status.CURSED);
+    }
+    
+    /**
+     * Create Lanciafiamme.
+     * @return Weapon Lanciafiamme.
+     */
+    public Weapon getLanciafiamme() {
+        return new WeaponImpl("Lanciafiamme",
+                "C'è davvero bisogno di una descrizione?",
+                this.generateMap(
+                    Statistics.PHYSICATK, 580,
+                    Statistics.FIREATK, 90,
+                    Statistics.ICEATK, 0,
+                    Statistics.THUNDERATK, 0
+                    ),
+                Status.NOT_DEFENDABLE);
+    }
+    
+    /**
+     * Create Cerbottana.
+     * @return Weapon Cerbottana.
+     */
+    public Weapon getCerbottana() {
+        return new WeaponImpl("Cerbottana",
+                "Arma meschina, silenziosa e letale",
+                this.generateMap(
+                    Statistics.PHYSICATK, 350,
+                    Statistics.FIREATK, 20,
+                    Statistics.ICEATK, 20,
+                    Statistics.THUNDERATK, 25
+                    ),
+                Status.ASLEEP);
+    }
+    
+    /**
+     * Create Spada.
+     * @return Weapon Spada.
+     */
+    public Weapon getSpadaMistica() {
+        return new WeaponImpl("Spada Mistica",
+                "Una spada leggendaria, non per pivelli",
+                this.generateMap(
+                    Statistics.PHYSICATK, 500,
+                    Statistics.FIREATK, 20,
+                    Statistics.ICEATK, 40,
+                    Statistics.THUNDERATK, 25
+                    ),
+                Status.ASLEEP);
+    }
+    
+    /**
+     * Create Coltre.
+     * @return Weapon Coltre.
+     */
+    public Weapon getColtre() {
+        return new WeaponImpl("Coltre Tossica",
+                "Una coltre di fumo capace di avvelenare il nemico",
+                this.generateMap(
+                    Statistics.PHYSICATK, 200,
+                    Statistics.FIREATK, 20,
+                    Statistics.ICEATK, 10,
+                    Statistics.THUNDERATK, 35
+                    ),
+                Status.POISONED);
+    }
 }
