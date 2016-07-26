@@ -25,20 +25,20 @@ public class SimpleCellImpl implements Cell {
      * 
      */
     private static final long serialVersionUID = -8981471810277191248L;
-    private Object frame;
+    private String path;
     private CellState state;
 
 
     /**
      * Basic Constructor for CellImpl.
      * 
-     * @param frame
-     *            the frame to associate
+     * @param path
+     *            the path of frame to associate
      * @param state
      *            the state to associate
      */
-    public SimpleCellImpl(final Object frame, final CellState state) {
-        this.frame = frame;
+    public SimpleCellImpl(final String path, final CellState state) {
+        this.path = path;
         this.state = state;
     }
 
@@ -54,8 +54,8 @@ public class SimpleCellImpl implements Cell {
 
 
     @Override
-    public void setFrame(final Object frame) {
-        this.frame = frame;
+    public void setFrame(final String path) {
+        this.path = path;
     }
 
     @Override
@@ -64,8 +64,8 @@ public class SimpleCellImpl implements Cell {
      }
 
     @Override
-    public Object getFrame() {
-        return this.frame;
+    public String getFrame() {
+        return this.path;
     }
 
     @Override

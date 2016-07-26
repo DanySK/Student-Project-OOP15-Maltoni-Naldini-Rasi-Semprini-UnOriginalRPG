@@ -43,18 +43,18 @@ public interface Cell extends Serializable {
     /**
      * Set a particular frame on the cell.
      * 
-     * @param frame
-     *            frame to set from the view
+     * @param path
+     *            path of frame to set from the view
      */
-    void setFrame(Object frame);
+    void setFrame(String path);
 
 
     /**
-     * Return the frame associated with the Cell.
+     * Return the path of frame associated with the Cell.
      * @return
      *          a frame Object
      */
-    Object getFrame();
+    String getFrame();
 
     /**
      * Get the object positioned in a cell, if present.

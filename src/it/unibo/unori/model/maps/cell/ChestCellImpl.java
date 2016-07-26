@@ -19,17 +19,17 @@ public class ChestCellImpl extends SimpleCellImpl {
      * 
      */
     private static final long serialVersionUID = -7296644040007976176L;
-    private final ObjectItem o;
+    private final Item o;
 
     /**
      * Constructor for the cell.
-     * @param frame
-     *              the frame to set in the cell
+     * @param path
+     *              the path of frame to set in the cell
      * @param o
      *              object to put in the cell
      */
-    public ChestCellImpl(final Object frame, final ObjectItem o) {
-        super(frame, CellState.BLOCKED);
+    public ChestCellImpl(final String path, final ObjectItem o) {
+        super(path, CellState.BLOCKED);
         this.o = o;
     }
 
