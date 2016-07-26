@@ -14,7 +14,7 @@ import it.unibo.unori.controller.exceptions.CorruptedUtilityFileException;
 /**
  * This JUnit test class checks if utility class Save works properly.
  */
-public class SaveTester {
+public class SaveTest {
     /**
      * This rule instantiates a temporary folder where to check files.
      */
