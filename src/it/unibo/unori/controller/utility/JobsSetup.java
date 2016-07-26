@@ -18,6 +18,7 @@ import it.unibo.unori.model.items.Armor.ArmorPieces;
 import it.unibo.unori.model.items.ArmorFactory;
 import it.unibo.unori.model.items.Weapon;
 import it.unibo.unori.model.items.WeaponFactory;
+import it.unibo.unori.view.sprites.CharacterSprite;
 
 /**
  * Utility class which provides default parameters for the jobs loading them from file.
@@ -55,7 +56,7 @@ public final class JobsSetup {
     /**
      * Main method. It creates JSON file starting from Factories of the model.
      * 
-     * @param args 
+     * @param args
      */
     public static void main(final String[] args) {
         final StatisticsFactory sf = new StatisticsFactory();
@@ -237,6 +238,32 @@ public final class JobsSetup {
         try {
             return JobsSetup.getDefaultWeapon(path);
         } catch (IOException e) {
+            return null;
+        }
+    }
+
+    /**
+     * Return the path of the PNG file that contains the battle sprite of the Job. As requested, it returns null if it
+     * can't find any default provided file path for the given Job
+     * 
+     * @param job
+     *            the Job
+     * @return the path if the job is found, or null if it can't find any default provided file path for the given Job
+     */
+    public static String getBattleSpritePath(final Jobs job) {
+        if (job.equals(Jobs.WARRIOR)) {
+            return "res/sprites/warrior.png";
+        } else if (job.equals(Jobs.PALADIN)) {
+            return "res/sprites/paladin.png";
+        } else if (job.equals(Jobs.MAGE)) {
+            return "res/sprites/mage.png";
+        } else if (job.equals(Jobs.RANGER)) {
+            return "res/sprites/ranger.png";
+        } else if (job.equals(Jobs.COOK)) {
+            return "res/sprites/cook.png";
+        } else if (job.equals(Jobs.CLOWN)) {
+            return "res/sprites/clown.png";
+        } else {
             return null;
         }
     }
