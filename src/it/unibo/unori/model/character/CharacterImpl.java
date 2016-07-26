@@ -19,6 +19,7 @@ public class CharacterImpl implements Character {
      */
     private static final long serialVersionUID = -95447626445744515L;
     private final String name;
+    private final String battleFrame;
     private int currentHP;
     private int currentMP;
     private int level;
@@ -30,17 +31,22 @@ public class CharacterImpl implements Character {
      * Constructor for CharacterImpl.
      * @param name
      *              name of the character.
+     * @param battleFrame
+     *              path of the battleFrame of the character
      * @param map
      *              statistics of the character.
      */
-    public CharacterImpl(final String name, final Map<Statistics, Integer> map) {
-        this(name, map, 1);
+    public CharacterImpl(final String name, final String battleFrame, 
+            final Map<Statistics, Integer> map) {
+        this(name, battleFrame, map, 1);
     }
 
     /**
      * Constructor for CharacterImpl.
      * @param name
      *              name of the character.
+     * @param battleFrame
+     *              path of the battleFrame of the character
      * @param map
      *              statistics of the character.
      * @param level
@@ -49,9 +55,10 @@ public class CharacterImpl implements Character {
      *                                  or the map does not define a value for all
      *                                  the statistics
      */
-    public CharacterImpl(final String name, final Map<Statistics, Integer> map, 
-                          final int level) throws IllegalArgumentException {
-        this(name, map, level, new LinkedList<MagicAttackInterface>());
+    public CharacterImpl(final String name, final String battleFrame,
+             final Map<Statistics, Integer> map, final int level) 
+                        throws IllegalArgumentException {
+        this(name, battleFrame, map, level, new LinkedList<MagicAttackInterface>());
     }
 
     /**
@@ -60,6 +67,8 @@ public class CharacterImpl implements Character {
      *              name of the character.
      * @param map
      *              statistics of the character.
+     * @param battleFrame
+     *              path of the battleFrame of the character
      * @param level
      *              the level of the character.
      * @param spellList
@@ -68,11 +77,14 @@ public class CharacterImpl implements Character {
      *                                  or the map does not define a value for all
      *                                  the statistics
      */
-    public CharacterImpl(final String name, final Map<Statistics, Integer> map, 
+    public CharacterImpl(final String name, final String battleFrame, final Map<Statistics, Integer> map, 
             final int level, final List<MagicAttackInterface> spellList) {
         this.name = name;
+        this.battleFrame = battleFrame;
         if (checkParameters(map, level)) {
-            throw new IllegalArgumentException("Lancio qui");
+            throw new IllegalArgumentException("I parametri immessi non corrispondono,"
+                    + "può essere un errore dovuto alla lettura da file, assicurarsi che i file"
+                    + "siano presenti e riprovare");
         }
         this.statistic = map;
         this.currentHP = this.statistic.get(Statistics.TOTALHP);
@@ -246,5 +258,10 @@ public class CharacterImpl implements Character {
      */
     protected Map<Statistics, Integer> getStatistics() {
         return this.statistic;
+    }
+
+    @Override
+    public String getBattleFrame() {
+        return this.battleFrame;
     }
 }

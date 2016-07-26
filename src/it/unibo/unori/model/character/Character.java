@@ -184,4 +184,11 @@ public interface Character extends Serializable {
      */
     int getCurrentMP();
 
+    /**
+     * Get the path of the battle-frame of character.
+     * @return
+     *          a string containing the path
+     */
+    String getBattleFrame();
+
 }

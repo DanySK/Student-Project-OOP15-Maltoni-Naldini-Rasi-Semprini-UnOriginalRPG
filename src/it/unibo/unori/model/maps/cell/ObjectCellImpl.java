@@ -17,13 +17,13 @@ public class ObjectCellImpl extends SimpleCellImpl {
 
     /**
      * Constructor.
-     * @param frame
-     *              frame to set in the cell
+     * @param path
+     *              path of frame to set in the cell
      * @param obj
      *              object to set in the cell
      */
-    public ObjectCellImpl(final Object frame, final Item obj) {
-        super(frame, CellState.BLOCKED);
+    public ObjectCellImpl(final String path, final Item obj) {
+        super(path, CellState.BLOCKED);
         this.obj = obj;
     }
 

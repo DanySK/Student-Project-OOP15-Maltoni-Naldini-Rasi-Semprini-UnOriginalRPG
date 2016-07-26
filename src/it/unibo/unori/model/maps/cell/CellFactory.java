@@ -16,7 +16,7 @@ public class CellFactory {
      *        a standard free cell 
      */
     public Cell getFreeCell() {
-        return new SimpleCellImpl(new Object(), CellState.FREE);
+        return new SimpleCellImpl("", CellState.FREE);
     }
 
     /**
@@ -25,7 +25,7 @@ public class CellFactory {
      *         a standard blocked cell object
      */
     public  Cell getBlockedCell() {
-        return new SimpleCellImpl(new Object(), CellState.BLOCKED);
+        return new SimpleCellImpl("", CellState.BLOCKED);
     }
 
     /**
@@ -35,6 +35,6 @@ public class CellFactory {
      */
     public Cell getObjectCell() {
         final WeaponFactory w = new WeaponFactory();
-        return new ObjectCellImpl(new Object(), w.getStdSword());
+        return new ObjectCellImpl("", w.getStdSword());
     }
 }

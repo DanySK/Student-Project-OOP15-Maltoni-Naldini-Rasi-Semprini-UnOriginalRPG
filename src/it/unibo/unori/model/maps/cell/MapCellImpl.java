@@ -20,8 +20,8 @@ public class MapCellImpl extends SimpleCellImpl {
 
     /**
      * Constructor.
-     * @param frame
-     *        the frame object to set
+     * @param path
+     *        the path of frame object to set
      * @param mapToLink
      *        the map to set in party 
      * @param initialPos
@@ -29,10 +29,10 @@ public class MapCellImpl extends SimpleCellImpl {
      *@throws IllegalArgumentException if the cell with the specified coordinates
      *                                  does not belong to the map
      */
-    public MapCellImpl(final Object frame, final GameMap mapToLink, 
+    public MapCellImpl(final String path, final GameMap mapToLink, 
                        final Position initialPos) 
                                throws IllegalArgumentException {
-        super(frame, CellState.BLOCKED);
+        super(path, CellState.BLOCKED);
         this.mapToLink = mapToLink;
         this.initialPos = initialPos;
     }

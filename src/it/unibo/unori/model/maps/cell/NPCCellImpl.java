@@ -21,13 +21,13 @@ public class NPCCellImpl extends SimpleCellImpl {
     /**
      * Constructor.
      * 
-     * @param frame
-     *            the frame to pass
+     * @param path
+     *            the path of the frame to set
      *@param npc
-     *          the npc who will generate the dialogue with the party
+     *          the Non Playable Character who will generate the dialogue with the party
      */
-    public NPCCellImpl(final Object frame, final Npc npc) {
-        super(frame, CellState.BLOCKED);
+    public NPCCellImpl(final String path, final Npc npc) {
+        super(path, CellState.BLOCKED);
         this.npc = npc;
     }
 
