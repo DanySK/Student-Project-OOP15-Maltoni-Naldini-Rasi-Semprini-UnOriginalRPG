@@ -1,6 +1,7 @@
 package it.unibo.unori.model.maps;
 
 import java.io.Serializable;
+import java.util.Map;
 
 import it.unibo.unori.model.character.HeroTeam;
 import it.unibo.unori.model.items.Bag;
@@ -39,17 +40,18 @@ public interface Party extends Serializable {
 
     /**
      * Set the current frame of party.
-     * @param frame
-     *              the frame to set
+     * @param frames
+     *              a map containig for each direction, 
+     *              the path of the frame to load.
      */
-    void setCurrentFrame(Object frame);
+    void setFrames(Map<CardinalPoints, String> frames);
 
     /**
-     * Get method for the frame Object.
+     * Get method for the current frame path.
      * @return
-     *          the frame Object of the party
+     *          the path of the party's frame
      */
-    Object getCurrentFrame();
+    String getCurrentFrame();
 
     /**
      * Move the party in the specified direction, if possible.

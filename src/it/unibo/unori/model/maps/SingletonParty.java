@@ -1,5 +1,9 @@
 package it.unibo.unori.model.maps;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 import it.unibo.unori.model.character.HeroTeam;
 import it.unibo.unori.model.character.HeroTeamImpl;
 import it.unibo.unori.model.items.Bag;
@@ -69,7 +73,7 @@ public final class SingletonParty {
         private static final long serialVersionUID = 5037069095324356034L;
         private Position currentPosition;
         private GameMap currentMap;
-        private Object frame;
+        private  Map<CardinalPoints, String> frames;
         private CardinalPoints orientation;
         private final Bag partyBag;
         private final HeroTeam heroteam;
@@ -81,10 +85,15 @@ public final class SingletonParty {
         PartyImpl() {
             this.currentMap = new GameMapImpl();
             this.currentPosition = this.currentMap.getInitialCellPosition();
-            this.frame = new Object();
             this.orientation = CardinalPoints.NORTH;
             this.partyBag = new BagImpl();
             this.heroteam = new HeroTeamImpl();
+            this.frames = new HashMap<>();
+        }
+
+        private boolean framesCheck(final Map<CardinalPoints, String> frames) {
+            return frames.keySet().containsAll(
+                    Arrays.asList(CardinalPoints.values()));
         }
 
         @Override
@@ -104,13 +113,17 @@ public final class SingletonParty {
         }
 
         @Override
-        public void setCurrentFrame(final Object frame) {
-            this.frame = frame;
+        public void setFrames(final Map<CardinalPoints, String> frames)
+                                        throws IllegalArgumentException {
+            if (!this.framesCheck(frames)) {
+                throw new IllegalArgumentException();
+            }
+            this.frames = frames;
         }
 
         @Override
-        public Object getCurrentFrame() {
-            return this.frame;
+        public String getCurrentFrame() {
+            return this.frames.get(orientation);
         }
 
         @Override
