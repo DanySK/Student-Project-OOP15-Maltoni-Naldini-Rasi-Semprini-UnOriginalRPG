@@ -38,6 +38,12 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     private int currentBar;
     private boolean defended;
 
+    private boolean checkInputParameters(final Jobs job, final Map<ArmorPieces, Armor> armor, 
+            final Weapon weapon) {
+        return job.getGrowthStats().isEmpty() || armor.isEmpty()
+                 || weapon == null || job.getBattleFrame() == null;
+    }
+
 
     /**
      * Standard constructor for HeroImpl.
@@ -51,11 +57,17 @@ public class HeroImpl  extends CharacterImpl implements Hero {
      *              Hero's initial equip.
      *@param weapon
      *              Hero's initial weapon.
+     * @throws IllegalArgumentException
+     *              if something went wrong on the creation of the job
      */
     public HeroImpl(final String name, final Jobs job, 
             final Map <Statistics, Integer> params,
-            final Map<ArmorPieces, Armor> armor, final Weapon weapon) {
+            final Map<ArmorPieces, Armor> armor, final Weapon weapon) 
+                        throws IllegalArgumentException {
         super(name, job.getBattleFrame(), params);
+        if (this.checkInputParameters(job, armor, weapon)) {
+            throw new IllegalArgumentException("Parameters are wrong!");
+        }
         this.armor = armor;
         this.weapon = weapon;
         this.heroJob = job;
@@ -71,11 +83,13 @@ public class HeroImpl  extends CharacterImpl implements Hero {
      *              Character's name
      * @param job
      *              Character's job
+     * @throws IllegalArgumentException
+     *              if something went wrong on initialization of the job
      */
-    public HeroImpl(final String name, final Jobs job) {
-       this(name, job, job.getInitialStats(), job.getInitialArmor(),
-               job.getInitialWeapon()); 
-    }
+    public HeroImpl(final String name, final Jobs job) throws IllegalArgumentException {
+           this(name, job, job.getInitialStats(), job.getInitialArmor(),
+                   job.getInitialWeapon()); 
+       }
 
     @Override
     public int getExpTot() {
