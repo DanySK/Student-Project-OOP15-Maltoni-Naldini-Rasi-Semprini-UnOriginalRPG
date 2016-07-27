@@ -9,8 +9,9 @@ import it.unibo.unori.model.battle.exceptions.NotDefendableException;
 import it.unibo.unori.model.battle.exceptions.NotEnoughMPExcpetion;
 import it.unibo.unori.model.battle.utility.BattleLogics;
 import it.unibo.unori.model.character.Foe;
+import it.unibo.unori.model.character.FoeSquad;
 import it.unibo.unori.model.character.Hero;
-import it.unibo.unori.model.character.HeroTeamImpl;
+import it.unibo.unori.model.character.HeroTeam;
 import it.unibo.unori.model.character.Status;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.character.Character;
@@ -25,8 +26,8 @@ import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
  */
 public class BattleImpl implements Battle {
 
-    private final HeroTeamImpl squad;
-    private final List<Foe> enemies;
+    private final HeroTeam squad;
+    private final FoeSquad enemies;
     private Foe foeOnTurn;
     private Hero heroOnTurn;
     private boolean over;
@@ -38,8 +39,8 @@ public class BattleImpl implements Battle {
      * @param en a List of Enemies.
      * @param bag the Item Bag.
      */
-    public BattleImpl(final List<Hero> team, final List<Foe> en, final Bag bag) {
-        this.squad = new HeroTeamImpl(team);
+    public BattleImpl(final HeroTeam team, final FoeSquad en, final Bag bag) {
+        this.squad = team;
         this.enemies = en;
         this.itemBag = bag;
         this.heroOnTurn = this.squad.getFirstHeroOnTurn();
@@ -48,8 +49,9 @@ public class BattleImpl implements Battle {
     
     private Character defeated(final Character ch) {
         if (ch instanceof Foe) {
-            this.enemies.remove(ch);
-            if (this.enemies.size() > 0) {
+            final Foe toRemove = (Foe) ch;
+            this.enemies.removeFoe(toRemove);
+            if (this.enemies.getAliveFoes().size() > 0) {
                 this.over = false;
             } else {
                 this.over = true;
@@ -67,10 +69,10 @@ public class BattleImpl implements Battle {
     
     private int getMediumLevelFoes() {
         int mediumLevel = 0;
-        for (final Foe h : this.enemies) {
+        for (final Foe h : this.enemies.getAllFoes()) {
             mediumLevel += h.getLevel();
         }
-        mediumLevel /= this.enemies.size();
+        mediumLevel /= this.enemies.getAllFoes().size();
         return mediumLevel;
     }
     
@@ -139,7 +141,7 @@ public class BattleImpl implements Battle {
             my.resetSpecialBar();
             final int damage = 
                     BattleLogics.specialAttackCalc(my.getLevel(), my.getAttack());
-            this.enemies.forEach(e -> {
+            this.enemies.getAllFoes().forEach(e -> {
                 e.takeDamage(damage);
                 if (this.isDefeated(e)) {
                     this.defeated(e);
@@ -182,7 +184,7 @@ public class BattleImpl implements Battle {
 
     @Override
     public List<Foe> getEnemies() {
-        return new ArrayList<>(this.enemies);
+        return new ArrayList<>(this.enemies.getAllFoes());
     }
 
     @Override

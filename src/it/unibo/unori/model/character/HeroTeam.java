@@ -46,7 +46,8 @@ public interface HeroTeam extends Serializable {
     /**
      * Returns the first Hero of the Team.
      * @return the Hero on the first place.
+     * @throws IllegalStateException if the list is empty
      */
-    Hero getFirstHeroOnTurn();
+    Hero getFirstHeroOnTurn() throws IllegalStateException;
 
 }

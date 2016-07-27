@@ -7,7 +7,7 @@ import java.util.Random;
 import it.unibo.unori.model.battle.MagicAttackInterface;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.Hero;
-import it.unibo.unori.model.character.HeroTeamImpl;
+import it.unibo.unori.model.character.HeroTeam;
 import it.unibo.unori.model.character.Status;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
 
@@ -90,7 +90,7 @@ public final class BattleLogics {
      * @return the List of the experience points acquired by each member
      * of my team.
      */
-    public static List<Integer> expAcquired(final HeroTeamImpl squad, 
+    public static List<Integer> expAcquired(final HeroTeam squad, 
             final int mediumLevel, final int notBeaten) {
         
         final List<Integer> exp = new ArrayList<>();
