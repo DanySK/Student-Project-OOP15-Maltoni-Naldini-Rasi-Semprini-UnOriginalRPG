@@ -35,12 +35,12 @@ public final class Save {
     /**
      * Static parameter for standard JSON object serialization save file.
      */
-    private static final String SAVE_FILE = "res/Save.json";
+    public static final String SAVE_FILE = "res/Save.json";
 
     /**
      * Static parameter for standard JSON object serialization statistics file.
      */
-    private static final String STATS_FILE = "res/Stats.json";
+    public static final String STATS_FILE = "res/Stats.json";
 
     private Save() {
         // Empty private constructor, because this is an utility class
@@ -283,20 +283,16 @@ public final class Save {
         return returnObject.orElseThrow(() -> new JsonIOException("The file provided is corrupted or non valid"));
     }
 
-    // Probably useless
-    private static <T> T deserializeJSON(final InstanceCreator<T> instanceCreator, final String path)
-                    throws IOException {
-        Type type = new TypeToken<T>() {
-        }.getType();
-        Optional<T> returnObject = Optional.empty();
-        final GsonBuilder gson = new GsonBuilder();
+    // Maybe not useless
+    public static <T> T deserializeJSON(final Class<T> c, final Gson gson, final String path) throws IOException {
+        /*
+         * Type type = new TypeToken<T>() { }.getType();
+         */
 
-        if (instanceCreator != null) {
-            gson.registerTypeAdapter(type, instanceCreator);
-        }
+        Optional<T> returnObject = Optional.empty();
 
         final Reader reader = new InputStreamReader(new FileInputStream(path), "UTF-8");
-        returnObject = Optional.ofNullable(gson.create().fromJson(reader, type));
+        returnObject = Optional.ofNullable(gson.fromJson(reader, c));
         reader.close();
 
         return returnObject.orElseThrow(() -> new JsonIOException("The file provided is corrupted or non valid"));
