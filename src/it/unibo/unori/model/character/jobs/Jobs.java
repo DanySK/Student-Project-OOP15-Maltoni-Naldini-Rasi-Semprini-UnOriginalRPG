@@ -40,12 +40,14 @@ public enum Jobs {
     private final Map<Statistics, Integer> basicStats;
     private final Map<Statistics, Integer> growthStats;
     private final Weapon basicWeapon;
+    private final String battleFrame;
 
      Jobs(final String filePath) {
-        this.basicEquip = JobsSetup.getDefaultArmor(filePath);
-        this.basicStats = JobsSetup.getDefaultStats(filePath);
-        this.growthStats = JobsSetup.getDefaultIncrements(filePath);
-        this.basicWeapon = JobsSetup.getDefaultWeapon(filePath);
+        this.basicEquip = JobsSetup.getDefaultArmorMap(filePath);
+        this.basicStats = JobsSetup.getDefaultStatsMap(filePath);
+        this.growthStats = JobsSetup.getDefaultIncrementsMap(filePath);
+        this.basicWeapon = JobsSetup.getDefaultWeaponNullable(filePath);
+        this.battleFrame = JobsSetup.getBattleSpritePath(filePath);
     }
 
     Jobs() {
@@ -53,6 +55,7 @@ public enum Jobs {
        this.basicWeapon = new WeaponFactory().getStdSword();
        this.basicStats = new StatisticsFactory().createDumpStats();
        this.growthStats = new GrowthFactory().createDumpGrowth();
+       this.battleFrame = "";
     }
 
      /**
@@ -85,5 +88,12 @@ public enum Jobs {
          return this.basicWeapon;
      }
 
-
+     /**
+      * Get the battle sprite of the job.
+      * @return
+      *         the path of the file containing the sprite
+      */
+     public String getBattleFrame() {
+         return this.battleFrame;
+     }
 }

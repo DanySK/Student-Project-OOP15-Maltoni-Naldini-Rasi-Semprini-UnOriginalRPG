@@ -55,7 +55,7 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     public HeroImpl(final String name, final Jobs job, 
             final Map <Statistics, Integer> params,
             final Map<ArmorPieces, Armor> armor, final Weapon weapon) {
-        super(name, params);
+        super(name, job.getBattleFrame(), params);
         this.armor = armor;
         this.weapon = weapon;
         this.heroJob = job;
