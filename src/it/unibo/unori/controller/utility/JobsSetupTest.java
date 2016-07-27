@@ -10,6 +10,9 @@ import org.junit.Test;
 import it.unibo.unori.model.character.jobs.Jobs;
 import it.unibo.unori.model.items.WeaponFactory;
 
+/**
+ * JUnit test for {@link it.unibo.unori.controller.utility.JobsSetup.java} class.
+ */
 public class JobsSetupTest {
 
     @Test
@@ -57,7 +60,8 @@ public class JobsSetupTest {
     /**
      * This tests if getPath() method throws exceptions when it should.
      * 
-     * @throws Exception to pass the test
+     * @throws Exception
+     *             to pass the test
      */
     @Test(expected = FileNotFoundException.class)
     public void testGetPathExceptions() throws Exception {

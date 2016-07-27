@@ -1,36 +1,29 @@
 package it.unibo.unori.controller.utility;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.lang.reflect.Type;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.InstanceCreator;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
 
 import it.unibo.unori.controller.GameStatistics;
-import it.unibo.unori.controller.exceptions.CorruptedUtilityFileException;
+import it.unibo.unori.model.items.Armor;
+import it.unibo.unori.model.items.ArmorImpl;
+import it.unibo.unori.model.items.Weapon;
+import it.unibo.unori.model.items.WeaponImpl;
 import it.unibo.unori.model.maps.Party;
+import it.unibo.unori.model.maps.SingletonParty;
 
 /**
  * Utility class that provides static methods for load/save data from/to file.
@@ -54,11 +47,8 @@ public final class Save {
      * The method restores a previously saved game from a given-path file.
      * 
      * @param path
-     *            the path where of the file
+     *            the path of the file
      * @return the Party object, which is the de facto savegame
-     * @throws FileNotFoundException
-     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
-     *             cannot be opened for reading
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
@@ -70,16 +60,13 @@ public final class Save {
      *             if the file does not contain a valid representation for an object of type
      */
     public static Party loadGameFromPath(final String path) throws IOException {
-        return deserializeJSON(path);
+        return deserializeJSON(path, Party.class);
     }
 
     /**
      * The method restores a previously saved game from the default save file.
      * 
      * @return the Party object, which is the de facto savegame
-     * @throws FileNotFoundException
-     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
-     *             cannot be opened for reading
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
@@ -137,8 +124,27 @@ public final class Save {
     }
 
     /**
-     * The method restores a previously saved game statistics object. If the file is not found, returns a new
-     * {@link it.unibo.unori.controller.GameStatistics.java}, with all values set to 0.
+     * The method restores a previously saved game statistics object from a given-path file.
+     * 
+     * @param path
+     *            the path of the file
+     * @return the GameStatistics object
+     * @throws FileNotFoundException
+     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
+     *             cannot be opened for reading.
+     * @throws IOException
+     *             if an error occurs
+     * @throws JsonIOException
+     *             if there was a problem reading from the Reader
+     * @throws JsonSyntaxException
+     *             if the file does not contain a valid representation for an object of type
+     */
+    public static GameStatistics loadStatsFromPath(final String path) throws IOException {
+        return deserializeJSON(path, GameStatistics.class);
+    }
+
+    /**
+     * The method restores a previously saved game statistics object from default path.
      * 
      * @return the GameStatistics object
      * @throws FileNotFoundException
@@ -152,14 +158,28 @@ public final class Save {
      *             if the file does not contain a valid representation for an object of type
      */
     public static GameStatistics loadStats() throws IOException {
-        GameStatistics returnObj;
-        try {
-            returnObj = deserializeJSON(STATS_FILE);
-        } catch (FileNotFoundException e) {
-            returnObj = new GameStatistics();
-        }
+        return Save.loadStatsFromPath(STATS_FILE);
+    }
 
-        return returnObj;
+    /**
+     * This method saves the statistics of the game. It saves in default path.
+     * 
+     * @param stats
+     *            the object which contains the game statistics
+     * @param path
+     *            the path of the file
+     * @throws IOException
+     *             if an error occurs
+     * @throws FileNotFoundException
+     *             if the file exists but is a directory rather than a regular file, does not exist but cannot be
+     *             created, or cannot be opened for any other reason
+     * @throws SecurityException
+     *             if a security manager exists and its checkWrite method denies write access to the file
+     * @throws JsonIOException
+     *             if there was a problem writing to the writer
+     */
+    public static void saveStatsToFile(final GameStatistics stats, final String path) throws IOException {
+        serializeJSON(stats, STATS_FILE);
     }
 
     /**
@@ -178,7 +198,7 @@ public final class Save {
      *             if there was a problem writing to the writer
      */
     public static void saveStats(final GameStatistics stats) throws IOException {
-        serializeJSON(stats, STATS_FILE);
+        Save.saveStatsToFile(stats, STATS_FILE);
     }
 
     /**
@@ -199,7 +219,7 @@ public final class Save {
      *             if there was a problem writing to the writer
      */
     public static void serializeJSON(final Object objectToSerialize, final String path) throws IOException {
-        Gson gson = new GsonBuilder().create();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Writer writer = new OutputStreamWriter(new FileOutputStream(path), "UTF-8");
         gson.toJson(objectToSerialize, writer);
         writer.close();
@@ -210,6 +230,9 @@ public final class Save {
      * 
      * @param <T>
      *            the type of the object serialized on the file
+     * @param c
+     *            the type of the object serialized on the file; it needs to be specified because sometimes it can't
+     *            parse the correct type automatically
      * @param path
      *            the path where to find the JSON file
      * @return the serialized object
@@ -223,14 +246,30 @@ public final class Save {
      * @throws JsonSyntaxException
      *             if the file does not contain a valid representation for an object of type
      */
-    public static <T> T deserializeJSON(final String path) throws IOException {
-        Type type = new TypeToken<T>() {
-        }.getType();
+    public static <T> T deserializeJSON(final String path, final Class<T> c) throws IOException {
+        /*
+         * Type type = new TypeToken<T>() { }.getType();
+         */
         Optional<T> returnObject = Optional.empty();
-        Gson gson = new GsonBuilder().create();
+        final Gson gson = new GsonBuilder().registerTypeAdapter(Armor.class, new InstanceCreator<Armor>() {
+            @Override
+            public Armor createInstance(final Type type) {
+                return ArmorImpl.NAKED;
+            }
+        }).registerTypeAdapter(Party.class, new InstanceCreator<Party>() {
+            @Override
+            public Party createInstance(final Type type) {
+                return SingletonParty.getParty();
+            }
+        }).registerTypeAdapter(Weapon.class, new InstanceCreator<Weapon>() {
+            @Override
+            public Weapon createInstance(final Type type) {
+                return WeaponImpl.FISTS;
+            }
+        }).create();
 
-        Reader reader = new InputStreamReader(new FileInputStream(path), "UTF-8");
-        returnObject = Optional.ofNullable(gson.fromJson(reader, type));
+        final Reader reader = new InputStreamReader(new FileInputStream(path), "UTF-8");
+        returnObject = Optional.ofNullable(gson.fromJson(reader, /* type */c));
         reader.close();
 
         return returnObject.orElseThrow(() -> new JsonIOException("The file provided is corrupted or non valid"));

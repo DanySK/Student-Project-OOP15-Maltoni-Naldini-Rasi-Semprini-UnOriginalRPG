@@ -1,15 +1,21 @@
 package it.unibo.unori.controller.utility;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import com.google.gson.JsonIOException;
+
 import it.unibo.unori.controller.exceptions.CorruptedUtilityFileException;
+import it.unibo.unori.model.maps.Party;
+import it.unibo.unori.model.maps.SingletonParty;
 
 /**
  * This JUnit test class checks if utility class Save works properly.
@@ -22,50 +28,66 @@ public class SaveTest {
     public final TemporaryFolder folder = new TemporaryFolder();
 
     /**
-     * This tests if loadSave method throws IOException if the file does not exist.
+     * This tests if loadSave method throws JsonIOException if the file does not exist.
      * 
-     * @throws FileNotFoundException
-     *             if the file does not exist
+     * @throws JsonIOException
+     *             if the file does is not a JSON-serialized object
      * @throws IOException
-     *             if some
+     *             if something else wrong happens
      */
-    @Test(expected = IOException.class)
+    @Test(expected = FileNotFoundException.class)
     public void testSaveFileNotFound() throws IOException {
-        folder.newFile("Save.json");
-        
+        Save.loadGameFromPath(folder.getRoot().getAbsolutePath() + "/Save.json");
     }
 
     /**
      * This tests if loadFromUtilityFile method throws IOException if the file does not exist.
      * 
+     * @throws JsonIOException
+     *             if the file does is not a JSON-serialized object
      * @throws IOException
-     *             if the file does not exist
-     * @throws CorruptedUtilityFileException
-     *             if the file does not match the correct pattern
+     *             if something else wrong happens
      */
-    @Test(expected = IOException.class)
-    public void testStatsFileNotFound() throws IOException, CorruptedUtilityFileException {
-        Save.loadFromUtilityTextFile(folder.getRoot().getCanonicalPath() + File.separator + Save.STATISTICS_TEXT_FILE);
+    @Test(expected = FileNotFoundException.class)
+    public void testStatsFileNotFound() throws IOException {
+        Save.loadStatsFromPath(folder.getRoot().getAbsolutePath() + "/Stats.json");
     }
 
     /**
-     * This tests if loadFromUtilityFile method throws CorruptedUtilityFileException if the file does not match the
-     * expected pattern.
+     * This tests if loadSave method throws JsonIOException if the file does not exist.
      * 
+     * @throws JsonIOException
+     *             if the file does is not a JSON-serialized object
      * @throws IOException
-     *             if the file does not exist
-     * @throws CorruptedUtilityFileException
-     *             if the file does not match the correct pattern
+     *             if something else wrong happens
      */
-    @Test(expected = CorruptedUtilityFileException.class)
-    public void testCorruptedSave() throws IOException, CorruptedUtilityFileException {
-        folder.newFile(Save.SAVE_TEXT_FILE);
-        Save.loadFromUtilityTextFile(folder.getRoot().getCanonicalPath() + File.separator + Save.SAVE_TEXT_FILE);
+    @Test(expected = JsonIOException.class)
+    public void testSaveFileNotValid() throws IOException {
+        final File f = folder.newFile("Save.json");
+        Save.loadGameFromPath(f.getAbsolutePath());
     }
-    
+
+    /**
+     * This tests if loadFromUtilityFile method throws IOException if the file does not exist.
+     * 
+     * @throws JsonIOException
+     *             if the file does is not a JSON-serialized object
+     * @throws IOException
+     *             if something else wrong happens
+     */
+    @Test(expected = JsonIOException.class)
+    public void testStatsFileNotValid() throws IOException {
+        final File f = folder.newFile("Stats.json");
+        Save.loadStatsFromPath(f.getAbsolutePath());
+    }
+
     @Test
-    public void testSaveAndLoadGame() {
-        fail("Not yet implemented");
+    public void testSaveAndLoadGame() throws IOException {
+        final File f = folder.newFile("Save.json");
+        final Party firstParty = SingletonParty.getParty();
+        Save.saveGameToPath(firstParty, f.getAbsolutePath());
+        final Party secondParty = Save.loadGameFromPath(f.getAbsolutePath());
+        assertEquals(firstParty, secondParty);
     }
 
     @Test
