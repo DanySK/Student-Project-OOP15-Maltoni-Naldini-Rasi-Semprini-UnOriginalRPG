@@ -6,7 +6,7 @@ import java.util.Map;
 import it.unibo.unori.model.character.HeroTeam;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.maps.exceptions.BlockedPathException;
-import it.unibo.unori.model.menu.Dialogue;
+import it.unibo.unori.model.menu.DialogueInterface;
 
 /**
  * Party is the central object of the all map-related classes.
@@ -81,7 +81,7 @@ public interface Party extends Serializable {
      * Method to interact with the looked Cell.
      * @return a dialogue, related to the kind of Cell
      */
-    Dialogue interact();
+    DialogueInterface interact();
 
     /**
      * Enum to define the four cardinal points and their skidding 

@@ -17,6 +17,7 @@ import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
 import it.unibo.unori.model.maps.exceptions.NoNPCFoundException;
 import it.unibo.unori.model.maps.exceptions.NoObjectFoundException;
 import it.unibo.unori.model.menu.Dialogue;
+import it.unibo.unori.model.menu.DialogueInterface;
 
 /**
  * SingletonParty is a class to make the Party interface match the Singleton
@@ -154,7 +155,7 @@ public final class SingletonParty {
         }
 
         @Override
-        public Dialogue interact() {
+        public DialogueInterface interact() {
             final Position pos = new Position(this.currentPosition.getPosX() + this.orientation.getXSkidding(),
                     this.currentPosition.getPosY() + this.orientation.getYSkidding());
             final Cell c = this.currentMap.getCell(pos);
