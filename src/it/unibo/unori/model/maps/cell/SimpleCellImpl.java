@@ -8,7 +8,7 @@ import it.unibo.unori.model.maps.exceptions.NoKeyFoundException;
 import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
 import it.unibo.unori.model.maps.exceptions.NoNPCFoundException;
 import it.unibo.unori.model.maps.exceptions.NoObjectFoundException;
-import it.unibo.unori.model.menu.Dialogue;
+import it.unibo.unori.model.menu.DialogueInterface;
 
 /**
  * Implementation of the Cell interface.
@@ -74,7 +74,7 @@ public class SimpleCellImpl implements Cell {
     }
 
     @Override
-    public Dialogue talkToNpc() throws NoNPCFoundException {
+    public DialogueInterface talkToNpc() throws NoNPCFoundException {
         throw new NoNPCFoundException();
     }
 
