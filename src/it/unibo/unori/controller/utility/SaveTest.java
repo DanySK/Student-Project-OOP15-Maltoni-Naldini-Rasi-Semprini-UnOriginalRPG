@@ -6,19 +6,22 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import com.google.gson.JsonIOException;
+import com.google.gson.reflect.TypeToken;
 
-import it.unibo.unori.controller.exceptions.CorruptedUtilityFileException;
-import it.unibo.unori.model.maps.Party;
+import it.unibo.unori.controller.GameStatistics;
 import it.unibo.unori.model.maps.SingletonParty;
 
 /**
- * This JUnit test class checks if utility class Save works properly.
+ * This JUnit test class checks if utility class Save works properly. I tested save*ToPath and load*ToPath methods
+ * instead of default-path versions to use the temporary folder, but they act exactly the same.
  */
 public class SaveTest {
     /**
@@ -30,7 +33,7 @@ public class SaveTest {
     /**
      * This tests if loadSave method throws JsonIOException if the file does not exist.
      * 
-     * @throws JsonIOException
+     * @throws FileNotFoundException
      *             if the file does is not a JSON-serialized object
      * @throws IOException
      *             if something else wrong happens
@@ -43,7 +46,7 @@ public class SaveTest {
     /**
      * This tests if loadFromUtilityFile method throws IOException if the file does not exist.
      * 
-     * @throws JsonIOException
+     * @throws FileNotFoundException
      *             if the file does is not a JSON-serialized object
      * @throws IOException
      *             if something else wrong happens
@@ -54,7 +57,7 @@ public class SaveTest {
     }
 
     /**
-     * This tests if loadSave method throws JsonIOException if the file does not exist.
+     * This tests if loadSave method throws JsonIOException if the file is not valid.
      * 
      * @throws JsonIOException
      *             if the file does is not a JSON-serialized object
@@ -68,7 +71,7 @@ public class SaveTest {
     }
 
     /**
-     * This tests if loadFromUtilityFile method throws IOException if the file does not exist.
+     * This tests if loadStats method throws JsonIOException if the file is not valid.
      * 
      * @throws JsonIOException
      *             if the file does is not a JSON-serialized object
@@ -81,28 +84,79 @@ public class SaveTest {
         Save.loadStatsFromPath(f.getAbsolutePath());
     }
 
+    /**
+     * This tests if loadGame and saveGame methods work properly.
+     * 
+     * @throws IOException
+     *             if something wrong happens
+     */
     @Test
     public void testSaveAndLoadGame() throws IOException {
         final File f = folder.newFile("Save.json");
-        final Party firstParty = SingletonParty.getParty();
-        Save.saveGameToPath(firstParty, f.getAbsolutePath());
-        final Party secondParty = Save.loadGameFromPath(f.getAbsolutePath());
-        assertEquals(firstParty, secondParty);
+        Save.saveGameToPath(SingletonParty.getParty(), f.getAbsolutePath());
+        assertEquals(SingletonParty.getParty(), Save.loadGameFromPath(f.getAbsolutePath()));
+    }
+
+    /**
+     * This tests if loadStats and saveStats methods work properly.
+     * 
+     * @throws IOException
+     *             if something wrong happens
+     */
+    @Test
+    public void testSaveAndLoadStats() throws IOException {
+        final File f = folder.newFile("Stats.json");
+
+        Save.saveStatsToPath(new GameStatistics(), f.getAbsolutePath());
+        assertEquals(new GameStatistics(), Save.loadStatsFromPath(f.getAbsolutePath()));
+
+        if (f.delete()) {
+            final GameStatistics gs = new GameStatistics();
+            gs.increaseArmorsAcquired(10);
+            gs.increaseBossesKilled(10);
+            gs.increaseMonstersKilled(10);
+            gs.increaseMonstersMet(10);
+            gs.increaseNewGame(10);
+            gs.increaseTotalExpGained(10);
+            gs.increaseTotalTimePlayed(10);
+            gs.increaseWeaponsAcquired(10);
+            gs.stopCountingTime();
+
+            Save.saveStatsToPath(gs, f.getAbsolutePath());
+            final GameStatistics ret = Save.loadStatsFromPath(f.getAbsolutePath());
+            System.out.println(gs.toString());
+            System.out.println();
+            System.out.println(ret.toString());
+            assertEquals(gs, ret);
+        } else {
+            fail("Can't delete temporary " + f.getName() + " JSON test file");
+        }
     }
 
     @Test
-    public void testLoadStats() {
-        fail("Not yet implemented");
-    }
+    public void testSerializeJSON() throws IOException {
+        final File f = folder.newFile("Try.json");
+        final String s = "Try";
+        Save.serializeJSON(s, f.getAbsolutePath());
+        assertEquals(s, Save.deserializeJSON(String.class, f.getAbsolutePath()));
 
-    @Test
-    public void testSaveStats() {
-        fail("Not yet implemented");
-    }
+        if (f.delete()) {
+            final Integer i = 10;
+            Save.serializeJSON(i, f.getAbsolutePath());
+            assertEquals(i, Save.deserializeJSON(Integer.class, f.getAbsolutePath()));
 
-    @Test
-    public void testSerializeJSON() {
-        fail("Not yet implemented");
+            if (f.delete()) {
+                Map<String, Integer> m = new HashMap<>();
+                m.put(s, i);
+                Save.serializeJSON(m, f.getAbsolutePath());
+                System.out.println(m.getClass());
+                assertEquals(m, Save.deserializeJSON(new TypeToken<Map<String, Integer>>() { }.getClass(), f.getAbsolutePath()));
+            } else {
+                fail("Can't delete temporary " + f.getName() + " JSON test file");
+            }
+        } else {
+            fail("Can't delete temporary " + f.getName() + " JSON test file");
+        }
     }
 
     @Test

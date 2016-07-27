@@ -105,7 +105,7 @@ public final class JobsSetup {
      *             if the file does not contain a valid representation for an object of type
      */
     public static Map<Statistics, Integer> getDefaultStats(final String path) throws IOException {
-        final JsonJobParameter objFromFile = Save.deserializeJSON(path, JsonJobParameter.class);
+        final JsonJobParameter objFromFile = Save.deserializeJSON(JsonJobParameter.class, path);
         return new HashMap<>(objFromFile.getDefaultStats());
     }
 
@@ -144,7 +144,7 @@ public final class JobsSetup {
      *             if the file does not contain a valid representation for an object of type
      */
     public static Map<Statistics, Integer> getDefaultIncrements(final String path) throws IOException {
-        final JsonJobParameter objFromFile = Save.deserializeJSON(path, JsonJobParameter.class);
+        final JsonJobParameter objFromFile = Save.deserializeJSON(JsonJobParameter.class, path);
         return new HashMap<>(objFromFile.getDefaultIncrement());
     }
 
@@ -182,7 +182,7 @@ public final class JobsSetup {
      *             if the file does not contain a valid representation for an object of type
      */
     public static Map<ArmorPieces, Armor> getDefaultArmor(final String path) throws IOException {
-        final JsonJobParameter objFromFile = Save.deserializeJSON(path, JsonJobParameter.class);
+        final JsonJobParameter objFromFile = Save.deserializeJSON(JsonJobParameter.class, path);
         return new HashMap<>(objFromFile.getDefaultArmor());
     }
 
@@ -220,7 +220,7 @@ public final class JobsSetup {
      *             if the file does not contain a valid representation for an object of type
      */
     public static Weapon getDefaultWeapon(final String path) throws IOException {
-        final JsonJobParameter objFromFile = Save.deserializeJSON(path, JsonJobParameter.class);
+        final JsonJobParameter objFromFile = Save.deserializeJSON(JsonJobParameter.class, path);
         return objFromFile.getDefaultWeapon();
     }
 

@@ -16,8 +16,11 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.InstanceCreator;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 
 import it.unibo.unori.controller.GameStatistics;
+import it.unibo.unori.controller.TimeCounter;
+import it.unibo.unori.controller.TimeCounterImpl;
 import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.ArmorImpl;
 import it.unibo.unori.model.items.Weapon;
@@ -60,7 +63,7 @@ public final class Save {
      *             if the file does not contain a valid representation for an object of type
      */
     public static Party loadGameFromPath(final String path) throws IOException {
-        return deserializeJSON(path, Party.class);
+        return deserializeJSON(Party.class, path);
     }
 
     /**
@@ -140,7 +143,7 @@ public final class Save {
      *             if the file does not contain a valid representation for an object of type
      */
     public static GameStatistics loadStatsFromPath(final String path) throws IOException {
-        return deserializeJSON(path, GameStatistics.class);
+        return deserializeJSON(GameStatistics.class, path);
     }
 
     /**
@@ -178,8 +181,8 @@ public final class Save {
      * @throws JsonIOException
      *             if there was a problem writing to the writer
      */
-    public static void saveStatsToFile(final GameStatistics stats, final String path) throws IOException {
-        serializeJSON(stats, STATS_FILE);
+    public static void saveStatsToPath(final GameStatistics stats, final String path) throws IOException {
+        serializeJSON(stats, path);
     }
 
     /**
@@ -198,7 +201,7 @@ public final class Save {
      *             if there was a problem writing to the writer
      */
     public static void saveStats(final GameStatistics stats) throws IOException {
-        Save.saveStatsToFile(stats, STATS_FILE);
+        Save.saveStatsToPath(stats, STATS_FILE);
     }
 
     /**
@@ -246,7 +249,7 @@ public final class Save {
      * @throws JsonSyntaxException
      *             if the file does not contain a valid representation for an object of type
      */
-    public static <T> T deserializeJSON(final String path, final Class<T> c) throws IOException {
+    public static <T> T deserializeJSON(final Class<T> c, final String path) throws IOException {
         /*
          * Type type = new TypeToken<T>() { }.getType();
          */
@@ -266,10 +269,34 @@ public final class Save {
             public Weapon createInstance(final Type type) {
                 return WeaponImpl.FISTS;
             }
+        }).registerTypeAdapter(TimeCounter.class, new InstanceCreator<TimeCounter>() {
+            @Override
+            public TimeCounter createInstance(final Type type) {
+                return new TimeCounterImpl();
+            }
         }).create();
 
         final Reader reader = new InputStreamReader(new FileInputStream(path), "UTF-8");
         returnObject = Optional.ofNullable(gson.fromJson(reader, /* type */c));
+        reader.close();
+
+        return returnObject.orElseThrow(() -> new JsonIOException("The file provided is corrupted or non valid"));
+    }
+
+    // Probably useless
+    private static <T> T deserializeJSON(final InstanceCreator<T> instanceCreator, final String path)
+                    throws IOException {
+        Type type = new TypeToken<T>() {
+        }.getType();
+        Optional<T> returnObject = Optional.empty();
+        final GsonBuilder gson = new GsonBuilder();
+
+        if (instanceCreator != null) {
+            gson.registerTypeAdapter(type, instanceCreator);
+        }
+
+        final Reader reader = new InputStreamReader(new FileInputStream(path), "UTF-8");
+        returnObject = Optional.ofNullable(gson.create().fromJson(reader, type));
         reader.close();
 
         return returnObject.orElseThrow(() -> new JsonIOException("The file provided is corrupted or non valid"));
