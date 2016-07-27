@@ -2,10 +2,14 @@ package it.unibo.unori.model.character.jobs;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+
+import java.util.Map;
 
 import org.junit.Test;
 
+import it.unibo.unori.controller.utility.JobsSetup;
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.HeroImpl;
 import it.unibo.unori.model.character.Statistics;
@@ -45,6 +49,8 @@ public class CharacterTest {
         assertEquals(h.getFireAtk(), 820);
         assertSame(h.getLevel(), 2);
         }
+
+
     /**
      * Test for equipments.
      */
