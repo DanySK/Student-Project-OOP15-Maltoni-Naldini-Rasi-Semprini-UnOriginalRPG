@@ -37,7 +37,7 @@ public class CellFactory {
         final WeaponFactory w = new WeaponFactory();
         return new ObjectCellImpl("", w.getStdSword());
     }
-    
+
     /**
      * Create a chest cell.
      * @return
@@ -45,6 +45,6 @@ public class CellFactory {
      */
     public Cell getChestCell() {
         final WeaponFactory w = new WeaponFactory();
-        return new ChestCellImpl("",w.getChiodo());
+        return new ChestCellImpl("", w.getChiodo());
     }
 }
