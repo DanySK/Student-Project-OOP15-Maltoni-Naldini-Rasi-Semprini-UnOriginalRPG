@@ -166,6 +166,7 @@ public final class SingletonParty {
                 try {
                     System.out.println("Provo a raccogliere un oggetto");
                     this.partyBag.storeItem(c.getObject());
+                    this.currentMap.replaceCell(pos, currentPosition);
                     return new Dialogue("Che fortuna! Hai trovato " + c.getObject().getName());
                 } catch (NoObjectFoundException e1) {
                     try {
