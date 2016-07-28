@@ -37,4 +37,14 @@ public class CellFactory {
         final WeaponFactory w = new WeaponFactory();
         return new ObjectCellImpl("", w.getStdSword());
     }
+    
+    /**
+     * Create a chest cell.
+     * @return
+     *          a simple chest cell, containing a nail
+     */
+    public Cell getChestCell() {
+        final WeaponFactory w = new WeaponFactory();
+        return new ChestCellImpl("",w.getChiodo());
+    }
 }

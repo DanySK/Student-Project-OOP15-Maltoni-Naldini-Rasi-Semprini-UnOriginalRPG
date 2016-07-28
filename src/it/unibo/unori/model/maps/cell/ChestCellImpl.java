@@ -3,7 +3,6 @@ package it.unibo.unori.model.maps.cell;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.Item;
 import it.unibo.unori.model.items.ItemImpl;
-import it.unibo.unori.model.items.ObjectItem;
 import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
 import it.unibo.unori.model.maps.exceptions.NoKeyFoundException;
 import it.unibo.unori.model.maps.exceptions.NoObjectFoundException;
@@ -29,7 +28,7 @@ public class ChestCellImpl extends SimpleCellImpl {
      * @param o
      *              object to put in the cell
      */
-    public ChestCellImpl(final String path, final ObjectItem o) {
+    public ChestCellImpl(final String path, final Item o) {
         super(path, CellState.BLOCKED);
         this.o = o;
         this.hasItem = true;
