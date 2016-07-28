@@ -20,6 +20,7 @@ public class ChestCellImpl extends SimpleCellImpl {
      */
     private static final long serialVersionUID = -7296644040007976176L;
     private final Item o;
+    private boolean hasItem;
 
     /**
      * Constructor for the cell.
@@ -31,6 +32,7 @@ public class ChestCellImpl extends SimpleCellImpl {
     public ChestCellImpl(final String path, final ObjectItem o) {
         super(path, CellState.BLOCKED);
         this.o = o;
+        this.hasItem = true;
     }
 
     /**
@@ -48,11 +50,15 @@ public class ChestCellImpl extends SimpleCellImpl {
     public Item openChest(final Bag b) throws NoObjectFoundException, 
                                               NoKeyFoundException,
                                               ItemNotFoundException {
-        if (!b.containsKey()) {
-            throw new NoKeyFoundException();
-        }
-        b.removeItem(ItemImpl.KEY);
-        return o;
+        if (this.hasItem) {
+            if (!b.containsKey()) {
+                throw new NoKeyFoundException();
+            }
+            b.removeItem(ItemImpl.KEY);
+            return o;
+        } else {
+            throw new NoObjectFoundException();
     }
 
+   }
 }
