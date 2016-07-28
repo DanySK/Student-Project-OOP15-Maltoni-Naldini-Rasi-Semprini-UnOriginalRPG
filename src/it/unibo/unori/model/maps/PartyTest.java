@@ -133,6 +133,11 @@ public class PartyTest {
        assertTrue(m.getCell(new Position(2, 2)).getObject().equals(wf.getStdSword()));
        p.interact();
        assertTrue(p.getPartyBag().contains(wf.getStdSword()));
+       try {
+           p.moveParty(CardinalPoints.SOUTH);
+       } catch (Exception e) {
+           fail("No Exception should be thrown now!");
+       }
     }
 
 }
