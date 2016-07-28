@@ -54,6 +54,7 @@ public class CharacterTest {
 
         try {
             final Hero h = new HeroImpl("Agamennone", Jobs.WARRIOR);
+            h.addExp(100);
             fail("IllegalArgumentException should be thrown");
         } catch (IllegalArgumentException e) {
             System.out.println(e);
