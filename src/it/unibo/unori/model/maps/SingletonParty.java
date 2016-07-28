@@ -97,14 +97,6 @@ public final class SingletonParty {
                     Arrays.asList(CardinalPoints.values()));
         }
 
-        public void setParty(final Party p) {
-            this.currentMap = p.getCurrentGameMap();
-            this.currentPosition = p.getCurrentPosition();
-            this.orientation = p.getOrientation();
-            this.partyBag = p.getPartyBag();
-            this.heroteam = p.getHeroTeam();
-            this.frames = p.getFrames();
-        }
 
         @Override
         public Position getCurrentPosition() {
@@ -122,10 +114,6 @@ public final class SingletonParty {
             return this.currentMap;
         }
 
-        @Override
-        public CardinalPoints getOrientation() {
-            return this.orientation;
-        }
 
         @Override
         public void setFrames(final Map<CardinalPoints, String> frames)
@@ -141,10 +129,6 @@ public final class SingletonParty {
             return this.frames.get(orientation);
         }
 
-        @Override
-        public Map<CardinalPoints, String> getFrames() {
-            return this.frames;
-        }
 
         @Override
         public Bag getPartyBag() {

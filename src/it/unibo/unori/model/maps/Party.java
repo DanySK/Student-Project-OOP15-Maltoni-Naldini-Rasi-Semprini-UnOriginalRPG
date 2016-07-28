@@ -17,12 +17,6 @@ import it.unibo.unori.model.menu.DialogueInterface;
  */
 public interface Party extends Serializable {
 
-    /**
-     * Store in the party object the fields of another party.
-     * @param p
-     *          the input party
-     */
-    void setParty(Party p);
 
     /**
      * Getter for the current position.
@@ -45,12 +39,7 @@ public interface Party extends Serializable {
      */
     GameMap getCurrentGameMap();
 
-    /**
-     * Getter for the orientation field.
-     * @return
-     *          current orientation
-     */
-    CardinalPoints getOrientation();
+
 
     /**
      * Set the current frame of party.
@@ -69,12 +58,6 @@ public interface Party extends Serializable {
      */
     String getCurrentFrame();
 
-    /**
-     * Getter for the frames.
-     * @return
-     *           the map containing the frames
-     */
-    Map<CardinalPoints, String> getFrames();
 
     /**
      * Move the party in the specified direction, if possible.
