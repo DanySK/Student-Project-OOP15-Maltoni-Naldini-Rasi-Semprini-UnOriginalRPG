@@ -6,12 +6,14 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import it.unibo.unori.model.items.ItemImpl;
 import it.unibo.unori.model.items.WeaponFactory;
 import it.unibo.unori.model.maps.Party.CardinalPoints;
 import it.unibo.unori.model.maps.cell.CellFactory;
 import it.unibo.unori.model.maps.exceptions.BlockedPathException;
 import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
 import it.unibo.unori.model.maps.exceptions.NoObjectFoundException;
+import it.unibo.unori.model.menu.DialogueInterface;
 
 /**
  * Test Class for the Party object.
@@ -111,12 +113,12 @@ public class PartyTest {
     }
 
     /**
-     * Test for the interact Method.
+     * Test for the interact Method with object.
      * @throws NoObjectFoundException 
      * @throws IllegalArgumentException 
      */
     @Test
-    public void testInteract() throws IllegalArgumentException, NoObjectFoundException {
+    public void testInteractWithObject() throws IllegalArgumentException, NoObjectFoundException {
         final Party p = SingletonParty.getParty();
         final GameMap m = mapFactory.getStdRoom();
         m.setCell(new Position(2, 2), this.cellFactory.getObjectCell());
@@ -138,6 +140,40 @@ public class PartyTest {
        } catch (Exception e) {
            fail("No Exception should be thrown now!");
        }
+    }
+
+    /**
+     * Test for method interact with Chest.
+     */
+    @Test
+    public void testInteractWithChest() {
+        final Party p = SingletonParty.getParty();
+        final GameMap m = this.mapFactory.getStdRoom();
+        m.setCell(new Position(2, 2), this.cellFactory.getChestCell());
+        p.setCurrentMap(m);
+        try {
+            p.moveParty(CardinalPoints.SOUTH);
+            p.moveParty(CardinalPoints.EAST);
+            fail("No Exception thrown");
+        } catch (BlockedPathException e) {
+            System.out.println(e);
+        } catch (Exception e) {
+            fail("Wrong Exception thrown");
+        }
+        final DialogueInterface d = p.interact();
+        System.out.println(d.getWholeDialogue());
+        p.getPartyBag().storeItem(ItemImpl.KEY);
+        final DialogueInterface d1 = p.interact();
+        System.out.println(d1.getWholeDialogue());
+        System.out.println(p.interact().getWholeDialogue());
+        try {
+            p.moveParty(CardinalPoints.EAST);
+            fail("No Exception thrown");
+        } catch (BlockedPathException e) {
+            System.out.println(e);
+        } catch (Exception e) {
+            fail("Wrong Exception thrown");
+        }
     }
 
 }
