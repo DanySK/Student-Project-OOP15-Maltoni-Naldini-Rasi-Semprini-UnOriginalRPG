@@ -6,6 +6,8 @@ import it.unibo.unori.model.battle.Battle;
 import it.unibo.unori.model.battle.BattleImpl;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.Hero;
+import it.unibo.unori.model.character.HeroTeam;
+import it.unibo.unori.model.character.HeroTeamImpl;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.maps.GameMap;
 
@@ -21,10 +23,10 @@ public class BattleState extends AbstractGameState {
      * @param map the map in which the battle started; used for the background
      * @param foes the list of enemies that the heroes must defeat
      * @param bag the bag containing the items of the party
-     */
+     */ //TODO temporary fix, maybe better to pass directly the HeroTeam
     public BattleState(final List<Hero> party, final GameMap map, final List<Foe> foes, final Bag bag) {
         super(/* new BattleLayer() TODO */ null);
-        this.battleModel = new BattleImpl(party, null, bag); // TODO null will be replaced by Battle getter
+        this.battleModel = new BattleImpl(new HeroTeamImpl(party), null, bag); // TODO null will be replaced by Battle getter
     }
 
     /*
