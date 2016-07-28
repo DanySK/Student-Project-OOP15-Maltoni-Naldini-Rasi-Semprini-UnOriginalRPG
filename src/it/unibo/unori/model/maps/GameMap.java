@@ -95,5 +95,15 @@ public interface GameMap extends Serializable {
      */
     Position getInitialCellPosition();
 
+    /**
+     * Replace the cell in the first position with the cell in the second position.
+     * @param toRemove
+     *          position of the cell to remove
+     * @param toSet
+     *          position of the cell to set
+     * @throws IllegalArgumentException if any of the position is invalid
+     */
+    void replaceCell(Position toRemove, Position toSet) throws IllegalArgumentException;
+
 
 }

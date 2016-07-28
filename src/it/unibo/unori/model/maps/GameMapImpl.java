@@ -177,7 +177,10 @@ public class GameMapImpl implements GameMap {
         this.fixInitialCellPosition();
     }
 
-
+    @Override
+    public void replaceCell(final Position toRemove, final Position toSet) {
+        this.setCell(toRemove, this.getCell(toSet));
+    }
 
 
     @Override
