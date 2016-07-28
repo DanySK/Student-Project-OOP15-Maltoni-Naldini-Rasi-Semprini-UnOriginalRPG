@@ -1,1 +1,102 @@
-{"defaultStats":{"ICEDEF":900,"THUNDERATK":1200,"ICEATK":900,"TOTALMP":800,"TOTALHP":1000,"PHYSICATK":1300,"SPEED":2500,"PHYSICDEF":700,"FIREATK":900,"FIREDEF":900,"THUNDERDEF":1200},"defaultIncrement":{"ICEDEF":30,"THUNDERATK":30,"ICEATK":20,"TOTALMP":20,"TOTALHP":100,"PHYSICATK":20,"SPEED":50,"PHYSICDEF":30,"FIREATK":30,"FIREDEF":20,"THUNDERDEF":20},"defaultArmor":{"ARMOR":{"name":"Cotta","piece":"ARMOR","desc":"Cotta piuttosto brutto","stats":{"ICEDEF":0,"PHYSICDEF":100,"FIREDEF":0,"THUNDERDEF":0},"immunity":"NONE"},"GLOVES":{"name":"Guanti","piece":"GLOVES","desc":"Guanti piuttosto brutti","stats":{"ICEDEF":0,"PHYSICDEF":100,"FIREDEF":0,"THUNDERDEF":0},"immunity":"NONE"},"HELMET":{"name":"Elmo","piece":"HELMET","desc":"Elmo piuttosto brutto","stats":{"ICEDEF":0,"PHYSICDEF":100,"FIREDEF":0,"THUNDERDEF":0},"immunity":"NONE"},"SHIELD":{"name":"Scudo","piece":"SHIELD","desc":"Scudo piuttosto brutto","stats":{"ICEDEF":0,"PHYSICDEF":100,"FIREDEF":0,"THUNDERDEF":0},"immunity":"NONE"},"TROUSERS":{"name":"Schinieri","piece":"TROUSERS","desc":"Schinieri piuttosto brutti","stats":{"ICEDEF":0,"PHYSICDEF":100,"FIREDEF":0,"THUNDERDEF":0},"immunity":"NONE"}},"defaultWeapon":{"name":"Spada Semplice","desc":"Adatta per tagliare il burro pi� che i nemici","stats":{"ICEATK":0,"THUNDERATK":0,"PHYSICATK":100,"FIREATK":0},"inflictedStatus":"NONE"}}
+{
+  "defaultStats": {
+    "TOTALHP": 1000,
+    "THUNDERDEF": 1200,
+    "THUNDERATK": 1200,
+    "ICEATK": 900,
+    "PHYSICATK": 1300,
+    "ICEDEF": 900,
+    "EXPFACTOR": 100,
+    "TOTALMP": 800,
+    "SPEED": 2500,
+    "FIREATK": 900,
+    "PHYSICDEF": 700,
+    "FIREDEF": 900
+  },
+  "defaultIncrement": {
+    "TOTALHP": 100,
+    "THUNDERDEF": 20,
+    "ICEDEF": 30,
+    "THUNDERATK": 30,
+    "TOTALMP": 20,
+    "SPEED": 50,
+    "ICEATK": 20,
+    "PHYSICATK": 20,
+    "FIREATK": 30,
+    "PHYSICDEF": 30,
+    "FIREDEF": 20
+  },
+  "defaultArmor": {
+    "SHIELD": {
+      "name": "Scudo",
+      "piece": "SHIELD",
+      "desc": "Scudo piuttosto brutto",
+      "stats": {
+        "THUNDERDEF": 0,
+        "ICEDEF": 0,
+        "PHYSICDEF": 100,
+        "FIREDEF": 0
+      },
+      "immunity": "NONE"
+    },
+    "TROUSERS": {
+      "name": "Schinieri",
+      "piece": "TROUSERS",
+      "desc": "Schinieri piuttosto brutti",
+      "stats": {
+        "THUNDERDEF": 0,
+        "ICEDEF": 0,
+        "PHYSICDEF": 100,
+        "FIREDEF": 0
+      },
+      "immunity": "NONE"
+    },
+    "HELMET": {
+      "name": "Elmo",
+      "piece": "HELMET",
+      "desc": "Elmo piuttosto brutto",
+      "stats": {
+        "THUNDERDEF": 0,
+        "ICEDEF": 0,
+        "PHYSICDEF": 100,
+        "FIREDEF": 0
+      },
+      "immunity": "NONE"
+    },
+    "GLOVES": {
+      "name": "Guanti",
+      "piece": "GLOVES",
+      "desc": "Guanti piuttosto brutti",
+      "stats": {
+        "THUNDERDEF": 0,
+        "ICEDEF": 0,
+        "PHYSICDEF": 100,
+        "FIREDEF": 0
+      },
+      "immunity": "NONE"
+    },
+    "ARMOR": {
+      "name": "Cotta",
+      "piece": "ARMOR",
+      "desc": "Cotta piuttosto brutto",
+      "stats": {
+        "THUNDERDEF": 0,
+        "ICEDEF": 0,
+        "PHYSICDEF": 100,
+        "FIREDEF": 0
+      },
+      "immunity": "NONE"
+    }
+  },
+  "defaultWeapon": {
+    "name": "Spada Semplice",
+    "desc": "Adatta per tagliare il burro pi� che i nemici",
+    "stats": {
+      "FIREATK": 0,
+      "THUNDERATK": 0,
+      "PHYSICATK": 100,
+      "ICEATK": 0
+    },
+    "inflictedStatus": "NONE"
+  }
+}

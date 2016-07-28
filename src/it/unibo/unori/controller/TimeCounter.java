@@ -44,4 +44,25 @@ public interface TimeCounter extends Serializable {
      * This methods starts the timer if it was previously stopped.
      */
     void startTimer();
+    
+    /**
+     * This method lets resume the timer without resetting the current time played.
+     * 
+     * @return the current time played
+     */
+    double getAndResumeTimer();
+
+    /**
+     * This methods resets the timer and sets it as stopped.
+     * 
+     * @return the time played before the reset.
+     */
+    double resetTimer();
+    
+    /**
+     * This methods returns if the timer is running.
+     * 
+     * @return true if the timer is running.
+     */
+    boolean isRunning();
 }

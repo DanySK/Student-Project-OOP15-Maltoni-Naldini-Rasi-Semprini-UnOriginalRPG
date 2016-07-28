@@ -1,5 +1,8 @@
 package it.unibo.unori.controller;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
@@ -20,15 +23,8 @@ public class GameStatistics implements Serializable {
     private int weaponsAcquired;
     private int armorsAcquired;
     private int totalExpGained;
-    private final TimeCounter timePlayed;
+    private final transient TimeCounter timePlayed = new TimeCounterImpl();
     private double timePlayedPreviously;
-
-    /**
-     * Default constructor.
-     */
-    public GameStatistics() {
-        timePlayed = new TimeCounterImpl();
-    }
 
     /**
      * Gets the number of new games started.
@@ -175,6 +171,7 @@ public class GameStatistics implements Serializable {
      */
     public void stopCountingTime() {
         this.timePlayed.stopTimer();
+        this.timePlayedPreviously += this.timePlayed.getAlreadyPlayedTime();
     }
 
     /**
@@ -239,4 +236,39 @@ public class GameStatistics implements Serializable {
         this.totalExpGained = saved.getTotalExpGained();
         this.weaponsAcquired = saved.getWeaponsAcquired();
     }
+
+    @Override
+    public String toString() {
+        return new StringBuilder().append("Number of new games: ").append(this.getNewGames())
+                        .append("\nNumber of monsters met: ").append(this.getMonstersMet())
+                        .append("\nNumber of monsters killed: ").append(this.getMonstersKilled())
+                        .append("\nNumber of bosses killed: ").append(this.getBossesKilled())
+                        .append("\nNumber of weapons acquired: ").append(this.getWeaponsAcquired())
+                        .append("\nNumber of armors acquired: ").append(this.getArmorsAcquired())
+                        .append("\nTotal Experience gained: ").append(this.getTotalExpGained())
+                        .append("\nTime played this game: ").append(this.getTimePlayed())
+                        .append("\nTotal time played: ").append(this.getTotalTimePlayed()).toString();
+    }
+
+    private void writeObject(final ObjectOutputStream out) throws IOException {
+        final boolean restart = this.timePlayed.isRunning();
+        this.increaseTotalTimePlayed(this.timePlayed.resetTimer());
+        out.defaultWriteObject();
+        if (restart) {
+            this.resumeCountingTime();
+        }
+    }
+
+    /**
+     * Resumes counting time.
+     */
+    public void resumeCountingTime() {
+        this.timePlayed.getAndResumeTimer();
+    }
+
+    private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        // this.startCountingTime();
+    }
+
 }

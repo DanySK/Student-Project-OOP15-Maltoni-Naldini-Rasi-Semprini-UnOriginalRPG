@@ -21,11 +21,11 @@ public class StateMachine implements Controller {
     public StateMachine() {
         this.stack = new StateMachineStackImpl();
         this.stats = new GameStatistics();
-        final File dat = new File(Save.STATISTICS_DAT_FILE);
+        final File file = new File(Save.STATS_FILE);
 
-        if (dat.exists() && dat.isFile()) {
+        if (file.exists() && file.isFile()) {
             try {
-                this.stats.restore(Save.loadStats(""));
+                this.stats.restore(Save.loadStats());
             } catch (Exception e) {
                 e.printStackTrace(); // TODO
             }

@@ -55,9 +55,11 @@ public final class JobsSetup {
     /**
      * Main method. It creates JSON file starting from Factories of the model.
      * 
-     * @param args standard main parameter
+     * @param args
+     *            standard main parameter
+     * @throws IOException 
      */
-    public static void main(final String[] args) {
+    public static void main(final String[] args) throws IOException {
         final StatisticsFactory sf = new StatisticsFactory();
         final GrowthFactory gf = new GrowthFactory();
         final ArmorFactory af = new ArmorFactory();
@@ -66,21 +68,15 @@ public final class JobsSetup {
         JsonJobParameter jsonJob;
 
         for (final Jobs j : Jobs.values()) {
-            try {
+            if (j.equals(Jobs.DUMP)) {
+                jobPath = Optional.empty();
+            } else {
                 jobPath = Optional.of(getPath(j));
-            } catch (FileNotFoundException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
             }
             if (jobPath.isPresent()) {
-                try {
-                    jsonJob = new JsonJobParameter(sf.getJobStats(j), gf.getJobGrowth(j), af.getStdEquip(),
-                                    wf.getStdSword());
-                    Save.serializeJSON(jsonJob, jobPath.get());
-                } catch (IOException e) {
-                    // TODO
-                    e.printStackTrace();
-                }
+                jsonJob = new JsonJobParameter(sf.getJobStats(j), gf.getJobGrowth(j), af.getStdEquip(),
+                                wf.getStdSword());
+                Save.serializeJSON(jsonJob, jobPath.get());
 
             }
 
@@ -105,7 +101,8 @@ public final class JobsSetup {
      *             if the file does not contain a valid representation for an object of type
      */
     public static Map<Statistics, Integer> getDefaultStats(final String path) throws IOException {
-        final JsonJobParameter objFromFile = Save.deserializeJSON(JsonJobParameter.class, path);
+        final JsonJobParameter objFromFile = Save.deserializeJSON(JsonJobParameter.class, JsonJobParameter.createGson(),
+                        path);
         return new HashMap<>(objFromFile.getDefaultStats());
     }
 
@@ -144,7 +141,8 @@ public final class JobsSetup {
      *             if the file does not contain a valid representation for an object of type
      */
     public static Map<Statistics, Integer> getDefaultIncrements(final String path) throws IOException {
-        final JsonJobParameter objFromFile = Save.deserializeJSON(JsonJobParameter.class, path);
+        final JsonJobParameter objFromFile = Save.deserializeJSON(JsonJobParameter.class, JsonJobParameter.createGson(),
+                        path);
         return new HashMap<>(objFromFile.getDefaultIncrement());
     }
 
@@ -182,7 +180,8 @@ public final class JobsSetup {
      *             if the file does not contain a valid representation for an object of type
      */
     public static Map<ArmorPieces, Armor> getDefaultArmor(final String path) throws IOException {
-        final JsonJobParameter objFromFile = Save.deserializeJSON(JsonJobParameter.class, path);
+        final JsonJobParameter objFromFile = Save.deserializeJSON(JsonJobParameter.class, JsonJobParameter.createGson(),
+                        path);
         return new HashMap<>(objFromFile.getDefaultArmor());
     }
 
@@ -220,7 +219,8 @@ public final class JobsSetup {
      *             if the file does not contain a valid representation for an object of type
      */
     public static Weapon getDefaultWeapon(final String path) throws IOException {
-        final JsonJobParameter objFromFile = Save.deserializeJSON(JsonJobParameter.class, path);
+        final JsonJobParameter objFromFile = Save.deserializeJSON(JsonJobParameter.class, JsonJobParameter.createGson(),
+                        path);
         return objFromFile.getDefaultWeapon();
     }
 
@@ -294,60 +294,6 @@ public final class JobsSetup {
         }
 
         return jobPath.orElseThrow(
-                        () -> new FileNotFoundException("It is not provided any default file path for this Job"));
-    }
-
-    /**
-     * Private static class that models an object used to serialize the Jobs
-     */
-    private static class JsonJobParameter {
-        private final Map<Statistics, Integer> defaultStats;
-        private final Map<Statistics, Integer> defaultIncrement;
-        private final Map<ArmorPieces, Armor> defaultArmor;
-        private final Weapon defaultWeapon;
-
-        JsonJobParameter(final Map<Statistics, Integer> defaultStats, final Map<Statistics, Integer> defaultIncrement,
-                        final Map<ArmorPieces, Armor> defaultArmor, final Weapon defaultWeapon) {
-            this.defaultStats = defaultStats;
-            this.defaultIncrement = defaultIncrement;
-            this.defaultArmor = defaultArmor;
-            this.defaultWeapon = defaultWeapon;
-        }
-
-        /**
-         * Get the initial equipments of a job.
-         * 
-         * @return a defensive copy of the equipments
-         */
-        public Map<ArmorPieces, Armor> getDefaultArmor() {
-            return new HashMap<>(this.defaultArmor);
-        }
-
-        /**
-         * Get the initial statistics of a job.
-         * 
-         * @return a defensive copy of the statistics
-         */
-        public Map<Statistics, Integer> getDefaultStats() {
-            return new HashMap<>(this.defaultStats);
-        }
-
-        /**
-         * Get the increment values of the job statistics .
-         * 
-         * @return a defensive copy of the statistics
-         */
-        public Map<Statistics, Integer> getDefaultIncrement() {
-            return new HashMap<>(this.defaultIncrement);
-        }
-
-        /**
-         * Get the starter weapon of the job.
-         * 
-         * @return the initial weapon of the job
-         */
-        public final Weapon getDefaultWeapon() {
-            return this.defaultWeapon;
-        }
+                        () -> new FileNotFoundException("It is not provided any default file path for the Job " + job));
     }
 }

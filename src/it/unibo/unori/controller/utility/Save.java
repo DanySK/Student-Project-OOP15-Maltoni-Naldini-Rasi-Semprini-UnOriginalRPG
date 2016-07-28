@@ -35,12 +35,12 @@ public final class Save {
     /**
      * Static parameter for standard JSON object serialization save file.
      */
-    private static final String SAVE_FILE = "res/Save.json";
+    public static final String SAVE_FILE = "res/Save.json";
 
     /**
      * Static parameter for standard JSON object serialization statistics file.
      */
-    private static final String STATS_FILE = "res/Stats.json";
+    public static final String STATS_FILE = "res/Stats.json";
 
     private Save() {
         // Empty private constructor, because this is an utility class
@@ -222,10 +222,44 @@ public final class Save {
      *             if there was a problem writing to the writer
      */
     public static void serializeJSON(final Object objectToSerialize, final String path) throws IOException {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        Writer writer = new OutputStreamWriter(new FileOutputStream(path), "UTF-8");
+        final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        final Writer writer = new OutputStreamWriter(new FileOutputStream(path), "UTF-8");
         gson.toJson(objectToSerialize, writer);
         writer.close();
+    }
+    
+    public static <T> T deserializeJSON(final String path) throws IOException {
+        
+        Type type = new TypeToken<T>() { }.getType();
+        
+        Optional<T> returnObject = Optional.empty();
+        final Gson gson = new GsonBuilder().registerTypeAdapter(Armor.class, new InstanceCreator<Armor>() {
+            @Override
+            public Armor createInstance(final Type type) {
+                return ArmorImpl.NAKED;
+            }
+        }).registerTypeAdapter(Party.class, new InstanceCreator<Party>() {
+            @Override
+            public Party createInstance(final Type type) {
+                return SingletonParty.getParty();
+            }
+        }).registerTypeAdapter(Weapon.class, new InstanceCreator<Weapon>() {
+            @Override
+            public Weapon createInstance(final Type type) {
+                return WeaponImpl.FISTS;
+            }
+        }).registerTypeAdapter(TimeCounter.class, new InstanceCreator<TimeCounter>() {
+            @Override
+            public TimeCounter createInstance(final Type type) {
+                return new TimeCounterImpl();
+            }
+        }).create();
+
+        final Reader reader = new InputStreamReader(new FileInputStream(path), "UTF-8");
+        returnObject = Optional.ofNullable(gson.fromJson(reader, type));
+        reader.close();
+
+        return returnObject.orElseThrow(() -> new JsonIOException("The file provided is corrupted or non valid"));
     }
 
     /**
@@ -283,20 +317,16 @@ public final class Save {
         return returnObject.orElseThrow(() -> new JsonIOException("The file provided is corrupted or non valid"));
     }
 
-    // Probably useless
-    private static <T> T deserializeJSON(final InstanceCreator<T> instanceCreator, final String path)
-                    throws IOException {
-        Type type = new TypeToken<T>() {
-        }.getType();
-        Optional<T> returnObject = Optional.empty();
-        final GsonBuilder gson = new GsonBuilder();
+    // Maybe not useless
+    public static <T> T deserializeJSON(final Class<T> c, final Gson gson, final String path) throws IOException {
+        /*
+         * Type type = new TypeToken<T>() { }.getType();
+         */
 
-        if (instanceCreator != null) {
-            gson.registerTypeAdapter(type, instanceCreator);
-        }
+        Optional<T> returnObject = Optional.empty();
 
         final Reader reader = new InputStreamReader(new FileInputStream(path), "UTF-8");
-        returnObject = Optional.ofNullable(gson.create().fromJson(reader, type));
+        returnObject = Optional.ofNullable(gson.fromJson(reader, c));
         reader.close();
 
         return returnObject.orElseThrow(() -> new JsonIOException("The file provided is corrupted or non valid"));
