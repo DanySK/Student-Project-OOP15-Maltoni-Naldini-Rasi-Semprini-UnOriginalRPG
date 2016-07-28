@@ -55,6 +55,7 @@ public class ChestCellImpl extends SimpleCellImpl {
                 throw new NoKeyFoundException();
             }
             b.removeItem(ItemImpl.KEY);
+            this.hasItem = false;
             return o;
         } else {
             throw new NoObjectFoundException();
