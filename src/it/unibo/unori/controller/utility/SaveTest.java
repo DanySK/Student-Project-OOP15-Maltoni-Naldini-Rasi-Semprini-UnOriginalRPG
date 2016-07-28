@@ -120,7 +120,7 @@ public class SaveTest {
             gs.increaseTotalExpGained(10);
             gs.increaseTotalTimePlayed(10);
             gs.increaseWeaponsAcquired(10);
-            gs.stopCountingTime();
+            // gs.stopCountingTime();
 
             Save.saveStatsToPath(gs, f.getAbsolutePath());
             final GameStatistics ret = Save.loadStatsFromPath(f.getAbsolutePath());
@@ -150,6 +150,7 @@ public class SaveTest {
                 m.put(s, i);
                 Save.serializeJSON(m, f.getAbsolutePath());
                 System.out.println(m.getClass());
+                
                 assertEquals(m, Save.deserializeJSON(new TypeToken<Map<String, Integer>>() { }.getClass(), f.getAbsolutePath()));
             } else {
                 fail("Can't delete temporary " + f.getName() + " JSON test file");
