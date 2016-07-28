@@ -2,9 +2,6 @@ package it.unibo.unori.controller;
 
 import java.io.Serializable;
 
-/**
- *
- */
 public interface TimeCounter extends Serializable {
     /**
      * Get the total time played in milliseconds.
@@ -44,13 +41,11 @@ public interface TimeCounter extends Serializable {
      * This methods starts the timer if it was previously stopped.
      */
     void startTimer();
-    
+
     /**
-     * This method lets resume the timer without resetting the current time played.
-     * 
-     * @return the current time played
+     * This method pause the timer without resetting the current time played.
      */
-    double getAndResumeTimer();
+    void pauseTimer();
 
     /**
      * This methods resets the timer and sets it as stopped.
@@ -58,11 +53,19 @@ public interface TimeCounter extends Serializable {
      * @return the time played before the reset.
      */
     double resetTimer();
-    
+
     /**
      * This methods returns if the timer is running.
      * 
      * @return true if the timer is running.
      */
     boolean isRunning();
+    
+    // TODO
+    @Override
+    int hashCode();
+
+    // TODO
+    @Override
+    boolean equals(final Object obj);
 }

@@ -19,6 +19,7 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 import it.unibo.unori.controller.GameStatistics;
+import it.unibo.unori.controller.GameStatisticsImpl;
 import it.unibo.unori.controller.TimeCounter;
 import it.unibo.unori.controller.TimeCounterImpl;
 import it.unibo.unori.model.items.Armor;
@@ -142,8 +143,8 @@ public final class Save {
      * @throws JsonSyntaxException
      *             if the file does not contain a valid representation for an object of type
      */
-    public static GameStatistics loadStatsFromPath(final String path) throws IOException {
-        return deserializeJSON(GameStatistics.class, path);
+    public static GameStatisticsImpl loadStatsFromPath(final String path) throws IOException {
+        return deserializeJSON(GameStatisticsImpl.class, path);
     }
 
     /**
@@ -160,7 +161,7 @@ public final class Save {
      * @throws JsonSyntaxException
      *             if the file does not contain a valid representation for an object of type
      */
-    public static GameStatistics loadStats() throws IOException {
+    public static GameStatisticsImpl loadStats() throws IOException {
         return Save.loadStatsFromPath(STATS_FILE);
     }
 
@@ -181,7 +182,7 @@ public final class Save {
      * @throws JsonIOException
      *             if there was a problem writing to the writer
      */
-    public static void saveStatsToPath(final GameStatistics stats, final String path) throws IOException {
+    public static void saveStatsToPath(final GameStatisticsImpl stats, final String path) throws IOException {
         serializeJSON(stats, path);
     }
 
@@ -200,7 +201,7 @@ public final class Save {
      * @throws JsonIOException
      *             if there was a problem writing to the writer
      */
-    public static void saveStats(final GameStatistics stats) throws IOException {
+    public static void saveStats(final GameStatisticsImpl stats) throws IOException {
         Save.saveStatsToPath(stats, STATS_FILE);
     }
 
@@ -307,6 +308,11 @@ public final class Save {
             @Override
             public TimeCounter createInstance(final Type type) {
                 return new TimeCounterImpl();
+            }
+        }).registerTypeAdapter(GameStatistics.class, new InstanceCreator<GameStatistics>() {
+            @Override
+            public GameStatistics createInstance(final Type type) {
+                return new GameStatisticsImpl();
             }
         }).create();
 

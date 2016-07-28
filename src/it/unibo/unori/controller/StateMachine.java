@@ -20,7 +20,7 @@ public class StateMachine implements Controller {
      */
     public StateMachine() {
         this.stack = new StateMachineStackImpl();
-        this.stats = new GameStatistics();
+        this.stats = new GameStatisticsImpl();
         final File file = new File(Save.STATS_FILE);
 
         if (file.exists() && file.isFile()) {

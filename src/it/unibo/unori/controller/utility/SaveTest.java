@@ -17,6 +17,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.reflect.TypeToken;
 
 import it.unibo.unori.controller.GameStatistics;
+import it.unibo.unori.controller.GameStatisticsImpl;
 import it.unibo.unori.model.maps.SingletonParty;
 
 /**
@@ -106,12 +107,12 @@ public class SaveTest {
     @Test
     public void testSaveAndLoadStats() throws IOException {
         final File f = folder.newFile("Stats.json");
-
-        Save.saveStatsToPath(new GameStatistics(), f.getAbsolutePath());
-        assertEquals(new GameStatistics(), Save.loadStatsFromPath(f.getAbsolutePath()));
+        final GameStatisticsImpl test = new GameStatisticsImpl();
+        Save.saveStatsToPath(test, f.getAbsolutePath());
+        assertEquals(test, Save.loadStatsFromPath(f.getAbsolutePath()));
 
         if (f.delete()) {
-            final GameStatistics gs = new GameStatistics();
+            final GameStatisticsImpl gs = new GameStatisticsImpl();
             gs.increaseArmorsAcquired(10);
             gs.increaseBossesKilled(10);
             gs.increaseMonstersKilled(10);
@@ -123,10 +124,10 @@ public class SaveTest {
             // gs.stopCountingTime();
 
             Save.saveStatsToPath(gs, f.getAbsolutePath());
-            final GameStatistics ret = Save.loadStatsFromPath(f.getAbsolutePath());
-            System.out.println(gs.toString());
-            System.out.println();
-            System.out.println(ret.toString());
+            final GameStatisticsImpl ret = Save.loadStatsFromPath(f.getAbsolutePath());
+            // System.out.println(gs.toString());
+            // System.out.println();
+            // System.out.println(ret.toString());
             assertEquals(gs, ret);
         } else {
             fail("Can't delete temporary " + f.getName() + " JSON test file");
@@ -149,7 +150,7 @@ public class SaveTest {
                 Map<String, Integer> m = new HashMap<>();
                 m.put(s, i);
                 Save.serializeJSON(m, f.getAbsolutePath());
-                System.out.println(m.getClass());
+                // System.out.println(m.getClass());
                 
                 assertEquals(m, Save.deserializeJSON(new TypeToken<Map<String, Integer>>() { }.getClass(), f.getAbsolutePath()));
             } else {

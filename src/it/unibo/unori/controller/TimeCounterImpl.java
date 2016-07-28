@@ -4,16 +4,11 @@ package it.unibo.unori.controller;
  * This implementation of TimeCounter calculates elapsed time by saving the starting time and calculating when needed.
  */
 public class TimeCounterImpl implements TimeCounter {
-    /**
-     * 
-     */
     private static final long serialVersionUID = -7207035105151035362L;
     private double alreadyPlayedTime;
     private double startingTime;
-    private double endingTime;
     private double timeDelta;
     private static final double NOT_STARTED = -1;
-    private static final double NOT_STOPPED = -2;
 
     /**
      * This constructor starts a new timer with specified already played time and let you choose if start it or not.
@@ -80,33 +75,32 @@ public class TimeCounterImpl implements TimeCounter {
 
     @Override
     public double getPlayingTime() {
-        if (isRunning()) {
-            this.stopTimer();
-            return this.getAndResumeTimer();
-        } else {
-            return this.timeDelta;
+        if (this.isRunning()) {
+            this.pauseTimer(); // Pause the counting makes it update the timeDelta
+            this.startTimer();
         }
+        return this.timeDelta;
     }
 
     @Override
     public final void startTimer() {
-        this.alreadyPlayedTime += this.timeDelta;
-        this.timeDelta = 0;
-        this.startingTime = System.currentTimeMillis();
-        this.endingTime = NOT_STOPPED;
+        if (!this.isRunning()) {
+            this.startingTime = System.currentTimeMillis();
+        }
     }
 
     @Override
     public void stopTimer() {
-        this.endingTime = System.currentTimeMillis();
-        this.timeDelta = this.timeDelta + (this.endingTime - this.startingTime);
-        this.startingTime = NOT_STARTED;
+        this.pauseTimer();
+        this.alreadyPlayedTime += this.timeDelta;
+        this.timeDelta = 0;
     }
+
     @Override
-    public double getAndResumeTimer() {
-        this.startingTime = System.currentTimeMillis();
-        this.endingTime = NOT_STOPPED;
-        return this.timeDelta;
+    public void pauseTimer() {
+        final double endingTime = System.currentTimeMillis();
+        this.timeDelta = endingTime - this.startingTime;
+        this.startingTime = NOT_STARTED;
     }
 
     @Override
@@ -114,12 +108,52 @@ public class TimeCounterImpl implements TimeCounter {
         this.stopTimer();
         final double retVal = this.getTotalTime();
         this.alreadyPlayedTime = 0;
-        this.timeDelta = 0;
         return retVal;
     }
 
     @Override
-    public boolean isRunning() {
-        return this.startingTime != NOT_STARTED && this.endingTime == NOT_STOPPED;
+    public final boolean isRunning() {
+        return this.startingTime != NOT_STARTED;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        long temp;
+        temp = Double.doubleToLongBits(alreadyPlayedTime);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(startingTime);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(timeDelta);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
+        final TimeCounterImpl other = (TimeCounterImpl) obj;
+        return new Double(this.alreadyPlayedTime).equals(new Double(other.alreadyPlayedTime))
+                        && new Double(this.startingTime).equals(new Double(other.startingTime))
+                        && new Double(this.timeDelta).equals(new Double(other.timeDelta));
     }
 }
