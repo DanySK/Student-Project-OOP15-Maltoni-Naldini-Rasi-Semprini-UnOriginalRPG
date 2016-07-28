@@ -4,10 +4,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.io.FileNotFoundException;
+import java.util.Optional;
 
 import org.junit.Test;
 
+import it.unibo.unori.model.character.jobs.GrowthFactory;
 import it.unibo.unori.model.character.jobs.Jobs;
+import it.unibo.unori.model.character.jobs.StatisticsFactory;
+import it.unibo.unori.model.items.ArmorFactory;
 import it.unibo.unori.model.items.WeaponFactory;
 
 /**
@@ -17,27 +21,97 @@ public class JobsSetupTest {
 
     @Test
     public void testGetDefaultStats() {
-        fail("Not yet implemented");
+        final StatisticsFactory sf = new StatisticsFactory();
+        for (final Jobs j : Jobs.values()) {
+            Optional<String> path = Optional.empty();
+            try {
+                path = Optional.of(JobsSetup.getPath(j));
+                if (j.equals(Jobs.DUMP)) {
+                    fail("It shouldn't find a path");
+                }
+            } catch (FileNotFoundException e) {
+                if (!j.equals(Jobs.DUMP)) {
+                    fail("It should find a path");
+                }
+            }
+
+            if (path.isPresent()) {
+                assertEquals(sf.getJobStats(j), JobsSetup.getDefaultStatsMap(path.get()));
+            }
+
+            path = Optional.empty();
+        }
     }
 
     @Test
     public void testGetDefaultIncrements() {
-        fail("Not yet implemented");
+        final GrowthFactory gf = new GrowthFactory();
+        for (final Jobs j : Jobs.values()) {
+            Optional<String> path = Optional.empty();
+            try {
+                path = Optional.of(JobsSetup.getPath(j));
+                if (j.equals(Jobs.DUMP)) {
+                    fail("It shouldn't find a path");
+                }
+            } catch (FileNotFoundException e) {
+                if (!j.equals(Jobs.DUMP)) {
+                    fail("It should find a path");
+                }
+            }
+
+            if (path.isPresent()) {
+                assertEquals(gf.getJobGrowth(j), JobsSetup.getDefaultIncrementsMap(path.get()));
+            }
+
+            path = Optional.empty();
+        }
     }
 
     @Test
     public void testGetDefaultArmor() {
-        fail("Not yet implemented");
+        final ArmorFactory af = new ArmorFactory();
+        for (final Jobs j : Jobs.values()) {
+            Optional<String> path = Optional.empty();
+            try {
+                path = Optional.of(JobsSetup.getPath(j));
+                if (j.equals(Jobs.DUMP)) {
+                    fail("It shouldn't find a path");
+                }
+            } catch (FileNotFoundException e) {
+                if (!j.equals(Jobs.DUMP)) {
+                    fail("It should find a path");
+                }
+            }
+
+            if (path.isPresent()) {
+                assertEquals(af.getStdEquip(), JobsSetup.getDefaultArmorMap(path.get()));
+            }
+
+            path = Optional.empty();
+        }
     }
 
     @Test
     public void testGetDefaultWeapon() throws Exception {
         final WeaponFactory wf = new WeaponFactory();
-
-        for (Jobs j : Jobs.values()) {
-            if (!j.equals(Jobs.DUMP)) {
-                // assertEquals
+        for (final Jobs j : Jobs.values()) {
+            Optional<String> path = Optional.empty();
+            try {
+                path = Optional.of(JobsSetup.getPath(j));
+                if (j.equals(Jobs.DUMP)) {
+                    fail("It shouldn't find a path");
+                }
+            } catch (FileNotFoundException e) {
+                if (!j.equals(Jobs.DUMP)) {
+                    fail("It should find a path");
+                }
             }
+
+            if (path.isPresent()) {
+                assertEquals(wf.getStdSword(), JobsSetup.getDefaultArmorMap(path.get()));
+            }
+
+            path = Optional.empty();
         }
     }
 
