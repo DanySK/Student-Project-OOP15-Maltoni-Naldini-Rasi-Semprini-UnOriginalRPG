@@ -76,8 +76,8 @@ public final class SingletonParty {
         private GameMap currentMap;
         private  Map<CardinalPoints, String> frames;
         private CardinalPoints orientation;
-        private final Bag partyBag;
-        private final HeroTeam heroteam;
+        private Bag partyBag;
+        private HeroTeam heroteam;
 
         /**
          * Constructor for PartyImpl, set a standard map, position, cell and
@@ -96,10 +96,14 @@ public final class SingletonParty {
             return frames.keySet().containsAll(
                     Arrays.asList(CardinalPoints.values()));
         }
-        
+
         public void setParty(final Party p) {
             this.currentMap = p.getCurrentGameMap();
             this.currentPosition = p.getCurrentPosition();
+            this.orientation = p.getOrientation();
+            this.partyBag = p.getPartyBag();
+            this.heroteam = p.getHeroTeam();
+            this.frames = p.getFrames();
         }
 
         @Override
@@ -119,6 +123,11 @@ public final class SingletonParty {
         }
 
         @Override
+        public CardinalPoints getOrientation() {
+            return this.orientation;
+        }
+
+        @Override
         public void setFrames(final Map<CardinalPoints, String> frames)
                                         throws IllegalArgumentException {
             if (!this.framesCheck(frames)) {
@@ -130,6 +139,11 @@ public final class SingletonParty {
         @Override
         public String getCurrentFrame() {
             return this.frames.get(orientation);
+        }
+
+        @Override
+        public Map<CardinalPoints, String> getFrames() {
+            return this.frames;
         }
 
         @Override

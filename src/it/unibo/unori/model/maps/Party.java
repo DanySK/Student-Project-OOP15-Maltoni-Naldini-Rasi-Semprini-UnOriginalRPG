@@ -46,6 +46,13 @@ public interface Party extends Serializable {
     GameMap getCurrentGameMap();
 
     /**
+     * Getter for the orientation field.
+     * @return
+     *          current orientation
+     */
+    CardinalPoints getOrientation();
+
+    /**
      * Set the current frame of party.
      * @param frames
      *              a map containig for each direction, 
@@ -63,12 +70,18 @@ public interface Party extends Serializable {
     String getCurrentFrame();
 
     /**
+     * Getter for the frames.
+     * @return
+     *           the map containing the frames
+     */
+    Map<CardinalPoints, String> getFrames();
+
+    /**
      * Move the party in the specified direction, if possible.
      * @param direction
      *                  the direction for the party to move
      * @throws BlockedPathException if the party can't move to that direction.
      */
-
     void moveParty(CardinalPoints direction) throws BlockedPathException;
 
     /**
