@@ -18,6 +18,13 @@ import it.unibo.unori.model.menu.DialogueInterface;
 public interface Party extends Serializable {
 
     /**
+     * Store in the party object the fields of another party.
+     * @param p
+     *          the input party
+     */
+    void setParty(Party p);
+
+    /**
      * Getter for the current position.
      * @return the current position of the party.
      */

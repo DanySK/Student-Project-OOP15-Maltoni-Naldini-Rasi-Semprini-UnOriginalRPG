@@ -96,6 +96,11 @@ public final class SingletonParty {
             return frames.keySet().containsAll(
                     Arrays.asList(CardinalPoints.values()));
         }
+        
+        public void setParty(final Party p) {
+            this.currentMap = p.getCurrentGameMap();
+            this.currentPosition = p.getCurrentPosition();
+        }
 
         @Override
         public Position getCurrentPosition() {
