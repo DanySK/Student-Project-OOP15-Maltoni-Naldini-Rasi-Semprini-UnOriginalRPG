@@ -13,6 +13,7 @@ import it.unibo.unori.model.character.HeroTeam;
 import it.unibo.unori.model.character.HeroTeamImpl;
 import it.unibo.unori.model.character.exceptions.MaxFoesException;
 import it.unibo.unori.model.character.exceptions.MaxHeroException;
+import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.character.jobs.Jobs;
 import it.unibo.unori.model.items.BagImpl;
 
@@ -31,10 +32,11 @@ public class BattleTest {
      * @throws MaxHeroException 
      * @throws IllegalArgumentException 
      * @throws MaxFoesException 
+     * @throws NoWeaponException 
      */
     @Test
     public void testInitialization() throws IllegalArgumentException, 
-    MaxHeroException, MaxFoesException {
+    MaxHeroException, MaxFoesException, NoWeaponException {
         
         team.addHero(new HeroImpl("Primo", Jobs.DUMP));
         assertEquals(team.getAliveHeroes().size(), 1);
@@ -55,6 +57,14 @@ public class BattleTest {
         assertEquals(enemies.getAliveFoes().size(), 4);
         
         this.battle = new BattleImpl(this.team, this.enemies, new BagImpl());
+        battle.setHeroOnTUrn(battle.getSquad().getFirstHeroOnTurn());
+        battle.setFoeOnTurn(battle.getEnemies().getFirstFoeOnTurn());
+        System.out.println("" + this.battle.getFoeOnTurn().getRemainingHP());
+        System.out.println("" + this.battle.getHeroOnTurn().getAttack());
+        final int firstDamage  = battle.attack(battle.getFoeOnTurn(), battle.getHeroOnTurn());
+        System.out.println("" + firstDamage);
+        System.out.println("" + this.battle.getFoeOnTurn().getRemainingHP());
+        assertEquals(this.battle.getEnemies().getAliveFoes().size(), 3);
     }
     
     /**
