@@ -1,8 +1,8 @@
 package it.unibo.unori.controller;
 
 /**
- * This class implements a GameStatistics with the counting time implemented with a
- * {@link it.unibo.unori.controller.TimeCounter} as an external strategy.
+ * This class implements a GameStatistics with the counting time implemented
+ * with a {@link it.unibo.unori.controller.TimeCounter} as an external strategy.
  * 
  * @see it.unibo.unori.controller.GameStatistics
  */
@@ -27,7 +27,7 @@ public class GameStatisticsImpl implements GameStatistics {
     }
 
     @Override
-    public void increaseNewGame(final int increment) {
+    public void increaseNewGames(final int increment) {
         this.newGames += increment;
     }
 
@@ -105,9 +105,11 @@ public class GameStatisticsImpl implements GameStatistics {
 
     @Override
     public void pauseCountingTime() {
-        final double endingTime = System.currentTimeMillis();
-        this.timeDelta = endingTime - this.startingTime;
-        this.startingTime = NOT_STARTED;
+        if (this.isCountingTime()) {
+            final double endingTime = System.currentTimeMillis();
+            this.timeDelta = endingTime - this.startingTime;
+            this.startingTime = NOT_STARTED;
+        }
     }
 
     @Override
@@ -120,8 +122,7 @@ public class GameStatisticsImpl implements GameStatistics {
     @Override
     public double getTimePlayed() {
         if (this.isCountingTime()) {
-            this.pauseCountingTime(); // Pause the counting makes it update the timeDelta
-            this.startCountingTime();
+            this.timeDelta = System.currentTimeMillis() - this.startingTime;
         }
         return this.timeDelta;
     }
@@ -160,6 +161,11 @@ public class GameStatisticsImpl implements GameStatistics {
         this.monstersMet = saved.getMonstersMet();
         this.newGames = saved.getNewGames();
         // this.timePlayed.setAlreadyPlayedTime(this.getTimePlayed());
+        if (saved.isCountingTime()) {
+            this.startCountingTime();
+        } else {
+            this.stopCountingTime();
+        }
         this.timeDelta = saved.getTimePlayed();
         this.timePlayedPreviously = saved.getTotalTimePlayed() - saved.getTimePlayed();
         this.totalExpGained = saved.getTotalExpGained();
@@ -169,23 +175,25 @@ public class GameStatisticsImpl implements GameStatistics {
     @Override
     public String toString() {
         return new StringBuilder().append("Number of new games: ").append(this.getNewGames())
-                        .append("\nNumber of monsters met: ").append(this.getMonstersMet())
-                        .append("\nNumber of monsters killed: ").append(this.getMonstersKilled())
-                        .append("\nNumber of bosses killed: ").append(this.getBossesKilled())
-                        .append("\nNumber of weapons acquired: ").append(this.getWeaponsAcquired())
-                        .append("\nNumber of armors acquired: ").append(this.getArmorsAcquired())
-                        .append("\nTotal Experience gained: ").append(this.getTotalExpGained())
-                        .append("\nTime played this game: ").append(this.getTimePlayed())
-                        .append("\nTotal time played: ").append(this.getTotalTimePlayed()).toString();
+                .append("\nNumber of monsters met: ").append(this.getMonstersMet())
+                .append("\nNumber of monsters killed: ").append(this.getMonstersKilled())
+                .append("\nNumber of bosses killed: ").append(this.getBossesKilled())
+                .append("\nNumber of weapons acquired: ").append(this.getWeaponsAcquired())
+                .append("\nNumber of armors acquired: ").append(this.getArmorsAcquired())
+                .append("\nTotal Experience gained: ").append(this.getTotalExpGained())
+                .append("\nTime played this game: ").append(this.getTimePlayed()).append("\nTotal time played: ")
+                .append(this.getTotalTimePlayed()).toString();
     }
     /*
-     * private void writeObject(final ObjectOutputStream out) throws IOException { final boolean restart =
-     * this.timePlayed.isRunning(); this.increaseTotalTimePlayed(this.timePlayed.resetTimer());
+     * private void writeObject(final ObjectOutputStream out) throws IOException
+     * { final boolean restart = this.timePlayed.isRunning();
+     * this.increaseTotalTimePlayed(this.timePlayed.resetTimer());
      * out.defaultWriteObject(); if (restart) { this.resumeCountingTime(); } }
      */
     /*
-     * private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
-     * in.defaultReadObject(); // this.startCountingTime(); }
+     * private void readObject(final ObjectInputStream in) throws IOException,
+     * ClassNotFoundException { in.defaultReadObject(); //
+     * this.startCountingTime(); }
      */
 
     /**
@@ -229,11 +237,10 @@ public class GameStatisticsImpl implements GameStatistics {
         final GameStatistics test = (GameStatistics) obj;
 
         return this.armorsAcquired == test.getArmorsAcquired() && this.bossesKilled == test.getBossesKilled()
-                        && this.monstersKilled == test.getMonstersKilled() && this.monstersMet == test.getMonstersMet()
-                        && this.newGames == test.getNewGames() && this.getTimePlayed() == test.getTimePlayed()
-                        && this.getTotalTimePlayed() == test.getTotalTimePlayed()
-                        && this.totalExpGained == test.getTotalExpGained()
-                        && this.weaponsAcquired == test.getWeaponsAcquired();
+                && this.monstersKilled == test.getMonstersKilled() && this.monstersMet == test.getMonstersMet()
+                && this.newGames == test.getNewGames() && this.getTimePlayed() == test.getTimePlayed()
+                && this.getTotalTimePlayed() == test.getTotalTimePlayed()
+                && this.totalExpGained == test.getTotalExpGained() && this.weaponsAcquired == test.getWeaponsAcquired();
     }
 
 }

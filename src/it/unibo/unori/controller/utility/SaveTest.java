@@ -16,7 +16,6 @@ import org.junit.rules.TemporaryFolder;
 import com.google.gson.JsonIOException;
 import com.google.gson.reflect.TypeToken;
 
-import it.unibo.unori.controller.GameStatistics;
 import it.unibo.unori.controller.GameStatisticsImpl;
 import it.unibo.unori.model.maps.SingletonParty;
 
@@ -117,7 +116,7 @@ public class SaveTest {
             gs.increaseBossesKilled(10);
             gs.increaseMonstersKilled(10);
             gs.increaseMonstersMet(10);
-            gs.increaseNewGame(10);
+            gs.increaseNewGames(10);
             gs.increaseTotalExpGained(10);
             gs.increaseTotalTimePlayed(10);
             gs.increaseWeaponsAcquired(10);

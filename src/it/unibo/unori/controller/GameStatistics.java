@@ -22,7 +22,7 @@ public interface GameStatistics extends Serializable {
      * @param increment
      *            the number to add to the current count of new games started.
      */
-    void increaseNewGame(final int increment);
+    void increaseNewGames(final int increment);
 
     /**
      * Gets the total number of monsters met.

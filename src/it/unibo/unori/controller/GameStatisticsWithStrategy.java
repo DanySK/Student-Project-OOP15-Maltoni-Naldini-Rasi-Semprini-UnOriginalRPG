@@ -23,7 +23,7 @@ public class GameStatisticsWithStrategy implements GameStatistics {
     }
 
     @Override
-    public void increaseNewGame(final int increment) {
+    public void increaseNewGames(final int increment) {
         this.newGames += increment;
     }
 
