@@ -6,22 +6,26 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import com.google.gson.JsonIOException;
-import com.google.gson.reflect.TypeToken;
 
 import it.unibo.unori.controller.GameStatisticsImpl;
 import it.unibo.unori.model.maps.SingletonParty;
 
 /**
- * This JUnit test class checks if utility class Save works properly. I tested save*ToPath and load*ToPath methods
- * instead of default-path versions to use the temporary folder, but they act exactly the same.
+ * This JUnit test class checks if utility class Save works properly. I tested
+ * save*ToPath and load*ToPath methods instead of default-path versions to use
+ * the temporary folder, but they act exactly the same.
  */
 public class SaveTest {
     /**
@@ -31,7 +35,8 @@ public class SaveTest {
     public final TemporaryFolder folder = new TemporaryFolder();
 
     /**
-     * This tests if loadSave method throws JsonIOException if the file does not exist.
+     * This tests if loadSave method throws JsonIOException if the file does not
+     * exist.
      * 
      * @throws FileNotFoundException
      *             if the file does is not a JSON-serialized object
@@ -44,7 +49,8 @@ public class SaveTest {
     }
 
     /**
-     * This tests if loadFromUtilityFile method throws IOException if the file does not exist.
+     * This tests if loadFromUtilityFile method throws IOException if the file
+     * does not exist.
      * 
      * @throws FileNotFoundException
      *             if the file does is not a JSON-serialized object
@@ -57,7 +63,8 @@ public class SaveTest {
     }
 
     /**
-     * This tests if loadSave method throws JsonIOException if the file is not valid.
+     * This tests if loadSave method throws JsonIOException if the file is not
+     * valid.
      * 
      * @throws JsonIOException
      *             if the file does is not a JSON-serialized object
@@ -71,7 +78,8 @@ public class SaveTest {
     }
 
     /**
-     * This tests if loadStats method throws JsonIOException if the file is not valid.
+     * This tests if loadStats method throws JsonIOException if the file is not
+     * valid.
      * 
      * @throws JsonIOException
      *             if the file does is not a JSON-serialized object
@@ -129,40 +137,112 @@ public class SaveTest {
             // System.out.println(ret.toString());
             assertEquals(gs, ret);
         } else {
-            fail("Can't delete temporary " + f.getName() + " JSON test file");
+            fail(getFailOnDeleteMessage(f.getName()));
         }
     }
 
+    /**
+     * This tests the correct serialization and deserialization methods.
+     * 
+     * @throws IOException
+     *             if something wrong happens
+     */
     @Test
-    public void testSerializeJSON() throws IOException {
+    public void testSerializeAndDeserializeJSON() throws IOException {
         final File f = folder.newFile("Try.json");
+        // Objects
+        final Boolean b = true;
         final String s = "Try";
-        Save.serializeJSON(s, f.getAbsolutePath());
-        assertEquals(s, Save.deserializeJSON(String.class, f.getAbsolutePath()));
+        final Integer i = 1;
+        final Double d = 1.0;
+        // Lists
+        final List<Boolean> l1 = new ArrayList<>();
+        final List<String> l2 = new LinkedList<>();
+        final List<Integer> l3 = new ArrayList<>();
+        final List<Double> l4 = new LinkedList<>();
+        // Maps
+        final Map<Integer, Boolean> m1 = new HashMap<>();
+        final Map<String, Double> m2 = new TreeMap<>();
+
+        // Objects
+        Save.serializeJSON(b, f.getAbsolutePath());
+        assertEquals(b, Save.deserializeJSON(Boolean.class, f.getAbsolutePath()));
 
         if (f.delete()) {
-            final Integer i = 10;
+            Save.serializeJSON(s, f.getAbsolutePath());
+            assertEquals(s, Save.deserializeJSON(String.class, f.getAbsolutePath()));
+        } else {
+            fail(getFailOnDeleteMessage(f.getName()));
+        }
+
+        if (f.delete()) {
             Save.serializeJSON(i, f.getAbsolutePath());
             assertEquals(i, Save.deserializeJSON(Integer.class, f.getAbsolutePath()));
-
-            if (f.delete()) {
-                Map<String, Integer> m = new HashMap<>();
-                m.put(s, i);
-                Save.serializeJSON(m, f.getAbsolutePath());
-                // System.out.println(m.getClass());
-                
-                assertEquals(m, Save.deserializeJSON(new TypeToken<Map<String, Integer>>() { }.getClass(), f.getAbsolutePath()));
-            } else {
-                fail("Can't delete temporary " + f.getName() + " JSON test file");
-            }
         } else {
-            fail("Can't delete temporary " + f.getName() + " JSON test file");
+            fail(getFailOnDeleteMessage(f.getName()));
+        }
+
+        if (f.delete()) {
+            Save.serializeJSON(d, f.getAbsolutePath());
+            assertEquals(d, Save.deserializeJSON(Double.class, f.getAbsolutePath()));
+        } else {
+            fail(getFailOnDeleteMessage(f.getName()));
+        }
+
+        // Lists
+        if (f.delete()) {
+            l1.add(b);
+            Save.serializeJSON(l1, f.getAbsolutePath());
+            assertEquals(l1, Save.deserializeJSON(l1.getClass(), f.getAbsolutePath()));
+        } else {
+            fail(getFailOnDeleteMessage(f.getName()));
+        }
+
+        if (f.delete()) {
+            l2.add(s);
+            Save.serializeJSON(l2, f.getAbsolutePath());
+            assertEquals(l2, Save.deserializeJSON(l2.getClass(), f.getAbsolutePath()));
+        } else {
+            fail(getFailOnDeleteMessage(f.getName()));
+        }
+
+        if (f.delete()) {
+            l3.add(i);
+            Save.serializeJSON(l3, f.getAbsolutePath());
+            assertEquals(l3, Save.deserializeJSON(l3.getClass(), f.getAbsolutePath()));
+        } else {
+            fail(getFailOnDeleteMessage(f.getName()));
+        }
+
+        if (f.delete()) {
+            l4.add(d);
+            Save.serializeJSON(l4, f.getAbsolutePath());
+            assertEquals(l4, Save.deserializeJSON(l4.getClass(), f.getAbsolutePath()));
+        } else {
+            fail(getFailOnDeleteMessage(f.getName()));
+        }
+
+        // Maps
+        if (f.delete()) {
+            m1.put(i, b);
+            Save.serializeJSON(m1, f.getAbsolutePath());
+            assertEquals(m1, Save.deserializeJSON(m1.getClass(), f.getAbsolutePath()));
+        } else {
+            fail(getFailOnDeleteMessage(f.getName()));
+        }
+
+        if (f.delete()) {
+            m2.put(s, d);
+            Save.serializeJSON(m2, f.getAbsolutePath());
+            assertEquals(m2, Save.deserializeJSON(m2.getClass(), f.getAbsolutePath()));
+        } else {
+            fail(getFailOnDeleteMessage(f.getName()));
         }
     }
 
-    @Test
-    public void testDeserializeJSON() {
-        fail("Not yet implemented");
+    private String getFailOnDeleteMessage(final String fileName) {
+        return new StringBuilder().append("Can't delete temporary ").append(fileName).append(" JSON test file")
+                .toString();
     }
 
 }

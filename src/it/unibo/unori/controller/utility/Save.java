@@ -18,7 +18,6 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
-import it.unibo.unori.controller.GameStatistics;
 import it.unibo.unori.controller.GameStatisticsImpl;
 import it.unibo.unori.controller.TimeCounter;
 import it.unibo.unori.controller.TimeCounterImpl;
@@ -43,6 +42,30 @@ public final class Save {
      */
     public static final String STATS_FILE = "res/Stats.json";
 
+    private static Gson gson = new GsonBuilder()
+            /* .enableComplexMapKeySerialization() */.setPrettyPrinting()
+            .registerTypeAdapter(Armor.class, new InstanceCreator<Armor>() {
+                @Override
+                public Armor createInstance(final Type type) {
+                    return ArmorImpl.NAKED;
+                }
+            }).registerTypeAdapter(Party.class, new InstanceCreator<Party>() {
+                @Override
+                public Party createInstance(final Type type) {
+                    return SingletonParty.getParty();
+                }
+            }).registerTypeAdapter(Weapon.class, new InstanceCreator<Weapon>() {
+                @Override
+                public Weapon createInstance(final Type type) {
+                    return WeaponImpl.FISTS;
+                }
+            }).registerTypeAdapter(TimeCounter.class, new InstanceCreator<TimeCounter>() {
+                @Override
+                public TimeCounter createInstance(final Type type) {
+                    return new TimeCounterImpl();
+                }
+            }).create();
+
     private Save() {
         // Empty private constructor, because this is an utility class
     }
@@ -56,12 +79,14 @@ public final class Save {
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
-     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
-     *             cannot be opened for reading
+     *             if the file does not exist, is a directory rather than a
+     *             regular file, or for some other reason cannot be opened for
+     *             reading
      * @throws JsonIOException
      *             if there was a problem reading from the Reader
      * @throws JsonSyntaxException
-     *             if the file does not contain a valid representation for an object of type
+     *             if the file does not contain a valid representation for an
+     *             object of type
      */
     public static Party loadGameFromPath(final String path) throws IOException {
         return deserializeJSON(Party.class, path);
@@ -74,20 +99,23 @@ public final class Save {
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
-     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
-     *             cannot be opened for reading
+     *             if the file does not exist, is a directory rather than a
+     *             regular file, or for some other reason cannot be opened for
+     *             reading
      * @throws JsonIOException
      *             if there was a problem reading from the Reader
      * @throws JsonSyntaxException
-     *             if the file does not contain a valid representation for an object of type
+     *             if the file does not contain a valid representation for an
+     *             object of type
      */
     public static Party loadGame() throws IOException {
         return loadGameFromPath(SAVE_FILE);
     }
 
     /**
-     * This method saves the state of the game by serializing the Party object (containing position on map, statistics,
-     * etc...) and the time played. It saves in a given-path file.
+     * This method saves the state of the game by serializing the Party object
+     * (containing position on map, statistics, etc...) and the time played. It
+     * saves in a given-path file.
      * 
      * @param party
      *            the party object
@@ -96,10 +124,12 @@ public final class Save {
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
-     *             if the file exists but is a directory rather than a regular file, does not exist but cannot be
-     *             created, or cannot be opened for any other reason
+     *             if the file exists but is a directory rather than a regular
+     *             file, does not exist but cannot be created, or cannot be
+     *             opened for any other reason
      * @throws SecurityException
-     *             if a security manager exists and its checkWrite method denies write access to the file.
+     *             if a security manager exists and its checkWrite method denies
+     *             write access to the file.
      * @throws JsonIOException
      *             if there was a problem writing to the writer
      */
@@ -108,18 +138,21 @@ public final class Save {
     }
 
     /**
-     * This method saves the state of the game by serializing the Party object (containing position on map, statistics,
-     * etc...) and the time played. It saves in default path.
+     * This method saves the state of the game by serializing the Party object
+     * (containing position on map, statistics, etc...) and the time played. It
+     * saves in default path.
      * 
      * @param party
      *            the party object
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
-     *             if the file exists but is a directory rather than a regular file, does not exist but cannot be
-     *             created, or cannot be opened for any other reason
+     *             if the file exists but is a directory rather than a regular
+     *             file, does not exist but cannot be created, or cannot be
+     *             opened for any other reason
      * @throws SecurityException
-     *             if a security manager exists and its checkWrite method denies write access to the file.
+     *             if a security manager exists and its checkWrite method denies
+     *             write access to the file.
      * @throws JsonIOException
      *             if there was a problem writing to the writer
      */
@@ -128,38 +161,44 @@ public final class Save {
     }
 
     /**
-     * The method restores a previously saved game statistics object from a given-path file.
+     * The method restores a previously saved game statistics object from a
+     * given-path file.
      * 
      * @param path
      *            the path of the file
      * @return the GameStatistics object
      * @throws FileNotFoundException
-     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
-     *             cannot be opened for reading.
+     *             if the file does not exist, is a directory rather than a
+     *             regular file, or for some other reason cannot be opened for
+     *             reading.
      * @throws IOException
      *             if an error occurs
      * @throws JsonIOException
      *             if there was a problem reading from the Reader
      * @throws JsonSyntaxException
-     *             if the file does not contain a valid representation for an object of type
+     *             if the file does not contain a valid representation for an
+     *             object of type
      */
     public static GameStatisticsImpl loadStatsFromPath(final String path) throws IOException {
         return deserializeJSON(GameStatisticsImpl.class, path);
     }
 
     /**
-     * The method restores a previously saved game statistics object from default path.
+     * The method restores a previously saved game statistics object from
+     * default path.
      * 
      * @return the GameStatistics object
      * @throws FileNotFoundException
-     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
-     *             cannot be opened for reading.
+     *             if the file does not exist, is a directory rather than a
+     *             regular file, or for some other reason cannot be opened for
+     *             reading.
      * @throws IOException
      *             if an error occurs
      * @throws JsonIOException
      *             if there was a problem reading from the Reader
      * @throws JsonSyntaxException
-     *             if the file does not contain a valid representation for an object of type
+     *             if the file does not contain a valid representation for an
+     *             object of type
      */
     public static GameStatisticsImpl loadStats() throws IOException {
         return Save.loadStatsFromPath(STATS_FILE);
@@ -175,10 +214,12 @@ public final class Save {
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
-     *             if the file exists but is a directory rather than a regular file, does not exist but cannot be
-     *             created, or cannot be opened for any other reason
+     *             if the file exists but is a directory rather than a regular
+     *             file, does not exist but cannot be created, or cannot be
+     *             opened for any other reason
      * @throws SecurityException
-     *             if a security manager exists and its checkWrite method denies write access to the file
+     *             if a security manager exists and its checkWrite method denies
+     *             write access to the file
      * @throws JsonIOException
      *             if there was a problem writing to the writer
      */
@@ -194,10 +235,12 @@ public final class Save {
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
-     *             if the file exists but is a directory rather than a regular file, does not exist but cannot be
-     *             created, or cannot be opened for any other reason
+     *             if the file exists but is a directory rather than a regular
+     *             file, does not exist but cannot be created, or cannot be
+     *             opened for any other reason
      * @throws SecurityException
-     *             if a security manager exists and its checkWrite method denies write access to the file
+     *             if a security manager exists and its checkWrite method denies
+     *             write access to the file
      * @throws JsonIOException
      *             if there was a problem writing to the writer
      */
@@ -215,46 +258,26 @@ public final class Save {
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
-     *             if the file exists but is a directory rather than a regular file, does not exist but cannot be
-     *             created, or cannot be opened for any other reason
+     *             if the file exists but is a directory rather than a regular
+     *             file, does not exist but cannot be created, or cannot be
+     *             opened for any other reason
      * @throws SecurityException
-     *             if a security manager exists and its checkWrite method denies write access to the file
+     *             if a security manager exists and its checkWrite method denies
+     *             write access to the file
      * @throws JsonIOException
      *             if there was a problem writing to the writer
      */
     public static void serializeJSON(final Object objectToSerialize, final String path) throws IOException {
-        final Gson gson = new GsonBuilder().setPrettyPrinting().create();
         final Writer writer = new OutputStreamWriter(new FileOutputStream(path), "UTF-8");
         gson.toJson(objectToSerialize, writer);
         writer.close();
     }
-    
+
     public static <T> T deserializeJSON(final String path) throws IOException {
-        
-        Type type = new TypeToken<T>() { }.getType();
-        
+        final Type type = new TypeToken<T>() {
+        }.getType();
+
         Optional<T> returnObject = Optional.empty();
-        final Gson gson = new GsonBuilder().registerTypeAdapter(Armor.class, new InstanceCreator<Armor>() {
-            @Override
-            public Armor createInstance(final Type type) {
-                return ArmorImpl.NAKED;
-            }
-        }).registerTypeAdapter(Party.class, new InstanceCreator<Party>() {
-            @Override
-            public Party createInstance(final Type type) {
-                return SingletonParty.getParty();
-            }
-        }).registerTypeAdapter(Weapon.class, new InstanceCreator<Weapon>() {
-            @Override
-            public Weapon createInstance(final Type type) {
-                return WeaponImpl.FISTS;
-            }
-        }).registerTypeAdapter(TimeCounter.class, new InstanceCreator<TimeCounter>() {
-            @Override
-            public TimeCounter createInstance(final Type type) {
-                return new TimeCounterImpl();
-            }
-        }).create();
 
         final Reader reader = new InputStreamReader(new FileInputStream(path), "UTF-8");
         returnObject = Optional.ofNullable(gson.fromJson(reader, type));
@@ -264,57 +287,32 @@ public final class Save {
     }
 
     /**
-     * This method loads a file from a given path and returns a single object from what reads.
+     * This method loads a file from a given path and returns a single object
+     * from what reads.
      * 
      * @param <T>
      *            the type of the object serialized on the file
      * @param c
-     *            the type of the object serialized on the file; it needs to be specified because sometimes it can't
-     *            parse the correct type automatically
+     *            the type of the object serialized on the file; it needs to be
+     *            specified because sometimes it can't parse the correct type
+     *            automatically
      * @param path
      *            the path where to find the JSON file
      * @return the serialized object
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
-     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
-     *             cannot be opened for reading
+     *             if the file does not exist, is a directory rather than a
+     *             regular file, or for some other reason cannot be opened for
+     *             reading
      * @throws JsonIOException
      *             if there was a problem reading from the Reader
      * @throws JsonSyntaxException
-     *             if the file does not contain a valid representation for an object of type
+     *             if the file does not contain a valid representation for an
+     *             object of type
      */
     public static <T> T deserializeJSON(final Class<T> c, final String path) throws IOException {
-        /*
-         * Type type = new TypeToken<T>() { }.getType();
-         */
         Optional<T> returnObject = Optional.empty();
-        final Gson gson = new GsonBuilder().registerTypeAdapter(Armor.class, new InstanceCreator<Armor>() {
-            @Override
-            public Armor createInstance(final Type type) {
-                return ArmorImpl.NAKED;
-            }
-        }).registerTypeAdapter(Party.class, new InstanceCreator<Party>() {
-            @Override
-            public Party createInstance(final Type type) {
-                return SingletonParty.getParty();
-            }
-        }).registerTypeAdapter(Weapon.class, new InstanceCreator<Weapon>() {
-            @Override
-            public Weapon createInstance(final Type type) {
-                return WeaponImpl.FISTS;
-            }
-        }).registerTypeAdapter(TimeCounter.class, new InstanceCreator<TimeCounter>() {
-            @Override
-            public TimeCounter createInstance(final Type type) {
-                return new TimeCounterImpl();
-            }
-        }).registerTypeAdapter(GameStatistics.class, new InstanceCreator<GameStatistics>() {
-            @Override
-            public GameStatistics createInstance(final Type type) {
-                return new GameStatisticsImpl();
-            }
-        }).create();
 
         final Reader reader = new InputStreamReader(new FileInputStream(path), "UTF-8");
         returnObject = Optional.ofNullable(gson.fromJson(reader, /* type */c));
