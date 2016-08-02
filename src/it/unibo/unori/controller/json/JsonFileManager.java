@@ -17,7 +17,6 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
 import it.unibo.unori.controller.GameStatisticsImpl;
-import it.unibo.unori.controller.utility.Save;
 import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.ArmorImpl;
 import it.unibo.unori.model.items.Weapon;
@@ -188,7 +187,7 @@ public class JsonFileManager {
      *             object of type
      */
     public GameStatisticsImpl loadStats() throws IOException {
-        return Save.loadStatsFromPath(STATS_FILE);
+        return loadStatsFromPath(STATS_FILE);
     }
 
     /**
@@ -232,7 +231,7 @@ public class JsonFileManager {
      *             if there was a problem writing to the writer
      */
     public void saveStats(final GameStatisticsImpl stats) throws IOException {
-        Save.saveStatsToPath(stats, STATS_FILE);
+        saveStatsToPath(stats, STATS_FILE);
     }
 
     /**
