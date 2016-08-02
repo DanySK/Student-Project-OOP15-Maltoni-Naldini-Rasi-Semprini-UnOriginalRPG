@@ -25,19 +25,23 @@ public class JsonJobParameter {
     private final Weapon defaultWeapon;
 
     /**
+     * Default constructor.
      * 
-     * @param defaultStats
-     * @param defaultIncrement
-     * @param defaultArmor
-     * @param defaultWeapon
+     * @param statistics
+     *            the default statistics at starting level
+     * @param growth
+     *            the default increment of statistics at level up
+     * @param armor
+     *            the default armor at the moment of creation
+     * @param weapon
+     *            the default weapon at the moment of creation
      */
-    public JsonJobParameter(final Map<Statistics, Integer> defaultStats,
-                    final Map<Statistics, Integer> defaultIncrement, final Map<ArmorPieces, Armor> defaultArmor,
-                    final Weapon defaultWeapon) {
-        this.defaultStats = defaultStats;
-        this.defaultIncrement = defaultIncrement;
-        this.defaultArmor = defaultArmor;
-        this.defaultWeapon = defaultWeapon;
+    public JsonJobParameter(final Map<Statistics, Integer> statistics, final Map<Statistics, Integer> growth,
+            final Map<ArmorPieces, Armor> armor, final Weapon weapon) {
+        this.defaultStats = statistics;
+        this.defaultIncrement = growth;
+        this.defaultArmor = armor;
+        this.defaultWeapon = weapon;
     }
 
     /**
@@ -74,26 +78,5 @@ public class JsonJobParameter {
      */
     public Weapon getDefaultWeapon() {
         return this.defaultWeapon;
-    }
-
-    /**
-     * It instantiates a new Gson object with {@link com.google.gson.InstanceCreator<T>} for
-     * {@link com.google.gson.InstanceCreator<Armor>} and {@link com.google.gson.InstanceCreator<Armor>} already
-     * registered, so it should deserialize a {@link it.unibo.unori.controller.json.JsonJobParameter} without problems.
-     * 
-     * @return a new Gson object
-     */
-    public static Gson createGson() {
-        return new GsonBuilder().registerTypeAdapter(Armor.class, new InstanceCreator<Armor>() {
-            @Override
-            public Armor createInstance(final Type type) {
-                return ArmorImpl.NAKED;
-            }
-        }).registerTypeAdapter(Weapon.class, new InstanceCreator<Weapon>() {
-            @Override
-            public Weapon createInstance(final Type type) {
-                return WeaponImpl.FISTS;
-            }
-        }).create();
     }
 }
