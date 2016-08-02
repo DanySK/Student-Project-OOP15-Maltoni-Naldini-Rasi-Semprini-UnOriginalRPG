@@ -121,15 +121,7 @@ public class BattleImpl implements Battle {
     public String usePotionHP(final Hero my, final Potion toUse) 
             throws ItemNotFoundException {
         if (this.itemBag.contains(toUse)) {
-            final int restore = toUse.getRestore();
-            switch(toUse.getStatisticToRestore()) {
-            case TOTALHP: my.restoreDamage(restore);
-                break;
-            case TOTALMP: my.restoreMP(restore);
-                break;
-            default:
-                break;
-            }
+            toUse.using(my);
             return "Hai usato " + toUse.getName() + " su " + my.getName() + "!";
         } else {
             throw new ItemNotFoundException();

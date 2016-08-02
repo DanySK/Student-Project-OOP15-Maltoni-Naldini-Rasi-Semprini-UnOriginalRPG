@@ -68,7 +68,7 @@ public interface Character extends Serializable {
      * @param hpToRestore
      *                  number of HP to restore
      */
-    void restoreDamage(int hpToRestore);
+    void restoreHP(int hpToRestore);
 
     /**
      * Method to restore character's MP.

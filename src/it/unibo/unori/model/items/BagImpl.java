@@ -152,7 +152,7 @@ public class BagImpl implements Bag {
 
     @Override
     public void usePotion(final Hero my, final Potion p) {
-        my.restoreDamage(p.getRestore());
+        my.restoreHP(p.getRestore());
     }
 
     @Override

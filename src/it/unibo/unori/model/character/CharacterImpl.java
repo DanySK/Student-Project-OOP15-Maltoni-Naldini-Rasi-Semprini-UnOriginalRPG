@@ -148,7 +148,7 @@ public class CharacterImpl implements Character {
     }
 
     @Override
-    public void restoreDamage(final int hpToRestore) {
+    public void restoreHP(final int hpToRestore) {
         this.currentHP = this.currentHP + hpToRestore > this.getTotalHP() ? this.getTotalHP()
                 : this.currentHP + hpToRestore;
 
