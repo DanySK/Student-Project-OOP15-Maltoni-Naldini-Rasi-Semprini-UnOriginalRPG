@@ -1,6 +1,5 @@
 package it.unibo.unori.model.battle;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import it.unibo.unori.model.battle.exceptions.BarNotFullException;
@@ -10,8 +9,10 @@ import it.unibo.unori.model.battle.exceptions.NotEnoughMPExcpetion;
 import it.unibo.unori.model.battle.utility.BattleLogics;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.FoeSquad;
+import it.unibo.unori.model.character.FoeSquadImpl;
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.HeroTeam;
+import it.unibo.unori.model.character.HeroTeamImpl;
 import it.unibo.unori.model.character.Status;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.character.Character;
@@ -89,7 +90,7 @@ public class BattleImpl implements Battle {
 
     @Override
     public int attack(final Foe enemy, final Hero my) throws NoWeaponException {
-        final int atkTot = my.getAttack() + my.getWeapon().getPhysicalAtk();
+        final int atkTot = my.getAttack() + (my.getWeapon().getPhysicalAtk());
         final int damage = 
                 BattleLogics.getStandardDamage(my.getLevel(), atkTot);
         enemy.takeDamage(damage);
@@ -183,13 +184,13 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public List<Foe> getEnemies() {
-        return new ArrayList<>(this.enemies.getAllFoes());
+    public FoeSquadImpl getEnemies() {
+        return new FoeSquadImpl(this.enemies.getAllFoes());
     }
 
     @Override
-    public List<Hero> getSquad() {
-        return new ArrayList<>(this.squad.getAllHeroes());
+    public HeroTeam getSquad() {
+        return new HeroTeamImpl(this.squad.getAllHeroes());
     }
 
     @Override

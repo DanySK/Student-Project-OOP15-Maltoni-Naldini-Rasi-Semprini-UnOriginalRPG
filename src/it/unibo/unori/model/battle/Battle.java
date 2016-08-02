@@ -1,12 +1,13 @@
 package it.unibo.unori.model.battle;
-import java.util.List;
 
 import it.unibo.unori.model.battle.exceptions.BarNotFullException;
 import it.unibo.unori.model.battle.exceptions.CantEscapeException;
 import it.unibo.unori.model.battle.exceptions.NotDefendableException;
 import it.unibo.unori.model.battle.exceptions.NotEnoughMPExcpetion;
 import it.unibo.unori.model.character.Foe;
+import it.unibo.unori.model.character.FoeSquadImpl;
 import it.unibo.unori.model.character.Hero;
+import it.unibo.unori.model.character.HeroTeam;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.Potion;
@@ -90,13 +91,13 @@ public interface Battle {
      * Getter method that returns the List of Enemies involved in the Battle.
      * @return List of Foes. (A defensive copy).
      */
-    List<Foe> getEnemies();
+    FoeSquadImpl getEnemies();
     
     /**
      * Getter method that returns the list of Characters representing my team.
      * @return a List of Heroes: my team. (A defensive copy).
      */
-    List<Hero> getSquad();
+    HeroTeam getSquad();
     
     /**
      * Getter method that returns an Instance of the Item Bag.
