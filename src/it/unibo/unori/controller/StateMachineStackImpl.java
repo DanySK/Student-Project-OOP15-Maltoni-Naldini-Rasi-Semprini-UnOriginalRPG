@@ -10,15 +10,15 @@ import it.unibo.unori.view.View;
 
 /**
  * This class models a stack of {@link it.unibo.unori.controller.state.GameState}, to manage the current state easily,
- * keeping track of the state of the last GameState.
+ * keeping track of the state of the last GameState. It uses a Stack<GameState> for model-side stack and a
+ * {@link it.unibo.view.View} for view-side stack.
  */
 public class StateMachineStackImpl implements StateMachineStack {
     private final Stack<GameState> gsStack = new Stack<>();
     private final View layerStack = new View();
 
     /**
-     * {@inheritDoc} It is set final because firstly
-     * called by the constructor, and it should not be overridden.
+     * {@inheritDoc} It is set final because firstly called by the constructor, and it should not be overridden.
      * 
      */
     @Override

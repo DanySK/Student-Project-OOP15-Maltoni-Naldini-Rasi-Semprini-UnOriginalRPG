@@ -1,13 +1,25 @@
 package it.unibo.unori.controller;
 
 /**
- * This class implements a GameStatistics with the counting time implemented
- * with a {@link it.unibo.unori.controller.TimeCounter} as an external strategy.
+ * This class implements a GameStatistics with the counting time implemented with a
+ * {@link it.unibo.unori.controller.TimeCounter} as an external strategy.
  * 
  * @see it.unibo.unori.controller.GameStatistics
  */
 public class GameStatisticsImpl implements GameStatistics {
-    private static final long serialVersionUID = -3510818499443500756L;
+    /**
+     * Generated serial version UID.
+     */
+    private static final long serialVersionUID = -1788767604314411774L;
+    /**
+     * Non-started state for internal GameStatistics timer.
+     */
+    private static final double NOT_STARTED = -1;
+    /**
+     * Default generated hashCode() prime.
+     */
+    private static final int HASHCODE_PRIME = 31;
+
     private int newGames;
     private int monstersMet;
     private int monstersKilled;
@@ -17,8 +29,6 @@ public class GameStatisticsImpl implements GameStatistics {
     private int totalExpGained;
     private double startingTime = NOT_STARTED;
     private double timeDelta;
-    private static final double NOT_STARTED = -1;
-    // private final transient TimeCounter timePlayed = new TimeCounterImpl();
     private double timePlayedPreviously;
 
     @Override
@@ -175,25 +185,23 @@ public class GameStatisticsImpl implements GameStatistics {
     @Override
     public String toString() {
         return new StringBuilder().append("Number of new games: ").append(this.getNewGames())
-                .append("\nNumber of monsters met: ").append(this.getMonstersMet())
-                .append("\nNumber of monsters killed: ").append(this.getMonstersKilled())
-                .append("\nNumber of bosses killed: ").append(this.getBossesKilled())
-                .append("\nNumber of weapons acquired: ").append(this.getWeaponsAcquired())
-                .append("\nNumber of armors acquired: ").append(this.getArmorsAcquired())
-                .append("\nTotal Experience gained: ").append(this.getTotalExpGained())
-                .append("\nTime played this game: ").append(this.getTimePlayed()).append("\nTotal time played: ")
-                .append(this.getTotalTimePlayed()).toString();
+                        .append("\nNumber of monsters met: ").append(this.getMonstersMet())
+                        .append("\nNumber of monsters killed: ").append(this.getMonstersKilled())
+                        .append("\nNumber of bosses killed: ").append(this.getBossesKilled())
+                        .append("\nNumber of weapons acquired: ").append(this.getWeaponsAcquired())
+                        .append("\nNumber of armors acquired: ").append(this.getArmorsAcquired())
+                        .append("\nTotal Experience gained: ").append(this.getTotalExpGained())
+                        .append("\nTime played this game: ").append(this.getTimePlayed())
+                        .append("\nTotal time played: ").append(this.getTotalTimePlayed()).toString();
     }
     /*
-     * private void writeObject(final ObjectOutputStream out) throws IOException
-     * { final boolean restart = this.timePlayed.isRunning();
-     * this.increaseTotalTimePlayed(this.timePlayed.resetTimer());
+     * private void writeObject(final ObjectOutputStream out) throws IOException { final boolean restart =
+     * this.timePlayed.isRunning(); this.increaseTotalTimePlayed(this.timePlayed.resetTimer());
      * out.defaultWriteObject(); if (restart) { this.resumeCountingTime(); } }
      */
     /*
-     * private void readObject(final ObjectInputStream in) throws IOException,
-     * ClassNotFoundException { in.defaultReadObject(); //
-     * this.startCountingTime(); }
+     * private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
+     * in.defaultReadObject(); // this.startCountingTime(); }
      */
 
     /**
@@ -203,22 +211,21 @@ public class GameStatisticsImpl implements GameStatistics {
      */
     @Override
     public int hashCode() {
-        final int prime = 31;
         int hash = 1;
-        hash = prime * hash + this.armorsAcquired;
-        hash = prime * hash + this.bossesKilled;
-        hash = prime * hash + this.monstersKilled;
-        hash = prime * hash + this.monstersMet;
-        hash = prime * hash + this.newGames;
+        hash = HASHCODE_PRIME * hash + this.armorsAcquired;
+        hash = HASHCODE_PRIME * hash + this.bossesKilled;
+        hash = HASHCODE_PRIME * hash + this.monstersKilled;
+        hash = HASHCODE_PRIME * hash + this.monstersMet;
+        hash = HASHCODE_PRIME * hash + this.newGames;
         long temp;
         temp = Double.doubleToLongBits(this.startingTime);
-        hash = prime * hash + (int) (temp ^ (temp >>> 32));
+        hash = HASHCODE_PRIME * hash + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(this.timeDelta);
-        hash = prime * hash + (int) (temp ^ (temp >>> 32));
+        hash = HASHCODE_PRIME * hash + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(this.timePlayedPreviously);
-        hash = prime * hash + (int) (temp ^ (temp >>> 32));
-        hash = prime * hash + this.totalExpGained;
-        hash = prime * hash + this.weaponsAcquired;
+        hash = HASHCODE_PRIME * hash + (int) (temp ^ (temp >>> 32));
+        hash = HASHCODE_PRIME * hash + this.totalExpGained;
+        hash = HASHCODE_PRIME * hash + this.weaponsAcquired;
         return hash;
     }
 
@@ -237,10 +244,11 @@ public class GameStatisticsImpl implements GameStatistics {
         final GameStatistics test = (GameStatistics) obj;
 
         return this.armorsAcquired == test.getArmorsAcquired() && this.bossesKilled == test.getBossesKilled()
-                && this.monstersKilled == test.getMonstersKilled() && this.monstersMet == test.getMonstersMet()
-                && this.newGames == test.getNewGames() && this.getTimePlayed() == test.getTimePlayed()
-                && this.getTotalTimePlayed() == test.getTotalTimePlayed()
-                && this.totalExpGained == test.getTotalExpGained() && this.weaponsAcquired == test.getWeaponsAcquired();
+                        && this.monstersKilled == test.getMonstersKilled() && this.monstersMet == test.getMonstersMet()
+                        && this.newGames == test.getNewGames() && this.getTimePlayed() == test.getTimePlayed()
+                        && this.getTotalTimePlayed() == test.getTotalTimePlayed()
+                        && this.totalExpGained == test.getTotalExpGained()
+                        && this.weaponsAcquired == test.getWeaponsAcquired();
     }
 
 }
