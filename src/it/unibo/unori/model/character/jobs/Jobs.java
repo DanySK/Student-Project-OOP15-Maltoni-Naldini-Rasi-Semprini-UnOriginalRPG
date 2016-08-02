@@ -3,7 +3,7 @@ package it.unibo.unori.model.character.jobs;
 import java.util.HashMap;
 import java.util.Map;
 
-import it.unibo.unori.controller.utility.JobsSetup;
+import it.unibo.unori.controller.json.JobsSetup;
 import it.unibo.unori.model.character.Statistics;
 import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.Armor.ArmorPieces;
@@ -43,11 +43,13 @@ public enum Jobs {
     private final String battleFrame;
 
      Jobs(final String filePath) {
-        this.basicEquip = JobsSetup.getDefaultArmorMap(filePath);
-        this.basicStats = JobsSetup.getDefaultStatsMap(filePath);
-        this.growthStats = JobsSetup.getDefaultIncrementsMap(filePath);
-        this.basicWeapon = JobsSetup.getDefaultWeaponNullable(filePath);
-        this.battleFrame = JobsSetup.getBattleSpritePath(filePath);
+        JobsSetup js = new JobsSetup();
+         
+        this.basicEquip = js.getDefaultArmorMap(filePath);
+        this.basicStats = js.getDefaultStatsMap(filePath);
+        this.growthStats = js.getDefaultIncrementsMap(filePath);
+        this.basicWeapon = js.getDefaultWeaponNullable(filePath);
+        this.battleFrame = js.getBattleSpritePath(filePath);
     }
 
     Jobs() {

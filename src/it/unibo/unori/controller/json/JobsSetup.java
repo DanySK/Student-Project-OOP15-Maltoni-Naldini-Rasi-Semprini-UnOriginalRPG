@@ -1,4 +1,4 @@
-package it.unibo.unori.controller.utility;
+package it.unibo.unori.controller.json;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -47,9 +47,14 @@ public final class JobsSetup {
      * Path to the JSON file of the clown's default statistics and armors/weapons.
      */
     public static final String CLOWN = "res/Clown.json";
+    
+    private JsonFileManager fileManager;
 
-    private JobsSetup() {
-        // Empty private constructor, because this is an utility class
+    /**
+     * Default constructor.
+     */
+    public JobsSetup() {
+        fileManager = new JsonFileManager();
     }
 
     /**
@@ -64,6 +69,7 @@ public final class JobsSetup {
         final GrowthFactory gf = new GrowthFactory();
         final ArmorFactory af = new ArmorFactory();
         final WeaponFactory wf = new WeaponFactory();
+        final JsonFileManager jfm = new JsonFileManager();
         Optional<String> jobPath = Optional.empty();
         JsonJobParameter jsonJob;
 
@@ -76,7 +82,7 @@ public final class JobsSetup {
             if (jobPath.isPresent()) {
                 jsonJob = new JsonJobParameter(sf.getJobStats(j), gf.getJobGrowth(j), af.getStdEquip(),
                                 wf.getStdSword());
-                Save.serializeJSON(jsonJob, jobPath.get());
+                jfm.saveJob(jsonJob, jobPath.get());
 
             }
 
@@ -100,10 +106,8 @@ public final class JobsSetup {
      * @throws JsonSyntaxException
      *             if the file does not contain a valid representation for an object of type
      */
-    public static Map<Statistics, Integer> getDefaultStats(final String path) throws IOException {
-        final JsonJobParameter objFromFile = Save.deserializeJSON(JsonJobParameter.class, JsonJobParameter.createGson(),
-                        path);
-        return new HashMap<>(objFromFile.getDefaultStats());
+    public Map<Statistics, Integer> getDefaultStats(final String path) throws IOException {
+        return new HashMap<>(fileManager.loadJob(path).getDefaultStats());
     }
 
     /**
@@ -115,7 +119,7 @@ public final class JobsSetup {
      *            the path to the file of the desired job.
      * @return a map containing the values, or an empty map if something wrong happens
      */
-    public static Map<Statistics, Integer> getDefaultStatsMap(final String path) {
+    public Map<Statistics, Integer> getDefaultStatsMap(final String path) {
         try {
             return getDefaultStats(path);
         } catch (IOException e) {
@@ -140,10 +144,8 @@ public final class JobsSetup {
      * @throws JsonSyntaxException
      *             if the file does not contain a valid representation for an object of type
      */
-    public static Map<Statistics, Integer> getDefaultIncrements(final String path) throws IOException {
-        final JsonJobParameter objFromFile = Save.deserializeJSON(JsonJobParameter.class, JsonJobParameter.createGson(),
-                        path);
-        return new HashMap<>(objFromFile.getDefaultIncrement());
+    public Map<Statistics, Integer> getDefaultIncrements(final String path) throws IOException {
+        return new HashMap<>(fileManager.loadJob(path).getDefaultIncrement());
     }
 
     /**
@@ -155,9 +157,9 @@ public final class JobsSetup {
      *            the path to the file of the desired job.
      * @return a map containing the values, or an empty map if something wrong happens
      */
-    public static Map<Statistics, Integer> getDefaultIncrementsMap(final String path) {
+    public Map<Statistics, Integer> getDefaultIncrementsMap(final String path) {
         try {
-            return JobsSetup.getDefaultIncrements(path);
+            return getDefaultIncrements(path);
         } catch (IOException e) {
             return new HashMap<>();
         }
@@ -179,10 +181,8 @@ public final class JobsSetup {
      * @throws JsonSyntaxException
      *             if the file does not contain a valid representation for an object of type
      */
-    public static Map<ArmorPieces, Armor> getDefaultArmor(final String path) throws IOException {
-        final JsonJobParameter objFromFile = Save.deserializeJSON(JsonJobParameter.class, JsonJobParameter.createGson(),
-                        path);
-        return new HashMap<>(objFromFile.getDefaultArmor());
+    public Map<ArmorPieces, Armor> getDefaultArmor(final String path) throws IOException {
+        return new HashMap<>(fileManager.loadJob(path).getDefaultArmor());
     }
 
     /**
@@ -194,9 +194,9 @@ public final class JobsSetup {
      *            the path to the file of the desired job.
      * @return a map containing the values, or an empty map if something wrong happens
      */
-    public static Map<ArmorPieces, Armor> getDefaultArmorMap(final String path) {
+    public Map<ArmorPieces, Armor> getDefaultArmorMap(final String path) {
         try {
-            return JobsSetup.getDefaultArmor(path);
+            return getDefaultArmor(path);
         } catch (IOException e) {
             return new HashMap<>();
         }
@@ -218,10 +218,8 @@ public final class JobsSetup {
      * @throws JsonSyntaxException
      *             if the file does not contain a valid representation for an object of type
      */
-    public static Weapon getDefaultWeapon(final String path) throws IOException {
-        final JsonJobParameter objFromFile = Save.deserializeJSON(JsonJobParameter.class, JsonJobParameter.createGson(),
-                        path);
-        return objFromFile.getDefaultWeapon();
+    public Weapon getDefaultWeapon(final String path) throws IOException {
+        return fileManager.loadJob(path).getDefaultWeapon();
     }
 
     /**
@@ -233,9 +231,9 @@ public final class JobsSetup {
      *            the path to the file of the desired job.
      * @return the weapon, or null if something wrong happens
      */
-    public static Weapon getDefaultWeaponNullable(final String path) {
+    public Weapon getDefaultWeaponNullable(final String path) {
         try {
-            return JobsSetup.getDefaultWeapon(path);
+            return getDefaultWeapon(path);
         } catch (IOException e) {
             return null;
         }
@@ -249,22 +247,25 @@ public final class JobsSetup {
      *            the Job (suggested to use this class' constant)
      * @return the path if the job is found, or null if it can't find any default provided file path for the given Job
      */
-    public static String getBattleSpritePath(final String job) {
+    public String getBattleSpritePath(final String job) {
+        // TODO maybe solve DD-anomaly
+        String spritePath = null; 
+        
         if (job.equals(WARRIOR)) {
-            return "res/sprites/warrior.png";
+            spritePath = "res/sprites/warrior.png";
         } else if (job.equals(PALADIN)) {
-            return "res/sprites/paladin.png";
+            spritePath = "res/sprites/paladin.png";
         } else if (job.equals(MAGE)) {
-            return "res/sprites/mage.png";
+            spritePath = "res/sprites/mage.png";
         } else if (job.equals(RANGER)) {
-            return "res/sprites/ranger.png";
+            spritePath = "res/sprites/ranger.png";
         } else if (job.equals(COOK)) {
-            return "res/sprites/cook.png";
+            spritePath = "res/sprites/cook.png";
         } else if (job.equals(CLOWN)) {
-            return "res/sprites/clown.png";
-        } else {
-            return null;
+            spritePath = "res/sprites/clown.png";
         }
+        
+        return spritePath;
     }
 
     /**
@@ -277,7 +278,7 @@ public final class JobsSetup {
      *             if it can't find any default provided file path for the given Job
      */
     public static String getPath(final Jobs job) throws FileNotFoundException {
-        Optional<String> jobPath = Optional.empty();
+        Optional<String> jobPath;
 
         if (job.equals(Jobs.WARRIOR)) {
             jobPath = Optional.of(WARRIOR);
@@ -291,6 +292,8 @@ public final class JobsSetup {
             jobPath = Optional.of(COOK);
         } else if (job.equals(Jobs.CLOWN)) {
             jobPath = Optional.of(CLOWN);
+        } else {
+            jobPath = Optional.empty();
         }
 
         return jobPath.orElseThrow(

@@ -1,4 +1,4 @@
-package it.unibo.unori.controller.utility;
+package it.unibo.unori.controller.json;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -22,6 +22,7 @@ public class JobsSetupTest {
     @Test
     public void testGetDefaultStats() {
         final StatisticsFactory sf = new StatisticsFactory();
+        final JobsSetup js = new JobsSetup();
         for (final Jobs j : Jobs.values()) {
             Optional<String> path = Optional.empty();
             try {
@@ -36,7 +37,7 @@ public class JobsSetupTest {
             }
 
             if (path.isPresent()) {
-                assertEquals(sf.getJobStats(j), JobsSetup.getDefaultStatsMap(path.get()));
+                assertEquals(sf.getJobStats(j), js.getDefaultStatsMap(path.get()));
             }
 
             path = Optional.empty();
@@ -46,6 +47,7 @@ public class JobsSetupTest {
     @Test
     public void testGetDefaultIncrements() {
         final GrowthFactory gf = new GrowthFactory();
+        final JobsSetup js = new JobsSetup();
         for (final Jobs j : Jobs.values()) {
             Optional<String> path = Optional.empty();
             try {
@@ -60,7 +62,7 @@ public class JobsSetupTest {
             }
 
             if (path.isPresent()) {
-                assertEquals(gf.getJobGrowth(j), JobsSetup.getDefaultIncrementsMap(path.get()));
+                assertEquals(gf.getJobGrowth(j), js.getDefaultIncrementsMap(path.get()));
             }
 
             path = Optional.empty();
@@ -70,6 +72,7 @@ public class JobsSetupTest {
     @Test
     public void testGetDefaultArmor() {
         final ArmorFactory af = new ArmorFactory();
+        final JobsSetup js = new JobsSetup();
         for (final Jobs j : Jobs.values()) {
             Optional<String> path = Optional.empty();
             try {
@@ -84,7 +87,7 @@ public class JobsSetupTest {
             }
 
             if (path.isPresent()) {
-                assertEquals(af.getStdEquip(), JobsSetup.getDefaultArmorMap(path.get()));
+                assertEquals(af.getStdEquip(), js.getDefaultArmorMap(path.get()));
             }
 
             path = Optional.empty();
@@ -94,6 +97,7 @@ public class JobsSetupTest {
     @Test
     public void testGetDefaultWeapon() throws Exception {
         final WeaponFactory wf = new WeaponFactory();
+        final JobsSetup js = new JobsSetup();
         for (final Jobs j : Jobs.values()) {
             Optional<String> path = Optional.empty();
             try {
@@ -108,7 +112,7 @@ public class JobsSetupTest {
             }
 
             if (path.isPresent()) {
-                assertEquals(wf.getStdSword(), JobsSetup.getDefaultArmorMap(path.get()));
+                assertEquals(wf.getStdSword(), js.getDefaultArmorMap(path.get()));
             }
 
             path = Optional.empty();

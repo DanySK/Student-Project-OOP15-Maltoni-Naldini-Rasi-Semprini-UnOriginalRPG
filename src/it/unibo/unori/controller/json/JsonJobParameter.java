@@ -1,4 +1,4 @@
-package it.unibo.unori.controller.utility;
+package it.unibo.unori.controller.json;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -79,7 +79,7 @@ public class JsonJobParameter {
     /**
      * It instantiates a new Gson object with {@link com.google.gson.InstanceCreator<T>} for
      * {@link com.google.gson.InstanceCreator<Armor>} and {@link com.google.gson.InstanceCreator<Armor>} already
-     * registered, so it should deserialize a {@link it.unibo.unori.controller.utility.JsonJobParameter} without problems.
+     * registered, so it should deserialize a {@link it.unibo.unori.controller.json.JsonJobParameter} without problems.
      * 
      * @return a new Gson object
      */
