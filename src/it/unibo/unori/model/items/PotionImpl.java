@@ -51,5 +51,45 @@ public class PotionImpl implements Potion {
     public Statistics getStatisticToRestore() {
         return this.statToRestore;
     }
+    
+    /**
+     * HashCode method implemented using auto generation.
+     * 
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((description == null) ? 0 : description.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + points;
+        result = prime * result + ((statToRestore == null) ? 0 : statToRestore.hashCode());
+        return result;
+    }
+    
+    /**
+     * Equals method implemented for the serialization.
+     * 
+     * @see java.lang.Object#equals(Object obj).
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        
+        final PotionImpl other = (PotionImpl) obj;
+        
+        return this.description == other.getDescription() && this.name == other.getName() 
+                && this.points == other.getRestore() 
+                && this.statToRestore == other.getStatisticToRestore();
+    }
 
 }

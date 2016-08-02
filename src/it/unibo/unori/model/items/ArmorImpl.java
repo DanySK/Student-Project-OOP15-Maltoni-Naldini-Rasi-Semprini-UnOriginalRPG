@@ -135,5 +135,50 @@ public class ArmorImpl implements Armor {
     public ArmorPieces getArmorClass() {
         return this.piece;
     }
+    
+    /**
+     * HashCode method implemented using auto generation.
+     * 
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((desc == null) ? 0 : desc.hashCode());
+        result = prime * result + ((immunity == null) ? 0 : immunity.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((piece == null) ? 0 : piece.hashCode());
+        result = prime * result + ((stats == null) ? 0 : stats.hashCode());
+        return result;
+    }
+    
+    /**
+     * Equals method implemented for the serialization.
+     * 
+     * @see java.lang.Object#equals(Object obj).
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        
+        final ArmorImpl other = (ArmorImpl) obj;
+        final Map<Statistics, Integer> map = this.stats;
+        
+        return this.desc == other.getDescription() && this.immunity == other.getImmunity() 
+                && this.name == other.getName() && this.piece == other.getArmorClass() 
+                && other.getFireDef() == map.get(Statistics.FIREDEF)
+                && other.getIceDefense() == map.get(Statistics.ICEDEF)
+                && other.getThunderDefense() == map.get(Statistics.THUNDERDEF)
+                && other.getPhysicalRes() == map.get(Statistics.PHYSICDEF);
+    }
 
 }

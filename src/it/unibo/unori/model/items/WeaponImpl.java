@@ -122,7 +122,11 @@ public class WeaponImpl implements Weapon {
         return this.inflictedStatus;
     }
 
-
+    /**
+     * HashCode method implemented using auto generation.
+     * 
+     * @see java.lang.Object#hashCode()
+     */
     @Override
     public int hashCode() {
         int result = 1;
@@ -132,7 +136,12 @@ public class WeaponImpl implements Weapon {
         result = PRIME * result + ((stats == null) ? 0 : stats.hashCode());
         return result;
     }
-
+    
+    /**
+     * Equals method implemented for the serialization.
+     * 
+     * @see java.lang.Object#equals(Object obj).
+     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -144,32 +153,16 @@ public class WeaponImpl implements Weapon {
         if (getClass() != obj.getClass()) {
             return false;
         }
+        
         final WeaponImpl other = (WeaponImpl) obj;
-        if (desc == null) {
-            if (other.desc != null) {
-                return false;
-            }
-        } else if (!desc.equals(other.desc)) {
-            return false;
-        }
-        if (inflictedStatus != other.inflictedStatus) {
-            return false;
-        }
-        if (name == null) {
-            if (other.name != null) {
-                return false;
-            }
-        } else if (!name.equals(other.name)) {
-            return false;
-        }
-        if (stats == null) {
-            if (other.stats != null) {
-                return false;
-            }
-        } else if (!stats.equals(other.stats)) {
-            return false;
-        }
-        return true;
+        final Map<Statistics, Integer> map = this.stats;
+        
+        return this.name == other.getName() && this.desc == other.getDescription() 
+                && this.inflictedStatus == other.getWeaponStatus()
+                && other.getFireAtk() == map.get(Statistics.FIREATK)
+                && other.getIceAtk() == map.get(Statistics.ICEATK)
+                && other.getPhysicalAtk() == map.get(Statistics.PHYSICATK)
+                && other.getThunderAtk() == map.get(Statistics.THUNDERATK);
     }
 
 }

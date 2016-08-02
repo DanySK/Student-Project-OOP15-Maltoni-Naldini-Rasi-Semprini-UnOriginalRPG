@@ -199,5 +199,45 @@ public class BagImpl implements Bag {
     public Map<Item, Integer> getMiscellaneous() {
         return new HashMap<>(this.miscellaneous);
     }
+    
+    /**
+     * HashCode method implemented using auto generation.
+     * 
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((armors == null) ? 0 : armors.hashCode());
+        result = prime * result + ((miscellaneous == null) ? 0 : miscellaneous.hashCode());
+        result = prime * result + ((potions == null) ? 0 : potions.hashCode());
+        result = prime * result + ((weapons == null) ? 0 : weapons.hashCode());
+        return result;
+    }
+    
+    /**
+     * Equals method implemented for the serialization.
+     * 
+     * @see java.lang.Object#equals(Object obj).
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        
+        final BagImpl other = (BagImpl) obj;
+        
+        return this.armors == other.getArmors() && this.miscellaneous == other.getMiscellaneous()
+                && this.potions == other.getPotions() && this.weapons == other.getWeapons();
+        
+    }
 
 }
