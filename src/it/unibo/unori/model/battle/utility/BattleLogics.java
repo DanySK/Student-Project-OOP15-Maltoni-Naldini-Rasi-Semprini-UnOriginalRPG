@@ -43,7 +43,7 @@ public final class BattleLogics {
     public static int getStandardDamage(final int charLevel, final int atck) {
         return BattleLogics.SHIFT 
                + (BattleLogics.MULT * charLevel * (charLevel - 1)
-               + (atck * BattleLogics.SHIFT) / 2);
+               + (atck * 3 * charLevel) / 2);
     }
 
     /**

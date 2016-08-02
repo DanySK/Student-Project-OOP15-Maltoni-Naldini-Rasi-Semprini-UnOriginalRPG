@@ -1,5 +1,6 @@
 package it.unibo.unori.model.items;
 
+import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.Statistics;
 
 /**
@@ -20,4 +21,16 @@ public interface Potion extends Item {
      * @return the kind of Statistic.
      */
     Statistics getStatisticToRestore();
+    
+    /**
+     * This method tells if the Potion restores the Status or not.
+     * @return true if the Potion restores the Status, false otherwise.
+     */
+    boolean isStatusChanging();
+    
+    /**
+     * Method that allows to actually use the Potion.
+     * @param hero the Hero that uses the Potion.
+     */
+    void using(Hero hero);
 }

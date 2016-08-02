@@ -95,4 +95,50 @@ public class MagicAttack implements MagicAttackInterface {
         return this.mpRequired;
     }
     
+    /**
+     * HashCode method implemented using auto generation.
+     * 
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + accuracy;
+        result = prime * result + ((description == null) ? 0 : description.hashCode());
+        result = prime * result + mpRequired;
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((shownString == null) ? 0 : shownString.hashCode());
+        result = prime * result + ((stats == null) ? 0 : stats.hashCode());
+        return result;
+    }
+    
+    /**
+     * Equals method implemented for the serialization.
+     * 
+     * @see java.lang.Object#equals(Object obj).
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true; 
+        }
+        if (obj == null) {
+            return false; 
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        
+        final MagicAttack other = (MagicAttack) obj;
+        final Map<Statistics, Integer> map = this.stats;
+        return this.accuracy == other.getAccuracy() && this.description == other.getDescription()
+                && (this.name).equals(other.toString()) && this.mpRequired == other.getMPRequired()
+                && this.shownString == other.getStringToShow()
+                && other.getFireAtk() == map.get(Statistics.FIREATK)
+                && other.getIceAtk() == map.get(Statistics.ICEATK)
+                && other.getPhysicAtk() == map.get(Statistics.PHYSICATK)
+                && other.getThunderAtk() == map.get(Statistics.THUNDERATK);
+    }
+    
 }

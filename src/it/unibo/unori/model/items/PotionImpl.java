@@ -1,6 +1,8 @@
 package it.unibo.unori.model.items;
 
+import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.Statistics;
+import it.unibo.unori.model.character.Status;
 
 /**
  * Implementation of Interface Potion.
@@ -17,6 +19,7 @@ public class PotionImpl implements Potion {
     private final String description;
     private final int points;
     private final Statistics statToRestore;
+    private final boolean statusRestorable;
     
     /**
      * Standard Constructor.
@@ -24,14 +27,32 @@ public class PotionImpl implements Potion {
      * @param restoreWhat the kind of Statistic to restore.
      * @param name the name of the specific Potion.
      * @param desc the description of the specific Potion.
+     * @param status true if the Potion restores the Status of the Character, false otherwise.
      */
     public PotionImpl(final int points, final Statistics restoreWhat, 
-            final String name, final String desc) {
+            final String name, final String desc, final boolean status) {
         this.points = points;
         this.statToRestore = restoreWhat;
         this.description = desc;
         this.name = name;
+        this.statusRestorable = status;
     }
+    
+    @Override
+    public void using(final Hero hero) {
+        if (this.statusRestorable) {
+            hero.setStatus(Status.NONE);
+        }
+        switch(this.statToRestore) {
+        case TOTALHP: hero.restoreHP(this.points);
+            break;
+        case TOTALMP: hero.restoreMP(this.points);
+            break;
+        default:
+            break;
+        }
+    }
+    
     @Override
     public String getName() {
         return this.name;
@@ -50,6 +71,52 @@ public class PotionImpl implements Potion {
     @Override
     public Statistics getStatisticToRestore() {
         return this.statToRestore;
+    }
+    
+    @Override
+    public boolean isStatusChanging() {
+        return this.statusRestorable;
+    }
+    
+    /**
+     * HashCode method implemented using auto generation.
+     * 
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((description == null) ? 0 : description.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + points;
+        result = prime * result + ((statToRestore == null) ? 0 : statToRestore.hashCode());
+        return result;
+    }
+    
+    /**
+     * Equals method implemented for the serialization.
+     * 
+     * @see java.lang.Object#equals(Object obj).
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        
+        final PotionImpl other = (PotionImpl) obj;
+        
+        return this.description == other.getDescription() && this.name == other.getName() 
+                && this.points == other.getRestore() 
+                && this.statToRestore == other.getStatisticToRestore()
+                && this.statusRestorable == other.statusRestorable;
     }
 
 }

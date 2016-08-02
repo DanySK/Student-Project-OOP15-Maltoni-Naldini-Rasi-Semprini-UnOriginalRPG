@@ -36,8 +36,8 @@ public class CharacterTest {
         h.takeDamage(1000);
         h.takeDamage(1000);
         assertEquals(h.getRemainingHP(), 0);
-        h.restoreDamage(1000);
-        h.restoreDamage(1000);
+        h.restoreHP(1000);
+        h.restoreHP(1000);
         assertEquals(h.getRemainingHP(), h.getTotalHP());
 
         h.levelUp();

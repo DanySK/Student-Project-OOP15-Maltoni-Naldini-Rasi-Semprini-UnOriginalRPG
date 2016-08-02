@@ -91,4 +91,39 @@ public class FoeSquadImpl implements FoeSquad {
         this.checkListSize();
         return this.enemies.get(0);
     }
+    
+    /**
+     * HashCode method implemented using auto generation.
+     * 
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((enemies == null) ? 0 : enemies.hashCode());
+        return result;
+    }
+    
+    /**
+     * Equals method implemented for the serialization.
+     * 
+     * @see java.lang.Object#equals(Object obj).
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true; 
+        }
+        if (obj == null) {
+            return false; 
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        
+        final FoeSquadImpl other = (FoeSquadImpl) obj;
+        
+        return this.enemies == other.getAllFoes();
+    }
 }
