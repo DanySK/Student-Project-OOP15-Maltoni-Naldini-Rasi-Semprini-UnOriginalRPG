@@ -46,14 +46,14 @@ public class JsonFileManager {
      * Default constructor.
      */
     public JsonFileManager() {
-        final JsonDeserializer<Armor> armorDeserializer = (element, type, context) -> ArmorImpl.NAKED;
-        final JsonDeserializer<Weapon> weaponDeserializer = (element, type, context) -> WeaponImpl.FISTS;
-        final JsonDeserializer<Party> partyDeserializer = (element, type, context) -> SingletonParty.getParty();
+        final JsonDeserializer<Armor> armorDeserialize = (element, type, context) -> ArmorImpl.NAKED;
+        final JsonDeserializer<Weapon> weaponDeserialize = (element, type, context) -> WeaponImpl.FISTS;
+        final JsonDeserializer<Party> partyDeserialize = (element, type, context) -> SingletonParty.getParty();
 
         gson = new GsonBuilder().enableComplexMapKeySerialization().setPrettyPrinting()
-                .registerTypeAdapter(Armor.class, armorDeserializer)
-                .registerTypeAdapter(Weapon.class, weaponDeserializer)
-                .registerTypeAdapter(Party.class, partyDeserializer).create();
+                .registerTypeAdapter(Armor.class, armorDeserialize)
+                .registerTypeAdapter(Weapon.class, weaponDeserialize)
+                .registerTypeAdapter(Party.class, partyDeserialize).create();
     }
 
     /**

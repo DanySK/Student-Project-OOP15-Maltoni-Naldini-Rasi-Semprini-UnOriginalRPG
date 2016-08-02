@@ -1,19 +1,12 @@
 package it.unibo.unori.controller.json;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.InstanceCreator;
 
 import it.unibo.unori.model.character.Statistics;
 import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.Armor.ArmorPieces;
-import it.unibo.unori.model.items.ArmorImpl;
 import it.unibo.unori.model.items.Weapon;
-import it.unibo.unori.model.items.WeaponImpl;
 
 /**
  * This class models an object used to serialize the Jobs.

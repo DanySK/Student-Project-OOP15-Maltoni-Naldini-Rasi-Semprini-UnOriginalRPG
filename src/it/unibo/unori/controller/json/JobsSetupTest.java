@@ -19,6 +19,9 @@ import it.unibo.unori.model.items.WeaponFactory;
  */
 public class JobsSetupTest {
 
+    /**
+     * This tests if the correct default statistics are returned.
+     */
     @Test
     public void testGetDefaultStats() {
         final StatisticsFactory sf = new StatisticsFactory();
@@ -44,6 +47,9 @@ public class JobsSetupTest {
         }
     }
 
+    /**
+     * This tests if the correct default increment are returned.
+     */
     @Test
     public void testGetDefaultIncrements() {
         final GrowthFactory gf = new GrowthFactory();
@@ -69,6 +75,9 @@ public class JobsSetupTest {
         }
     }
 
+    /**
+     * This tests if the correct default armors are returned.
+     */
     @Test
     public void testGetDefaultArmor() {
         final ArmorFactory af = new ArmorFactory();
@@ -94,8 +103,11 @@ public class JobsSetupTest {
         }
     }
 
+    /**
+     * This tests if the correct default weapons are returned.
+     */
     @Test
-    public void testGetDefaultWeapon() throws Exception {
+    public void testGetDefaultWeapon() {
         final WeaponFactory wf = new WeaponFactory();
         final JobsSetup js = new JobsSetup();
         for (final Jobs j : Jobs.values()) {
