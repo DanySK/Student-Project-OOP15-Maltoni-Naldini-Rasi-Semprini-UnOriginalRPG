@@ -2,7 +2,11 @@ package it.unibo.unori.controller;
 
 import java.util.Stack;
 
+import javax.swing.JPanel;
+
 import it.unibo.unori.controller.state.GameState;
+import it.unibo.unori.controller.state.MapState;
+import it.unibo.unori.view.View;
 
 /**
  * This class models a stack of {@link it.unibo.unori.controller.state.GameState}, to manage the current state easily,
@@ -10,16 +14,19 @@ import it.unibo.unori.controller.state.GameState;
  */
 public class StateMachineStackImpl implements StateMachineStack {
     private final Stack<GameState> gsStack = new Stack<>();
+    private final View layerStack = new View();
 
-    @Override
-    public final void update(final double elapsedTime) {
-        // TODO check method
-        gsStack.peek().update(elapsedTime);
-    }
-
+    /**
+     * {@inheritDoc} It is set final because firstly
+     * called by the constructor, and it should not be overridden.
+     * 
+     */
     @Override
     public final void render() {
-        // TODO check method
+        final JPanel currentLayer = this.gsStack.peek().getLayer();
+        this.layerStack.push(currentLayer);
+        this.layerStack.resizeTo(currentLayer);
+        this.layerStack.center();
     }
 
     @Override
@@ -32,5 +39,10 @@ public class StateMachineStackImpl implements StateMachineStack {
     public GameState pop() {
         // TODO check method
         return gsStack.pop();
+    }
+
+    @Override
+    public boolean isGameReallyStarted() {
+        return this.gsStack.stream().anyMatch(state -> MapState.class.isAssignableFrom(state.getClass()));
     }
 }
