@@ -137,7 +137,7 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public String usePotionHP(final Hero my, final Potion toUse) 
+    public String usePotion(final Hero my, final Potion toUse) 
             throws ItemNotFoundException {
         if (this.itemBag.contains(toUse)) {
             toUse.using(my);

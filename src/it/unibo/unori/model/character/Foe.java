@@ -11,6 +11,7 @@ public interface Foe extends Character {
 
     /**
      * Get the IA of the foe.
+     * The IA goes from 1 to 10.
      * @return the IA of the foe
      */
     int getIA();
@@ -39,5 +40,13 @@ public interface Foe extends Character {
      * @throws NoWeaponException if the Foe is not holding any Weapon.
      */
     void unsetWeapon() throws NoWeaponException;
+    
+    /**
+     * This method is supposed to be used in Battle by a Foe.
+     * It allows him to restore a certain Status, and it can be used as often as the
+     * level of the Foe increases.
+     * @param statToRestore the Statistic to be restored.
+     */
+    void restoreInBattle(Statistics statToRestore);
 
 }

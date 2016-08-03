@@ -53,7 +53,7 @@ public interface Battle {
      * @return a confirmation String.
      * @throws ItemNotFoundException if the Potion is not present in the Bag.
      */
-    String usePotionHP(Hero my, Potion toUse) throws ItemNotFoundException;
+    String usePotion(Hero my, Potion toUse) throws ItemNotFoundException;
 
     /**
      * Method that allows to throw a Special Attack if the bar is full.

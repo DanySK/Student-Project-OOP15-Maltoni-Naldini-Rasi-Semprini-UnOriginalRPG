@@ -172,4 +172,11 @@ public final class BattleLogics {
         }
         return Status.NONE;
     }
+    
+    public static int mPToRestoreForFoe(final Foe f) {
+        final int toReturn;
+        if(f.getIA() <= 3) {
+            toReturn = f.getTf.getCurrentMP()
+        }
+    }
 }
