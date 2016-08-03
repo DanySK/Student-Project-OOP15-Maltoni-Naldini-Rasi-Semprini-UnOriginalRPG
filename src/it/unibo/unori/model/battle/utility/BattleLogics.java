@@ -134,20 +134,30 @@ public final class BattleLogics {
      * This method is useful to determine if a Weapon has caused a Status changing.
      * @param my the Hero who is attacking.
      * @param en the Enemy being attacked.
+     * @param who a boolean variable: true if the Status is inflicted to a Foe, false if it is
+     * inflicted to a Hero.
      * @return the Status that the attack causes, 
      * depending on Hero and Enemy's level.
      * @throws NoWeaponException if the Hero is not holding any Weapon
      */
-    public static Status causingStatus(final Hero my, final Foe en) 
+    public static Status causingStatus(final Hero my, final Foe en, final boolean who) 
             throws NoWeaponException {
-        final int diff = my.getLevel() - en.getLevel();
+        final int diff;
+        final Status toReturn;
+        if (who) {
+             diff = my.getLevel() - en.getLevel();
+             toReturn = my.getWeapon().getWeaponStatus();
+        } else {
+            diff = en.getLevel() - my.getLevel();
+            toReturn = en.getWeapon().getWeaponStatus();
+        }
         if (diff >= BattleLogics.DIFFERENCE_MAX) {
-            return my.getWeapon().getWeaponStatus();
+            return toReturn;
         } else if (diff > 2 && diff < BattleLogics.DIFFERENCE_MAX) {
             final Random rand = new Random();
             final int luck = rand.nextInt(BattleLogics.PERCENTAGE_MEDIUM);
             if (luck == BattleLogics.YOURELUCKY) {
-                return my.getWeapon().getWeaponStatus();
+                return toReturn;
             } else {
                 return Status.NONE;
             }
@@ -155,7 +165,7 @@ public final class BattleLogics {
             final Random rand = new Random();
             final int luck = rand.nextInt(BattleLogics.LUCKPERCENTAGE);
             if (luck == BattleLogics.YOURELUCKY) {
-                return my.getWeapon().getWeaponStatus();
+                return toReturn;
             } else {
                 return Status.NONE;
             }

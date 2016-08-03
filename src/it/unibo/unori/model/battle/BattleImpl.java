@@ -92,7 +92,7 @@ public class BattleImpl implements Battle {
 
     @Override
     public int attack() throws NoWeaponException {
-        if(BattleLogics.whosFirst(this.heroOnTurn.getSpeed(), this.foeOnTurn.getSpeed())) {
+        if (BattleLogics.whosFirst(this.heroOnTurn.getSpeed(), this.foeOnTurn.getSpeed())) {
             final int atkTot = this.heroOnTurn.getAttack() 
                     + (this.heroOnTurn.getWeapon().getPhysicalAtk());
             final int damage = 
@@ -102,7 +102,8 @@ public class BattleImpl implements Battle {
                 this.defeated(this.foeOnTurn);
             } else {
                 if (this.foeOnTurn.getStatus().equals(Status.NONE)) {
-                    this.foeOnTurn.setStatus(BattleLogics.causingStatus(this.heroOnTurn, this.foeOnTurn));
+                    this.foeOnTurn.setStatus(BattleLogics.causingStatus(this.heroOnTurn,
+                            this.foeOnTurn, true));
                 }
             }
             return damage;
@@ -114,7 +115,8 @@ public class BattleImpl implements Battle {
                 this.defeated(this.heroOnTurn);
             } else {
                 if (this.heroOnTurn.getStatus().equals(Status.NONE)) {
-                    this.heroOnTurn.setStatus(BattleLogics.causingStatus(this.heroOnTurn, this.foeOnTurn));
+                    this.heroOnTurn.setStatus(BattleLogics.causingStatus(this.heroOnTurn,
+                            this.foeOnTurn, false));
                 }
             }
             return damage;
@@ -167,16 +169,30 @@ public class BattleImpl implements Battle {
     @Override
     public int useMagicAttack(final MagicAttack m, final Foe enemy)
             throws NotEnoughMPExcpetion, MagicNotFoundException {
-        if (this.heroOnTurn.getMagics().contains(m)) {
-            if (this.heroOnTurn.getCurrentMP() > m.getMPRequired()) {
-                this.heroOnTurn.consumeMP(m.getMPRequired());
+        if (BattleLogics.whosFirst(this.heroOnTurn.getSpeed(), this.foeOnTurn.getSpeed())) {
+            if (this.heroOnTurn.getMagics().contains(m)) {
+                if (this.heroOnTurn.getCurrentMP() > m.getMPRequired()) {
+                    this.heroOnTurn.consumeMP(m.getMPRequired());
+                } else {
+                    throw new NotEnoughMPExcpetion();
+                }
+                //TODO A lot of things.
+                return 0;
             } else {
-                throw new NotEnoughMPExcpetion();
+                throw new MagicNotFoundException();
             }
-            //TODO A lot of things.
-            return 0;
         } else {
-            throw new MagicNotFoundException();
+            if (this.foeOnTurn.getMagics().contains(m)) {
+                if (this.foeOnTurn.getCurrentMP() > m.getMPRequired()) {
+                    this.foeOnTurn.consumeMP(m.getMPRequired());
+                } else {
+                    throw new NotEnoughMPExcpetion();
+                }
+                //TODO A lot of things.
+                return 0;
+            } else {
+                throw new MagicNotFoundException();
+            }
         }
         
     }

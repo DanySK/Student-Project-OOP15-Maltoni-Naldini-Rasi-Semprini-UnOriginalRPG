@@ -2,6 +2,7 @@ package it.unibo.unori.model.character;
 
 import java.util.Map;
 
+import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
 import it.unibo.unori.model.items.Weapon;
 import it.unibo.unori.model.items.WeaponImpl;
@@ -33,6 +34,20 @@ public class FoeImpl extends CharacterImpl implements Foe {
         this.wep = weapon;
     }
     
+    /**
+     * Constructor to create a Foe who has not initially any Weapon.
+     * @param intelligence the IA of the Foe.
+     * @param name the name of the Foe.
+     * @param battleFrame path of frame to set for the battle interface
+     * @param map the Statistics of the Foe.
+     */
+    public FoeImpl(final int intelligence, final String name,
+            final String battleFrame, final Map<Statistics, Integer> map) {
+        super(name, battleFrame, map);
+        this.ia = intelligence;
+        this.wep = WeaponImpl.FISTS;
+    }
+    
     private boolean isNotPresentWeapon() {
         return this.wep.equals(WeaponImpl.FISTS);
     }
@@ -58,6 +73,15 @@ public class FoeImpl extends CharacterImpl implements Foe {
             this.wep = w;
         } else {
             throw new WeaponAlreadyException();
+        }
+    }
+
+    @Override
+    public void unsetWeapon() throws NoWeaponException {
+        if (this.isNotPresentWeapon()) {
+            throw new NoWeaponException();
+        } else {
+            this.wep = WeaponImpl.FISTS;
         }
     }
 

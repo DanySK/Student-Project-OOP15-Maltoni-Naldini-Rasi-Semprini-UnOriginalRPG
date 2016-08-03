@@ -1,5 +1,6 @@
 package it.unibo.unori.model.character;
 
+import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
 import it.unibo.unori.model.items.Weapon;
 
@@ -32,5 +33,11 @@ public interface Foe extends Character {
      * @throws WeaponAlreadyException  if the Foe has already a Weapon.
      */
     void setWeapon(Weapon w) throws WeaponAlreadyException;
+    
+    /**
+     * This method allows to remove a Weapon from the equipment of the Foe.
+     * @throws NoWeaponException if the Foe is not holding any Weapon.
+     */
+    void unsetWeapon() throws NoWeaponException;
 
 }
