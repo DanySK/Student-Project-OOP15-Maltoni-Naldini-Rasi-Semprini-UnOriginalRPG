@@ -28,6 +28,8 @@ public final class BattleLogics {
     private static final int LOWIA = 3;
     private static final int MEDIUMIA = 6;
     private static final int HIGHIA = 8;
+    private static final int TURNSFORMEDIUMIA = 7;
+    private static final int TURNSFORHIGHIA = 5;
     
 
     private BattleLogics() {
@@ -185,15 +187,35 @@ public final class BattleLogics {
      */
     public static int mPToRestoreForFoe(final Foe f) {
         final int toReturn;
-        if (f.getIA() <= 3) {
+        if (f.getIA() <= LOWIA) {
             toReturn = (f.getTotalMP() - f.getCurrentMP()) / 4;
-        } else if (f.getIA() > BattleLogics.LOWIA && f.getIA() <= BattleLogics.MEDIUMIA) {
+        } else if (f.getIA() > LOWIA && f.getIA() <= MEDIUMIA) {
             toReturn = (f.getTotalMP() - f.getCurrentMP()) / 3;
-        } else if (f.getIA() > BattleLogics.MEDIUMIA && f.getIA() <= BattleLogics.HIGHIA) {
+        } else if (f.getIA() > MEDIUMIA && f.getIA() <= HIGHIA) {
             toReturn = (f.getTotalMP() - f.getCurrentMP()) / 2;
         } else {
             toReturn = f.getTotalMP() - f.getCurrentMP();
         }
         return toReturn;
+    }
+    
+    /**
+     * Method that gives to a Foe a sort of Intelligence.
+     * The method calculates weather the Foe can restore his Statistics or not,
+     * depending on his IA and on the turns that he has already played.
+     * @param f the Foe interested.
+     * @param nOfTurnsPlayed the number of turns that he is already played
+     * @return true if the Foe can Restore a Statistic in Battle, false otherwise.
+     */
+    public static boolean canFoeRestore(final Foe f, final int nOfTurnsPlayed) {
+        if (f.getIA() <= LOWIA) {
+            return  nOfTurnsPlayed >= 10;
+        } else if (f.getIA() > LOWIA && f.getIA() <= MEDIUMIA) {
+            return nOfTurnsPlayed >= TURNSFORMEDIUMIA;
+        } else if (f.getIA() > MEDIUMIA && f.getIA() <= HIGHIA) {
+            return nOfTurnsPlayed >= TURNSFORHIGHIA;
+        } else {
+            return nOfTurnsPlayed >= 3;
+        }
     }
 }

@@ -13,6 +13,7 @@ public class PotionFactory {
      * @return a simple Potion.
      */
     public Potion getStdPotion() {
-        return new PotionImpl(10, Statistics.PHYSICATK, "Acqua", "Un rimedio molto comune", false);
+        return new PotionImpl(1, Statistics.PHYSICATK, "Acqua", 
+                "Un rimedio tanto comune quanto inutile", false);
     }
 }
