@@ -203,19 +203,26 @@ public final class BattleLogics {
      * Method that gives to a Foe a sort of Intelligence.
      * The method calculates weather the Foe can restore his Statistics or not,
      * depending on his IA and on the turns that he has already played.
+     * Plus, there's a luck percentage that can allow a low-leveled Foe to use a
+     * restore when his IA shouldn't let him to. This percentage is calculated by method
+     * whosFirst(), with, as parameters, two integers (first lower than second).
      * @param f the Foe interested.
      * @param nOfTurnsPlayed the number of turns that he is already played
      * @return true if the Foe can Restore a Statistic in Battle, false otherwise.
      */
     public static boolean canFoeRestore(final Foe f, final int nOfTurnsPlayed) {
-        if (f.getIA() <= LOWIA) {
-            return  nOfTurnsPlayed >= 10;
-        } else if (f.getIA() > LOWIA && f.getIA() <= MEDIUMIA) {
-            return nOfTurnsPlayed >= TURNSFORMEDIUMIA;
-        } else if (f.getIA() > MEDIUMIA && f.getIA() <= HIGHIA) {
-            return nOfTurnsPlayed >= TURNSFORHIGHIA;
+        if (whosFirst(LOWIA, MEDIUMIA)) {
+            return true;
         } else {
-            return nOfTurnsPlayed >= 3;
+            if (f.getIA() <= LOWIA) {
+                return  nOfTurnsPlayed >= 10;
+            } else if (f.getIA() > LOWIA && f.getIA() <= MEDIUMIA) {
+                return nOfTurnsPlayed >= TURNSFORMEDIUMIA;
+            } else if (f.getIA() > MEDIUMIA && f.getIA() <= HIGHIA) {
+                return nOfTurnsPlayed >= TURNSFORHIGHIA;
+            } else {
+                return nOfTurnsPlayed >= 3;
+            }
         }
     }
 }
