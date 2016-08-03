@@ -13,6 +13,7 @@ import it.unibo.unori.model.character.FoeSquadImpl;
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.HeroTeam;
 import it.unibo.unori.model.character.HeroTeamImpl;
+import it.unibo.unori.model.character.Statistics;
 import it.unibo.unori.model.character.Status;
 import it.unibo.unori.model.character.exceptions.MagicNotFoundException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
@@ -146,6 +147,13 @@ public class BattleImpl implements Battle {
             throw new ItemNotFoundException();
         }
     }
+    
+    @Override
+    public String foeUsesRestore(final Statistics statToRestore) {
+        return this.foeOnTurn.getName() + " ha rigenerato i suoi "
+                + this.foeOnTurn.restoreInBattle(statToRestore) + ", ora è più in forma!";
+        
+    }
 
     @Override
     public String specialAttack() throws BarNotFullException {
@@ -252,4 +260,5 @@ public class BattleImpl implements Battle {
         this.foeOnTurn = en;
         return "E' il turno di " + en.getName(); 
     }
+
 }

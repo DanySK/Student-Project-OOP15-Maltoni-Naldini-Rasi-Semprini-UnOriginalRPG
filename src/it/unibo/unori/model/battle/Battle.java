@@ -8,6 +8,7 @@ import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.FoeSquad;
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.HeroTeam;
+import it.unibo.unori.model.character.Statistics;
 import it.unibo.unori.model.character.exceptions.MagicNotFoundException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.items.Bag;
@@ -86,6 +87,13 @@ public interface Battle {
      * It adds the appropriate amount of exp points to each Character of my team.
      */
     void acquireExp();
+    
+    /**
+     * Method that allows the Foe to restore a Statistic on his turn.
+     * @param statToRestore the Statistic to be restored.
+     * @return a confirmation String.
+     */
+    String foeUsesRestore(Statistics statToRestore);
     
     /**
      * Getter method that returns the List of Enemies involved in the Battle.

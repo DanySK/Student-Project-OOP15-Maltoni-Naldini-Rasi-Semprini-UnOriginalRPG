@@ -87,16 +87,16 @@ public class FoeImpl extends CharacterImpl implements Foe {
     }
 
     @Override
-    public void restoreInBattle(final Statistics statToRestore) {
+    public String restoreInBattle(final Statistics statToRestore) {
         switch (statToRestore) {
         case TOTALHP: this.restoreHP(this.getTotalHP() - this.getRemainingHP());
-            break;
+            return "HP";
         case TOTALMP: this.restoreMP(BattleLogics.mPToRestoreForFoe(this));
-            break;
+            return "MP";
         default:
             break;
         }
-        
+        return null;
     }
 
 }
