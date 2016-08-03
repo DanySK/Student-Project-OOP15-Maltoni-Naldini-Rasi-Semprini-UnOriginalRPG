@@ -25,6 +25,10 @@ public final class BattleLogics {
     private static final int LEVELER = 5;
     private static final int DIFFERENCE_MAX = 4;
     private static final int PERCENTAGE_MEDIUM = 25;
+    private static final int LOWIA = 3;
+    private static final int MEDIUMIA = 6;
+    private static final int HIGHIA = 8;
+    
 
     private BattleLogics() {
         //Empty private constructor, because this is an utility class
@@ -173,10 +177,23 @@ public final class BattleLogics {
         return Status.NONE;
     }
     
+    /**
+     * Method that returns the amount of MP that the method restoreInBattle() of Foe must use.
+     * @param f the Foe interested.
+     * @return the amount of MP that the Foe can restore by using restoreInBattle(),
+     * depending on his IA.
+     */
     public static int mPToRestoreForFoe(final Foe f) {
         final int toReturn;
-        if(f.getIA() <= 3) {
-            toReturn = f.getTf.getCurrentMP()
+        if (f.getIA() <= 3) {
+            toReturn = (f.getTotalMP() - f.getCurrentMP()) / 4;
+        } else if (f.getIA() > BattleLogics.LOWIA && f.getIA() <= BattleLogics.MEDIUMIA) {
+            toReturn = (f.getTotalMP() - f.getCurrentMP()) / 3;
+        } else if (f.getIA() > BattleLogics.MEDIUMIA && f.getIA() <= BattleLogics.HIGHIA) {
+            toReturn = (f.getTotalMP() - f.getCurrentMP()) / 2;
+        } else {
+            toReturn = f.getTotalMP() - f.getCurrentMP();
         }
+        return toReturn;
     }
 }

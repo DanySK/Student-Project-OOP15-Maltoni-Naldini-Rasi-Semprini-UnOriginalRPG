@@ -2,6 +2,7 @@ package it.unibo.unori.model.character;
 
 import java.util.Map;
 
+import it.unibo.unori.model.battle.utility.BattleLogics;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
 import it.unibo.unori.model.items.Weapon;
@@ -90,7 +91,7 @@ public class FoeImpl extends CharacterImpl implements Foe {
         switch (statToRestore) {
         case TOTALHP: this.restoreHP(this.getTotalHP() - this.getRemainingHP());
             break;
-        case TOTALMP: this.restoreMP();
+        case TOTALMP: this.restoreMP(BattleLogics.mPToRestoreForFoe(this));
             break;
         default:
             break;
