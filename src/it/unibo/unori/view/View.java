@@ -4,15 +4,21 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLayeredPane;
 
+import java.awt.Dimension;
+
 /**
- * This class displays game layers with transparency,
+ *
+ * This class displays the game layers with transparency,
  * behaving like a stack.
+ *
  */
 public final class View extends JFrame
 {
     private Integer layers = 0;
     private final JLayeredPane layeredPane;
+
     private static final String TITLE = "UnOriginal.RPG";
+    public static final Dimension SIZE = new Dimension(640, 480);
 
     /**
      * Creates an instance of the view.
@@ -21,16 +27,16 @@ public final class View extends JFrame
     {
         super(TITLE);
         this.setResizable(false);
-        layeredPane = getLayeredPane();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        layeredPane = this.getLayeredPane();
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     /**
      * Centers the view to the screen.
      */
-    public void center()
+    public void centerToScreen()
     {
-        setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -39,7 +45,7 @@ public final class View extends JFrame
      */
     public void resizeTo(final JPanel layer)
     {
-        getContentPane().setPreferredSize(layer.getSize());
+        this.getContentPane().setPreferredSize(layer.getSize());
 
         this.pack();
     }
@@ -50,7 +56,7 @@ public final class View extends JFrame
      */
     public void push(final JPanel layer)
     {
-        layeredPane.add(layer, ++layers);
+        this.layeredPane.add(layer, ++layers);
     }
 
     /**
@@ -58,6 +64,6 @@ public final class View extends JFrame
      */
     public void pop()
     {
-        layeredPane.remove(layeredPane.highestLayer());
+        this.layeredPane.remove(layeredPane.highestLayer());
     }
 }

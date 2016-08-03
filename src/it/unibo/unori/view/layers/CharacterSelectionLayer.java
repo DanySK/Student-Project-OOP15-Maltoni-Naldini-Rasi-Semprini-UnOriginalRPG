@@ -44,9 +44,9 @@ public class CharacterSelectionLayer extends JPanel
      */
     public CharacterSelectionLayer()
     {
-        setPreferredSize(SIZE);
-        setBackground(BACKGROUND_COLOR);
-        setBounds(0, 0, SIZE.width, SIZE.height);
+        this.setPreferredSize(SIZE);
+        this.setBackground(BACKGROUND_COLOR);
+        this.setBounds(0, 0, SIZE.width, SIZE.height);
 
         this.setLayout(null);
         Insets insets = this.getInsets();
@@ -161,6 +161,6 @@ public class CharacterSelectionLayer extends JPanel
             @Override public void run() { view.setVisible(true); }
         });
 
-        view.center();
+        view.centerToScreen();
     }
 }

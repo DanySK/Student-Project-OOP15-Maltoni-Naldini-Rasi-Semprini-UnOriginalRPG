@@ -1,13 +1,20 @@
 package it.unibo.unori.view.layers;
 
+import it.unibo.unori.view.View;
 import it.unibo.unori.view.Button;
 
 import java.util.List;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 import javax.swing.InputMap;
 import javax.swing.ActionMap;
 import javax.swing.KeyStroke;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.BorderFactory;
 import javax.swing.AbstractAction;
 
@@ -17,6 +24,7 @@ import java.awt.Dimension;
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
 
 import java.util.ArrayList;
 import it.unibo.unori.view.View;
@@ -35,7 +43,7 @@ public class MainMenuLayer extends JPanel
 
     private final JPanel buttonPanel = new JPanel();
     private static final Color BACKGROUND_COLOR = Color.BLACK;
-    private static final Dimension SIZE = new Dimension(600, 400);
+    private static final Dimension SIZE = View.SIZE;
 
      /*
       * Creates the main menu.
@@ -44,12 +52,25 @@ public class MainMenuLayer extends JPanel
      public MainMenuLayer(final List<Button> buttons)
      {
         super();
+
         this.buttons = buttons;
 
-        setPreferredSize(SIZE);
-        setLayout(new BorderLayout());
-        setBackground(BACKGROUND_COLOR);
-        setBounds(0, 0, SIZE.width, SIZE.height);
+        this.setPreferredSize(SIZE);
+        this.setLayout(new BorderLayout());
+        this.setBackground(BACKGROUND_COLOR);
+        this.setBounds(0, 0, SIZE.width, SIZE.height);
+
+        BufferedImage logoImage;
+
+        try {
+            logoImage = ImageIO.read(new File("res/logo.png"));
+        } catch (IOException e) {
+            logoImage = null;
+        }
+
+        JLabel logo = new JLabel(new ImageIcon(logoImage));
+        this.add(logo);
+
         buttonPanel.setBackground(BACKGROUND_COLOR);
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 10));
 
@@ -64,7 +85,7 @@ public class MainMenuLayer extends JPanel
             System.out.println("The button list is empty");
         }
 
-        add(buttonPanel, BorderLayout.PAGE_END);
+        this.add(buttonPanel, BorderLayout.PAGE_END);
 
         final ActionMap actionMap = getActionMap();
         final InputMap inputMap = getInputMap(WHEN_IN_FOCUSED_WINDOW);
@@ -152,6 +173,6 @@ public class MainMenuLayer extends JPanel
              @Override public void run() { view.setVisible(true); }
          });
 
-        view.center();
+        view.centerToScreen();
      }
 }

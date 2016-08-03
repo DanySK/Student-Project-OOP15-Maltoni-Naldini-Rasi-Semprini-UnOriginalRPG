@@ -54,14 +54,14 @@ public class MapLayer extends JPanel
     {
         super();
 
-        size.width = map.getMapWidth() * CELL_SIZE.width;
-        size.height = map.getMapLength() * CELL_SIZE.height;
+        this.size.width = map.getMapWidth() * CELL_SIZE.width;
+        this.size.height = map.getMapLength() * CELL_SIZE.height;
 
-        setPreferredSize(size);
-        setBounds(0, 0, size.width, size.height);
+        this.setPreferredSize(size);
+        this.setBounds(0, 0, size.width, size.height);
 
-        character = CharacterSprite.CLOWN;
-        sprite = character.getSprite(CharacterSprite.View.FRONT);
+        this.character = CharacterSprite.CLOWN;
+        this.sprite = character.getSprite(CharacterSprite.View.FRONT);
 
         final ActionMap actionMap = getActionMap();
         final InputMap inputMap = getInputMap(WHEN_IN_FOCUSED_WINDOW);
@@ -125,6 +125,8 @@ public class MapLayer extends JPanel
                 System.out.println("Blocked path!");
             }
 
+            /* ANIMATION */
+
             new Thread() {
                 @Override
                 public void run()
@@ -184,6 +186,6 @@ public class MapLayer extends JPanel
             @Override public void run() { view.setVisible(true); }
         });
 
-        view.center();
+        view.centerToScreen();
     }
 }

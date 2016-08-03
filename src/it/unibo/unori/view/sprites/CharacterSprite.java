@@ -81,8 +81,8 @@ public enum CharacterSprite
     }
 
     /**
-     * Returns the sprite associated to the character view specified.
-     * @param spriteView the character view of the sprite to be returned
+     * @return the sprite associated to the character
+     * @param spriteView the sprite view angle of the character
      */
     public BufferedImage getSprite(final CharacterSprite.View spriteView)
     {

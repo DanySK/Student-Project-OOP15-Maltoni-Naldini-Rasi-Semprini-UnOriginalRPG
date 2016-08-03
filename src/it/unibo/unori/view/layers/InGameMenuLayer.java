@@ -43,14 +43,15 @@ public class InGameMenuLayer extends JPanel
     public InGameMenuLayer(final List<Button> buttons)
     {
         super();
+
         this.buttons = buttons;
 
-        setOpaque(true);
-        setPreferredSize(SIZE);
-        setBackground(BACKGROUND_COLOR);
-        setBounds(0, 0, SIZE.width, SIZE.height);
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
+        this.setOpaque(true);
+        this.setPreferredSize(SIZE);
+        this.setBackground(BACKGROUND_COLOR);
+        this.setBounds(0, 0, SIZE.width, SIZE.height);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
 
         for (final Button button : buttons)
         {
@@ -149,7 +150,7 @@ public class InGameMenuLayer extends JPanel
             @Override public void run() { view.setVisible(true); }
         });
 
-        view.center();
+        view.centerToScreen();
 
         /* IN-GAME MENU */
 
