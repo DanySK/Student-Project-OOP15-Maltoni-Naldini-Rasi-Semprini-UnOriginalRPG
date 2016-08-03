@@ -13,7 +13,9 @@ import it.unibo.unori.model.character.FoeSquadImpl;
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.HeroTeam;
 import it.unibo.unori.model.character.HeroTeamImpl;
+import it.unibo.unori.model.character.Statistics;
 import it.unibo.unori.model.character.Status;
+import it.unibo.unori.model.character.exceptions.MagicNotFoundException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.character.Character;
 import it.unibo.unori.model.items.Bag;
@@ -45,6 +47,7 @@ public class BattleImpl implements Battle {
         this.enemies = en;
         this.itemBag = bag;
         this.heroOnTurn = this.squad.getFirstHeroOnTurn();
+        this.foeOnTurn = this.enemies.getFirstFoeOnTurn();
         this.over = false;
     }
     
@@ -89,19 +92,36 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public int attack(final Foe enemy, final Hero my) throws NoWeaponException {
-        final int atkTot = my.getAttack() + (my.getWeapon().getPhysicalAtk());
-        final int damage = 
-                BattleLogics.getStandardDamage(my.getLevel(), atkTot);
-        enemy.takeDamage(damage);
-        if (this.isDefeated(enemy)) {
-            this.defeated(enemy);
-        } else {
-            if (enemy.getStatus().equals(Status.NONE)) {
-                enemy.setStatus(BattleLogics.causingStatus(my, enemy));
+    public int attack() throws NoWeaponException {
+        if (BattleLogics.whosFirst(this.heroOnTurn.getSpeed(), this.foeOnTurn.getSpeed())) {
+            final int atkTot = this.heroOnTurn.getAttack() 
+                    + (this.heroOnTurn.getWeapon().getPhysicalAtk());
+            final int damage = 
+                    BattleLogics.getStandardDamage(this.heroOnTurn.getLevel(), atkTot);
+            this.foeOnTurn.takeDamage(damage);
+            if (this.isDefeated(this.foeOnTurn)) {
+                this.defeated(this.foeOnTurn);
+            } else {
+                if (this.foeOnTurn.getStatus().equals(Status.NONE)) {
+                    this.foeOnTurn.setStatus(BattleLogics.causingStatus(this.heroOnTurn,
+                            this.foeOnTurn, true));
+                }
             }
+            return damage;
+        } else {
+            final int atkTot = this.foeOnTurn.getAttack()
+                    + this.foeOnTurn.getWeapon().getPhysicalAtk();
+            final int damage = BattleLogics.getStandardDamage(this.foeOnTurn.getLevel(), atkTot);
+            if (this.isDefeated(this.heroOnTurn)) {
+                this.defeated(this.heroOnTurn);
+            } else {
+                if (this.heroOnTurn.getStatus().equals(Status.NONE)) {
+                    this.heroOnTurn.setStatus(BattleLogics.causingStatus(this.heroOnTurn,
+                            this.foeOnTurn, false));
+                }
+            }
+            return damage;
         }
-        return damage;
     }
 
     @Override
@@ -118,7 +138,7 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public String usePotionHP(final Hero my, final Potion toUse) 
+    public String usePotion(final Hero my, final Potion toUse) 
             throws ItemNotFoundException {
         if (this.itemBag.contains(toUse)) {
             toUse.using(my);
@@ -127,35 +147,62 @@ public class BattleImpl implements Battle {
             throw new ItemNotFoundException();
         }
     }
+    
+    @Override
+    public String foeUsesRestore(final Statistics statToRestore) {
+        return this.foeOnTurn.getName() + " ha rigenerato i suoi "
+                + this.foeOnTurn.restoreInBattle(statToRestore) + ", ora è più in forma!";
+        
+    }
 
     @Override
-    public String specialAttack(final Hero my) throws BarNotFullException {
-        if (my.getCurrentBar() == my.getTotBar()) {
-            my.resetSpecialBar();
+    public String specialAttack() throws BarNotFullException {
+        if (this.heroOnTurn.getCurrentBar() == this.heroOnTurn.getTotBar()) {
+            this.heroOnTurn.resetSpecialBar();
             final int damage = 
-                    BattleLogics.specialAttackCalc(my.getLevel(), my.getAttack());
+                    BattleLogics.specialAttackCalc(this.heroOnTurn.getLevel(),
+                            this.heroOnTurn.getAttack());
             this.enemies.getAllFoes().forEach(e -> {
                 e.takeDamage(damage);
                 if (this.isDefeated(e)) {
                     this.defeated(e);
                 }
             });
-            return my.getName() + "ha usato l'attacco speciale!";
+            return this.heroOnTurn.getName() + "ha usato l'attacco speciale!";
         } else {
             throw new BarNotFullException();
         }
     }
 
     @Override
-    public int useMagicAttack(final MagicAttack m, final Hero my, final Foe enemy)
-            throws NotEnoughMPExcpetion {
-        if (my.getCurrentMP() > m.getMPRequired()) {
-            my.consumeMP(m.getMPRequired());
+    public int useMagicAttack(final MagicAttack m, final Foe enemy)
+            throws NotEnoughMPExcpetion, MagicNotFoundException {
+        if (BattleLogics.whosFirst(this.heroOnTurn.getSpeed(), this.foeOnTurn.getSpeed())) {
+            if (this.heroOnTurn.getMagics().contains(m)) {
+                if (this.heroOnTurn.getCurrentMP() > m.getMPRequired()) {
+                    this.heroOnTurn.consumeMP(m.getMPRequired());
+                } else {
+                    throw new NotEnoughMPExcpetion();
+                }
+                //TODO A lot of things.
+                return 0;
+            } else {
+                throw new MagicNotFoundException();
+            }
         } else {
-            throw new NotEnoughMPExcpetion();
+            if (this.foeOnTurn.getMagics().contains(m)) {
+                if (this.foeOnTurn.getCurrentMP() > m.getMPRequired()) {
+                    this.foeOnTurn.consumeMP(m.getMPRequired());
+                } else {
+                    throw new NotEnoughMPExcpetion();
+                }
+                //TODO A lot of things.
+                return 0;
+            } else {
+                throw new MagicNotFoundException();
+            }
         }
-        //TODO A lot of things.
-        return 0;
+        
     }
 
     @Override
@@ -165,18 +212,20 @@ public class BattleImpl implements Battle {
 
     @Override
     public void acquireExp() {
-        final List<Integer> points =
-                BattleLogics.expAcquired(this.squad, this.getMediumLevelFoes(),
-                        this.squad.getAliveHeroes().size());
-        int index = 0;
-        for (final Hero h : this.squad.getAliveHeroes()) {
-            h.addExp(points.get(index));
-            index++;
+        if (this.isOver()) {
+            final List<Integer> points =
+                    BattleLogics.expAcquired(this.squad, this.getMediumLevelFoes(),
+                            this.squad.getAliveHeroes().size());
+            int index = 0;
+            for (final Hero h : this.squad.getAliveHeroes()) {
+                h.addExp(points.get(index));
+                index++;
+            }
         }
     }
 
     @Override
-    public FoeSquadImpl getEnemies() {
+    public FoeSquad getEnemies() {
         return new FoeSquadImpl(this.enemies.getAllFoes());
     }
 
@@ -211,4 +260,5 @@ public class BattleImpl implements Battle {
         this.foeOnTurn = en;
         return "E' il turno di " + en.getName(); 
     }
+
 }

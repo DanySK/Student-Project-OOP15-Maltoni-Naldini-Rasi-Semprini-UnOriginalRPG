@@ -223,11 +223,6 @@ public class CharacterImpl implements Character {
     }
 
     @Override
-    public int getTotMP() {
-        return this.statistic.get(Statistics.TOTALMP);
-    }
-
-    @Override
     public int getCurrentMP() {
         return this.currentMP;
     }

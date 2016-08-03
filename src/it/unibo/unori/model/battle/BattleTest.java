@@ -61,7 +61,7 @@ public class BattleTest {
         battle.setFoeOnTurn(battle.getEnemies().getFirstFoeOnTurn());
         System.out.println("" + this.battle.getFoeOnTurn().getRemainingHP());
         System.out.println("" + this.battle.getHeroOnTurn().getAttack());
-        final int firstDamage  = battle.attack(battle.getFoeOnTurn(), battle.getHeroOnTurn());
+        final int firstDamage  = battle.attack();
         System.out.println("" + firstDamage);
         System.out.println("" + this.battle.getFoeOnTurn().getRemainingHP());
         assertEquals(this.battle.getEnemies().getAliveFoes().size(), 3);
