@@ -13,6 +13,8 @@ import it.unibo.unori.model.character.exceptions.MagicNotFoundException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.Potion;
+import it.unibo.unori.model.items.exceptions.HeroDeadException;
+import it.unibo.unori.model.items.exceptions.HeroNotDeadException;
 import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
 
 /**
@@ -53,8 +55,11 @@ public interface Battle {
      * @param toUse the Potion to use.
      * @return a confirmation String.
      * @throws ItemNotFoundException if the Potion is not present in the Bag.
+     * @throws HeroDeadException if the Hero is dead and tries to use a Potion
+     *  that does not give life back.
+     * @throws HeroNotDeadException if the Hero is alive and uses a reliving Potion
      */
-    String usePotion(Hero my, Potion toUse) throws ItemNotFoundException;
+    String usePotion(Hero my, Potion toUse) throws ItemNotFoundException, HeroDeadException, HeroNotDeadException;
 
     /**
      * Method that allows to throw a Special Attack if the bar is full.

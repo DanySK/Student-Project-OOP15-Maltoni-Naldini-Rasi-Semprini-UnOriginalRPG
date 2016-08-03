@@ -13,6 +13,6 @@ public class ItemNotFoundException extends Exception {
     
     @Override
     public String toString() {
-        return "Questo oggetto non è presente nella Borsa!";
+        return "Questo oggetto non e' presente nella Borsa!";
     }
 }

@@ -21,6 +21,8 @@ import it.unibo.unori.model.character.Character;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.BagImpl;
 import it.unibo.unori.model.items.Potion;
+import it.unibo.unori.model.items.exceptions.HeroDeadException;
+import it.unibo.unori.model.items.exceptions.HeroNotDeadException;
 import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
 
 /**
@@ -139,7 +141,7 @@ public class BattleImpl implements Battle {
 
     @Override
     public String usePotion(final Hero my, final Potion toUse) 
-            throws ItemNotFoundException {
+            throws ItemNotFoundException, HeroDeadException, HeroNotDeadException {
         if (this.itemBag.contains(toUse)) {
             toUse.using(my);
             return "Hai usato " + toUse.getName() + " su " + my.getName() + "!";

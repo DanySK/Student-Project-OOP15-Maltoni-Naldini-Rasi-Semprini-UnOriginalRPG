@@ -2,6 +2,8 @@ package it.unibo.unori.model.items;
 
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.Statistics;
+import it.unibo.unori.model.items.exceptions.HeroDeadException;
+import it.unibo.unori.model.items.exceptions.HeroNotDeadException;
 
 /**
  * An Interface modeling a generic Potion.
@@ -31,6 +33,8 @@ public interface Potion extends Item {
     /**
      * Method that allows to actually use the Potion.
      * @param hero the Hero that uses the Potion.
+     * @throws HeroDeadException if the Potion is not allowed to relieve the Hero.
+     * @throws HeroNotDeadException if the Potion is a reliever and the Hero is still alive.
      */
-    void using(Hero hero);
+    void using(Hero hero) throws HeroDeadException, HeroNotDeadException;
 }
