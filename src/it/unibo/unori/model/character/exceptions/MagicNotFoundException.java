@@ -1,7 +1,7 @@
 package it.unibo.unori.model.character.exceptions;
 
 /**
- * Exception to be thrown when a MagicAttack is not present in the List of a Hero.
+ * Exception to be thrown when a MagicAttack is not present in the Spell List of a Hero.
  */
 public class MagicNotFoundException extends Exception {
 

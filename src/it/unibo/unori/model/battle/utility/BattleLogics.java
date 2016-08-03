@@ -92,7 +92,6 @@ public final class BattleLogics {
      */
     public static List<Integer> expAcquired(final HeroTeam squad, 
             final int mediumLevel, final int notBeaten) {
-        
         final List<Integer> exp = new ArrayList<>();
         squad.getAllHeroes().forEach(i -> {
             exp.add(((mediumLevel / BattleLogics.LEVELER * notBeaten)
@@ -122,10 +121,11 @@ public final class BattleLogics {
      * a magic attack.
      * @param h the Hero involved in Battle.
      * @param toThrow the Magic Attack that is supposed to be thrown.
+     * @param en the Foe to attack.
      * @return the damage of the magic attack.
      */
     public static int magicAttackCalc(final Hero h, 
-            final MagicAttackInterface toThrow) {
+            final MagicAttackInterface toThrow, final Foe en) {
         //TODO
         return 0;
     }

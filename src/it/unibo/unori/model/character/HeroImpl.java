@@ -214,7 +214,7 @@ public class HeroImpl  extends CharacterImpl implements Hero {
 
     @Override
     public boolean hasWeapon() {
-        return this.weapon.equals(WeaponImpl.FISTS);
+        return !this.isNotPresentWeapon();
     }
 
     @Override
