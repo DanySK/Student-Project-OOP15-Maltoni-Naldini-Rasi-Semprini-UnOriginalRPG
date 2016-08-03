@@ -3,6 +3,7 @@ package it.unibo.unori.controller;
 import java.util.Stack;
 
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import it.unibo.unori.controller.state.GameState;
 import it.unibo.unori.controller.state.MapState;
@@ -26,18 +27,25 @@ public class StateMachineStackImpl implements StateMachineStack {
         final JPanel currentLayer = this.gsStack.peek().getLayer();
         this.layerStack.push(currentLayer);
         this.layerStack.resizeTo(currentLayer);
-        this.layerStack.center();
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                layerStack.setVisible(true);
+            }
+        });
+
+        this.layerStack.centerToScreen();
     }
 
     @Override
     public void push(final GameState state) {
-        // TODO check method
         gsStack.push(state);
     }
 
     @Override
     public GameState pop() {
-        // TODO check method
+        this.layerStack.pop();
         return gsStack.pop();
     }
 

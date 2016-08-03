@@ -29,4 +29,6 @@ public interface Controller {
      * @throws IOException 
      */
     void loadGame() throws IOException;
+    
+    void newGame() throws IOException;
 }

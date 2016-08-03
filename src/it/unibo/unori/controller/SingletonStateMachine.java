@@ -79,6 +79,7 @@ public final class SingletonStateMachine {
         }
 
         @Override
+        // TODO maybe could be encapsulated better
         public void loadGame() throws IOException {
             /*
              * If the game is already started, it shouldn't change the current GameStatistics; if not, if the file
@@ -95,6 +96,29 @@ public final class SingletonStateMachine {
             while (this.stack.isGameReallyStarted()) {
                 this.stack.pop(); // TODO this cycle needs to be tested
             }
+
+            this.stack.push(loadedGame);
+            this.stack.render();
+        }
+
+        @Override
+        // TODO maybe could be encapsulated better
+        public void newGame() throws IOException {
+            /*
+             * If the game is already started, it shouldn't change the current GameStatistics; if not, if the file
+             * exists from previous plays, it should be loaded.
+             */
+            if (!this.stack.isGameReallyStarted() && new File(JsonFileManager.STATS_FILE).exists()) {
+                this.stats.restore(this.fileManager.loadStats());
+            }
+
+            // TODO maybe we should check if the SingletonParty should be reset
+            final GameState loadedGame = new MapState(SingletonParty.getParty().getCurrentGameMap());
+
+            /*
+             * It should be unnecessary to check if the game is started, because the player can't start a new game
+             * during play
+             */
 
             this.stack.push(loadedGame);
             this.stack.render();

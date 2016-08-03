@@ -1,6 +1,7 @@
 package it.unibo.unori.controller;
 
 import java.io.File;
+import java.io.IOException;
 
 import it.unibo.unori.controller.json.JsonFileManager;
 import it.unibo.unori.controller.state.MainMenuState;
@@ -61,6 +62,12 @@ public class StateMachine implements Controller {
     public void loadGame() {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public void newGame() throws IOException {
+        // TODO Auto-generated method stub
+        
     }
 
 }
