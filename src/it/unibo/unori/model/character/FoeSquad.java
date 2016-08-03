@@ -46,4 +46,19 @@ public interface FoeSquad extends Serializable {
      * @throws IllegalStateException if the list of Foes is empty.
      */
     Foe getFirstFoeOnTurn() throws IllegalStateException;
+    
+    /**
+     * Method to be Called when a Foe is defeated.
+     * @param f the Foe interested
+     * @return a confirmation String
+     * @throws IllegalArgumentException if the foe is not present on the aliveFoes List.
+     */
+    String defeatFoe(Foe f) throws IllegalArgumentException;
+    
+    /**
+     * Method to check if a Foe is defeated.
+     * @param f the Foe to check.
+     * @return true if the Foe is defeated, false otherwise.
+     */
+    boolean isDefeated(Foe f);
 }

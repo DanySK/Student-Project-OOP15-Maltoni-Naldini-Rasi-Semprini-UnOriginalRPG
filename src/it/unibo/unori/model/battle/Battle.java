@@ -35,10 +35,10 @@ public interface Battle {
 
     /**
      * Method that allows to throw a regular attack (standard).
-     * @return the damage inflicted to the specified enemy.
+     * @return a confirmation String.
      * @throws NoWeaponException if the Hero isn't holding any Weapon.
      */
-    int attack() throws NoWeaponException;
+    String attack() throws NoWeaponException;
 
     /**
      * Method that allows to defend a personal team's character at choice, just for

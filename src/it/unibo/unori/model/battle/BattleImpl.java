@@ -94,22 +94,32 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public int attack() throws NoWeaponException {
+    public String attack() throws NoWeaponException {
         if (BattleLogics.whosFirst(this.heroOnTurn.getSpeed(), this.foeOnTurn.getSpeed())) {
             final int atkTot = this.heroOnTurn.getAttack() 
                     + (this.heroOnTurn.getWeapon().getPhysicalAtk());
             final int damage = 
                     BattleLogics.getStandardDamage(this.heroOnTurn.getLevel(), atkTot);
             this.foeOnTurn.takeDamage(damage);
-            if (this.isDefeated(this.foeOnTurn)) {
-                this.defeated(this.foeOnTurn);
+            
+            String toReturn = this.enemies.defeatFoe(this.foeOnTurn);
+            
+            if (this.enemies.isDefeated(this.foeOnTurn)) {
+                return toReturn;
             } else {
+                toReturn = toReturn.concat(": " + damage + " HP!");
                 if (this.foeOnTurn.getStatus().equals(Status.NONE)) {
                     this.foeOnTurn.setStatus(BattleLogics.causingStatus(this.heroOnTurn,
                             this.foeOnTurn, true));
                 }
+                if (!this.foeOnTurn.getStatus().equals(Status.NONE)) {
+                    toReturn = toReturn.concat(" " + this.foeOnTurn.getName() + 
+                            " ha subito un cambiamento di Stato! Ora è " + this.foeOnTurn.getStatus());
+                }
+                return toReturn;
             }
-            return damage;
+            
+            
         } else {
             final int atkTot = this.foeOnTurn.getAttack()
                     + this.foeOnTurn.getWeapon().getPhysicalAtk();
@@ -122,7 +132,8 @@ public class BattleImpl implements Battle {
                             this.foeOnTurn, false));
                 }
             }
-            return damage;
+             //TODO
+            return null;
         }
     }
 
