@@ -23,7 +23,7 @@ import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
  */
 
 public interface Battle {
-
+    
     /**
      * Method that allows to escape from battle.
      * @param enemy the enemy on turn.

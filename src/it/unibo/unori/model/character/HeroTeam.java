@@ -64,5 +64,11 @@ public interface HeroTeam extends Serializable {
      * @throws IllegalArgumentException if the Hero is not present on the aliveHeroes list.
      */
     String defeatHero(Hero h) throws IllegalArgumentException;
+    
+    /**
+     * Method to tell if the Team is empty.
+     * @return true if the Team is empty, false otherwise.
+     */
+    boolean isEmpty();
 
 }

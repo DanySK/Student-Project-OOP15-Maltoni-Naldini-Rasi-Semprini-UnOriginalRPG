@@ -61,4 +61,10 @@ public interface FoeSquad extends Serializable {
      * @return true if the Foe is defeated, false otherwise.
      */
     boolean isDefeated(Foe f);
+    
+    /**
+     * Method to check if the FoeSquad is empty.
+     * @return true if the Squad is Empty, false otherwise.
+     */
+    boolean isEmpty();
 }

@@ -64,6 +64,11 @@ public class FoeSquadImpl implements FoeSquad {
     }
     
     @Override
+    public boolean isEmpty() {
+        return this.enemies.isEmpty();
+    }
+    
+    @Override
     public boolean isDefeated(final Foe f) {
         return f.getStatus().equals(Status.DEAD);
     }

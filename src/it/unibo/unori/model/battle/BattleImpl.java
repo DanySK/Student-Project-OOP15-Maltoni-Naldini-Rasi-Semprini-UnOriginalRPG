@@ -56,17 +56,6 @@ public class BattleImpl implements Battle {
         this.outCome = Optional.empty();
     }
     
-    /**
-     * Simple Constructor for Battle without any parameters.
-     */
-    public BattleImpl() {
-        this.squad = new HeroTeamImpl();
-        this.enemies = new FoeSquadImpl();
-        this.itemBag = new BagImpl();
-        this.over = false;
-        this.outCome = Optional.empty();
-    }
-    
     private Optional<Boolean> setOver() {
         if (this.enemies.getAliveFoes().size() == 0) {
             this.over = true;

@@ -63,6 +63,11 @@ public class HeroTeamImpl implements HeroTeam {
             throw new IllegalStateException();
         }
     }
+    
+    @Override
+    public boolean isEmpty() {
+        return this.heroList.isEmpty();
+    }
 
     @Override
     public void addHero(final Hero h) throws MaxHeroException {
