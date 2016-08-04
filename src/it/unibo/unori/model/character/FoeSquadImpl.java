@@ -20,6 +20,7 @@ public class FoeSquadImpl implements FoeSquad {
     
     private static final int MAXEN = 4;
     private List<Foe> enemies;
+    private List<Foe> aliveFoes;
     
     /**
      * Constructor for a FoeSquad having already a List of Foes as a parameter.
@@ -31,6 +32,7 @@ public class FoeSquadImpl implements FoeSquad {
             throw new IllegalArgumentException();
         }
         this.enemies = list;
+        this.aliveFoes = this.getAliveFoes();
     }
     
     /**
@@ -40,6 +42,10 @@ public class FoeSquadImpl implements FoeSquad {
     public FoeSquadImpl(final Foe en) {
         this.enemies = new ArrayList<>();
         this.enemies.add(en);
+        this.aliveFoes = new ArrayList<>();
+        if (!en.getStatus().equals(Status.DEAD)) {
+            this.aliveFoes.add(en);
+        }
     }
     
     /**
@@ -47,6 +53,7 @@ public class FoeSquadImpl implements FoeSquad {
      */
     public FoeSquadImpl() {
         this.enemies = new ArrayList<>();
+        this.aliveFoes = new ArrayList<>();
     }
     
     //Method to check the size of the List.
@@ -57,19 +64,27 @@ public class FoeSquadImpl implements FoeSquad {
     }
     
     @Override
+    public boolean isDefeated(final Foe f) {
+        return f.getStatus().equals(Status.DEAD);
+    }
+    
+    @Override
     public void addFoe(final Foe toAdd) throws MaxFoesException {
-        if (this.enemies.size() == MAXEN) {
+        if (this.enemies.size() == MAXEN || this.aliveFoes.size() == MAXEN) {
             throw new MaxFoesException();
         }
         this.enemies.add(toAdd);
+        this.aliveFoes = this.getAliveFoes();
     }
     
     @Override
     public void removeFoe(final Foe toRemove) throws IllegalArgumentException {
-        if (!this.enemies.contains(toRemove) || this.enemies.size() == 1) {
+        if (!this.enemies.contains(toRemove) || this.enemies.size() == 1
+                || this.aliveFoes.size() == 1) {
             throw new IllegalArgumentException();
         }
         this.enemies.remove(toRemove);
+        this.aliveFoes.remove(toRemove);
 
     }
     
@@ -90,6 +105,21 @@ public class FoeSquadImpl implements FoeSquad {
     public Foe getFirstFoeOnTurn() throws IllegalStateException {
         this.checkListSize();
         return this.enemies.get(0);
+    }
+    
+    @Override
+    public String defeatFoe(final Foe f) {
+        if (this.isDefeated(f)) {
+            if (this.aliveFoes.contains(f)) {
+                this.aliveFoes.remove(f);
+            } else {
+                throw new IllegalArgumentException();
+            }
+            return f.getName() + " e' stato sconfitto!";
+        } else {
+            return f.getName() + " incassa il colpo!";
+        }
+        
     }
     
     /**

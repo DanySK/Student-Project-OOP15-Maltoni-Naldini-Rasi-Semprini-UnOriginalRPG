@@ -3,6 +3,8 @@ package it.unibo.unori.model.items;
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.Statistics;
 import it.unibo.unori.model.character.Status;
+import it.unibo.unori.model.items.exceptions.HeroDeadException;
+import it.unibo.unori.model.items.exceptions.HeroNotDeadException;
 
 /**
  * Implementation of Interface Potion.
@@ -27,7 +29,23 @@ public class PotionImpl implements Potion {
      * @param restoreWhat the kind of Statistic to restore.
      * @param name the name of the specific Potion.
      * @param desc the description of the specific Potion.
-     * @param status true if the Potion restores the Status of the Character, false otherwise.
+     */
+    public PotionImpl(final int points, final Statistics restoreWhat, 
+            final String name, final String desc) {
+        this.points = points;
+        this.statToRestore = restoreWhat;
+        this.description = desc;
+        this.name = name;
+        this.statusRestorable = false;
+    }
+    
+    /**
+     * Constructor with an extra parameter, telling if the Potion is status-changing.
+     * @param points the amount of Statistic Points to restore.
+     * @param restoreWhat the kind of Statistic to restore.
+     * @param name the name of the specific Potion.
+     * @param desc the description of the specific Potion.
+     * @param status true if the Potion modifies Status, false otherwise.
      */
     public PotionImpl(final int points, final Statistics restoreWhat, 
             final String name, final String desc, final boolean status) {
@@ -39,10 +57,19 @@ public class PotionImpl implements Potion {
     }
     
     @Override
-    public void using(final Hero hero) {
+    public void using(final Hero hero) throws HeroDeadException, HeroNotDeadException {
         if (this.statusRestorable) {
             hero.setStatus(Status.NONE);
         }
+        if (hero.getStatus().equals(Status.DEAD)
+                && (this.name != "Pozione della Vita" || this.name != "Pozione di Dio")) {
+                throw new HeroDeadException();
+        } else {
+            if (this.name == "Pozione della Vita" || this.name == "Pozione di Dio") {
+                throw new HeroNotDeadException();
+            }
+        }
+        
         switch(this.statToRestore) {
         case TOTALHP: hero.restoreHP(this.points);
             break;

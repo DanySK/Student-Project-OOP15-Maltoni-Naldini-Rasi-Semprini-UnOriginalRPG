@@ -25,6 +25,12 @@ public final class BattleLogics {
     private static final int LEVELER = 5;
     private static final int DIFFERENCE_MAX = 4;
     private static final int PERCENTAGE_MEDIUM = 25;
+    private static final int LOWIA = 3;
+    private static final int MEDIUMIA = 6;
+    private static final int HIGHIA = 8;
+    private static final int TURNSFORMEDIUMIA = 7;
+    private static final int TURNSFORHIGHIA = 5;
+    
 
     private BattleLogics() {
         //Empty private constructor, because this is an utility class
@@ -92,7 +98,6 @@ public final class BattleLogics {
      */
     public static List<Integer> expAcquired(final HeroTeam squad, 
             final int mediumLevel, final int notBeaten) {
-        
         final List<Integer> exp = new ArrayList<>();
         squad.getAllHeroes().forEach(i -> {
             exp.add(((mediumLevel / BattleLogics.LEVELER * notBeaten)
@@ -122,10 +127,11 @@ public final class BattleLogics {
      * a magic attack.
      * @param h the Hero involved in Battle.
      * @param toThrow the Magic Attack that is supposed to be thrown.
+     * @param en the Foe to attack.
      * @return the damage of the magic attack.
      */
     public static int magicAttackCalc(final Hero h, 
-            final MagicAttackInterface toThrow) {
+            final MagicAttackInterface toThrow, final Foe en) {
         //TODO
         return 0;
     }
@@ -134,20 +140,30 @@ public final class BattleLogics {
      * This method is useful to determine if a Weapon has caused a Status changing.
      * @param my the Hero who is attacking.
      * @param en the Enemy being attacked.
+     * @param who a boolean variable: true if the Status is inflicted to a Foe, false if it is
+     * inflicted to a Hero.
      * @return the Status that the attack causes, 
      * depending on Hero and Enemy's level.
      * @throws NoWeaponException if the Hero is not holding any Weapon
      */
-    public static Status causingStatus(final Hero my, final Foe en) 
+    public static Status causingStatus(final Hero my, final Foe en, final boolean who) 
             throws NoWeaponException {
-        final int diff = my.getLevel() - en.getLevel();
+        final int diff;
+        final Status toReturn;
+        if (who) {
+             diff = my.getLevel() - en.getLevel();
+             toReturn = my.getWeapon().getWeaponStatus();
+        } else {
+            diff = en.getLevel() - my.getLevel();
+            toReturn = en.getWeapon().getWeaponStatus();
+        }
         if (diff >= BattleLogics.DIFFERENCE_MAX) {
-            return my.getWeapon().getWeaponStatus();
+            return toReturn;
         } else if (diff > 2 && diff < BattleLogics.DIFFERENCE_MAX) {
             final Random rand = new Random();
             final int luck = rand.nextInt(BattleLogics.PERCENTAGE_MEDIUM);
             if (luck == BattleLogics.YOURELUCKY) {
-                return my.getWeapon().getWeaponStatus();
+                return toReturn;
             } else {
                 return Status.NONE;
             }
@@ -155,11 +171,58 @@ public final class BattleLogics {
             final Random rand = new Random();
             final int luck = rand.nextInt(BattleLogics.LUCKPERCENTAGE);
             if (luck == BattleLogics.YOURELUCKY) {
-                return my.getWeapon().getWeaponStatus();
+                return toReturn;
             } else {
                 return Status.NONE;
             }
         }
         return Status.NONE;
+    }
+    
+    /**
+     * Method that returns the amount of MP that the method restoreInBattle() of Foe must use.
+     * @param f the Foe interested.
+     * @return the amount of MP that the Foe can restore by using restoreInBattle(),
+     * depending on his IA.
+     */
+    public static int mPToRestoreForFoe(final Foe f) {
+        final int toReturn;
+        if (f.getIA() <= LOWIA) {
+            toReturn = (f.getTotalMP() - f.getCurrentMP()) / 4;
+        } else if (f.getIA() > LOWIA && f.getIA() <= MEDIUMIA) {
+            toReturn = (f.getTotalMP() - f.getCurrentMP()) / 3;
+        } else if (f.getIA() > MEDIUMIA && f.getIA() <= HIGHIA) {
+            toReturn = (f.getTotalMP() - f.getCurrentMP()) / 2;
+        } else {
+            toReturn = f.getTotalMP() - f.getCurrentMP();
+        }
+        return toReturn;
+    }
+    
+    /**
+     * Method that gives to a Foe a sort of Intelligence.
+     * The method calculates weather the Foe can restore his Statistics or not,
+     * depending on his IA and on the turns that he has already played.
+     * Plus, there's a luck percentage that can allow a low-leveled Foe to use a
+     * restore when his IA shouldn't let him to. This percentage is calculated by method
+     * whosFirst(), with, as parameters, two integers (first lower than second).
+     * @param f the Foe interested.
+     * @param nOfTurnsPlayed the number of turns that he is already played
+     * @return true if the Foe can Restore a Statistic in Battle, false otherwise.
+     */
+    public static boolean canFoeRestore(final Foe f, final int nOfTurnsPlayed) {
+        if (whosFirst(LOWIA, MEDIUMIA)) {
+            return true;
+        } else {
+            if (f.getIA() <= LOWIA) {
+                return  nOfTurnsPlayed >= 10;
+            } else if (f.getIA() > LOWIA && f.getIA() <= MEDIUMIA) {
+                return nOfTurnsPlayed >= TURNSFORMEDIUMIA;
+            } else if (f.getIA() > MEDIUMIA && f.getIA() <= HIGHIA) {
+                return nOfTurnsPlayed >= TURNSFORHIGHIA;
+            } else {
+                return nOfTurnsPlayed >= 3;
+            }
+        }
     }
 }
