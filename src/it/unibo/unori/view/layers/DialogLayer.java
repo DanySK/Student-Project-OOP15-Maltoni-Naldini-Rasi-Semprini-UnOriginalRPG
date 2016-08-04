@@ -53,12 +53,6 @@ public class DialogLayer extends JPanel {
 
         button.requestFocus();
 
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("OK");
-            }
-        });
-
         final ActionMap actionMap = getActionMap();
         final InputMap inputMap = getInputMap(WHEN_IN_FOCUSED_WINDOW);
 
