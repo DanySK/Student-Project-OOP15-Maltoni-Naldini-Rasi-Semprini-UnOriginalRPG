@@ -13,8 +13,8 @@ public class DialogueTest {
     
     private final Dialogue toTest = new Dialogue("Dialogo di prova, devo solo aggiungere"
             + " righe per vedere se le principali funzioni della classe vanno bene"
-            + "asvbdkbvkjavbadvadbsbgvbdjkdasb<fkjcbaqslbfhuwqgufvuvuefy "
-            + "asvbahefvuguegvquagugauegvygeaufuygruyvhbaie "
+            + "asvbdkbvkjavbadvadbsbgvbdjkdasb<fkjcbaqslbfhuwqgufvuvuefy"
+            + "QUALCOSA efvuguegvquag ugauegvyge aufuygruyvhbaie"
             + "aVEFIUHRAISHFIQEHIFOIYEAQFGHIOYAIVOIYVB"
             + "adkbnvajsbgihquiwghpisuihviushiuhwihgushruighuiwhguihrwguhruh");
     

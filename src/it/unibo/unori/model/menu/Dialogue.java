@@ -37,16 +37,44 @@ public class Dialogue implements DialogueInterface {
         final List<String> toShow = new ArrayList<>();
         int count = 0;
         String s = "";
-        for (final Character c : this.sentence.toCharArray()) {
+        boolean longWord = false;
+        String[] splitted = this.sentence.split(" ");
+        for (final String str : splitted) {
             if (count >= 0 && count < Dialogue.MAX_CHARS) {
-                s = s.concat(c.toString());            
+                if (str.length() + count < Dialogue.MAX_CHARS) {
+                    if (longWord) {
+                        s = s.concat(" ");
+                    }
+                    s = s.concat(str + " ");
+                    count += str.length() + 1;
+                } 
+                if (str.length() + count == Dialogue.MAX_CHARS) {
+                    s = s.concat(str);
+                    count = 0;
+                    toShow.add(s);
+                    s = "";
+                } else if (str.length() + count > Dialogue.MAX_CHARS) {
+                    if (str.length() + 1 <= MAX_CHARS) {
+                        toShow.add(s);
+                        s = str + " ";
+                        count = str.length() + 1;
+                    } else {
+                        for (Character ch : str.toCharArray()) {
+                            longWord = true;
+                            if (count < Dialogue.MAX_CHARS) {
+                                s = s.concat(ch.toString());
+                                count++;
+                            }
+                            if (count == Dialogue.MAX_CHARS) {
+                                count = 0;
+                                toShow.add(s);
+                                s = "";
+                            }
+                            
+                        }
+                    }
+                }
             } 
-            count++;
-            if (count == Dialogue.MAX_CHARS) {
-                count = 0;
-                toShow.add(s);
-                s = "";
-            }
         }
         toShow.add(s);
         return toShow;
@@ -80,10 +108,10 @@ public class Dialogue implements DialogueInterface {
     }
     
     /**
-     * Method that generates the Dialogue printing it on Console. Just to test. To be modified.
+     * Method that generates the Dialogue printing it on Console.
+     * For Test purposes.
      */
     public void generate() {
-        //TODO Come vogliamo gestire il dialogo? Non so se è mio compito
         this.listRows.forEach(e -> {
             System.out.println(this.showNext());
             if (this.changeWindow()) {

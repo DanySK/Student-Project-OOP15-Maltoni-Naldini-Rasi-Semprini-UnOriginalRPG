@@ -65,6 +65,15 @@ public class BattleTest {
         assertEquals(enemies.getAliveFoes().size(), 4);
         
         this.setBattle(this.team, new BagImpl(), this.enemies);
+        
+        try {
+            battle.getOutCome();
+        } catch (IllegalStateException e) {
+            System.out.println("La lotta non è ancora finita");
+        }  catch (Exception other) {
+            fail("OTHER EXCEPTION!!");
+        }
+        
         battle.setHeroOnTUrn(battle.getSquad().getFirstHeroOnTurn());
         battle.setFoeOnTurn(battle.getEnemies().getFirstFoeOnTurn());
         System.out.println("" + this.battle.getHeroOnTurn().getRemainingHP());
@@ -108,12 +117,5 @@ public class BattleTest {
         } catch (MaxFoesException e) {
             e.printStackTrace();
         }
-        try {
-            battle.getOutCome();
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        } /* catch (Exception other) {
-            fail("OTHER EXCEPTION!!");
-        }*/
     }
 }

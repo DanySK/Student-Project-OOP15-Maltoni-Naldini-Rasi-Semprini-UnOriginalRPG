@@ -56,7 +56,7 @@ public final class MagicGenerator {
                         15, 6, 9, 12, 8, 30); break;
                 case CLOWN : mag = new MagicAttack("Occhiata glaciale",
                         "Hai lanciato un'occhiata glaciale!",
-                        "Abilità classica di un Clown,"
+                        "Abilita'�classica di un Clown,"
                         + "particolarmente efficace nel tipo ghiaccio",
                         10, 10, 12, 10, 8, 25); break;
                 default:
@@ -126,15 +126,15 @@ public final class MagicGenerator {
                         20, 20, 20, 80, 5, 60); break;
                 case PALADIN :mag = new MagicAttack("Guanto del Potere",
                         "Hai usato il Guanto del Potere!",
-                        "Lanciare un guanto di sfida non è mai stato così doloroso",
+                        "Lanciare un guanto di sfida non e' mai stato cosi' doloroso",
                         30, 30, 30, 75, 5, 68); break;
                 case MAGE : mag = new MagicAttack("Incantesimo Devastante",
                         "Hai lanciato un incantesimo devastante!", 
                         "Una magia molto avanzata e molto potente",
                         40, 40, 40, 65, 5, 75); break;
-                case RANGER : mag = new MagicAttack("Autorità Imponente",
+                case RANGER : mag = new MagicAttack("Autorita'� Imponente",
                         "Hai usato la tua autorità per colpire!",
-                        "Un vero Ranger è molto orgoglioso della sua autorità."
+                        "Un vero Ranger e' molto orgoglioso della sua autorita'�."
                         + " E la usa come arma",
                         30, 45, 26, 71, 5, 65); break;
                 case COOK : mag = new MagicAttack("Urlo Anti-Vegano",
@@ -144,7 +144,7 @@ public final class MagicGenerator {
                         45, 26, 30, 70, 5, 68); break;
                 case CLOWN : mag = new MagicAttack("Giochiamo insieme",
                         "Hai inquietato a morte il nemico!",
-                        "Non c'è nulla di più inquietante e glaciale"
+                        "Non c'e' nulla di piu' inquietante e glaciale"
                         + " di una richiesta come questa",
                         35, 35, 40, 68, 5, 65); break;
                 default:
