@@ -3,6 +3,7 @@ package it.unibo.unori.view;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLayeredPane;
+import javax.swing.SwingUtilities;
 
 import java.awt.Dimension;
 
@@ -16,8 +17,8 @@ public final class View extends JFrame
 {
     private Integer layers = 0;
     private final JLayeredPane layeredPane;
-
     private static final String TITLE = "UnOriginal.RPG";
+
     public static final Dimension SIZE = new Dimension(640, 480);
 
     /**
@@ -26,9 +27,11 @@ public final class View extends JFrame
     public View()
     {
         super(TITLE);
+
         this.setResizable(false);
-        layeredPane = this.getLayeredPane();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        layeredPane = this.getLayeredPane();
     }
 
     /**
@@ -37,6 +40,16 @@ public final class View extends JFrame
     public void centerToScreen()
     {
         this.setLocationRelativeTo(null);
+    }
+
+    /**
+     * Resizes the view to the default size.
+     */
+    public void resize()
+    {
+        this.getContentPane().setPreferredSize(SIZE);
+
+        this.pack();
     }
 
     /**
@@ -65,5 +78,15 @@ public final class View extends JFrame
     public void pop()
     {
         this.layeredPane.remove(layeredPane.highestLayer());
+    }
+
+    /**
+     * Displays the view thread safely.
+     */
+    public void run()
+    {
+        SwingUtilities.invokeLater(new Runnable() {
+             @Override public void run() { View.this.setVisible(true); }
+         });
     }
 }

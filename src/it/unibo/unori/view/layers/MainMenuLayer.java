@@ -27,7 +27,6 @@ import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 
 import java.util.ArrayList;
-import it.unibo.unori.view.View;
 import javax.swing.SwingUtilities;
 import java.awt.event.ActionListener;
 
@@ -53,12 +52,13 @@ public class MainMenuLayer extends JPanel
      {
         super();
 
-        this.buttons = buttons;
-
         this.setPreferredSize(SIZE);
+        this.setBounds(0, 0, SIZE.width, SIZE.height);
+
         this.setLayout(new BorderLayout());
         this.setBackground(BACKGROUND_COLOR);
-        this.setBounds(0, 0, SIZE.width, SIZE.height);
+
+        /* LOGO */
 
         BufferedImage logoImage;
 
@@ -71,19 +71,24 @@ public class MainMenuLayer extends JPanel
         JLabel logo = new JLabel(new ImageIcon(logoImage));
         this.add(logo);
 
+        /* BUTTONS */
+
+        this.buttons = buttons;
+
         buttonPanel.setBackground(BACKGROUND_COLOR);
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 10));
 
-        for (final Button button : buttons)
-        {
+        for (final Button button : buttons) {
             buttonPanel.add(button);
         }
 
         try {
             buttons.get(focusedButton).requestFocus();
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("The button list is empty");
+            System.out.println("The button list is empty"); // ERROR
         }
+
+        /* INPUT MAP */
 
         this.add(buttonPanel, BorderLayout.PAGE_END);
 
@@ -98,27 +103,21 @@ public class MainMenuLayer extends JPanel
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "ENTER");
      }
 
-    private class ButtonAction extends AbstractAction
-    {
+    private class ButtonAction extends AbstractAction {
         private final int direction;
 
-        ButtonAction(final int direction)
-        {
+        ButtonAction(final int direction) {
             super();
             this.direction = direction;
         }
 
         @Override
-        public void actionPerformed(final ActionEvent e)
-        {
-            if (direction == 0)
-            {
+        public void actionPerformed(final ActionEvent e) {
+            if (direction == 0) {
                 buttons.get(focusedButton).doClick();
             }
-            else
-            {
-                if (buttons.size() != 0)
-                {
+            else {
+                if (buttons.size() != 0) {
                     focusedButton += direction;
 
                     if (focusedButton < 0)
@@ -131,48 +130,42 @@ public class MainMenuLayer extends JPanel
             }
         }
     }
-    
+
      /**
       * {@inheritDoc}
       */
      @Override
-     public void disable()
-     {
-         for (final Component component : buttonPanel.getComponents())
-         {
+     public void disable() {
+         for (final Component component : buttonPanel.getComponents()) {
              component.setEnabled(false);
          }
      }
 
-     public static void main(final String... args)
-     {
-         /* BUTTONS */
+    public static void main(final String... args) {
+        /* BUTTONS */
 
-         final List<Button> buttons = new ArrayList<Button>();
-         final Button button = new Button("Resume Game");
+        final List<Button> buttons = new ArrayList<Button>();
+        final Button button = new Button("Resume Game");
 
-         buttons.add(button);
-         buttons.add(new Button("New Game"));
+        buttons.add(button);
+        buttons.add(new Button("New Game"));
 
-         button.addActionListener(new ActionListener() {
-             public void actionPerformed(ActionEvent e)
-             {
-                 System.out.println("Resume Game");
-             }
-         });
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Resume Game");
+            }
+        });
 
-         /* MAIN MENU */
+        /* MAIN MENU */
 
-         final View view = new View();
-         final JPanel mainMenu = new MainMenuLayer(buttons);
+        final View view = new View();
+        final JPanel mainMenu = new MainMenuLayer(buttons);
 
-         view.push(mainMenu);
-         view.resizeTo(mainMenu);
+        view.push(mainMenu);
+        view.resizeTo(mainMenu);
 
-         SwingUtilities.invokeLater(new Runnable() {
-             @Override public void run() { view.setVisible(true); }
-         });
+	    view.run();
 
-        view.centerToScreen();
-     }
+	    view.centerToScreen();
+	}
 }
