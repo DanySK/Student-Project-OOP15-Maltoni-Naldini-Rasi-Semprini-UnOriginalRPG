@@ -1,9 +1,8 @@
 package it.unibo.unori.model.battle;
 
-import org.junit.Test;
+import static org.junit.Assert.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import org.junit.Test;
 
 import it.unibo.unori.model.character.HeroImpl;
 import it.unibo.unori.model.battle.exceptions.BarNotFullException;
@@ -69,7 +68,14 @@ public class BattleTest {
         System.out.println(firstDamage);
         System.out.println("" + this.battle.getHeroOnTurn().getRemainingHP());
         System.out.println(this.battle.getHeroOnTurn().getCurrentBar());
-        battle.specialAttack();
+        battle.setFoeOnTurn(battle.getEnemies().getAliveFoes().get(0));
+        final String secndDamage  = battle.attack(true);
+        System.out.println(secndDamage);
+        System.out.println(this.battle.getHeroOnTurn().getCurrentBar());
+        this.battle.getHeroOnTurn().setCurrentBar(100);
+        System.out.println(battle.specialAttack());
+        assertEquals(this.battle.getEnemies().getAliveFoes().size(), 0);
+        assertTrue(this.battle.isOver());
     }
     
     /**
