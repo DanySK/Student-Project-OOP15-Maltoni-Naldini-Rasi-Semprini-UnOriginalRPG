@@ -28,8 +28,9 @@ public interface StateMachineStack {
     GameState pop();
 
     /**
-     * Checks if there is MapState in the stack; if there is, it means the game should be started.
-     * @return true if the game opened at least the map
+     * Looks at the GameState at the top of the stack without removing it from the stack.
+     * 
+     * @return the state peeked
      */
-    boolean isGameReallyStarted();
+    GameState peek();
 }

@@ -31,4 +31,6 @@ public interface Controller {
     void loadGame() throws IOException;
     
     void newGame() throws IOException;
+
+    void setParty();
 }

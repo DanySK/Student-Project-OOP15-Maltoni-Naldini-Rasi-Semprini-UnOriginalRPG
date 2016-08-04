@@ -50,7 +50,7 @@ public class StateMachineStackImpl implements StateMachineStack {
     }
 
     @Override
-    public boolean isGameReallyStarted() {
-        return this.gsStack.stream().anyMatch(state -> MapState.class.isAssignableFrom(state.getClass()));
+    public GameState peek() {
+        return this.gsStack.peek();
     }
 }
