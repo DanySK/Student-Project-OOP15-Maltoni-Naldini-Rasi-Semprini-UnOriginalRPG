@@ -17,7 +17,6 @@ import it.unibo.unori.model.character.Statistics;
 import it.unibo.unori.model.character.Status;
 import it.unibo.unori.model.character.exceptions.MagicNotFoundException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
-import it.unibo.unori.model.character.Character;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.BagImpl;
 import it.unibo.unori.model.items.Potion;
@@ -53,24 +52,12 @@ public class BattleImpl implements Battle {
         this.over = false;
     }
     
-    private Character defeated(final Character ch) {
-        if (ch instanceof Foe) {
-            final Foe toRemove = (Foe) ch;
-            this.enemies.removeFoe(toRemove);
-            if (this.enemies.getAliveFoes().size() > 0) {
-                this.over = false;
-            } else {
-                this.over = true;
-            }
-        } else if (ch instanceof Hero) {
-            final Hero toRemove = (Hero) ch;
-            this.squad.removeHero(toRemove);
+    private void setOver() {
+        if (this.enemies.getAliveFoes().size() == 0 || this.squad.getAliveHeroes().size() == 0) {
+            this.over = true;
+        } else {
+            this.over = false;
         }
-        return ch;
-    }
-    
-    private boolean isDefeated(final Character ch) {
-        return ch.getRemainingHP() == 0;
     }
     
     private int getMediumLevelFoes() {
@@ -94,8 +81,9 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public String attack() throws NoWeaponException {
-        if (BattleLogics.whosFirst(this.heroOnTurn.getSpeed(), this.foeOnTurn.getSpeed())) {
+    public String attack(final boolean whosFirst) throws NoWeaponException {
+        
+        if (whosFirst) {
             final int atkTot = this.heroOnTurn.getAttack() 
                     + (this.heroOnTurn.getWeapon().getPhysicalAtk());
             final int damage = 
@@ -105,6 +93,7 @@ public class BattleImpl implements Battle {
             String toReturn = this.enemies.defeatFoe(this.foeOnTurn);
             
             if (this.enemies.isDefeated(this.foeOnTurn)) {
+                this.setOver();
                 return toReturn;
             } else {
                 toReturn = toReturn.concat(": " + damage + " HP!");
@@ -113,27 +102,35 @@ public class BattleImpl implements Battle {
                             this.foeOnTurn, true));
                 }
                 if (!this.foeOnTurn.getStatus().equals(Status.NONE)) {
-                    toReturn = toReturn.concat(" " + this.foeOnTurn.getName() + 
-                            " ha subito un cambiamento di Stato! Ora è " + this.foeOnTurn.getStatus());
+                    toReturn = toReturn.concat(" " + this.foeOnTurn.getName() 
+                            + " ha subito un cambiamento di Stato! Ora è " + this.foeOnTurn.getStatus());
                 }
                 return toReturn;
             }
-            
-            
         } else {
             final int atkTot = this.foeOnTurn.getAttack()
                     + this.foeOnTurn.getWeapon().getPhysicalAtk();
-            final int damage = BattleLogics.getStandardDamage(this.foeOnTurn.getLevel(), atkTot);
-            if (this.isDefeated(this.heroOnTurn)) {
-                this.defeated(this.heroOnTurn);
+            final int damage = 
+                    BattleLogics.getStandardDamage(this.foeOnTurn.getLevel(), atkTot);
+            this.heroOnTurn.takeDamage(damage);
+            String toReturn = this.squad.defeatHero(this.heroOnTurn);
+            
+            if (this.squad.isDefeated(this.heroOnTurn)) {
+                this.setOver();
+                return toReturn;
             } else {
+                toReturn = toReturn.concat(": " + damage + " HP!");
                 if (this.heroOnTurn.getStatus().equals(Status.NONE)) {
                     this.heroOnTurn.setStatus(BattleLogics.causingStatus(this.heroOnTurn,
                             this.foeOnTurn, false));
                 }
+                if (!this.heroOnTurn.getStatus().equals(Status.NONE)) {
+                    toReturn = toReturn.concat(" " + this.heroOnTurn.getName() 
+                            + " ha subito un cambiamento di Stato! Ora è " 
+                            + this.heroOnTurn.getStatus());
+                }
+                return toReturn;
             }
-             //TODO
-            return null;
         }
     }
 
@@ -170,17 +167,20 @@ public class BattleImpl implements Battle {
 
     @Override
     public String specialAttack() throws BarNotFullException {
+        
         if (this.heroOnTurn.getCurrentBar() == this.heroOnTurn.getTotBar()) {
             this.heroOnTurn.resetSpecialBar();
             final int damage = 
                     BattleLogics.specialAttackCalc(this.heroOnTurn.getLevel(),
                             this.heroOnTurn.getAttack());
-            this.enemies.getAllFoes().forEach(e -> {
-                e.takeDamage(damage);
-                if (this.isDefeated(e)) {
-                    this.defeated(e);
-                }
+            
+            this.enemies.getAliveFoes().forEach(e -> {
+                
+                String toReturn;
+                e.takeDamage(damage / 2);
+                toReturn = this.enemies.defeatFoe(e);
             });
+            this.setOver();
             return this.heroOnTurn.getName() + "ha usato l'attacco speciale!";
         } else {
             throw new BarNotFullException();
@@ -188,9 +188,9 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public int useMagicAttack(final MagicAttack m, final Foe enemy)
+    public int useMagicAttack(final MagicAttack m, final Foe enemy, final boolean whosFirst)
             throws NotEnoughMPExcpetion, MagicNotFoundException {
-        if (BattleLogics.whosFirst(this.heroOnTurn.getSpeed(), this.foeOnTurn.getSpeed())) {
+        if (whosFirst) {
             if (this.heroOnTurn.getMagics().contains(m)) {
                 if (this.heroOnTurn.getCurrentMP() > m.getMPRequired()) {
                     this.heroOnTurn.consumeMP(m.getMPRequired());

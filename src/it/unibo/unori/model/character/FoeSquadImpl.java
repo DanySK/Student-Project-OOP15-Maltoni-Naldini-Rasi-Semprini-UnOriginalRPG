@@ -108,7 +108,7 @@ public class FoeSquadImpl implements FoeSquad {
     }
     
     @Override
-    public String defeatFoe(final Foe f) {
+    public String defeatFoe(final Foe f) throws IllegalArgumentException {
         if (this.isDefeated(f)) {
             if (this.aliveFoes.contains(f)) {
                 this.aliveFoes.remove(f);

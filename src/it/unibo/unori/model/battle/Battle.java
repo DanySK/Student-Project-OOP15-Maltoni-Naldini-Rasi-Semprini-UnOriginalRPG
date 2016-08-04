@@ -35,10 +35,12 @@ public interface Battle {
 
     /**
      * Method that allows to throw a regular attack (standard).
+     * @param whosFirst true if the Hero is attacking, false otherwise.
+     * Note: use BattleLogics.whosFirst().
      * @return a confirmation String.
      * @throws NoWeaponException if the Hero isn't holding any Weapon.
      */
-    String attack() throws NoWeaponException;
+    String attack(boolean whosFirst) throws NoWeaponException;
 
     /**
      * Method that allows to defend a personal team's character at choice, just for
@@ -73,12 +75,14 @@ public interface Battle {
      * Note: A Magic Attack can also be thrown to an Enemy who is not on turn.
      * @param m the Magic Attack to use.
      * @param enemy the enemy to which throw the attack.
+     * @param whosFirst true if the Hero is attacking, false otherwise.
+     * Note: use BattleLogics.whosFirst().
      * @return the amount of damage inflicted.
      * @throws NotEnoughMPExcpetion if the current MPs of the Character
      * is not enough to throw the attack.
      * @throws MagicNotFoundException 
      */
-    int useMagicAttack(MagicAttack m, Foe enemy) 
+    int useMagicAttack(MagicAttack m, Foe enemy, boolean whosFirst) 
             throws NotEnoughMPExcpetion, MagicNotFoundException;
     
     /**

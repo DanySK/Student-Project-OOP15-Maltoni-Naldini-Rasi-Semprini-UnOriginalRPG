@@ -59,12 +59,13 @@ public class BattleTest {
         this.battle = new BattleImpl(this.team, this.enemies, new BagImpl());
         battle.setHeroOnTUrn(battle.getSquad().getFirstHeroOnTurn());
         battle.setFoeOnTurn(battle.getEnemies().getFirstFoeOnTurn());
-        System.out.println("" + this.battle.getFoeOnTurn().getRemainingHP());
+        System.out.println("" + this.battle.getHeroOnTurn().getRemainingHP());
         System.out.println("" + this.battle.getHeroOnTurn().getAttack());
-        final String firstDamage  = battle.attack();
-        System.out.println("" + firstDamage);
-        System.out.println("" + this.battle.getFoeOnTurn().getRemainingHP());
-        assertEquals(this.battle.getEnemies().getAliveFoes().size(), 3);
+        final String firstDamage  = battle.attack(true);
+        System.out.println(this.battle.getFoeOnTurn().getSpeed() + " "
+                + this.battle.getHeroOnTurn().getSpeed());
+        System.out.println(firstDamage);
+        System.out.println("" + this.battle.getHeroOnTurn().getRemainingHP());
     }
     
     /**

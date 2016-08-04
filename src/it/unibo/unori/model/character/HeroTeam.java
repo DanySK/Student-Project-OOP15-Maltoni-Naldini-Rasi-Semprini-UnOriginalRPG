@@ -49,5 +49,20 @@ public interface HeroTeam extends Serializable {
      * @throws IllegalStateException if the list is empty
      */
     Hero getFirstHeroOnTurn() throws IllegalStateException;
+    
+    /**
+     * Method to check if a certain Hero is defeated.
+     * @param h the Hero to check.
+     * @return true if the Hero is dead, false otherwise.
+     */
+    boolean isDefeated(Hero h);
+    
+    /**
+     * Method to be called in battle, it kills a Hero if his Status goes Dead.
+     * @param h the Hero to defeat.
+     * @return a confirmation String.
+     * @throws IllegalArgumentException if the Hero is not present on the aliveHeroes list.
+     */
+    String defeatHero(Hero h) throws IllegalArgumentException;
 
 }

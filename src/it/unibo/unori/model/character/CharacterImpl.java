@@ -144,7 +144,9 @@ public class CharacterImpl implements Character {
     public void takeDamage(final int damage) {
         this.currentHP = this.currentHP - damage < 0 ? 0 
                 : this.currentHP - damage;
-
+        if (this.currentHP == 0) {
+            this.setStatus(Status.DEAD);
+        }
     }
 
     @Override

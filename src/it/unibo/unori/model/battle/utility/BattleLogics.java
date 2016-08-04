@@ -57,6 +57,8 @@ public final class BattleLogics {
      * The magic numbers LUCKPERCENTAGE and YOURELUCKY help to implement
      * a sort of lucky possibility for my Character to move first even if
      * his speed is lower than enemy's.
+     * If the two speed levels are equal, both of the contenders have the same (fifty-fifty)
+     * probability to gain the first move.
      * Luck Percentage is 5%: if my random number (between 0 and 49)
      * equals the number 3, then I'm allowed to move first anyways.
      * Else, if I'm not lucky, the Character with highest speed moves first.
@@ -65,10 +67,14 @@ public final class BattleLogics {
      * @return true if I may move first. False otherwise.
      */
     public static boolean whosFirst(final int myV, final int enemV) {
-        final Random rand = new Random();
-        final int luck = rand.nextInt(BattleLogics.LUCKPERCENTAGE);
+        Random rand = new Random();
+        int luck = rand.nextInt(BattleLogics.LUCKPERCENTAGE);
         if (luck == BattleLogics.YOURELUCKY) {
             return true;
+        } else if (myV == enemV) {
+            rand = new Random();
+            luck = rand.nextInt(2);
+            return luck == 0;
         } else {
             return myV > enemV;
         }
