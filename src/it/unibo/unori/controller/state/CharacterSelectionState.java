@@ -1,7 +1,5 @@
 package it.unibo.unori.controller.state;
 
-import javax.swing.JPanel;
-
 import it.unibo.unori.view.layers.CharacterSelectionLayer;
 
 public class CharacterSelectionState extends AbstractGameState {

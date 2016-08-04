@@ -2,12 +2,18 @@ package it.unibo.unori.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
 import it.unibo.unori.controller.json.JsonFileManager;
+import it.unibo.unori.controller.state.CharacterSelectionState;
 import it.unibo.unori.controller.state.GameState;
 import it.unibo.unori.controller.state.MainMenuState;
 import it.unibo.unori.controller.state.MapState;
 import it.unibo.unori.model.maps.SingletonParty;
+import it.unibo.unori.view.layers.CharacterSelectionLayer;
+import it.unibo.unori.model.character.HeroImpl;
+import it.unibo.unori.model.character.exceptions.MaxHeroException;
+import it.unibo.unori.model.character.jobs.Jobs;
 
 /**
  * This class manages an implementation of {@link it.unibo.controller.Controller} interface that matches the Singleton
@@ -49,7 +55,7 @@ public final class SingletonStateMachine {
          * This default constructor instantiates a new StateMachine controller class, adding a new
          * {@link it.unibo.unori.Controller.StateMachineStack} with a new
          * {@link it.unibo.unori.controller.state.MainMenuState} pushed at the top. It also counts time, but the timer
-         * needs to be started. It is a final class because it has no need to be extendable.
+         * needs to be started. It is a final class because it has no need to be extendible.
          */
         StateMachineImpl() {
             this.stack = new StateMachineStackImpl();
@@ -62,7 +68,6 @@ public final class SingletonStateMachine {
          */
         @Override
         public void begin() {
-            // TODO
             stack.push(new MainMenuState());
             stack.render();
         }
@@ -75,53 +80,60 @@ public final class SingletonStateMachine {
         @Override
         public void saveGame() throws IOException {
             this.fileManager.saveGame(SingletonParty.getParty());
-            // TODO need to be tesed: maybe is better to get it from MapState instance
+            // TODO need to be tested: maybe is better to get the map from MapState instance
         }
 
         @Override
-        // TODO maybe could be encapsulated better
         public void loadGame() throws IOException {
-            /*
-             * If the game is already started, it shouldn't change the current GameStatistics; if not, if the file
-             * exists from previous plays, it should be loaded.
-             */
-            if (!this.stack.isGameReallyStarted() && new File(JsonFileManager.STATS_FILE).exists()) {
-                this.stats.restore(this.fileManager.loadStats());
-            }
+            this.restoreStatsIfNeeded();
 
             SingletonParty.loadParty(this.fileManager.loadGame());
             final GameState loadedGame = new MapState(SingletonParty.getParty().getCurrentGameMap());
 
-            // If the game is already started, it should be removed to reload it.
-            while (this.stack.isGameReallyStarted()) {
-                this.stack.pop(); // TODO this cycle needs to be tested
-            }
-
             this.stack.push(loadedGame);
             this.stack.render();
         }
 
         @Override
-        // TODO maybe could be encapsulated better
         public void newGame() throws IOException {
-            /*
-             * If the game is already started, it shouldn't change the current GameStatistics; if not, if the file
-             * exists from previous plays, it should be loaded.
-             */
-            if (!this.stack.isGameReallyStarted() && new File(JsonFileManager.STATS_FILE).exists()) {
-                this.stats.restore(this.fileManager.loadStats());
-            }
+            this.restoreStatsIfNeeded();
 
             // TODO maybe we should check if the SingletonParty should be reset
-            final GameState loadedGame = new MapState(SingletonParty.getParty().getCurrentGameMap());
 
-            /*
-             * It should be unnecessary to check if the game is started, because the player can't start a new game
-             * during play
-             */
-
-            this.stack.push(loadedGame);
+            this.stack.push(new CharacterSelectionState());
             this.stack.render();
+        }
+
+        @Override
+        public void setParty() {
+            if (CharacterSelectionLayer.class.isInstance(this.stack.peek().getLayer())) {
+                final Map<String, Jobs> selected = null /*((CharacterSelectionLayer) this.stack.pop().getLayer()).getParty()*/;
+                
+                selected.entrySet().forEach(entry -> {
+                    try {
+                        SingletonParty.getParty().getHeroTeam().addHero(new HeroImpl(entry.getKey(), entry.getValue()));
+                    } catch (IllegalArgumentException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } catch (MaxHeroException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                });
+                
+                this.stack.push(new MapState(SingletonParty.getParty().getCurrentGameMap()));
+                
+            }
+            
+        }
+
+        /**
+         * If the statistics file exists from previous plays, it should be loaded. This method does that
+         */
+        private void restoreStatsIfNeeded() throws IOException {
+            if (new File(JsonFileManager.STATS_FILE).exists()) {
+                this.stats.restore(this.fileManager.loadStats());
+            }
         }
 
     }

@@ -1,4 +1,4 @@
-package it.unibo.unori.controller.json;
+package it.unibo.unori.controller.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import org.junit.Test;
 
+import it.unibo.unori.controller.json.JobsSetup;
 import it.unibo.unori.model.character.jobs.GrowthFactory;
 import it.unibo.unori.model.character.jobs.Jobs;
 import it.unibo.unori.model.character.jobs.StatisticsFactory;
