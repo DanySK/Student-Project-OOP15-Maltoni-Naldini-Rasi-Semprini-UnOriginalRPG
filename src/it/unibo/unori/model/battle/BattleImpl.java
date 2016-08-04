@@ -170,17 +170,17 @@ public class BattleImpl implements Battle {
     public String specialAttack() throws BarNotFullException {
         
         if (this.heroOnTurn.getCurrentBar() == this.heroOnTurn.getTotBar()) {
-            this.heroOnTurn.resetSpecialBar();
+            final String toReturn = this.heroOnTurn.getName() + " ha usato l'attacco speciale!\n";
             final int damage = 
                     BattleLogics.specialAttackCalc(this.heroOnTurn.getLevel(),
                             this.heroOnTurn.getAttack());
             this.enemies.getAliveFoes().forEach(e -> {
                 e.takeDamage(damage / 2);
-                this.enemies.defeatFoe(e);
+                toReturn = toReturn.concat(this.enemies.defeatFoe(e));
             });
             this.heroOnTurn.resetSpecialBar();
             this.setOver();
-            return this.heroOnTurn.getName() + " ha usato l'attacco speciale!";
+            return toReturn;
         } else {
             throw new BarNotFullException();
         }
