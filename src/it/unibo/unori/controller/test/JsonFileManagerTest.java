@@ -1,4 +1,4 @@
-package it.unibo.unori.controller.json;
+package it.unibo.unori.controller.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -14,6 +14,7 @@ import org.junit.rules.TemporaryFolder;
 import com.google.gson.JsonIOException;
 
 import it.unibo.unori.controller.GameStatisticsImpl;
+import it.unibo.unori.controller.json.JsonFileManager;
 import it.unibo.unori.model.maps.SingletonParty;
 
 /**
