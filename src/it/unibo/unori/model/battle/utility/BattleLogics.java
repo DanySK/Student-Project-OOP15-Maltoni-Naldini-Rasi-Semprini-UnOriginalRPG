@@ -30,6 +30,10 @@ public final class BattleLogics {
     private static final int HIGHIA = 8;
     private static final int TURNSFORMEDIUMIA = 7;
     private static final int TURNSFORHIGHIA = 5;
+    private static final int MAGICFILL = 30;
+    private static final int NORMALFILL = 20;
+    private static final int SHIFTLEVELEQUAL = 5;
+    private static final int SHIFTLEVELLOWER = 10;
     
 
     private BattleLogics() {
@@ -229,6 +233,31 @@ public final class BattleLogics {
             } else {
                 return nOfTurnsPlayed >= 3;
             }
+        }
+    }
+    
+    /**
+     * Method to calculate how much the special bar of an Hero must be filled after each attack.
+     * This value depends on the type of the attack (magic or standard) and on the difference between
+     * the levels of the two opponents.
+     * @param f the Foe against which the Hero throws an attack.
+     * @param isMagic true if the attack is Magic, false otherwise.
+     * @param my the Hero whose special attack bar is to be filled.
+     * @return the value to fill the special bar.
+     */
+    public static int toFillSpecialBar(final Foe f, final boolean isMagic, final Hero my) {
+        final int toReturn;
+        if (isMagic) {
+            toReturn = MAGICFILL;
+        } else {
+            toReturn = NORMALFILL;
+        }
+        if (my.getLevel() - f.getLevel() > 0) {
+            return toReturn;
+        } else if (my.getLevel() == f.getLevel()) {
+            return toReturn + SHIFTLEVELEQUAL;
+        } else {
+            return toReturn + SHIFTLEVELLOWER;
         }
     }
 }

@@ -13,6 +13,6 @@ public class BarNotFullException extends Exception {
 
     @Override
     public String toString() {
-        return "La barra non è ancora piena!";
+        return "La barra non e' ancora piena!";
     }
 }

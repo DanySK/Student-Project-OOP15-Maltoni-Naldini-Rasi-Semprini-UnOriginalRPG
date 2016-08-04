@@ -89,7 +89,8 @@ public class BattleImpl implements Battle {
             final int damage = 
                     BattleLogics.getStandardDamage(this.heroOnTurn.getLevel(), atkTot);
             this.foeOnTurn.takeDamage(damage);
-            
+            this.heroOnTurn.setCurrentBar(
+                    BattleLogics.toFillSpecialBar(this.foeOnTurn, false, this.heroOnTurn));
             String toReturn = this.enemies.defeatFoe(this.foeOnTurn);
             
             if (this.enemies.isDefeated(this.foeOnTurn)) {
@@ -175,10 +176,8 @@ public class BattleImpl implements Battle {
                             this.heroOnTurn.getAttack());
             
             this.enemies.getAliveFoes().forEach(e -> {
-                
-                String toReturn;
                 e.takeDamage(damage / 2);
-                toReturn = this.enemies.defeatFoe(e);
+                this.enemies.defeatFoe(e);
             });
             this.setOver();
             return this.heroOnTurn.getName() + "ha usato l'attacco speciale!";
@@ -197,6 +196,8 @@ public class BattleImpl implements Battle {
                 } else {
                     throw new NotEnoughMPExcpetion();
                 }
+                this.heroOnTurn.setCurrentBar(
+                        BattleLogics.toFillSpecialBar(this.foeOnTurn, true, this.heroOnTurn));
                 //TODO A lot of things.
                 return 0;
             } else {

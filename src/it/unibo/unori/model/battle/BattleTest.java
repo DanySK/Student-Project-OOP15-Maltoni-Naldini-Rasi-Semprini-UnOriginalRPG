@@ -6,6 +6,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import it.unibo.unori.model.character.HeroImpl;
+import it.unibo.unori.model.battle.exceptions.BarNotFullException;
 import it.unibo.unori.model.character.FoeImpl;
 import it.unibo.unori.model.character.FoeSquad;
 import it.unibo.unori.model.character.FoeSquadImpl;
@@ -33,10 +34,11 @@ public class BattleTest {
      * @throws IllegalArgumentException 
      * @throws MaxFoesException 
      * @throws NoWeaponException 
+     * @throws BarNotFullException 
      */
     @Test
     public void testInitialization() throws IllegalArgumentException, 
-    MaxHeroException, MaxFoesException, NoWeaponException {
+    MaxHeroException, MaxFoesException, NoWeaponException, BarNotFullException {
         
         team.addHero(new HeroImpl("Primo", Jobs.DUMP));
         assertEquals(team.getAliveHeroes().size(), 1);
@@ -66,6 +68,8 @@ public class BattleTest {
                 + this.battle.getHeroOnTurn().getSpeed());
         System.out.println(firstDamage);
         System.out.println("" + this.battle.getHeroOnTurn().getRemainingHP());
+        System.out.println(this.battle.getHeroOnTurn().getCurrentBar());
+        battle.specialAttack();
     }
     
     /**
