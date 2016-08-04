@@ -84,6 +84,7 @@ public class BattleTest {
         assertEquals(this.battle.getEnemies().getAliveFoes().size(), 0);
         assertTrue(this.battle.isOver());
         System.out.println(battle.getOutCome());
+        this.battle = new BattleImpl(battle);
     }
     
     /**
@@ -111,6 +112,8 @@ public class BattleTest {
             battle.getOutCome();
         } catch (IllegalStateException e) {
             e.printStackTrace();
-        }
+        } /* catch (Exception other) {
+            fail("OTHER EXCEPTION!!");
+        }*/
     }
 }

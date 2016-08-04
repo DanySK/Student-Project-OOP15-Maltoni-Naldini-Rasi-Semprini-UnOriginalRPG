@@ -56,6 +56,20 @@ public class BattleImpl implements Battle {
         this.outCome = Optional.empty();
     }
     
+    /**
+     * Constructor for test purposes.
+     * @param battle a battle to initialize a new Battle with.
+     */
+    public BattleImpl(final Battle battle) {
+        this.enemies = battle.getEnemies();
+        this.squad = battle.getSquad();
+        this.itemBag = battle.getItemBag();
+        this.heroOnTurn = battle.getHeroOnTurn();
+        this.foeOnTurn = battle.getFoeOnTurn();
+        this.over = battle.isOver();
+        this.outCome = Optional.of(battle.getOutCome());
+    }
+    
     private Optional<Boolean> setOver() {
         if (this.enemies.getAliveFoes().size() == 0) {
             this.over = true;
