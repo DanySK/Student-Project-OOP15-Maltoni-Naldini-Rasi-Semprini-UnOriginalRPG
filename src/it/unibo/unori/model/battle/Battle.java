@@ -147,4 +147,11 @@ public interface Battle {
      * @return the next Foe on turn.
      */
     Foe getFoeOnTurn();
+    
+    /**
+     * Method to call only when the Battle is over, gives a String telling the outcome.
+     * @return a confirmation String telling the outCome.
+     * @throws IllegalStateException if the Battle is not Over.
+     */
+    String getOutCome()throws IllegalStateException;
 }

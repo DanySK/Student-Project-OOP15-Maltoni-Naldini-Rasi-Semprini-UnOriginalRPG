@@ -1,6 +1,8 @@
 package it.unibo.unori.model.battle;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import it.unibo.unori.model.battle.exceptions.BarNotFullException;
 import it.unibo.unori.model.battle.exceptions.CantEscapeException;
@@ -35,6 +37,7 @@ public class BattleImpl implements Battle {
     private Foe foeOnTurn;
     private Hero heroOnTurn;
     private boolean over;
+    private Optional<String> outCome;
     private final Bag itemBag;
     
     /**
@@ -50,13 +53,22 @@ public class BattleImpl implements Battle {
         this.heroOnTurn = this.squad.getFirstHeroOnTurn();
         this.foeOnTurn = this.enemies.getFirstFoeOnTurn();
         this.over = false;
+        this.outCome = Optional.empty();
     }
     
-    private void setOver() {
-        if (this.enemies.getAliveFoes().size() == 0 || this.squad.getAliveHeroes().size() == 0) {
+    private Optional<Boolean> setOver() {
+        if (this.enemies.getAliveFoes().size() == 0) {
             this.over = true;
+            this.outCome = Optional.of("Complimenti, hai vinto la Battaglia!!");
+            return Optional.of(true);
+        } else if (this.squad.getAliveHeroes().size() == 0) {
+            this.over = true;
+            this.outCome = Optional.of("Peccato, sei stato sconfitto...");
+            return Optional.of(false);
         } else {
             this.over = false;
+            this.outCome = Optional.empty();
+            return Optional.empty();
         }
     }
     
@@ -169,18 +181,26 @@ public class BattleImpl implements Battle {
     @Override
     public String specialAttack() throws BarNotFullException {
         
+        List<String> list = new ArrayList<>();
         if (this.heroOnTurn.getCurrentBar() == this.heroOnTurn.getTotBar()) {
             final String toReturn = this.heroOnTurn.getName() + " ha usato l'attacco speciale!\n";
+            list.add(toReturn);
             final int damage = 
                     BattleLogics.specialAttackCalc(this.heroOnTurn.getLevel(),
                             this.heroOnTurn.getAttack());
             this.enemies.getAliveFoes().forEach(e -> {
+                String toAdd;
                 e.takeDamage(damage / 2);
-                toReturn = toReturn.concat(this.enemies.defeatFoe(e));
+                toAdd = this.enemies.defeatFoe(e);
+                list.add(toAdd + "\n");
             });
             this.heroOnTurn.resetSpecialBar();
             this.setOver();
-            return toReturn;
+            String finale = "";
+            for (String s : list) {
+                finale = finale.concat(s);
+            }
+            return finale;
         } else {
             throw new BarNotFullException();
         }
@@ -273,6 +293,14 @@ public class BattleImpl implements Battle {
     public String setFoeOnTurn(final Foe en) {
         this.foeOnTurn = en;
         return "E' il turno di " + en.getName(); 
+    }
+
+    @Override
+    public String getOutCome() throws IllegalStateException {
+        if (!this.isOver()) {
+            throw new IllegalStateException();
+        }
+        return this.outCome.get();
     }
 
 }

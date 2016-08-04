@@ -15,6 +15,7 @@ import it.unibo.unori.model.character.exceptions.MaxFoesException;
 import it.unibo.unori.model.character.exceptions.MaxHeroException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.character.jobs.Jobs;
+import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.BagImpl;
 
 /**
@@ -26,6 +27,10 @@ public class BattleTest {
     private Battle battle;
     private HeroTeam team = new HeroTeamImpl();
     private FoeSquad enemies = new FoeSquadImpl();
+    
+    private void setBattle(final HeroTeam h, final Bag bag, final FoeSquad en) {
+        this.battle = new BattleImpl(h, en, bag);
+    }
     
     /**
      * Method to test the only initialization of the Battle.
@@ -57,7 +62,7 @@ public class BattleTest {
         enemies.addFoe(new FoeImpl(1, "Quarto Nemico", "", Jobs.DUMP.getInitialStats()));
         assertEquals(enemies.getAliveFoes().size(), 4);
         
-        this.battle = new BattleImpl(this.team, this.enemies, new BagImpl());
+        this.setBattle(this.team, new BagImpl(), this.enemies);
         battle.setHeroOnTUrn(battle.getSquad().getFirstHeroOnTurn());
         battle.setFoeOnTurn(battle.getEnemies().getFirstFoeOnTurn());
         System.out.println("" + this.battle.getHeroOnTurn().getRemainingHP());
@@ -76,6 +81,7 @@ public class BattleTest {
         System.out.println(battle.specialAttack());
         assertEquals(this.battle.getEnemies().getAliveFoes().size(), 0);
         assertTrue(this.battle.isOver());
+        System.out.println(battle.getOutCome());
     }
     
     /**
@@ -97,6 +103,11 @@ public class BattleTest {
             fail("IllegalArgumentException!!");
             e.printStackTrace();
         } catch (MaxFoesException e) {
+            e.printStackTrace();
+        }
+        try {
+            battle.getOutCome();
+        } catch (IllegalStateException e) {
             e.printStackTrace();
         }
     }
