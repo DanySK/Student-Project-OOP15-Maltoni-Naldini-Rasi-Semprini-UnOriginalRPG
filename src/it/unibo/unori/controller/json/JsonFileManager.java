@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import com.google.gson.Gson;
@@ -19,8 +21,16 @@ import com.google.gson.JsonSyntaxException;
 import it.unibo.unori.controller.GameStatisticsImpl;
 import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.ArmorImpl;
+import it.unibo.unori.model.items.Bag;
+import it.unibo.unori.model.items.BagImpl;
+import it.unibo.unori.model.items.Item;
+import it.unibo.unori.model.items.ItemImpl;
+import it.unibo.unori.model.items.Potion;
+import it.unibo.unori.model.items.PotionFactory;
 import it.unibo.unori.model.items.Weapon;
 import it.unibo.unori.model.items.WeaponImpl;
+import it.unibo.unori.model.maps.GameMap;
+import it.unibo.unori.model.maps.GameMapImpl;
 import it.unibo.unori.model.maps.Party;
 import it.unibo.unori.model.maps.SingletonParty;
 
@@ -49,11 +59,29 @@ public class JsonFileManager {
         final JsonDeserializer<Armor> armorDeserialize = (element, type, context) -> ArmorImpl.NAKED;
         final JsonDeserializer<Weapon> weaponDeserialize = (element, type, context) -> WeaponImpl.FISTS;
         final JsonDeserializer<Party> partyDeserialize = (element, type, context) -> SingletonParty.getParty();
+        final JsonDeserializer<Potion> potionDeserialize = (element, type, context) -> /*new PotionImpl(0, Statistics.TOTALHP, "", "")*/ new PotionFactory().getStdPotion();
+        final JsonDeserializer<Bag> bagDeserialize = (element, type, context) -> new BagImpl();
+        final JsonDeserializer<Item> itemDeserialize = (element, type, context) -> {
+            if (type.getClass().isAssignableFrom(Armor.class)) {
+                return ArmorImpl.NAKED;
+            } else if (type.getClass().isAssignableFrom(Weapon.class)) {
+                return WeaponImpl.FISTS;
+            } else if (type.getClass().isAssignableFrom(Potion.class)) {
+                return /*new PotionImpl(0, Statistics.TOTALHP, "", "")*/ new PotionFactory().getStdPotion();
+            } else {
+                return new ItemImpl("", "");
+            }
+        };
+        final JsonDeserializer<GameMap> mapDeserialize = (element, type, context) -> new GameMapImpl();
 
         gson = new GsonBuilder().enableComplexMapKeySerialization().setPrettyPrinting()
+                .registerTypeAdapter(Item.class, itemDeserialize)
                 .registerTypeAdapter(Armor.class, armorDeserialize)
                 .registerTypeAdapter(Weapon.class, weaponDeserialize)
-                .registerTypeAdapter(Party.class, partyDeserialize).create();
+                .registerTypeAdapter(Party.class, partyDeserialize)
+                .registerTypeAdapter(Potion.class, potionDeserialize)
+                .registerTypeAdapter(Bag.class, bagDeserialize)
+                .registerTypeAdapter(GameMap.class, mapDeserialize).create();
     }
 
     /**
@@ -281,6 +309,16 @@ public class JsonFileManager {
         return this.deserializeJSON(JsonJobParameter.class, path);
     }
 
+    public List<Item> loadItems(final String path) throws IOException {
+        final Item[] itemArray = this.deserializeJSON(Item[].class, path);
+        
+        return Arrays.asList(itemArray);
+    }
+    
+    public GameMap loadMap(final String path) throws IOException {
+        return this.deserializeJSON(GameMap.class, path);
+    }
+    
     /**
      * This method serializes on a file in a given path a single object.
      * 
