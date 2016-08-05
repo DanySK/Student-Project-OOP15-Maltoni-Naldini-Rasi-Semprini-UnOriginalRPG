@@ -18,7 +18,10 @@ public class FoeSquadImpl implements FoeSquad {
      */
     private static final long serialVersionUID = 4383761859347253973L;
     
-    private static final int MAXEN = 4;
+    /**
+     * Max number of Foes allowed in a Team.
+     */
+    public static final int MAXEN = 4;
     private List<Foe> enemies;
     private List<Foe> aliveFoes;
     
