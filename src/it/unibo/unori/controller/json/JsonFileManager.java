@@ -143,7 +143,7 @@ public class JsonFileManager {
      *             opened for any other reason
      * @throws SecurityException
      *             if a security manager exists and its checkWrite method denies
-     *             write access to the file.
+     *             write access to the file
      * @throws JsonIOException
      *             if there was a problem writing to the writer
      */
@@ -166,7 +166,7 @@ public class JsonFileManager {
      *             opened for any other reason
      * @throws SecurityException
      *             if a security manager exists and its checkWrite method denies
-     *             write access to the file.
+     *             write access to the file
      * @throws JsonIOException
      *             if there was a problem writing to the writer
      */

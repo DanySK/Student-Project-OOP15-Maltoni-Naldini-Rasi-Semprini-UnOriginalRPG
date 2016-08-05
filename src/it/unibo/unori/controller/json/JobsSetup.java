@@ -20,34 +20,46 @@ import it.unibo.unori.model.items.Weapon;
 import it.unibo.unori.model.items.WeaponFactory;
 
 /**
- * Utility class which provides default parameters for the jobs loading them from file.
+ * Utility class which provides default parameters for the jobs loading them
+ * from file.
  */
 public final class JobsSetup {
     /**
-     * Path to the JSON file of the warrior's default statistics and armors/weapons.
+     * Path to the JSON file of the warrior's default statistics and
+     * armors/weapons.
      */
     public static final String WARRIOR = "res/Warrior.json";
     /**
-     * Path to the JSON file of the paladin's default statistics and armors/weapons.
+     * Path to the JSON file of the paladin's default statistics and
+     * armors/weapons.
      */
     public static final String PALADIN = "res/Paladin.json";
     /**
-     * Path to the JSON file of the mage's default statistics and armors/weapons.
+     * Path to the JSON file of the mage's default statistics and
+     * armors/weapons.
      */
     public static final String MAGE = "res/Mage.json";
     /**
-     * Path to the JSON file of the ranger's default statistics and armors/weapons.
+     * Path to the JSON file of the ranger's default statistics and
+     * armors/weapons.
      */
     public static final String RANGER = "res/Ranger.json";
     /**
-     * Path to the JSON file of the cook's default statistics and armors/weapons.
+     * Path to the JSON file of the cook's default statistics and
+     * armors/weapons.
      */
     public static final String COOK = "res/Cook.json";
     /**
-     * Path to the JSON file of the clown's default statistics and armors/weapons.
+     * Path to the JSON file of the clown's default statistics and
+     * armors/weapons.
      */
     public static final String CLOWN = "res/Clown.json";
-    
+
+    private final Map<String, Map<Statistics, Integer>> statsMap;
+    private final Map<String, Map<Statistics, Integer>> growthMap;
+    private final Map<String, Map<ArmorPieces, Armor>> armorMap;
+    private final Map<String, Weapon> weaponMap;
+
     private JsonFileManager fileManager;
 
     /**
@@ -55,6 +67,10 @@ public final class JobsSetup {
      */
     public JobsSetup() {
         fileManager = new JsonFileManager();
+        statsMap = new HashMap<>();
+        growthMap = new HashMap<>();
+        armorMap = new HashMap<>();
+        weaponMap = new HashMap<>();
     }
 
     /**
@@ -62,7 +78,7 @@ public final class JobsSetup {
      * 
      * @param args
      *            standard main parameter
-     * @throws IOException 
+     * @throws IOException
      */
     public static void main(final String[] args) throws IOException {
         final StatisticsFactory sf = new StatisticsFactory();
@@ -81,7 +97,7 @@ public final class JobsSetup {
             }
             if (jobPath.isPresent()) {
                 jsonJob = new JsonJobParameter(sf.getJobStats(j), gf.getJobGrowth(j), af.getStdEquip(),
-                                wf.getStdSword());
+                        wf.getStdSword());
                 jfm.saveJob(jsonJob, jobPath.get());
 
             }
@@ -91,7 +107,8 @@ public final class JobsSetup {
     }
 
     /**
-     * Loads the default statistics of the job from JSON file. Suggested to pass constants provided by this class.
+     * Loads the default statistics of the job from JSON file. Suggested to pass
+     * constants provided by this class.
      * 
      * @param path
      *            the path to the file of the desired job.
@@ -99,25 +116,32 @@ public final class JobsSetup {
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
-     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
-     *             cannot be opened for reading
+     *             if the file does not exist, is a directory rather than a
+     *             regular file, or for some other reason cannot be opened for
+     *             reading
      * @throws JsonIOException
      *             if there was a problem reading from the Reader
      * @throws JsonSyntaxException
-     *             if the file does not contain a valid representation for an object of type
+     *             if the file does not contain a valid representation for an
+     *             object of type
      */
     public Map<Statistics, Integer> getDefaultStats(final String path) throws IOException {
-        return new HashMap<>(fileManager.loadJob(path).getDefaultStats());
+        if (!this.statsMap.containsKey(path)) {
+            this.statsMap.put(path, fileManager.loadJob(path).getDefaultStats());
+        }
+        return new HashMap<>(this.statsMap.get(path));
     }
 
     /**
-     * Loads the default statistics of the job from JSON file. Suggested to pass constants provided by this class. This
-     * method acts exactly the same as {@link #getDefaultStats(String)}, but instead of throwing exceptions, return an
-     * empty map if something wrong happens.
+     * Loads the default statistics of the job from JSON file. Suggested to pass
+     * constants provided by this class. This method acts exactly the same as
+     * {@link #getDefaultStats(String)}, but instead of throwing exceptions,
+     * return an empty map if something wrong happens.
      * 
      * @param path
      *            the path to the file of the desired job.
-     * @return a map containing the values, or an empty map if something wrong happens
+     * @return a map containing the values, or an empty map if something wrong
+     *         happens
      */
     public Map<Statistics, Integer> getDefaultStatsMap(final String path) {
         try {
@@ -128,8 +152,8 @@ public final class JobsSetup {
     }
 
     /**
-     * Loads the default statistics increments of the job from JSON file. Suggested to pass constants provided by this
-     * class.
+     * Loads the default statistics increments of the job from JSON file.
+     * Suggested to pass constants provided by this class.
      * 
      * @param path
      *            the path to the file of the desired job.
@@ -137,25 +161,32 @@ public final class JobsSetup {
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
-     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
-     *             cannot be opened for reading
+     *             if the file does not exist, is a directory rather than a
+     *             regular file, or for some other reason cannot be opened for
+     *             reading
      * @throws JsonIOException
      *             if there was a problem reading from the Reader
      * @throws JsonSyntaxException
-     *             if the file does not contain a valid representation for an object of type
+     *             if the file does not contain a valid representation for an
+     *             object of type
      */
     public Map<Statistics, Integer> getDefaultIncrements(final String path) throws IOException {
-        return new HashMap<>(fileManager.loadJob(path).getDefaultIncrement());
+        if (!this.growthMap.containsKey(path)) {
+            this.growthMap.put(path, fileManager.loadJob(path).getDefaultIncrement());
+        }
+        return new HashMap<>(this.growthMap.get(path));
     }
 
     /**
-     * Loads the default statistics increments of the job from JSON file. Suggested to pass constants provided by this
-     * class. This method acts exactly the same as {@link #getDefaultIncrements(String)}, but instead of throwing
-     * exceptions, return an empty map if something wrong happens.
+     * Loads the default statistics increments of the job from JSON file.
+     * Suggested to pass constants provided by this class. This method acts
+     * exactly the same as {@link #getDefaultIncrements(String)}, but instead of
+     * throwing exceptions, return an empty map if something wrong happens.
      * 
      * @param path
      *            the path to the file of the desired job.
-     * @return a map containing the values, or an empty map if something wrong happens
+     * @return a map containing the values, or an empty map if something wrong
+     *         happens
      */
     public Map<Statistics, Integer> getDefaultIncrementsMap(final String path) {
         try {
@@ -166,7 +197,8 @@ public final class JobsSetup {
     }
 
     /**
-     * Loads the default armor of the job from JSON file. Suggested to pass constants provided by this class.
+     * Loads the default armor of the job from JSON file. Suggested to pass
+     * constants provided by this class.
      * 
      * @param path
      *            the path to the file of the desired job.
@@ -174,25 +206,32 @@ public final class JobsSetup {
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
-     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
-     *             cannot be opened for reading
+     *             if the file does not exist, is a directory rather than a
+     *             regular file, or for some other reason cannot be opened for
+     *             reading
      * @throws JsonIOException
      *             if there was a problem reading from the Reader
      * @throws JsonSyntaxException
-     *             if the file does not contain a valid representation for an object of type
+     *             if the file does not contain a valid representation for an
+     *             object of type
      */
     public Map<ArmorPieces, Armor> getDefaultArmor(final String path) throws IOException {
-        return new HashMap<>(fileManager.loadJob(path).getDefaultArmor());
+        if (!this.armorMap.containsKey(path)) {
+            this.armorMap.put(path, fileManager.loadJob(path).getDefaultArmor());
+        }
+        return new HashMap<>(this.armorMap.get(path));
     }
 
     /**
-     * Loads the default armor of the job from JSON file. Suggested to pass constants provided by this class. This
-     * method acts exactly the same as {@link #getDefaultArmor(String)}, but instead of throwing exceptions, return an
-     * empty map if something wrong happens.
+     * Loads the default armor of the job from JSON file. Suggested to pass
+     * constants provided by this class. This method acts exactly the same as
+     * {@link #getDefaultArmor(String)}, but instead of throwing exceptions,
+     * return an empty map if something wrong happens.
      * 
      * @param path
      *            the path to the file of the desired job.
-     * @return a map containing the values, or an empty map if something wrong happens
+     * @return a map containing the values, or an empty map if something wrong
+     *         happens
      */
     public Map<ArmorPieces, Armor> getDefaultArmorMap(final String path) {
         try {
@@ -203,7 +242,8 @@ public final class JobsSetup {
     }
 
     /**
-     * Loads the default weapon of the job from JSON file. Suggested to pass constants provided by this class.
+     * Loads the default weapon of the job from JSON file. Suggested to pass
+     * constants provided by this class.
      * 
      * @param path
      *            the path to the file of the desired job.
@@ -211,21 +251,27 @@ public final class JobsSetup {
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
-     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
-     *             cannot be opened for reading
+     *             if the file does not exist, is a directory rather than a
+     *             regular file, or for some other reason cannot be opened for
+     *             reading
      * @throws JsonIOException
      *             if there was a problem reading from the Reader
      * @throws JsonSyntaxException
-     *             if the file does not contain a valid representation for an object of type
+     *             if the file does not contain a valid representation for an
+     *             object of type
      */
     public Weapon getDefaultWeapon(final String path) throws IOException {
-        return fileManager.loadJob(path).getDefaultWeapon();
+        if (!this.weaponMap.containsKey(path)) {
+            this.weaponMap.put(path, fileManager.loadJob(path).getDefaultWeapon());
+        }
+        return this.weaponMap.get(path);
     }
 
     /**
-     * Loads the default weapon of the job from JSON file. Suggested to pass constants provided by this class. This
-     * method acts exactly the same as {@link #getDefaultWeapon(String)}, but instead of throwing exceptions, returns
-     * null if something wrong happens.
+     * Loads the default weapon of the job from JSON file. Suggested to pass
+     * constants provided by this class. This method acts exactly the same as
+     * {@link #getDefaultWeapon(String)}, but instead of throwing exceptions,
+     * returns null if something wrong happens.
      * 
      * @param path
      *            the path to the file of the desired job.
@@ -240,42 +286,55 @@ public final class JobsSetup {
     }
 
     /**
-     * Return the path of the PNG file that contains the battle sprite of the Job. As requested, it returns null if it
-     * can't find any default provided file path for the given Job
+     * Return the path of the PNG file that contains the battle sprite of the
+     * Job. As requested, it returns null if it can't find any default provided
+     * file path for the given Job
      * 
      * @param job
      *            the Job (suggested to use this class' constant)
-     * @return the path if the job is found, or null if it can't find any default provided file path for the given Job
+     * @return the path if the job is found, or null if it can't find any
+     *         default provided file path for the given Job
      */
     public String getBattleSpritePath(final String job) {
-        // TODO maybe solve DD-anomaly
-        String spritePath = null; 
-        
-        if (job.equals(WARRIOR)) {
-            spritePath = "res/sprites/warrior.png";
-        } else if (job.equals(PALADIN)) {
-            spritePath = "res/sprites/paladin.png";
-        } else if (job.equals(MAGE)) {
-            spritePath = "res/sprites/mage.png";
-        } else if (job.equals(RANGER)) {
-            spritePath = "res/sprites/ranger.png";
-        } else if (job.equals(COOK)) {
-            spritePath = "res/sprites/cook.png";
-        } else if (job.equals(CLOWN)) {
-            spritePath = "res/sprites/clown.png";
+        final String spritePath;
+
+        switch (job) {
+            case WARRIOR:
+                spritePath = "res/sprites/warrior.png";
+                break;
+            case PALADIN:
+                spritePath = "res/sprites/paladin.png";
+                break;
+            case MAGE:
+                spritePath = "res/sprites/mage.png";
+                break;
+            case RANGER:
+                spritePath = "res/sprites/ranger.png";
+                break;
+            case COOK:
+                spritePath = "res/sprites/cook.png";
+                break;
+            case CLOWN:
+                spritePath = "res/sprites/clown.png";
+                break;
+            default:
+                spritePath = null;
+                break;
         }
-        
+
         return spritePath;
     }
 
     /**
-     * Return the path of the JSON file that contains the default parameters of the Job.
+     * Return the path of the JSON file that contains the default parameters of
+     * the Job.
      * 
      * @param job
      *            the Job
      * @return the path if the job is found
      * @throws FileNotFoundException
-     *             if it can't find any default provided file path for the given Job
+     *             if it can't find any default provided file path for the given
+     *             Job
      */
     public static String getPath(final Jobs job) throws FileNotFoundException {
         Optional<String> jobPath;
@@ -297,6 +356,6 @@ public final class JobsSetup {
         }
 
         return jobPath.orElseThrow(
-                        () -> new FileNotFoundException("It is not provided any default file path for the Job " + job));
+                () -> new FileNotFoundException("It is not provided any default file path for the Job " + job));
     }
 }
