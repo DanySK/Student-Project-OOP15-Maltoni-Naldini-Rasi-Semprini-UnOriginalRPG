@@ -107,6 +107,11 @@ public class Dialogue implements DialogueInterface {
         return this.listRows;
     }
     
+    @Override
+    public boolean isOver() {
+        return this.nextToShow == this.listRows.size();
+    }
+    
     /**
      * Method that generates the Dialogue printing it on Console.
      * For Test purposes.

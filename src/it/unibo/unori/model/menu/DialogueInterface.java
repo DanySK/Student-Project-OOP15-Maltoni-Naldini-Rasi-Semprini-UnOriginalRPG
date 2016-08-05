@@ -40,5 +40,11 @@ public interface DialogueInterface extends Serializable {
      * @return a List of Strings representing the sentence.
      */
     List<String> getList();
+
+    /**
+     * Method that tells me if the Dialogue is Over.
+     * @return true if the Dialogue is over, false otherwise.
+     */
+    boolean isOver();
     
 }
