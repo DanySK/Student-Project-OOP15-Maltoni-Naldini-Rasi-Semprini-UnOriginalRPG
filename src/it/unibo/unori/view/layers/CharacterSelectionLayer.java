@@ -39,7 +39,7 @@ public class CharacterSelectionLayer extends JPanel {
 
     private JLabel sprite;
     private Jobs job = Jobs.values()[0];
-    private List<Jobs> party = new LinkedList<Jobs>();
+    private Map<String, Jobs> party = new HashMap<String, Jobs>();
 
     /**
      * Displays the character-selection menu.

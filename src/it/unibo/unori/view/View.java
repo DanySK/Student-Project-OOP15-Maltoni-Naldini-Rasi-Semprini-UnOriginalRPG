@@ -70,7 +70,7 @@ public final class View extends JFrame {
      * Removes the layer on top of the view.
      */
     public void pop() {
-        this.layeredPane.remove(layeredPane.highestLayer());
+        this.layeredPane.remove(layeredPane.highestLayer() - 1);
     }
 
     /**

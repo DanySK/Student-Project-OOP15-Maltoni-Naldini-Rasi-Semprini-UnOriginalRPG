@@ -162,8 +162,10 @@ public class MainMenuLayer extends JPanel {
         view.push(mainMenu);
         view.resizeTo(mainMenu);
 
-	    view.run();
+        view.run();
 
-	    view.centerToScreen();
-	}
+        view.pop();
+
+        view.centerToScreen();
+    }
 }
