@@ -35,8 +35,7 @@ import java.awt.event.ActionListener;
  * The main menu of the game.
  *
  */
-public class MainMenuLayer extends JPanel
-{
+public class MainMenuLayer extends JPanel {
     private int focusedButton = 0;
     private final List<Button> buttons;
 
@@ -48,8 +47,7 @@ public class MainMenuLayer extends JPanel
       * Creates the main menu.
       * @param buttons the list of buttons to be displayed
       */
-     public MainMenuLayer(final List<Button> buttons)
-     {
+     public MainMenuLayer(final List<Button> buttons) {
         super();
 
         this.setPreferredSize(SIZE);

@@ -1,166 +1,169 @@
 package it.unibo.unori.view.layers;
 
+import it.unibo.unori.view.View;
 import it.unibo.unori.view.Button;
-import it.unibo.unori.view.sprites.CharacterSprite;
+import it.unibo.unori.view.sprites.JobSprite;
+import it.unibo.unori.model.character.jobs.Jobs;
 
 import java.util.List;
 import java.util.LinkedList;
 
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+
 import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import javax.swing.BoxLayout;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicArrowButton;
 
-import java.awt.Point;
 import java.awt.Color;
-import java.awt.Insets;
-import java.awt.Graphics;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
 
-import it.unibo.unori.view.View;
-import javax.swing.SwingUtilities;
-
 /**
- *
- * The character selection menu.
+ * 
+ * The character-selection menu. 
  *
  */
-public class CharacterSelectionLayer extends JPanel
-{
-    private static final int PARTY_SIZE = 5;
-    private CharacterSprite character = CharacterSprite.values()[0];
-    private List<CharacterSprite> party = new LinkedList<CharacterSprite>();
-
-    private static final int SEPARATOR = 25;
-    private static final Point BORDER = new Point(25, 25);
+public class CharacterSelectionLayer extends JPanel {
+    private static final Dimension SIZE = View.SIZE;
     private static final Color BACKGROUND_COLOR = Color.BLACK;
-    private static final Dimension SIZE = new Dimension(325, 300);
+
+    private JLabel sprite;
+    private Jobs job = Jobs.values()[0];
+    private List<Jobs> party = new LinkedList<Jobs>();
 
     /**
-     * Creates the character selection menu.
+     * Displays the character-selection menu.
+     * @param maxHero the number of heroes in the party
+     * @param button the button to be displayed when finished
      */
-    public CharacterSelectionLayer()
-    {
-        this.setPreferredSize(SIZE);
+    public CharacterSelectionLayer(final int maxHero, final Button button) {
+        super();
+
         this.setBackground(BACKGROUND_COLOR);
+
+        this.setPreferredSize(SIZE);
         this.setBounds(0, 0, SIZE.width, SIZE.height);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        this.setLayout(null);
-        Insets insets = this.getInsets();
+        final JPanel partyPanel = new JPanel();
+        partyPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        partyPanel.setBackground(BACKGROUND_COLOR);
 
-        Button button = new Button("Done");
-        JTextField textField = new JTextField(10);
-        BasicArrowButton left = new BasicArrowButton(SwingConstants.WEST);
-        BasicArrowButton right = new BasicArrowButton(SwingConstants.EAST);
-
-        /* TEXT FIELD */
-
-        Dimension textFieldSize = textField.getPreferredSize();
-        textField.setBounds(BORDER.x + insets.left,
-                            BORDER.y + insets.top,
-                            textFieldSize.width, textFieldSize.height);
-
+        final JTextField textField = new JTextField(20);
+        textField.setMaximumSize(textField.getPreferredSize());
         textField.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e)
-            {
-                if (party.size() <= PARTY_SIZE)
-                {
-                    if (party.size() == PARTY_SIZE)
-                    {
-                        button.setEnabled(true);
-                    }
+            public void actionPerformed(final ActionEvent e) {
+                if (party.size() < maxHero) {
+                    party.add(job);
 
-                    party.add(character);
+                    partyPanel.add(new JLabel(new ImageIcon(getSprite())));
+                    partyPanel.validate();
                 }
-                textField.setText("");
-
-                repaint();
+                if (party.size() == maxHero) {
+                    button.setEnabled(true);
+                }
             }
         });
+
+        final JPanel spritePanel = new JPanel();
+        spritePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        spritePanel.setBackground(BACKGROUND_COLOR);
+
+        final BasicArrowButton left = new BasicArrowButton(SwingConstants.WEST);
+        left.addActionListener(new ActionListener() {
+            public void actionPerformed(final ActionEvent e) {
+                previousJob();
+            }
+        });
+
+        sprite = new JLabel(new ImageIcon(getSprite()));
+
+        final BasicArrowButton right = new BasicArrowButton(SwingConstants.EAST);
+        right.addActionListener(new ActionListener() {
+            public void actionPerformed(final ActionEvent e) {
+                nextJob();
+            }
+        });
+
+        final JLabel statistics = new JLabel("Statistics");
+        statistics.setForeground(Color.WHITE);
+        statistics.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         this.add(textField);
 
-        /* ARROWS */
+        spritePanel.add(left);
+        spritePanel.add(sprite);
+        spritePanel.add(right);
 
-        Dimension arrowSize = left.getPreferredSize();
-        left.setBounds(BORDER.x + insets.left,
-                             BORDER.y + SEPARATOR * 2 + insets.top,
-                             arrowSize.width, arrowSize.height);
-        right.setBounds(BORDER.x + (int) (SEPARATOR * 2.6) + insets.left,
-                              BORDER.y + SEPARATOR * 2 + insets.top,
-                              arrowSize.width, arrowSize.height);
+        spritePanel.setMaximumSize(spritePanel.getPreferredSize());
 
-        left.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e)
-            {
-                character = character.previous();
-                repaint();
-            }
-        });
-        right.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e)
-            {
-                character = character.next();
-                repaint();
-            }
-        });
+        this.add(spritePanel);
 
-        this.add(left);
-        this.add(right);
+        this.add(statistics);
 
-        /* BUTTON */
+        this.add(partyPanel);
 
-        Dimension buttonSize = button.getPreferredSize();
-        button.setBounds(BORDER.x + SEPARATOR * 2 + insets.left,
-                         BORDER.y + SEPARATOR * 8 + insets.top,
-                         buttonSize.width, buttonSize.height);
-
-        button.setEnabled(false);
         this.add(button);
+        button.setEnabled(false);
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
 
-    @Override
-    protected void paintComponent(final Graphics g)
-    {
-        super.paintComponent(g);
-        BufferedImage sprite;
+    /**
+     * @return the party chosen by the user
+     */
+    public List<Jobs> getParty() {
+        return party;
+    }
 
-        // SELECTED
+    private BufferedImage getSprite() {
+        BufferedImage spriteSheet;
 
-        sprite = character.getSprite(CharacterSprite.View.BATTLE);
+        try {
+            spriteSheet = ImageIO.read(new File(job.getBattleFrame()));
+        } catch (IOException e) {
+            spriteSheet = null;
+        }
 
-        g.drawImage(sprite, BORDER.x + SEPARATOR,
-                    SEPARATOR * 3,
-                    sprite.getWidth(), sprite.getHeight(), null);
+        return spriteSheet.getSubimage(JobSprite.BATTLE.getPosition().x,
+                                       JobSprite.BATTLE.getPosition().y,
+                                       JobSprite.BATTLE.getDimension().width,
+                                       JobSprite.BATTLE.getDimension().height);
+    }
 
-        // ENTIRE PARTY
+    private void nextJob() {
+        job = Jobs.values()[(job.ordinal() + 1)  % (Jobs.values().length - 1)];
+        sprite.setIcon(new ImageIcon(getSprite()));
+    }
 
-        for (int i = 0; i < party.size(); i++)
-        {
-            sprite = party.get(i).getSprite(CharacterSprite.View.BATTLE);
-
-            g.drawImage(sprite,
-                        BORDER.x + SEPARATOR * 2 * i,
-                        BORDER.y + SEPARATOR * 5,
-                        sprite.getWidth(), sprite.getHeight(), null);
+    private void previousJob() {
+        if (job.ordinal() - 1 >= 0) {
+            job = Jobs.values()[job.ordinal() - 1];
+            sprite.setIcon(new ImageIcon(getSprite()));
+        } else {
+            job = Jobs.values()[Jobs.values().length - 2];
+            sprite.setIcon(new ImageIcon(getSprite()));
         }
     }
 
-    public static void main(final String... args)
-    {
+    public static void main(final String... args) {
         final View view = new View();
-        final JPanel characterSelection = new CharacterSelectionLayer();
+        final Button button = new Button("Test");
+        final JPanel characterSelection = new CharacterSelectionLayer(5, button);
 
         view.push(characterSelection);
         view.resizeTo(characterSelection);
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override public void run() { view.setVisible(true); }
-        });
-
+        view.run();
         view.centerToScreen();
     }
 }

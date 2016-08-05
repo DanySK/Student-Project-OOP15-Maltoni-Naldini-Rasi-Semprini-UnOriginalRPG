@@ -19,6 +19,7 @@ import java.awt.FlowLayout;
 public class Button extends JButton implements FocusListener
 {
     private static final int FONT_SIZE = 17;
+    private static final String FONT_NAME = "Arial";
 
     private static final String FOCUS_ICON = "res/button/focus.png";
     private static final String DEFAULT_ICON = "res/button/default.png";
@@ -29,8 +30,7 @@ public class Button extends JButton implements FocusListener
      * Creates a button with the specified label.
      * @param label text to be shown inside the button
      */
-    public Button(final String label)
-    {
+    public Button(final String label) {
         super(label);
 
         this.setFocusPainted(false);
@@ -43,7 +43,7 @@ public class Button extends JButton implements FocusListener
 
         this.setForeground(Color.WHITE);
         this.setHorizontalTextPosition(JButton.CENTER);
-        this.setFont(new Font("Arial", Font.PLAIN, FONT_SIZE));
+        this.setFont(new Font(FONT_NAME, Font.PLAIN, FONT_SIZE));
 
         this.addFocusListener(this);
     }
@@ -52,8 +52,7 @@ public class Button extends JButton implements FocusListener
      * {@inheritDoc}
      */
     @Override
-    public void focusGained(final FocusEvent e)
-    {
+    public void focusGained(final FocusEvent e) {
         this.setIcon(new ImageIcon(FOCUS_ICON));
         this.setRolloverIcon(new ImageIcon(ROLLOVER2_ICON));
     }
@@ -62,14 +61,12 @@ public class Button extends JButton implements FocusListener
      * {@inheritDoc}
      */
     @Override
-    public void focusLost(final FocusEvent e)
-    {
+    public void focusLost(final FocusEvent e) {
         this.setIcon(new ImageIcon(DEFAULT_ICON));
         this.setRolloverIcon(new ImageIcon(ROLLOVER_ICON));
     }
 
-    public static void main(final String... args)
-    {
+    public static void main(final String... args) {
         final JFrame frame = new JFrame();
         frame.getContentPane().setLayout(new FlowLayout());
         

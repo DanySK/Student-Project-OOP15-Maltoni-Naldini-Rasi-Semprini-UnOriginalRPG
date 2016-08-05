@@ -37,8 +37,7 @@ import it.unibo.unori.model.maps.GameMapImpl;
  * The game map.
  *
  */
-public class MapLayer extends JPanel
-{
+public class MapLayer extends JPanel {
     private BufferedImage sprite;
     private CharacterSprite character;
     private final Party party = SingletonParty.getParty();
@@ -50,8 +49,7 @@ public class MapLayer extends JPanel
     /**
      * Creates the game map.
      */
-    public MapLayer()
-    {
+    public MapLayer() {
         super();
 
         this.size.width = map.getMapWidth() * CELL_SIZE.width;
@@ -77,8 +75,7 @@ public class MapLayer extends JPanel
     }
 
     @Override
-    protected void paintComponent(Graphics g)
-    {
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         for (int y = 0; y < map.getMapLength(); y++)
@@ -103,25 +100,19 @@ public class MapLayer extends JPanel
                     CELL_SIZE.width, CELL_SIZE.height, null);
     }
 
-    private class MoveAction extends AbstractAction
-    {
+    private class MoveAction extends AbstractAction {
         private final Party.CardinalPoints direction;
 
-        MoveAction(final Party.CardinalPoints direction)
-        {
+        MoveAction(final Party.CardinalPoints direction) {
             super();
             this.direction = direction;
         }
 
         @Override
-        public void actionPerformed(final ActionEvent e)
-        {
-            try
-            {
+        public void actionPerformed(final ActionEvent e) {
+            try {
                 party.moveParty(direction);
-            }
-            catch (BlockedPathException e1)
-            {
+            } catch (BlockedPathException e1) {
                 System.out.println("Blocked path!");
             }
 
@@ -129,12 +120,10 @@ public class MapLayer extends JPanel
 
             new Thread() {
                 @Override
-                public void run()
-                {
+                public void run() {
                     BufferedImage[] frame = new BufferedImage[2];
 
-                    switch (direction)
-                    {
+                    switch (direction) {
                         case NORTH:
                             frame[0] = character.getSprite(CharacterSprite.View.BACK);
                             frame[1] = character.getSprite(CharacterSprite.View.BACK2);
@@ -166,14 +155,14 @@ public class MapLayer extends JPanel
     {
         AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
         tx.translate(- image.getWidth(null), 0);
+        
         AffineTransformOp op;
         op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 
         return op.filter(image, null);
     }
 
-    public static void main(final String... args)
-    {
+    public static void main(final String... args) {
         final View view = new View();
         SingletonParty.getParty().setCurrentMap(new GameMapImpl(12, 12));
 
@@ -182,9 +171,7 @@ public class MapLayer extends JPanel
         view.push(mapLayer);
         view.resizeTo(mapLayer);
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override public void run() { view.setVisible(true); }
-        });
+        view.run();
 
         view.centerToScreen();
     }

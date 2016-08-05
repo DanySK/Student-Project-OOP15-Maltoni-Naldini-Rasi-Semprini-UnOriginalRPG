@@ -13,8 +13,7 @@ import java.awt.Dimension;
  * behaving like a stack.
  *
  */
-public final class View extends JFrame
-{
+public final class View extends JFrame {
     private Integer layers = 0;
     private final JLayeredPane layeredPane;
     private static final String TITLE = "UnOriginal.RPG";
@@ -24,8 +23,7 @@ public final class View extends JFrame
     /**
      * Creates an instance of the view.
      */
-    public View()
-    {
+    public View() {
         super(TITLE);
 
         this.setResizable(false);
@@ -37,16 +35,14 @@ public final class View extends JFrame
     /**
      * Centers the view to the screen.
      */
-    public void centerToScreen()
-    {
+    public void centerToScreen() {
         this.setLocationRelativeTo(null);
     }
 
     /**
      * Resizes the view to the default size.
      */
-    public void resize()
-    {
+    public void resize() {
         this.getContentPane().setPreferredSize(SIZE);
 
         this.pack();
@@ -56,8 +52,7 @@ public final class View extends JFrame
      * Resizes the view to the specified layer.
      * @param layer the layer the view will resize to
      */
-    public void resizeTo(final JPanel layer)
-    {
+    public void resizeTo(final JPanel layer) {
         this.getContentPane().setPreferredSize(layer.getSize());
 
         this.pack();
@@ -67,24 +62,21 @@ public final class View extends JFrame
      * Pushes a layer on top of the view.
      * @param layer the layer to be pushed
      */
-    public void push(final JPanel layer)
-    {
+    public void push(final JPanel layer) {
         this.layeredPane.add(layer, ++layers);
     }
 
     /**
      * Removes the layer on top of the view.
      */
-    public void pop()
-    {
+    public void pop() {
         this.layeredPane.remove(layeredPane.highestLayer());
     }
 
     /**
      * Displays the view thread safely.
      */
-    public void run()
-    {
+    public void run() {
         SwingUtilities.invokeLater(new Runnable() {
              @Override public void run() { View.this.setVisible(true); }
          });
