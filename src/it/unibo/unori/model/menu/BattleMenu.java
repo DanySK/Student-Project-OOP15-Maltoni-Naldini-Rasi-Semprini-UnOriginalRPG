@@ -21,7 +21,7 @@ public class BattleMenu implements BattleMenuInterface {
     
     @Override
     public void runAway() throws CantEscapeException {
-        this.battle.runAway(this.battle.getFoeOnTurn(), this.battle.getHeroOnTurn());
+        this.battle.runAway();
     }
     
     @Override
