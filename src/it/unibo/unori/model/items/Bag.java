@@ -6,6 +6,8 @@ import java.util.Map;
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.exceptions.ArmorAlreadyException;
 import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
+import it.unibo.unori.model.items.exceptions.HeroDeadException;
+import it.unibo.unori.model.items.exceptions.HeroNotDeadException;
 import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
 
 /**
@@ -35,9 +37,11 @@ public interface Bag extends Serializable {
      * This method allows to use a Potion on a specified Hero.
      * @param my the Hero on which use the Potion.
      * @param p the Potion to use.
+     * @throws HeroNotDeadException if the Hero tries to use a relive Potion without being dead.
+     * @throws HeroDeadException if the Hero tries to use a non-relive Potion and he is dead.
      * @throws ItemNotFoundException if the Potion is not contained in the Bag.
      */
-    void usePotion(Hero my, Potion p);
+    void usePotion(Hero my, Potion p) throws HeroDeadException, HeroNotDeadException;
 
     /**
      * This method allows to equip a Hero with a specified Armor.

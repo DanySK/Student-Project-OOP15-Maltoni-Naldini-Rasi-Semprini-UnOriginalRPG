@@ -15,8 +15,9 @@ public interface BattleMenuInterface {
     
     /**
      * Method to handle the open bag choice.
+     * @return the BagMenu.
      */
-    void useBag();
+    BagMenuInterface useBag();
     
     /**
      * Method to handle the fight choice.

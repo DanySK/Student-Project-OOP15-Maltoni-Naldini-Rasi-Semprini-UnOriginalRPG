@@ -6,6 +6,8 @@ import java.util.Map;
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.exceptions.ArmorAlreadyException;
 import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
+import it.unibo.unori.model.items.exceptions.HeroDeadException;
+import it.unibo.unori.model.items.exceptions.HeroNotDeadException;
 import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
 
 /**
@@ -151,8 +153,9 @@ public class BagImpl implements Bag {
     }
 
     @Override
-    public void usePotion(final Hero my, final Potion p) {
-        my.restoreHP(p.getRestore());
+    public void usePotion(final Hero my, final Potion p) 
+            throws HeroDeadException, HeroNotDeadException {
+        p.using(my);
     }
 
     @Override
