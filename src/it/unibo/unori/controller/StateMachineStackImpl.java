@@ -6,20 +6,36 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import it.unibo.unori.controller.state.GameState;
-import it.unibo.unori.controller.state.MapState;
 import it.unibo.unori.view.View;
 
 /**
- * This class models a stack of {@link it.unibo.unori.controller.state.GameState}, to manage the current state easily,
- * keeping track of the state of the last GameState. It uses a Stack<GameState> for model-side stack and a
- * {@link it.unibo.view.View} for view-side stack.
+ * This class models a stack of
+ * {@link it.unibo.unori.controller.state.GameState}, to manage the current
+ * state easily, keeping track of the state of the last GameState. It uses a
+ * Stack<GameState> for model-side stack and a {@link it.unibo.view.View} for
+ * view-side stack.
  */
 public class StateMachineStackImpl implements StateMachineStack {
-    private final Stack<GameState> gsStack = new Stack<>();
-    private final View layerStack = new View();
+    private final Stack<GameState> gsStack;
+    private final View layerStack;
 
     /**
-     * {@inheritDoc} It is set final because firstly called by the constructor, and it should not be overridden.
+     * Default constructor.
+     */
+    public StateMachineStackImpl() {
+        this.gsStack = new Stack<>();
+        this.layerStack = new View();
+    }
+
+    @Override
+    public void pushAndRender(final GameState state) {
+        this.push(state);
+        this.render();
+    }
+
+    /**
+     * {@inheritDoc} It is set final because firstly called by the constructor,
+     * and it should not be overridden.
      * 
      */
     @Override

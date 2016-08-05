@@ -51,12 +51,12 @@ public class MainMenuState extends AbstractGameState {
         final ActionListener listener = new MainMenuActionListener();
         final List<Button> returnList = new ArrayList<>();
         
-        final Button newGame = new Button("New game");
+        final Button newGame = new Button("Nuova partita");
         newGame.addActionListener(listener);
         newGame.setActionCommand(MainMenuActionListener.NEW_GAME);
         returnList.add(newGame);
         
-        final Button loadGame = new Button("Load game");
+        final Button loadGame = new Button("Carica parita");
         loadGame.addActionListener(listener);
         loadGame.setActionCommand(MainMenuActionListener.LOAD_GAME);
         returnList.add(loadGame);

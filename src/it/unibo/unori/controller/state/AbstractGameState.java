@@ -3,7 +3,7 @@ package it.unibo.unori.controller.state;
 import javax.swing.JPanel;
 
 /**
- * Abstarct class that models a game state in the state machine controller. It implements the interface and defines the
+ * Abstract class that models a game state in the state machine controller. It implements the interface and defines the
  * shared method getLayer().
  */
 public abstract class AbstractGameState implements GameState {

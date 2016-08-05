@@ -9,6 +9,7 @@ import it.unibo.unori.controller.state.CharacterSelectionState;
 import it.unibo.unori.controller.state.GameState;
 import it.unibo.unori.controller.state.MainMenuState;
 import it.unibo.unori.controller.state.MapState;
+import it.unibo.unori.model.maps.Party.CardinalPoints;
 import it.unibo.unori.model.maps.SingletonParty;
 import it.unibo.unori.view.layers.CharacterSelectionLayer;
 import it.unibo.unori.model.character.HeroImpl;
@@ -16,7 +17,8 @@ import it.unibo.unori.model.character.exceptions.MaxHeroException;
 import it.unibo.unori.model.character.jobs.Jobs;
 
 /**
- * This class manages an implementation of {@link it.unibo.controller.Controller} interface that matches the Singleton
+ * This class manages an implementation of
+ * {@link it.unibo.controller.Controller} interface that matches the Singleton
  * pattern. It is a final class in order to not be extended.
  */
 public final class SingletonStateMachine {
@@ -27,8 +29,8 @@ public final class SingletonStateMachine {
     }
 
     /**
-     * Method to get the controller instance inside the class. Multiple allocations are prevented also in a multi-thread
-     * system.
+     * Method to get the controller instance inside the class. Multiple
+     * allocations are prevented also in a multi-thread system.
      * 
      * @return the single instance of Controller created.
      */
@@ -42,9 +44,11 @@ public final class SingletonStateMachine {
     }
 
     /**
-     * This class implements the {@link it.unibo.controller.Controller} interface. It's declared private for
-     * encapsulation purpose: the only way to use an instance of this class is by the method
-     * {@link SingletonStateMachine#getController()} of the SingletonStateMachine class.
+     * This class implements the {@link it.unibo.controller.Controller}
+     * interface. It's declared private for encapsulation purpose: the only way
+     * to use an instance of this class is by the method
+     * {@link SingletonStateMachine#getController()} of the
+     * SingletonStateMachine class.
      */
     private static final class StateMachineImpl implements Controller {
         private final StateMachineStack stack;
@@ -52,10 +56,12 @@ public final class SingletonStateMachine {
         private final JsonFileManager fileManager;
 
         /**
-         * This default constructor instantiates a new StateMachine controller class, adding a new
+         * This default constructor instantiates a new StateMachine controller
+         * class, adding a new
          * {@link it.unibo.unori.Controller.StateMachineStack} with a new
-         * {@link it.unibo.unori.controller.state.MainMenuState} pushed at the top. It also counts time, but the timer
-         * needs to be started. It is a final class because it has no need to be extendible.
+         * {@link it.unibo.unori.controller.state.MainMenuState} pushed at the
+         * top. It also counts time, but the timer needs to be started. It is a
+         * final class because it has no need to be extendible.
          */
         StateMachineImpl() {
             this.stack = new StateMachineStackImpl();
@@ -64,7 +70,8 @@ public final class SingletonStateMachine {
         }
 
         /**
-         * {@inheritDoc} This is done by pushing a new MainMenuState and updating and rendering it.
+         * {@inheritDoc} This is done by pushing a new MainMenuState and
+         * updating and rendering it.
          */
         @Override
         public void begin() {
@@ -80,7 +87,8 @@ public final class SingletonStateMachine {
         @Override
         public void saveGame() throws IOException {
             this.fileManager.saveGame(SingletonParty.getParty());
-            // TODO need to be tested: maybe is better to get the map from MapState instance
+            // TODO need to be tested: maybe is better to get the map from
+            // MapState instance
         }
 
         @Override
@@ -107,8 +115,8 @@ public final class SingletonStateMachine {
         @Override
         public void setParty() {
             if (CharacterSelectionLayer.class.isInstance(this.stack.peek().getLayer())) {
-                final Map<String, Jobs> selected = null /*((CharacterSelectionLayer) this.stack.pop().getLayer()).getParty()*/;
-                
+                final Map<String, Jobs> selected = ((CharacterSelectionLayer) this.stack.pop().getLayer()).getParty();
+
                 selected.entrySet().forEach(entry -> {
                     try {
                         SingletonParty.getParty().getHeroTeam().addHero(new HeroImpl(entry.getKey(), entry.getValue()));
@@ -120,20 +128,46 @@ public final class SingletonStateMachine {
                         e.printStackTrace();
                     }
                 });
-                
+
                 this.stack.push(new MapState(SingletonParty.getParty().getCurrentGameMap()));
-                
+
             }
-            
+
         }
 
         /**
-         * If the statistics file exists from previous plays, it should be loaded. This method does that
+         * If the statistics file exists from previous plays, it should be
+         * loaded. This method does that.
+         * 
+         * @throws IOException
+         *             if an error occurs
+         * @throws SecurityException
+         *             if a security manager exists and it denies read access to
+         *             the file or directory
+         * @throws FileNotFoundException
+         *             if the file does not exist, is a directory rather than a
+         *             regular file, or for some other reason cannot be opened
+         *             for reading.
+         * @throws JsonIOException
+         *             if there was a problem reading from the Reader
+         * @throws JsonSyntaxException
+         *             if the file does not contain a valid representation for
+         *             an object of type
          */
         private void restoreStatsIfNeeded() throws IOException {
             if (new File(JsonFileManager.STATS_FILE).exists()) {
                 this.stats.restore(this.fileManager.loadStats());
             }
+        }
+
+        @Override
+        public GameState getCurrentState() {
+            return this.stack.peek();
+        }
+
+        @Override
+        public Class<?> getCurrentStateClass() {
+            return this.stack.peek().getClass();
         }
 
     }

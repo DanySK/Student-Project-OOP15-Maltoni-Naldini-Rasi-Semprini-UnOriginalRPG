@@ -3,12 +3,27 @@ package it.unibo.unori.controller;
 import it.unibo.unori.controller.state.GameState;
 
 /**
- * This interface models a stack of {@link it.unibo.unori.controller.state.GameState}, to manage the current state easily,
- * keeping track of the state of the last GameState. It incorporates both model and graphic for each state.
+ * This interface models a stack of
+ * {@link it.unibo.unori.controller.state.GameState}, to manage the current
+ * state easily, keeping track of the state of the last GameState. It
+ * incorporates both model and graphic for each state.
  */
 public interface StateMachineStack {
     /**
-     * The method calls the render method of the GameState at the top of the stack.
+     * Because usually both methods push and render are called at the same time,
+     * this method unifies the two.
+     * 
+     * @see #push(GameState)
+     * @see #render()
+     * 
+     * @param state
+     *            the state to push
+     */
+    void pushAndRender(GameState state);
+
+    /**
+     * The method calls the render method of the GameState at the top of the
+     * stack.
      */
     void render();
 
@@ -28,9 +43,11 @@ public interface StateMachineStack {
     GameState pop();
 
     /**
-     * Looks at the GameState at the top of the stack without removing it from the stack.
+     * Looks at the GameState at the top of the stack without removing it from
+     * the stack.
      * 
      * @return the state peeked
      */
     GameState peek();
+
 }
