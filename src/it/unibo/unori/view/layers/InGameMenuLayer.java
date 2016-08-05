@@ -28,8 +28,7 @@ import java.awt.event.ActionListener;
  * A menu that can be opened in-game.
  *
  */
-public class InGameMenuLayer extends JPanel
-{
+public class InGameMenuLayer extends JPanel {
     private int focusedButton = 0;
     private final List<Button> buttons;
 
@@ -40,8 +39,7 @@ public class InGameMenuLayer extends JPanel
      * Creates the in-game menu.
      * @param buttons the list of buttons to be displayed
      */
-    public InGameMenuLayer(final List<Button> buttons)
-    {
+    public InGameMenuLayer(final List<Button> buttons) {
         super();
 
         this.buttons = buttons;
@@ -53,8 +51,7 @@ public class InGameMenuLayer extends JPanel
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
 
-        for (final Button button : buttons)
-        {
+        for (final Button button : buttons) {
             this.add(button);
             button.setAlignmentX(Component.CENTER_ALIGNMENT);
         }
@@ -80,20 +77,16 @@ public class InGameMenuLayer extends JPanel
      * {@inheritDoc}
      */
     @Override
-    public void disable()
-    {
-        for (final Component component : getComponents())
-        {
+    public void disable() {
+        for (final Component component : getComponents()) {
             component.setEnabled(false);
         }
     }
 
-    private class ButtonAction extends AbstractAction
-    {
+    private class ButtonAction extends AbstractAction {
         private final int direction;
 
-        ButtonAction(final int direction)
-        {
+        ButtonAction(final int direction) {
             super();
             this.direction = direction;
         }
@@ -101,14 +94,11 @@ public class InGameMenuLayer extends JPanel
         @Override
         public void actionPerformed(final ActionEvent e)
         {
-            if (direction == 0)
-            {
+            if (direction == 0) {
                 buttons.get(focusedButton).doClick();
             }
-            else
-            {
-                if (buttons.size() != 0)
-                {
+            else {
+                if (buttons.size() != 0) {
                     focusedButton += direction;
 
                     if (focusedButton < 0)
@@ -122,8 +112,7 @@ public class InGameMenuLayer extends JPanel
         }
     }
 
-    public static void main(final String... args)
-    {
+    public static void main(final String... args) {
         final View view = new View();
 
         /* MAIN MENU */
