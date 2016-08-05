@@ -16,7 +16,11 @@ public class HeroTeamImpl implements HeroTeam {
      * 
      */
     private static final long serialVersionUID = 7340817911963589484L;
-    private static final int MAXHERO = 4;
+    
+    /**
+     * Max number of Heroes allowed in a Team.
+     */
+    public static final int MAXHERO = 4;
     private final List<Hero> heroList;
     private List<Hero> aliveHeroes;
 
