@@ -23,6 +23,15 @@ public class NpcImpl implements Npc {
     public NpcImpl(final Dialogue d) {
         this.sentence = d;
     }
+    
+    /**
+     * Alternative Constructor for an Npc.
+     * It has as an argument, a String that is going to generate de Dialogue.
+     * @param dialogue the sentence of the Npc, in form of String.
+     */
+    public NpcImpl(final String dialogue) {
+        this.sentence = new Dialogue(dialogue);
+    }
 
     @Override
     public DialogueInterface getDialogue() {
