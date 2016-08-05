@@ -1,6 +1,3 @@
-/**
- * 
- */
 package it.unibo.unori.controller;
 
 import java.awt.event.KeyAdapter;

@@ -1,4 +1,4 @@
-package it.unibo.unori.controller;
+package it.unibo.unori.controller.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -8,6 +8,9 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
+
+import it.unibo.unori.controller.GameStatistics;
+import it.unibo.unori.controller.GameStatisticsImpl;
 
 /**
  * JUnit test class for {@link it.unibo.unori.controller.GameStatistics}
