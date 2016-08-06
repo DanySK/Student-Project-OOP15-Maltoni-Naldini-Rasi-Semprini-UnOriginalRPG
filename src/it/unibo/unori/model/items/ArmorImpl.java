@@ -180,5 +180,10 @@ public class ArmorImpl implements Armor {
                 && other.getThunderDefense() == map.get(Statistics.THUNDERDEF)
                 && other.getPhysicalRes() == map.get(Statistics.PHYSICDEF);
     }
+    
+    @Override
+    public String toString() {
+        return this.name;
+    }
 
 }

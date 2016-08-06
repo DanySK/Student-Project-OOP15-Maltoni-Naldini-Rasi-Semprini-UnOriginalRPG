@@ -164,5 +164,10 @@ public class WeaponImpl implements Weapon {
                 && other.getPhysicalAtk() == map.get(Statistics.PHYSICATK)
                 && other.getThunderAtk() == map.get(Statistics.THUNDERATK);
     }
+    
+    @Override
+    public String toString() {
+        return this.name;
+    }
 
 }

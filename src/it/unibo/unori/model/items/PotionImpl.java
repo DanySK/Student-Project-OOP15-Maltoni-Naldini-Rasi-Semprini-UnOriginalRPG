@@ -145,5 +145,10 @@ public class PotionImpl implements Potion {
                 && this.statToRestore == other.getStatisticToRestore()
                 && this.statusRestorable == other.statusRestorable;
     }
+    
+    @Override
+    public String toString() {
+        return this.name;
+    }
 
 }

@@ -63,7 +63,11 @@ public class ItemImpl implements Item {
             return false;
         }
     }
-
+    
+    @Override
+    public String toString() {
+        return this.name;
+    }
 
 
 }
