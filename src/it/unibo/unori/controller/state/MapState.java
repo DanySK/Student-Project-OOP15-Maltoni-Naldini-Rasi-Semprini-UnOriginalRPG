@@ -40,7 +40,17 @@ public class MapState extends AbstractGameState {
             }
             
             return returnMap;
-        }), new MapState.InteractAction(), new MapState.OpenMenuAction(), String[][] paths*/ null));
+        }), new MapState.InteractAction(), new MapState.OpenMenuAction(), (String[][]) (() -> {
+            String[][] returnMap = new String[map.getMapLength()][map.getMapWidth()];
+            
+            for(final int lenght = 0; length < map.getMapLength(); length++) {
+                for(final int width = 0; width < map.getMapWidth(); width++) {
+                    returnMap[length][width] = map.getCell(new Position(length, width)).getFrame();
+                }
+            }
+            
+            return returnMap;
+        })*/null));
         party = SingletonParty.getParty();
         party.setCurrentMap(map);
         // TODO
