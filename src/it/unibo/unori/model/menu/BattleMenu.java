@@ -17,8 +17,8 @@ public class BattleMenu implements BattleMenuInterface {
      * Standard constructor.
      * @param battle the current Battle.
      */
-    public BattleMenu(final BattleImpl battle) {
-        this.battle = battle;
+    public BattleMenu(final BattleImpl batt) {
+        this.battle = batt;
         this.bag = this.battle.getItemBag();
     }
     
