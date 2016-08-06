@@ -25,7 +25,6 @@ public class TestBagMenu {
         bag.storeItem(fact.getBalestra());
         bag.storeItem(fact.getBalestra());
         bag.storeItem(fact.getBalestra());
-        System.out.println(bag.getMiscellaneous().size());
         bag.storeItem(fact.getBalestra());
         bag.storeItem(fact.getCannone());
         bag.storeItem(fact.getCannone());
@@ -54,16 +53,6 @@ public class TestBagMenu {
         System.out.println(bag.getMiscellaneous());
         System.out.println(toTest.getAllItems());
         System.out.println(this.toTest.getList());
-        System.out.println(this.toTest.getSelected());
-        System.out.println(this.toTest.scrollDown());
-        System.out.println(this.toTest.getSelected());
-        System.out.println(this.toTest.scrollDown());
-        System.out.println(this.toTest.getSelected());
-        System.out.println(this.toTest.scrollUp());
-        System.out.println(this.toTest.getSelected());
-        System.out.println(this.toTest.scrollUp());
-        System.out.println(this.toTest.getSelected());
-        System.out.println(this.toTest.scrollDown());
         System.out.println(this.toTest.getSelected());
     }
 }

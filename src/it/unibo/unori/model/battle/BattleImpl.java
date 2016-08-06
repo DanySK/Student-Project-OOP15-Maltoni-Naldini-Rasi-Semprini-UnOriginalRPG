@@ -220,7 +220,7 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public int useMagicAttack(final MagicAttack m, final Foe enemy, final boolean whosFirst)
+    public String useMagicAttack(final MagicAttack m, final Foe enemy, final boolean whosFirst)
             throws NotEnoughMPExcpetion, MagicNotFoundException {
         if (whosFirst) {
             if (this.heroOnTurn.getMagics().contains(m)) {
@@ -232,7 +232,7 @@ public class BattleImpl implements Battle {
                 this.heroOnTurn.setCurrentBar(
                         BattleLogics.toFillSpecialBar(this.foeOnTurn, true, this.heroOnTurn));
                 //TODO A lot of things.
-                return 0;
+                return null;
             } else {
                 throw new MagicNotFoundException();
             }
@@ -244,7 +244,7 @@ public class BattleImpl implements Battle {
                     throw new NotEnoughMPExcpetion();
                 }
                 //TODO A lot of things.
-                return 0;
+                return null;
             } else {
                 throw new MagicNotFoundException();
             }

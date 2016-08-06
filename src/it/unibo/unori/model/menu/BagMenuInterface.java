@@ -20,14 +20,14 @@ public interface BagMenuInterface {
      * Method to scroll the Bag Items up by one.
      * @return 
      */
-    int scrollUp();
+    void scrollUp();
     
     
     /**
      * Method to scroll the Bag Items down by one.
      * @return 
      */
-    int scrollDown();
+    void scrollDown();
     
     
     /**

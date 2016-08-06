@@ -75,12 +75,12 @@ public interface Battle {
      * @param enemy the enemy to which throw the attack.
      * @param whosFirst true if the Hero is attacking, false otherwise.
      * Note: use BattleLogics.whosFirst().
-     * @return the amount of damage inflicted.
+     * @return A confirmation String.
      * @throws NotEnoughMPExcpetion if the current MPs of the Character
      * is not enough to throw the attack.
      * @throws MagicNotFoundException 
      */
-    int useMagicAttack(MagicAttack m, Foe enemy, boolean whosFirst) 
+    String useMagicAttack(MagicAttack m, Foe enemy, boolean whosFirst) 
             throws NotEnoughMPExcpetion, MagicNotFoundException;
     
     /**

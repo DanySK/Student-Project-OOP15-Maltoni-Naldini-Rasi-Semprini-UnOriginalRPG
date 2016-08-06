@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import it.unibo.unori.model.battle.Battle;
 import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.Item;
@@ -29,7 +30,19 @@ public class BagMenu implements BagMenuInterface {
      */
     public BagMenu(final Bag b) {
         this.bag = b;
-        
+        this.generateFromaBag();
+    }
+    
+    /**
+     * Another constructor, it has a Battle as a parameter
+     */
+    public BagMenu(final Battle battle) {
+        this.bag = battle.getItemBag();
+        this.generateFromaBag();
+    }
+    
+    //Method to be called in the Constructor.
+    private void generateFromaBag() {
         this.listOfItems = new ArrayList<>();
         this.bag.getMiscellaneous().keySet().forEach(e -> {
             this.listOfItems.add(e);
@@ -45,7 +58,7 @@ public class BagMenu implements BagMenuInterface {
     }
     
     @Override
-    public int scrollUp() {
+    public void scrollUp() {
         int nextIndex = this.listOfItems.indexOf(this.selected.get().getX()) + 1;
         if(nextIndex >= this.listOfItems.size()) {
             nextIndex -= this.listOfItems.size();
@@ -54,11 +67,10 @@ public class BagMenu implements BagMenuInterface {
             this.selected = Optional.of(new Pair<Item, Integer>(
                     this.listOfItems.get(nextIndex), this.listOfQuantity.get(nextIndex)));
         }
-        return nextIndex;
     }
     
     @Override
-    public int scrollDown() {
+    public void scrollDown() {
         int nextIndex = this.listOfItems.indexOf(this.selected.get().getX()) - 1;
         if((nextIndex + 1) <= 0){
             nextIndex = this.listOfItems.size() - 1;
@@ -67,7 +79,6 @@ public class BagMenu implements BagMenuInterface {
             this.selected =  Optional.of(new Pair<Item, Integer>(
                     this.listOfItems.get(nextIndex), this.listOfQuantity.get(nextIndex)));
         }
-        return nextIndex;
     }
     
     @Override
@@ -103,19 +114,7 @@ public class BagMenu implements BagMenuInterface {
     @Override
     public void update(final Bag b) {
         this.bag = b;
-        
-        this.listOfItems = new ArrayList<>();
-        this.bag.getMiscellaneous().keySet().forEach(e -> {
-            this.listOfItems.add(e);
-        });
-        this.listOfQuantity = new ArrayList<>();
-        this.bag.getMiscellaneous().values().forEach(e -> {
-            this.listOfQuantity.add(e);
-        });
-        
-        this.selected = 
-                Optional.of(new Pair<Item, Integer>(
-                        this.listOfItems.get(0), this.listOfQuantity.get(0)));
+        this.generateFromaBag();
     }
     
     @Override
