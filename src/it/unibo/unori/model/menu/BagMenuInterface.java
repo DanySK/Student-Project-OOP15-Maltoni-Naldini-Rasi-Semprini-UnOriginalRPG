@@ -1,5 +1,6 @@
 package it.unibo.unori.model.menu;
 
+import java.util.List;
 import java.util.Map;
 
 import it.unibo.unori.model.items.Armor;
@@ -67,4 +68,18 @@ public interface BagMenuInterface {
      * @return the quantity of the currently selected Item.
      */
     int getSelectedQuantity();
+
+    /**
+     * Method to update the Menu with another Bag. 
+     * For Test purposes.
+     * @param b the bag to update with.
+     */
+    void update(Bag b);
+
+    /**
+     * Method that returns the list of Items stored in BagMenu.
+     * For Test purposes.
+     * @return the list of Items stored.
+     */
+    List<Map<Item, Integer>> getList();
 }

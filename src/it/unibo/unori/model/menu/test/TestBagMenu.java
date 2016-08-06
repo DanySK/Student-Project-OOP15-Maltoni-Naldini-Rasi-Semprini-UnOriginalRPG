@@ -46,8 +46,15 @@ public class TestBagMenu {
         bag.storeItem(factP.getPozioneDio());
         bag.storeItem(factP.getPozioneDio());
         bag.storeItem(factP.getPozioneDio());
-        System.out.println(bag.getMiscellaneous().size());
+        System.out.println(bag.getMiscellaneous());
         System.out.println(bag.getMiscellaneous().values());
         this.toTest = new BagMenu(bag);
+        bag.storeItem(fact.getColtre());
+        this.toTest.update(bag);
+        System.out.println(bag.getMiscellaneous());
+        System.out.println(toTest.getAllItems());
+        System.out.println(toTest.getSelectedQuantity());
+        System.out.println(this.toTest.getSelectedIem());
+        System.out.println(toTest.getList());
     }
 }

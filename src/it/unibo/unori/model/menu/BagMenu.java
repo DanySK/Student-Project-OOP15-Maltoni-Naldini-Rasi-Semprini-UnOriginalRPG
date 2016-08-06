@@ -1,6 +1,7 @@
 package it.unibo.unori.model.menu;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -17,7 +18,7 @@ import it.unibo.unori.model.items.Weapon;
  */
 public class BagMenu implements BagMenuInterface {
     
-    private final Bag bag;
+    private Bag bag;
     private Optional<Item> selectedItem;
     private Optional<Integer> selectedQuantity;
     private List<Item> listOfItems;
@@ -94,5 +95,34 @@ public class BagMenu implements BagMenuInterface {
     @Override
     public int getSelectedQuantity() {
         return this.selectedQuantity.get();
+    }
+    
+    @Override
+    public void update(final Bag b) {
+        this.bag = b;
+        
+        this.listOfItems = new ArrayList<>();
+        this.bag.getMiscellaneous().keySet().forEach(e -> {
+            this.listOfItems.add(e);
+        });
+        this.listOfQuantity = new ArrayList<>();
+        this.bag.getMiscellaneous().values().forEach(e -> {
+            this.listOfQuantity.add(e);
+        });
+        
+        this.selectedItem = Optional.of(this.listOfItems.get(0));
+        this.selectedQuantity = Optional.of(this.listOfQuantity.get(0));
+    }
+    
+    @Override
+    public List<Map<Item, Integer>> getList() {
+        final List<Map<Item, Integer>> toReturn = new ArrayList<>();
+        
+        this.listOfItems.forEach(e -> {
+            final Map<Item, Integer> toAdd = new HashMap<>();
+            toAdd.put(e, this.listOfQuantity.get(this.listOfItems.indexOf(e)));
+            toReturn.add(toAdd);
+        });
+        return toReturn;
     }
 }
