@@ -21,8 +21,9 @@ public interface BattleMenuInterface {
     
     /**
      * Method to handle the fight choice.
+     * @return the FightMenu.
      */
-    void fight();
+    FightInterface fight();
     
     /**
      * Method to handle the special attack bar implementation.

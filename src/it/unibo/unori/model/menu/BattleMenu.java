@@ -33,8 +33,8 @@ public class BattleMenu implements BattleMenuInterface {
     }
     
     @Override
-    public void fight() {
-        //TODO
+    public FightInterface fight() {
+        return new FightMenu(this.battle);
     }
     
     @Override
