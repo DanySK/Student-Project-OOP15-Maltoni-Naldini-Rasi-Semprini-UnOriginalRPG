@@ -4,9 +4,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
 
+import it.unibo.unori.controller.exceptions.NotValidStateException;
 import it.unibo.unori.controller.state.GameState;
-import it.unibo.unori.model.maps.Party;
 
 /**
  * This is the interface for the main controller, started by the main object and
@@ -86,5 +87,9 @@ public interface Controller {
     Class<?> getCurrentStateClass();
 
     void setParty();
+    
+    void openMenu() throws NotValidStateException;
+
+    void closeMenu() throws NotValidStateException;
 
 }

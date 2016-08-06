@@ -10,6 +10,10 @@ import it.unibo.unori.controller.SingletonStateMachine;
 import it.unibo.unori.controller.state.MapState;
 import it.unibo.unori.model.menu.DialogueInterface;
 
+/**
+ * Action that should be linked with interaction button(s). This makes the
+ * player interact with cells near him/her.
+ */
 public class InteractAction extends AbstractAction {
     /**
      * Generated serial version UID.

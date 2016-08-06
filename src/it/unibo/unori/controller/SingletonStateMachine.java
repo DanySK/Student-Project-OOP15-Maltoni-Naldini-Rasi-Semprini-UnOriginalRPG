@@ -1,20 +1,25 @@
 package it.unibo.unori.controller;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
 
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
+
+import it.unibo.unori.controller.exceptions.NotValidStateException;
 import it.unibo.unori.controller.json.JsonFileManager;
 import it.unibo.unori.controller.state.CharacterSelectionState;
 import it.unibo.unori.controller.state.GameState;
+import it.unibo.unori.controller.state.InGameMenuState;
 import it.unibo.unori.controller.state.MainMenuState;
 import it.unibo.unori.controller.state.MapState;
-import it.unibo.unori.model.maps.Party.CardinalPoints;
-import it.unibo.unori.model.maps.SingletonParty;
-import it.unibo.unori.view.layers.CharacterSelectionLayer;
 import it.unibo.unori.model.character.HeroImpl;
 import it.unibo.unori.model.character.exceptions.MaxHeroException;
 import it.unibo.unori.model.character.jobs.Jobs;
+import it.unibo.unori.model.maps.SingletonParty;
+import it.unibo.unori.view.layers.CharacterSelectionLayer;
 
 /**
  * This class manages an implementation of
@@ -168,6 +173,23 @@ public final class SingletonStateMachine {
         @Override
         public Class<?> getCurrentStateClass() {
             return this.stack.peek().getClass();
+        }
+
+        public void openMenu() throws NotValidStateException {
+            if (this.stack.peek().getClass().isInstance(InGameMenuState.class)) {
+                this.stack.push(new InGameMenuState());
+                this.stack.render();
+            } else {
+                throw new NotValidStateException();
+            }
+        }
+
+        public void closeMenu() throws NotValidStateException {
+            if (this.stack.peek().getClass().isInstance(InGameMenuState.class)) {
+                this.stack.pop();
+            } else {
+                throw new NotValidStateException();
+            }
         }
 
     }

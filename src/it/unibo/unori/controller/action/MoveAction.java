@@ -24,7 +24,13 @@ public class MoveAction extends AbstractAction {
     private final Party.CardinalPoints direction;
     private final Controller controller;
 
-    MoveAction(final Party.CardinalPoints direction) {
+    /**
+     * Default constructor.
+     * 
+     * @param direction
+     *            the direction to move to
+     */
+    public MoveAction(final Party.CardinalPoints direction) {
         super();
         this.direction = direction;
         this.controller = SingletonStateMachine.getController();
