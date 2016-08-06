@@ -8,6 +8,7 @@ import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.Item;
 import it.unibo.unori.model.items.Potion;
 import it.unibo.unori.model.items.Weapon;
+import it.unibo.unori.model.menu.utility.Pair;
 
 /**
  * Interface to model an in-Bag Menu.
@@ -17,14 +18,16 @@ public interface BagMenuInterface {
     
     /**
      * Method to scroll the Bag Items up by one.
+     * @return 
      */
-    void scrollUp();
+    int scrollUp();
     
     
     /**
      * Method to scroll the Bag Items down by one.
+     * @return 
      */
-    void scrollDown();
+    int scrollDown();
     
     
     /**
@@ -56,18 +59,6 @@ public interface BagMenuInterface {
      * @return the Bag.
      */
     Bag getBag();
-    
-    /**
-     * Getter method that returns the currently selected Item.
-     * @return the currently selected Item.
-     */
-    Item getSelectedIem();
-    
-    /**
-     * Getter method that returns the quantity of the currently selected Item.
-     * @return the quantity of the currently selected Item.
-     */
-    int getSelectedQuantity();
 
     /**
      * Method to update the Menu with another Bag. 
@@ -81,5 +72,11 @@ public interface BagMenuInterface {
      * For Test purposes.
      * @return the list of Items stored.
      */
-    List<Map<Item, Integer>> getList();
+    List<Pair<Item, Integer>> getList();
+
+    /**
+     * Getter method that returns the currently selected Item, with its relative quantity.
+     * @return the currently selected Item and its quantity.
+     */
+    Pair<Item, Integer> getSelected();
 }

@@ -1,7 +1,6 @@
 package it.unibo.unori.model.menu;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -11,6 +10,7 @@ import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.Item;
 import it.unibo.unori.model.items.Potion;
 import it.unibo.unori.model.items.Weapon;
+import it.unibo.unori.model.menu.utility.Pair;
 
 /**
  * Class to model a menu for the Bag.
@@ -19,8 +19,7 @@ import it.unibo.unori.model.items.Weapon;
 public class BagMenu implements BagMenuInterface {
     
     private Bag bag;
-    private Optional<Item> selectedItem;
-    private Optional<Integer> selectedQuantity;
+    private Optional<Pair<Item, Integer>> selected;
     private List<Item> listOfItems;
     private List<Integer> listOfQuantity;
     
@@ -39,33 +38,36 @@ public class BagMenu implements BagMenuInterface {
         this.bag.getMiscellaneous().values().forEach(e -> {
             this.listOfQuantity.add(e);
         });
-        
-        this.selectedItem = Optional.of(this.listOfItems.get(0));
-        this.selectedQuantity = Optional.of(this.listOfQuantity.get(0));
+
+        this.selected = 
+                Optional.of(new Pair<Item, Integer>(
+                        this.listOfItems.get(0), this.listOfQuantity.get(0)));
     }
     
     @Override
-    public void scrollUp() {
-        int nextIndex = this.listOfItems.indexOf(this.selectedItem.get()) + 1;
+    public int scrollUp() {
+        int nextIndex = this.listOfItems.indexOf(this.selected.get().getX()) + 1;
         if(nextIndex >= this.listOfItems.size()) {
-            nextIndex = nextIndex - this.listOfItems.size();
+            nextIndex -= this.listOfItems.size();
         }
-        if (this.selectedItem.isPresent() && this.selectedQuantity.isPresent()) {
-            this.selectedItem = Optional.of(this.listOfItems.get(nextIndex));
-            this.selectedQuantity = Optional.of(this.listOfQuantity.get(nextIndex));
+        if (this.selected.isPresent()) {
+            this.selected = Optional.of(new Pair<Item, Integer>(
+                    this.listOfItems.get(nextIndex), this.listOfQuantity.get(nextIndex)));
         }
+        return nextIndex;
     }
     
     @Override
-    public void scrollDown() {
-        int nextIndex = this.listOfItems.indexOf(this.selectedItem.get()) - 1;
+    public int scrollDown() {
+        int nextIndex = this.listOfItems.indexOf(this.selected.get().getX()) - 1;
         if((nextIndex + 1) <= 0){
             nextIndex = this.listOfItems.size() - 1;
         }
-        if (this.selectedItem.isPresent() && this.selectedQuantity.isPresent()) {
-            this.selectedItem =  Optional.of(this.listOfItems.get(nextIndex));
-            this.selectedQuantity = Optional.of(this.listOfQuantity.get(nextIndex));
+        if (this.selected.isPresent()) {
+            this.selected =  Optional.of(new Pair<Item, Integer>(
+                    this.listOfItems.get(nextIndex), this.listOfQuantity.get(nextIndex)));
         }
+        return nextIndex;
     }
     
     @Override
@@ -94,13 +96,8 @@ public class BagMenu implements BagMenuInterface {
     }
     
     @Override
-    public Item getSelectedIem() {
-        return this.selectedItem.get();
-    }
-    
-    @Override
-    public int getSelectedQuantity() {
-        return this.selectedQuantity.get();
+    public Pair<Item, Integer> getSelected() {
+        return this.selected.get();
     }
     
     @Override
@@ -116,17 +113,18 @@ public class BagMenu implements BagMenuInterface {
             this.listOfQuantity.add(e);
         });
         
-        this.selectedItem = Optional.of(this.listOfItems.get(0));
-        this.selectedQuantity = Optional.of(this.listOfQuantity.get(0));
+        this.selected = 
+                Optional.of(new Pair<Item, Integer>(
+                        this.listOfItems.get(0), this.listOfQuantity.get(0)));
     }
     
     @Override
-    public List<Map<Item, Integer>> getList() {
-        final List<Map<Item, Integer>> toReturn = new ArrayList<>();
+    public List<Pair<Item, Integer>> getList() {
+        final List<Pair<Item, Integer>> toReturn = new ArrayList<>();
         
         this.listOfItems.forEach(e -> {
-            final Map<Item, Integer> toAdd = new HashMap<>();
-            toAdd.put(e, this.listOfQuantity.get(this.listOfItems.indexOf(e)));
+            final Pair<Item, Integer> toAdd = 
+                    new Pair<>(e, this.listOfQuantity.get(this.listOfItems.indexOf(e)));
             toReturn.add(toAdd);
         });
         return toReturn;
