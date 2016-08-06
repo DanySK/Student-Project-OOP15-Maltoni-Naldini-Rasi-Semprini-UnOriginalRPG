@@ -14,8 +14,9 @@ public interface DialogueInterface extends Serializable {
     /**
      * This method gives the next String to show in the dialogue window.
      * @return the next string to show.
+     * @throws IndexOutOfBoundsException if the whole List has already been showed.
      */
-    String showNext();
+    String showNext() throws IndexOutOfBoundsException;
     
     /**
      * This method tells if the dialogue window is full of rows or not.

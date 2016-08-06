@@ -81,10 +81,14 @@ public class Dialogue implements DialogueInterface {
     }
     
     @Override
-    public String showNext() {
-        final String show = this.listRows.get(this.nextToShow);
-        this.nextToShow++;
-        return show;
+    public String showNext() throws IndexOutOfBoundsException {
+        if (!this.isOver()) {
+            final String show = this.listRows.get(this.nextToShow);
+            this.nextToShow++;
+            return show;
+        } else {
+            throw new IndexOutOfBoundsException();
+        }
     }
     
     @Override
@@ -109,7 +113,7 @@ public class Dialogue implements DialogueInterface {
     
     @Override
     public boolean isOver() {
-        return this.nextToShow == this.listRows.size();
+        return this.nextToShow >= this.listRows.size();
     }
     
     /**
