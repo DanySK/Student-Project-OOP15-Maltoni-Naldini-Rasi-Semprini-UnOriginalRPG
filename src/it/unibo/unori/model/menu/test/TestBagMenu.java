@@ -56,5 +56,33 @@ public class TestBagMenu {
         System.out.println(toTest.getSelectedQuantity());
         System.out.println(this.toTest.getSelectedIem());
         System.out.println(toTest.getList());
+        this.toTest.scrollUp();
+        System.out.println(this.toTest.getSelectedIem());
+        this.toTest.scrollUp();
+        System.out.println(this.toTest.getSelectedIem());
+        this.toTest.scrollDown();
+        System.out.println(this.toTest.getSelectedIem());
+        this.toTest.scrollDown();
+        System.out.println(this.toTest.getSelectedIem());
+        this.toTest.scrollDown();
+        System.out.println(this.toTest.getSelectedIem());
+        this.toTest.scrollUp();
+        System.out.println(this.toTest.getSelectedIem());
+        this.toTest.scrollUp();
+        System.out.println(this.toTest.getSelectedIem());
+        this.toTest.scrollDown();
+        System.out.println(this.toTest.getSelectedIem());
+        this.toTest.scrollDown();
+        System.out.println(this.toTest.getSelectedIem());
+        this.toTest.scrollDown();
+        System.out.println(this.toTest.getSelectedIem());
+        this.toTest.scrollDown();
+        System.out.println(this.toTest.getSelectedIem());
+        this.toTest.scrollDown();
+        System.out.println(this.toTest.getSelectedIem());
+        this.toTest.scrollDown();
+        System.out.println(this.toTest.getSelectedIem());
+        this.toTest.scrollDown();
+        System.out.println(this.toTest.getSelectedIem());
     }
 }

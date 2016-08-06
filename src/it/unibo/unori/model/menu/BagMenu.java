@@ -46,19 +46,25 @@ public class BagMenu implements BagMenuInterface {
     
     @Override
     public void scrollUp() {
-        if (this.selectedItem.isPresent()) {
-            this.selectedItem = 
-                    Optional.of(this.listOfItems.get(
-                            this.listOfItems.indexOf(this.selectedItem.get()) + 1));
+        int nextIndex = this.listOfItems.indexOf(this.selectedItem.get()) + 1;
+        if(nextIndex >= this.listOfItems.size()) {
+            nextIndex = nextIndex - this.listOfItems.size();
+        }
+        if (this.selectedItem.isPresent() && this.selectedQuantity.isPresent()) {
+            this.selectedItem = Optional.of(this.listOfItems.get(nextIndex));
+            this.selectedQuantity = Optional.of(this.listOfQuantity.get(nextIndex));
         }
     }
     
     @Override
     public void scrollDown() {
-        if (this.selectedItem.isPresent()) {
-            this.selectedItem = 
-                    Optional.of(this.listOfItems.get(
-                            this.listOfItems.indexOf(this.selectedItem.get()) - 1));
+        int nextIndex = this.listOfItems.indexOf(this.selectedItem.get()) - 1;
+        if((nextIndex + 1) <= 0){
+            nextIndex = this.listOfItems.size() - 1;
+        }
+        if (this.selectedItem.isPresent() && this.selectedQuantity.isPresent()) {
+            this.selectedItem =  Optional.of(this.listOfItems.get(nextIndex));
+            this.selectedQuantity = Optional.of(this.listOfQuantity.get(nextIndex));
         }
     }
     
