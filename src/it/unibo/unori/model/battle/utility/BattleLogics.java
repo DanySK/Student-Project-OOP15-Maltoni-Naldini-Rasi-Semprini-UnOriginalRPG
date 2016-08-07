@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import it.unibo.unori.model.battle.MagicAttackInterface;
+import it.unibo.unori.model.battle.exceptions.FailedException;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.HeroTeam;
@@ -269,10 +270,41 @@ public final class BattleLogics {
      * @param who true if the Hero throws the attack, false if the Foe throws.
      * @param toThrow the MagicAttack interested.
      * @return the damage to be inflicted either to the Foe or the Hero.
+     * @throws FailedException if the attack fails.
      */
     public static int calculateWeakness(final Foe f, final Hero my, final boolean who,
-            final MagicAttackInterface toThrow) {
-        //TODO
-        return 0;
+            final MagicAttackInterface toThrow) throws FailedException {
+        if (BattleLogics.isSucsessfull(toThrow)) {
+            //TODO
+            return 0; 
+        } else {
+            throw new FailedException();
+        }
+    }
+    
+    /**
+     * Accuracy is calculated in this way:
+     * If the accuracy of the attack is x, then the Character has 2/x+1 probability
+     * to fail the attack. Except from the case in which the accuracy equals 8: in that
+     * case the probability to fail is 1/x+1.
+     * @param m the MagicAttack to throw.
+     * @return true if the attack does not fail, false otherwise.
+     */
+    public static boolean isSucsessfull(final MagicAttackInterface m) {
+        final int accuracy = m.getAccuracy();
+        final int toCalc = accuracy + 1;
+        if (accuracy >= HIGHIA) {
+            Random rand = new Random();
+            int luck = rand.nextInt(toCalc);
+            return !(luck == YOURELUCKY);
+        } else if (accuracy >= MEDIUMIA && accuracy < HIGHIA) {
+            Random rand = new Random();
+            int luck = rand.nextInt(toCalc);
+            return !(luck == YOURELUCKY || luck == 0);
+        } else {
+            Random rand = new Random();
+            int luck = rand.nextInt(toCalc);
+            return !(luck == YOURELUCKY || luck == 0);
+        }
     }
 }
