@@ -15,6 +15,8 @@ import com.google.gson.JsonIOException;
 
 import it.unibo.unori.controller.GameStatisticsImpl;
 import it.unibo.unori.controller.json.JsonFileManager;
+import it.unibo.unori.controller.json.JsonJobParameter;
+import it.unibo.unori.model.character.jobs.Jobs;
 import it.unibo.unori.model.maps.SingletonParty;
 
 /**
@@ -25,6 +27,7 @@ import it.unibo.unori.model.maps.SingletonParty;
 public class JsonFileManagerTest {
     private static final String SAVE_FILE = "Save.json";
     private static final String STATS_FILE = "Stats.json";
+    private static final String DUMP_JOB_FILE = "Dump.json";
     
     /**
      * This rule instantiates a temporary folder where to check files.
@@ -117,32 +120,45 @@ public class JsonFileManagerTest {
     @Test
     public void testSaveAndLoadStats() throws IOException {
         final JsonFileManager jsonManager = new JsonFileManager();
-        final File f = folder.newFile(STATS_FILE);
+        final File file = folder.newFile(STATS_FILE);
         final GameStatisticsImpl test = new GameStatisticsImpl();
-        jsonManager.saveStatsToPath(test, f.getAbsolutePath());
-        assertEquals(test, jsonManager.loadStatsFromPath(f.getAbsolutePath()));
+        jsonManager.saveStatsToPath(test, file.getAbsolutePath());
+        assertEquals(test, jsonManager.loadStatsFromPath(file.getAbsolutePath()));
 
-        if (f.delete()) {
-            final GameStatisticsImpl gs = new GameStatisticsImpl();
-            gs.increaseArmorsAcquired(10);
-            gs.increaseBossesKilled(10);
-            gs.increaseMonstersKilled(10);
-            gs.increaseMonstersMet(10);
-            gs.increaseNewGames(10);
-            gs.increaseTotalExpGained(10);
-            gs.increaseTotalTimePlayed(10);
-            gs.increaseWeaponsAcquired(10);
-            // gs.stopCountingTime();
+        if (file.delete()) {
+            final GameStatisticsImpl gameStats = new GameStatisticsImpl();
+            gameStats.increaseArmorsAcquired(10);
+            gameStats.increaseBossesKilled(10);
+            gameStats.increaseMonstersKilled(10);
+            gameStats.increaseMonstersMet(10);
+            gameStats.increaseNewGames(10);
+            gameStats.increaseTotalExpGained(10);
+            gameStats.increaseTotalTimePlayed(10);
+            gameStats.increaseWeaponsAcquired(10);
 
-            jsonManager.saveStatsToPath(gs, f.getAbsolutePath());
-            final GameStatisticsImpl ret = jsonManager.loadStatsFromPath(f.getAbsolutePath());
-            // System.out.println(gs.toString());
-            // System.out.println();
-            // System.out.println(ret.toString());
-            assertEquals(gs, ret);
+            jsonManager.saveStatsToPath(gameStats, file.getAbsolutePath());
+            final GameStatisticsImpl ret = jsonManager.loadStatsFromPath(file.getAbsolutePath());
+            assertEquals(gameStats, ret);
         } else {
-            fail("Can't delete temporary " + f.getName() + " JSON test file");
+            fail("Can't delete temporary " + file.getName() + " JSON test file");
         }
+    }
+    
+    @Test
+    public void testSaveAndLoadJob() throws IOException {
+        final JsonFileManager jsonManager = new JsonFileManager();
+        final File file = folder.newFile(DUMP_JOB_FILE);
+        final Jobs jobsTest = Jobs.DUMP;
+        final JsonJobParameter parameterTest = new JsonJobParameter(jobsTest.getInitialStats(), jobsTest.getGrowthStats(), jobsTest.getInitialArmor(), jobsTest.getInitialWeapon());
+        
+        jsonManager.saveJob(parameterTest, DUMP_JOB_FILE);
+        final JsonJobParameter loaded = jsonManager.loadJob(DUMP_JOB_FILE);
+        assertEquals(parameterTest.getDefaultStats(), loaded.getDefaultStats());
+        assertEquals(parameterTest.getDefaultIncrement(), loaded.getDefaultIncrement());
+        assertEquals(parameterTest.getDefaultArmor(), loaded.getDefaultArmor());
+        assertEquals(parameterTest.getDefaultWeapon(), loaded.getDefaultWeapon());
+        
+        
     }
 
 }

@@ -19,6 +19,7 @@ import it.unibo.unori.model.items.WeaponFactory;
  * JUnit test for {@link it.unibo.unori.controller.utility.JobsSetup.java} class.
  */
 public class JobsSetupTest {
+    private static final String PATH_NOT_FOUND = "It shouldn't find a path";
 
     /**
      * This tests if the correct default statistics are returned.
@@ -32,11 +33,11 @@ public class JobsSetupTest {
             try {
                 path = Optional.of(JobsSetup.getPath(j));
                 if (j.equals(Jobs.DUMP)) {
-                    fail("It shouldn't find a path");
+                    fail(PATH_NOT_FOUND);
                 }
             } catch (FileNotFoundException e) {
                 if (!j.equals(Jobs.DUMP)) {
-                    fail("It should find a path");
+                    fail(PATH_NOT_FOUND);
                 }
             }
 
@@ -60,11 +61,11 @@ public class JobsSetupTest {
             try {
                 path = Optional.of(JobsSetup.getPath(j));
                 if (j.equals(Jobs.DUMP)) {
-                    fail("It shouldn't find a path");
+                    fail(PATH_NOT_FOUND);
                 }
             } catch (FileNotFoundException e) {
                 if (!j.equals(Jobs.DUMP)) {
-                    fail("It should find a path");
+                    fail(PATH_NOT_FOUND);
                 }
             }
 
@@ -88,11 +89,11 @@ public class JobsSetupTest {
             try {
                 path = Optional.of(JobsSetup.getPath(j));
                 if (j.equals(Jobs.DUMP)) {
-                    fail("It shouldn't find a path");
+                    fail(PATH_NOT_FOUND);
                 }
             } catch (FileNotFoundException e) {
                 if (!j.equals(Jobs.DUMP)) {
-                    fail("It should find a path");
+                    fail(PATH_NOT_FOUND);
                 }
             }
 
@@ -116,16 +117,16 @@ public class JobsSetupTest {
             try {
                 path = Optional.of(JobsSetup.getPath(j));
                 if (j.equals(Jobs.DUMP)) {
-                    fail("It shouldn't find a path");
+                    fail(PATH_NOT_FOUND);
                 }
             } catch (FileNotFoundException e) {
                 if (!j.equals(Jobs.DUMP)) {
-                    fail("It should find a path");
+                    fail(PATH_NOT_FOUND);
                 }
             }
 
             if (path.isPresent()) {
-                assertEquals(wf.getStdSword(), js.getDefaultArmorMap(path.get()));
+                assertEquals(wf.getStdSword(), js.getDefaultWeaponNullable(path.get()));
             }
 
             path = Optional.empty();

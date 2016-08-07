@@ -14,28 +14,29 @@ import java.util.Optional;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
 import it.unibo.unori.controller.GameStatisticsImpl;
+import it.unibo.unori.controller.json.deserializers.ArmorDeserializer;
+import it.unibo.unori.controller.json.deserializers.BagDeserializer;
+import it.unibo.unori.controller.json.deserializers.GameMapDeserializer;
+import it.unibo.unori.controller.json.deserializers.ItemDeserializer;
+import it.unibo.unori.controller.json.deserializers.PartyDeserializer;
+import it.unibo.unori.controller.json.deserializers.PotionDeserializer;
+import it.unibo.unori.controller.json.deserializers.WeaponDeserializer;
 import it.unibo.unori.model.items.Armor;
-import it.unibo.unori.model.items.ArmorImpl;
 import it.unibo.unori.model.items.Bag;
-import it.unibo.unori.model.items.BagImpl;
 import it.unibo.unori.model.items.Item;
-import it.unibo.unori.model.items.ItemImpl;
 import it.unibo.unori.model.items.Potion;
-import it.unibo.unori.model.items.PotionFactory;
 import it.unibo.unori.model.items.Weapon;
-import it.unibo.unori.model.items.WeaponImpl;
 import it.unibo.unori.model.maps.GameMap;
-import it.unibo.unori.model.maps.GameMapImpl;
 import it.unibo.unori.model.maps.Party;
-import it.unibo.unori.model.maps.SingletonParty;
+import it.unibo.unori.model.maps.Position;
+import it.unibo.unori.model.maps.cell.Cell;
 
 /**
- * This class models a clean bondary between Google Gson library and the needs
+ * This class models a clean boundary between Google Gson library and the needs
  * of this project, providing methods to serialize and deserialize from JSON
  * files instances of Party, GameStatistics and JsonJobsParamethers.
  */
@@ -56,32 +57,33 @@ public class JsonFileManager {
      * Default constructor.
      */
     public JsonFileManager() {
-        final JsonDeserializer<Armor> armorDeserialize = (element, type, context) -> ArmorImpl.NAKED;
-        final JsonDeserializer<Weapon> weaponDeserialize = (element, type, context) -> WeaponImpl.FISTS;
-        final JsonDeserializer<Party> partyDeserialize = (element, type, context) -> SingletonParty.getParty();
-        final JsonDeserializer<Potion> potionDeserialize = (element, type, context) -> /*new PotionImpl(0, Statistics.TOTALHP, "", "")*/ new PotionFactory().getStdPotion();
-        final JsonDeserializer<Bag> bagDeserialize = (element, type, context) -> new BagImpl();
-        final JsonDeserializer<Item> itemDeserialize = (element, type, context) -> {
+        /*final InstanceCreator<Weapon> weaponDeserialize = (type) -> new WeaponImpl();
+        final InstanceCreator<Party> partyDeserialize = (type) -> SingletonParty.getParty();
+        final InstanceCreator<Potion> potionDeserialize = (type) -> new PotionFactory().getStdPotion();
+        final InstanceCreator<Bag> bagDeserialize = (type) -> new BagImpl();
+        final InstanceCreator<Item> itemDeserialize = (type) -> {
             if (type.getClass().isAssignableFrom(Armor.class)) {
                 return ArmorImpl.NAKED;
             } else if (type.getClass().isAssignableFrom(Weapon.class)) {
                 return WeaponImpl.FISTS;
             } else if (type.getClass().isAssignableFrom(Potion.class)) {
-                return /*new PotionImpl(0, Statistics.TOTALHP, "", "")*/ new PotionFactory().getStdPotion();
+                return new PotionFactory().getStdPotion();
             } else {
                 return new ItemImpl("", "");
             }
         };
-        final JsonDeserializer<GameMap> mapDeserialize = (element, type, context) -> new GameMapImpl();
+        final InstanceCreator<GameMap> mapDeserialize = (type) -> new GameMapImpl();*/
 
         gson = new GsonBuilder().enableComplexMapKeySerialization().setPrettyPrinting()
-                .registerTypeAdapter(Item.class, itemDeserialize)
-                .registerTypeAdapter(Armor.class, armorDeserialize)
-                .registerTypeAdapter(Weapon.class, weaponDeserialize)
-                .registerTypeAdapter(Party.class, partyDeserialize)
-                .registerTypeAdapter(Potion.class, potionDeserialize)
-                .registerTypeAdapter(Bag.class, bagDeserialize)
-                .registerTypeAdapter(GameMap.class, mapDeserialize).create();
+                .registerTypeAdapter(Armor.class, new ArmorDeserializer())
+                .registerTypeAdapter(Item.class, new ItemDeserializer())
+                .registerTypeAdapter(Weapon.class, new WeaponDeserializer())
+                .registerTypeAdapter(Potion.class, new PotionDeserializer())
+                .registerTypeAdapter(Party.class, new PartyDeserializer())
+                .registerTypeAdapter(Bag.class, new BagDeserializer())
+                .registerTypeAdapter(GameMap.class, new GameMapDeserializer())
+                .registerTypeAdapter(Position.class, new GameMapDeserializer.PositionDeserializer())
+                .registerTypeAdapter(Cell.class, new GameMapDeserializer.CellDeserializer()).create();
     }
 
     /**

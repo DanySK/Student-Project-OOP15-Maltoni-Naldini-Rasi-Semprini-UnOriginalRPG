@@ -60,7 +60,7 @@ public final class JobsSetup {
     private final Map<String, Map<ArmorPieces, Armor>> armorMap;
     private final Map<String, Weapon> weaponMap;
 
-    private JsonFileManager fileManager;
+    private final JsonFileManager fileManager;
 
     /**
      * Default constructor.
@@ -78,7 +78,7 @@ public final class JobsSetup {
      * 
      * @param args
      *            standard main parameter
-     * @throws IOException
+     * @throws IOException if something goes wrong
      */
     public static void main(final String[] args) throws IOException {
         final StatisticsFactory sf = new StatisticsFactory();
