@@ -40,20 +40,20 @@ public class Dialogue implements DialogueInterface {
         boolean longWord = false;
         String[] splitted = this.sentence.split(" ");
         for (final String str : splitted) {
-            if (count >= 0 && count < Dialogue.MAX_CHARS) {
+            if (count >= 0 && count <= Dialogue.MAX_CHARS) {
                 if (str.length() + count < Dialogue.MAX_CHARS) {
                     if (longWord) {
                         s = s.concat(" ");
+                        longWord = false;
                     }
                     s = s.concat(str + " ");
                     count += str.length() + 1;
-                } 
-                if (str.length() + count == Dialogue.MAX_CHARS) {
+                } else if (str.length() + count == MAX_CHARS) {
                     s = s.concat(str);
                     count = 0;
                     toShow.add(s);
                     s = "";
-                } else if (str.length() + count > Dialogue.MAX_CHARS) {
+                } else if (str.length() + count > MAX_CHARS) {
                     if (str.length() + 1 <= MAX_CHARS) {
                         toShow.add(s);
                         s = str + " ";
@@ -61,11 +61,11 @@ public class Dialogue implements DialogueInterface {
                     } else {
                         for (Character ch : str.toCharArray()) {
                             longWord = true;
-                            if (count < Dialogue.MAX_CHARS) {
+                            if (count < MAX_CHARS) {
                                 s = s.concat(ch.toString());
                                 count++;
                             }
-                            if (count == Dialogue.MAX_CHARS) {
+                            if (count == MAX_CHARS) {
                                 count = 0;
                                 toShow.add(s);
                                 s = "";
@@ -127,5 +127,10 @@ public class Dialogue implements DialogueInterface {
                 System.out.println();
             }
         });
+    }
+    
+    @Override
+    public String toString() {
+        return this.showRows().toString();
     }
 }
