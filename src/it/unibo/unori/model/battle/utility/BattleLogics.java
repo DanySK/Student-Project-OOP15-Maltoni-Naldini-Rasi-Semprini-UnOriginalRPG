@@ -261,6 +261,14 @@ public final class BattleLogics {
         }
     }
     
+    /**
+     * Method supposed to calculate weakness in a MagicAttack.
+     * @param f the Foe that throws or  suffers the MagicAttack.
+     * @param my the Hero that throws or suffers the MagicAttack.
+     * @param who true if the Hero throws the attack, false if the Foe throws.
+     * @param toThrow the MagicAttack interested.
+     * @return the damage to be inflicted either to the Foe or the Hero.
+     */
     public static int calculateWeakness(final Foe f, final Hero my, final boolean who,
             final MagicAttackInterface toThrow) {
         return 0;
