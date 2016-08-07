@@ -134,20 +134,6 @@ public final class BattleLogics {
     }
     
     /**
-     * This method calculates the damage to inflict to an enemy by throwing 
-     * a magic attack.
-     * @param h the Hero involved in Battle.
-     * @param toThrow the Magic Attack that is supposed to be thrown.
-     * @param en the Foe to attack.
-     * @return the damage of the magic attack.
-     */
-    public static int magicAttackCalc(final Hero h, 
-            final MagicAttackInterface toThrow, final Foe en) {
-        //TODO
-        return 0;
-    }
-    
-    /**
      * This method is useful to determine if a Weapon has caused a Status changing.
      * @param my the Hero who is attacking.
      * @param en the Enemy being attacked.
