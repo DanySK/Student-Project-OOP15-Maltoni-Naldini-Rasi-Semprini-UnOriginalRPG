@@ -260,4 +260,9 @@ public final class BattleLogics {
             return toReturn + SHIFTLEVELLOWER;
         }
     }
+    
+    public static int calculateWeakness(final Foe f, final Hero my, final boolean who,
+            final MagicAttackInterface toThrow) {
+        return 0;
+    }
 }

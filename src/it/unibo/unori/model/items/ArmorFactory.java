@@ -14,7 +14,7 @@ import it.unibo.unori.model.items.Armor.ArmorPieces;
 public class ArmorFactory {
     
     private Map<Statistics, Integer> generateStatsMap(final Statistics physDef, final int valueFirst,
-            final Statistics fireDef, final int valueSec,final Statistics iceDef,
+            final Statistics fireDef, final int valueSec, final Statistics iceDef,
             final int valueThir, final Statistics thdDef, final int valueFour) {
         Map<Statistics, Integer> map = new HashMap<>();
         map.put(physDef, valueFirst);
