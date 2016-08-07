@@ -31,7 +31,7 @@ public class MagicAttack implements MagicAttackInterface {
      * @param iceAtk the ice power of the attack.
      * @param physicAtk the physic power of the attack.
      * @param accuracy the accuracy of the attack (it goes from 1 to 10).
-     * @param mp the mp required to throw the attack.
+     * @param mp the MP required to throw the attack.
      */
     public MagicAttack(final String name, final String shownString, 
             final String description, final int fireAtk, final int thunderAtk,

@@ -263,6 +263,7 @@ public final class BattleLogics {
     
     /**
      * Method supposed to calculate weakness in a MagicAttack.
+     * Note: possible Exceptions are handled in BattleImpl.
      * @param f the Foe that throws or  suffers the MagicAttack.
      * @param my the Hero that throws or suffers the MagicAttack.
      * @param who true if the Hero throws the attack, false if the Foe throws.
@@ -271,6 +272,7 @@ public final class BattleLogics {
      */
     public static int calculateWeakness(final Foe f, final Hero my, final boolean who,
             final MagicAttackInterface toThrow) {
+        //TODO
         return 0;
     }
 }
