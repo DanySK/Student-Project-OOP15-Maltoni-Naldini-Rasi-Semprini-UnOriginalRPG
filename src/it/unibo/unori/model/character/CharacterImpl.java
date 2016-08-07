@@ -1,6 +1,7 @@
 package it.unibo.unori.model.character;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -249,12 +250,9 @@ public class CharacterImpl implements Character {
         }
     }
 
-    /**
-     * Protected method to get all the statistics of the character.
-     * @return the statistics of the character
-     */
-    protected Map<Statistics, Integer> getStatistics() {
-        return this.statistic;
+    @Override
+    public Map<Statistics, Integer> getStatistics() {
+        return new HashMap<>(this.statistic);
     }
 
     @Override

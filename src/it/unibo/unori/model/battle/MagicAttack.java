@@ -95,6 +95,11 @@ public class MagicAttack implements MagicAttackInterface {
         return this.mpRequired;
     }
     
+    @Override
+    public Map<Statistics, Integer> getMap() {
+        return new HashMap<>(this.stats);
+    }
+    
     /**
      * HashCode method implemented using auto generation.
      * 

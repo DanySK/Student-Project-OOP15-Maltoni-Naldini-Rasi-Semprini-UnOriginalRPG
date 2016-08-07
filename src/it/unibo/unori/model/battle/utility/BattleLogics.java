@@ -1,7 +1,9 @@
 package it.unibo.unori.model.battle.utility;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import it.unibo.unori.model.battle.MagicAttackInterface;
@@ -9,8 +11,11 @@ import it.unibo.unori.model.battle.exceptions.FailedException;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.HeroTeam;
+import it.unibo.unori.model.character.Statistics;
+import it.unibo.unori.model.character.Character;
 import it.unibo.unori.model.character.Status;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
+import it.unibo.unori.model.menu.utility.Pair;
 
 /**
  * Utility class that contains static methods that allow to model 
@@ -260,9 +265,22 @@ public final class BattleLogics {
      */
     public static int calculateWeakness(final Foe f, final Hero my, final boolean who,
             final MagicAttackInterface toThrow) throws FailedException {
-        if (isSucsessfull(toThrow)) {
-            //TODO
-            return 0; 
+        if (isSuccessfull(toThrow)) {
+            Pair<Statistics, Integer> powerMagic = new Pair<>(Statistics.SPEED, 0);
+            final double weaknessFactor;
+            for (Statistics s : toThrow.getMap().keySet()) {
+                int temp = toThrow.getMap().get(s);
+                if (powerMagic.getY() <= temp) {
+                    powerMagic = new Pair<>(s, temp);
+                }
+            }
+            if (who) {
+                weaknessFactor = weakOrNot(f, powerMagic.getX());
+                return 0; 
+            } else {
+                weaknessFactor = weakOrNot(my, powerMagic.getX());
+                return 0;
+            }
         } else {
             throw new FailedException();
         }
@@ -276,7 +294,7 @@ public final class BattleLogics {
      * @param m the MagicAttack to throw.
      * @return true if the attack does not fail, false otherwise.
      */
-    private static boolean isSucsessfull(final MagicAttackInterface m) {
+    private static boolean isSuccessfull(final MagicAttackInterface m) {
         final int accuracy = m.getAccuracy();
         final int toCalc = accuracy + 1;
         if (accuracy >= HIGHIA) {
@@ -292,5 +310,51 @@ public final class BattleLogics {
             int luck = rand.nextInt(toCalc);
             return !(luck == YOURELUCKY || luck == 0);
         }
+    }
+    
+    /**
+     * Private method which calculates a weakness factor based on 
+     * the most Powerful stat of the magic to throw and of the opponent.
+     * @param ch the opponent (Hero or Foe).
+     * @param powerMagic the most powerful statistic of the MagicAttack.
+     * @return a weakness factor.
+     */
+    private static double weakOrNot(final Character ch, final Statistics powerMagic) {
+        Pair<Statistics, Integer> powerOpponent = new Pair<>(Statistics.SPEED, 0);
+        double weakness = 0;
+        Map<Statistics, Integer> mapToCheck = new HashMap<>();
+        mapToCheck.put(Statistics.FIREATK, ch.getFireAtk());
+        mapToCheck.put(Statistics.ICEATK, ch.getIceAttack());
+        mapToCheck.put(Statistics.THUNDERATK, ch.getThunderAttack());
+        
+        for (Statistics s : mapToCheck.keySet()) {
+            int temp = ch.getStatistics().get(s);
+            if (powerOpponent.getY() <= temp) {
+                powerOpponent = new Pair<>(s, temp);
+            }
+        }
+        if ((powerOpponent.getX().equals(Statistics.FIREATK) 
+                        && powerMagic.equals(Statistics.ICEATK))
+                || (powerOpponent.getX().equals(Statistics.ICEATK) 
+                        && powerMagic.equals(Statistics.THUNDERATK))
+                || (powerOpponent.getX().equals(Statistics.THUNDERATK) 
+                        && powerMagic.equals(Statistics.FIREATK))) {
+            weakness = 1 / 3;
+        } else if ((powerOpponent.getX().equals(Statistics.ICEATK) 
+                && powerMagic.equals(Statistics.FIREATK))
+                || powerOpponent.getX().equals(Statistics.FIREATK) 
+                && powerMagic.equals(Statistics.THUNDERATK) 
+                || powerOpponent.getX().equals(Statistics.THUNDERATK) 
+                && powerMagic.equals(Statistics.ICEATK)) {
+            weakness = 2 / 3;
+        } else if ((powerOpponent.getX().equals(Statistics.FIREATK) 
+                && powerMagic.equals(Statistics.FIREATK))
+                || (powerOpponent.getX().equals(Statistics.ICEATK) 
+                        && powerMagic.equals(Statistics.ICEATK))
+                || (powerOpponent.getX().equals(Statistics.THUNDERATK) 
+                        && powerMagic.equals(Statistics.THUNDERATK))) {
+            weakness = 1 / 2;
+        }
+        return weakness;
     }
 }

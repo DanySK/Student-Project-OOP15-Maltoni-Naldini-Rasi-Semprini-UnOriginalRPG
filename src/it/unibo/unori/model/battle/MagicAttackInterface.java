@@ -1,6 +1,9 @@
 package it.unibo.unori.model.battle;
 
 import java.io.Serializable;
+import java.util.Map;
+
+import it.unibo.unori.model.character.Statistics;
 
 /**
  * An Interface that gives the main methods for a Magic Attack.
@@ -54,4 +57,10 @@ public interface MagicAttackInterface extends Serializable {
      * @return the amount of MP required.
      */
     int getMPRequired();
+    
+    /**
+     * A getter method that returns the whole Map of Statistics with respective values.
+     * @return the Map of Statistics and values.
+     */
+    Map<Statistics, Integer> getMap();
 }

@@ -2,6 +2,7 @@ package it.unibo.unori.model.character;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import it.unibo.unori.model.battle.MagicAttackInterface;
 import it.unibo.unori.model.character.exceptions.MagicNotFoundException;
@@ -184,5 +185,11 @@ public interface Character extends Serializable {
      *          a string containing the path
      */
     String getBattleFrame();
+    
+    /**
+     * Method to get all the statistics of the character.
+     * @return the statistics of the character
+     */
+    Map<Statistics, Integer> getStatistics();
 
 }
