@@ -274,7 +274,7 @@ public final class BattleLogics {
      */
     public static int calculateWeakness(final Foe f, final Hero my, final boolean who,
             final MagicAttackInterface toThrow) throws FailedException {
-        if (BattleLogics.isSucsessfull(toThrow)) {
+        if (isSucsessfull(toThrow)) {
             //TODO
             return 0; 
         } else {
@@ -290,7 +290,7 @@ public final class BattleLogics {
      * @param m the MagicAttack to throw.
      * @return true if the attack does not fail, false otherwise.
      */
-    public static boolean isSucsessfull(final MagicAttackInterface m) {
+    private static boolean isSucsessfull(final MagicAttackInterface m) {
         final int accuracy = m.getAccuracy();
         final int toCalc = accuracy + 1;
         if (accuracy >= HIGHIA) {
