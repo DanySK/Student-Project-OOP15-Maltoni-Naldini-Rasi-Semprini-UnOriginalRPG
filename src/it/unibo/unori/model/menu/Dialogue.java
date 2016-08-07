@@ -17,7 +17,7 @@ public class Dialogue implements DialogueInterface {
     private static final int MAX_CHARS = 50;
     private final String sentence;
     private int nextToShow;
-    private final List<String> listRows;
+    private final List<String> listOfRows;
     
     /**
      * Standard constructor.
@@ -25,7 +25,7 @@ public class Dialogue implements DialogueInterface {
      */
     public Dialogue(final String toShow) {
         this.sentence = toShow;
-        this.listRows = this.showRows();
+        this.listOfRows = this.showRows();
         this.nextToShow = 0;
     }
     
@@ -83,7 +83,7 @@ public class Dialogue implements DialogueInterface {
     @Override
     public String showNext() throws IndexOutOfBoundsException {
         if (!this.isOver()) {
-            final String show = this.listRows.get(this.nextToShow);
+            final String show = this.listOfRows.get(this.nextToShow);
             this.nextToShow++;
             return show;
         } else {
@@ -108,12 +108,12 @@ public class Dialogue implements DialogueInterface {
     
     @Override
     public List<String> getList() {
-        return this.listRows;
+        return this.listOfRows;
     }
     
     @Override
     public boolean isOver() {
-        return this.nextToShow >= this.listRows.size();
+        return this.nextToShow >= this.listOfRows.size();
     }
     
     /**
@@ -121,7 +121,7 @@ public class Dialogue implements DialogueInterface {
      * For Test purposes.
      */
     public void generate() {
-        this.listRows.forEach(e -> {
+        this.listOfRows.forEach(e -> {
             System.out.println(this.showNext());
             if (this.changeWindow()) {
                 System.out.println();

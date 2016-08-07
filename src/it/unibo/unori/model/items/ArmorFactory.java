@@ -12,18 +12,28 @@ import it.unibo.unori.model.items.Armor.ArmorPieces;
  *
  */
 public class ArmorFactory {
-
+    
+    private Map<Statistics, Integer> generateStatsMap(final Statistics physDef, final int valueFirst,
+            final Statistics fireDef, final int valueSec,final Statistics iceDef,
+            final int valueThir, final Statistics thdDef, final int valueFour) {
+        Map<Statistics, Integer> map = new HashMap<>();
+        map.put(physDef, valueFirst);
+        map.put(fireDef, valueSec);
+        map.put(iceDef, valueThir);
+        map.put(thdDef, valueFour);
+        return map;
+    }
     /**
      * Create a standard equip for a character.
      * @return A list containing the equip
      */
     public Map<ArmorPieces, Armor> getStdEquip() {
         final Map<ArmorPieces, Armor> equip = new HashMap<>();
-        final Map<Statistics, Integer> statsmap = new HashMap<>(); 
-        statsmap.put(Statistics.PHYSICDEF, 100);
-        statsmap.put(Statistics.FIREDEF, 0);
-        statsmap.put(Statistics.ICEDEF, 0);
-        statsmap.put(Statistics.THUNDERDEF, 0);
+        final Map<Statistics, Integer> statsmap = this.generateStatsMap(
+                Statistics.PHYSICDEF, 100,
+                Statistics.FIREDEF, 0,
+                Statistics.ICEDEF, 0,
+                Statistics.THUNDERDEF, 0);
         equip.put(ArmorPieces.HELMET, new ArmorImpl("Elmo", ArmorPieces.HELMET, 
                 "Elmo piuttosto brutto", statsmap, Status.NONE));
         equip.put(ArmorPieces.ARMOR, new ArmorImpl("Cotta", ArmorPieces.ARMOR,
