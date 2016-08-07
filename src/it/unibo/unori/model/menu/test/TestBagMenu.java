@@ -17,6 +17,9 @@ public class TestBagMenu {
     
     private BagMenuInterface toTest;
     
+    /**
+     * Standard test for BagMenu.
+     */
     @Test
     public void testStandard() {
         final WeaponFactory fact = new WeaponFactory();

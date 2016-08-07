@@ -43,6 +43,9 @@ public class DialogueTest {
         assertTrue(this.toTest.isOver());
     }
     
+    /**
+     * Method to check the Exceptions of Dialogue.
+     */
     @Test
     public void testExceptions() {
         this.toTest.showNext();
@@ -54,7 +57,7 @@ public class DialogueTest {
         this.toTest.showNext();
         try {
             System.out.println(this.toTest.showNext());
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Giusto cosi");
         } catch (Exception other) {
             fail("Other Exception!!!!");

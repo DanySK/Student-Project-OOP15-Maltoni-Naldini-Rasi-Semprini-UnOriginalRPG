@@ -108,7 +108,7 @@ public class Dialogue implements DialogueInterface {
     
     @Override
     public List<String> getList() {
-        return this.listOfRows;
+        return new ArrayList<>(this.listOfRows);
     }
     
     @Override

@@ -18,6 +18,10 @@ public class FightMenu implements FightInterface {
     
    private final Battle bat;
    
+   /**
+    * Standard constructor for a Fight Menu.
+    * @param battle the Battle from which generate the FightMenu.
+    */
    public FightMenu(final Battle battle) {
        this.bat = battle;
    }
