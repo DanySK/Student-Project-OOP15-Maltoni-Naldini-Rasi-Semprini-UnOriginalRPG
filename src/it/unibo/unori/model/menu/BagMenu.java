@@ -1,6 +1,7 @@
 package it.unibo.unori.model.menu;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -8,6 +9,7 @@ import java.util.Optional;
 import it.unibo.unori.model.battle.Battle;
 import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.Bag;
+import it.unibo.unori.model.items.BagImpl;
 import it.unibo.unori.model.items.Item;
 import it.unibo.unori.model.items.Potion;
 import it.unibo.unori.model.items.Weapon;
@@ -34,7 +36,8 @@ public class BagMenu implements BagMenuInterface {
     }
     
     /**
-     * Another constructor, it has a Battle as a parameter
+     * Another constructor, it has a Battle as a parameter.
+     * @param battle the battle from which take a Bag.
      */
     public BagMenu(final Battle battle) {
         this.bag = battle.getItemBag();
@@ -60,7 +63,7 @@ public class BagMenu implements BagMenuInterface {
     @Override
     public void scrollUp() {
         int nextIndex = this.listOfItems.indexOf(this.selected.get().getX()) + 1;
-        if(nextIndex >= this.listOfItems.size()) {
+        if (nextIndex >= this.listOfItems.size()) {
             nextIndex -= this.listOfItems.size();
         }
         if (this.selected.isPresent()) {
@@ -72,7 +75,7 @@ public class BagMenu implements BagMenuInterface {
     @Override
     public void scrollDown() {
         int nextIndex = this.listOfItems.indexOf(this.selected.get().getX()) - 1;
-        if((nextIndex + 1) <= 0){
+        if ((nextIndex + 1) <= 0) {
             nextIndex = this.listOfItems.size() - 1;
         }
         if (this.selected.isPresent()) {
@@ -83,32 +86,32 @@ public class BagMenu implements BagMenuInterface {
     
     @Override
     public Map<Item, Integer> getAllItems() {
-        return this.bag.getMiscellaneous();
+        return new HashMap<>(this.bag.getMiscellaneous());
     }
     
     @Override
     public Map<Armor, Integer> getArmors() {
-        return this.bag.getArmors();
+        return new HashMap<>(this.bag.getArmors());
     }
     
     @Override
     public Map<Weapon, Integer> getWeapons() {
-        return this.bag.getWeapons();
+        return new HashMap<>(this.bag.getWeapons());
     }
     
     @Override
     public Map<Potion, Integer> getPotions() {
-        return this.bag.getPotions();
+        return new HashMap<>(this.bag.getPotions());
     }
     
     @Override
     public Bag getBag() {
-        return this.bag;
+        return new BagImpl(this.bag);
     }
     
     @Override
     public Pair<Item, Integer> getSelected() {
-        return this.selected.get();
+        return new Pair<>(this.selected.get());
     }
     
     @Override
