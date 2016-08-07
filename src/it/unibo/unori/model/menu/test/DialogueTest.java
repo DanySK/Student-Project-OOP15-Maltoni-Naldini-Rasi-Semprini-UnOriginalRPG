@@ -22,8 +22,6 @@ public class DialogueTest {
             + "aVEFIUHRAISHFIQEHIFOIYEAQFGHIOYAIVOIYVB"
             + "adkbnvajsbgihquiwghpisuihviushiuhwihgushruighuiwhguihrwguhruh");
     
-    private final int chars = this.toTest.getWholeDialogue().length();
-    
     /**
      * Method to test the principal functions of class Dialogue.
      */
