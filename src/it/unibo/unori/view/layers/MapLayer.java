@@ -4,6 +4,9 @@ import it.unibo.unori.view.sprites.JobSprite;
 
 import java.util.Map;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.swing.Action;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
@@ -17,8 +20,6 @@ import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 
@@ -30,18 +31,30 @@ import it.unibo.unori.view.exceptions.SpriteNotFoundException;
  *
  */
 public class MapLayer extends JPanel {
-    private BufferedImage sprite;
-    private BufferedImage spriteSheet;
-    private final BufferedImage[] frame = new BufferedImage[2];
-
     private Point position;
     private Dimension cellSize;
     private BufferedImage[][] map;
 
+    private boolean dialogue = false;
+    private String dialogueText = "";
+
+    private BufferedImage sprite;
+    private BufferedImage spriteSheet;
+
+    private final Dimension size;
+    private final BufferedImage[] frame = new BufferedImage[2];
+
     /**
      * Creates the game map.
-     * @param spriteSheet the sprite-sheet of the character moving
-     * @throws SpriteNotFoundException if a game sprite is not found
+     *
+     * @param movement the action of the character moving
+     * @param interact the action of the character interaction
+     * @param menu the action that opens the in-game menu
+     * @param map the paths of the map's sprites
+     * @param position the initial position of the character
+     * @param spriteSheetPath the path of the character's sprite sheet
+     *
+     * @throws SpriteNotFoundException a sprite is not found
      */
     public MapLayer(final Map<Integer, Action> movement,
                     final Action interact, final Action menu,
@@ -51,6 +64,12 @@ public class MapLayer extends JPanel {
 
         this.map = readMap(map);
         this.position = position;
+
+        size = new Dimension(cellSize.width * this.map.length,
+                             cellSize.height * this.map[0].length);
+
+        this.setPreferredSize(size);
+        this.setBounds(0, 0, size.width, size.height);
 
         try {
             spriteSheet = ImageIO.read(new File(spriteSheetPath));
@@ -81,6 +100,8 @@ public class MapLayer extends JPanel {
                     inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "RIGHT");
                     actionMap.put("RIGHT", entry.getValue());
                     break;
+                default: // direzione non supportata
+                    break;
             }
         }
 
@@ -91,6 +112,10 @@ public class MapLayer extends JPanel {
         actionMap.put("ESCAPE", menu);
     }
 
+    /**
+     * Moves the character in the 4 cardinal directions.
+     * @param direction the direction the character will move to
+     */
     public void move(final int direction) {
         switch (direction) {
             case SwingConstants.NORTH:
@@ -122,12 +147,22 @@ public class MapLayer extends JPanel {
         }.start();
     }
 
+    /**
+     * Move the character to the specified position.
+     * @param position the position the character will move to.
+     */
     public void move(final Point position) {
         this.position = position;
 
         repaint();
     }
 
+    /**
+     * Change the current map
+     * @param map the new map's sprite paths
+     * @param position the position the character will be in
+     * @throws SpriteNotFoundException a sprite is not found
+     */
     public void changeMap(final String[][] map,
                           final Point position) throws SpriteNotFoundException {
         this.map = readMap(map);
@@ -136,17 +171,32 @@ public class MapLayer extends JPanel {
         repaint();
     }
 
+    /**
+     * Show a dialogue in the view.
+     * @param dialogue the text to be shown inside the dialogue
+     */
     public void showDialogue(final String dialogue) {
+        this.dialogue = true;
+        this.dialogueText = dialogue;
 
+        repaint();
     }
 
+    /**
+     * Hide the dialogue.
+     */
     public void hideDialogue() {
+        dialogue = false;
 
+        repaint();
     }
 
     @Override
     protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
+
+        final int border = 10;
+        final int height = 100;
 
         for (int x = 0; x < map.length; x++) {
             for (int y = 0; y < map[0].length; y++) {
@@ -160,6 +210,23 @@ public class MapLayer extends JPanel {
                     position.x * cellSize.width,
                     position.y * cellSize.height,
                     cellSize.width, cellSize.height, null);
+
+        if (dialogue) {
+            g.drawRect(border, size.height - border,
+                       size.width - border * 2, height);
+
+            String text = new String();
+
+            for (final char c : dialogueText.toCharArray()) {
+                if (g.getFontMetrics().stringWidth(text + c) > size.width - border * 4) {
+                    text = text.concat("\n" + c);
+                } else {
+                    text = text.concat("" + c);
+                }
+            }
+
+            g.drawString(dialogueText, border * 2, size.height - border * 2);
+        }
     }
 
     private BufferedImage[][] readMap(final String[][] map) throws SpriteNotFoundException {
