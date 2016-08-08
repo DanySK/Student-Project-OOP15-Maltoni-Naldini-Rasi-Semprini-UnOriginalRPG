@@ -195,7 +195,6 @@ public class BattleImpl implements Battle {
 
     @Override
     public String specialAttack() throws BarNotFullException {
-        
         List<String> list = new ArrayList<>();
         if (this.heroOnTurn.getCurrentBar() == this.heroOnTurn.getTotBar()) {
             final String toReturn = this.heroOnTurn.getName() + " ha usato l'attacco speciale!\n";
