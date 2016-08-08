@@ -227,6 +227,7 @@ public class BattleImpl implements Battle {
         final Character whoAttacks = whosFirst ? this.heroOnTurn : this.foeOnTurn;
         final Character whoSuffers = whosFirst ? this.foeOnTurn : this.heroOnTurn;
         final int damage;
+        String toShow = whoAttacks.getName() + " usa una Magia!";
         if (whoAttacks.getMagics().contains(m)) {
             if (whoAttacks.getCurrentMP() > m.getMPRequired()) {
                 whoAttacks.consumeMP(m.getMPRequired());
@@ -238,13 +239,14 @@ public class BattleImpl implements Battle {
                         BattleLogics.toFillSpecialBar(this.foeOnTurn, true, this.heroOnTurn));
             }
             try {
-                damage = BattleLogics.calculateMagic(foeOnTurn, heroOnTurn, whosFirst, m);
+                damage = BattleLogics.calculateMagic(whoAttacks, whoSuffers, m);
                 whoSuffers.takeDamage(damage);
-                return whoAttacks.getName() + " " + m.getStringToShow() 
-                + " e causa inflitto un danno di " + damage + " HP a " + whoSuffers.getName() + "!";
+                toShow = toShow.concat("\n" + whoAttacks.getName() + " " + m.getStringToShow() 
+                + " e causa un danno di " + damage + " HP a " + whoSuffers.getName() + "!");
             } catch (FailedException e) {
-                return "Attacco Fallito!";
+                toShow = toShow.concat("\n" + "Attacco Fallito!");
             }
+            return toShow;
         } else {
             throw new MagicNotFoundException();
         }

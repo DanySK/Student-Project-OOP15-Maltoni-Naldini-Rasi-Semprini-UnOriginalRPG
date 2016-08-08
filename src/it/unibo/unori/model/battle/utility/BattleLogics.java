@@ -250,21 +250,19 @@ public final class BattleLogics {
     /**
      * Method supposed to calculate weakness in a MagicAttack.
      * Note: possible Exceptions are handled in BattleImpl.
-     * @param f the Foe that throws or  suffers the MagicAttack.
-     * @param my the Hero that throws or suffers the MagicAttack.
-     * @param who true if the Hero throws the attack, false if the Foe throws.
+     * @param att the Character that throws the MagicAttack.
+     * @param opp the Character that suffers the MagicAttack.
      * @param toThrow the MagicAttack interested.
      * @return the damage to be inflicted either to the Foe or the Hero.
      * @throws FailedException if the attack fails.
      */
-    public static int calculateMagic(final Foe f, final Hero my, final boolean who,
+    public static int calculateMagic(final Character att, final Character opp,
             final MagicAttackInterface toThrow) throws FailedException {
         if (isSuccessfull(toThrow)) {
-            final int diff = who ? my.getLevel() - f.getLevel() : f.getLevel() - my.getLevel();
+            final int diff = att.getLevel() - opp.getLevel();
             final int toMultiply = toThrow.getPhysicAtk() * MULT + SHIFT + diff;
             final Double weaknessFactor;
-            final Character opponent = who ? f : my;
-            weaknessFactor = weakOrNot(opponent, toThrow) * toMultiply;
+            weaknessFactor = weakOrNot(opp, toThrow) * toMultiply;
             return weaknessFactor.intValue();
         } else {
             throw new FailedException();
