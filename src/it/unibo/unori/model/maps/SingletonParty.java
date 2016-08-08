@@ -76,8 +76,8 @@ public final class SingletonParty {
         private GameMap currentMap;
         private  Map<CardinalPoints, String> frames;
         private CardinalPoints orientation;
-        private Bag partyBag;
-        private HeroTeam heroteam;
+        private final Bag partyBag;
+        private final HeroTeam heroteam;
 
         /**
          * Constructor for PartyImpl, set a standard map, position, cell and
