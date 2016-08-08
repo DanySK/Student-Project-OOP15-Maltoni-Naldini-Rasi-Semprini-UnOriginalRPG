@@ -317,6 +317,7 @@ public final class BattleLogics {
             int temp = magic.getMap().get(s);
             if (toCompare <= temp) {
                 powerMagic = s;
+                toCompare = temp;
             }
         }
         Map<Statistics, Integer> mapToCheck = new HashMap<>();
