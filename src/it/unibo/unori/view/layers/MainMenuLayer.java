@@ -1,6 +1,7 @@
 package it.unibo.unori.view.layers;
 
 import it.unibo.unori.view.View;
+import it.unibo.unori.view.exceptions.SpriteNotFoundException;
 import it.unibo.unori.view.Button;
 
 import java.util.List;
@@ -145,7 +146,11 @@ public class MainMenuLayer extends JPanel {
 
         button.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
-                view.push(new CharacterSelectionLayer(5, button));
+                try {
+                    view.push(new CharacterSelectionLayer(5, button));
+                } catch (final SpriteNotFoundException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
 
