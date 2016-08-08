@@ -1,6 +1,7 @@
 package it.unibo.unori.view.layers;
 
 import it.unibo.unori.view.View;
+import it.unibo.unori.view.exceptions.SpriteNotFoundException;
 import it.unibo.unori.view.Button;
 import it.unibo.unori.view.sprites.JobSprite;
 import it.unibo.unori.model.character.jobs.Jobs;
@@ -52,8 +53,10 @@ public class CharacterSelectionLayer extends JPanel {
      * Displays the character-selection menu.
      * @param maxHero the number of heroes in the party
      * @param button the button to be displayed when finished
+     * @throws SpriteNotFoundException if the sprite is not found
      */
-    public CharacterSelectionLayer(final int maxHero, final Button button) { // TODO estetica
+    public CharacterSelectionLayer(final int maxHero,
+                                   final Button button) throws SpriteNotFoundException {
         super();
         this.button = button;
         this.maxHero = maxHero;
@@ -65,32 +68,20 @@ public class CharacterSelectionLayer extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         textField = new JTextField(20);
-        textField.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
-                addCurrentJobToParty();
-            }
-        });
+        textField.addActionListener(new SelectionAction(0));
         textField.setMaximumSize(textField.getPreferredSize());
 
         final JPanel spritePanel = new JPanel();
-        spritePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         spritePanel.setBackground(BACKGROUND_COLOR);
+        spritePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         final BasicArrowButton left = new BasicArrowButton(SwingConstants.WEST);
-        left.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
-                previousJob();
-            }
-        });
+        left.addActionListener(new SelectionAction(-1));
 
         sprite = new JLabel(new ImageIcon(getSprite()));
 
         final BasicArrowButton right = new BasicArrowButton(SwingConstants.EAST);
-        right.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
-                nextJob();
-            }
-        });
+        right.addActionListener(new SelectionAction(1));
 
         final JLabel statistics = new JLabel("Statistics:");
         statistics.setForeground(Color.WHITE);
@@ -100,7 +91,7 @@ public class CharacterSelectionLayer extends JPanel {
         partyPanel.setBackground(BACKGROUND_COLOR);
         partyPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        // TODO Le statistiche del job sono private!
+        // TODO statistiche
 
         button.setEnabled(false);
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -125,26 +116,51 @@ public class CharacterSelectionLayer extends JPanel {
         return party;
     }
 
-    private void addCurrentJobToParty() {
+    private class SelectionAction implements ActionListener {
+        private final int direction;
+
+        SelectionAction(final int direction) {
+            this.direction = direction;
+        }
+
+        public void actionPerformed(final ActionEvent e) {
+            try {
+                if (direction == 0) {
+                    addCurrentJobToParty();
+                }
+                else if (direction == -1) {
+                    previousJob();
+                }
+                else if (direction == 1) {
+                    nextJob();
+                }
+            } catch (final SpriteNotFoundException e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
+
+    private void addCurrentJobToParty() throws SpriteNotFoundException {
         if (party.size() < maxHero && party.get(textField.getText()) == null) {
             party.put(textField.getText(), job);
 
             partyPanel.add(new JLabel(new ImageIcon(getSprite())));
             partyPanel.validate();
-        } // TODO come stampo l'errore?
+        } // TODO errore
 
         if (party.size() == maxHero) {
             button.setEnabled(true);
         }
     }
 
-    private BufferedImage getSprite() {
+    private BufferedImage getSprite() throws SpriteNotFoundException {
         BufferedImage spriteSheet;
 
-        try { // TODO se non trova lo sprite?
+        try {
             spriteSheet = ImageIO.read(new File(job.getBattleFrame()));
         } catch (final IOException e) {
             spriteSheet = null;
+            throw new SpriteNotFoundException(job.getBattleFrame());
         }
 
         if (spriteSheet != null) {
@@ -157,12 +173,12 @@ public class CharacterSelectionLayer extends JPanel {
         }
     }
 
-    private void nextJob() {
+    private void nextJob() throws SpriteNotFoundException {
         job = Jobs.values()[(job.ordinal() + 1)  % (Jobs.values().length - 1)];
         sprite.setIcon(new ImageIcon(getSprite()));
     }
 
-    private void previousJob() {
+    private void previousJob() throws SpriteNotFoundException {
         if (job.ordinal() - 1 >= 0) {
             job = Jobs.values()[job.ordinal() - 1];
             sprite.setIcon(new ImageIcon(getSprite()));
