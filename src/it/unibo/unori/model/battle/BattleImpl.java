@@ -109,7 +109,6 @@ public class BattleImpl implements Battle {
 
     @Override
     public String attack(final boolean whosFirst) throws NoWeaponException {
-        
         if (whosFirst) {
             final int atkTot = this.heroOnTurn.getAttack() 
                     + (this.heroOnTurn.getWeapon().getPhysicalAtk());

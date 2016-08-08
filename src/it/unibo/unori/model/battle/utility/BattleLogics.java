@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
 
 import it.unibo.unori.model.battle.MagicAttackInterface;
@@ -15,6 +16,7 @@ import it.unibo.unori.model.character.Statistics;
 import it.unibo.unori.model.character.Character;
 import it.unibo.unori.model.character.Status;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
+import it.unibo.unori.model.items.Weapon;
 import it.unibo.unori.model.menu.utility.Pair;
 
 /**
@@ -40,6 +42,8 @@ public final class BattleLogics {
     private static final int NORMALFILL = 20;
     private static final int SHIFTLEVELEQUAL = 5;
     private static final int SHIFTLEVELLOWER = 10;
+    private static final int SHIFTWEAKNESS = 50;
+    private static final double SHIFTNOTWEAK = 25.0;
     
 
     private BattleLogics() {
@@ -297,55 +301,98 @@ public final class BattleLogics {
      * @return a weakness factor.
      */
     private static double weakOrNot(final Character ch, final MagicAttackInterface magic) {
-        double weakness = 0;
         if (magic.getFireAtk() == magic.getIceAtk() 
                 && magic.getFireAtk() == magic.getThunderAtk()) {
-            weakness = 1 / 2;
-            return weakness;
+            return 1 / 2;
         }
-        Pair<Statistics, Integer> powerOpponent = new Pair<>(Statistics.SPEED, 0);
-        Statistics powerMagic = Statistics.SPEED;
-        int toCompare = 0;
-        for (Statistics s : magic.getMap().keySet()) {
-            int temp = magic.getMap().get(s);
-            if (toCompare <= temp) {
-                powerMagic = s;
-                toCompare = temp;
-            }
-        }
-        Map<Statistics, Integer> mapToCheck = new HashMap<>();
-        mapToCheck.put(Statistics.FIREATK, ch.getFireAtk());
-        mapToCheck.put(Statistics.ICEATK, ch.getIceAttack());
-        mapToCheck.put(Statistics.THUNDERATK, ch.getThunderAttack());
+        Statistics powerMagic = getBestStat(magic.getMap()).getX();
+        Map<Statistics, Integer> mapToCheck = generateMapFor(true, ch);
+        Pair<Statistics, Integer> powerOpponent = getBestStat(mapToCheck);
         
-        for (Statistics s : mapToCheck.keySet()) {
-            int temp = ch.getStatistics().get(s);
-            if (powerOpponent.getY() <= temp) {
-                powerOpponent = new Pair<>(s, temp);
+        return weaknessGeneral(powerOpponent.getX(), powerMagic);
+    }
+    
+    /**
+     * General method that calculates weakness baasing on two Stats.
+     * @param opp best Stat of the opponent.
+     * @param best best Stat of mine.
+     * @return a weakness factor.
+     */
+    private static double weaknessGeneral(final Statistics opp, final Statistics best) {
+        double weakness = 0;
+            if ((opp.equals(Statistics.FIREATK) 
+                    && best.equals(Statistics.ICEATK))
+            || (opp.equals(Statistics.ICEATK) 
+                    && best.equals(Statistics.THUNDERATK))
+            || (opp.equals(Statistics.THUNDERATK) 
+                    && best.equals(Statistics.FIREATK))) {
+                weakness = 1 / 3;
+            } else if ((opp.equals(Statistics.ICEATK) 
+                    && best.equals(Statistics.FIREATK))
+            || opp.equals(Statistics.FIREATK) 
+                && best.equals(Statistics.THUNDERATK) 
+            || opp.equals(Statistics.THUNDERATK) 
+                && best.equals(Statistics.ICEATK)) {
+                weakness = 2 / 3;
+            } else if ((opp.equals(Statistics.FIREATK) 
+                    && best.equals(Statistics.FIREATK))
+            || (opp.equals(Statistics.ICEATK) 
+                    && best.equals(Statistics.ICEATK))
+            || (opp.equals(Statistics.THUNDERATK) 
+                    && best.equals(Statistics.THUNDERATK))) {
+                weakness = 1 / 2;
+            }
+            return weakness;
+    }
+    
+    /**
+     * Private method that, given a Map of Statistics and Integer, returns the best Stat.
+     * @param map the Map to check.
+     * @return a Pair of Statistic and its relative value.
+     */
+    private static Pair<Statistics, Integer> getBestStat(final Map<Statistics, Integer> map) {
+        Pair<Statistics, Integer> power = new Pair<>(null, 0);
+        for (Entry<Statistics, Integer> s : map.entrySet()) {
+            int temp = map.get(s.getKey());
+            if (power.getY() <= temp) {
+                power = new Pair<>(s.getKey(), temp);
             }
         }
-        if ((powerOpponent.getX().equals(Statistics.FIREATK) 
-                        && powerMagic.equals(Statistics.ICEATK))
-                || (powerOpponent.getX().equals(Statistics.ICEATK) 
-                        && powerMagic.equals(Statistics.THUNDERATK))
-                || (powerOpponent.getX().equals(Statistics.THUNDERATK) 
-                        && powerMagic.equals(Statistics.FIREATK))) {
-            weakness = 1 / 3;
-        } else if ((powerOpponent.getX().equals(Statistics.ICEATK) 
-                && powerMagic.equals(Statistics.FIREATK))
-                || powerOpponent.getX().equals(Statistics.FIREATK) 
-                && powerMagic.equals(Statistics.THUNDERATK) 
-                || powerOpponent.getX().equals(Statistics.THUNDERATK) 
-                && powerMagic.equals(Statistics.ICEATK)) {
-            weakness = 2 / 3;
-        } else if ((powerOpponent.getX().equals(Statistics.FIREATK) 
-                && powerMagic.equals(Statistics.FIREATK))
-                || (powerOpponent.getX().equals(Statistics.ICEATK) 
-                        && powerMagic.equals(Statistics.ICEATK))
-                || (powerOpponent.getX().equals(Statistics.THUNDERATK) 
-                        && powerMagic.equals(Statistics.THUNDERATK))) {
-            weakness = 1 / 2;
+        return power;
+    }
+    
+    private static Map<Statistics, Integer> generateMapFor(final boolean atkOrDef, 
+            final Character opp) {
+        final Map<Statistics, Integer> map = new HashMap<>();
+        if (atkOrDef)  {
+            map.put(Statistics.FIREATK, opp.getFireAtk());
+            map.put(Statistics.ICEATK, opp.getIceAttack());
+            map.put(Statistics.THUNDERATK, opp.getThunderAttack());
+        } else {
+            map.put(Statistics.FIREDEF, opp.getFireDefense());
+            map.put(Statistics.ICEDEF, opp.getIceDefense());
+            map.put(Statistics.THUNDERDEF, opp.getThunderDefense());
         }
-        return weakness;
+        return map;
+    }
+    
+    /**
+     * Method that calculates the value to add to the physic attack of a Weapon, calculating weakness.
+     * @param w the Weapon interested.
+     * @param opp the opponent.
+     * @return the value to be added.
+     */
+    public static int toAddToWeapon(final Weapon w, final Character opp) {
+        Double weakness;
+        if (w.getFireAtk() == w.getIceAtk() 
+                && w.getFireAtk() == w.getThunderAtk()) {
+            weakness = SHIFTNOTWEAK;
+        } else {
+            final Statistics powerWeap = getBestStat(w.getStats()).getX();
+            Map<Statistics, Integer> mapToCheck = generateMapFor(true, opp);
+            Pair<Statistics, Integer> powerOpponent = getBestStat(mapToCheck);
+            weakness = weaknessGeneral(powerWeap, powerOpponent.getX()) * SHIFTWEAKNESS;
+        }
+        return weakness.intValue();
     }
 }
