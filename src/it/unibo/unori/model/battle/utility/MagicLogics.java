@@ -85,6 +85,15 @@ public final class MagicLogics {
         return power;
     }
     
+    /**
+     * This private method generates a Map for a MagicAttack, a Weapon or an Armor.
+     * Explain: given a Character, the method takes the Stats of interest to compare with
+     * the stats of a MagicAttack, a Weapon or an Armor.
+     * @param atkOrDef true if we are using it in context of Weapon and MagicAttack (in that case
+     * we need Attack and not Defense), or Armor (in this case we need Defense) .
+     * @param opp the Character from which extrapolate the Map.
+     * @return the Map itself.
+     */
     private static Map<Statistics, Integer> generateMapFor(final boolean atkOrDef, 
             final Character opp) {
         final Map<Statistics, Integer> map = new HashMap<>();
