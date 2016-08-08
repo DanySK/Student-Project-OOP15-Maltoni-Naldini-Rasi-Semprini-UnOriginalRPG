@@ -10,6 +10,7 @@ import it.unibo.unori.model.battle.exceptions.FailedException;
 import it.unibo.unori.model.battle.exceptions.NotDefendableException;
 import it.unibo.unori.model.battle.exceptions.NotEnoughMPExcpetion;
 import it.unibo.unori.model.battle.utility.BattleLogics;
+import it.unibo.unori.model.battle.utility.MagicLogics;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.FoeSquad;
 import it.unibo.unori.model.character.FoeSquadImpl;
@@ -111,7 +112,7 @@ public class BattleImpl implements Battle {
     public String attack(final boolean whosFirst) throws NoWeaponException {
         if (whosFirst) {
             final int atkTot = this.heroOnTurn.getAttack() 
-                    + BattleLogics.toAddToWeapon(this.heroOnTurn.getWeapon(), this.foeOnTurn);
+                    + MagicLogics.toAddToWeapon(this.heroOnTurn.getWeapon(), this.foeOnTurn);
             final int damage = 
                     BattleLogics.getStandardDamage(this.heroOnTurn.getLevel(), atkTot);
             this.foeOnTurn.takeDamage(damage);
@@ -136,7 +137,7 @@ public class BattleImpl implements Battle {
             }
         } else {
             final int atkTot = this.foeOnTurn.getAttack()
-                    + BattleLogics.toAddToWeapon(this.foeOnTurn.getWeapon(), this.heroOnTurn);
+                    + MagicLogics.toAddToWeapon(this.foeOnTurn.getWeapon(), this.heroOnTurn);
             final int damage = 
                     BattleLogics.getStandardDamage(this.foeOnTurn.getLevel(), atkTot);
             this.heroOnTurn.takeDamage(damage);
@@ -237,7 +238,7 @@ public class BattleImpl implements Battle {
                         BattleLogics.toFillSpecialBar(this.foeOnTurn, true, this.heroOnTurn));
             }
             try {
-                damage = BattleLogics.calculateMagic(whoAttacks, whoSuffers, m);
+                damage = MagicLogics.calculateMagic(whoAttacks, whoSuffers, m);
                 whoSuffers.takeDamage(damage);
                 toShow = toShow.concat("\n" + whoAttacks.getName() + " " + m.getStringToShow() 
                 + " e causa un danno di " + damage + " HP a " + whoSuffers.getName() + "!");
