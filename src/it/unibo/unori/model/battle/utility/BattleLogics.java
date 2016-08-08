@@ -268,13 +268,9 @@ public final class BattleLogics {
         if (isSuccessfull(toThrow)) {
             final int toMultiply = toThrow.getPhysicAtk() * MULT + SHIFT;
             final Double weaknessFactor;
-            if (who) {
-                weaknessFactor = weakOrNot(f, toThrow) * toMultiply;
-                return weaknessFactor.intValue(); 
-            } else {
-                weaknessFactor = weakOrNot(my, toThrow) * toMultiply;
-                return weaknessFactor.intValue();
-            }
+            final Character opponent = who ? f : my;
+            weaknessFactor = weakOrNot(opponent, toThrow) * toMultiply;
+            return weaknessFactor.intValue();
         } else {
             throw new FailedException();
         }
@@ -291,17 +287,11 @@ public final class BattleLogics {
     private static boolean isSuccessfull(final MagicAttackInterface m) {
         final int accuracy = m.getAccuracy();
         final int toCalc = accuracy + 1;
+        Random rand = new Random();
+        int luck = rand.nextInt(toCalc);
         if (accuracy >= HIGHIA) {
-            Random rand = new Random();
-            int luck = rand.nextInt(toCalc);
             return !(luck == YOURELUCKY);
-        } else if (accuracy >= MEDIUMIA && accuracy < HIGHIA) {
-            Random rand = new Random();
-            int luck = rand.nextInt(toCalc);
-            return !(luck == YOURELUCKY || luck == 0);
         } else {
-            Random rand = new Random();
-            int luck = rand.nextInt(toCalc);
             return !(luck == YOURELUCKY || luck == 0);
         }
     }
@@ -321,16 +311,14 @@ public final class BattleLogics {
             return weakness;
         }
         Pair<Statistics, Integer> powerOpponent = new Pair<>(Statistics.SPEED, 0);
-        Statistics powerMagic;
-        Pair<Statistics, Integer> powerMagicDuo = new Pair<>(Statistics.SPEED, 0);
+        Statistics powerMagic = Statistics.SPEED;
+        int toCompare = 0;
         for (Statistics s : magic.getMap().keySet()) {
             int temp = magic.getMap().get(s);
-            if (powerMagicDuo.getY() <= temp) {
-                powerMagicDuo = new Pair<>(s, temp);
+            if (toCompare <= temp) {
+                powerMagic = s;
             }
         }
-        
-        powerMagic = powerMagicDuo.getX();
         Map<Statistics, Integer> mapToCheck = new HashMap<>();
         mapToCheck.put(Statistics.FIREATK, ch.getFireAtk());
         mapToCheck.put(Statistics.ICEATK, ch.getIceAttack());
