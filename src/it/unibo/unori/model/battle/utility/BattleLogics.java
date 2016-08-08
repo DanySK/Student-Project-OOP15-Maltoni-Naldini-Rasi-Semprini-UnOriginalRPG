@@ -263,23 +263,17 @@ public final class BattleLogics {
      * @return the damage to be inflicted either to the Foe or the Hero.
      * @throws FailedException if the attack fails.
      */
-    public static int calculateWeakness(final Foe f, final Hero my, final boolean who,
+    public static int calculateMagic(final Foe f, final Hero my, final boolean who,
             final MagicAttackInterface toThrow) throws FailedException {
         if (isSuccessfull(toThrow)) {
-            Pair<Statistics, Integer> powerMagic = new Pair<>(Statistics.SPEED, 0);
-            final double weaknessFactor;
-            for (Statistics s : toThrow.getMap().keySet()) {
-                int temp = toThrow.getMap().get(s);
-                if (powerMagic.getY() <= temp) {
-                    powerMagic = new Pair<>(s, temp);
-                }
-            }
+            final int toMultiply = toThrow.getPhysicAtk() * MULT + SHIFT;
+            final Double weaknessFactor;
             if (who) {
-                weaknessFactor = weakOrNot(f, powerMagic.getX());
-                return 0; 
+                weaknessFactor = weakOrNot(f, toThrow) * toMultiply;
+                return weaknessFactor.intValue(); 
             } else {
-                weaknessFactor = weakOrNot(my, powerMagic.getX());
-                return 0;
+                weaknessFactor = weakOrNot(my, toThrow) * toMultiply;
+                return weaknessFactor.intValue();
             }
         } else {
             throw new FailedException();
@@ -319,9 +313,24 @@ public final class BattleLogics {
      * @param powerMagic the most powerful statistic of the MagicAttack.
      * @return a weakness factor.
      */
-    private static double weakOrNot(final Character ch, final Statistics powerMagic) {
-        Pair<Statistics, Integer> powerOpponent = new Pair<>(Statistics.SPEED, 0);
+    private static double weakOrNot(final Character ch, final MagicAttackInterface magic) {
         double weakness = 0;
+        if (magic.getFireAtk() == magic.getIceAtk() 
+                && magic.getFireAtk() == magic.getThunderAtk()) {
+            weakness = 1 / 2;
+            return weakness;
+        }
+        Pair<Statistics, Integer> powerOpponent = new Pair<>(Statistics.SPEED, 0);
+        Statistics powerMagic;
+        Pair<Statistics, Integer> powerMagicDuo = new Pair<>(Statistics.SPEED, 0);
+        for (Statistics s : magic.getMap().keySet()) {
+            int temp = magic.getMap().get(s);
+            if (powerMagicDuo.getY() <= temp) {
+                powerMagicDuo = new Pair<>(s, temp);
+            }
+        }
+        
+        powerMagic = powerMagicDuo.getX();
         Map<Statistics, Integer> mapToCheck = new HashMap<>();
         mapToCheck.put(Statistics.FIREATK, ch.getFireAtk());
         mapToCheck.put(Statistics.ICEATK, ch.getIceAttack());
