@@ -1,21 +1,17 @@
 package it.unibo.unori.controller.state;
 
-import java.awt.event.ActionEvent;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.awt.Point;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-
-import it.unibo.unori.controller.Controller;
-import it.unibo.unori.controller.SingletonStateMachine;
-import it.unibo.unori.controller.exceptions.NotValidStateException;
+import it.unibo.unori.controller.action.InteractAction;
+import it.unibo.unori.controller.action.MoveAction;
+import it.unibo.unori.controller.action.OpenMenuAction;
 import it.unibo.unori.model.maps.GameMap;
 import it.unibo.unori.model.maps.Party;
+import it.unibo.unori.model.maps.Position;
 import it.unibo.unori.model.maps.SingletonParty;
 import it.unibo.unori.model.maps.exceptions.BlockedPathException;
 import it.unibo.unori.model.menu.DialogueInterface;
+import it.unibo.unori.view.exceptions.SpriteNotFoundException;
 import it.unibo.unori.view.layers.MapLayer;
 
 /**
@@ -30,27 +26,17 @@ public class MapState extends AbstractGameState {
      * 
      * @param map
      *            the map to start from
+     * @throws SpriteNotFoundException
+     *             if the sprite at the path provided does not exist
      */
-    public MapState(final GameMap map) {
-        super(new MapLayer(/*(Map<Party.CardinalPoints, Action>) (() -> {
-            final Map<Party.CardinalPoints, Action> returnMap = new HashMap<>();
-            
-            for (Party.CardinalPoints direction : Party.CardinalPoints.values()) {
-                returnMap.put(direction, new MapState.MoveAction(direction));
-            }
-            
-            return returnMap;
-        }), new MapState.InteractAction(), new MapState.OpenMenuAction(), (String[][]) (() -> {
-            String[][] returnMap = new String[map.getMapLength()][map.getMapWidth()];
-            
-            for(final int lenght = 0; length < map.getMapLength(); length++) {
-                for(final int width = 0; width < map.getMapWidth(); width++) {
-                    returnMap[length][width] = map.getCell(new Position(length, width)).getFrame();
-                }
-            }
-            
-            return returnMap;
-        })*/null));
+    public MapState(final GameMap map) throws SpriteNotFoundException {
+        super(new MapLayer(MoveAction.getSupportedMovementsMap(), 
+              new InteractAction(), 
+              new OpenMenuAction(),
+              MapState.getMapImagesPath(map),
+              new Point(map.getInitialCellPosition().getPosX(), 
+              map.getInitialCellPosition().getPosY()),
+              SingletonParty.getParty().getCurrentFrame()));
         party = SingletonParty.getParty();
         party.setCurrentMap(map);
         // TODO
@@ -91,114 +77,22 @@ public class MapState extends AbstractGameState {
 
     /**
      * Opens a dialogue from the model.
+     * 
      * @return the dialogue from the model
      */
     public DialogueInterface interact() {
         return this.party.interact();
     }
 
-    /**
-     * Action that should be linked with movement dedicated buttons as WASD or
-     * UP, DOWN, LEFT, RIGHT. This uses the controller to query the model if the
-     * movement is possible: if yes, does the movement both on model and view,
-     * if not, does nothing.
-     */
-    public class MoveAction extends AbstractAction {
-        /**
-         * Generated serial version UID.
-         */
-        private static final long serialVersionUID = 781647080297844098L;
+    private static String[][] getMapImagesPath(final GameMap map) {
+        String[][] returnMatrix = new String[map.getMapLength()][map.getMapWidth()];
 
-        private final Party.CardinalPoints direction;
-
-        /**
-         * Default constructor.
-         * 
-         * @param direction
-         *            the direction to move to
-         */
-        public MoveAction(final Party.CardinalPoints direction) {
-            super();
-            this.direction = direction;
-        }
-
-        @Override
-        public void actionPerformed(final ActionEvent event) {
-            if (MapState.this.moveParty(this.direction)) {
-                // MapState.this.getLayer().moveParty(this.direction);
-            }
-        }
-    }
-
-    /**
-     * Action that should be linked with interaction button(s). This makes the
-     * player interact with cells near him/her.
-     */
-    public class InteractAction extends AbstractAction {
-        /**
-         * Generated serial version UID.
-         */
-        private static final long serialVersionUID = -6714062831714869023L;
-
-        private Optional<DialogueInterface> currentDialogue;
-
-        /**
-         * Default constructor.
-         */
-        public InteractAction() {
-            super();
-            currentDialogue = Optional.empty();
-        }
-
-        @Override
-        public void actionPerformed(final ActionEvent event) {
-            if (this.currentDialogue.isPresent()) {
-                if (this.currentDialogue.get().isOver()) {
-                    // ((MapLayer) MapState.this.getLayer()).hideDialog();
-                    this.currentDialogue = Optional.empty();
-                }
-            } else {
-                this.currentDialogue = Optional.of(MapState.this.interact());
-            }
-            // ((MapLayer)
-            // MapState.this.getLayer()).showDialogue(this.currentDialogue.get().showNext());
-        }
-    }
-    
-    /**
-     * Action that should be linked to menu dedicated buttons as for example ESC.
-     * This will open the menu if possible.
-     */
-    // TODO It's not necessary to put it here
-    public /*static*/ class OpenMenuAction extends AbstractAction {
-        /**
-         * Generated serial version UID.
-         */
-        private static final long serialVersionUID = 8283970384379034094L;
-        
-        private final Controller controller;
-
-        /**
-         * Default constructor.
-         */
-        public OpenMenuAction() {
-            super();
-            this.controller = SingletonStateMachine.getController();
-        }
-
-        @Override
-        public void actionPerformed(final ActionEvent event) {
-            if (this.controller.getCurrentStateClass().isInstance(MapState.class)) {
-                try {
-                    this.controller.openMenu();
-                } catch (NotValidStateException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            } else {
-                // TODO
+        for (int length = 0; length < map.getMapLength(); length++) {
+            for (int width = 0; width < map.getMapWidth(); width++) {
+                returnMatrix[length][width] = map.getCell(new Position(length, width)).getFrame();
             }
         }
 
+        return returnMatrix;
     }
 }

@@ -19,6 +19,7 @@ import it.unibo.unori.model.character.HeroImpl;
 import it.unibo.unori.model.character.exceptions.MaxHeroException;
 import it.unibo.unori.model.character.jobs.Jobs;
 import it.unibo.unori.model.maps.SingletonParty;
+import it.unibo.unori.view.exceptions.SpriteNotFoundException;
 import it.unibo.unori.view.layers.CharacterSelectionLayer;
 
 /**
@@ -134,7 +135,12 @@ public final class SingletonStateMachine {
                     }
                 });
 
-                this.stack.push(new MapState(SingletonParty.getParty().getCurrentGameMap()));
+                try {
+                    this.stack.push(new MapState(SingletonParty.getParty().getCurrentGameMap()));
+                } catch (SpriteNotFoundException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
 
             }
 
