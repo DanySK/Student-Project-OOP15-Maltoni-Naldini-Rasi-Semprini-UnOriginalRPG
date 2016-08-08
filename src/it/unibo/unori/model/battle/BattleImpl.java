@@ -111,7 +111,7 @@ public class BattleImpl implements Battle {
     public String attack(final boolean whosFirst) throws NoWeaponException {
         if (whosFirst) {
             final int atkTot = this.heroOnTurn.getAttack() 
-                    + (this.heroOnTurn.getWeapon().getPhysicalAtk());
+                    + BattleLogics.toAddToWeapon(this.heroOnTurn.getWeapon(), this.foeOnTurn);
             final int damage = 
                     BattleLogics.getStandardDamage(this.heroOnTurn.getLevel(), atkTot);
             this.foeOnTurn.takeDamage(damage);
@@ -136,7 +136,7 @@ public class BattleImpl implements Battle {
             }
         } else {
             final int atkTot = this.foeOnTurn.getAttack()
-                    + this.foeOnTurn.getWeapon().getPhysicalAtk();
+                    + BattleLogics.toAddToWeapon(this.foeOnTurn.getWeapon(), this.heroOnTurn);
             final int damage = 
                     BattleLogics.getStandardDamage(this.foeOnTurn.getLevel(), atkTot);
             this.heroOnTurn.takeDamage(damage);

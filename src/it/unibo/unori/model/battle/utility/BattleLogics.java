@@ -380,7 +380,7 @@ public final class BattleLogics {
      * Method that calculates the value to add to the physic attack of a Weapon, calculating weakness.
      * @param w the Weapon interested.
      * @param opp the opponent.
-     * @return the value to be added.
+     * @return the value of a weapon attack.
      */
     public static int toAddToWeapon(final Weapon w, final Character opp) {
         Double weakness;
@@ -393,6 +393,6 @@ public final class BattleLogics {
             Pair<Statistics, Integer> powerOpponent = getBestStat(mapToCheck);
             weakness = weaknessGeneral(powerWeap, powerOpponent.getX()) * SHIFTWEAKNESS;
         }
-        return weakness.intValue();
+        return weakness.intValue() + w.getPhysicalAtk();
     }
 }
