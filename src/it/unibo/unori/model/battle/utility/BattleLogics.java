@@ -150,15 +150,9 @@ public final class BattleLogics {
      */
     public static Status causingStatus(final Hero my, final Foe en, final boolean who) 
             throws NoWeaponException {
-        final int diff;
-        final Status toReturn;
-        if (who) {
-             diff = my.getLevel() - en.getLevel();
-             toReturn = my.getWeapon().getWeaponStatus();
-        } else {
-            diff = en.getLevel() - my.getLevel();
-            toReturn = en.getWeapon().getWeaponStatus();
-        }
+        final int diff = who ? my.getLevel() - en.getLevel() : en.getLevel() - my.getLevel();
+        final Status toReturn = who ? my.getWeapon().getWeaponStatus() : en.getWeapon().getWeaponStatus();
+        
         if (diff >= BattleLogics.DIFFERENCE_MAX) {
             return toReturn;
         } else if (diff > 2 && diff < BattleLogics.DIFFERENCE_MAX) {
@@ -266,7 +260,8 @@ public final class BattleLogics {
     public static int calculateMagic(final Foe f, final Hero my, final boolean who,
             final MagicAttackInterface toThrow) throws FailedException {
         if (isSuccessfull(toThrow)) {
-            final int toMultiply = toThrow.getPhysicAtk() * MULT + SHIFT;
+            final int diff = who ? my.getLevel() - f.getLevel() : f.getLevel() - my.getLevel();
+            final int toMultiply = toThrow.getPhysicAtk() * MULT + SHIFT + diff;
             final Double weaknessFactor;
             final Character opponent = who ? f : my;
             weaknessFactor = weakOrNot(opponent, toThrow) * toMultiply;

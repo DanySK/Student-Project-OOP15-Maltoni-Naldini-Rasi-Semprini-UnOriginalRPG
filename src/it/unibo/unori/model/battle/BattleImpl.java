@@ -16,6 +16,7 @@ import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.HeroTeam;
 import it.unibo.unori.model.character.HeroTeamImpl;
 import it.unibo.unori.model.character.Statistics;
+import it.unibo.unori.model.character.Character;
 import it.unibo.unori.model.character.Status;
 import it.unibo.unori.model.character.exceptions.MagicNotFoundException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
@@ -222,33 +223,23 @@ public class BattleImpl implements Battle {
     @Override
     public String useMagicAttack(final MagicAttack m, final Foe enemy, final boolean whosFirst)
             throws NotEnoughMPExcpetion, MagicNotFoundException {
-        if (whosFirst) {
-            if (this.heroOnTurn.getMagics().contains(m)) {
-                if (this.heroOnTurn.getCurrentMP() > m.getMPRequired()) {
-                    this.heroOnTurn.consumeMP(m.getMPRequired());
-                } else {
-                    throw new NotEnoughMPExcpetion();
-                }
+        final Character whoAttacks = whosFirst ? this.heroOnTurn : this.foeOnTurn;
+        if (whoAttacks.getMagics().contains(m)) {
+            if (whoAttacks.getCurrentMP() > m.getMPRequired()) {
+                whoAttacks.consumeMP(m.getMPRequired());
+            } else {
+                throw new NotEnoughMPExcpetion();
+            }
+            if (whoAttacks.equals(this.heroOnTurn)) {
                 this.heroOnTurn.setCurrentBar(
                         BattleLogics.toFillSpecialBar(this.foeOnTurn, true, this.heroOnTurn));
-                //TODO A lot of things.
-                return null;
-            } else {
-                throw new MagicNotFoundException();
             }
+            
+            return null;
         } else {
-            if (this.foeOnTurn.getMagics().contains(m)) {
-                if (this.foeOnTurn.getCurrentMP() > m.getMPRequired()) {
-                    this.foeOnTurn.consumeMP(m.getMPRequired());
-                } else {
-                    throw new NotEnoughMPExcpetion();
-                }
-                //TODO A lot of things.
-                return null;
-            } else {
-                throw new MagicNotFoundException();
-            }
+            throw new MagicNotFoundException();
         }
+       
         
     }
 
