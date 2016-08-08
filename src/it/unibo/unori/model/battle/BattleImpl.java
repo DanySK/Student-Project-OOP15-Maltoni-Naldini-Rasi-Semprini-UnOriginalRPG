@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import it.unibo.unori.model.battle.exceptions.BarNotFullException;
 import it.unibo.unori.model.battle.exceptions.CantEscapeException;
+import it.unibo.unori.model.battle.exceptions.FailedException;
 import it.unibo.unori.model.battle.exceptions.NotDefendableException;
 import it.unibo.unori.model.battle.exceptions.NotEnoughMPExcpetion;
 import it.unibo.unori.model.battle.utility.BattleLogics;
@@ -224,6 +225,8 @@ public class BattleImpl implements Battle {
     public String useMagicAttack(final MagicAttack m, final Foe enemy, final boolean whosFirst)
             throws NotEnoughMPExcpetion, MagicNotFoundException {
         final Character whoAttacks = whosFirst ? this.heroOnTurn : this.foeOnTurn;
+        final Character whoSuffers = whosFirst ? this.foeOnTurn : this.heroOnTurn;
+        final int damage;
         if (whoAttacks.getMagics().contains(m)) {
             if (whoAttacks.getCurrentMP() > m.getMPRequired()) {
                 whoAttacks.consumeMP(m.getMPRequired());
@@ -234,8 +237,14 @@ public class BattleImpl implements Battle {
                 this.heroOnTurn.setCurrentBar(
                         BattleLogics.toFillSpecialBar(this.foeOnTurn, true, this.heroOnTurn));
             }
-            
-            return null;
+            try {
+                damage = BattleLogics.calculateMagic(foeOnTurn, heroOnTurn, whosFirst, m);
+                whoSuffers.takeDamage(damage);
+                return whoAttacks.getName() + " " + m.getStringToShow() 
+                + " e causa inflitto un danno di " + damage + " HP a " + whoSuffers.getName() + "!";
+            } catch (FailedException e) {
+                return "Attacco Fallito!";
+            }
         } else {
             throw new MagicNotFoundException();
         }
