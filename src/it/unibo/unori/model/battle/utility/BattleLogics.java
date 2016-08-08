@@ -150,15 +150,9 @@ public final class BattleLogics {
      */
     public static Status causingStatus(final Hero my, final Foe en, final boolean who) 
             throws NoWeaponException {
-        final int diff;
-        final Status toReturn;
-        if (who) {
-             diff = my.getLevel() - en.getLevel();
-             toReturn = my.getWeapon().getWeaponStatus();
-        } else {
-            diff = en.getLevel() - my.getLevel();
-            toReturn = en.getWeapon().getWeaponStatus();
-        }
+        final int diff = who ? my.getLevel() - en.getLevel() : en.getLevel() - my.getLevel();
+        final Status toReturn = who ? my.getWeapon().getWeaponStatus() : en.getWeapon().getWeaponStatus();
+        
         if (diff >= BattleLogics.DIFFERENCE_MAX) {
             return toReturn;
         } else if (diff > 2 && diff < BattleLogics.DIFFERENCE_MAX) {
@@ -256,31 +250,20 @@ public final class BattleLogics {
     /**
      * Method supposed to calculate weakness in a MagicAttack.
      * Note: possible Exceptions are handled in BattleImpl.
-     * @param f the Foe that throws or  suffers the MagicAttack.
-     * @param my the Hero that throws or suffers the MagicAttack.
-     * @param who true if the Hero throws the attack, false if the Foe throws.
+     * @param att the Character that throws the MagicAttack.
+     * @param opp the Character that suffers the MagicAttack.
      * @param toThrow the MagicAttack interested.
      * @return the damage to be inflicted either to the Foe or the Hero.
      * @throws FailedException if the attack fails.
      */
-    public static int calculateWeakness(final Foe f, final Hero my, final boolean who,
+    public static int calculateMagic(final Character att, final Character opp,
             final MagicAttackInterface toThrow) throws FailedException {
         if (isSuccessfull(toThrow)) {
-            Pair<Statistics, Integer> powerMagic = new Pair<>(Statistics.SPEED, 0);
-            final double weaknessFactor;
-            for (Statistics s : toThrow.getMap().keySet()) {
-                int temp = toThrow.getMap().get(s);
-                if (powerMagic.getY() <= temp) {
-                    powerMagic = new Pair<>(s, temp);
-                }
-            }
-            if (who) {
-                weaknessFactor = weakOrNot(f, powerMagic.getX());
-                return 0; 
-            } else {
-                weaknessFactor = weakOrNot(my, powerMagic.getX());
-                return 0;
-            }
+            final int diff = att.getLevel() - opp.getLevel();
+            final int toMultiply = toThrow.getPhysicAtk() * MULT + SHIFT + diff;
+            final Double weaknessFactor;
+            weaknessFactor = weakOrNot(opp, toThrow) * toMultiply;
+            return weaknessFactor.intValue();
         } else {
             throw new FailedException();
         }
@@ -297,17 +280,11 @@ public final class BattleLogics {
     private static boolean isSuccessfull(final MagicAttackInterface m) {
         final int accuracy = m.getAccuracy();
         final int toCalc = accuracy + 1;
+        Random rand = new Random();
+        int luck = rand.nextInt(toCalc);
         if (accuracy >= HIGHIA) {
-            Random rand = new Random();
-            int luck = rand.nextInt(toCalc);
             return !(luck == YOURELUCKY);
-        } else if (accuracy >= MEDIUMIA && accuracy < HIGHIA) {
-            Random rand = new Random();
-            int luck = rand.nextInt(toCalc);
-            return !(luck == YOURELUCKY || luck == 0);
         } else {
-            Random rand = new Random();
-            int luck = rand.nextInt(toCalc);
             return !(luck == YOURELUCKY || luck == 0);
         }
     }
@@ -319,9 +296,23 @@ public final class BattleLogics {
      * @param powerMagic the most powerful statistic of the MagicAttack.
      * @return a weakness factor.
      */
-    private static double weakOrNot(final Character ch, final Statistics powerMagic) {
-        Pair<Statistics, Integer> powerOpponent = new Pair<>(Statistics.SPEED, 0);
+    private static double weakOrNot(final Character ch, final MagicAttackInterface magic) {
         double weakness = 0;
+        if (magic.getFireAtk() == magic.getIceAtk() 
+                && magic.getFireAtk() == magic.getThunderAtk()) {
+            weakness = 1 / 2;
+            return weakness;
+        }
+        Pair<Statistics, Integer> powerOpponent = new Pair<>(Statistics.SPEED, 0);
+        Statistics powerMagic = Statistics.SPEED;
+        int toCompare = 0;
+        for (Statistics s : magic.getMap().keySet()) {
+            int temp = magic.getMap().get(s);
+            if (toCompare <= temp) {
+                powerMagic = s;
+                toCompare = temp;
+            }
+        }
         Map<Statistics, Integer> mapToCheck = new HashMap<>();
         mapToCheck.put(Statistics.FIREATK, ch.getFireAtk());
         mapToCheck.put(Statistics.ICEATK, ch.getIceAttack());
