@@ -8,6 +8,8 @@ import java.util.Map.Entry;
 import it.unibo.unori.model.battle.MagicAttackInterface;
 import it.unibo.unori.model.battle.exceptions.FailedException;
 import it.unibo.unori.model.character.Character;
+import it.unibo.unori.model.character.Foe;
+import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.Statistics;
 import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.Weapon;
@@ -204,5 +206,37 @@ public final class MagicLogics {
             weakness = weaknessGeneral(powerArm, powerOpponent.getX()) * SHIFTWEAKNESS;
         }
         return weakness.intValue() + ar.getPhysicalRes();
+    }
+    
+    /**
+     * This method calculates the whole damage to inflict in Battle, merging Attack and Defense.
+     * @param att the Character who attacks.
+     * @param opp the Character who suffers.
+     * @param ar the eventual Armor of the Character who attacks.
+     * @param w the Weapon of the Character who attacks.
+     * @return the amount of damage to inflict.
+     */
+    public static int mergeAtkAndDef(final Character att, final Character opp,
+            final Armor ar, final Weapon w) {
+        final int atkTot = att.getAttack() + toAddToWeapon(w, att);
+        if (opp instanceof Foe) {
+            Double weakness;
+            if (opp.getFireDefense() == opp.getIceDefense() 
+                    && opp.getFireDefense() == opp.getThunderDefense()) {
+                weakness = SHIFTNOTWEAK - MULT;
+            } else {
+                Map<Statistics, Integer> mapToCheck = generateMapFor(false, opp);
+                Statistics powerOpponent = getBestStat(mapToCheck).getX();
+                Map<Statistics, Integer> mapToCheckAtt = generateMapFor(true, att);
+                Statistics powerAtt = getBestStat(mapToCheckAtt).getX();
+                weakness = weaknessGeneral(powerAtt, powerOpponent) * (SHIFTWEAKNESS - 10);
+            }
+            return BattleLogics.getStandardDamage(att.getLevel(),
+                    atkTot - weakness.intValue() + opp.getDefense());
+        } else if (opp instanceof Hero) {
+            return BattleLogics.getStandardDamage(att.getLevel(), atkTot - toAddToArmor(ar, opp));
+        } else {
+            throw new IllegalStateException();
+        }
     }
 }

@@ -239,4 +239,5 @@ public final class BattleLogics {
             return toReturn + SHIFTLEVELLOWER;
         }
     }
+    
 }

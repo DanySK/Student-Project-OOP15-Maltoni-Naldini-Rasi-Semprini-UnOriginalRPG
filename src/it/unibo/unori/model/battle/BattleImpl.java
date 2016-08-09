@@ -22,6 +22,7 @@ import it.unibo.unori.model.character.Character;
 import it.unibo.unori.model.character.Status;
 import it.unibo.unori.model.character.exceptions.MagicNotFoundException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
+import it.unibo.unori.model.items.Armor.ArmorPieces;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.BagImpl;
 import it.unibo.unori.model.items.Potion;
@@ -42,6 +43,9 @@ public class BattleImpl implements Battle {
     private boolean over;
     private Optional<String> outCome;
     private final Bag itemBag;
+    
+    private static final String OUTCOMEPOSITIVE = "Complimenti, hai vinto la Battaglia!!";
+    private static final String OUTCOMENEGATIVE = "Peccato... Sei stato sconfitto";
     
     /**
      * Standard constructor for Class BattleImpl.
@@ -76,11 +80,11 @@ public class BattleImpl implements Battle {
     private Optional<Boolean> setOver() {
         if (this.enemies.getAliveFoes().size() == 0) {
             this.over = true;
-            this.outCome = Optional.of("Complimenti, hai vinto la Battaglia!!");
+            this.outCome = Optional.of(OUTCOMEPOSITIVE);
             return Optional.of(true);
         } else if (this.squad.getAliveHeroes().size() == 0) {
             this.over = true;
-            this.outCome = Optional.of("Peccato, sei stato sconfitto...");
+            this.outCome = Optional.of(OUTCOMENEGATIVE);
             return Optional.of(false);
         } else {
             this.over = false;
@@ -111,10 +115,9 @@ public class BattleImpl implements Battle {
     @Override
     public String attack(final boolean whosFirst) throws NoWeaponException {
         if (whosFirst) {
-            final int atkTot = this.heroOnTurn.getAttack() 
-                    + MagicLogics.toAddToWeapon(this.heroOnTurn.getWeapon(), this.foeOnTurn);
             final int damage = 
-                    BattleLogics.getStandardDamage(this.heroOnTurn.getLevel(), atkTot);
+                    MagicLogics.mergeAtkAndDef(this.heroOnTurn, this.foeOnTurn,
+                            this.heroOnTurn.getArmor(ArmorPieces.NONE), this.heroOnTurn.getWeapon());
             this.foeOnTurn.takeDamage(damage);
             this.heroOnTurn.setCurrentBar(
                     BattleLogics.toFillSpecialBar(this.foeOnTurn, false, this.heroOnTurn));
