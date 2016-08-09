@@ -1,5 +1,8 @@
 package it.unibo.unori.model.items;
 
+import java.util.Map;
+
+import it.unibo.unori.model.character.Statistics;
 import it.unibo.unori.model.character.Status;
 
 /**
@@ -37,5 +40,11 @@ public interface Weapon extends Item {
      * @return the status of the weapon
      */
     Status getWeaponStatus();
+
+    /**
+     * Method that returns the map of stats with relative values for this Weapon.
+     * @return the map of Stats.
+     */
+    Map<Statistics, Integer> getStats();
 
 }

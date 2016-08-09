@@ -121,6 +121,11 @@ public class WeaponImpl implements Weapon {
     public Status getWeaponStatus() {
         return this.inflictedStatus;
     }
+    
+    @Override
+    public Map<Statistics, Integer> getStats() {
+        return new HashMap<>(this.stats);
+    }
 
     /**
      * HashCode method implemented using auto generation.
