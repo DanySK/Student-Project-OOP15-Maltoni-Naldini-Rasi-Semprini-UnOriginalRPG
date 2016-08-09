@@ -12,6 +12,7 @@ import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.Statistics;
 import it.unibo.unori.model.items.Armor;
+import it.unibo.unori.model.items.Armor.ArmorPieces;
 import it.unibo.unori.model.items.Weapon;
 import it.unibo.unori.model.menu.utility.Pair;
 
@@ -194,18 +195,32 @@ public final class MagicLogics {
      * @param opp the opponent.
      * @return the value of a armor resistance.
      */
-    public static int toAddToArmor(final Armor ar, final Character opp) {
+    public static int toAddToArmor(final Map<ArmorPieces, Armor> ar, final Character opp) {
         Double weakness;
-        if (ar.getFireDef() == ar.getIceDefense() 
-                && ar.getFireDef() == ar.getThunderDefense()) {
+        final Map<Statistics, Integer> m = new HashMap<>();
+        int fireDef = 0;
+        int iceDef = 0;
+        int thunDef = 0;
+        int physDef = 0;
+        for (Entry<ArmorPieces, Armor> armor : ar.entrySet()) {
+            fireDef += armor.getValue().getFireDef();
+            iceDef += armor.getValue().getIceDefense();
+            thunDef += armor.getValue().getThunderDefense();
+            physDef += armor.getValue().getPhysicalRes();
+        }
+        if (fireDef == iceDef && fireDef == thunDef) {
             weakness = SHIFTNOTWEAK;
         } else {
-            final Statistics powerArm = getBestStat(ar.getStats()).getX();
+            m.put(Statistics.FIREDEF, fireDef);
+            m.put(Statistics.ICEDEF, iceDef);
+            m.put(Statistics.THUNDERDEF, thunDef);
+            
+            final Statistics powerArm = getBestStat(m).getX();
             Map<Statistics, Integer> mapToCheck = generateMapFor(false, opp);
             Pair<Statistics, Integer> powerOpponent = getBestStat(mapToCheck);
             weakness = weaknessGeneral(powerArm, powerOpponent.getX()) * SHIFTWEAKNESS;
         }
-        return weakness.intValue() + ar.getPhysicalRes();
+        return weakness.intValue() + physDef;
     }
     
     /**
@@ -217,7 +232,7 @@ public final class MagicLogics {
      * @return the amount of damage to inflict.
      */
     public static int mergeAtkAndDef(final Character att, final Character opp,
-            final Armor ar, final Weapon w) {
+            final Map<ArmorPieces, Armor> ar, final Weapon w) {
         final int atkTot = att.getAttack() + toAddToWeapon(w, att);
         if (opp instanceof Foe) {
             Double weakness;

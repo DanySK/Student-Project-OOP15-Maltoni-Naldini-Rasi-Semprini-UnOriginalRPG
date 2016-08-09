@@ -9,7 +9,7 @@ import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.HeroTeam;
 import it.unibo.unori.model.character.Status;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
-import it.unibo.unori.model.items.Armor.ArmorPieces;
+import it.unibo.unori.model.items.Armor;
 
 /**
  * Utility class that contains static methods that allow to model 
@@ -153,11 +153,12 @@ public final class BattleLogics {
                 toReturn = my.getWeapon().getWeaponStatus();
             }
         } else {
-            if (en.getWeapon().getWeaponStatus().equals(my.getArmor(ArmorPieces.NONE).getImmunity())) {
-                return Status.NONE;
-            } else {
-                toReturn = en.getWeapon().getWeaponStatus();
+            for (Armor arm : my.getWholeArmor().values()) {
+                if (en.getWeapon().getWeaponStatus().equals(arm.getImmunity())) {
+                    return Status.NONE;
+                }
             }
+            toReturn = en.getWeapon().getWeaponStatus();
         }
         
         if (diff >= BattleLogics.DIFFERENCE_MAX) {

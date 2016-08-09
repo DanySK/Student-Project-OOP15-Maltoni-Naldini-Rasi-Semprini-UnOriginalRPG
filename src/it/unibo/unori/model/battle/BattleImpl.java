@@ -114,10 +114,13 @@ public class BattleImpl implements Battle {
 
     @Override
     public String attack(final boolean whosFirst) throws NoWeaponException {
+        final Character whoAttacks = whosFirst ? this.heroOnTurn : this.foeOnTurn;
+        final Character whoSuffers = whosFirst ? this.foeOnTurn : this.heroOnTurn;
+        //TODO
         if (whosFirst) {
             final int damage = 
                     MagicLogics.mergeAtkAndDef(this.heroOnTurn, this.foeOnTurn,
-                            this.heroOnTurn.getArmor(ArmorPieces.NONE), this.heroOnTurn.getWeapon());
+                            this.heroOnTurn.getWholeArmor(), this.heroOnTurn.getWeapon());
             this.foeOnTurn.takeDamage(damage);
             this.heroOnTurn.setCurrentBar(
                     BattleLogics.toFillSpecialBar(this.foeOnTurn, false, this.heroOnTurn));

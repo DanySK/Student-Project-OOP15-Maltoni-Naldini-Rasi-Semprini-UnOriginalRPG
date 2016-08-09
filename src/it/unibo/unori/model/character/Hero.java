@@ -1,5 +1,7 @@
 package it.unibo.unori.model.character;
 
+import java.util.Map;
+
 import it.unibo.unori.model.character.exceptions.ArmorAlreadyException;
 import it.unibo.unori.model.character.exceptions.NoArmorException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
@@ -140,4 +142,10 @@ public interface Hero extends Character {
      * turn if the Hero was previously defended.
      */
     void setUndefended();
+    
+    /**
+     * Method that gets the whole equipment of Armor of the Hero.
+     * @return the whole Armor.
+     */
+    Map<ArmorPieces, Armor> getWholeArmor();
 }

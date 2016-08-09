@@ -1,6 +1,7 @@
 package it.unibo.unori.model.character;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 import it.unibo.unori.model.battle.utility.MagicGenerator;
@@ -164,6 +165,11 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     @Override
     public Armor getArmor(final ArmorPieces p) {
         return this.armor.get(p);
+    }
+    
+    @Override
+    public Map<ArmorPieces, Armor> getWholeArmor() {
+        return new HashMap<>(this.armor);
     }
 
     @Override
