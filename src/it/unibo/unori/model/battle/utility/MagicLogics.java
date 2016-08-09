@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.Map.Entry;
-import java.util.Optional;
 
 import it.unibo.unori.model.battle.MagicAttackInterface;
 import it.unibo.unori.model.battle.exceptions.FailedException;
@@ -228,7 +227,6 @@ public final class MagicLogics {
      * This method calculates the whole damage to inflict in Battle, merging Attack and Defense.
      * @param att the Character who attacks.
      * @param opp the Character who suffers.
-     * @param ar the eventual Armor of the Character who attacks.
      * @param w the Weapon of the Character who attacks.
      * @return the amount of damage to inflict.
      */

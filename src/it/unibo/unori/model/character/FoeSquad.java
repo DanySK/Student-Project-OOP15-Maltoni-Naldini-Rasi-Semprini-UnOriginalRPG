@@ -67,4 +67,10 @@ public interface FoeSquad extends Serializable {
      * @return true if the Squad is Empty, false otherwise.
      */
     boolean isEmpty();
+    
+    /**
+     * This getter method returns a String representing the FoeSquad.
+     * @return a String used as a name for the Squad.
+     */
+    String getNameOfSquad();
 }

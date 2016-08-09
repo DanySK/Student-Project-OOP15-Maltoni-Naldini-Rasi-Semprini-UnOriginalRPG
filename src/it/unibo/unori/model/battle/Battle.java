@@ -16,6 +16,7 @@ import it.unibo.unori.model.items.Potion;
 import it.unibo.unori.model.items.exceptions.HeroDeadException;
 import it.unibo.unori.model.items.exceptions.HeroNotDeadException;
 import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
+import it.unibo.unori.model.menu.DialogueInterface;
 
 /**
  * An interface modeling a generic Battle.
@@ -152,5 +153,11 @@ public interface Battle {
      * @throws IllegalStateException if the Battle is not Over.
      */
     String getOutCome()throws IllegalStateException;
+
+    /**
+     * Getter method to be called at the beginning of the Battle, it gives a presentation String.
+     * @return a presentation String
+     */
+    DialogueInterface getPresentation();
    
 }

@@ -28,6 +28,8 @@ import it.unibo.unori.model.items.Potion;
 import it.unibo.unori.model.items.exceptions.HeroDeadException;
 import it.unibo.unori.model.items.exceptions.HeroNotDeadException;
 import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
+import it.unibo.unori.model.menu.Dialogue;
+import it.unibo.unori.model.menu.DialogueInterface;
 
 /**
  * The principal Class modeling the Battle Mode.
@@ -45,6 +47,8 @@ public class BattleImpl implements Battle {
     
     private static final String OUTCOMEPOSITIVE = "Complimenti, hai vinto la Battaglia!!";
     private static final String OUTCOMENEGATIVE = "Peccato... Sei stato sconfitto";
+    private static final String CHANGETURN = "E' il turno di ";
+    private static final String PRESENTATION = "E' iniziata la lotta contro ";
     
     /**
      * Standard constructor for Class BattleImpl.
@@ -287,13 +291,13 @@ public class BattleImpl implements Battle {
     @Override
     public String setHeroOnTUrn(final Hero h) {
         this.heroOnTurn = h;
-        return "E' il turno di " + h.getName();
+        return CHANGETURN + h.getName();
     }
     
     @Override
     public String setFoeOnTurn(final Foe en) {
         this.foeOnTurn = en;
-        return "E' il turno di " + en.getName(); 
+        return CHANGETURN + en.getName() + " nemico"; 
     }
 
     @Override
@@ -303,5 +307,9 @@ public class BattleImpl implements Battle {
         }
         return this.outCome.get();
     }
-
+    
+    @Override
+    public DialogueInterface getPresentation() {
+        return new Dialogue(PRESENTATION + this.enemies.getNameOfSquad());
+    }
 }

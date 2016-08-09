@@ -112,7 +112,11 @@ public class FoeSquadImpl implements FoeSquad {
         } else {
             return f.getName() + " incassa il colpo!";
         }
-        
+    }
+    
+    @Override
+    public String getNameOfSquad() {
+        return this.enemies.size() + " nemici!\n";
     }
     
     /**

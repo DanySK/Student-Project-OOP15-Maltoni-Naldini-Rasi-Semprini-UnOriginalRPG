@@ -116,10 +116,7 @@ public class Dialogue implements DialogueInterface {
         return this.nextToShow >= this.listOfRows.size();
     }
     
-    /**
-     * Method that generates the Dialogue printing it on Console.
-     * For Test purposes.
-     */
+    @Override
     public void generate() {
         this.listOfRows.forEach(e -> {
             System.out.println(this.showNext());

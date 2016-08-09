@@ -73,7 +73,7 @@ public class BattleTest {
         }  catch (Exception other) {
             fail("OTHER EXCEPTION!!");
         }
-        
+        battle.getPresentation().generate();
         battle.setHeroOnTUrn(battle.getSquad().getFirstHeroOnTurn());
         battle.setFoeOnTurn(battle.getEnemies().getFirstFoeOnTurn());
         System.out.println("" + this.battle.getHeroOnTurn().getRemainingHP());
