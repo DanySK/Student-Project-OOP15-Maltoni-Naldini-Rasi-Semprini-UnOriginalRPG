@@ -22,7 +22,6 @@ public class HeroTeamImpl implements HeroTeam {
      */
     public static final int MAXHERO = 4;
     private final List<Hero> heroList;
-    private List<Hero> aliveHeroes;
 
     /**
      * Constructor with an existent list of heroes.
@@ -37,7 +36,6 @@ public class HeroTeamImpl implements HeroTeam {
             throw new IllegalArgumentException();
         }
         this.heroList = l;
-        this.aliveHeroes = this.getAliveHeroes();
     }
 
     /**
@@ -48,10 +46,6 @@ public class HeroTeamImpl implements HeroTeam {
     public HeroTeamImpl(final Hero h) {
         this.heroList = new ArrayList<>();
         this.heroList.add(h);
-        this.aliveHeroes = new ArrayList<>();
-        if (!h.getStatus().equals(Status.DEAD)) {
-            this.aliveHeroes.add(h);
-        }
     }
 
     /**
@@ -59,7 +53,6 @@ public class HeroTeamImpl implements HeroTeam {
      */
     public HeroTeamImpl() {
         this.heroList = new ArrayList<>();
-        this.aliveHeroes = new ArrayList<>();
     }
 
     private void checkListSize() throws IllegalStateException {
@@ -79,7 +72,6 @@ public class HeroTeamImpl implements HeroTeam {
             throw new MaxHeroException();
         }
         this.heroList.add(h);
-        this.aliveHeroes = this.getAliveHeroes();
     }
 
     @Override
@@ -88,7 +80,6 @@ public class HeroTeamImpl implements HeroTeam {
             throw new IllegalArgumentException();
         }
         this.heroList.remove(h);
-        this.aliveHeroes.remove(h);
     }
 
     @Override
@@ -139,9 +130,7 @@ public class HeroTeamImpl implements HeroTeam {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        
         final HeroTeamImpl other = (HeroTeamImpl) obj;
-        
         return this.heroList == other.getAllHeroes();
     }
 
@@ -153,11 +142,6 @@ public class HeroTeamImpl implements HeroTeam {
     @Override
     public String defeatHero(final Hero h) throws IllegalArgumentException {
         if (this.isDefeated(h)) {
-            if (this.aliveHeroes.contains(h)) {
-                this.aliveHeroes.remove(h);
-            } else {
-                throw new IllegalArgumentException();
-            }
             return h.getName() + " e' stato sconfitto!";
         } else {
             return h.getName() + " incassa il colpo!";

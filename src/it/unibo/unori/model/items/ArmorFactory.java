@@ -23,6 +23,7 @@ public class ArmorFactory {
         map.put(thdDef, valueFour);
         return map;
     }
+    
     /**
      * Create a standard equip for a character.
      * @return A list containing the equip
