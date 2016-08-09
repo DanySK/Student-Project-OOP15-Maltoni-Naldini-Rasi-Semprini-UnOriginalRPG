@@ -147,7 +147,11 @@ public final class BattleLogics {
         final int diff = who ? my.getLevel() - en.getLevel() : en.getLevel() - my.getLevel();
         final Status toReturn;
         if (who) {
-            toReturn = my.getWeapon().getWeaponStatus();
+            if(en.getImmunity().equals(my.getWeapon().getWeaponStatus())) {
+                return Status.NONE;
+            } else {
+                toReturn = my.getWeapon().getWeaponStatus();
+            }
         } else {
             if (en.getWeapon().getWeaponStatus().equals(my.getArmor(ArmorPieces.NONE).getImmunity())) {
                 return Status.NONE;

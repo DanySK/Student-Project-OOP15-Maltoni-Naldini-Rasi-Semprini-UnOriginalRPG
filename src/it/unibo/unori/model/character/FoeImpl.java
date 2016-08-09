@@ -48,10 +48,32 @@ public class FoeImpl extends CharacterImpl implements Foe {
      */
     public FoeImpl(final int intelligence, final String name,
             final String battleFrame, final Map<Statistics, Integer> map, final Status immune) {
-        super(name, battleFrame, map);
-        this.ia = intelligence;
-        this.wep = WeaponImpl.FISTS;
-        this.immunity = immune;
+        this(intelligence, name, battleFrame, map, WeaponImpl.FISTS, immune);
+    }
+    
+    /**
+     * Constructor to create a Foe that has initially no Weapon and no immunity.
+     * @param intelligence the IA of the Foe.
+     * @param name the name of the Foe.
+     * @param battleFrame path of frame to set for the battle interface
+     * @param map the Statistics of the Foe.
+     */
+    public FoeImpl(final int intelligence, final String name,
+            final String battleFrame, final Map<Statistics, Integer> map) {
+        this(intelligence, name, battleFrame, map, WeaponImpl.FISTS, Status.NONE);
+    }
+    
+    /**
+     * Constructor to create a Foe that has no immunity.
+     * @param intelligence the IA of the Foe.
+     * @param name the name of the Foe.
+     * @param battleFrame path of frame to set for the battle interface
+     * @param map the Statistics of the Foe.
+     * @param weapon the Weapon that the Foe is holding.
+     */
+    public FoeImpl(final int intelligence, final String name, final String battleFrame,
+            final Map<Statistics, Integer> map, final Weapon weapon) {
+        this(intelligence, name, battleFrame, map, weapon, Status.NONE);
     }
     
     private boolean isNotPresentWeapon() {
