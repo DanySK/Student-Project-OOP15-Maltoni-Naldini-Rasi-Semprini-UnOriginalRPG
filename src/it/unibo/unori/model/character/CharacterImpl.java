@@ -99,6 +99,13 @@ public class CharacterImpl implements Character {
     private boolean checkParameters(final Map<Statistics, Integer> map, final int level) {
         return level <= 0 || !map.keySet().containsAll(Arrays.asList(Statistics.values()));
     }
+    
+    // Method to check if a param is negative
+    private void checkParam(final int param) throws IllegalArgumentException {
+        if (param < 0) {
+            throw new IllegalArgumentException();
+        }
+    }
 
 
     @Override
@@ -136,6 +143,7 @@ public class CharacterImpl implements Character {
 
     @Override
     public void consumeMP(final int mpToConsume) {
+        this.checkParam(mpToConsume);
         this.currentMP = this.currentMP - mpToConsume < 0 ? 0 
                                  : this.currentMP - mpToConsume;
 
@@ -143,6 +151,7 @@ public class CharacterImpl implements Character {
 
     @Override
     public void takeDamage(final int damage) {
+        this.checkParam(damage);
         this.currentHP = this.currentHP - damage < 0 ? 0 
                 : this.currentHP - damage;
         if (this.currentHP == 0) {
@@ -152,6 +161,7 @@ public class CharacterImpl implements Character {
 
     @Override
     public void restoreHP(final int hpToRestore) {
+        this.checkParam(hpToRestore);
         this.currentHP = this.currentHP + hpToRestore > this.getTotalHP() ? this.getTotalHP()
                 : this.currentHP + hpToRestore;
 
@@ -159,6 +169,7 @@ public class CharacterImpl implements Character {
 
     @Override
     public void restoreMP(final int mpToRestore) {
+        this.checkParam(mpToRestore);
         this.currentMP = this.currentMP + mpToRestore > this.getTotalHP() ? this.getTotalMP()
                 : this.currentHP + mpToRestore;
     }
