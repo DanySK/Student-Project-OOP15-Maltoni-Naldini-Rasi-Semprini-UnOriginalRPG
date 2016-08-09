@@ -187,11 +187,12 @@ public class BattleImpl implements Battle {
             list.add(toReturn);
             final int damage = 
                     BattleLogics.specialAttackCalc(this.heroOnTurn.getLevel(),
-                            this.heroOnTurn.getAttack());
+                            this.heroOnTurn.getAttack()) / 2;
             this.enemies.getAliveFoes().forEach(e -> {
                 String toAdd;
-                e.takeDamage(damage / 2);
-                toAdd = this.enemies.defeatFoe(e);
+                e.takeDamage(damage);
+                toAdd = e.getName() + " subisce un danno di " + damage + " HP!\n" 
+                        + this.enemies.defeatFoe(e);
                 list.add(toAdd + "\n");
             });
             this.heroOnTurn.resetSpecialBar();

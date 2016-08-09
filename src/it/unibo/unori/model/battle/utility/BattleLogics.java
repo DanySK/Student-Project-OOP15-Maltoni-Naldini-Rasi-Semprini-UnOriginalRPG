@@ -129,8 +129,8 @@ public final class BattleLogics {
      * @return the damage of the special attack.
      */
     public static int specialAttackCalc(final int charLev, final int atck) {
-        return BattleLogics.getStandardDamage(charLev, atck) * 2
-                + charLev * BattleLogics.MULT;
+        return BattleLogics.getStandardDamage(charLev, atck) * LEVELER
+                + charLev * MULT;
     }
     
     /**
