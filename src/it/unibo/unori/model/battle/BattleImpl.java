@@ -22,7 +22,6 @@ import it.unibo.unori.model.character.Character;
 import it.unibo.unori.model.character.Status;
 import it.unibo.unori.model.character.exceptions.MagicNotFoundException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
-import it.unibo.unori.model.items.Armor.ArmorPieces;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.BagImpl;
 import it.unibo.unori.model.items.Potion;
@@ -116,56 +115,37 @@ public class BattleImpl implements Battle {
     public String attack(final boolean whosFirst) throws NoWeaponException {
         final Character whoAttacks = whosFirst ? this.heroOnTurn : this.foeOnTurn;
         final Character whoSuffers = whosFirst ? this.foeOnTurn : this.heroOnTurn;
-        //TODO
+        
+        final int damage = 
+                MagicLogics.mergeAtkAndDef(whoAttacks, whoSuffers, whoAttacks.getWeapon());
+        whoSuffers.takeDamage(damage);
+        String toReturn = whoAttacks.getName() + " attacca " + whoSuffers.getName() + " con "
+                + whoAttacks.getWeapon() + "!\nE causa un danno pari a " + damage + " HP!";
         if (whosFirst) {
-            final int damage = 
-                    MagicLogics.mergeAtkAndDef(this.heroOnTurn, this.foeOnTurn,
-                            this.heroOnTurn.getWholeArmor(), this.heroOnTurn.getWeapon());
-            this.foeOnTurn.takeDamage(damage);
             this.heroOnTurn.setCurrentBar(
                     BattleLogics.toFillSpecialBar(this.foeOnTurn, false, this.heroOnTurn));
-            String toReturn = this.enemies.defeatFoe(this.foeOnTurn);
-            
+            toReturn = toReturn.concat("\n" + this.enemies.defeatFoe(this.foeOnTurn));
             if (this.enemies.isDefeated(this.foeOnTurn)) {
                 this.setOver();
                 return toReturn;
-            } else {
-                toReturn = toReturn.concat(": " + damage + " HP!");
-                if (this.foeOnTurn.getStatus().equals(Status.NONE)) {
-                    this.foeOnTurn.setStatus(BattleLogics.causingStatus(this.heroOnTurn,
-                            this.foeOnTurn, true));
-                }
-                if (!this.foeOnTurn.getStatus().equals(Status.NONE)) {
-                    toReturn = toReturn.concat(" " + this.foeOnTurn.getName() 
-                            + " ha subito un cambiamento di Stato! Ora è " + this.foeOnTurn.getStatus());
-                }
-                return toReturn;
             }
         } else {
-            final int atkTot = this.foeOnTurn.getAttack()
-                    + MagicLogics.toAddToWeapon(this.foeOnTurn.getWeapon(), this.heroOnTurn);
-            final int damage = 
-                    BattleLogics.getStandardDamage(this.foeOnTurn.getLevel(), atkTot);
-            this.heroOnTurn.takeDamage(damage);
-            String toReturn = this.squad.defeatHero(this.heroOnTurn);
+            toReturn = this.squad.defeatHero(this.heroOnTurn);
             
             if (this.squad.isDefeated(this.heroOnTurn)) {
                 this.setOver();
                 return toReturn;
-            } else {
-                toReturn = toReturn.concat(": " + damage + " HP!");
-                if (this.heroOnTurn.getStatus().equals(Status.NONE)) {
-                    this.heroOnTurn.setStatus(BattleLogics.causingStatus(this.heroOnTurn,
-                            this.foeOnTurn, false));
-                }
-                if (!this.heroOnTurn.getStatus().equals(Status.NONE)) {
-                    toReturn = toReturn.concat(" " + this.heroOnTurn.getName() 
-                            + " ha subito un cambiamento di Stato! Ora è " 
-                            + this.heroOnTurn.getStatus());
-                }
-                return toReturn;
             }
         }
+        if (whoSuffers.getStatus().equals(Status.NONE)) {
+            whoSuffers.setStatus(BattleLogics.causingStatus(whoAttacks,
+                    whoSuffers));
+        }
+        if (!whoSuffers.getStatus().equals(Status.NONE)) {
+            toReturn = toReturn.concat(" " + whoSuffers.getName() 
+                    + " ha subito un cambiamento di Stato! Ora è " + whoSuffers.getStatus());
+        }
+        return toReturn;
     }
 
     @Override

@@ -6,6 +6,7 @@ import java.util.Random;
 
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.Hero;
+import it.unibo.unori.model.character.Character;
 import it.unibo.unori.model.character.HeroTeam;
 import it.unibo.unori.model.character.Status;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
@@ -134,31 +135,31 @@ public final class BattleLogics {
     
     /**
      * This method is useful to determine if a Weapon has caused a Status changing.
-     * @param my the Hero who is attacking.
-     * @param en the Enemy being attacked.
-     * @param who a boolean variable: true if the Status is inflicted to a Foe, false if it is
-     * inflicted to a Hero.
+     * @param my the Character who is attacking.
+     * @param en the Character being attacked.
      * @return the Status that the attack causes, 
      * depending on Hero and Enemy's level.
      * @throws NoWeaponException if the Hero is not holding any Weapon
      */
-    public static Status causingStatus(final Hero my, final Foe en, final boolean who) 
+    public static Status causingStatus(final Character my, final Character en) 
             throws NoWeaponException {
-        final int diff = who ? my.getLevel() - en.getLevel() : en.getLevel() - my.getLevel();
+        final int diff = my.getLevel() - en.getLevel();
         final Status toReturn;
-        if (who) {
-            if (en.getImmunity().equals(my.getWeapon().getWeaponStatus())) {
+        if (my instanceof Hero) {
+            if (((Foe) en).getImmunity().equals(my.getWeapon().getWeaponStatus())) {
                 return Status.NONE;
             } else {
                 toReturn = my.getWeapon().getWeaponStatus();
             }
-        } else {
-            for (Armor arm : my.getWholeArmor().values()) {
+        } else if (my instanceof Foe) {
+            for (Armor arm : ((Hero) my).getWholeArmor().values()) {
                 if (en.getWeapon().getWeaponStatus().equals(arm.getImmunity())) {
                     return Status.NONE;
                 }
             }
             toReturn = en.getWeapon().getWeaponStatus();
+        } else {
+            throw new IllegalStateException();
         }
         
         if (diff >= BattleLogics.DIFFERENCE_MAX) {

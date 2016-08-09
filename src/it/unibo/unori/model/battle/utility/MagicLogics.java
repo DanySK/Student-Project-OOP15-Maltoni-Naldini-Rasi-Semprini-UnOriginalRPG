@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.Map.Entry;
+import java.util.Optional;
 
 import it.unibo.unori.model.battle.MagicAttackInterface;
 import it.unibo.unori.model.battle.exceptions.FailedException;
@@ -231,8 +232,7 @@ public final class MagicLogics {
      * @param w the Weapon of the Character who attacks.
      * @return the amount of damage to inflict.
      */
-    public static int mergeAtkAndDef(final Character att, final Character opp,
-            final Map<ArmorPieces, Armor> ar, final Weapon w) {
+    public static int mergeAtkAndDef(final Character att, final Character opp, final Weapon w) {
         final int atkTot = att.getAttack() + toAddToWeapon(w, att);
         if (opp instanceof Foe) {
             Double weakness;
@@ -249,7 +249,9 @@ public final class MagicLogics {
             return BattleLogics.getStandardDamage(att.getLevel(),
                     atkTot - weakness.intValue() + opp.getDefense());
         } else if (opp instanceof Hero) {
-            return BattleLogics.getStandardDamage(att.getLevel(), atkTot - toAddToArmor(ar, opp));
+            
+            return BattleLogics.getStandardDamage(att.getLevel(), atkTot 
+                    - toAddToArmor(((Hero) opp).getWholeArmor(), att));
         } else {
             throw new IllegalStateException();
         }
