@@ -2,8 +2,10 @@ package it.unibo.unori.model.menu.utility;
 
 /**
  * A standard generic Pair<X,Y>, with getters, hashCode, equals, and toString well implemented. 
+ * @param <X> a generic type X.
+ * @param <Y> a generic type Y.
  */
-public class Pair<X,Y> {
+public class Pair<X, Y> {
 	
 	private final X x;
 	private final Y y;
