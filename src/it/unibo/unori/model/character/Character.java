@@ -6,6 +6,9 @@ import java.util.Map;
 
 import it.unibo.unori.model.battle.MagicAttackInterface;
 import it.unibo.unori.model.character.exceptions.MagicNotFoundException;
+import it.unibo.unori.model.character.exceptions.NoWeaponException;
+import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
+import it.unibo.unori.model.items.Weapon;
 
 /**
  * Interface to define methods for all the characters(party members and enemies).
@@ -191,5 +194,33 @@ public interface Character extends Serializable {
      * @return the statistics of the character
      */
     Map<Statistics, Integer> getStatistics();
+    
+    /**
+     * 
+     *  A getter method that gives the Weapon that the Character is holding.
+     * @throws NoWeaponException if the Character is not equipped with any Weapon 
+     * @return the Weapon the Character is holding 
+     * 
+     */
+    Weapon getWeapon() throws NoWeaponException;
+    
+    /**
+     * This method allows to remove a Weapon from a Character equipment.
+     * @throws NoWeaponException if the Character is not equipped with any Weapon
+     */
+    void unsetWeapon() throws NoWeaponException;
+    
+    /**
+     * This method allows me to give a Weapon to my Character.
+     * @param w the Weapon Item.
+     * @throws WeaponAlreadyException if the Character already has a weapon.
+     */
+    void setWeapon(Weapon w) throws WeaponAlreadyException;
+    
+    /**
+     * Method that tells weather the Hero is holding a Weapon or not.
+     * @return true if the Hero is holding a Weapon, false otherwise.
+     */
+    boolean hasWeapon();
 
 }

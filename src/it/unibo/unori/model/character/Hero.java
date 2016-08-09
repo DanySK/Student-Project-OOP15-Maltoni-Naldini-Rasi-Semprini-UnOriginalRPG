@@ -4,12 +4,9 @@ import java.util.Map;
 
 import it.unibo.unori.model.character.exceptions.ArmorAlreadyException;
 import it.unibo.unori.model.character.exceptions.NoArmorException;
-import it.unibo.unori.model.character.exceptions.NoWeaponException;
-import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
 import it.unibo.unori.model.character.jobs.Jobs;
 import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.Armor.ArmorPieces;
-import it.unibo.unori.model.items.Weapon;
 
 /**
  * An interface modeling a generic Character of the game.
@@ -37,28 +34,6 @@ public interface Hero extends Character {
      * @return the amount of Experience Points needed to level up.
      */
     int getRemainingExp();
-
-    /**
-     * This method allows me to give a Weapon to my Character.
-     * @param w the Weapon Item.
-     * @throws WeaponAlreadyException if the Character already has a weapon.
-     */
-    void setWeapon(Weapon w) throws WeaponAlreadyException;
-
-    /**
-     * This method allows to remove a Weapon from a Character equipment.
-     * @throws NoWeaponException if the Character is not equipped with any Weapon
-     */
-    void unsetWeapon() throws NoWeaponException;
-
-    /**
-     * 
-     *  A getter method that gives the Weapon that the Character is holding.
-     * @throws NoWeaponException if the Character is not equipped with any Weapon 
-     * @return the Weapon the Character is holding 
-     * 
-     */
-    Weapon getWeapon() throws NoWeaponException;
 
     /**
      * This method allows me to give an Armor to my Character.
@@ -120,11 +95,7 @@ public interface Hero extends Character {
      * Method to increase hero's statistics when his level grows.
      */
     void levelUp();
-    /**
-     * Method that tells weather the Hero is holding a Weapon or not.
-     * @return true if the Hero is holding a Weapon, false otherwise.
-     */
-    boolean hasWeapon();
+    
 
     /**
      * Method that sets the Hero as "defended" for a turn in Battle.

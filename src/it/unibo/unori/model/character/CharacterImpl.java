@@ -8,6 +8,10 @@ import java.util.Map;
 
 import it.unibo.unori.model.battle.MagicAttackInterface;
 import it.unibo.unori.model.character.exceptions.MagicNotFoundException;
+import it.unibo.unori.model.character.exceptions.NoWeaponException;
+import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
+import it.unibo.unori.model.items.Weapon;
+import it.unibo.unori.model.items.WeaponImpl;
 
 /**
  * Class to design a generic Character.
@@ -24,6 +28,7 @@ public class CharacterImpl implements Character {
     private int currentHP;
     private int currentMP;
     private int level;
+    private Weapon weapon;
     private Status status;
     private final Map<Statistics, Integer> statistic;
     private final List<MagicAttackInterface> spellList;
@@ -38,8 +43,8 @@ public class CharacterImpl implements Character {
      *              statistics of the character.
      */
     public CharacterImpl(final String name, final String battleFrame, 
-            final Map<Statistics, Integer> map) {
-        this(name, battleFrame, map, 1);
+            final Map<Statistics, Integer> map, final Weapon w) {
+        this(name, battleFrame, map, 1, w);
     }
 
     /**
@@ -57,9 +62,9 @@ public class CharacterImpl implements Character {
      *                                  the statistics
      */
     public CharacterImpl(final String name, final String battleFrame,
-             final Map<Statistics, Integer> map, final int level) 
+             final Map<Statistics, Integer> map, final int level, final Weapon w) 
                         throws IllegalArgumentException {
-        this(name, battleFrame, map, level, new LinkedList<MagicAttackInterface>());
+        this(name, battleFrame, map, level, new LinkedList<MagicAttackInterface>(), w);
     }
 
     /**
@@ -79,7 +84,7 @@ public class CharacterImpl implements Character {
      *                                  the statistics
      */
     public CharacterImpl(final String name, final String battleFrame, final Map<Statistics, Integer> map, 
-            final int level, final List<MagicAttackInterface> spellList) {
+            final int level, final List<MagicAttackInterface> spellList, final Weapon w) {
         this.name = name;
         this.battleFrame = battleFrame;
         if (checkParameters(map, level)) {
@@ -93,6 +98,7 @@ public class CharacterImpl implements Character {
         this.status = Status.NONE;
         this.level = level;
         this.spellList = spellList;
+        this.weapon = w;
     }
 
     // method to check the parameters.
@@ -107,6 +113,9 @@ public class CharacterImpl implements Character {
         }
     }
 
+    private boolean isNotPresentWeapon() {
+        return this.weapon.equals(WeaponImpl.FISTS);
+    }
 
     @Override
     public String getName() {
@@ -270,4 +279,35 @@ public class CharacterImpl implements Character {
     public String getBattleFrame() {
         return this.battleFrame;
     }
+    
+
+    @Override
+    public void setWeapon(final Weapon w) throws WeaponAlreadyException {
+        if (this.isNotPresentWeapon()) {
+            this.weapon = w;
+        } else {
+            throw new WeaponAlreadyException();
+        }
+    }
+
+    @Override
+    public void unsetWeapon() throws NoWeaponException {
+        if (this.isNotPresentWeapon()) {
+           throw new NoWeaponException();
+        } else {
+            this.weapon = WeaponImpl.FISTS;
+        }
+    }
+
+    @Override
+    public Weapon getWeapon() throws NoWeaponException {
+        return this.weapon;
+    }
+    
+    @Override
+    public boolean hasWeapon() {
+        return !this.isNotPresentWeapon();
+    }
+
+
 }

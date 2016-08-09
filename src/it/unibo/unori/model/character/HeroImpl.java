@@ -7,14 +7,11 @@ import java.util.Map;
 import it.unibo.unori.model.battle.utility.MagicGenerator;
 import it.unibo.unori.model.character.exceptions.ArmorAlreadyException;
 import it.unibo.unori.model.character.exceptions.NoArmorException;
-import it.unibo.unori.model.character.exceptions.NoWeaponException;
-import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
 import it.unibo.unori.model.character.jobs.Jobs;
 import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.Armor.ArmorPieces;
 import it.unibo.unori.model.items.ArmorImpl;
 import it.unibo.unori.model.items.Weapon;
-import it.unibo.unori.model.items.WeaponImpl;
 
 
 /**
@@ -31,7 +28,6 @@ public class HeroImpl  extends CharacterImpl implements Hero {
      */
     private static final long serialVersionUID = 7538947993488315753L;
     private final Map<ArmorPieces, Armor> armor;
-    private Weapon weapon;
     private final Jobs heroJob;
     private int totExp;
     private int currentExp;
@@ -39,7 +35,7 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     private int currentBar;
     private boolean defended;
 
-    private boolean checkInputParameters(final Jobs job, final Map<ArmorPieces, Armor> armor, 
+    private boolean checkInputParameters(final Jobs job, final Map<ArmorPieces, Armor> armor,
             final Weapon weapon) {
         return job.getGrowthStats().isEmpty() || armor.isEmpty()
                  || weapon == null || job.getBattleFrame() == null;
@@ -65,12 +61,11 @@ public class HeroImpl  extends CharacterImpl implements Hero {
             final Map <Statistics, Integer> params,
             final Map<ArmorPieces, Armor> armor, final Weapon weapon) 
                         throws IllegalArgumentException {
-        super(name, job.getBattleFrame(), params);
+        super(name, job.getBattleFrame(), params, weapon);
         if (this.checkInputParameters(job, armor, weapon)) {
             throw new IllegalArgumentException("Parameters are wrong!");
         }
         this.armor = armor;
-        this.weapon = weapon;
         this.heroJob = job;
         this.specialBar = 100;
         this.currentBar = 0;
@@ -113,35 +108,9 @@ public class HeroImpl  extends CharacterImpl implements Hero {
         return this.currentExp;
     }
 
-    private boolean isNotPresentWeapon() {
-        return this.weapon.equals(WeaponImpl.FISTS);
-    }
 
     private boolean isNotPresentArmor(final ArmorPieces ar) {
         return this.armor.get(ar).equals(ArmorImpl.NAKED);
-    }
-
-    @Override
-    public void setWeapon(final Weapon w) throws WeaponAlreadyException {
-        if (this.isNotPresentWeapon()) {
-            this.weapon = w;
-        } else {
-            throw new WeaponAlreadyException();
-        }
-    }
-
-    @Override
-    public void unsetWeapon() throws NoWeaponException {
-        if (this.isNotPresentWeapon()) {
-           throw new NoWeaponException();
-        } else {
-            this.weapon = WeaponImpl.FISTS;
-        }
-    }
-
-    @Override
-    public Weapon getWeapon() throws NoWeaponException {
-        return this.weapon;
     }
 
     @Override
@@ -216,11 +185,6 @@ public class HeroImpl  extends CharacterImpl implements Hero {
             final int k = s.get(i) + m.get(i);
            s.replace(i, k);
         });
-    }
-
-    @Override
-    public boolean hasWeapon() {
-        return !this.isNotPresentWeapon();
     }
 
     @Override
