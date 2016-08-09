@@ -214,4 +214,16 @@ public class GameMapImpl implements GameMap {
         return this.getColumn(0).size();
     }
 
+    @Override
+    public String[][] getFrames() {
+        final String[][] map = new String[this.floorMap.length]
+                                         [this.floorMap[0].length];
+        for (int i = 0; i < this.floorMap.length; i++) {
+            for (int j = 0; i < this.floorMap[0].length; j++) {
+                map[i][j] = this.floorMap[i][j].getFrame(); 
+            }
+        }
+        return map;
+    }
+
 }

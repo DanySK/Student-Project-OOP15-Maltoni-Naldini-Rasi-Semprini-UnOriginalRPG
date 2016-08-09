@@ -105,5 +105,12 @@ public interface GameMap extends Serializable {
      */
     void replaceCell(Position toRemove, Position toSet) throws IllegalArgumentException;
 
+    /**
+     * Method to get the resource locator for each cell in the map.
+     * @return
+     *          A matrix containing the paths
+     */
+    String[][] getFrames();
+
 
 }
