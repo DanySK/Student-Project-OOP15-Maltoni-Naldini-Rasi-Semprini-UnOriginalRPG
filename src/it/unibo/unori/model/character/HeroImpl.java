@@ -100,7 +100,7 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     public void addExp(final int expAcquired) {
         if (this.currentExp + expAcquired > this.totExp) {
             final int plus = this.currentExp + expAcquired - this.totExp;
-            this.setLevel(this.getLevel() + 1);
+            this.levelUp();
             this.currentExp += plus;
         } else {
             this.currentExp += expAcquired;
