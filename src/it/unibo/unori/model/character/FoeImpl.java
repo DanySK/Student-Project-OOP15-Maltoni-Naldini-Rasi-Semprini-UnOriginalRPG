@@ -19,6 +19,7 @@ public class FoeImpl extends CharacterImpl implements Foe {
     private static final long serialVersionUID = -1168567801329410379L;
     private final int ia;
     private Weapon wep;
+    private final Status immunity;
 
     /**
      * Standard constructor for a Foe.
@@ -27,12 +28,14 @@ public class FoeImpl extends CharacterImpl implements Foe {
      * @param battleFrame path of frame to set for the battle interface
      * @param map the Statistics of the Foe.
      * @param weapon the Weapon that the Foe is holding.
+     * @param immune a Status to which this Foe is immune.
      */
-    public FoeImpl(final int intelligence, final String name,
-            final String battleFrame, final Map<Statistics, Integer> map, final Weapon weapon) {
+    public FoeImpl(final int intelligence, final String name, final String battleFrame,
+            final Map<Statistics, Integer> map, final Weapon weapon, final Status immune) {
         super(name, battleFrame, map);
         this.ia = intelligence;
         this.wep = weapon;
+        this.immunity = immune;
     }
     
     /**
@@ -41,12 +44,14 @@ public class FoeImpl extends CharacterImpl implements Foe {
      * @param name the name of the Foe.
      * @param battleFrame path of frame to set for the battle interface
      * @param map the Statistics of the Foe.
+     * @param immune a Status to which this Foe is immune.
      */
     public FoeImpl(final int intelligence, final String name,
-            final String battleFrame, final Map<Statistics, Integer> map) {
+            final String battleFrame, final Map<Statistics, Integer> map, final Status immune) {
         super(name, battleFrame, map);
         this.ia = intelligence;
         this.wep = WeaponImpl.FISTS;
+        this.immunity = immune;
     }
     
     private boolean isNotPresentWeapon() {
@@ -97,6 +102,11 @@ public class FoeImpl extends CharacterImpl implements Foe {
             break;
         }
         return null;
+    }
+    
+    @Override
+    public Status getImmunity() {
+        return this.immunity;
     }
 
 }

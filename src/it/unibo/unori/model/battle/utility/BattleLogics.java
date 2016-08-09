@@ -9,6 +9,7 @@ import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.HeroTeam;
 import it.unibo.unori.model.character.Status;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
+import it.unibo.unori.model.items.Armor.ArmorPieces;
 
 /**
  * Utility class that contains static methods that allow to model 
@@ -144,7 +145,16 @@ public final class BattleLogics {
     public static Status causingStatus(final Hero my, final Foe en, final boolean who) 
             throws NoWeaponException {
         final int diff = who ? my.getLevel() - en.getLevel() : en.getLevel() - my.getLevel();
-        final Status toReturn = who ? my.getWeapon().getWeaponStatus() : en.getWeapon().getWeaponStatus();
+        final Status toReturn;
+        if (who) {
+            toReturn = my.getWeapon().getWeaponStatus();
+        } else {
+            if (en.getWeapon().getWeaponStatus().equals(my.getArmor(ArmorPieces.NONE).getImmunity())) {
+                return Status.NONE;
+            } else {
+                toReturn = en.getWeapon().getWeaponStatus();
+            }
+        }
         
         if (diff >= BattleLogics.DIFFERENCE_MAX) {
             return toReturn;

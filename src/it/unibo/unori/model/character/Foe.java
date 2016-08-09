@@ -49,5 +49,11 @@ public interface Foe extends Character {
      * @return a String representing the Stat that has been restored.
      */
     String restoreInBattle(Statistics statToRestore);
+    
+    /**
+     * Getter Method that returns the immunity of the Foe.
+     * @return the Status to which the Foe is immune;
+     */
+    Status getImmunity();
 
 }
