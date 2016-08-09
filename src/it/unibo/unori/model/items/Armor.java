@@ -1,5 +1,8 @@
 package it.unibo.unori.model.items;
 
+import java.util.Map;
+
+import it.unibo.unori.model.character.Statistics;
 import it.unibo.unori.model.character.Status;
 
 /**
@@ -42,6 +45,12 @@ public interface Armor extends Item {
      * @return the kind of the piece of armor.
      */
     ArmorPieces getArmorClass();
+    
+    /**
+     * Getter method that returns the map of stats of this Armor.
+     * @return a Map of Stats (a defensive copy).
+     */
+    Map<Statistics, Integer> getStats();
 
     /**
      * Enumeration to define the different kind of armors.
@@ -50,6 +59,7 @@ public interface Armor extends Item {
     enum ArmorPieces {
         SHIELD, HELMET, ARMOR, GLOVES, TROUSERS, NONE 
      }
+    
 }
 
 

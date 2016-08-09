@@ -9,6 +9,7 @@ import it.unibo.unori.model.battle.MagicAttackInterface;
 import it.unibo.unori.model.battle.exceptions.FailedException;
 import it.unibo.unori.model.character.Character;
 import it.unibo.unori.model.character.Statistics;
+import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.Weapon;
 import it.unibo.unori.model.menu.utility.Pair;
 
@@ -183,5 +184,25 @@ public final class MagicLogics {
             weakness = weaknessGeneral(powerWeap, powerOpponent.getX()) * SHIFTWEAKNESS;
         }
         return weakness.intValue() + w.getPhysicalAtk();
+    }
+    
+    /**
+     * Method that calculates the value to add to the physic defense of an Armor, calculating weakness.
+     * @param ar the Armor interested.
+     * @param opp the opponent.
+     * @return the value of a armor resistance.
+     */
+    public static int toAddToArmor(final Armor ar, final Character opp) {
+        Double weakness;
+        if (ar.getFireDef() == ar.getIceDefense() 
+                && ar.getFireDef() == ar.getThunderDefense()) {
+            weakness = SHIFTNOTWEAK;
+        } else {
+            final Statistics powerArm = getBestStat(ar.getStats()).getX();
+            Map<Statistics, Integer> mapToCheck = generateMapFor(false, opp);
+            Pair<Statistics, Integer> powerOpponent = getBestStat(mapToCheck);
+            weakness = weaknessGeneral(powerArm, powerOpponent.getX()) * SHIFTWEAKNESS;
+        }
+        return weakness.intValue() + ar.getPhysicalRes();
     }
 }

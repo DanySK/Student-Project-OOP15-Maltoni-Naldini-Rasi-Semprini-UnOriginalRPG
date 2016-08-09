@@ -136,6 +136,11 @@ public class ArmorImpl implements Armor {
         return this.piece;
     }
     
+    @Override
+    public Map<Statistics, Integer> getStats() {
+        return new HashMap<>(this.stats);
+    }
+    
     /**
      * HashCode method implemented using auto generation.
      * 
