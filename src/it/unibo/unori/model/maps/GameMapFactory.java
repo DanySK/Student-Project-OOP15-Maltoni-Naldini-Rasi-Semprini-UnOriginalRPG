@@ -1,7 +1,5 @@
 package it.unibo.unori.model.maps;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.stream.IntStream;
 
 import it.unibo.unori.model.character.Npc;
@@ -11,7 +9,6 @@ import it.unibo.unori.model.maps.cell.CellFactory;
 import it.unibo.unori.model.maps.cell.MapCellImpl;
 import it.unibo.unori.model.maps.cell.NPCCellImpl;
 import it.unibo.unori.model.menu.Dialogue;
-import it.unibo.unori.model.menu.DialogueInterface;
 
 /**
  * Factory to realize some standard Maps.
@@ -93,6 +90,28 @@ public class GameMapFactory {
         map.setCell(new Position(2, 3), new NPCCellImpl("", player4));
         return map;
     }
+    /**
+     * create the map for the church.
+     * @return
+     *          the map of the church
+     */
+    public GameMap createChurch() {
+        final GameMap map = this.getSizeableMap(9, 7);
+        final Npc priest = new NpcImpl("Mi hanno sbattuto quaggiù perchè mi mangiavo tutte le ostie!");
+        final Npc complot = new NpcImpl("Hai notato che questo posto ha entrate ma non uscite? Devono essere gli Illuminati!");
+        final Npc solider = new NpcImpl("Sono una guardia inutile, ma non quanto lui dalla parte opposta!");
+        for (int i = 3; i < 8; i += 2) {
+            map.setCell(new Position(i, 2), FACT.getBlockedCell());
+            map.setCell(new Position(i, 3), FACT.getBlockedCell());
+            map.setCell(new Position(i, 5), FACT.getBlockedCell());
+            map.setCell(new Position(i, 6), FACT.getBlockedCell());
+        }
+        map.setCell(new Position(2, 4), new NPCCellImpl("", priest));
+        map.setCell(new Position(9, 1), new NPCCellImpl("", solider));
+        map.setCell(new Position(9, 7), new NPCCellImpl("", solider));
+        map.setCell(new Position(5, 1), new NPCCellImpl("", complot));
+        return map;
+    }
 
     /**
      * Create the villageMap.
@@ -107,11 +126,19 @@ public class GameMapFactory {
             map.setCell(new Position(15, i), FACT.getBlockedCell());
         }
         final GameMap h1 = this.create4NPCRoomMap();
-        final MapCellImpl c1 = new MapCellImpl("", map, new Position(6, 4));
+        MapCellImpl c1 = new MapCellImpl("", map, new Position(6, 4));
         h1.setCell(new Position(h1.getMapWidth() - 1, 4), c1);
-        final MapCellImpl c2 = new MapCellImpl("", h1, new Position(4, 4));
+        MapCellImpl c2 = new MapCellImpl("", h1, new Position(4, 4));
         map.setCell(new Position(5, 4), c2);
         map.setInitialCellPosition(new Position(6, 4));
+
+        final  GameMap ch = this.createChurch();
+        c1 = new MapCellImpl("", ch, new Position(9, 4));
+        map.setCell(new Position(7, 13), c1);
+        c2 = new MapCellImpl("", map, new Position(8, 13));
+        for (int i = 3; i < 6; i++) {
+            ch.setCell(new Position(10, i), c2);
+        }
         return map;
     }
 
