@@ -52,8 +52,9 @@ public final class BattleLogics {
      * @return the damage calculated by the algorithm.
      */
     public static int getStandardDamage(final int charLevel, final int atck) {
+        int toMult = charLevel > 1 ? charLevel - 1 : 1;
         return BattleLogics.SHIFT 
-               + (BattleLogics.MULT * charLevel * (charLevel - 1)
+               + (BattleLogics.MULT * charLevel * toMult
                + (atck * 3 * charLevel) / 2);
     }
 
