@@ -36,6 +36,8 @@ import it.unibo.unori.controller.json.deserializers.NpcDeserializer;
 import it.unibo.unori.controller.json.deserializers.PartyDeserializer;
 import it.unibo.unori.controller.json.deserializers.PotionDeserializer;
 import it.unibo.unori.controller.json.deserializers.WeaponDeserializer;
+import it.unibo.unori.controller.json.serializer.ArmorSerializer;
+import it.unibo.unori.controller.json.serializer.WeaponSerializer;
 import it.unibo.unori.model.battle.MagicAttackInterface;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.FoeSquad;
@@ -93,9 +95,11 @@ public class JsonFileManager {
          * GameMapImpl();
          */
 
-        gson = new GsonBuilder().enableComplexMapKeySerialization().setPrettyPrinting()
+        gson = new GsonBuilder()/*.enableComplexMapKeySerialization()*/.setPrettyPrinting()
                 .registerTypeAdapter(Item.class, new ItemDeserializer())
+                .registerTypeAdapter(Armor.class, new ArmorSerializer())
                 .registerTypeAdapter(Armor.class, new ArmorDeserializer())
+                .registerTypeAdapter(Weapon.class, new WeaponSerializer())
                 .registerTypeAdapter(Weapon.class, new WeaponDeserializer())
                 .registerTypeAdapter(Potion.class, new PotionDeserializer())
                 .registerTypeAdapter(Bag.class, new BagDeserializer())
@@ -324,6 +328,8 @@ public class JsonFileManager {
      *             if there was a problem writing to the writer
      */
     public void saveJob(final JsonJobParameter job, final String path) throws IOException {
+        System.out.println(this.gson.toJson(job));
+        
         this.serializeJSON(job, path);
     }
 
