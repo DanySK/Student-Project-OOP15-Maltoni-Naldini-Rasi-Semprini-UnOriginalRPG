@@ -1,6 +1,7 @@
 package it.unibo.unori.model.battle;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -8,6 +9,7 @@ import org.junit.Test;
 
 import it.unibo.unori.model.character.HeroImpl;
 import it.unibo.unori.model.battle.exceptions.BarNotFullException;
+import it.unibo.unori.model.battle.exceptions.NotDefendableException;
 import it.unibo.unori.model.character.FoeImpl;
 import it.unibo.unori.model.character.FoeSquad;
 import it.unibo.unori.model.character.FoeSquadImpl;
@@ -16,9 +18,11 @@ import it.unibo.unori.model.character.HeroTeamImpl;
 import it.unibo.unori.model.character.exceptions.MaxFoesException;
 import it.unibo.unori.model.character.exceptions.MaxHeroException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
+import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
 import it.unibo.unori.model.character.jobs.Jobs;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.BagImpl;
+import it.unibo.unori.model.items.WeaponFactory;
 
 /**
  * Class for testing the Battle Mode.
@@ -29,9 +33,31 @@ public class BattleTest {
     private Battle battle;
     private HeroTeam team = new HeroTeamImpl();
     private FoeSquad enemies = new FoeSquadImpl();
+    private final Bag bag = new BagImpl();
     
-    private void setBattle(final HeroTeam h, final Bag bag, final FoeSquad en) {
-        this.battle = new BattleImpl(h, en, bag);
+    private void setBattle() {
+        this.battle = new BattleImpl(this.team, this.enemies, this.bag);
+        battle.getPresentation().generate();
+    }
+    
+    private void setTeams() throws IllegalArgumentException, MaxHeroException, MaxFoesException {
+        team.addHero(new HeroImpl("Primo", Jobs.CLOWN));
+        assertEquals(team.getAliveHeroes().size(), 1);
+        team.addHero(new HeroImpl("Secondo", Jobs.COOK));
+        assertEquals(team.getAliveHeroes().size(), 2);
+        team.addHero(new HeroImpl("Terzo", Jobs.MAGE));
+        assertEquals(team.getAliveHeroes().size(), 3);
+        team.addHero(new HeroImpl("Quarto", Jobs.RANGER));
+        assertEquals(team.getAliveHeroes().size(), 4);
+
+        enemies.addFoe(new FoeImpl(1, "Primo Nemico", "", Jobs.RANGER.getInitialStats()));
+        assertEquals(enemies.getAliveFoes().size(), 1);
+        enemies.addFoe(new FoeImpl(1, "Secondo Nemico", "", Jobs.RANGER.getInitialStats()));
+        assertEquals(enemies.getAliveFoes().size(), 2);
+        enemies.addFoe(new FoeImpl(1, "Terzo Nemico", "", Jobs.RANGER.getInitialStats()));
+        assertEquals(enemies.getAliveFoes().size(), 3);
+        enemies.addFoe(new FoeImpl(1, "Quarto Nemico", "", Jobs.RANGER.getInitialStats()));
+        assertEquals(enemies.getAliveFoes().size(), 4);
     }
     
     /**
@@ -45,27 +71,8 @@ public class BattleTest {
     @Test
     public void testInitialization() throws IllegalArgumentException, 
     MaxHeroException, MaxFoesException, NoWeaponException, BarNotFullException {
-        
-        team.addHero(new HeroImpl("Primo", Jobs.DUMP));
-        assertEquals(team.getAliveHeroes().size(), 1);
-        team.addHero(new HeroImpl("Secondo", Jobs.DUMP));
-        assertEquals(team.getAliveHeroes().size(), 2);
-        team.addHero(new HeroImpl("Terzo", Jobs.DUMP));
-        assertEquals(team.getAliveHeroes().size(), 3);
-        team.addHero(new HeroImpl("Quarto", Jobs.DUMP));
-        assertEquals(team.getAliveHeroes().size(), 4);
-
-        enemies.addFoe(new FoeImpl(1, "Primo Nemico", "", Jobs.DUMP.getInitialStats()));
-        assertEquals(enemies.getAliveFoes().size(), 1);
-        enemies.addFoe(new FoeImpl(1, "Secondo Nemico", "", Jobs.DUMP.getInitialStats()));
-        assertEquals(enemies.getAliveFoes().size(), 2);
-        enemies.addFoe(new FoeImpl(1, "Terzo Nemico", "", Jobs.DUMP.getInitialStats()));
-        assertEquals(enemies.getAliveFoes().size(), 3);
-        enemies.addFoe(new FoeImpl(1, "Quarto Nemico", "", Jobs.DUMP.getInitialStats()));
-        assertEquals(enemies.getAliveFoes().size(), 4);
-        
-        this.setBattle(this.team, new BagImpl(), this.enemies);
-        
+        this.setTeams();
+        this.setBattle();
         try {
             battle.getOutCome();
         } catch (IllegalStateException e) {
@@ -73,9 +80,8 @@ public class BattleTest {
         }  catch (Exception other) {
             fail("OTHER EXCEPTION!!");
         }
-        battle.getPresentation().generate();
-        battle.setHeroOnTUrn(battle.getSquad().getFirstHeroOnTurn());
-        battle.setFoeOnTurn(battle.getEnemies().getFirstFoeOnTurn());
+        System.out.println(battle.setHeroOnTUrn(battle.getSquad().getFirstHeroOnTurn()));
+        System.out.println(battle.setFoeOnTurn(battle.getEnemies().getFirstFoeOnTurn()));
         System.out.println("" + this.battle.getHeroOnTurn().getRemainingHP());
         System.out.println("" + this.battle.getHeroOnTurn().getAttack());
         final String firstDamage  = battle.attack(true);
@@ -94,6 +100,44 @@ public class BattleTest {
         assertTrue(this.battle.isOver());
         System.out.println(battle.getOutCome());
         this.battle = new BattleImpl(battle);
+    }
+    
+    /**
+     * Method to test other features of Battle.
+     * @throws NoWeaponException 
+     */
+    @Test
+    public void testOtherDynamics() throws NoWeaponException {
+        try {
+            this.setTeams();
+        } catch (IllegalArgumentException | MaxHeroException | MaxFoesException e) {
+            fail("Errore di qualche tipo");
+        }
+        this.setBattle();
+        System.out.println(battle.setHeroOnTUrn(battle.getSquad().getFirstHeroOnTurn()));
+        
+        try {
+            System.out.println(battle.defend(battle.getSquad().getAliveHeroes().get(2)));
+        } catch (NotDefendableException e) {
+            System.out.println("Errore");
+        }
+        assertTrue(battle.getSquad().getAliveHeroes().get(2).isDefended());
+        System.out.println(battle.setFoeOnTurn(battle.getEnemies().getFirstFoeOnTurn()));
+        
+        System.out.println(battle.getHeroOnTurn().getRemainingHP());
+        System.out.println(battle.attack(false));
+        System.out.println(battle.getHeroOnTurn().getAttack());
+        try {
+            battle.getHeroOnTurn().unsetWeapon();
+            battle.getHeroOnTurn().setWeapon(WeaponFactory.getMazza());
+        } catch (WeaponAlreadyException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println(battle.getHeroOnTurn().getWeapon().getPhysicalAtk());
+        System.out.println(battle.getHeroOnTurn().getRemainingHP());
+        assertFalse(battle.getSquad().getAliveHeroes().get(2).isDefended());
+        System.out.println(battle.attack(true));
     }
     
     /**

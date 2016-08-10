@@ -15,7 +15,7 @@ import it.unibo.unori.model.menu.Dialogue;
  */
 public class DialogueTest {
     
-    private final Dialogue toTest = new Dialogue("Dialogo di prova, devo solo aggiungere"
+    private final Dialogue toTest = new Dialogue("Dialogo di prova. devo solo aggiungere"
             + " righe per vedere se le principali funzioni della classe vanno bene"
             + "asvbdkbvkjavbadvadbsbgvbdjkdasb<fkjcbaqslbfhuwqgufvuvuefy"
             + "QUALCOSA efvuguegvquag ugauegvyge aufuygruyvhbaie"
@@ -55,6 +55,7 @@ public class DialogueTest {
         this.toTest.showNext();
         this.toTest.showNext();
         this.toTest.showNext();
+        
         try {
             System.out.println(this.toTest.showNext());
         } catch (IndexOutOfBoundsException e) {

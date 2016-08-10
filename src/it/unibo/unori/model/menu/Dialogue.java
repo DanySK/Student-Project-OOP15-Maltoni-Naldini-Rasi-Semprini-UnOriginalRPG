@@ -40,7 +40,12 @@ public class Dialogue implements DialogueInterface {
         boolean longWord = false;
         String[] splitted = this.sentence.split(" ");
         for (final String str : splitted) {
-            if (count >= 0 && count <= Dialogue.MAX_CHARS) {
+            if (str.endsWith(".\n") || str.endsWith("\n") || str.endsWith(".")) {
+                s = s.concat(str);
+                count = 0;
+                toShow.add(s);
+                s = "";
+            } else if (count >= 0 && count <= Dialogue.MAX_CHARS) {
                 if (str.length() + count < Dialogue.MAX_CHARS) {
                     if (longWord) {
                         s = s.concat(" ");
@@ -128,6 +133,10 @@ public class Dialogue implements DialogueInterface {
     
     @Override
     public String toString() {
-        return this.showRows().toString();
+        String s = "";
+        for (String str : this.listOfRows) {
+            s = s.concat(str + "\n");
+        }
+        return s;
     }
 }

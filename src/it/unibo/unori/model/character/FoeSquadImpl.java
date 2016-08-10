@@ -149,6 +149,6 @@ public class FoeSquadImpl implements FoeSquad {
             return false;
         }
         final FoeSquadImpl other = (FoeSquadImpl) obj;
-        return this.enemies == other.getAllFoes();
+        return this.enemies.equals(other.getAllFoes());
     }
 }
