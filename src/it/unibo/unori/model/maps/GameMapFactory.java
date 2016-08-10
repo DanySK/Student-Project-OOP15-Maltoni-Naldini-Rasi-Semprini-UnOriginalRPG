@@ -90,6 +90,26 @@ public class GameMapFactory {
         map.setCell(new Position(2, 3), new NPCCellImpl("", player4));
         return map;
     }
+
+    /**
+     * Create the blacksmith's shop.
+     * @return
+     *          map of the blacksmith shop.
+     */
+    public GameMap createShop() {
+        final GameMap map = this.getSizeableMap(10, 4);
+        map.setRow(3, FACT.getBlockedCell());
+        final Npc blackSmith = new NpcImpl("Fuori dalla mia palude!");
+        final Npc assistant1 = new NpcImpl("Il fabbro si è barricato dietro il bancone!"
+                + " Nessuno portà andare a parlargli ora!");
+        final Npc assistant2 = new NpcImpl("Il fabbro è arrabbiato perchè "
+                + "i ladri gli hanno rubato tutti i suoi averi!");
+        map.setCell(new Position(2, 5), new NPCCellImpl("", blackSmith));
+        map.setCell(new Position(4, 1), new NPCCellImpl("", assistant1));
+        map.setCell(new Position(4, 10), new NPCCellImpl("", assistant2));
+        return map;
+    }
+
     /**
      * create the map for the church.
      * @return
@@ -132,13 +152,24 @@ public class GameMapFactory {
         map.setCell(new Position(5, 4), c2);
         map.setInitialCellPosition(new Position(6, 4));
 
-        final  GameMap ch = this.createChurch();
+        final GameMap ch = this.createChurch();
         c1 = new MapCellImpl("", ch, new Position(9, 4));
         map.setCell(new Position(7, 13), c1);
         c2 = new MapCellImpl("", map, new Position(8, 13));
         for (int i = 3; i < 6; i++) {
             ch.setCell(new Position(10, i), c2);
         }
+
+        final GameMap sh = this.createShop();
+        c1 = new MapCellImpl("", sh, new Position(4, 7)); 
+        map.setCell(new Position(15, 4), c1);
+        c2 = new MapCellImpl("", map, new Position(16, 4));
+        sh.setCell(new Position(5, 7), c2);
+
+        final Npc snm = new NpcImpl("Sto cercando la Lore, ma non la trovo!");
+        map.setCell(new Position(2, 18), new NPCCellImpl("", snm));
+        final Npc lego = new NpcImpl("Stanno portando gli hobbit a Isengard!");
+        map.setCell(new Position(11, 4), new NPCCellImpl("", lego));
         return map;
     }
 
