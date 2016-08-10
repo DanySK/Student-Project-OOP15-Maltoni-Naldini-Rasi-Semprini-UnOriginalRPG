@@ -10,6 +10,7 @@ import it.unibo.unori.model.items.ItemImpl;
 import it.unibo.unori.model.items.WeaponFactory;
 import it.unibo.unori.model.maps.Party.CardinalPoints;
 import it.unibo.unori.model.maps.cell.CellFactory;
+import it.unibo.unori.model.maps.cell.MapCellImpl;
 import it.unibo.unori.model.maps.exceptions.BlockedPathException;
 import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
 import it.unibo.unori.model.maps.exceptions.NoObjectFoundException;
@@ -174,6 +175,39 @@ public class PartyTest {
         } catch (Exception e) {
             fail("Wrong Exception thrown");
         }
+    }
+
+    /**
+     * Test the village map.
+     */
+    @Test
+    public void testVillageMap() {
+        System.out.println("Parte VillageTest");
+        final Party p = SingletonParty.getParty();
+        p.setCurrentMap(mapFactory.getVillageMap());
+        try {
+            p.moveParty(CardinalPoints.NORTH);
+            p.moveParty(CardinalPoints.NORTH);
+            p.moveParty(CardinalPoints.NORTH);
+            } catch (Exception e) {
+                fail("No exception should be thrown!");
+            } 
+        try {
+            p.moveParty(CardinalPoints.WEST);
+            fail("Exception should be thrown!");
+        } catch (BlockedPathException e) {
+            System.out.println(p.interact().getWholeDialogue());
+        } catch (Exception e) {
+            fail("Different exception thrown");
+        }
+             try {
+                 p.moveParty(CardinalPoints.SOUTH);
+                 p.moveParty(CardinalPoints.SOUTH);
+                 p.moveParty(CardinalPoints.SOUTH);
+                 assertTrue(p.getCurrentPosition().equals(new Position(6, 4)));
+             } catch (BlockedPathException e) {
+                 fail("No exception should be thrown!");
+             }
     }
 
 }
