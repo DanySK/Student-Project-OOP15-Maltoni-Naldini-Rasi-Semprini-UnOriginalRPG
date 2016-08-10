@@ -67,7 +67,7 @@ public class GameMapFactory {
      *          a closed map sized as liked
      */
     public GameMap getSizeableMap(final int width, final int length) {
-        final GameMap map = new GameMapImpl(width + 1, length + 1);
+        final GameMap map = new GameMapImpl(width + 2, length + 2);
         final Cell cell = new CellFactory().getBlockedCell();
         map.setRow(0, cell);
         map.setRow(width, cell);
@@ -81,7 +81,7 @@ public class GameMapFactory {
      *          a room map with 4 npc around a table.
      */
     public GameMap create4NPCRoomMap() {
-        final GameMap map = this.getSizeableMap(5, 6);
+        final GameMap map = this.getSizeableMap(4, 4);
         map.setCell(new Position(2, 2), FACT.getBlockedCell());
         final Npc player1 = new NpcImpl("Caccia l'Asso!");
         final Npc player2 = new NpcImpl(new Dialogue("Full vince su tris eheheheh"));
@@ -109,6 +109,9 @@ public class GameMapFactory {
         final GameMap h1 = this.create4NPCRoomMap();
         final MapCellImpl c1 = new MapCellImpl("", map, new Position(6, 4));
         h1.setCell(new Position(h1.getMapWidth() - 1, 4), c1);
+        final MapCellImpl c2 = new MapCellImpl("", h1, new Position(4, 4));
+        map.setCell(new Position(5, 4), c2);
+        map.setInitialCellPosition(new Position(6, 4));
         return map;
     }
 
