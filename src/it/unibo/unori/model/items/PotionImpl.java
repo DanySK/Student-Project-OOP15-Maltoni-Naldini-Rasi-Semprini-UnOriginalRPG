@@ -143,7 +143,7 @@ public class PotionImpl implements Potion {
         return this.description == other.getDescription() && this.name == other.getName() 
                 && this.points == other.getRestore() 
                 && this.statToRestore == other.getStatisticToRestore()
-                && this.statusRestorable == other.statusRestorable;
+                && this.statusRestorable == other.isStatusChanging();
     }
     
     @Override
