@@ -1,0 +1,102 @@
+{
+  "defaultStats": {
+    "TOTALHP": 1000,
+    "THUNDERDEF": 900,
+    "THUNDERATK": 1500,
+    "ICEATK": 1500,
+    "PHYSICATK": 500,
+    "ICEDEF": 900,
+    "EXPFACTOR": 100,
+    "TOTALMP": 2500,
+    "SPEED": 1200,
+    "FIREATK": 1500,
+    "PHYSICDEF": 500,
+    "FIREDEF": 900
+  },
+  "defaultIncrement": {
+    "TOTALHP": 50,
+    "THUNDERDEF": 20,
+    "ICEDEF": 20,
+    "THUNDERATK": 30,
+    "TOTALMP": 50,
+    "SPEED": 30,
+    "ICEATK": 30,
+    "PHYSICATK": 10,
+    "FIREATK": 30,
+    "PHYSICDEF": 10,
+    "FIREDEF": 20
+  },
+  "defaultArmor": {
+    "SHIELD": {
+      "name": "Scudo",
+      "piece": "SHIELD",
+      "desc": "Scudo piuttosto brutto",
+      "stats": {
+        "THUNDERDEF": 0,
+        "ICEDEF": 0,
+        "PHYSICDEF": 100,
+        "FIREDEF": 0
+      },
+      "immunity": "NONE"
+    },
+    "TROUSERS": {
+      "name": "Schinieri",
+      "piece": "TROUSERS",
+      "desc": "Schinieri piuttosto brutti",
+      "stats": {
+        "THUNDERDEF": 0,
+        "ICEDEF": 0,
+        "PHYSICDEF": 100,
+        "FIREDEF": 0
+      },
+      "immunity": "NONE"
+    },
+    "HELMET": {
+      "name": "Elmo",
+      "piece": "HELMET",
+      "desc": "Elmo piuttosto brutto",
+      "stats": {
+        "THUNDERDEF": 0,
+        "ICEDEF": 0,
+        "PHYSICDEF": 100,
+        "FIREDEF": 0
+      },
+      "immunity": "NONE"
+    },
+    "GLOVES": {
+      "name": "Guanti",
+      "piece": "GLOVES",
+      "desc": "Guanti piuttosto brutti",
+      "stats": {
+        "THUNDERDEF": 0,
+        "ICEDEF": 0,
+        "PHYSICDEF": 100,
+        "FIREDEF": 0
+      },
+      "immunity": "NONE"
+    },
+    "ARMOR": {
+      "name": "Cotta",
+      "piece": "ARMOR",
+      "desc": "Cotta piuttosto brutto",
+      "stats": {
+        "THUNDERDEF": 0,
+        "ICEDEF": 0,
+        "PHYSICDEF": 100,
+        "FIREDEF": 0
+      },
+      "immunity": "NONE"
+    }
+  },
+  "defaultWeapon": {
+    "name": "Spada Semplice",
+    "desc": "Adatta per tagliare il burro pi� che i nemici",
+    "stats": {
+      "FIREATK": 0,
+      "THUNDERATK": 0,
+      "PHYSICATK": 100,
+      "ICEATK": 0
+    },
+    "inflictedStatus": "NONE"
+  }
+}
