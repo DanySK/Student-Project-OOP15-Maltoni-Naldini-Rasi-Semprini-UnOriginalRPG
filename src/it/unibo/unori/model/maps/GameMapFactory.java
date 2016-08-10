@@ -1,10 +1,17 @@
 package it.unibo.unori.model.maps;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.IntStream;
 
+import it.unibo.unori.model.character.Npc;
+import it.unibo.unori.model.character.NpcImpl;
 import it.unibo.unori.model.maps.cell.Cell;
 import it.unibo.unori.model.maps.cell.CellFactory;
 import it.unibo.unori.model.maps.cell.MapCellImpl;
+import it.unibo.unori.model.maps.cell.NPCCellImpl;
+import it.unibo.unori.model.menu.Dialogue;
+import it.unibo.unori.model.menu.DialogueInterface;
 
 /**
  * Factory to realize some standard Maps.
@@ -69,13 +76,21 @@ public class GameMapFactory {
         return map;
         }
     /**
-     * Create a room map.
+     * Create a room map with 4 npc.
      * @return
-     *          a room map.
+     *          a room map with 4 npc around a table.
      */
-    public GameMap createRoomMap() {
+    public GameMap create4NPCRoomMap() {
         final GameMap map = this.getSizeableMap(5, 6);
         map.setCell(new Position(2, 2), FACT.getBlockedCell());
+        final Npc player1 = new NpcImpl("Caccia l'Asso!");
+        final Npc player2 = new NpcImpl(new Dialogue("Full vince su tris eheheheh"));
+        final Npc player3 = new NpcImpl(new Dialogue("Tutti combattono mostri e io sto a giocare a marafone"));
+        final Npc player4 = new NpcImpl(new Dialogue("Io gioco drago bianco occhi blu! Ah no aspetta..."));
+        map.setCell(new Position(1, 2), new NPCCellImpl("", player1));
+        map.setCell(new Position(2, 1), new NPCCellImpl("", player2));
+        map.setCell(new Position(3, 2), new NPCCellImpl("", player3));
+        map.setCell(new Position(2, 3), new NPCCellImpl("", player4));
         return map;
     }
 
@@ -91,6 +106,9 @@ public class GameMapFactory {
             map.setCell(new Position(14, i), FACT.getBlockedCell());
             map.setCell(new Position(15, i), FACT.getBlockedCell());
         }
+        final GameMap h1 = this.create4NPCRoomMap();
+        final MapCellImpl c1 = new MapCellImpl("", map, new Position(6, 4));
+        h1.setCell(new Position(h1.getMapWidth() - 1, 4), c1);
         return map;
     }
 
