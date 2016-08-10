@@ -189,9 +189,15 @@ public class BattleImpl implements Battle {
         if (this.heroOnTurn.getCurrentBar() == this.heroOnTurn.getTotBar()) {
             final String toReturn = this.heroOnTurn.getName() + " ha usato l'attacco speciale!\n";
             list.add(toReturn);
+            int toAddAtk;
+            try {
+                toAddAtk = this.heroOnTurn.getWeapon().getPhysicalAtk();
+            } catch (NoWeaponException e1) {
+                toAddAtk = 0;
+            }
             final int damage = 
                     BattleLogics.specialAttackCalc(this.heroOnTurn.getLevel(),
-                            this.heroOnTurn.getAttack()) / 2;
+                            this.heroOnTurn.getAttack() + toAddAtk) / 2;
             this.enemies.getAliveFoes().forEach(e -> {
                 String toAdd;
                 e.takeDamage(damage);
