@@ -26,7 +26,7 @@ public class MainMenuActionListener extends AbstractUnoriActionListener {
                 this.getController().newGame();
                 break;
             case LOAD_GAME:
-                this.getController().newGame();
+                this.getController().loadGame();
                 break;
             default:
                 throw new UnknownButtonException(command);
