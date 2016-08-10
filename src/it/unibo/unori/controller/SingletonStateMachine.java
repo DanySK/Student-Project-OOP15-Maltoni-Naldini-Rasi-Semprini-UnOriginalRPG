@@ -142,6 +142,14 @@ public final class SingletonStateMachine {
                     e.printStackTrace();
                 }
 
+            } else {
+                try {
+                    throw new NotValidStateException();
+                } catch (NotValidStateException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                // TODO Modifica assolutamente
             }
 
         }
