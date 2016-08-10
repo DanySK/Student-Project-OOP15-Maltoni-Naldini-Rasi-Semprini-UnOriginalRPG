@@ -70,9 +70,9 @@ public class GameMapFactory {
         final GameMap map = new GameMapImpl(width + 2, length + 2);
         final Cell cell = new CellFactory().getBlockedCell();
         map.setRow(0, cell);
-        map.setRow(width, cell);
+        map.setRow(width + 1, cell);
         map.setColumn(0, cell);
-        map.setColumn(length, cell);
+        map.setColumn(length + 1, cell);
         return map;
         }
     /**
