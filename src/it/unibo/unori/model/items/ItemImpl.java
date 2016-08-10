@@ -16,16 +16,16 @@ public class ItemImpl implements Item {
     /**
      * Basic item for the game, a key.
      */
-    public static final Item KEY = new ItemImpl("Chiave", "Una piccola chiave "
-            + "per ogni evenienza");
+    public static final Item KEY = new ItemImpl("Chiave", "Una piccola chiave " + "per ogni evenienza");
 
     /**
-     * Constructor with two input string, one for the name and 
-     * the other for the description.
+     * Constructor with two input string, one for the name and the other for the
+     * description.
+     * 
      * @param name
-     *          name of the item
+     *            name of the item
      * @param desc
-     *          description of the item
+     *            description of the item
      */
     public ItemImpl(final String name, final String desc) {
         this.name = name;
@@ -53,21 +53,23 @@ public class ItemImpl implements Item {
 
     @Override
     public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
         if (o == null) {
             return false;
         }
-        if (this.getClass().equals(o.getClass())) {
-            final ItemImpl tmp = (ItemImpl) o;
-            return this.name.equals(tmp.getName());
-        } else {
+        if (getClass() != o.getClass()) {
             return false;
         }
+        final ItemImpl tmp = (ItemImpl) o;
+        return this.name.equals(tmp.getName()) 
+            && this.desc.equals(tmp.getDescription());
     }
-    
+
     @Override
     public String toString() {
         return this.name;
     }
-
 
 }
