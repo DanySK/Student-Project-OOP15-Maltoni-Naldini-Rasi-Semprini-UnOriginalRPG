@@ -237,8 +237,10 @@ public class BagImpl implements Bag {
         
         final BagImpl other = (BagImpl) obj;
         
-        return this.armors == other.getArmors() && this.miscellaneous == other.getMiscellaneous()
-                && this.potions == other.getPotions() && this.weapons == other.getWeapons();
+        return this.armors.equals(other.getArmors()) 
+                && this.miscellaneous.equals(other.getMiscellaneous())
+                && this.potions.equals(other.getPotions()) 
+                && this.weapons.equals(other.getWeapons());
         
     }
 

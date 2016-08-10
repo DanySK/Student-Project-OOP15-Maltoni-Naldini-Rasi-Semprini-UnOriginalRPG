@@ -131,7 +131,7 @@ public class HeroTeamImpl implements HeroTeam {
             return false;
         }
         final HeroTeamImpl other = (HeroTeamImpl) obj;
-        return this.heroList == other.getAllHeroes();
+        return this.heroList.equals(other.getAllHeroes());
     }
 
     @Override
