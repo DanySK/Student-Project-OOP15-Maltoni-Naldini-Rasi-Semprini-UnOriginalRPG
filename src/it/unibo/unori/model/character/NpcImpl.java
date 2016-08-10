@@ -18,10 +18,10 @@ public class NpcImpl implements Npc {
     /**
      * Simple Constructor for an Npc.
      * All I need is the Dialogue he's going to show.
-     * @param d the sentence of the Npc, in form of Dialogue.
+     * @param dialogueInterface the sentence of the Npc, in form of Dialogue.
      */
-    public NpcImpl(final Dialogue d) {
-        this.sentence = d;
+    public NpcImpl(final DialogueInterface dialogueInterface) {
+        this.sentence = dialogueInterface;
     }
     
     /**
