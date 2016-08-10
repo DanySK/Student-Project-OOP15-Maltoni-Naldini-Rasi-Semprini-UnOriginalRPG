@@ -128,6 +128,10 @@ public class Dialogue implements DialogueInterface {
     
     @Override
     public String toString() {
-        return this.showRows().toString();
+        String s = "";
+        for (String str : this.listOfRows) {
+            s = s.concat(str + "\n");
+        }
+        return s;
     }
 }
