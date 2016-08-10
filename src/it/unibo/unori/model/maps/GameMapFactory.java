@@ -4,10 +4,12 @@ import java.util.stream.IntStream;
 
 import it.unibo.unori.model.character.Npc;
 import it.unibo.unori.model.character.NpcImpl;
+import it.unibo.unori.model.items.PotionFactory;
 import it.unibo.unori.model.maps.cell.Cell;
 import it.unibo.unori.model.maps.cell.CellFactory;
 import it.unibo.unori.model.maps.cell.MapCellImpl;
 import it.unibo.unori.model.maps.cell.NPCCellImpl;
+import it.unibo.unori.model.maps.cell.ObjectCellImpl;
 import it.unibo.unori.model.menu.Dialogue;
 
 /**
@@ -21,6 +23,7 @@ public class GameMapFactory {
      */
     public static final GameMap LINKINGMAP = new GameMapImpl();
     private static final CellFactory FACT = new CellFactory();
+    private static final PotionFactory PACT = new PotionFactory();
     private static final int MAXSIZE = 99;
 
     /**
@@ -172,5 +175,22 @@ public class GameMapFactory {
         map.setCell(new Position(11, 4), new NPCCellImpl("", lego));
         return map;
     }
+
+   /**
+    * Create the Aisle to connect the village to the dungeon.
+    * @return the aisle.
+    */
+   public GameMap createAisle() {
+       final GameMap map = this.getSizeableMap(8, 22);
+       final Npc link = new NpcImpl("Eyhaaaaaaa!");
+       final Npc gigio = new NpcImpl("Quello lì è Link che si è perso e cerca di tornare a casa");
+       final Npc sora = new NpcImpl("Siccome Kingdom Hearts 3 non esce mai, ho cambiato contratto e sono venuto qua!");
+       map.setCell(new Position(3, 6), new NPCCellImpl("", link));
+       map.setCell(new Position(7, 16), new NPCCellImpl("", sora));
+       map.setCell(new Position(6, 6), new NPCCellImpl("", gigio));
+       map.setCell(new Position(7, 3), new ObjectCellImpl("", PACT.getPasticcheMagiche()));
+       map.setCell(new Position(7, 21), new ObjectCellImpl("", PACT.getRimedioDellaNonna()));
+       return map;
+   }
 
 }
