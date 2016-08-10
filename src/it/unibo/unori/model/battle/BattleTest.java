@@ -121,10 +121,12 @@ public class BattleTest {
         }
         assertTrue(battle.getSquad().getAliveHeroes().get(2).isDefended());
         System.out.println(battle.setFoeOnTurn(battle.getEnemies().getFirstFoeOnTurn()));
+        battle.getFoeOnTurn().setWeapon(new WeaponFactory());
         System.out.println(battle.getHeroOnTurn().getRemainingHP());
         System.out.println(battle.attack(false));
         System.out.println(battle.getHeroOnTurn().getRemainingHP());
         assertFalse(battle.getSquad().getAliveHeroes().get(2).isDefended());
+        System.out.println(battle.attack(true));
     }
     
     /**
