@@ -1,10 +1,12 @@
 package it.unibo.unori.controller.state;
 
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import it.unibo.unori.controller.actionlistener.MainMenuActionListener;
+import it.unibo.unori.controller.json.JsonFileManager;
 import it.unibo.unori.view.Button;
 import it.unibo.unori.view.layers.MainMenuLayer;
 
@@ -59,6 +61,7 @@ public class MainMenuState extends AbstractGameState {
         final Button loadGame = new Button("Carica parita");
         loadGame.addActionListener(listener);
         loadGame.setActionCommand(MainMenuActionListener.LOAD_GAME);
+        loadGame.setEnabled(new File(JsonFileManager.STATS_FILE).isFile());
         returnList.add(loadGame);
         
         return returnList;
