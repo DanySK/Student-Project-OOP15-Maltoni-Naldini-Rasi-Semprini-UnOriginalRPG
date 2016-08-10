@@ -3,8 +3,13 @@ package it.unibo.unori.model.maps;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.unibo.unori.model.items.Armor.ArmorPieces;
 import it.unibo.unori.model.items.ArmorFactory;
+import it.unibo.unori.model.items.Item;
+import it.unibo.unori.model.items.PotionFactory;
+import it.unibo.unori.model.items.WeaponFactory;
 import it.unibo.unori.model.maps.cell.MapCellImpl;
+import it.unibo.unori.model.maps.cell.ObjectCellImpl;
 
 /**
  * Class to build the dungeon.
@@ -14,6 +19,13 @@ public class DungeonBuilder {
 
     private static final GameMapFactory FACT = new GameMapFactory();
     private static final ArmorFactory AACT = new ArmorFactory();
+    private static final PotionFactory PACT = new PotionFactory();
+    private final List<GameMap> rList = new ArrayList<>();
+    private final List<GameMap> sList = new ArrayList<>();
+    private final List<GameMap> tList = new ArrayList<>();
+    private final List<GameMap> fList = new ArrayList<>();
+    private static final Position POS1 = new Position(7, 3);
+    private static final Position POS2 = new Position(2, 11);
 
     private void northLink(final GameMap lowerMap, final GameMap upperMap) {
        MapCellImpl c1 = new MapCellImpl("", upperMap, new Position(8, 6));
@@ -37,14 +49,47 @@ public class DungeonBuilder {
         estMap.setCell(new Position(5, 0), c2);
     }
 
-    private GameMap firstFloorBuilder() {
-        final GameMap mainRoom = FACT.getSizeableMap(8, 12);
-        final List<GameMap> roomList = new ArrayList<>();
-        roomList.add(mainRoom);
-        for (int i = 0; i < 16; i++) {
-            roomList.add(FACT.getSizeableMap(8, 12));
+    private void storeItem(final Position pos, final GameMap map, final Item i) {
+        map.setCell(pos, new ObjectCellImpl("", i));
+    }
+
+    private void finalFloorBuilder() {
+        for (int i = 0; i < 2; i++) {
+            fList.add(FACT.getSizeableMap(8, 12));
         }
-        return mainRoom;
+        this.storeItem(POS1, fList.get(0), PACT.getGigaPozione());
+        this.storeItem(POS2, fList.get(0), PACT.getTrapiantoMana());
+        this.northLink(fList.get(0), fList.get(1));
+    }
+
+    private void firstFloorBuilder() {
+        for (int i = 0; i < 17; i++) {
+            rList.add(FACT.getSizeableMap(8, 12));
+        }
+        this.westLink(rList.get(0), rList.get(2));
+        this.storeItem(POS1, rList.get(1), PACT.getAspirinaMagica());
+        this.storeItem(POS2, rList.get(2), PACT.getIntruglio());
+        this.westLink(rList.get(1), rList.get(0));
+        this.northLink(rList.get(0), rList.get(3));
+        this.northLink(rList.get(3), rList.get(4));
+        this.storeItem(POS2, rList.get(4), WeaponFactory.getChiodo());
+        this.westLink(rList.get(4), rList.get(13));
+        this.storeItem(POS1, rList.get(13), AACT.getBronzeEquip().get(ArmorPieces.SHIELD));
+        this.westLink(rList.get(5), rList.get(4));
+        this.northLink(rList.get(5), rList.get(6));
+        this.westLink(rList.get(7), rList.get(6));
+        this.storeItem(POS1, rList.get(7), WeaponFactory.getCannone());
+        this.westLink(rList.get(6), rList.get(8));
+        this.northLink(rList.get(8), rList.get(9));
+        this.storeItem(POS1, rList.get(9), PACT.getRimedioDellaNonna());
+        this.northLink(rList.get(9), rList.get(10));
+        this.westLink(rList.get(11), rList.get(10));
+        this.storeItem(POS2, rList.get(11), AACT.getSilverEquip().get(ArmorPieces.GLOVES));
+        this.westLink(rList.get(8), rList.get(12));
+        this.westLink(rList.get(12), rList.get(14));
+        this.storeItem(POS1, rList.get(14), PACT.getTrapiantoMana());
+        this.northLink(rList.get(14), rList.get(15));
+        this.westLink(rList.get(15), rList.get(16));
     }
 
 }
