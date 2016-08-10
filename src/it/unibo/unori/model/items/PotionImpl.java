@@ -140,7 +140,8 @@ public class PotionImpl implements Potion {
         
         final PotionImpl other = (PotionImpl) obj;
         
-        return this.description == other.getDescription() && this.name == other.getName() 
+        return this.description.equals(other.getDescription()) 
+                && this.name.equals(other.getName()) 
                 && this.points == other.getRestore() 
                 && this.statToRestore.equals(other.getStatisticToRestore())
                 && this.statusRestorable == other.isStatusChanging();

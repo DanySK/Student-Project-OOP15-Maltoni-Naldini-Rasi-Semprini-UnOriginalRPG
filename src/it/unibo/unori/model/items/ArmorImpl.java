@@ -178,9 +178,9 @@ public class ArmorImpl implements Armor {
         final ArmorImpl other = (ArmorImpl) obj;
         final Map<Statistics, Integer> map = this.stats;
         
-        return this.desc == other.getDescription() 
+        return this.desc.equals(other.getDescription()) 
                 && this.immunity.equals(other.getImmunity()) 
-                && this.name == other.getName() 
+                && this.name.equals(other.getName()) 
                 && this.piece.equals(other.getArmorClass()) 
                 && other.getFireDef() == map.get(Statistics.FIREDEF)
                 && other.getIceDefense() == map.get(Statistics.ICEDEF)

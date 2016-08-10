@@ -131,7 +131,6 @@ public class BattleTest {
             battle.getHeroOnTurn().unsetWeapon();
             battle.getHeroOnTurn().setWeapon(WeaponFactory.getMazza());
         } catch (WeaponAlreadyException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         System.out.println(battle.getHeroOnTurn().getWeapon().getPhysicalAtk());

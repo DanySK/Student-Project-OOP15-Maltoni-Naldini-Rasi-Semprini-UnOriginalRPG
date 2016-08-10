@@ -162,7 +162,7 @@ public class WeaponImpl implements Weapon {
         final WeaponImpl other = (WeaponImpl) obj;
         final Map<Statistics, Integer> map = this.stats;
         
-        return this.name == other.getName() && this.desc == other.getDescription() 
+        return this.name.equals(other.getName()) && this.desc.equals(other.getDescription()) 
                 && this.inflictedStatus.equals(other.getWeaponStatus())
                 && other.getFireAtk() == map.get(Statistics.FIREATK)
                 && other.getIceAtk() == map.get(Statistics.ICEATK)
