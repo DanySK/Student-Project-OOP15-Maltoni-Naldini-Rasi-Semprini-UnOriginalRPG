@@ -129,8 +129,8 @@ public final class BattleLogics {
      * @return the damage of the special attack.
      */
     public static int specialAttackCalc(final int charLev, final int atck) {
-        return BattleLogics.getStandardDamage(charLev, atck) * LEVELER
-                + charLev * MULT;
+        return (BattleLogics.getStandardDamage(charLev, atck) * (LEVELER - 2)
+                + charLev * LEVELER) / 2;
     }
     
     /**
@@ -152,7 +152,7 @@ public final class BattleLogics {
                 toReturn = my.getWeapon().getWeaponStatus();
             }
         } else if (my instanceof Foe) {
-            for (Armor arm : ((Hero) my).getWholeArmor().values()) {
+            for (Armor arm : ((Hero) en).getWholeArmor().values()) {
                 if (en.getWeapon().getWeaponStatus().equals(arm.getImmunity())) {
                     return Status.NONE;
                 }

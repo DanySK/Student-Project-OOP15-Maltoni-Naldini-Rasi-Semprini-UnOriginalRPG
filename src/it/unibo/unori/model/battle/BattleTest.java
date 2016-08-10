@@ -1,6 +1,7 @@
 package it.unibo.unori.model.battle;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -8,6 +9,7 @@ import org.junit.Test;
 
 import it.unibo.unori.model.character.HeroImpl;
 import it.unibo.unori.model.battle.exceptions.BarNotFullException;
+import it.unibo.unori.model.battle.exceptions.NotDefendableException;
 import it.unibo.unori.model.character.FoeImpl;
 import it.unibo.unori.model.character.FoeSquad;
 import it.unibo.unori.model.character.FoeSquadImpl;
@@ -33,6 +35,7 @@ public class BattleTest {
     
     private void setBattle() {
         this.battle = new BattleImpl(this.team, this.enemies, this.bag);
+        battle.getPresentation().generate();
     }
     
     private void setTeams() throws IllegalArgumentException, MaxHeroException, MaxFoesException {
@@ -75,9 +78,8 @@ public class BattleTest {
         }  catch (Exception other) {
             fail("OTHER EXCEPTION!!");
         }
-        battle.getPresentation().generate();
-        battle.setHeroOnTUrn(battle.getSquad().getFirstHeroOnTurn());
-        battle.setFoeOnTurn(battle.getEnemies().getFirstFoeOnTurn());
+        System.out.println(battle.setHeroOnTUrn(battle.getSquad().getFirstHeroOnTurn()));
+        System.out.println(battle.setFoeOnTurn(battle.getEnemies().getFirstFoeOnTurn()));
         System.out.println("" + this.battle.getHeroOnTurn().getRemainingHP());
         System.out.println("" + this.battle.getHeroOnTurn().getAttack());
         final String firstDamage  = battle.attack(true);
@@ -100,15 +102,29 @@ public class BattleTest {
     
     /**
      * Method to test other features of Battle.
+     * @throws NoWeaponException 
      */
     @Test
-    public void testOtherDynamics() {
+    public void testOtherDynamics() throws NoWeaponException {
         try {
             this.setTeams();
         } catch (IllegalArgumentException | MaxHeroException | MaxFoesException e) {
             fail("Errore di qualche tipo");
         }
         this.setBattle();
+        System.out.println(battle.setHeroOnTUrn(battle.getSquad().getFirstHeroOnTurn()));
+        
+        try {
+            System.out.println(battle.defend(battle.getSquad().getAliveHeroes().get(2)));
+        } catch (NotDefendableException e) {
+            System.out.println("Errore");
+        }
+        assertTrue(battle.getSquad().getAliveHeroes().get(2).isDefended());
+        System.out.println(battle.setFoeOnTurn(battle.getEnemies().getFirstFoeOnTurn()));
+        System.out.println(battle.getHeroOnTurn().getRemainingHP());
+        System.out.println(battle.attack(false));
+        System.out.println(battle.getHeroOnTurn().getRemainingHP());
+        assertFalse(battle.getSquad().getAliveHeroes().get(2).isDefended());
     }
     
     /**

@@ -105,6 +105,24 @@ public class BattleImpl implements Battle {
         return mediumLevel;
     }
     
+    private boolean setUndefendedAndNotify(final Character whoSuffers) {
+        if (whoSuffers instanceof Hero) {
+            if (((Hero) whoSuffers).isDefended()) {
+                ((Hero) whoSuffers).setUndefended();
+                return true;
+            } else {
+                this.squad.getAliveHeroes().forEach(h -> {
+                    if (h.isDefended()) {
+                        h.setUndefended();
+                    }
+                });
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+    
     @Override
     public String runAway() throws CantEscapeException {
         if (BattleLogics.canEscape(this.getHeroOnTurn().getLevel(), this.getFoeOnTurn().getLevel())) {
@@ -119,9 +137,12 @@ public class BattleImpl implements Battle {
     public String attack(final boolean whosFirst) throws NoWeaponException {
         final Character whoAttacks = whosFirst ? this.heroOnTurn : this.foeOnTurn;
         final Character whoSuffers = whosFirst ? this.foeOnTurn : this.heroOnTurn;
-        
+        if (this.setUndefendedAndNotify(whoSuffers)) {
+            return whoSuffers.getName() + " e' difeso! Non subisce danni";
+        }
         final int damage = 
                 MagicLogics.mergeAtkAndDef(whoAttacks, whoSuffers, whoAttacks.getWeapon());
+        
         whoSuffers.takeDamage(damage);
         String toReturn = whoAttacks.getName() + " attacca " + whoSuffers.getName() + " con "
                 + whoAttacks.getWeapon() + "!\nE causa un danno pari a " + damage + " HP!";
@@ -134,8 +155,7 @@ public class BattleImpl implements Battle {
                 return toReturn;
             }
         } else {
-            toReturn = this.squad.defeatHero(this.heroOnTurn);
-            
+            toReturn = toReturn.concat("\n" + this.squad.defeatHero(this.heroOnTurn));
             if (this.squad.isDefeated(this.heroOnTurn)) {
                 this.setOver();
                 return toReturn;
@@ -197,7 +217,7 @@ public class BattleImpl implements Battle {
             }
             final int damage = 
                     BattleLogics.specialAttackCalc(this.heroOnTurn.getLevel(),
-                            this.heroOnTurn.getAttack() + toAddAtk) / 2;
+                            this.heroOnTurn.getAttack() + toAddAtk);
             this.enemies.getAliveFoes().forEach(e -> {
                 String toAdd;
                 e.takeDamage(damage);
@@ -224,6 +244,9 @@ public class BattleImpl implements Battle {
         final Character whoSuffers = whosFirst ? this.foeOnTurn : this.heroOnTurn;
         final int damage;
         String toShow = whoAttacks.getName() + " usa una Magia!";
+        if (this.setUndefendedAndNotify(whoSuffers)) {
+            return whoSuffers.getName() + " e' difeso! Non subisce danni";
+        }
         if (whoAttacks.getMagics().contains(m)) {
             if (whoAttacks.getCurrentMP() > m.getMPRequired()) {
                 whoAttacks.consumeMP(m.getMPRequired());
