@@ -116,7 +116,7 @@ public class FoeSquadImpl implements FoeSquad {
     
     @Override
     public String getNameOfSquad() {
-        return this.enemies.size() + " nemici!\n";
+        return this.enemies.size() + " nemici!";
     }
     
     /**

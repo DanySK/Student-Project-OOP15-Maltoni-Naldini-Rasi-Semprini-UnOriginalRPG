@@ -40,7 +40,8 @@ public class Dialogue implements DialogueInterface {
         boolean longWord = false;
         String[] splitted = this.sentence.split(" ");
         for (final String str : splitted) {
-            if (str.endsWith(".\n") || str.endsWith("\n") || str.endsWith(".")) {
+            if (str.endsWith(".\n") || str.endsWith("\n") || str.endsWith(".") 
+                    || str.endsWith("!") || str.endsWith("?")) {
                 s = s.concat(str);
                 count = 0;
                 toShow.add(s);
@@ -81,7 +82,9 @@ public class Dialogue implements DialogueInterface {
                 }
             } 
         }
-        toShow.add(s);
+        if (!s.equals("")) {
+            toShow.add(s); 
+        }
         return toShow;
     }
     
