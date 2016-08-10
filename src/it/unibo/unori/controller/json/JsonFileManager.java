@@ -20,11 +20,25 @@ import com.google.gson.JsonSyntaxException;
 import it.unibo.unori.controller.GameStatisticsImpl;
 import it.unibo.unori.controller.json.deserializers.ArmorDeserializer;
 import it.unibo.unori.controller.json.deserializers.BagDeserializer;
+import it.unibo.unori.controller.json.deserializers.CharacterDeserializer;
+import it.unibo.unori.controller.json.deserializers.DialogueDeserializer;
+import it.unibo.unori.controller.json.deserializers.FoeDeserializer;
+import it.unibo.unori.controller.json.deserializers.FoeSquadDeserializer;
 import it.unibo.unori.controller.json.deserializers.GameMapDeserializer;
+import it.unibo.unori.controller.json.deserializers.HeroDeserializer;
+import it.unibo.unori.controller.json.deserializers.HeroTeamDeserializer;
 import it.unibo.unori.controller.json.deserializers.ItemDeserializer;
+import it.unibo.unori.controller.json.deserializers.MagicAttackDeserializer;
+import it.unibo.unori.controller.json.deserializers.NpcDeserializer;
 import it.unibo.unori.controller.json.deserializers.PartyDeserializer;
 import it.unibo.unori.controller.json.deserializers.PotionDeserializer;
 import it.unibo.unori.controller.json.deserializers.WeaponDeserializer;
+import it.unibo.unori.model.battle.MagicAttackInterface;
+import it.unibo.unori.model.character.Foe;
+import it.unibo.unori.model.character.FoeSquad;
+import it.unibo.unori.model.character.Hero;
+import it.unibo.unori.model.character.HeroTeam;
+import it.unibo.unori.model.character.Npc;
 import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.Item;
@@ -34,6 +48,8 @@ import it.unibo.unori.model.maps.GameMap;
 import it.unibo.unori.model.maps.Party;
 import it.unibo.unori.model.maps.Position;
 import it.unibo.unori.model.maps.cell.Cell;
+import it.unibo.unori.model.menu.Dialogue;
+import it.unibo.unori.model.menu.DialogueInterface;
 
 /**
  * This class models a clean boundary between Google Gson library and the needs
@@ -75,15 +91,26 @@ public class JsonFileManager {
         final InstanceCreator<GameMap> mapDeserialize = (type) -> new GameMapImpl();*/
 
         gson = new GsonBuilder().enableComplexMapKeySerialization().setPrettyPrinting()
-                .registerTypeAdapter(Armor.class, new ArmorDeserializer())
                 .registerTypeAdapter(Item.class, new ItemDeserializer())
+                .registerTypeAdapter(Armor.class, new ArmorDeserializer())
                 .registerTypeAdapter(Weapon.class, new WeaponDeserializer())
                 .registerTypeAdapter(Potion.class, new PotionDeserializer())
-                .registerTypeAdapter(Party.class, new PartyDeserializer())
                 .registerTypeAdapter(Bag.class, new BagDeserializer())
-                .registerTypeAdapter(GameMap.class, new GameMapDeserializer())
+                .registerTypeAdapter(MagicAttackInterface.class, new MagicAttackDeserializer())
+                .registerTypeAdapter(Character.class, new CharacterDeserializer())
+                .registerTypeAdapter(Foe.class, new FoeDeserializer())
+                .registerTypeAdapter(FoeSquad.class, new FoeSquadDeserializer())
+                .registerTypeAdapter(Hero.class, new HeroDeserializer())
+                .registerTypeAdapter(HeroTeam.class, new HeroTeamDeserializer())
+                .registerTypeAdapter(Npc.class, new NpcDeserializer())
+                .registerTypeAdapter(DialogueInterface.class, new DialogueDeserializer()) // TODO not sure what to keep
+                .registerTypeAdapter(Dialogue.class, new DialogueDeserializer()) // TODO not sure what to keep
                 .registerTypeAdapter(Position.class, new GameMapDeserializer.PositionDeserializer())
-                .registerTypeAdapter(Cell.class, new GameMapDeserializer.CellDeserializer()).create();
+                .registerTypeAdapter(Cell.class, new GameMapDeserializer.CellDeserializer())
+                .registerTypeAdapter(GameMap.class, new GameMapDeserializer())
+                .registerTypeAdapter(Party.class, new PartyDeserializer())
+                .registerTypeAdapter(Position.class, new GameMapDeserializer.PositionDeserializer())
+                .create();
     }
 
     /**
@@ -340,7 +367,7 @@ public class JsonFileManager {
      * @throws JsonIOException
      *             if there was a problem writing to the writer
      */
-    private void serializeJSON(final Object objectToSerialize, final String path) throws IOException {
+    public /*private*/ void serializeJSON(final Object objectToSerialize, final String path) throws IOException {
         final Writer writer = new OutputStreamWriter(new FileOutputStream(path), "UTF-8");
         gson.toJson(objectToSerialize, writer);
         writer.close();
@@ -372,7 +399,7 @@ public class JsonFileManager {
      *             if the file does not contain a valid representation for an
      *             object of type
      */
-    private <T> T deserializeJSON(final Class<T> clazz, final String path) throws IOException {
+    public /*private*/ <T> T deserializeJSON(final Class<T> clazz, final String path) throws IOException {
         Optional<T> returnObject = Optional.empty();
 
         final Reader reader = new InputStreamReader(new FileInputStream(path), "UTF-8");

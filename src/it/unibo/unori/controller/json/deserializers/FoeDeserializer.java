@@ -1,6 +1,7 @@
 package it.unibo.unori.controller.json.deserializers;
 
 import java.lang.reflect.Type;
+import java.util.List;
 import java.util.Map;
 
 import com.google.gson.JsonDeserializationContext;
@@ -10,9 +11,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 
+import it.unibo.unori.model.battle.MagicAttackInterface;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.FoeImpl;
 import it.unibo.unori.model.character.Statistics;
+import it.unibo.unori.model.character.Status;
 import it.unibo.unori.model.items.Weapon;
 
 public class FoeDeserializer implements JsonDeserializer<Foe> {
@@ -26,13 +29,13 @@ public class FoeDeserializer implements JsonDeserializer<Foe> {
     private static final String STATISTIC = "statistic";
     private static final String SPELL_LIST = "spellList";
     // FoeImpl
-    private static final String IA = "ia";
+    private static final String SMARTNESS = "ia";
     private static final String WEAPON = "wep";
 
     @Override
     public Foe deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
             throws JsonParseException {
-        JsonObject jObj = (JsonObject) json;
+        final JsonObject jObj = (JsonObject) json;
 
         // Deserializing fields for constructor
         final String name = jObj.get(NAME).getAsString();
@@ -40,13 +43,31 @@ public class FoeDeserializer implements JsonDeserializer<Foe> {
                 new TypeToken<Map<Statistics, Integer>>() {
                 }.getType());
         final Weapon weapon = context.deserialize(jObj.get(WEAPON), Weapon.class);
-        final int ia = jObj.get(IA).getAsInt();
+        final int smartness = jObj.get(SMARTNESS).getAsInt();
         final String battleFrame = jObj.get(BATTLE_FRAME).getAsString();
         // Instantiation
-        final Foe returnFoe = new FoeImpl(ia, name, battleFrame, params, weapon);
+        final Foe returnFoe = new FoeImpl(smartness, name, battleFrame, params, weapon);
         // Other fields
-
-        // TODO
+        final int currentHP = jObj.get(CURRENT_HP).getAsInt();
+        if (returnFoe.getRemainingHP() > currentHP) {
+            returnFoe.takeDamage(returnFoe.getRemainingHP() - currentHP);
+        } else if (returnFoe.getRemainingHP() < currentHP) {
+            returnFoe.restoreHP(currentHP - returnFoe.getRemainingHP());
+        }
+        final int currentMP = jObj.get(CURRENT_MP).getAsInt();
+        if (returnFoe.getCurrentMP() > currentMP) {
+            returnFoe.consumeMP(returnFoe.getCurrentMP() - currentMP);
+        } else if (returnFoe.getCurrentMP() < currentMP) {
+            returnFoe.restoreMP(currentMP - returnFoe.getCurrentMP());
+        }
+        final int level = jObj.get(LEVEL).getAsInt();
+        returnFoe.setLevel(level);
+        final Status status = context.deserialize(jObj.get(STATUS), Status.class);
+        returnFoe.setStatus(status);
+        final List<MagicAttackInterface> spellList = context.deserialize(jObj.get(SPELL_LIST),
+                new TypeToken<List<MagicAttackInterface>>() {
+                }.getType());
+        spellList.forEach(returnFoe::addSpell); // TODO check
 
         return returnFoe; // TODO
     }
