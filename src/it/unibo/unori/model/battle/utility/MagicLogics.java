@@ -242,10 +242,10 @@ public final class MagicLogics {
                 Statistics powerOpponent = getBestStat(mapToCheck).getX();
                 Map<Statistics, Integer> mapToCheckAtt = generateMapFor(true, att);
                 Statistics powerAtt = getBestStat(mapToCheckAtt).getX();
-                weakness = weaknessGeneral(powerAtt, powerOpponent) * (SHIFTWEAKNESS - 10);
+                weakness = weaknessGeneral(powerAtt, powerOpponent) * SHIFTWEAKNESS;
             }
             return BattleLogics.getStandardDamage(att.getLevel(),
-                    atkTot - weakness.intValue() + opp.getDefense());
+                    atkTot + weakness.intValue() - opp.getDefense());
         } else if (opp instanceof Hero) {
             
             return BattleLogics.getStandardDamage(att.getLevel(), atkTot 

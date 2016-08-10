@@ -18,9 +18,11 @@ import it.unibo.unori.model.character.HeroTeamImpl;
 import it.unibo.unori.model.character.exceptions.MaxFoesException;
 import it.unibo.unori.model.character.exceptions.MaxHeroException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
+import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
 import it.unibo.unori.model.character.jobs.Jobs;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.BagImpl;
+import it.unibo.unori.model.items.WeaponFactory;
 
 /**
  * Class for testing the Battle Mode.
@@ -121,9 +123,18 @@ public class BattleTest {
         }
         assertTrue(battle.getSquad().getAliveHeroes().get(2).isDefended());
         System.out.println(battle.setFoeOnTurn(battle.getEnemies().getFirstFoeOnTurn()));
-        battle.getFoeOnTurn().setWeapon(new WeaponFactory());
+        
         System.out.println(battle.getHeroOnTurn().getRemainingHP());
         System.out.println(battle.attack(false));
+        System.out.println(battle.getHeroOnTurn().getAttack());
+        try {
+            battle.getHeroOnTurn().unsetWeapon();
+            battle.getHeroOnTurn().setWeapon(WeaponFactory.getMazza());
+        } catch (WeaponAlreadyException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println(battle.getHeroOnTurn().getWeapon().getPhysicalAtk());
         System.out.println(battle.getHeroOnTurn().getRemainingHP());
         assertFalse(battle.getSquad().getAliveHeroes().get(2).isDefended());
         System.out.println(battle.attack(true));
