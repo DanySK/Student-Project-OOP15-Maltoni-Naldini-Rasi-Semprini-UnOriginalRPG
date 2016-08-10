@@ -34,8 +34,7 @@ public class CellFactory {
      *          a  cell containing a sword
      */
     public Cell getObjectCell() {
-        final WeaponFactory w = new WeaponFactory();
-        return new ObjectCellImpl("", w.getStdSword());
+        return new ObjectCellImpl("", WeaponFactory.getStdSword());
     }
 
     /**
@@ -44,7 +43,6 @@ public class CellFactory {
      *          a simple chest cell, containing a nail
      */
     public Cell getChestCell() {
-        final WeaponFactory w = new WeaponFactory();
-        return new ChestCellImpl("", w.getChiodo());
+        return new ChestCellImpl("", WeaponFactory.getChiodo());
     }
 }
