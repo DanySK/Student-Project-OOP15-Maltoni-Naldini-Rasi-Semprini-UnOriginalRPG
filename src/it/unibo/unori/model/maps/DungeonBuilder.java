@@ -29,6 +29,13 @@ public class DungeonBuilder {
     private static final Position POS1 = new Position(7, 3);
     private static final Position POS2 = new Position(2, 11);
 
+    /**
+     * Method to link two dungeon room vertically.
+     * @param lowerMap
+     *          the lower map
+     * @param upperMap
+     *          the upper map
+     */
     private void northLink(final GameMap lowerMap, final GameMap upperMap) {
        MapCellImpl c1 = new MapCellImpl("", upperMap, new Position(8, 6));
        MapCellImpl c2 = new MapCellImpl("", upperMap, new Position(8, 7));
@@ -40,6 +47,13 @@ public class DungeonBuilder {
        upperMap.setCell(new Position(9, 7), c2);
     }
 
+    /**
+     * Method to link two maps horizontally.
+     * @param westMap
+     *          the west map
+     * @param estMap
+     *          the east map
+     */
     private void westLink(final GameMap westMap, final GameMap estMap) {
         MapCellImpl c1 = new MapCellImpl("", estMap, new Position(4, 1));
         MapCellImpl c2 = new MapCellImpl("", estMap, new Position(5, 1));
@@ -51,14 +65,33 @@ public class DungeonBuilder {
         estMap.setCell(new Position(5, 0), c2);
     }
 
+    /**
+     * Method to link multi-level maps.
+     * @param map1
+     *          map to link
+     * @param map2
+     *          map to link
+     */
+    private void linkMap(final GameMap map1, final GameMap map2) {
+        final MapCellImpl c1 = new MapCellImpl("", map1, new Position(6, 5));
+        final MapCellImpl c2 = new MapCellImpl("", map2, new Position(6, 5));
+        map2.setCell(new Position(5, 5), c1);
+        map1.setCell(new Position(5, 5), c2);
+    }
+
+ 
+
     private void storeItem(final Position pos, final GameMap map, final Item i) {
         map.setCell(pos, new ObjectCellImpl("", i));
     }
-    
+
     private void storeChest(final Position pos, final GameMap map, final Item i) {
         map.setCell(pos, new ChestCellImpl("", i));
     }
 
+    /**
+     * Build final floor.
+     */
     private void finalFloorBuilder() {
         for (int i = 0; i < 2; i++) {
             fList.add(FACT.getSizeableMap(8, 12));
@@ -67,7 +100,30 @@ public class DungeonBuilder {
         this.storeItem(POS2, fList.get(0), PACT.getTrapiantoMana());
         this.northLink(fList.get(0), fList.get(1));
     }
-    
+
+    /**
+     * Build third floor
+     */
+    private void thirdFloorBuilder() {
+        for (int i = 0; i < 9; i++) {
+            tList.add(FACT.getSizeableMap(8, 12));
+        }
+        this.northLink(tList.get(0), tList.get(2));
+        this.northLink(tList.get(5), tList.get(0));
+        this.northLink(tList.get(6), tList.get(5));
+        this.northLink(tList.get(6), tList.get(7));
+        this.westLink(tList.get(8), tList.get(1));
+        this.westLink(tList.get(1), tList.get(0));
+        this.westLink(tList.get(0), tList.get(3));
+        this.westLink(tList.get(3), tList.get(4));
+        this.storeChest(POS1, tList.get(0), AACT.getGoldEquip().get(ArmorPieces.SHIELD));
+        this.storeChest(POS1, tList.get(4), ItemImpl.KEY);
+        this.storeChest(POS2, tList.get(7), WeaponFactory.getSpadaMistica());
+    }
+
+    /**
+     * Build second floor.
+     */
     private void secondFloorBuilder() {
         for (int i = 0; i < 18; i++) {
             sList.add(FACT.getSizeableMap(8, 12));
@@ -94,9 +150,11 @@ public class DungeonBuilder {
         this.northLink(sList.get(14), sList.get(13));
         this.westLink(sList.get(16), sList.get(14));
         this.northLink(sList.get(17), sList.get(16));
-        
     }
 
+    /**
+     * Build first floor.
+     */
     private void firstFloorBuilder() {
         for (int i = 0; i < 17; i++) {
             rList.add(FACT.getSizeableMap(8, 12));
@@ -125,6 +183,22 @@ public class DungeonBuilder {
         this.storeItem(POS1, rList.get(14), PACT.getTrapiantoMana());
         this.northLink(rList.get(14), rList.get(15));
         this.westLink(rList.get(15), rList.get(16));
+    }
+
+    /**
+     * Connect the floor and return the first room of first floor.
+     * @return
+     *         first room of first floor.
+     */
+    public GameMap dungeonBuild() {
+       this.finalFloorBuilder();
+       this.thirdFloorBuilder();
+       this.secondFloorBuilder();
+       this.firstFloorBuilder();
+       this.linkMap(fList.get(0), tList.get(tList.size() - 1));
+       this.linkMap(tList.get(0), sList.get(sList.size() - 1));
+       this.linkMap(sList.get(0), rList.get(rList.size() - 1));
+       return rList.get(0);
     }
 
 }
