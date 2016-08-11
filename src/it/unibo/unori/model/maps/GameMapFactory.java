@@ -149,27 +149,11 @@ public class GameMapFactory {
             map.setCell(new Position(14, i), FACT.getBlockedCell());
             map.setCell(new Position(15, i), FACT.getBlockedCell());
         }
-        final GameMap h1 = this.create4NPCRoomMap();
-        MapCellImpl c1 = new MapCellImpl("", map, new Position(6, 4));
-        h1.setCell(new Position(h1.getMapWidth() - 1, 4), c1);
-        MapCellImpl c2 = new MapCellImpl("", h1, new Position(4, 4));
-        map.setCell(new Position(5, 4), c2);
-        map.setInitialCellPosition(new Position(6, 4));
-
-        final GameMap ch = this.createChurch();
-        c1 = new MapCellImpl("", ch, new Position(9, 4));
-        map.setCell(new Position(7, 13), c1);
-        c2 = new MapCellImpl("", map, new Position(8, 13));
-        for (int i = 3; i < 6; i++) {
-            ch.setCell(new Position(10, i), c2);
+        for (int i = 12; i < 15; i++) {
+            for (int j = 4; j < 8; j++) {
+                map.setCell(new Position(j, i), FACT.getBlockedCell());
+            }
         }
-
-        final GameMap sh = this.createShop();
-        c1 = new MapCellImpl("", sh, new Position(4, 7)); 
-        map.setCell(new Position(15, 4), c1);
-        c2 = new MapCellImpl("", map, new Position(16, 4));
-        sh.setCell(new Position(5, 7), c2);
-
         final Npc snm = new NpcImpl("Sto cercando la Lore, ma non la trovo!");
         map.setCell(new Position(2, 18), new NPCCellImpl("", snm));
         final Npc lego = new NpcImpl("Stanno portando gli hobbit a Isengard!");
