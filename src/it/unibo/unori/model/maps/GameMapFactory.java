@@ -5,6 +5,7 @@ import java.util.stream.IntStream;
 import it.unibo.unori.model.character.Npc;
 import it.unibo.unori.model.character.NpcImpl;
 import it.unibo.unori.model.items.PotionFactory;
+import it.unibo.unori.model.items.WeaponFactory;
 import it.unibo.unori.model.maps.cell.Cell;
 import it.unibo.unori.model.maps.cell.CellFactory;
 import it.unibo.unori.model.maps.cell.MapCellImpl;
@@ -190,6 +191,20 @@ public class GameMapFactory {
        map.setCell(new Position(6, 6), new NPCCellImpl("", gigio));
        map.setCell(new Position(7, 3), new ObjectCellImpl("", PACT.getPasticcheMagiche()));
        map.setCell(new Position(7, 21), new ObjectCellImpl("", PACT.getRimedioDellaNonna()));
+       return map;
+   }
+
+   /**
+    * Create the entrance for the dungeon.
+    * @return
+    *       Map containing entrance for the dungeon
+    */
+   public GameMap createDungeonEntrance() {
+       final GameMap map = this.getSizeableMap(10, 10);
+       final Npc crest = new NpcImpl("Questo dungeon mi fa paura, vado a lavorare a Train Simulator");
+       map.setCell(new Position(3, 6), new NPCCellImpl("", crest));
+       map.setCell(new Position(8, 9), new ObjectCellImpl("", PACT.getPozioneVita()));
+       map.setCell(new Position(2, 9), new ObjectCellImpl("", WeaponFactory.getLanciafiamme()));
        return map;
    }
 
