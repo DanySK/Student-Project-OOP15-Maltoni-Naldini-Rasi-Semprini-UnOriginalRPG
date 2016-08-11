@@ -54,7 +54,7 @@ public class FoeSquadImpl implements FoeSquad {
     
     //Method to check the size of the List.
     private void checkListSize() throws IllegalStateException {
-        if (this.enemies.size() == 0) {
+        if (this.enemies == null) {
             throw new IllegalStateException();
         }
     }

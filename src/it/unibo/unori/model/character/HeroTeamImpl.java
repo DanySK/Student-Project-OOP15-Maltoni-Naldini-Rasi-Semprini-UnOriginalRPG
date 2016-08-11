@@ -56,7 +56,7 @@ public class HeroTeamImpl implements HeroTeam {
     }
 
     private void checkListSize() throws IllegalStateException {
-        if (this.heroList.size() == 0) {
+        if (this.heroList == null) {
             throw new IllegalStateException();
         }
     }
