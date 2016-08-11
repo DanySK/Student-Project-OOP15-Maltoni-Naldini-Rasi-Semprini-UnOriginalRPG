@@ -121,7 +121,6 @@ public class PartyTest {
     public void testInteractWithObject() throws IllegalArgumentException, NoObjectFoundException {
         final Party p = SingletonParty.getParty();
         final GameMap m = mapFactory.getStdRoom();
-        m.getFrames();
         m.setCell(new Position(2, 2), this.cellFactory.getObjectCell());
         p.setCurrentMap(m);
         assertEquals(p.getCurrentPosition(), new Position(1, 1));
@@ -174,39 +173,6 @@ public class PartyTest {
         } catch (Exception e) {
             fail("Wrong Exception thrown");
         }
-    }
-
-    /**
-     * Test the village map.
-     */
-    @Test
-    public void testVillageMap() {
-        System.out.println("Parte VillageTest");
-        final Party p = SingletonParty.getParty();
-        p.setCurrentMap(mapFactory.getVillageMap());
-        try {
-            p.moveParty(CardinalPoints.NORTH);
-            p.moveParty(CardinalPoints.NORTH);
-            p.moveParty(CardinalPoints.NORTH);
-            } catch (Exception e) {
-                fail("No exception should be thrown!");
-            } 
-        try {
-            p.moveParty(CardinalPoints.WEST);
-            fail("Exception should be thrown!");
-        } catch (BlockedPathException e) {
-            System.out.println(p.interact().getWholeDialogue());
-        } catch (Exception e) {
-            fail("Different exception thrown");
-        }
-             try {
-                 p.moveParty(CardinalPoints.SOUTH);
-                 p.moveParty(CardinalPoints.SOUTH);
-                 p.moveParty(CardinalPoints.SOUTH);
-                 assertTrue(p.getCurrentPosition().equals(new Position(6, 4)));
-             } catch (BlockedPathException e) {
-                 fail("No exception should be thrown!");
-             }
     }
 
 }
