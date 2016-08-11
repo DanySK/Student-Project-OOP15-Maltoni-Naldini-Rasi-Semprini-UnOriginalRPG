@@ -72,7 +72,7 @@ public class DungeonBuilder {
      * @param map2
      *          map to link
      */
-    private void linkMap(final GameMap map1, final GameMap map2) {
+    public void linkMap(final GameMap map1, final GameMap map2) {
         final MapCellImpl c1 = new MapCellImpl("", map1, new Position(6, 5));
         final MapCellImpl c2 = new MapCellImpl("", map2, new Position(6, 5));
         map2.setCell(new Position(5, 5), c1);

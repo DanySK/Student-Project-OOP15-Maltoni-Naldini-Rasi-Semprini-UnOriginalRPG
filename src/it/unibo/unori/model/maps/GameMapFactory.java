@@ -185,6 +185,12 @@ public class GameMapFactory {
     */
    public GameMap createDungeonEntrance() {
        final GameMap map = this.getSizeableMap(10, 10);
+       for (int i = 4; i < 7; i++) {
+           for (int j = 4; j < 7; j++) {
+              map.setCell(new Position(i, j), FACT.getBlockedCell()); 
+           }
+       }
+       map.setCell(new Position(6, 5), FACT.getFreeCell());
        final Npc crest = new NpcImpl("Questo dungeon mi fa paura, vado a lavorare a Train Simulator");
        map.setCell(new Position(3, 6), new NPCCellImpl("", crest));
        map.setCell(new Position(8, 9), new ObjectCellImpl("", PACT.getPozioneVita()));
