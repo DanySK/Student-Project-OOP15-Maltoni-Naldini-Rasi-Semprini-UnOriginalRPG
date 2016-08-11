@@ -33,6 +33,13 @@ public final class View extends JFrame {
     }
 
     /**
+     * Closes the view.
+     */
+    public void close() {
+        this.dispose();
+    }
+
+    /**
      * Centers the view to the screen.
      */
     public void centerToScreen() {

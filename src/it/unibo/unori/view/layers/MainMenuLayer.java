@@ -160,5 +160,7 @@ public class MainMenuLayer extends JPanel {
 
         view.run();
         view.centerToScreen();
+
+        view.close();
     }
 }
