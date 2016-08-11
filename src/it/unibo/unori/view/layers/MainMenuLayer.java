@@ -1,10 +1,12 @@
 package it.unibo.unori.view.layers;
 
 import it.unibo.unori.view.View;
-import it.unibo.unori.view.exceptions.SpriteNotFoundException;
 import it.unibo.unori.view.Button;
+import it.unibo.unori.view.layers.CharacterSelectionLayer;
+import it.unibo.unori.view.exceptions.SpriteNotFoundException;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,10 +28,7 @@ import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
-
-import java.util.ArrayList;
 import java.awt.event.ActionListener;
-import it.unibo.unori.view.layers.CharacterSelectionLayer;
 
 /**
  *
