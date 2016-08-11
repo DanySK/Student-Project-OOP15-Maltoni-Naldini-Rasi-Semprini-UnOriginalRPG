@@ -37,6 +37,8 @@ import it.unibo.unori.controller.json.deserializers.PartyDeserializer;
 import it.unibo.unori.controller.json.deserializers.PotionDeserializer;
 import it.unibo.unori.controller.json.deserializers.WeaponDeserializer;
 import it.unibo.unori.controller.json.serializer.ArmorSerializer;
+import it.unibo.unori.controller.json.serializer.GameMapSerializer;
+import it.unibo.unori.controller.json.serializer.HeroTeamSerializer;
 import it.unibo.unori.controller.json.serializer.WeaponSerializer;
 import it.unibo.unori.model.battle.MagicAttackInterface;
 import it.unibo.unori.model.character.Foe;
@@ -72,7 +74,7 @@ public class JsonFileManager {
      */
     public static final String STATS_FILE = "res/Stats.json";
 
-    public final Gson gson;
+    private final Gson gson;
 
     /**
      * Default constructor.
@@ -108,6 +110,7 @@ public class JsonFileManager {
                 .registerTypeAdapter(Foe.class, new FoeDeserializer())
                 .registerTypeAdapter(FoeSquad.class, new FoeSquadDeserializer())
                 .registerTypeAdapter(Hero.class, new HeroDeserializer())
+                .registerTypeAdapter(HeroTeam.class, new HeroTeamSerializer())
                 .registerTypeAdapter(HeroTeam.class, new HeroTeamDeserializer())
                 .registerTypeAdapter(Npc.class, new NpcDeserializer())
                 .registerTypeAdapter(DialogueInterface.class, new DialogueDeserializer()) // TODO
@@ -122,8 +125,11 @@ public class JsonFileManager {
                                                                                  // what
                                                                                  // to
                                                                                  // keep
+                .registerTypeAdapter(Position.class, new GameMapSerializer.PositionSerializer())
                 .registerTypeAdapter(Position.class, new GameMapDeserializer.PositionDeserializer())
+                .registerTypeAdapter(Cell.class, new GameMapSerializer.CellSerializer())
                 .registerTypeAdapter(Cell.class, new GameMapDeserializer.CellDeserializer())
+                .registerTypeAdapter(GameMap.class, new GameMapSerializer())
                 .registerTypeAdapter(GameMap.class, new GameMapDeserializer())
                 .registerTypeAdapter(Party.class, new PartyDeserializer())
                 .registerTypeAdapter(Position.class, new GameMapDeserializer.PositionDeserializer()).create();
@@ -328,7 +334,7 @@ public class JsonFileManager {
      *             if there was a problem writing to the writer
      */
     public void saveJob(final JsonJobParameter job, final String path) throws IOException {
-        System.out.println(this.gson.toJson(job));
+        // System.out.println(this.gson.toJson(job));
         
         this.serializeJSON(job, path);
     }

@@ -151,8 +151,8 @@ public class JsonFileManagerTest {
         final Jobs jobsTest = Jobs.DUMP;
         final JsonJobParameter parameterTest = new JsonJobParameter(jobsTest.getInitialStats(), jobsTest.getGrowthStats(), jobsTest.getInitialArmor(), jobsTest.getInitialWeapon());
         
-        System.out.println(parameterTest.getDefaultArmor());
-        System.out.println(parameterTest.getDefaultWeapon());
+        // System.out.println(parameterTest.getDefaultArmor());
+        // System.out.println(parameterTest.getDefaultWeapon());
         
         jsonManager.saveJob(parameterTest, DUMP_JOB_FILE);
         final JsonJobParameter loaded = jsonManager.loadJob(DUMP_JOB_FILE);

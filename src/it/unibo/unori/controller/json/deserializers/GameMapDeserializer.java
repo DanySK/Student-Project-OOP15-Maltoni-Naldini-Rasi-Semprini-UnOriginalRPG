@@ -30,8 +30,9 @@ public class GameMapDeserializer implements JsonDeserializer<GameMap> {
             throws JsonParseException {
 
         final Cell[][] floorMap = context.deserialize(((JsonObject) json).get(FLOOR_MAP), Cell[][].class);
+        // System.out.println(floorMap);
         final Position initialPosition = context.deserialize(((JsonObject) json).get(INITIAL_POSITION), Position.class);
-
+        // System.out.println(initialPosition);
         final GameMap returnMap = new GameMapImpl(floorMap.length, floorMap[0].length, initialPosition);
 
         for (int i = 0; i < floorMap.length; i++) {
@@ -83,6 +84,7 @@ public class GameMapDeserializer implements JsonDeserializer<GameMap> {
             final String path = jObj.get(PATH).getAsString();
 
             Cell returnCell;
+            final CellState state = context.deserialize(jObj.get(STATE), CellState.class);
 
             if (typeOfT.getClass().isInstance(ObjectCellImpl.class)) {
                 final Item obj = context.deserialize(jObj.get(OBJ), Item.class);
@@ -98,8 +100,15 @@ public class GameMapDeserializer implements JsonDeserializer<GameMap> {
                 final Item item = context.deserialize(jObj.get(ITEM), Item.class);
                 returnCell = new ChestCellImpl(path, item);
             } else {
-                final CellState state = context.deserialize(jObj.get(STATE), CellState.class);
                 returnCell = new SimpleCellImpl(path, state);
+            }
+
+            /*
+             * The state is common, but automatically set by constructor;
+             * this is necessary because it can be changed. 
+             */
+            if (!returnCell.getClass().isInstance(SimpleCellImpl.class)) { // TODO check, maybe unnecessary
+                returnCell.setState(state);
             }
 
             return returnCell;
