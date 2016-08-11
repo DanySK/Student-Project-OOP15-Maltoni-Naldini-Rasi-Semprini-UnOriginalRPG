@@ -42,4 +42,8 @@ public class NPCCellImpl extends SimpleCellImpl {
         return npc.getDialogue();
     }
 
+    public Npc getNpc() {
+        return this.npc;
+    }
+
 }

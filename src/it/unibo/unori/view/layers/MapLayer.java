@@ -1,6 +1,7 @@
 package it.unibo.unori.view.layers;
 
 import it.unibo.unori.view.sprites.JobSprite;
+import it.unibo.unori.view.exceptions.SpriteNotFoundException;
 
 import java.util.Map;
 
@@ -22,8 +23,6 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
-
-import it.unibo.unori.view.exceptions.SpriteNotFoundException;
 
 /**
  *

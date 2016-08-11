@@ -1,7 +1,7 @@
 package it.unibo.unori.model.battle.utility;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import it.unibo.unori.model.character.Foe;
@@ -25,7 +25,8 @@ public final class BattleLogics {
     private static final int YOURELUCKY = 3;
     private static final int LEVELER = 5;
     private static final int DIFFERENCE_MAX = 4;
-    private static final int PERCENTAGE_MEDIUM = 25;
+    private static final int PERCENTAGE_MEDIUM = 12;
+    private static final int PERCENTAGE_HIGH = 25;
     private static final int LOWIA = 3;
     private static final int MEDIUMIA = 6;
     private static final int HIGHIA = 8;
@@ -52,8 +53,8 @@ public final class BattleLogics {
      * @return the damage calculated by the algorithm.
      */
     public static int getStandardDamage(final int charLevel, final int atck) {
-        return BattleLogics.SHIFT 
-               + (BattleLogics.MULT * charLevel * (charLevel - 1)
+        int toMult = charLevel > 1 ? charLevel - 1 : 1;
+        return SHIFT + (MULT * charLevel * toMult
                + (atck * 3 * charLevel) / 2);
     }
 
@@ -73,8 +74,8 @@ public final class BattleLogics {
      */
     public static boolean whosFirst(final int myV, final int enemV) {
         Random rand = new Random();
-        int luck = rand.nextInt(BattleLogics.LUCKPERCENTAGE);
-        if (luck == BattleLogics.YOURELUCKY) {
+        int luck = rand.nextInt(LUCKPERCENTAGE);
+        if (luck == YOURELUCKY) {
             return true;
         } else if (myV == enemV) {
             rand = new Random();
@@ -93,7 +94,7 @@ public final class BattleLogics {
      * @return true if I can escape. False otherwise
      */
     public static boolean canEscape(final int myLev, final int enemLev) {
-        return BattleLogics.whosFirst(myLev, enemLev);
+        return whosFirst(myLev, enemLev);
     }
 
     /**
@@ -107,13 +108,13 @@ public final class BattleLogics {
      * @return the List of the experience points acquired by each member
      * of my team.
      */
-    public static List<Integer> expAcquired(final HeroTeam squad, 
+    public static Map<Hero, Integer> expAcquired(final HeroTeam squad, 
             final int mediumLevel, final int notBeaten) {
-        final List<Integer> exp = new ArrayList<>();
+        final Map<Hero, Integer> exp = new HashMap<>();
         squad.getAllHeroes().forEach(i -> {
-            exp.add(((mediumLevel / BattleLogics.LEVELER * notBeaten)
-                    * ((2 * mediumLevel + BattleLogics.MULT) ^ 2)
-                    / ((mediumLevel + i.getLevel() + BattleLogics.MULT) ^ 2) + 1)
+            exp.put(i, ((mediumLevel / LEVELER * notBeaten)
+                    * ((2 * mediumLevel + MULT) ^ 2)
+                    / ((mediumLevel + i.getLevel() + MULT) ^ 2) + 1)
                     * i.getExpFactor());
         });
         return exp;
@@ -129,7 +130,7 @@ public final class BattleLogics {
      * @return the damage of the special attack.
      */
     public static int specialAttackCalc(final int charLev, final int atck) {
-        return (BattleLogics.getStandardDamage(charLev, atck) * (LEVELER - 2)
+        return (getStandardDamage(charLev, atck) * (LEVELER - 2)
                 + charLev * LEVELER) / 2;
     }
     
@@ -162,20 +163,20 @@ public final class BattleLogics {
             throw new IllegalStateException();
         }
         
-        if (diff >= BattleLogics.DIFFERENCE_MAX) {
+        if (diff >= DIFFERENCE_MAX) {
             return toReturn;
-        } else if (diff > 2 && diff < BattleLogics.DIFFERENCE_MAX) {
+        } else if (diff > 2 && diff < DIFFERENCE_MAX) {
             final Random rand = new Random();
-            final int luck = rand.nextInt(BattleLogics.PERCENTAGE_MEDIUM);
-            if (luck == BattleLogics.YOURELUCKY) {
+            final int luck = rand.nextInt(PERCENTAGE_MEDIUM);
+            if (luck == YOURELUCKY) {
                 return toReturn;
             } else {
                 return Status.NONE;
             }
         } else if (diff >= 0 && diff <= 2) {
             final Random rand = new Random();
-            final int luck = rand.nextInt(BattleLogics.LUCKPERCENTAGE);
-            if (luck == BattleLogics.YOURELUCKY) {
+            final int luck = rand.nextInt(PERCENTAGE_HIGH);
+            if (luck == YOURELUCKY) {
                 return toReturn;
             } else {
                 return Status.NONE;

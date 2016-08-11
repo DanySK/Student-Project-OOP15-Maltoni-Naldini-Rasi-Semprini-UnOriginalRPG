@@ -15,19 +15,22 @@ import it.unibo.unori.model.menu.Dialogue;
  */
 public class DialogueTest {
     
+    
+    
+    private final Dialogue altro = new Dialogue("Inizia!");
     private final Dialogue toTest = new Dialogue("Dialogo di prova. devo solo aggiungere"
             + " righe per vedere se le principali funzioni della classe vanno bene"
             + "asvbdkbvkjavbadvadbsbgvbdjkdasb<fkjcbaqslbfhuwqgufvuvuefy"
             + "QUALCOSA efvuguegvquag ugauegvyge aufuygruyvhbaie"
             + "aVEFIUHRAISHFIQEHIFOIYEAQFGHIOYAIVOIYVB"
-            + "adkbnvajsbgihquiwghpisuihviushiuhwihgushruighuiwhguihrwguhruh");
-    
+            + "adkbnvajsbgihquiwghpisuihviushiuhwihgushruighuiwhguihrwguhruhsagerg");
     /**
      * Method to test the principal functions of class Dialogue.
      */
     @Test
     public void testDialogue() {
-        
+        altro.generate();
+        System.out.println(altro.getList());
         System.out.println(this.toTest);
         System.out.println(this.toTest.showNext());
         assertFalse(this.toTest.changeWindow());
@@ -38,9 +41,11 @@ public class DialogueTest {
         assertTrue(this.toTest.changeWindow());
         System.out.println(this.toTest.showNext());
         System.out.println(this.toTest.showNext());
-        assertTrue(this.toTest.changeWindow());
+        System.out.println(this.toTest.showNext());
         System.out.println(this.toTest.showNext());
         assertTrue(this.toTest.isOver());
+        
+        
     }
     
     /**

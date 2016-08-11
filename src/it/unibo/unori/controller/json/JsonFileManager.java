@@ -8,8 +8,11 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
+import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.google.gson.Gson;
@@ -33,6 +36,10 @@ import it.unibo.unori.controller.json.deserializers.NpcDeserializer;
 import it.unibo.unori.controller.json.deserializers.PartyDeserializer;
 import it.unibo.unori.controller.json.deserializers.PotionDeserializer;
 import it.unibo.unori.controller.json.deserializers.WeaponDeserializer;
+import it.unibo.unori.controller.json.serializer.ArmorSerializer;
+import it.unibo.unori.controller.json.serializer.GameMapSerializer;
+import it.unibo.unori.controller.json.serializer.HeroTeamSerializer;
+import it.unibo.unori.controller.json.serializer.WeaponSerializer;
 import it.unibo.unori.model.battle.MagicAttackInterface;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.FoeSquad;
@@ -73,26 +80,28 @@ public class JsonFileManager {
      * Default constructor.
      */
     public JsonFileManager() {
-        /*final InstanceCreator<Weapon> weaponDeserialize = (type) -> new WeaponImpl();
-        final InstanceCreator<Party> partyDeserialize = (type) -> SingletonParty.getParty();
-        final InstanceCreator<Potion> potionDeserialize = (type) -> new PotionFactory().getStdPotion();
-        final InstanceCreator<Bag> bagDeserialize = (type) -> new BagImpl();
-        final InstanceCreator<Item> itemDeserialize = (type) -> {
-            if (type.getClass().isAssignableFrom(Armor.class)) {
-                return ArmorImpl.NAKED;
-            } else if (type.getClass().isAssignableFrom(Weapon.class)) {
-                return WeaponImpl.FISTS;
-            } else if (type.getClass().isAssignableFrom(Potion.class)) {
-                return new PotionFactory().getStdPotion();
-            } else {
-                return new ItemImpl("", "");
-            }
-        };
-        final InstanceCreator<GameMap> mapDeserialize = (type) -> new GameMapImpl();*/
+        /*
+         * final InstanceCreator<Weapon> weaponDeserialize = (type) -> new
+         * WeaponImpl(); final InstanceCreator<Party> partyDeserialize = (type)
+         * -> SingletonParty.getParty(); final InstanceCreator<Potion>
+         * potionDeserialize = (type) -> new PotionFactory().getStdPotion();
+         * final InstanceCreator<Bag> bagDeserialize = (type) -> new BagImpl();
+         * final InstanceCreator<Item> itemDeserialize = (type) -> { if
+         * (type.getClass().isAssignableFrom(Armor.class)) { return
+         * ArmorImpl.NAKED; } else if
+         * (type.getClass().isAssignableFrom(Weapon.class)) { return
+         * WeaponImpl.FISTS; } else if
+         * (type.getClass().isAssignableFrom(Potion.class)) { return new
+         * PotionFactory().getStdPotion(); } else { return new ItemImpl("", "");
+         * } }; final InstanceCreator<GameMap> mapDeserialize = (type) -> new
+         * GameMapImpl();
+         */
 
-        gson = new GsonBuilder().enableComplexMapKeySerialization().setPrettyPrinting()
+        gson = new GsonBuilder()/*.enableComplexMapKeySerialization()*/.setPrettyPrinting()
                 .registerTypeAdapter(Item.class, new ItemDeserializer())
+                .registerTypeAdapter(Armor.class, new ArmorSerializer())
                 .registerTypeAdapter(Armor.class, new ArmorDeserializer())
+                .registerTypeAdapter(Weapon.class, new WeaponSerializer())
                 .registerTypeAdapter(Weapon.class, new WeaponDeserializer())
                 .registerTypeAdapter(Potion.class, new PotionDeserializer())
                 .registerTypeAdapter(Bag.class, new BagDeserializer())
@@ -101,16 +110,29 @@ public class JsonFileManager {
                 .registerTypeAdapter(Foe.class, new FoeDeserializer())
                 .registerTypeAdapter(FoeSquad.class, new FoeSquadDeserializer())
                 .registerTypeAdapter(Hero.class, new HeroDeserializer())
+                .registerTypeAdapter(HeroTeam.class, new HeroTeamSerializer())
                 .registerTypeAdapter(HeroTeam.class, new HeroTeamDeserializer())
                 .registerTypeAdapter(Npc.class, new NpcDeserializer())
-                .registerTypeAdapter(DialogueInterface.class, new DialogueDeserializer()) // TODO not sure what to keep
-                .registerTypeAdapter(Dialogue.class, new DialogueDeserializer()) // TODO not sure what to keep
+                .registerTypeAdapter(DialogueInterface.class, new DialogueDeserializer()) // TODO
+                                                                                          // not
+                                                                                          // sure
+                                                                                          // what
+                                                                                          // to
+                                                                                          // keep
+                .registerTypeAdapter(Dialogue.class, new DialogueDeserializer()) // TODO
+                                                                                 // not
+                                                                                 // sure
+                                                                                 // what
+                                                                                 // to
+                                                                                 // keep
+                .registerTypeAdapter(Position.class, new GameMapSerializer.PositionSerializer())
                 .registerTypeAdapter(Position.class, new GameMapDeserializer.PositionDeserializer())
+                .registerTypeAdapter(Cell.class, new GameMapSerializer.CellSerializer())
                 .registerTypeAdapter(Cell.class, new GameMapDeserializer.CellDeserializer())
+                .registerTypeAdapter(GameMap.class, new GameMapSerializer())
                 .registerTypeAdapter(GameMap.class, new GameMapDeserializer())
                 .registerTypeAdapter(Party.class, new PartyDeserializer())
-                .registerTypeAdapter(Position.class, new GameMapDeserializer.PositionDeserializer())
-                .create();
+                .registerTypeAdapter(Position.class, new GameMapDeserializer.PositionDeserializer()).create();
     }
 
     /**
@@ -312,6 +334,8 @@ public class JsonFileManager {
      *             if there was a problem writing to the writer
      */
     public void saveJob(final JsonJobParameter job, final String path) throws IOException {
+        // System.out.println(this.gson.toJson(job));
+        
         this.serializeJSON(job, path);
     }
 
@@ -338,16 +362,29 @@ public class JsonFileManager {
         return this.deserializeJSON(JsonJobParameter.class, path);
     }
 
-    public List<Item> loadItems(final String path) throws IOException {
-        final Item[] itemArray = this.deserializeJSON(Item[].class, path);
-        
-        return Arrays.asList(itemArray);
+    public <T> List<T> loadListAsArray(final Class<T[]> arrayClass, final String path) throws IOException {
+        final T[] array = this.deserializeJSON(arrayClass, path);
+
+        return Arrays.asList(array);
     }
-    
+
+    public <T> List<T> loadList(final Class<T> arrayClass, final String path) throws IOException {
+        @SuppressWarnings("unchecked")
+        final T[] array = (T[]) this.deserializeJSON(Array.newInstance(arrayClass, 0).getClass(), path);
+
+        return Arrays.asList(array);
+    }
+
+    /*
+     * public Item loadItem(final String path) throws IOException { final Item
+     * item = this.deserializeJSON(Item.class, path);
+     * 
+     * return item; }
+     */
     public GameMap loadMap(final String path) throws IOException {
         return this.deserializeJSON(GameMap.class, path);
     }
-    
+
     /**
      * This method serializes on a file in a given path a single object.
      * 
@@ -367,7 +404,7 @@ public class JsonFileManager {
      * @throws JsonIOException
      *             if there was a problem writing to the writer
      */
-    public /*private*/ void serializeJSON(final Object objectToSerialize, final String path) throws IOException {
+    public /* private */ void serializeJSON(final Object objectToSerialize, final String path) throws IOException {
         final Writer writer = new OutputStreamWriter(new FileOutputStream(path), "UTF-8");
         gson.toJson(objectToSerialize, writer);
         writer.close();
@@ -376,7 +413,7 @@ public class JsonFileManager {
     /**
      * This method loads a file from a given path and returns a single object
      * from what reads. It is private because tested only with the classes
-     * needed here.
+     * needed here. It does not work with Collections and Maps.
      * 
      * @param <T>
      *            the type of the object serialized on the file
@@ -387,6 +424,8 @@ public class JsonFileManager {
      * @param path
      *            the path where to find the JSON file
      * @return the serialized object
+     * @throws IllegalArgumentException
+     *             if passed a Collection or a Map
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
@@ -399,8 +438,12 @@ public class JsonFileManager {
      *             if the file does not contain a valid representation for an
      *             object of type
      */
-    public /*private*/ <T> T deserializeJSON(final Class<T> clazz, final String path) throws IOException {
+    public /* private */ <T> T deserializeJSON(final Class<T> clazz, final String path) throws IOException {
         Optional<T> returnObject = Optional.empty();
+
+        if (Collection.class.isAssignableFrom(clazz) || Map.class.isAssignableFrom(clazz)) {
+            throw new IllegalArgumentException("The " + clazz.toString() + " is not deserializable by this method");
+        }
 
         final Reader reader = new InputStreamReader(new FileInputStream(path), "UTF-8");
         returnObject = Optional.ofNullable(gson.fromJson(reader, clazz));
