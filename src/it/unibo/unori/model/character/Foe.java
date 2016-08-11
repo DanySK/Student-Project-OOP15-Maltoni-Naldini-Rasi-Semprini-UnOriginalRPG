@@ -14,7 +14,7 @@ public interface Foe extends Character {
     
     /**
      * This method is supposed to be used in Battle by a Foe.
-     * It allows him to restore a certain Status, and it can be used as often as the
+     * It allows him to restore a certain Statistic, and it can be used as often as the
      * level of the Foe increases.
      * @param statToRestore the Statistic to be restored.
      * @return a String representing the Stat that has been restored.
