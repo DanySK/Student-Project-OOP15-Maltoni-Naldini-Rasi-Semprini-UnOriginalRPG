@@ -121,6 +121,7 @@ public class PartyTest {
     public void testInteractWithObject() throws IllegalArgumentException, NoObjectFoundException {
         final Party p = SingletonParty.getParty();
         final GameMap m = mapFactory.getStdRoom();
+        m.getFrames();
         m.setCell(new Position(2, 2), this.cellFactory.getObjectCell());
         p.setCurrentMap(m);
         assertEquals(p.getCurrentPosition(), new Position(1, 1));
