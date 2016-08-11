@@ -1,8 +1,10 @@
 package it.unibo.unori.view.layers;
 
+import it.unibo.unori.view.View;
 import it.unibo.unori.view.Button;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.InputMap;
@@ -11,20 +13,17 @@ import javax.swing.KeyStroke;
 import javax.swing.BoxLayout;
 import javax.swing.BorderFactory;
 import javax.swing.AbstractAction;
+import javax.swing.SwingUtilities;
 
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
-
-import java.util.ArrayList;
-import it.unibo.unori.view.View;
-import javax.swing.SwingUtilities;
 import java.awt.event.ActionListener;
 
 /**
- * 
+ *
  * A menu that can be opened in-game.
  *
  */
@@ -58,7 +57,7 @@ public class InGameMenuLayer extends JPanel {
 
         try {
             buttons.get(focusedButton).requestFocus();
-        } catch (IndexOutOfBoundsException e) {
+        } catch (final IndexOutOfBoundsException e) {
             System.out.println("The button list is empty");
         }
 
@@ -101,10 +100,12 @@ public class InGameMenuLayer extends JPanel {
                 if (buttons.size() != 0) {
                     focusedButton += direction;
 
-                    if (focusedButton < 0)
+                    if (focusedButton < 0) {
                         focusedButton = buttons.size() - 1;
-                    if (focusedButton > buttons.size() - 1)
+                    }
+                    if (focusedButton > buttons.size() - 1) {
                         focusedButton = 0;
+                    }
 
                     buttons.get(focusedButton).requestFocus();
                 }
