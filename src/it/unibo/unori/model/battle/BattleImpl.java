@@ -279,16 +279,26 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public void acquireExp() {
-        if (this.isOver()) {
-            final List<Integer> points =
-                    BattleLogics.expAcquired(this.squad, this.getMediumLevelFoes(),
-                            this.squad.getAliveHeroes().size());
-            int index = 0;
-            for (final Hero h : this.squad.getAliveHeroes()) {
-                h.addExp(points.get(index));
-                index++;
+    public String acquireExp() {
+        if (this.isOver() && this.outCome.equals(Optional.of(OUTCOMEPOSITIVE))) {
+            final List<String> toReturn = new ArrayList<>();
+            this.squad.getAliveHeroes().forEach(h -> {
+                BattleLogics.expAcquired(this.squad, this.getMediumLevelFoes(),
+                        this.squad.getAliveHeroes().size()).entrySet().forEach(e -> {
+                            if (h.equals(e.getKey())) {
+                                h.addExp(e.getValue());
+                                toReturn.add(h.getName() + " riceve " 
+                                + e.getValue() + " punti Esperienza!\n");
+                            }
+                        });
+            });
+            String s = "";
+            for (String str : toReturn) {
+                s = s.concat(str);
             }
+            return s;
+        } else {
+            throw new IllegalStateException();
         }
     }
 

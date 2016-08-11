@@ -1,10 +1,11 @@
 package it.unibo.unori.view.layers;
 
 import it.unibo.unori.view.View;
-import it.unibo.unori.view.exceptions.SpriteNotFoundException;
 import it.unibo.unori.view.Button;
 import it.unibo.unori.view.sprites.JobSprite;
+import it.unibo.unori.model.character.Statistics;
 import it.unibo.unori.model.character.jobs.Jobs;
+import it.unibo.unori.view.exceptions.SpriteNotFoundException;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -44,6 +45,7 @@ public class CharacterSelectionLayer extends JPanel {
 
     private final JLabel sprite;
     private final Button button;
+    private final JLabel statistics;
     private final JPanel partyPanel;
     private final JTextField textField;
 
@@ -83,15 +85,14 @@ public class CharacterSelectionLayer extends JPanel {
         final BasicArrowButton right = new BasicArrowButton(SwingConstants.EAST);
         right.addActionListener(new SelectionAction(1));
 
-        final JLabel statistics = new JLabel("Statistics:");
+        statistics = new JLabel(getStatistics(), SwingConstants.CENTER);
+
         statistics.setForeground(Color.WHITE);
         statistics.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         partyPanel = new JPanel();
         partyPanel.setBackground(BACKGROUND_COLOR);
         partyPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-
-        // TODO statistiche
 
         button.setEnabled(false);
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -116,6 +117,52 @@ public class CharacterSelectionLayer extends JPanel {
         return party;
     }
 
+    private String getStatistics() {
+        final StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("<html>");
+
+        stringBuilder.append("HP: ");
+        stringBuilder.append(job.getInitialStats().get(Statistics.TOTALHP));
+        stringBuilder.append("<br>");
+        stringBuilder.append("MP: ");
+        stringBuilder.append(job.getInitialStats().get(Statistics.TOTALMP));
+        stringBuilder.append("<br>");
+        stringBuilder.append("Speed: ");
+        stringBuilder.append(job.getInitialStats().get(Statistics.SPEED));
+        stringBuilder.append("<br>");
+        stringBuilder.append("Fire Attack: ");
+        stringBuilder.append(job.getInitialStats().get(Statistics.FIREATK));
+        stringBuilder.append("<br>");
+        stringBuilder.append("Fire Defense: ");
+        stringBuilder.append(job.getInitialStats().get(Statistics.FIREDEF));
+        stringBuilder.append("<br>");
+        stringBuilder.append("Thunder Attack: ");
+        stringBuilder.append(job.getInitialStats().get(Statistics.THUNDERATK));
+        stringBuilder.append("<br>");
+        stringBuilder.append("Thunder Defense: ");
+        stringBuilder.append(job.getInitialStats().get(Statistics.THUNDERDEF));
+        stringBuilder.append("<br>");
+        stringBuilder.append("Ice Attack: ");
+        stringBuilder.append(job.getInitialStats().get(Statistics.ICEATK));
+        stringBuilder.append("<br>");
+        stringBuilder.append("Ice Defense: ");
+        stringBuilder.append(job.getInitialStats().get(Statistics.ICEDEF));
+        stringBuilder.append("<br>");
+        stringBuilder.append("Physical Attack: ");
+        stringBuilder.append(job.getInitialStats().get(Statistics.PHYSICATK));
+        stringBuilder.append("<br>");
+        stringBuilder.append("Physical Defense: ");
+        stringBuilder.append(job.getInitialStats().get(Statistics.PHYSICDEF));
+        stringBuilder.append("<br>");
+
+        stringBuilder.append("</html>");
+
+        final String statisticsText = stringBuilder.toString();
+
+        return statisticsText;
+    }
+
     private class SelectionAction implements ActionListener {
         private final int direction;
 
@@ -134,6 +181,8 @@ public class CharacterSelectionLayer extends JPanel {
                 else if (direction == 1) {
                     nextJob();
                 }
+
+                statistics.setText(getStatistics());
             } catch (final SpriteNotFoundException e1) {
                 e1.printStackTrace();
             }

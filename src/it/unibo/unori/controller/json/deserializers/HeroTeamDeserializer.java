@@ -15,7 +15,7 @@ import it.unibo.unori.model.character.HeroTeam;
 import it.unibo.unori.model.character.HeroTeamImpl;
 
 public class HeroTeamDeserializer implements JsonDeserializer<HeroTeam> {
-    private final static String HERO_LIST = "heroList";
+    private static final String HERO_LIST = "heroList";
     
     @Override
     public HeroTeam deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)

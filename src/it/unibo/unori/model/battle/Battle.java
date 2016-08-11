@@ -93,8 +93,9 @@ public interface Battle {
     /**
      * Method to be called at the end of the Battle.
      * It adds the appropriate amount of exp points to each Character of my team.
+     * @return a confirmation String.
      */
-    void acquireExp();
+    String acquireExp();
     
     /**
      * Method that allows the Foe to restore a Statistic on his turn.
