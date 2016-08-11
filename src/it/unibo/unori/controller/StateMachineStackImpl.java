@@ -69,4 +69,12 @@ public class StateMachineStackImpl implements StateMachineStack {
     public GameState peek() {
         return this.gsStack.peek();
     }
+
+    @Override
+    public void closeTheView() {
+        while (!this.gsStack.isEmpty()) {
+            this.pop();
+        }
+        this.layerStack.close();
+    }
 }

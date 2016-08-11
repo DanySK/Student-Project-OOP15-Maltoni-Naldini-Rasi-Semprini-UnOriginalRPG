@@ -33,7 +33,7 @@ public class MapState extends AbstractGameState {
         super(new MapLayer(MoveAction.getSupportedMovementsMap(), 
               new InteractAction(), 
               new OpenMenuAction(),
-              MapState.getMapImagesPath(map),
+              map.getFrames(),
               new Point(map.getInitialCellPosition().getPosX(), 
               map.getInitialCellPosition().getPosY()),
               SingletonParty.getParty().getCurrentFrame()));
@@ -82,17 +82,5 @@ public class MapState extends AbstractGameState {
      */
     public DialogueInterface interact() {
         return this.party.interact();
-    }
-
-    private static String[][] getMapImagesPath(final GameMap map) {
-        String[][] returnMatrix = new String[map.getMapLength()][map.getMapWidth()];
-
-        for (int length = 0; length < map.getMapLength(); length++) {
-            for (int width = 0; width < map.getMapWidth(); width++) {
-                returnMatrix[length][width] = map.getCell(new Position(length, width)).getFrame();
-            }
-        }
-
-        return returnMatrix;
     }
 }
