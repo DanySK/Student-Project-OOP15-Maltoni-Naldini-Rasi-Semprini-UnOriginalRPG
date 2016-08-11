@@ -82,6 +82,8 @@ public interface Controller {
      */
     void newGame() throws IOException;
     
+    void closeGame();
+    
     GameState getCurrentState();
     
     Class<?> getCurrentStateClass();
@@ -91,5 +93,7 @@ public interface Controller {
     void openMenu() throws NotValidStateException;
 
     void closeMenu() throws NotValidStateException;
+    
+    StateMachineStack getStack();
 
 }

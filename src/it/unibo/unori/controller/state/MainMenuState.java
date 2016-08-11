@@ -64,6 +64,11 @@ public class MainMenuState extends AbstractGameState {
         loadGame.setEnabled(new File(JsonFileManager.STATS_FILE).isFile());
         returnList.add(loadGame);
         
+        final Button closeGame = new Button("Esci");
+        loadGame.addActionListener(listener);
+        loadGame.setActionCommand(MainMenuActionListener.CLOSE_GAME);
+        returnList.add(closeGame);
+        
         return returnList;
     }
 }

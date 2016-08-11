@@ -188,7 +188,8 @@ public final class SingletonStateMachine {
         public Class<?> getCurrentStateClass() {
             return this.stack.peek().getClass();
         }
-
+        
+        @Override
         public void openMenu() throws NotValidStateException {
             if (this.stack.peek().getClass().isInstance(InGameMenuState.class)) {
                 this.stack.push(new InGameMenuState());
@@ -198,12 +199,23 @@ public final class SingletonStateMachine {
             }
         }
 
+        @Override
         public void closeMenu() throws NotValidStateException {
             if (this.stack.peek().getClass().isInstance(InGameMenuState.class)) {
                 this.stack.pop();
             } else {
                 throw new NotValidStateException();
             }
+        }
+
+        @Override
+        public void closeGame() {
+            this.stack.closeTheView();
+        }
+
+        @Override
+        public StateMachineStack getStack() {
+            return this.stack;
         }
 
     }

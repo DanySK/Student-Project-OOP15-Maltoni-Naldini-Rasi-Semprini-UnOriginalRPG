@@ -49,5 +49,7 @@ public interface StateMachineStack {
      * @return the state peeked
      */
     GameState peek();
+    
+    void closeTheView();
 
 }
