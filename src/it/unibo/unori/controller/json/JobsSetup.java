@@ -28,32 +28,32 @@ public final class JobsSetup {
      * Path to the JSON file of the warrior's default statistics and
      * armors/weapons.
      */
-    public static final String WARRIOR = "res/Warrior.json";
+    public static final String WARRIOR = "res/jobs/Warrior.json";
     /**
      * Path to the JSON file of the paladin's default statistics and
      * armors/weapons.
      */
-    public static final String PALADIN = "res/Paladin.json";
+    public static final String PALADIN = "res/jobs/Paladin.json";
     /**
      * Path to the JSON file of the mage's default statistics and
      * armors/weapons.
      */
-    public static final String MAGE = "res/Mage.json";
+    public static final String MAGE = "res/jobs/Mage.json";
     /**
      * Path to the JSON file of the ranger's default statistics and
      * armors/weapons.
      */
-    public static final String RANGER = "res/Ranger.json";
+    public static final String RANGER = "res/jobs/Ranger.json";
     /**
      * Path to the JSON file of the cook's default statistics and
      * armors/weapons.
      */
-    public static final String COOK = "res/Cook.json";
+    public static final String COOK = "res/jobs/Cook.json";
     /**
      * Path to the JSON file of the clown's default statistics and
      * armors/weapons.
      */
-    public static final String CLOWN = "res/Clown.json";
+    public static final String CLOWN = "res/jobs/Clown.json";
 
     private final Map<String, Map<Statistics, Integer>> statsMap;
     private final Map<String, Map<Statistics, Integer>> growthMap;
