@@ -23,6 +23,7 @@ import it.unibo.unori.model.character.jobs.Jobs;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.BagImpl;
 import it.unibo.unori.model.items.WeaponFactory;
+import it.unibo.unori.model.menu.DialogueInterface;
 
 /**
  * Class for testing the Battle Mode.
@@ -84,14 +85,14 @@ public class BattleTest {
         System.out.println(battle.setFoeOnTurn(battle.getEnemies().getFirstFoeOnTurn()));
         System.out.println("" + this.battle.getHeroOnTurn().getRemainingHP());
         System.out.println("" + this.battle.getHeroOnTurn().getAttack());
-        final String firstDamage  = battle.attack(true);
+        final DialogueInterface firstDamage  = battle.attack(true);
         System.out.println(this.battle.getFoeOnTurn().getSpeed() + " "
                 + this.battle.getHeroOnTurn().getSpeed());
         System.out.println(firstDamage);
         System.out.println("" + this.battle.getHeroOnTurn().getRemainingHP());
         System.out.println(this.battle.getHeroOnTurn().getCurrentBar());
         battle.setFoeOnTurn(battle.getEnemies().getAliveFoes().get(0));
-        final String secndDamage  = battle.attack(true);
+        final DialogueInterface secndDamage  = battle.attack(true);
         System.out.println(secndDamage);
         System.out.println(this.battle.getHeroOnTurn().getCurrentBar());
         this.battle.getHeroOnTurn().setCurrentBar(100);

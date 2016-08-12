@@ -134,11 +134,11 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public String attack(final boolean whosFirst) throws NoWeaponException {
+    public DialogueInterface attack(final boolean whosFirst) throws NoWeaponException {
         final Character whoAttacks = whosFirst ? this.heroOnTurn : this.foeOnTurn;
         final Character whoSuffers = whosFirst ? this.foeOnTurn : this.heroOnTurn;
         if (this.setUndefendedAndNotify(whoSuffers)) {
-            return whoSuffers.getName() + " e' difeso! Non subisce danni";
+            return new Dialogue(whoSuffers.getName() + " e' difeso! Non subisce danni");
         }
         final int damage = 
                 MagicLogics.mergeAtkAndDef(whoAttacks, whoSuffers, whoAttacks.getWeapon());
@@ -152,13 +152,13 @@ public class BattleImpl implements Battle {
             toReturn = toReturn.concat("\n" + this.enemies.defeatFoe(this.foeOnTurn));
             if (this.enemies.isDefeated(this.foeOnTurn)) {
                 this.setOver();
-                return toReturn;
+                return new Dialogue(toReturn);
             }
         } else {
             toReturn = toReturn.concat("\n" + this.squad.defeatHero(this.heroOnTurn));
             if (this.squad.isDefeated(this.heroOnTurn)) {
                 this.setOver();
-                return toReturn;
+                return new Dialogue(toReturn);
             }
         }
         if (whoSuffers.getStatus().equals(Status.NONE)) {
@@ -169,42 +169,42 @@ public class BattleImpl implements Battle {
             toReturn = toReturn.concat(" " + whoSuffers.getName() 
                     + " ha subito un cambiamento di Stato! Ora è " + whoSuffers.getStatus());
         }
-        return toReturn;
+        return new Dialogue(toReturn);
     }
 
     @Override
-    public String defend(final Hero friend) throws NotDefendableException {
+    public DialogueInterface defend(final Hero friend) throws NotDefendableException {
         if (friend.getStatus() == Status.NOT_DEFENDABLE) {
             throw new NotDefendableException();
         }
         if (friend.isDefended()) {
-            return friend.getName() + " e' gia'  difeso! Peccato...";
+            return new Dialogue(friend.getName() + " e' gia'  difeso! Peccato...");
         } else {
             friend.setDefended();
-            return "Hai difeso " + friend.getName();
+            return new Dialogue("Hai difeso " + friend.getName());
         }
     }
 
     @Override
-    public String usePotion(final Hero my, final Potion toUse) 
+    public DialogueInterface usePotion(final Hero my, final Potion toUse) 
             throws ItemNotFoundException, HeroDeadException, HeroNotDeadException {
         if (this.itemBag.contains(toUse)) {
             toUse.using(my);
-            return "Hai usato " + toUse.getName() + " su " + my.getName() + "!";
+            return new Dialogue("Hai usato " + toUse.getName() + " su " + my.getName() + "!");
         } else {
             throw new ItemNotFoundException();
         }
     }
     
     @Override
-    public String foeUsesRestore(final Statistics statToRestore) {
-        return this.foeOnTurn.getName() + " ha rigenerato i suoi "
-                + this.foeOnTurn.restoreInBattle(statToRestore) + ", ora è più in forma!";
+    public DialogueInterface foeUsesRestore(final Statistics statToRestore) {
+        return new Dialogue(this.foeOnTurn.getName() + " ha rigenerato i suoi "
+                + this.foeOnTurn.restoreInBattle(statToRestore) + ", ora è più in forma!");
         
     }
 
     @Override
-    public String specialAttack() throws BarNotFullException {
+    public DialogueInterface specialAttack() throws BarNotFullException {
         List<String> list = new ArrayList<>();
         if (this.heroOnTurn.getCurrentBar() == this.heroOnTurn.getTotBar()) {
             final String toReturn = this.heroOnTurn.getName() + " ha usato l'attacco speciale!\n";
@@ -231,21 +231,21 @@ public class BattleImpl implements Battle {
             for (String s : list) {
                 finale = finale.concat(s);
             }
-            return finale;
+            return new Dialogue(finale);
         } else {
             throw new BarNotFullException();
         }
     }
 
     @Override
-    public String useMagicAttack(final MagicAttack m, final Foe enemy, final boolean whosFirst)
+    public DialogueInterface useMagicAttack(final MagicAttack m, final Foe enemy, final boolean whosFirst)
             throws NotEnoughMPExcpetion, MagicNotFoundException {
         final Character whoAttacks = whosFirst ? this.heroOnTurn : this.foeOnTurn;
         final Character whoSuffers = whosFirst ? this.foeOnTurn : this.heroOnTurn;
         final int damage;
         String toShow = whoAttacks.getName() + " usa una Magia!";
         if (this.setUndefendedAndNotify(whoSuffers)) {
-            return whoSuffers.getName() + " e' difeso! Non subisce danni";
+            return new Dialogue(whoSuffers.getName() + " e' difeso! Non subisce danni");
         }
         if (whoAttacks.getMagics().contains(m)) {
             if (whoAttacks.getCurrentMP() > m.getMPRequired()) {
@@ -265,7 +265,7 @@ public class BattleImpl implements Battle {
             } catch (FailedException e) {
                 toShow = toShow.concat("\n" + "Attacco Fallito!");
             }
-            return toShow;
+            return new Dialogue(toShow);
         } else {
             throw new MagicNotFoundException();
         }
@@ -279,7 +279,7 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public String acquireExp() {
+    public DialogueInterface acquireExp() {
         if (this.isOver() && this.outCome.equals(Optional.of(OUTCOMEPOSITIVE))) {
             final List<String> toReturn = new ArrayList<>();
             this.squad.getAliveHeroes().forEach(h -> {
@@ -296,7 +296,7 @@ public class BattleImpl implements Battle {
             for (String str : toReturn) {
                 s = s.concat(str);
             }
-            return s;
+            return new Dialogue(s);
         } else {
             throw new IllegalStateException();
         }
