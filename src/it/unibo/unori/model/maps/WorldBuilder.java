@@ -74,13 +74,24 @@ public class WorldBuilder {
 
     /**
      * Get a specific map, in order to set some parameters.
-     * @param mapName
-     *          name of the map, chosen from the enumeration.
+     * @param areaName
+     *          name of the game area, chosen from the enumeration.
      * @return
      *          the gameMap of the correspondent area.
      */ 
-    public GameMap getGameMap(final MAPS mapName) {
-        return this.mapsList.get(mapName);
+    public GameMap getGameMap(final MAPS areaName) {
+        return this.mapsList.get(areaName);
+    }
+
+    /**
+     * Set a map for a specific area.
+     * @param mapName
+     *          name of the area
+     * @param newMap
+     *          map to be set in that game area.
+     */
+    public void setGameMap(final MAPS mapName, final GameMap newMap) {
+        this.mapsList.replace(mapName, newMap);
     }
 
     enum MAPS {
