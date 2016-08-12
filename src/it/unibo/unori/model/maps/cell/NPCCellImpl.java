@@ -5,9 +5,9 @@ import it.unibo.unori.model.maps.exceptions.NoNPCFoundException;
 import it.unibo.unori.model.menu.DialogueInterface;
 
 /**
- * An Extension of the SimpleCellImpl class to accomplish a dialogue with a
- * Non-Playable-Character(NPC).
- *
+ * Class to handle a Non Playable Character on the map, extends the 
+ * SimpleCellImpl class, when the party interact with the cell, it 
+ * returns the dialogue of that NPC.
  */
 public class NPCCellImpl extends SimpleCellImpl {
 
@@ -22,7 +22,7 @@ public class NPCCellImpl extends SimpleCellImpl {
      * Constructor.
      * 
      * @param path
-     *            the path of the frame to set
+     *            the path of the image to set
      *@param npc
      *          the Non Playable Character who will generate the dialogue with the party
      */
@@ -31,17 +31,17 @@ public class NPCCellImpl extends SimpleCellImpl {
         this.npc = npc;
     }
 
-    /**
-     * Override the SimpleCellImpl method.
-     * This new implementation of the method no longer throws always an Exception,
-     * but instead get the dialogue from the npc field.
-     * 
-     */
+
     @Override
     public DialogueInterface talkToNpc() throws NoNPCFoundException {
         return npc.getDialogue();
     }
 
+    /**
+     * Getter for the npc, needed for the serialization.
+     * @return
+     *      the npc object
+     */
     public Npc getNpc() {
         return this.npc;
     }

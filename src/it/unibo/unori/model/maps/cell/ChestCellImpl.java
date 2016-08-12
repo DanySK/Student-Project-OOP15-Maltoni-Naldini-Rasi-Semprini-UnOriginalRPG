@@ -8,8 +8,10 @@ import it.unibo.unori.model.maps.exceptions.NoKeyFoundException;
 import it.unibo.unori.model.maps.exceptions.NoObjectFoundException;
 
 /**
- * Class which design a chest in the game, which has a object inside and it need
- * a key to open.
+ * Class which design a cell with a chest inside in the game, 
+ * which has a object inside and it need a key to be opened.
+ * It has two fields: one to contain the object and one to signal if the object
+ * has already been picked up.
  *
  */
 public class ChestCellImpl extends SimpleCellImpl {
@@ -24,7 +26,7 @@ public class ChestCellImpl extends SimpleCellImpl {
     /**
      * Constructor for the cell.
      * @param path
-     *              the path of frame to set in the cell
+     *              the path of image to set in the cell
      * @param o
      *              object to put in the cell
      */
@@ -34,18 +36,7 @@ public class ChestCellImpl extends SimpleCellImpl {
         this.hasItem = true;
     }
 
-    /**
-     * Method to open the chest and get the item inside.
-     * @param b
-     *          the bag of the party
-     * @return
-     *          the item in the chest
-     * @throws NoObjectFoundException if the chest is empty.
-     * @throws NoKeyFoundException if the bag does not contain a key
-     * @throws ItemNotFoundException if there's an error in the process of 
-     *  removing the key
-     * 
-     */
+    @Override
     public Item openChest(final Bag b) throws NoObjectFoundException, 
                                               NoKeyFoundException,
                                               ItemNotFoundException {

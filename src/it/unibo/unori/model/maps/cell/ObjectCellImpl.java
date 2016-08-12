@@ -4,7 +4,7 @@ import it.unibo.unori.model.items.Item;
 import it.unibo.unori.model.maps.exceptions.NoObjectFoundException;
 
 /**
- * Cell Implementation to handle a collectable Gameobject. 
+ * Extends SimpleCellImpl, handle a object on the map. 
  *
  */
 public class ObjectCellImpl extends SimpleCellImpl {
@@ -18,7 +18,7 @@ public class ObjectCellImpl extends SimpleCellImpl {
     /**
      * Constructor.
      * @param path
-     *              path of frame to set in the cell
+     *              path of image to set in the cell
      * @param obj
      *              object to set in the cell
      */
@@ -27,9 +27,6 @@ public class ObjectCellImpl extends SimpleCellImpl {
         this.obj = obj;
     }
 
-    /**
-     * Override the getObject method of SimpleCellImpl.
-     */
     @Override
     public Item getObject() throws NoObjectFoundException {
         return this.obj;

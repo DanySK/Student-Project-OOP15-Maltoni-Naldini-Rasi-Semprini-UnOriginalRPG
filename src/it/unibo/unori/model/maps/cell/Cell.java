@@ -15,11 +15,12 @@ import it.unibo.unori.model.menu.DialogueInterface;
 /**
  * 
  * A interface to define the basic method of a cell. A cell is the basic
- * component of a map, a map has a matrix composed of various cells Every cell
- * has a frame object inside , to represent the frame linked to the logical cell
- * The logical cell has a position , a state ,which can be occupied or free,and
- * various method to control it. Serializable interface is added in order to
- * make possible the saving of a cell on file.
+ * component of a map, a map has a matrix composed of various cells, every cell
+ * has a path of the resource of its image.
+ * The logical cell has a state ,which can be blocked or free, and
+ * various method to control and interact with it. 
+ * Serializable interface is added in order to make possible 
+ * the saving of a cell on file.
  *
  */
 
@@ -41,7 +42,7 @@ public interface Cell extends Serializable {
 
 
     /**
-     * Set a particular frame on the cell.
+     * Set the path of the image of the cell.
      * 
      * @param path
      *            path of frame to set from the view
@@ -50,7 +51,7 @@ public interface Cell extends Serializable {
 
 
     /**
-     * Return the path of frame associated with the Cell.
+     * Return the path of the image associated with the Cell.
      * @return
      *          a frame Object
      */
@@ -64,8 +65,8 @@ public interface Cell extends Serializable {
     Item getObject() throws NoObjectFoundException;
 
     /**
-     * Created a dialogue with the NPC , if present.
-     * @return a dialogue window with the NPC
+     * Initiate a dialogue with the NPC , if present.
+     * @return dialogue of the NPC in that position
      * @throws NoNPCFoundException if the NPC is not present
      */
     DialogueInterface talkToNpc() throws NoNPCFoundException;
