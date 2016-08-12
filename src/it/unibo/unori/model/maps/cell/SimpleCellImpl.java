@@ -12,9 +12,9 @@ import it.unibo.unori.model.menu.DialogueInterface;
 
 /**
  * Implementation of the Cell interface.
- * Has 2 private field : frame, state.
- * frame is the object to graphical represent the cell
- * state is the current state of the cell 
+ * Has 2 private field : Path and State.
+ * Path is the path of the image of the cell
+ * State is the current state of the cell 
  * Three methods raise an Exception, because CellImpl is the implementation 
  * for a simple free or blocked cell, no advanced mechanism is developed.
  *
