@@ -23,12 +23,12 @@ import it.unibo.unori.model.menu.utility.Pair;
  */
 public final class MagicLogics {
     
-    private static final int SHIFT = 30;
+    private static final int SHIFT = 7;
     private static final int MULT = 10;
     private static final int YOURELUCKY = 3;
     private static final int HIGHIA = 8;
-    private static final int SHIFTWEAKNESS = 50;
-    private static final double SHIFTNOTWEAK = 25.0;
+    private static final int SHIFTWEAKNESS = 30;
+    private static final double SHIFTNOTWEAK = 15.0;
     private static final double WEAKNESSLOW = 1.25;
     private static final double WEAKNESSMEDIUM = 2.5;
     private static final double WEAKNESSHIGH = 5.0;
@@ -174,7 +174,7 @@ public final class MagicLogics {
             final MagicAttackInterface toThrow) throws FailedException {
         if (isSuccessfull(toThrow)) {
             final int diff = att.getLevel() - opp.getLevel();
-            final int toMultiply = toThrow.getPhysicAtk() * MULT + SHIFT + diff;
+            final int toMultiply = toThrow.getPhysicAtk() * SHIFT + diff;
             final Double weaknessFactor;
             weaknessFactor = weakOrNot(opp, toThrow) * toMultiply;
             return weaknessFactor.intValue();
@@ -192,7 +192,7 @@ public final class MagicLogics {
     public static int toAddToWeapon(final Weapon w, final Character opp) {
         Double weakness;
         if (isWeaknessMedium(w.getFireAtk(), w.getIceAtk(), w.getThunderAtk())) {
-            weakness = WEAKNESSMEDIUM;
+            weakness = SHIFTNOTWEAK;
         } else {
             final Statistics powerWeap = getBestStat(w.getStats()).getX();
             Map<Statistics, Integer> mapToCheck = generateMapFor(true, opp);
