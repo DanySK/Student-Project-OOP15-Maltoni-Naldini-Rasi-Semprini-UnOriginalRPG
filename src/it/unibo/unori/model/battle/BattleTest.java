@@ -151,6 +151,14 @@ public class BattleTest {
         } catch (NotEnoughMPExcpetion | MagicNotFoundException e) {
             e.printStackTrace();
         }
+        System.out.println(this.battle.getEnemies().getAliveFoes());
+        try {
+            this.battle.useMagicAttack(
+                    MagicGenerator.getMedium(this.battle.getHeroOnTurn().getJob()),
+                    this.battle.getFoeOnTurn(), true).generate();
+        } catch (NotEnoughMPExcpetion | MagicNotFoundException e) {
+            e.printStackTrace();
+        }
     }
     
     /**
