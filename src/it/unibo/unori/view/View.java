@@ -18,7 +18,7 @@ public final class View extends JFrame {
     private final JLayeredPane layeredPane;
     private static final String TITLE = "UnOriginal.RPG";
 
-    public static final Dimension SIZE = new Dimension(640, 480);
+    public static final Dimension SIZE = new Dimension(640, 480); // TODO
 
     /**
      * Creates an instance of the view.
