@@ -73,4 +73,10 @@ public interface FoeSquad extends Serializable {
      * @return a String used as a name for the Squad.
      */
     String getNameOfSquad();
+
+    /**
+     * Method that returns the next Foe who can be set on turn in Battle.
+     * @return the next Foe on turn.
+     */
+    Foe getNextFoe();
 }

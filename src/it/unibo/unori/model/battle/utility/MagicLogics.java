@@ -66,6 +66,7 @@ public final class MagicLogics {
                 && magic.getFireAtk() == magic.getThunderAtk()) {
             return 1 / 2;
         }
+        
         Statistics powerMagic = getBestStat(magic.getMap()).getX();
         Map<Statistics, Integer> mapToCheck = generateMapFor(true, ch);
         Pair<Statistics, Integer> powerOpponent = getBestStat(mapToCheck);
@@ -120,7 +121,7 @@ public final class MagicLogics {
      * @return a weakness factor.
      */
     private static double weaknessGeneral(final Statistics opp, final Statistics best) {
-        double weakness = 0;
+        double weakness = 1;
             if ((opp.equals(Statistics.FIREATK) 
                     && best.equals(Statistics.ICEATK))
             || (opp.equals(Statistics.ICEATK) 

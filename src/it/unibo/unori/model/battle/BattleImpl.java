@@ -80,6 +80,13 @@ public class BattleImpl implements Battle {
         this.outCome = Optional.of(battle.getOutCome());
     }
     
+    private void checkWhoAttacks() {
+        if (this.foeOnTurn.getStatus().equals(Status.DEAD) 
+                || this.heroOnTurn.getStatus().equals(Status.DEAD)) {
+            throw new IllegalStateException();
+        }
+    }
+    
     private Optional<Boolean> setOver() {
         if (this.enemies.getAliveFoes().size() == 0) {
             this.over = true;
@@ -107,10 +114,10 @@ public class BattleImpl implements Battle {
     
     private int getMediumDefenseFoes() {
         int medium = 0;
-        for (final Foe h : this.enemies.getAllFoes()) {
+        for (final Foe h : this.enemies.getAliveFoes()) {
             medium += h.getDefense();
         }
-        medium /= this.enemies.getAllFoes().size();
+        medium /= this.enemies.getAliveFoes().size();
         return medium / 2;
     }
     
@@ -144,6 +151,7 @@ public class BattleImpl implements Battle {
 
     @Override
     public DialogueInterface attack(final boolean whosFirst) throws NoWeaponException {
+        this.checkWhoAttacks();
         final Character whoAttacks = whosFirst ? this.heroOnTurn : this.foeOnTurn;
         final Character whoSuffers = whosFirst ? this.foeOnTurn : this.heroOnTurn;
         if (this.setUndefendedAndNotify(whoSuffers)) {
@@ -161,12 +169,14 @@ public class BattleImpl implements Battle {
             toReturn = toReturn.concat(" " + this.enemies.defeatFoe(this.foeOnTurn));
             if (this.enemies.isDefeated(this.foeOnTurn)) {
                 this.setOver();
+                this.setFoeOnTurn(this.enemies.getNextFoe());
                 return new Dialogue(toReturn);
             }
         } else {
             toReturn = toReturn.concat(" " + this.squad.defeatHero(this.heroOnTurn));
             if (this.squad.isDefeated(this.heroOnTurn)) {
                 this.setOver();
+                this.setHeroOnTUrn(this.squad.getNextHero());
                 return new Dialogue(toReturn);
             }
         }
@@ -183,6 +193,7 @@ public class BattleImpl implements Battle {
 
     @Override
     public DialogueInterface defend(final Hero friend) throws NotDefendableException {
+        this.checkWhoAttacks();
         if (friend.getStatus() == Status.NOT_DEFENDABLE) {
             throw new NotDefendableException();
         }
@@ -197,6 +208,7 @@ public class BattleImpl implements Battle {
     @Override
     public DialogueInterface usePotion(final Hero my, final Potion toUse) 
             throws ItemNotFoundException, HeroDeadException, HeroNotDeadException {
+        this.checkWhoAttacks();
         if (this.itemBag.contains(toUse)) {
             toUse.using(my);
             return new Dialogue("Hai usato " + toUse.getName() + " su " + my.getName() + "!");
@@ -214,6 +226,7 @@ public class BattleImpl implements Battle {
 
     @Override
     public DialogueInterface specialAttack() throws BarNotFullException {
+        this.checkWhoAttacks();
         List<String> list = new ArrayList<>();
         if (this.heroOnTurn.getCurrentBar() == this.heroOnTurn.getTotBar()) {
             final String toReturn = 
@@ -235,9 +248,14 @@ public class BattleImpl implements Battle {
                 toAdd = " " + e.getName() + " subisce un danno di " + damage + " HP! " 
                         + this.enemies.defeatFoe(e);
                 list.add(toAdd + "\n");
+                if (this.enemies.isDefeated(e)) {
+                    this.setOver();
+                }
             });
+            if (!this.isOver()) {
+                this.setFoeOnTurn(this.enemies.getNextFoe());
+            }
             this.heroOnTurn.resetSpecialBar();
-            this.setOver();
             String finale = "";
             for (String s : list) {
                 finale = finale.concat(s);
@@ -249,8 +267,10 @@ public class BattleImpl implements Battle {
     }
 
     @Override
-    public DialogueInterface useMagicAttack(final MagicAttack m, final Foe enemy, final boolean whosFirst)
+    public DialogueInterface useMagicAttack(final MagicAttackInterface m,
+            final Foe enemy, final boolean whosFirst)
             throws NotEnoughMPExcpetion, MagicNotFoundException {
+        this.checkWhoAttacks();
         final Character whoAttacks = whosFirst ? this.heroOnTurn : this.foeOnTurn;
         final Character whoSuffers = whosFirst ? this.foeOnTurn : this.heroOnTurn;
         final int damage;
@@ -264,17 +284,29 @@ public class BattleImpl implements Battle {
             } else {
                 throw new NotEnoughMPExcpetion();
             }
-            if (whoAttacks.equals(this.heroOnTurn)) {
-                this.heroOnTurn.setCurrentBar(
-                        BattleLogics.toFillSpecialBar(this.foeOnTurn, true, this.heroOnTurn));
-            }
+            
             try {
                 damage = MagicLogics.calculateMagic(whoAttacks, whoSuffers, m);
                 whoSuffers.takeDamage(damage);
-                toShow = toShow.concat("\n" + whoAttacks.getName() + " " + m.getStringToShow() 
-                + " e causa un danno di " + damage + " HP a " + whoSuffers.getName() + "!");
+                toShow = toShow.concat(" " + whoAttacks.getName() + " " + m.getStringToShow() 
+                + " E causa un danno di " + damage + " HP a " + whoSuffers.getName() + "!");
+                if (whosFirst) {
+                    this.heroOnTurn.setCurrentBar(
+                            BattleLogics.toFillSpecialBar(enemy, true, this.heroOnTurn));
+                    toShow = toShow.concat(" " + this.enemies.defeatFoe(enemy));
+                    if (this.enemies.isDefeated(enemy)) {
+                        this.setOver();
+                        this.setFoeOnTurn(this.enemies.getNextFoe());
+                    }
+                } else {
+                    toShow = toShow.concat(" " + this.squad.defeatHero(this.heroOnTurn));
+                    if (this.squad.isDefeated(this.heroOnTurn)) {
+                        this.setOver();
+                        this.setHeroOnTUrn(this.squad.getNextHero());
+                    }
+                }
             } catch (FailedException e) {
-                toShow = toShow.concat("\n" + "Attacco Fallito!");
+                toShow = toShow.concat(" Attacco Fallito!");
             }
             return new Dialogue(toShow);
         } else {
@@ -291,6 +323,7 @@ public class BattleImpl implements Battle {
 
     @Override
     public DialogueInterface acquireExp() {
+        this.checkWhoAttacks();
         if (this.isOver() && this.outCome.equals(Optional.of(OUTCOMEPOSITIVE))) {
             final List<String> toReturn = new ArrayList<>();
             this.squad.getAliveHeroes().forEach(h -> {

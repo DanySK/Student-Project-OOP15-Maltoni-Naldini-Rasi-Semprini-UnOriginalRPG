@@ -81,7 +81,7 @@ public interface Battle {
      * is not enough to throw the attack.
      * @throws MagicNotFoundException 
      */
-    DialogueInterface useMagicAttack(MagicAttack m, Foe enemy, boolean whosFirst) 
+    DialogueInterface useMagicAttack(MagicAttackInterface m, Foe enemy, boolean whosFirst) 
             throws NotEnoughMPExcpetion, MagicNotFoundException;
     
     /**

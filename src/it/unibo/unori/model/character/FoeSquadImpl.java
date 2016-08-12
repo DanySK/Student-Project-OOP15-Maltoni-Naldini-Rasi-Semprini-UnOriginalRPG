@@ -119,6 +119,19 @@ public class FoeSquadImpl implements FoeSquad {
         return this.enemies.size() + " nemici!";
     }
     
+    @Override
+    public Foe getNextFoe() {
+        int maxV = 0;
+        Foe toReturn = this.getAliveFoes().get(0);
+        for (Foe f : this.getAliveFoes()) {
+            if (maxV < f.getSpeed()) {
+                maxV = f.getSpeed();
+                toReturn = f;
+            }
+        }
+        return toReturn;
+    }
+    
     /**
      * HashCode method implemented using auto generation.
      * 
