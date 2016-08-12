@@ -7,7 +7,6 @@ import it.unibo.unori.controller.action.MoveAction;
 import it.unibo.unori.controller.action.OpenMenuAction;
 import it.unibo.unori.model.maps.GameMap;
 import it.unibo.unori.model.maps.Party;
-import it.unibo.unori.model.maps.Position;
 import it.unibo.unori.model.maps.SingletonParty;
 import it.unibo.unori.model.maps.exceptions.BlockedPathException;
 import it.unibo.unori.model.menu.DialogueInterface;

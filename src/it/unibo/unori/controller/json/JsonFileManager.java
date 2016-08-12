@@ -74,7 +74,7 @@ public class JsonFileManager {
      */
     public static final String STATS_FILE = "res/Stats.json";
 
-    private final Gson gson;
+    public final Gson gson;
 
     /**
      * Default constructor.
