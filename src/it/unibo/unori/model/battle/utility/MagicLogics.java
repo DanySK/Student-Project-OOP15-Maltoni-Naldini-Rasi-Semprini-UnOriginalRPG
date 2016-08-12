@@ -249,7 +249,7 @@ public final class MagicLogics {
         } else if (opp instanceof Hero) {
             
             return BattleLogics.getStandardDamage(att.getLevel(), atkTot 
-                    - toAddToArmor(((Hero) opp).getWholeArmor(), att));
+                    - (toAddToArmor(((Hero) opp).getWholeArmor(), att) + opp.getDefense() / 2));
         } else {
             throw new IllegalStateException();
         }

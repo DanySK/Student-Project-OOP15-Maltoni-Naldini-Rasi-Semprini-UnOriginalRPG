@@ -105,6 +105,15 @@ public class BattleImpl implements Battle {
         return mediumLevel;
     }
     
+    private int getMediumDefenseFoes() {
+        int medium = 0;
+        for (final Foe h : this.enemies.getAllFoes()) {
+            medium += h.getDefense();
+        }
+        medium /= this.enemies.getAllFoes().size();
+        return medium / 2;
+    }
+    
     private boolean setUndefendedAndNotify(final Character whoSuffers) {
         if (whoSuffers instanceof Hero) {
             if (((Hero) whoSuffers).isDefended()) {
@@ -216,9 +225,10 @@ public class BattleImpl implements Battle {
             } catch (NoWeaponException e1) {
                 toAddAtk = 0;
             }
+            
             final int damage = 
                     BattleLogics.specialAttackCalc(this.heroOnTurn.getLevel(),
-                            this.heroOnTurn.getAttack() + toAddAtk);
+                            this.heroOnTurn.getAttack() + (toAddAtk - this.getMediumDefenseFoes()));
             this.enemies.getAliveFoes().forEach(e -> {
                 String toAdd;
                 e.takeDamage(damage);
