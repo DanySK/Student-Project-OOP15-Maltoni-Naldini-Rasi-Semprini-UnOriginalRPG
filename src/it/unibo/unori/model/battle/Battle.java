@@ -39,7 +39,7 @@ public interface Battle {
      * @return a confirmation String.
      * @throws NoWeaponException if the Hero isn't holding any Weapon.
      */
-    String attack(boolean whosFirst) throws NoWeaponException;
+    DialogueInterface attack(boolean whosFirst) throws NoWeaponException;
 
     /**
      * Method that allows to defend a personal team's character at choice, just for
@@ -48,7 +48,7 @@ public interface Battle {
      * @return a confirmation String
      * @throws NotDefendableException if the friend is not defendable.
      */
-    String defend(Hero friend) throws NotDefendableException;
+    DialogueInterface defend(Hero friend) throws NotDefendableException;
     
     /**
      * Method that allows to use a Potion from the item Bag.
@@ -60,14 +60,14 @@ public interface Battle {
      *  that does not give life back.
      * @throws HeroNotDeadException if the Hero is alive and uses a reliving Potion
      */
-    String usePotion(Hero my, Potion toUse) throws ItemNotFoundException, HeroDeadException, HeroNotDeadException;
+    DialogueInterface usePotion(Hero my, Potion toUse) throws ItemNotFoundException, HeroDeadException, HeroNotDeadException;
 
     /**
      * Method that allows to throw a Special Attack if the bar is full.
      * @throws BarNotFullException if the bar is not filled.
      * @return a confirmation String.
      */
-    String specialAttack() throws BarNotFullException;
+    DialogueInterface specialAttack() throws BarNotFullException;
     
     /**
      * Method that allows to throw an attack using Magic.
@@ -81,7 +81,7 @@ public interface Battle {
      * is not enough to throw the attack.
      * @throws MagicNotFoundException 
      */
-    String useMagicAttack(MagicAttack m, Foe enemy, boolean whosFirst) 
+    DialogueInterface useMagicAttack(MagicAttack m, Foe enemy, boolean whosFirst) 
             throws NotEnoughMPExcpetion, MagicNotFoundException;
     
     /**
@@ -95,14 +95,14 @@ public interface Battle {
      * It adds the appropriate amount of exp points to each Character of my team.
      * @return a confirmation String.
      */
-    String acquireExp();
+    DialogueInterface acquireExp();
     
     /**
      * Method that allows the Foe to restore a Statistic on his turn.
      * @param statToRestore the Statistic to be restored.
      * @return a confirmation String.
      */
-    String foeUsesRestore(Statistics statToRestore);
+    DialogueInterface foeUsesRestore(Statistics statToRestore);
     
     /**
      * Getter method that returns the List of Enemies involved in the Battle.
