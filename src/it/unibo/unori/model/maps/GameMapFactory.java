@@ -101,7 +101,7 @@ public class GameMapFactory {
      *          map of the blacksmith shop.
      */
     public GameMap createShop() {
-        final GameMap map = this.getSizeableMap(10, 4);
+        final GameMap map = this.getSizeableMap(4, 10);
         map.setRow(3, FACT.getBlockedCell());
         final Npc blackSmith = new NpcImpl("Fuori dalla mia palude!");
         final Npc assistant1 = new NpcImpl("Il fabbro si è barricato dietro il bancone!"
