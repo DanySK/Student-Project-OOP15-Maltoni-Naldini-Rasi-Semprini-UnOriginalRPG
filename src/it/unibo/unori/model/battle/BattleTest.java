@@ -10,11 +10,14 @@ import org.junit.Test;
 import it.unibo.unori.model.character.HeroImpl;
 import it.unibo.unori.model.battle.exceptions.BarNotFullException;
 import it.unibo.unori.model.battle.exceptions.NotDefendableException;
+import it.unibo.unori.model.battle.exceptions.NotEnoughMPExcpetion;
+import it.unibo.unori.model.battle.utility.MagicGenerator;
 import it.unibo.unori.model.character.FoeImpl;
 import it.unibo.unori.model.character.FoeSquad;
 import it.unibo.unori.model.character.FoeSquadImpl;
 import it.unibo.unori.model.character.HeroTeam;
 import it.unibo.unori.model.character.HeroTeamImpl;
+import it.unibo.unori.model.character.exceptions.MagicNotFoundException;
 import it.unibo.unori.model.character.exceptions.MaxFoesException;
 import it.unibo.unori.model.character.exceptions.MaxHeroException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
@@ -23,6 +26,7 @@ import it.unibo.unori.model.character.jobs.Jobs;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.BagImpl;
 import it.unibo.unori.model.items.WeaponFactory;
+import it.unibo.unori.model.menu.DialogueInterface;
 
 /**
  * Class for testing the Battle Mode.
@@ -84,15 +88,15 @@ public class BattleTest {
         System.out.println(battle.setFoeOnTurn(battle.getEnemies().getFirstFoeOnTurn()));
         System.out.println("" + this.battle.getHeroOnTurn().getRemainingHP());
         System.out.println("" + this.battle.getHeroOnTurn().getAttack());
-        final String firstDamage  = battle.attack(true);
+        final DialogueInterface firstDamage  = battle.attack(true);
         System.out.println(this.battle.getFoeOnTurn().getSpeed() + " "
                 + this.battle.getHeroOnTurn().getSpeed());
         System.out.println(firstDamage);
         System.out.println("" + this.battle.getHeroOnTurn().getRemainingHP());
         System.out.println(this.battle.getHeroOnTurn().getCurrentBar());
         battle.setFoeOnTurn(battle.getEnemies().getAliveFoes().get(0));
-        final String secndDamage  = battle.attack(true);
-        System.out.println(secndDamage);
+        final DialogueInterface secndDamage  = battle.attack(true);
+        secndDamage.generate();
         System.out.println(this.battle.getHeroOnTurn().getCurrentBar());
         this.battle.getHeroOnTurn().setCurrentBar(100);
         System.out.println(battle.specialAttack());
@@ -137,6 +141,28 @@ public class BattleTest {
         System.out.println(battle.getHeroOnTurn().getRemainingHP());
         assertFalse(battle.getSquad().getAliveHeroes().get(2).isDefended());
         System.out.println(battle.attack(true));
+        System.out.println(this.battle.getEnemies().getAliveFoes());
+        this.battle.getHeroOnTurn().addSpell(
+                MagicGenerator.getMedium(this.battle.getHeroOnTurn().getJob()));
+        try {
+            this.battle.useMagicAttack(
+                    MagicGenerator.getMedium(this.battle.getHeroOnTurn().getJob()),
+                    this.battle.getFoeOnTurn(), true).generate();
+        } catch (NotEnoughMPExcpetion e) {
+            e.printStackTrace();
+        } catch (MagicNotFoundException e) {
+            fail("Magia non aggiunta correttamente!!");
+        }
+        System.out.println(this.battle.getEnemies().getAliveFoes());
+        try {
+            this.battle.useMagicAttack(
+                    MagicGenerator.getMedium(this.battle.getHeroOnTurn().getJob()),
+                    this.battle.getFoeOnTurn(), true).generate();
+        } catch (NotEnoughMPExcpetion e) {
+            e.printStackTrace();
+        } catch (MagicNotFoundException e) {
+            fail("Magia non aggiunta correttamente!!");
+        }
     }
     
     /**
