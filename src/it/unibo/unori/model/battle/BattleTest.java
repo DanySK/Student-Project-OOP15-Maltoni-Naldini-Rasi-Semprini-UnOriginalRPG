@@ -148,16 +148,20 @@ public class BattleTest {
             this.battle.useMagicAttack(
                     MagicGenerator.getMedium(this.battle.getHeroOnTurn().getJob()),
                     this.battle.getFoeOnTurn(), true).generate();
-        } catch (NotEnoughMPExcpetion | MagicNotFoundException e) {
+        } catch (NotEnoughMPExcpetion e) {
             e.printStackTrace();
+        } catch (MagicNotFoundException e) {
+            fail("Magia non aggiunta correttamente!!");
         }
         System.out.println(this.battle.getEnemies().getAliveFoes());
         try {
             this.battle.useMagicAttack(
                     MagicGenerator.getMedium(this.battle.getHeroOnTurn().getJob()),
                     this.battle.getFoeOnTurn(), true).generate();
-        } catch (NotEnoughMPExcpetion | MagicNotFoundException e) {
+        } catch (NotEnoughMPExcpetion e) {
             e.printStackTrace();
+        } catch (MagicNotFoundException e) {
+            fail("Magia non aggiunta correttamente!!");
         }
     }
     
