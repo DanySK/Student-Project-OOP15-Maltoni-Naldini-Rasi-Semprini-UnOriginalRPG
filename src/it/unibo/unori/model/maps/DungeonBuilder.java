@@ -22,10 +22,10 @@ public class DungeonBuilder {
     private static final GameMapFactory FACT = new GameMapFactory();
     private static final ArmorFactory AACT = new ArmorFactory();
     private static final PotionFactory PACT = new PotionFactory();
-    private final List<GameMap> rList = new ArrayList<>();
-    private final List<GameMap> sList = new ArrayList<>();
-    private final List<GameMap> tList = new ArrayList<>();
-    private final List<GameMap> fList = new ArrayList<>();
+    private List<GameMap> rList = new ArrayList<>();
+    private List<GameMap> sList = new ArrayList<>();
+    private List<GameMap> tList = new ArrayList<>();
+    private List<GameMap> fList = new ArrayList<>();
     private static final Position POS1 = new Position(7, 3);
     private static final Position POS2 = new Position(2, 11);
 
@@ -93,8 +93,10 @@ public class DungeonBuilder {
      * Build final floor.
      */
     private void finalFloorBuilder() {
-        for (int i = 0; i < 2; i++) {
-            fList.add(FACT.getSizeableMap(8, 12));
+        if (fList.isEmpty()) {
+            for (int i = 0; i < 2; i++) {
+                fList.add(FACT.getSizeableMap(8, 12));
+            }
         }
         this.storeItem(POS1, fList.get(0), PACT.getGigaPozione());
         this.storeItem(POS2, fList.get(0), PACT.getTrapiantoMana());
@@ -105,8 +107,10 @@ public class DungeonBuilder {
      * Build third floor
      */
     private void thirdFloorBuilder() {
-        for (int i = 0; i < 9; i++) {
-            tList.add(FACT.getSizeableMap(8, 12));
+        if (tList.isEmpty()) {
+            for (int i = 0; i < 9; i++) {
+                tList.add(FACT.getSizeableMap(8, 12));
+            }
         }
         this.northLink(tList.get(0), tList.get(2));
         this.northLink(tList.get(5), tList.get(0));
@@ -125,8 +129,10 @@ public class DungeonBuilder {
      * Build second floor.
      */
     private void secondFloorBuilder() {
-        for (int i = 0; i < 18; i++) {
-            sList.add(FACT.getSizeableMap(8, 12));
+        if (sList.isEmpty()) {
+            for (int i = 0; i < 18; i++) {
+                sList.add(FACT.getSizeableMap(8, 12));
+            }
         }
         this.northLink(sList.get(1), sList.get(0));
         this.northLink(sList.get(2), sList.get(1));
@@ -156,8 +162,10 @@ public class DungeonBuilder {
      * Build first floor.
      */
     private void firstFloorBuilder() {
-        for (int i = 0; i < 17; i++) {
-            rList.add(FACT.getSizeableMap(8, 12));
+        if (rList.isEmpty()) {
+            for (int i = 0; i < 17; i++) {
+                rList.add(FACT.getSizeableMap(8, 12));
+            }
         }
         this.westLink(rList.get(0), rList.get(2));
         this.storeItem(POS1, rList.get(1), PACT.getAspirinaMagica());
@@ -199,6 +207,26 @@ public class DungeonBuilder {
        this.linkMap(tList.get(0), sList.get(sList.size() - 1));
        this.linkMap(sList.get(0), rList.get(rList.size() - 1));
        return rList.get(0);
+    }
+
+    /**
+     * Set a list of map as a floor of the dungeon.
+     * @param floorNum
+     *          number of the floor to set
+     * @param maps
+     *      list of the maps of the floor
+     * @throws IllegalArgumentException
+     *          if the number of the floor is not between 1 and 4
+     */
+    public void setFloor(final int floorNum, final List<GameMap> maps) 
+                            throws IllegalArgumentException {
+        switch (floorNum) {
+        case 1: this.rList = new ArrayList<>(maps); break;
+        case 2: this.sList = new ArrayList<>(maps); break;
+        case 3: this.tList = new ArrayList<>(maps); break;
+        case 4: this.fList = new ArrayList<>(maps); break;
+        default: throw new IllegalArgumentException(); 
+        }
     }
 
 }
