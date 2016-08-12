@@ -39,7 +39,7 @@ public final class MagicLogics {
     
     /**
      * Accuracy is calculated in this way:
-     * If the accuracy of the attack is x, then the Character has 2/x+1 probability
+     * If the accuracy of the attack is x, then the Character has 2/x+4 probability
      * to fail the attack. Except from the case in which the accuracy equals 8: in that
      * case the probability to fail is 1/x+1.
      * @param m the MagicAttack to throw.
@@ -47,7 +47,7 @@ public final class MagicLogics {
      */
     private static boolean isSuccessfull(final MagicAttackInterface m) {
         final int accuracy = m.getAccuracy();
-        final int toCalc = accuracy + 1;
+        final int toCalc = accuracy + 4;
         Random rand = new Random();
         int luck = rand.nextInt(toCalc);
         if (accuracy >= HIGHIA) {
@@ -65,9 +65,8 @@ public final class MagicLogics {
      * @return a weakness factor.
      */
     private static double weakOrNot(final Character ch, final MagicAttackInterface magic) {
-        if (magic.getFireAtk() == magic.getIceAtk() 
-                && magic.getFireAtk() == magic.getThunderAtk()) {
-            return 1 / 2;
+        if (isWeaknessMedium(magic.getFireAtk(), magic.getIceAtk(), magic.getThunderAtk())) {
+            return WEAKNESSMEDIUM;
         }
         
         Statistics powerMagic = getBestStat(magic.getMap()).getX();
@@ -75,6 +74,10 @@ public final class MagicLogics {
         Pair<Statistics, Integer> powerOpponent = getBestStat(mapToCheck);
         
         return weaknessGeneral(powerOpponent.getX(), powerMagic);
+    }
+    
+    private static boolean isWeaknessMedium(final int fire, final int ice, final int thun) {
+        return fire == ice && fire == thun;
     }
     
     /**
@@ -103,16 +106,16 @@ public final class MagicLogics {
      * @return the Map itself.
      */
     private static Map<Statistics, Integer> generateMapFor(final boolean atkOrDef, 
-            final Character opp) {
+            final Character ch) {
         final Map<Statistics, Integer> map = new HashMap<>();
         if (atkOrDef)  {
-            map.put(Statistics.FIREATK, opp.getFireAtk());
-            map.put(Statistics.ICEATK, opp.getIceAttack());
-            map.put(Statistics.THUNDERATK, opp.getThunderAttack());
+            map.put(Statistics.FIREATK, ch.getFireAtk());
+            map.put(Statistics.ICEATK, ch.getIceAttack());
+            map.put(Statistics.THUNDERATK, ch.getThunderAttack());
         } else {
-            map.put(Statistics.FIREDEF, opp.getFireDefense());
-            map.put(Statistics.ICEDEF, opp.getIceDefense());
-            map.put(Statistics.THUNDERDEF, opp.getThunderDefense());
+            map.put(Statistics.FIREDEF, ch.getFireDefense());
+            map.put(Statistics.ICEDEF, ch.getIceDefense());
+            map.put(Statistics.THUNDERDEF, ch.getThunderDefense());
         }
         return map;
     }
@@ -135,26 +138,25 @@ public final class MagicLogics {
         } else {
             opp = opponent;
         }
-        System.out.println("Chi subisce: " + opp + "\nChi attacca: " + best + "\n");
         
-            if (opp.equals(best)) {
-                weakness = WEAKNESSMEDIUM;
-            } else if ((opp.equals(Statistics.ICEATK) 
-                    && best.equals(Statistics.FIREATK))
-            || (opp.equals(Statistics.FIREATK) 
-                && best.equals(Statistics.THUNDERATK)) 
-            || (opp.equals(Statistics.THUNDERATK) 
-                && best.equals(Statistics.ICEATK))) {
-                    weakness = WEAKNESSHIGH;
-            } else if ((opp.equals(Statistics.FIREATK) 
-                    && best.equals(Statistics.ICEATK))
-            || (opp.equals(Statistics.ICEATK) 
-                    && best.equals(Statistics.THUNDERATK))
-            || (opp.equals(Statistics.THUNDERATK) 
-                    && best.equals(Statistics.FIREATK))) {
-                weakness = WEAKNESSLOW;
-            }
-            return weakness;
+        if (opp.equals(best)) {
+            weakness = WEAKNESSMEDIUM;
+        } else if ((opp.equals(Statistics.ICEATK) 
+                && best.equals(Statistics.FIREATK))
+        || (opp.equals(Statistics.FIREATK) 
+            && best.equals(Statistics.THUNDERATK)) 
+        || (opp.equals(Statistics.THUNDERATK) 
+            && best.equals(Statistics.ICEATK))) {
+                weakness = WEAKNESSHIGH;
+        } else if ((opp.equals(Statistics.FIREATK) 
+                && best.equals(Statistics.ICEATK))
+        || (opp.equals(Statistics.ICEATK) 
+                && best.equals(Statistics.THUNDERATK))
+        || (opp.equals(Statistics.THUNDERATK) 
+                && best.equals(Statistics.FIREATK))) {
+            weakness = WEAKNESSLOW;
+        }
+        return weakness;
             
     }
     
@@ -189,9 +191,8 @@ public final class MagicLogics {
      */
     public static int toAddToWeapon(final Weapon w, final Character opp) {
         Double weakness;
-        if (w.getFireAtk() == w.getIceAtk() 
-                && w.getFireAtk() == w.getThunderAtk()) {
-            weakness = SHIFTNOTWEAK;
+        if (isWeaknessMedium(w.getFireAtk(), w.getIceAtk(), w.getThunderAtk())) {
+            weakness = WEAKNESSMEDIUM;
         } else {
             final Statistics powerWeap = getBestStat(w.getStats()).getX();
             Map<Statistics, Integer> mapToCheck = generateMapFor(true, opp);
@@ -220,7 +221,7 @@ public final class MagicLogics {
             thunDef += armor.getValue().getThunderDefense();
             physDef += armor.getValue().getPhysicalRes();
         }
-        if (fireDef == iceDef && fireDef == thunDef) {
+        if (isWeaknessMedium(fireDef, iceDef, thunDef)) {
             weakness = SHIFTNOTWEAK;
         } else {
             m.put(Statistics.FIREATK, fireDef);
@@ -261,7 +262,7 @@ public final class MagicLogics {
         } else if (opp instanceof Hero) {
             
             return BattleLogics.getStandardDamage(att.getLevel(), atkTot 
-                    - (toAddToArmor(((Hero) opp).getWholeArmor(), att) + opp.getDefense() / 2));
+                    - (toAddToArmor(((Hero) opp).getWholeArmor(), att) + opp.getDefense() / 3));
         } else {
             throw new IllegalStateException();
         }
