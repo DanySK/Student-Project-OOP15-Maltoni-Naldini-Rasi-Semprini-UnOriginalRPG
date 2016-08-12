@@ -93,7 +93,7 @@ public class BattleTest {
         System.out.println(this.battle.getHeroOnTurn().getCurrentBar());
         battle.setFoeOnTurn(battle.getEnemies().getAliveFoes().get(0));
         final DialogueInterface secndDamage  = battle.attack(true);
-        System.out.println(secndDamage);
+        secndDamage.generate();
         System.out.println(this.battle.getHeroOnTurn().getCurrentBar());
         this.battle.getHeroOnTurn().setCurrentBar(100);
         System.out.println(battle.specialAttack());
