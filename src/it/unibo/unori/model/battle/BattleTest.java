@@ -10,11 +10,14 @@ import org.junit.Test;
 import it.unibo.unori.model.character.HeroImpl;
 import it.unibo.unori.model.battle.exceptions.BarNotFullException;
 import it.unibo.unori.model.battle.exceptions.NotDefendableException;
+import it.unibo.unori.model.battle.exceptions.NotEnoughMPExcpetion;
+import it.unibo.unori.model.battle.utility.MagicGenerator;
 import it.unibo.unori.model.character.FoeImpl;
 import it.unibo.unori.model.character.FoeSquad;
 import it.unibo.unori.model.character.FoeSquadImpl;
 import it.unibo.unori.model.character.HeroTeam;
 import it.unibo.unori.model.character.HeroTeamImpl;
+import it.unibo.unori.model.character.exceptions.MagicNotFoundException;
 import it.unibo.unori.model.character.exceptions.MaxFoesException;
 import it.unibo.unori.model.character.exceptions.MaxHeroException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
@@ -139,6 +142,15 @@ public class BattleTest {
         assertFalse(battle.getSquad().getAliveHeroes().get(2).isDefended());
         System.out.println(battle.attack(true));
         System.out.println(this.battle.getEnemies().getAliveFoes());
+        this.battle.getHeroOnTurn().addSpell(
+                MagicGenerator.getMedium(this.battle.getHeroOnTurn().getJob()));
+        try {
+            this.battle.useMagicAttack(
+                    MagicGenerator.getMedium(this.battle.getHeroOnTurn().getJob()),
+                    this.battle.getFoeOnTurn(), true).generate();
+        } catch (NotEnoughMPExcpetion | MagicNotFoundException e) {
+            e.printStackTrace();
+        }
     }
     
     /**
