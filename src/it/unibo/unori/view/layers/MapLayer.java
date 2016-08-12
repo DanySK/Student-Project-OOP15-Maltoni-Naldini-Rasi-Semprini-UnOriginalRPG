@@ -30,25 +30,26 @@ import java.awt.image.AffineTransformOp;
  *
  */
 public class MapLayer extends JPanel {
+    private static final Dimension SIZE = new Dimension(640, 640); // TODO
+    private static final Dimension CELL_SIZE = new Dimension(32, 32);
+
     private Point position;
-    private Dimension cellSize;
     private BufferedImage[][] map;
 
-    private boolean dialogue = false;
+    private boolean dialogueActive;
     private String dialogueText = "";
 
     private BufferedImage sprite;
     private BufferedImage spriteSheet;
-
-    private final Dimension size;
     private final BufferedImage[] frame = new BufferedImage[2];
 
     /**
      * Creates the game map.
      *
-     * @param movement the action of the character moving
-     * @param interact the action of the character interaction
-     * @param menu the action that opens the in-game menu
+     * @param menu the action that openes the in-game menu
+     * @param movement the action that moves the character
+     * @param interact the action that interacts with the map
+     *
      * @param map the paths of the map's sprites
      * @param position the initial position of the character
      * @param spriteSheetPath the path of the character's sprite sheet
@@ -61,14 +62,11 @@ public class MapLayer extends JPanel {
                     final String spriteSheetPath) throws SpriteNotFoundException {
         super();
 
-        this.map = readMap(map);
-        this.position = position;
+        this.map = readMap(map); // reads the map
+        this.position = position; // reads the position
 
-        size = new Dimension(cellSize.width * this.map.length,
-                             cellSize.height * this.map[0].length);
-
-        this.setPreferredSize(size);
-        this.setBounds(0, 0, size.width, size.height);
+        this.setPreferredSize(SIZE); // sets the size of this layer
+        this.setBounds(0, 0, SIZE.width, SIZE.height); // sets the size and position in the view
 
         try {
             spriteSheet = ImageIO.read(new File(spriteSheetPath));
@@ -99,7 +97,7 @@ public class MapLayer extends JPanel {
                     inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "RIGHT");
                     actionMap.put("RIGHT", entry.getValue());
                     break;
-                default: // direzione non supportata
+                default: // TODO direzione non supportata?
                     break;
             }
         }
@@ -175,7 +173,7 @@ public class MapLayer extends JPanel {
      * @param dialogue the text to be shown inside the dialogue
      */
     public void showDialogue(final String dialogue) {
-        this.dialogue = true;
+        this.dialogueActive = true;
         this.dialogueText = dialogue;
 
         repaint();
@@ -185,7 +183,7 @@ public class MapLayer extends JPanel {
      * Hide the dialogue.
      */
     public void hideDialogue() {
-        dialogue = false;
+        dialogueActive = false;
 
         repaint();
     }
@@ -200,35 +198,35 @@ public class MapLayer extends JPanel {
         for (int x = 0; x < map.length; x++) {
             for (int y = 0; y < map[0].length; y++) {
                 g.drawImage(map[x][y],
-                            x * cellSize.width, y * cellSize.height,
-                            cellSize.width, cellSize.height, null);
+                            x * CELL_SIZE.width, y * CELL_SIZE.height,
+                            CELL_SIZE.width, CELL_SIZE.height, null);
             }
         }
 
         g.drawImage(sprite,
-                    position.x * cellSize.width,
-                    position.y * cellSize.height,
-                    cellSize.width, cellSize.height, null);
+                    position.x * CELL_SIZE.width,
+                    position.y * CELL_SIZE.height,
+                    CELL_SIZE.width, CELL_SIZE.height, null);
 
-        if (dialogue) {
-            g.drawRect(border, size.height - border,
-                       size.width - border * 2, height);
+        if (dialogueActive) {
+            g.drawRect(border, SIZE.height - border,
+                       SIZE.width - border * 2, height);
 
-            String text = new String();
+            final StringBuilder stringBuilder = new StringBuilder();
 
             for (final char c : dialogueText.toCharArray()) {
-                if (g.getFontMetrics().stringWidth(text + c) > size.width - border * 4) {
-                    text = text.concat("\n" + c);
-                } else {
-                    text = text.concat("" + c);
+                if (g.getFontMetrics().stringWidth(stringBuilder.toString() + c)
+                    > SIZE.width - border * 4) {
+                    stringBuilder.append('\n');
                 }
+                stringBuilder.append(c);
             }
 
-            g.drawString(dialogueText, border * 2, size.height - border * 2);
+            g.drawString(stringBuilder.toString(), border * 2, SIZE.height - border * 2);
         }
     }
 
-    private BufferedImage[][] readMap(final String[][] map) throws SpriteNotFoundException {
+    private BufferedImage[][] readMap(final String[]... map) throws SpriteNotFoundException {
         final BufferedImage[][] mapImage = new BufferedImage[map.length][map[0].length];
 
         for (int x = 0; x < map.length; x++) {
@@ -241,8 +239,6 @@ public class MapLayer extends JPanel {
                 }
             }
         }
-
-        cellSize = new Dimension(mapImage[0][0].getWidth(), mapImage[0][0].getHeight());
 
         return mapImage;
     }
