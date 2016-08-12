@@ -2,11 +2,8 @@ package it.unibo.unori.controller.json.serializer;
 
 import java.lang.reflect.Type;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
@@ -20,7 +17,6 @@ import it.unibo.unori.model.maps.cell.ChestCellImpl;
 import it.unibo.unori.model.maps.cell.MapCellImpl;
 import it.unibo.unori.model.maps.cell.NPCCellImpl;
 import it.unibo.unori.model.maps.cell.ObjectCellImpl;
-import it.unibo.unori.model.maps.cell.SimpleCellImpl;
 import it.unibo.unori.model.maps.exceptions.NoObjectFoundException;
 
 public class GameMapSerializer implements JsonSerializer<GameMap> {
