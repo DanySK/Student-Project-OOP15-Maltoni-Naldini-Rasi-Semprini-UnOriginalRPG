@@ -20,12 +20,7 @@ import it.unibo.unori.model.maps.cell.CellState;
 public class GameMapImpl implements GameMap {
 
     /**
-     * Three of these fields are really important:
-     * floorMap is a matrix of Cells, whose size can be regulated, and it represent 
-     * the Map
-     * InitialX and InitialY are two coordinates to describe the cell
-     * on which the party will be when the map will be loaded.
-     * Initial Cell standard is (0,0)
+     * 
      */
     private static final long serialVersionUID = -887928696341560842L;
     private static final int STDCELLS = 100; 
@@ -72,9 +67,7 @@ public class GameMapImpl implements GameMap {
 
 
     /**
-     * private method to initialize the map
-     * @param size
-     *              the size of the row of the matrix
+     * Private method to initialize the matrix of cells.
      */ 
     private void initializeMap() {
         for (int i = 0; i < this.floorMap.length; i++) {
