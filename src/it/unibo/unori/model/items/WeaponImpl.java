@@ -124,7 +124,11 @@ public class WeaponImpl implements Weapon {
     
     @Override
     public Map<Statistics, Integer> getStats() {
-        return new HashMap<>(this.stats);
+        Map<Statistics, Integer> toRet = new HashMap<>();
+        toRet.put(Statistics.FIREATK, this.getFireAtk());
+        toRet.put(Statistics.ICEATK, this.getIceAtk());
+        toRet.put(Statistics.THUNDERATK, this.getThunderAtk());
+        return toRet;
     }
 
     /**

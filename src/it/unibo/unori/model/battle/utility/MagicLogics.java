@@ -122,29 +122,27 @@ public final class MagicLogics {
      */
     private static double weaknessGeneral(final Statistics opp, final Statistics best) {
         double weakness = 1;
-            if ((opp.equals(Statistics.FIREATK) 
+        System.out.println("Chi subisce: " + opp + "\nChi attacca: " + best + "\n");
+        
+            if (opp.equals(best)) {
+                weakness = 1 / 2;
+            } else if ((opp.equals(Statistics.ICEATK) 
+                    && best.equals(Statistics.FIREATK))
+            || (opp.equals(Statistics.FIREATK) 
+                && best.equals(Statistics.THUNDERATK)) 
+            || (opp.equals(Statistics.THUNDERATK) 
+                && best.equals(Statistics.ICEATK))) {
+                    weakness = 2 / 3;
+            } else if ((opp.equals(Statistics.FIREATK) 
                     && best.equals(Statistics.ICEATK))
             || (opp.equals(Statistics.ICEATK) 
                     && best.equals(Statistics.THUNDERATK))
             || (opp.equals(Statistics.THUNDERATK) 
                     && best.equals(Statistics.FIREATK))) {
                 weakness = 1 / 3;
-            } else if ((opp.equals(Statistics.ICEATK) 
-                    && best.equals(Statistics.FIREATK))
-            || opp.equals(Statistics.FIREATK) 
-                && best.equals(Statistics.THUNDERATK) 
-            || opp.equals(Statistics.THUNDERATK) 
-                && best.equals(Statistics.ICEATK)) {
-                weakness = 2 / 3;
-            } else if ((opp.equals(Statistics.FIREATK) 
-                    && best.equals(Statistics.FIREATK))
-            || (opp.equals(Statistics.ICEATK) 
-                    && best.equals(Statistics.ICEATK))
-            || (opp.equals(Statistics.THUNDERATK) 
-                    && best.equals(Statistics.THUNDERATK))) {
-                weakness = 1 / 2;
             }
             return weakness;
+            
     }
     
     
@@ -212,12 +210,12 @@ public final class MagicLogics {
         if (fireDef == iceDef && fireDef == thunDef) {
             weakness = SHIFTNOTWEAK;
         } else {
-            m.put(Statistics.FIREDEF, fireDef);
-            m.put(Statistics.ICEDEF, iceDef);
-            m.put(Statistics.THUNDERDEF, thunDef);
+            m.put(Statistics.FIREATK, fireDef);
+            m.put(Statistics.ICEATK, iceDef);
+            m.put(Statistics.THUNDERATK, thunDef);
             
             final Statistics powerArm = getBestStat(m).getX();
-            Map<Statistics, Integer> mapToCheck = generateMapFor(false, opp);
+            Map<Statistics, Integer> mapToCheck = generateMapFor(true, opp);
             Pair<Statistics, Integer> powerOpponent = getBestStat(mapToCheck);
             weakness = weaknessGeneral(powerArm, powerOpponent.getX()) * SHIFTWEAKNESS;
         }
