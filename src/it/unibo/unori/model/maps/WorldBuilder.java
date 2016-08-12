@@ -94,6 +94,15 @@ public class WorldBuilder {
         this.mapsList.replace(mapName, newMap);
     }
 
+    /**
+     * Getter for the dungeonBuilder.
+     * @return
+     *      the dungeonBuilder object
+     */
+    public DungeonBuilder getDungeonBuilder() {
+        return this.b;
+    }
+
     enum MAPS {
         /**
          * Kind of maps ammitted in the enumeration
