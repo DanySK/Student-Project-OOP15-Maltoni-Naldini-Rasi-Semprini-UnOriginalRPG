@@ -145,17 +145,17 @@ public class BattleImpl implements Battle {
         
         whoSuffers.takeDamage(damage);
         String toReturn = whoAttacks.getName() + " attacca " + whoSuffers.getName() + " con "
-                + whoAttacks.getWeapon() + "!\nE causa un danno pari a " + damage + " HP!";
+                + whoAttacks.getWeapon() + "! E causa un danno pari a " + damage + " HP!";
         if (whosFirst) {
             this.heroOnTurn.setCurrentBar(
                     BattleLogics.toFillSpecialBar(this.foeOnTurn, false, this.heroOnTurn));
-            toReturn = toReturn.concat("\n" + this.enemies.defeatFoe(this.foeOnTurn));
+            toReturn = toReturn.concat(" " + this.enemies.defeatFoe(this.foeOnTurn));
             if (this.enemies.isDefeated(this.foeOnTurn)) {
                 this.setOver();
                 return new Dialogue(toReturn);
             }
         } else {
-            toReturn = toReturn.concat("\n" + this.squad.defeatHero(this.heroOnTurn));
+            toReturn = toReturn.concat(" " + this.squad.defeatHero(this.heroOnTurn));
             if (this.squad.isDefeated(this.heroOnTurn)) {
                 this.setOver();
                 return new Dialogue(toReturn);
@@ -207,7 +207,8 @@ public class BattleImpl implements Battle {
     public DialogueInterface specialAttack() throws BarNotFullException {
         List<String> list = new ArrayList<>();
         if (this.heroOnTurn.getCurrentBar() == this.heroOnTurn.getTotBar()) {
-            final String toReturn = this.heroOnTurn.getName() + " ha usato l'attacco speciale!\n";
+            final String toReturn = 
+                    this.heroOnTurn.getName() + " ha usato l'attacco speciale!";
             list.add(toReturn);
             int toAddAtk;
             try {
@@ -221,7 +222,7 @@ public class BattleImpl implements Battle {
             this.enemies.getAliveFoes().forEach(e -> {
                 String toAdd;
                 e.takeDamage(damage);
-                toAdd = e.getName() + " subisce un danno di " + damage + " HP!\n" 
+                toAdd = " " + e.getName() + " subisce un danno di " + damage + " HP! " 
                         + this.enemies.defeatFoe(e);
                 list.add(toAdd + "\n");
             });
