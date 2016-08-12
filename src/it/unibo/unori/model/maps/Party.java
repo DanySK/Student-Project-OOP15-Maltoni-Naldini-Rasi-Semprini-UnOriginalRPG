@@ -87,7 +87,7 @@ public interface Party extends Serializable {
     DialogueInterface interact();
 
     /**
-     * Enum to define the four cardinal points and their skidding 
+     * Enum to define the four cardinal points and their skidding(described as coordinate)
      * from the current cell.
      *
      */

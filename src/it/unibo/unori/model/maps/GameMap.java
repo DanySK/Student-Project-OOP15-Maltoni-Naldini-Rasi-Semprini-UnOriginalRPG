@@ -52,7 +52,7 @@ public interface GameMap extends Serializable {
     List<Cell> getRow(int posX) throws IllegalArgumentException;
 
     /**
-     * Get , as list , the column specified.
+     * Get, as list , the column specified.
      * @param posY
      *             the column to get
      * @return a list of cell
@@ -62,8 +62,7 @@ public interface GameMap extends Serializable {
 
     /**
      * Set an entire row with an instance of a Cell.
-     * it may be useful to set the border cell of the map
-     * @param posX
+     *@param posX
      *              the row to set 
      *@param cell
      *              the cell to set 
