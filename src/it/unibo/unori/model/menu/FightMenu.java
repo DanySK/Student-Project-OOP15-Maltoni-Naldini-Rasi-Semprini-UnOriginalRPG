@@ -27,23 +27,23 @@ public class FightMenu implements FightInterface {
    }
    
     @Override
-    public String attack(final boolean whoAttacks) throws NoWeaponException {
+    public DialogueInterface attack(final boolean whoAttacks) throws NoWeaponException {
         return this.bat.attack(whoAttacks);
     }
 
     @Override
-    public String magic(final MagicAttack m, final Foe enemy, final boolean whosFirst) 
+    public DialogueInterface magic(final MagicAttack m, final Foe enemy, final boolean whosFirst) 
             throws NotEnoughMPExcpetion, MagicNotFoundException {
         return this.bat.useMagicAttack(m, enemy, whosFirst);
     }
 
     @Override
-    public String specialAtk() throws BarNotFullException {
+    public DialogueInterface specialAtk() throws BarNotFullException {
         return this.bat.specialAttack();
     }
 
     @Override
-    public String defend(final Hero toDefend) throws NotDefendableException {
+    public DialogueInterface defend(final Hero toDefend) throws NotDefendableException {
         return this.bat.defend(toDefend);
     }
 

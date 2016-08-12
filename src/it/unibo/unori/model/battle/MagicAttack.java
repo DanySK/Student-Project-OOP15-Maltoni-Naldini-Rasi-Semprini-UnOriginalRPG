@@ -97,7 +97,11 @@ public class MagicAttack implements MagicAttackInterface {
     
     @Override
     public Map<Statistics, Integer> getMap() {
-        return new HashMap<>(this.stats);
+        Map<Statistics, Integer> mapToCheckMagic = new HashMap<>();
+        mapToCheckMagic.put(Statistics.FIREATK, this.getFireAtk());
+        mapToCheckMagic.put(Statistics.ICEATK, this.getIceAtk());
+        mapToCheckMagic.put(Statistics.THUNDERATK, this.getThunderAtk());
+        return mapToCheckMagic;
     }
     
     /**

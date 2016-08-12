@@ -309,5 +309,9 @@ public class CharacterImpl implements Character {
         return !this.isNotPresentWeapon();
     }
 
+    @Override
+    public String toString() {  
+        return this.name;
+    }
 
 }

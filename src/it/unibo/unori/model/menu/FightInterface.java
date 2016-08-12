@@ -20,7 +20,7 @@ public interface FightInterface {
      * @return a confirmation String
      * @throws BarNotFullException if the special Bar is not full yet.
      */
-    String specialAtk() throws BarNotFullException;
+    DialogueInterface specialAtk() throws BarNotFullException;
     
     /**
      * Method that calls a defense from Battle.
@@ -28,7 +28,7 @@ public interface FightInterface {
      * @return a confirmation String. 
      * @throws NotDefendableException if the Hero set as a parameter is not defendable.
      */
-    String defend(Hero toDefend) throws NotDefendableException;
+    DialogueInterface defend(Hero toDefend) throws NotDefendableException;
     
     /**
      * Method that calls an attack from Battle.
@@ -37,7 +37,7 @@ public interface FightInterface {
      * @throws NoWeaponException if the Hero (or the Foe, it depends on who attacks) is not holding
      * any Weapon.
      */
-    String attack(boolean whoAttacks) throws NoWeaponException;
+    DialogueInterface attack(boolean whoAttacks) throws NoWeaponException;
     
     /**
      * Method that calls a magic attack from Battle.
@@ -48,6 +48,6 @@ public interface FightInterface {
      * @throws NotEnoughMPExcpetion if the Hero (or the Foe) has not got enough MPs.
      * @throws MagicNotFoundException if the Hero (or the Foe) has not got the Magic in his spell list.
      */
-    String magic(MagicAttack m, Foe enemy, boolean whosFirst) 
+    DialogueInterface magic(MagicAttack m, Foe enemy, boolean whosFirst) 
             throws NotEnoughMPExcpetion, MagicNotFoundException;
 }

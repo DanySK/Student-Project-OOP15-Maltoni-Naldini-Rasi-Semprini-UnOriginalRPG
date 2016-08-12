@@ -70,5 +70,11 @@ public interface HeroTeam extends Serializable {
      * @return true if the Team is empty, false otherwise.
      */
     boolean isEmpty();
+    
+    /**
+     * Method that allows to set the next Hero on turn in Battle.
+     * @return the next Hero on turn.
+     */
+    Hero getNextHero();
 
 }
