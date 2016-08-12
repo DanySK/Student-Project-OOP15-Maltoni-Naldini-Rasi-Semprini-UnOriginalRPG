@@ -8,12 +8,13 @@ import java.util.Map;
 import java.io.File;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
+
 import javax.swing.Action;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.InputMap;
 import javax.swing.ActionMap;
-import javax.imageio.ImageIO;
 import javax.swing.SwingConstants;
 
 import java.awt.Point;
@@ -30,8 +31,8 @@ import java.awt.image.AffineTransformOp;
  *
  */
 public class MapLayer extends JPanel {
-    private static final Dimension SIZE = new Dimension(640, 640); // TODO
-    private static final Dimension CELL_SIZE = new Dimension(32, 32);
+    private static final Dimension SIZE = new Dimension(800, 640); // dimensioni massime
+    private static final Dimension CELL_SIZE = new Dimension(32, 32); // dimensioni cella
 
     private Point position;
     private BufferedImage[][] map;
@@ -50,7 +51,7 @@ public class MapLayer extends JPanel {
      * @param movement the action that moves the character
      * @param interact the action that interacts with the map
      *
-     * @param map the paths of the map's sprites
+     * @param map the game map as a matrix of sprite paths
      * @param position the initial position of the character
      * @param spriteSheetPath the path of the character's sprite sheet
      *
@@ -65,16 +66,17 @@ public class MapLayer extends JPanel {
         this.map = readMap(map); // reads the map
         this.position = position; // reads the position
 
-        this.setPreferredSize(SIZE); // sets the size of this layer
+        this.setPreferredSize(SIZE); // TODO è necessario?
         this.setBounds(0, 0, SIZE.width, SIZE.height); // sets the size and position in the view
 
         try {
             spriteSheet = ImageIO.read(new File(spriteSheetPath));
         } catch (final IOException e) {
             spriteSheet = null;
+
             throw new SpriteNotFoundException(spriteSheetPath);
         }
-        sprite = getSprite(spriteSheet, JobSprite.FRONT);
+        sprite = getSprite(spriteSheet, JobSprite.FRONT); // loads the sprite sheet
 
         final ActionMap actionMap = getActionMap();
         final InputMap inputMap = getInputMap(WHEN_IN_FOCUSED_WINDOW);
