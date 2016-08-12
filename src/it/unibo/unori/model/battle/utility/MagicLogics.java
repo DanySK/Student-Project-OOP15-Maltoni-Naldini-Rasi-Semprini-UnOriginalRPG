@@ -29,6 +29,9 @@ public final class MagicLogics {
     private static final int HIGHIA = 8;
     private static final int SHIFTWEAKNESS = 50;
     private static final double SHIFTNOTWEAK = 25.0;
+    private static final double WEAKNESSLOW = 1.25;
+    private static final double WEAKNESSMEDIUM = 2.5;
+    private static final double WEAKNESSHIGH = 5.0;
     
     private MagicLogics() {
         //Empty private constructor, because this is an utility class
@@ -95,7 +98,7 @@ public final class MagicLogics {
      * Explain: given a Character, the method takes the Stats of interest to compare with
      * the stats of a MagicAttack, a Weapon or an Armor.
      * @param atkOrDef true if we are using it in context of Weapon and MagicAttack (in that case
-     * we need Attack and not Defense), or Armor (in this case we need Defense) .
+     * we need Attack and not Defense), false in case of Armor (in this case we need Defense) .
      * @param opp the Character from which extrapolate the Map.
      * @return the Map itself.
      */
@@ -120,26 +123,36 @@ public final class MagicLogics {
      * @param best best Stat of mine.
      * @return a weakness factor.
      */
-    private static double weaknessGeneral(final Statistics opp, final Statistics best) {
+    private static double weaknessGeneral(final Statistics opponent, final Statistics best) {
         double weakness = 1;
+        Statistics opp;
+        if (opponent.equals(Statistics.THUNDERDEF)) {
+            opp = Statistics.THUNDERATK;
+        } else if (opponent.equals(Statistics.FIREDEF)) {
+            opp = Statistics.FIREATK;
+        } else if (opponent.equals(Statistics.ICEDEF)) {
+            opp = Statistics.ICEATK;
+        } else {
+            opp = opponent;
+        }
         System.out.println("Chi subisce: " + opp + "\nChi attacca: " + best + "\n");
         
             if (opp.equals(best)) {
-                weakness = 1 / 2;
+                weakness = WEAKNESSMEDIUM;
             } else if ((opp.equals(Statistics.ICEATK) 
                     && best.equals(Statistics.FIREATK))
             || (opp.equals(Statistics.FIREATK) 
                 && best.equals(Statistics.THUNDERATK)) 
             || (opp.equals(Statistics.THUNDERATK) 
                 && best.equals(Statistics.ICEATK))) {
-                    weakness = 2 / 3;
+                    weakness = WEAKNESSHIGH;
             } else if ((opp.equals(Statistics.FIREATK) 
                     && best.equals(Statistics.ICEATK))
             || (opp.equals(Statistics.ICEATK) 
                     && best.equals(Statistics.THUNDERATK))
             || (opp.equals(Statistics.THUNDERATK) 
                     && best.equals(Statistics.FIREATK))) {
-                weakness = 1 / 3;
+                weakness = WEAKNESSLOW;
             }
             return weakness;
             
@@ -241,7 +254,7 @@ public final class MagicLogics {
                 Statistics powerOpponent = getBestStat(mapToCheck).getX();
                 Map<Statistics, Integer> mapToCheckAtt = generateMapFor(true, att);
                 Statistics powerAtt = getBestStat(mapToCheckAtt).getX();
-                weakness = weaknessGeneral(powerAtt, powerOpponent) * SHIFTWEAKNESS;
+                weakness = weaknessGeneral(powerOpponent, powerAtt) * SHIFTWEAKNESS;
             }
             return BattleLogics.getStandardDamage(att.getLevel(),
                     atkTot + weakness.intValue() - opp.getDefense());
