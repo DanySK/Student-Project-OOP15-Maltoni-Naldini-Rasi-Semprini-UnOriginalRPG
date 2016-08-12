@@ -74,7 +74,7 @@ public class JsonFileManager {
      */
     public static final String STATS_FILE = "res/Stats.json";
 
-    public final Gson gson;
+    private final Gson gson;
 
     /**
      * Default constructor.
@@ -373,6 +373,10 @@ public class JsonFileManager {
         final T[] array = (T[]) this.deserializeJSON(Array.newInstance(arrayClass, 0).getClass(), path);
 
         return Arrays.asList(array);
+    }
+    
+    public void saveMap(final GameMap map, final String path) throws IOException {
+        this.serializeJSON(map, path);
     }
 
     /*

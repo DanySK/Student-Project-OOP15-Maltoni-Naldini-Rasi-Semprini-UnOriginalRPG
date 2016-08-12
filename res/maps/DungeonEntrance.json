@@ -1,0 +1,608 @@
+{
+  "floorMap": [
+    [
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      }
+    ],
+    [
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      }
+    ],
+    [
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      }
+    ],
+    [
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      }
+    ],
+    [
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      }
+    ],
+    [
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      }
+    ],
+    [
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      }
+    ],
+    [
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      }
+    ],
+    [
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      }
+    ],
+    [
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      }
+    ],
+    [
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "FREE"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      }
+    ],
+    [
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "",
+        "state": "BLOCKED"
+      }
+    ]
+  ],
+  "initialPosition": {
+    "posX": 1,
+    "posY": 1
+  }
+}
