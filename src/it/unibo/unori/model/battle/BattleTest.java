@@ -138,6 +138,7 @@ public class BattleTest {
         System.out.println(battle.getHeroOnTurn().getRemainingHP());
         assertFalse(battle.getSquad().getAliveHeroes().get(2).isDefended());
         System.out.println(battle.attack(true));
+        System.out.println(this.battle.getEnemies().getAliveFoes());
     }
     
     /**
