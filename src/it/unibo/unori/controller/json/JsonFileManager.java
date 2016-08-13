@@ -339,6 +339,7 @@ public class JsonFileManager {
         this.serializeJSON(job, path);
     }
 
+    
     /**
      * This method returns a JsonJobParameter object containing all the default
      * parameters of a specific Job.
@@ -360,6 +361,16 @@ public class JsonFileManager {
      */
     public JsonJobParameter loadJob(final String path) throws IOException {
         return this.deserializeJSON(JsonJobParameter.class, path);
+    }
+    
+    public void saveFoe(final JsonFoeParameters foe, final String path) throws IOException {
+        // System.out.println(this.gson.toJson(job));
+
+        this.serializeJSON(foe, path);
+    }
+    
+    public JsonFoeParameters loadFoe(final String path) throws IOException {
+        return this.deserializeJSON(JsonFoeParameters.class, path);
     }
 
     public <T> List<T> loadListAsArray(final Class<T[]> arrayClass, final String path) throws IOException {
