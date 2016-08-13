@@ -97,7 +97,7 @@ public class JsonFileManager {
          * GameMapImpl();
          */
 
-        gson = new GsonBuilder()/*.enableComplexMapKeySerialization()*/.setPrettyPrinting()
+        gson = new GsonBuilder()/* .enableComplexMapKeySerialization() */.setPrettyPrinting()
                 .registerTypeAdapter(Item.class, new ItemDeserializer())
                 .registerTypeAdapter(Armor.class, new ArmorSerializer())
                 .registerTypeAdapter(Armor.class, new ArmorDeserializer())
@@ -335,7 +335,7 @@ public class JsonFileManager {
      */
     public void saveJob(final JsonJobParameter job, final String path) throws IOException {
         // System.out.println(this.gson.toJson(job));
-        
+
         this.serializeJSON(job, path);
     }
 
@@ -374,7 +374,7 @@ public class JsonFileManager {
 
         return Arrays.asList(array);
     }
-    
+
     public void saveMap(final GameMap map, final String path) throws IOException {
         this.serializeJSON(map, path);
     }
@@ -384,6 +384,26 @@ public class JsonFileManager {
      * item = this.deserializeJSON(Item.class, path);
      * 
      * return item; }
+     */
+
+    /**
+     * This method loads from a file in a specified path a JSON-serialized
+     * GameMap.
+     * 
+     * @param path
+     *            the path where to find the file
+     * @return the map serialized on the specified file
+     * @throws IOException
+     *             if an error occurs
+     * @throws FileNotFoundException
+     *             if the file does not exist, is a directory rather than a
+     *             regular file, or for some other reason cannot be opened for
+     *             reading
+     * @throws JsonIOException
+     *             if there was a problem reading from the Reader
+     * @throws JsonSyntaxException
+     *             if the file does not contain a valid representation for an
+     *             object of type
      */
     public GameMap loadMap(final String path) throws IOException {
         return this.deserializeJSON(GameMap.class, path);
