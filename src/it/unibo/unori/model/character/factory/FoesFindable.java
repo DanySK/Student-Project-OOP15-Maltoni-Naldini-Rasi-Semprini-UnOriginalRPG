@@ -1,32 +1,50 @@
 package it.unibo.unori.model.character.factory;
 
-import it.unibo.unori.model.character.Foe;
-import it.unibo.unori.model.character.FoeImpl;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import it.unibo.unori.model.battle.MagicAttackInterface;
+import it.unibo.unori.model.character.Statistics;
 import it.unibo.unori.model.character.Status;
+import it.unibo.unori.model.items.Weapon;
 
 public enum FoesFindable {
     
-    FOLLETTO(1, "Folletto", Status.NONE, "");
+    FOLLETTO(Status.NONE),
+    GNOMO_DA_GIARDINO(Status.ASLEEP),
+    DEMONE(Status.BLEEDING),
+    DRAGO(Status.POISONED),
+    SPIRITO(Status.CURSED),
+    BAMBINO(Status.BLEEDING),
+    STREGONE(Status.CURSED),
+    EROE_CADUTO(Status.ASLEEP);
     
-    private final Foe f;
+    private final Status immunity;
+    private final Map<Statistics, Integer> map;
+    private final List<MagicAttackInterface> magics = new ArrayList<>();
+    private final Weapon weap;
     
-    private FoesFindable(final int ia, final String name, final Status immunity,
-            final String battleFrame) {
-        if(ia == 1) {
-            this.f = new FoeImpl(ia, name, battleFrame, FoesFactory.getBasicStats().getY(),
-                    FoesFactory.getBasicStats().getX(), immunity);
-        } else {
-            this.f = new FoeImpl(ia, name, battleFrame, FoesFactory.getGrowingStats(ia).getY(),
-                FoesFactory.getGrowingStats(ia).getX(), immunity);
-        }
+    private FoesFindable(final Status immunity) {
+        this.immunity = immunity;
+        this.map = FoesFactory.getBasicStats();
+        this.magics.add(FoesFactory.getBasicMag());
+        this.weap = FoesFactory.getBasicWeap();
     }
     
-    @Override
-    public String toString() {
-        return this.f.getName();
+    public Status getImmunity() {
+        return this.immunity;
+    }
+
+    public Map<Statistics, Integer> getMap() {
+        return map;
+    }
+
+    public Weapon getWeap() {
+        return weap;
     }
     
-    public Foe getThis() {
-        return this.f;
+    public List<MagicAttackInterface> getMagic() {
+        return this.magics;
     }
 }

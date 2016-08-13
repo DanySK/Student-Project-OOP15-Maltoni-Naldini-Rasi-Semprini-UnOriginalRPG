@@ -1,11 +1,16 @@
 package it.unibo.unori.model.character.factory;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
+import it.unibo.unori.model.battle.MagicAttackInterface;
+import it.unibo.unori.model.battle.utility.MagicGenerator;
 import it.unibo.unori.model.character.Statistics;
+import it.unibo.unori.model.character.jobs.Jobs;
 import it.unibo.unori.model.items.Weapon;
 import it.unibo.unori.model.items.WeaponFactory;
 import it.unibo.unori.model.items.WeaponImpl;
@@ -22,14 +27,14 @@ public final class FoesFactory {
     }
     
     private static int getBasicOf(Statistics s) {
-        return getBasicStats().getY().get(s);
+        return getBasicStats().get(s);
     }
     
     /**
      * This method gives the basic Stats for a Foe of ia 1.
-     * @return a Pair of Weapon and Map of Statistics.
+     * @return a Map of Statistics.
      */
-    public static Pair<Weapon, Map<Statistics, Integer>> getBasicStats() {
+    public static Map<Statistics, Integer> getBasicStats() {
         final Map<Statistics, Integer> m = new HashMap<>();
         m.put(Statistics.TOTALHP, 2000);
         m.put(Statistics.TOTALMP, 700);
@@ -42,19 +47,34 @@ public final class FoesFactory {
         m.put(Statistics.ICEDEF, 750);
         m.put(Statistics.PHYSICATK, 2000);
         m.put(Statistics.PHYSICDEF, 2000);
-        return new Pair<>(WeaponImpl.FISTS, m);
+        return m;
     }
     
     /**
-     * This method gives the stats of a Foe grown depending on his ia and a Weapon.
-     * @param ia the ia of the Foe.
-     * @return a Pair of Weapon and Map of Stats
+     * Method that returns a basic Weapon.
+     * @return a standard Weapon for a Foe.
      */
-    public static Pair<Weapon, Map<Statistics, Integer>> getGrowingStats(final int ia) {
+    public static Weapon getBasicWeap() {
+        return WeaponImpl.FISTS;
+    }
+    
+    /**
+     * Method that returns a basic Magic.
+     * @return a standard magic for the Foe.
+     */
+    public static MagicAttackInterface getBasicMag() {
+        return MagicGenerator.getBasic();
+    }
+    
+    /**
+     * This method gives the stats of a Foe grown depending on his ia.
+     * @param ia the ia of the Foe.
+     * @return a Map of Stats
+     */
+    public static Map<Statistics, Integer> getGrowingStats(final int ia) {
         final Map<Statistics, Integer> m = new HashMap<>();
         final int growth = (ia ^ 2) * 10 + SHIFT;
         Pair<Statistics, Statistics> best = new Pair<>(Statistics.PHYSICATK, Statistics.PHYSICDEF);
-        Weapon w = WeaponImpl.FISTS;
         Random rand = new Random();
         int luck = rand.nextInt(LUCKFORSTATS);
         switch (luck) {
@@ -69,6 +89,35 @@ public final class FoesFactory {
         default : break;
         }
         
+        m.put(Statistics.TOTALHP, getBasicOf(Statistics.TOTALHP) + growth);
+        m.put(Statistics.TOTALMP, getBasicOf(Statistics.TOTALMP) + growth);
+        m.put(Statistics.SPEED, getBasicOf(Statistics.SPEED) + growth);
+        m.put(Statistics.FIREATK, getBasicOf(Statistics.FIREATK) + growth);
+        m.put(Statistics.FIREDEF, getBasicOf(Statistics.FIREDEF) + growth);
+        m.put(Statistics.THUNDERATK, getBasicOf(Statistics.THUNDERATK) + growth);
+        m.put(Statistics.THUNDERDEF, getBasicOf(Statistics.THUNDERDEF) + growth);
+        m.put(Statistics.ICEATK, getBasicOf(Statistics.ICEATK) + growth);
+        m.put(Statistics.ICEDEF, getBasicOf(Statistics.ICEDEF) + growth);
+        m.put(Statistics.PHYSICATK, getBasicOf(Statistics.PHYSICATK) + growth);
+        m.put(Statistics.PHYSICDEF, getBasicOf(Statistics.PHYSICDEF) + growth);
+        for(Entry<Statistics, Integer> e : m.entrySet()) {
+            if (best.getX().equals(e.getKey())) {
+                m.replace(e.getKey(), e.getValue() + SHIFT);
+            }
+            if(best.getY().equals(e.getKey())) {
+                m.replace(e.getKey(), e.getValue() + SHIFT);
+            }
+        }
+        return m;
+    }
+    
+    /**
+     * Method that gives the Weapon of a Foe depending on his IA.
+     * @param ia the IA of the Foe.
+     * @return a Weapon for the Foe.
+     */
+    public static Weapon getWeaponGrown(final int ia) {
+        Weapon w = WeaponImpl.FISTS;
         if (ia > 0 && ia <= 3) {
             Random randLow = new Random();
             int luckLow = randLow.nextInt(LUCKFORSTATS);
@@ -118,25 +167,24 @@ public final class FoesFactory {
             default : break;
             }
         }
-        m.put(Statistics.TOTALHP, getBasicOf(Statistics.TOTALHP) + growth);
-        m.put(Statistics.TOTALMP, getBasicOf(Statistics.TOTALMP) + growth);
-        m.put(Statistics.SPEED, getBasicOf(Statistics.SPEED) + growth);
-        m.put(Statistics.FIREATK, getBasicOf(Statistics.FIREATK) + growth);
-        m.put(Statistics.FIREDEF, getBasicOf(Statistics.FIREDEF) + growth);
-        m.put(Statistics.THUNDERATK, getBasicOf(Statistics.THUNDERATK) + growth);
-        m.put(Statistics.THUNDERDEF, getBasicOf(Statistics.THUNDERDEF) + growth);
-        m.put(Statistics.ICEATK, getBasicOf(Statistics.ICEATK) + growth);
-        m.put(Statistics.ICEDEF, getBasicOf(Statistics.ICEDEF) + growth);
-        m.put(Statistics.PHYSICATK, getBasicOf(Statistics.PHYSICATK) + growth);
-        m.put(Statistics.PHYSICDEF, getBasicOf(Statistics.PHYSICDEF) + growth);
-        for(Entry<Statistics, Integer> e : m.entrySet()) {
-            if (best.getX().equals(e.getKey())) {
-                m.replace(e.getKey(), e.getValue() + SHIFT);
+        return w;
+    }
+    
+    public static List<MagicAttackInterface> getGrownMagics(final int ia) {
+        final List<MagicAttackInterface> l = new ArrayList<>();
+        if(ia > 0 && ia <= 4) {
+            for(Jobs j : Jobs.values()) {
+                 l.add(MagicGenerator.getStandard(j));
             }
-            if(best.getY().equals(e.getKey())) {
-                m.replace(e.getKey(), e.getValue() + SHIFT);
-            }
+        } else if(ia > 4 && ia <= 7) {
+            for(Jobs j : Jobs.values()) {
+                l.add(MagicGenerator.getMedium(j));
+           }
+        } else {
+            for(Jobs j : Jobs.values()) {
+                l.add(MagicGenerator.getAdvanced(j));
+           }  
         }
-        return new Pair<>(w, m);
+        return l;
     }
 }
