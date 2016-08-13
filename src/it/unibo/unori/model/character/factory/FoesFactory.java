@@ -21,6 +21,8 @@ public final class FoesFactory {
     private static final int SHIFT = 30;
     private static final int LUCKFORSTATS = 4;
     private static final int LUCKMED = 6;
+    private static final int MEDIUMIA = 4;
+    private static final int HIGHIA = 7;
 
     private FoesFactory() {
         //Empty private constructor, because this is a final utility class
@@ -172,11 +174,11 @@ public final class FoesFactory {
     
     public static List<MagicAttackInterface> getGrownMagics(final int ia) {
         final List<MagicAttackInterface> l = new ArrayList<>();
-        if(ia > 0 && ia <= 4) {
+        if(ia > 0 && ia <= MEDIUMIA) {
             for(Jobs j : Jobs.values()) {
                  l.add(MagicGenerator.getStandard(j));
             }
-        } else if(ia > 4 && ia <= 7) {
+        } else if(ia > MEDIUMIA && ia <= HIGHIA) {
             for(Jobs j : Jobs.values()) {
                 l.add(MagicGenerator.getMedium(j));
            }
