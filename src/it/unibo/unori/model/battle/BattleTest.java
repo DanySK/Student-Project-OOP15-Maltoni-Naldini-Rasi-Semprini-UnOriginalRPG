@@ -22,6 +22,7 @@ import it.unibo.unori.model.character.exceptions.MaxFoesException;
 import it.unibo.unori.model.character.exceptions.MaxHeroException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
+import it.unibo.unori.model.character.factory.FoesFindable;
 import it.unibo.unori.model.character.jobs.Jobs;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.BagImpl;
@@ -54,13 +55,13 @@ public class BattleTest {
         team.addHero(new HeroImpl("Quarto", Jobs.RANGER));
         assertEquals(team.getAliveHeroes().size(), 4);
 
-        enemies.addFoe(new FoeImpl(1, "Primo Nemico", "", Jobs.RANGER.getInitialStats()));
+        enemies.addFoe(new FoeImpl(1, "Primo Nemico", "", FoesFindable.GNOMO_DA_GIARDINO));
         assertEquals(enemies.getAliveFoes().size(), 1);
-        enemies.addFoe(new FoeImpl(1, "Secondo Nemico", "", Jobs.RANGER.getInitialStats()));
+        enemies.addFoe(new FoeImpl(1, "Secondo Nemico", "", FoesFindable.GNOMO_DA_GIARDINO));
         assertEquals(enemies.getAliveFoes().size(), 2);
-        enemies.addFoe(new FoeImpl(1, "Terzo Nemico", "", Jobs.RANGER.getInitialStats()));
+        enemies.addFoe(new FoeImpl(1, "Terzo Nemico", "", FoesFindable.GNOMO_DA_GIARDINO));
         assertEquals(enemies.getAliveFoes().size(), 3);
-        enemies.addFoe(new FoeImpl(1, "Quarto Nemico", "", Jobs.RANGER.getInitialStats()));
+        enemies.addFoe(new FoeImpl(1, "Quarto Nemico", "", FoesFindable.GNOMO_DA_GIARDINO));
         assertEquals(enemies.getAliveFoes().size(), 4);
     }
     
@@ -180,7 +181,7 @@ public class BattleTest {
             e.printStackTrace();
         }
         try {
-            enemies.addFoe(new FoeImpl(1, "Quinto Nemico", "", Jobs.DUMP.getInitialStats()));
+            enemies.addFoe(new FoeImpl(1, "Quinto Nemico", "", FoesFindable.GNOMO_DA_GIARDINO));
         } catch (IllegalArgumentException e) {
             fail("IllegalArgumentException!!");
             e.printStackTrace();

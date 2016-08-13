@@ -1,10 +1,8 @@
 package it.unibo.unori.model.character;
 
-import java.util.Map;
-
 import it.unibo.unori.model.battle.utility.BattleLogics;
-import it.unibo.unori.model.items.Weapon;
-import it.unibo.unori.model.items.WeaponImpl;
+import it.unibo.unori.model.character.factory.FoesFactory;
+import it.unibo.unori.model.character.factory.FoesFindable;
 
 /**
  * Implementation of Interface Foe.
@@ -16,60 +14,22 @@ public class FoeImpl extends CharacterImpl implements Foe {
      */
     private static final long serialVersionUID = -1168567801329410379L;
     private final int ia;
-    private final Status immunity;
+    private final FoesFindable type;
 
     /**
      * Standard constructor for a Foe.
      * @param intelligence the IA of the Foe.
      * @param name the name of the Foe.
      * @param battleFrame path of frame to set for the battle interface
-     * @param map the Statistics of the Foe.
-     * @param weapon the Weapon that the Foe is holding.
-     * @param immune a Status to which this Foe is immune.
+     * @param type the type of the Foe.
      */
-    public FoeImpl(final int intelligence, final String name, final String battleFrame,
-            final Map<Statistics, Integer> map, final Weapon weapon, final Status immune) {
-        super(name, battleFrame, map, weapon);
+    public FoeImpl(final int intelligence, final String name, 
+            final String battleFrame, final FoesFindable type) {
+        super(name, battleFrame, 
+                FoesFactory.getGrowingStats(intelligence), FoesFactory.getWeaponGrown(intelligence));
         this.ia = intelligence;
-        this.immunity = immune;
-    }
-    
-    /**
-     * Constructor to create a Foe who has not initially any Weapon.
-     * @param intelligence the IA of the Foe.
-     * @param name the name of the Foe.
-     * @param battleFrame path of frame to set for the battle interface
-     * @param map the Statistics of the Foe.
-     * @param immune a Status to which this Foe is immune.
-     */
-    public FoeImpl(final int intelligence, final String name,
-            final String battleFrame, final Map<Statistics, Integer> map, final Status immune) {
-        this(intelligence, name, battleFrame, map, WeaponImpl.FISTS, immune);
-    }
-    
-    /**
-     * Constructor to create a Foe that has initially no Weapon and no immunity.
-     * @param intelligence the IA of the Foe.
-     * @param name the name of the Foe.
-     * @param battleFrame path of frame to set for the battle interface
-     * @param map the Statistics of the Foe.
-     */
-    public FoeImpl(final int intelligence, final String name,
-            final String battleFrame, final Map<Statistics, Integer> map) {
-        this(intelligence, name, battleFrame, map, WeaponImpl.FISTS, Status.NONE);
-    }
-    
-    /**
-     * Constructor to create a Foe that has no immunity.
-     * @param intelligence the IA of the Foe.
-     * @param name the name of the Foe.
-     * @param battleFrame path of frame to set for the battle interface
-     * @param map the Statistics of the Foe.
-     * @param weapon the Weapon that the Foe is holding.
-     */
-    public FoeImpl(final int intelligence, final String name, final String battleFrame,
-            final Map<Statistics, Integer> map, final Weapon weapon) {
-        this(intelligence, name, battleFrame, map, weapon, Status.NONE);
+        this.type = type;
+        FoesFactory.getGrownMagics(intelligence).stream().forEach(m -> this.addSpell(m));
     }
 
     @Override
@@ -90,9 +50,13 @@ public class FoeImpl extends CharacterImpl implements Foe {
         return null;
     }
     
+    public FoesFindable getType() {
+        return this.type;
+    }
+    
     @Override
     public Status getImmunity() {
-        return this.immunity;
+        return this.type.getImmunity();
     }
 
 }
