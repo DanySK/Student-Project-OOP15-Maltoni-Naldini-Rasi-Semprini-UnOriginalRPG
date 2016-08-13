@@ -21,15 +21,15 @@ public final class FoesFactory {
         //Empty private constructor, because this is a final utility class
     }
     
-    private int getBasicOf(Statistics s) {
-        return this.getBasicStats().getY().get(s);
+    private static int getBasicOf(Statistics s) {
+        return getBasicStats().getY().get(s);
     }
     
     /**
      * This method gives the basic Stats for a Foe of ia 1.
      * @return a Pair of Weapon and Map of Statistics.
      */
-    public Pair<Weapon, Map<Statistics, Integer>> getBasicStats() {
+    public static Pair<Weapon, Map<Statistics, Integer>> getBasicStats() {
         final Map<Statistics, Integer> m = new HashMap<>();
         m.put(Statistics.TOTALHP, 2000);
         m.put(Statistics.TOTALMP, 700);
@@ -50,7 +50,7 @@ public final class FoesFactory {
      * @param ia the ia of the Foe.
      * @return a Pair of Weapon and Map of Stats
      */
-    public Pair<Weapon, Map<Statistics, Integer>> getGrowingStats(final int ia) {
+    public static Pair<Weapon, Map<Statistics, Integer>> getGrowingStats(final int ia) {
         final Map<Statistics, Integer> m = new HashMap<>();
         final int growth = (ia ^ 2) * 10 + SHIFT;
         Pair<Statistics, Statistics> best = new Pair<>(Statistics.PHYSICATK, Statistics.PHYSICDEF);
