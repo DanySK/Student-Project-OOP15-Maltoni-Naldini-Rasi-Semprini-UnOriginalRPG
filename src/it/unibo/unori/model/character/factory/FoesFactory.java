@@ -25,6 +25,10 @@ public final class FoesFactory {
         return this.getBasicStats().getY().get(s);
     }
     
+    /**
+     * This method gives the basic Stats for a Foe of ia 1.
+     * @return a Pair of Weapon and Map of Statistics.
+     */
     public Pair<Weapon, Map<Statistics, Integer>> getBasicStats() {
         final Map<Statistics, Integer> m = new HashMap<>();
         m.put(Statistics.TOTALHP, 2000);
@@ -41,6 +45,11 @@ public final class FoesFactory {
         return new Pair<>(WeaponImpl.FISTS, m);
     }
     
+    /**
+     * This method gives the stats of a Foe grown depending on his ia and a Weapon.
+     * @param ia the ia of the Foe.
+     * @return a Pair of Weapon and Map of Stats
+     */
     public Pair<Weapon, Map<Statistics, Integer>> getGrowingStats(final int ia) {
         final Map<Statistics, Integer> m = new HashMap<>();
         final int growth = (ia ^ 2) * 10 + SHIFT;
