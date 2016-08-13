@@ -42,22 +42,29 @@ public class MapSetup {
         final GameMap dungeonEntrance = gmf.createDungeonEntrance();
 
         String path;
+        
+        System.out.println("Village: " + village./*getMapLength*/getMapWidth() + "x" + village./*getMapWidth*/getMapLength());
+        System.out.println("Church: " + church./*getMapLength*/getMapWidth() + "x" + church./*getMapWidth*/getMapLength());
+        System.out.println("House: " + house./*getMapLength*/getMapWidth() + "x" + house./*getMapWidth*/getMapLength());
+        System.out.println("Shop: " + shop./*getMapLength*/getMapWidth() + "x" + shop./*getMapWidth*/getMapLength());
+        System.out.println("Passage: " + passage./*getMapLength*/getMapWidth() + "x" + passage./*getMapWidth*/getMapLength());
+        System.out.println("Dungeon entrance: " + dungeonEntrance./*getMapLength*/getMapWidth() + "x" + dungeonEntrance./*getMapWidth*/getMapLength());
 
-        for (int i = 0; i < village.getMapLength(); i++) {
-            for (int j = 0; j < village.getMapWidth(); j++) {
+        for (int i = 0; i < village./*getMapLength*/getMapWidth(); i++) {
+            for (int j = 0; j < village./*getMapWidth*/getMapLength(); j++) {
                 // Horizontal borders
                 if (i == 0) {
                     if (j == 0) {
                         path = "res/sprites/map/fence/upper-left.png";
-                    } else if (j == village.getMapWidth() - 1) {
+                    } else if (j == village./*getMapWidth*/getMapLength() - 1) {
                         path = "res/sprites/map/fence/upper-right.png";
                     } else {
                         path = "res/sprites/map/fence/width.png";
                     }
-                } else if (i == village.getMapLength() - 1) {
+                } else if (i == village./*getMapLength*/getMapWidth() - 1) {
                     if (j == 0) {
                         path = "res/sprites/map/fence/lower-left.png";
-                    } else if (j == village.getMapWidth() - 1) {
+                    } else if (j == village./*getMapWidth*/getMapLength() - 1) {
                         path = "res/sprites/map/fence/lower-right.png";
                     } else {
                         path = "res/sprites/map/fence/width.png";
@@ -65,7 +72,7 @@ public class MapSetup {
                     // Vertical borders
                 } else if (j == 0) {
                     path = "res/sprites/map/fence/height.png";
-                } else if (j == village.getMapWidth() - 1) {
+                } else if (j == village./*getMapWidth*/getMapLength() - 1) {
                     if (i >= 9 && j <= 12) {
                         path = /* "res/sprites/map/black.png" */"res/sprites/map/grass.png";
                     } else {
@@ -108,15 +115,20 @@ public class MapSetup {
                     path = "res/sprites/map/grass.png";
                 }
 
-                village.getCell(new Position(i, j)).setFrame(path);
+                try {
+                    village.getCell(new Position(i, j)).setFrame(path);
+                } catch (Exception e) {
+                    System.out.println("\nVillage error: I = " + i + "\nJ = " + j + "\npath = " + path);
+                    throw e;
+                }
             }
         }
         fileManager.saveMap(village, VILLAGE);
 
-        for (int i = 0; i < church.getMapLength(); i++) {
+        for (int i = 0; i < church./*getMapLength*/getMapWidth(); i++) {
             for (int j = 0; j < church.getMapWidth(); j++) {
                 // Borders
-                if (i == 0 || i == church.getMapLength() - 1 || j == 0 || j == church.getMapWidth() - 1) {
+                if (i == 0 || i == church./*getMapLength*/getMapWidth() - 1 || j == 0 || j == church./*getMapWidth*/getMapLength() - 1) {
                     if (i == 10 && j == 4) {
                         path = "res/sprites/map/floor.png";
                     } else {
@@ -140,15 +152,20 @@ public class MapSetup {
                     path = "res/sprites/map/floor.png";
                 }
 
-                church.getCell(new Position(i, j)).setFrame(path);
+                try {
+                    church.getCell(new Position(i, j)).setFrame(path);
+                } catch (Exception e) {
+                    System.out.println("\nChurch error: I = " + i + "\nJ = " + j + "\npath = " + path);
+                    throw e;
+                }
             }
         }
         fileManager.saveMap(church, CHURCH);
 
-        for (int i = 0; i < house.getMapLength(); i++) {
+        for (int i = 0; i < house./*getMapLength*/getMapWidth(); i++) {
             for (int j = 0; j < house.getMapWidth(); j++) {
                 // Borders
-                if (i == 0 || i == house.getMapLength() - 1 || j == 0 || j == house.getMapWidth() - 1) {
+                if (i == 0 || i == house./*getMapLength*/getMapWidth() - 1 || j == 0 || j == house./*getMapWidth*/getMapLength() - 1) {
                     if (i == 3 && j == 4) {
                         path = "res/sprites/map/floor.png";
                     } else {
@@ -169,15 +186,20 @@ public class MapSetup {
                     // Floor
                     path = "res/sprites/map/floor.png";
                 }
-                house.getCell(new Position(i, j)).setFrame(path);
+                try {
+                    house.getCell(new Position(i, j)).setFrame(path);
+                } catch (Exception e) {
+                    System.out.println("\nHouse error: I = " + i + "\nJ = " + j + "\npath = " + path);
+                    throw e;
+                }
             }
         }
         fileManager.saveMap(house, FOUR_NPC_ROOM);
 
-        for (int i = 0; i < shop.getMapLength(); i++) {
+        for (int i = 0; i < shop./*getMapLength*/getMapWidth(); i++) {
             for (int j = 0; j < shop.getMapWidth(); j++) {
                 // Borders
-                if (i == 0 || i == shop.getMapLength() - 1 || j == 0 || j == shop.getMapWidth() - 1) {
+                if (i == 0 || i == shop./*getMapLength*/getMapWidth() - 1 || j == 0 || j == shop./*getMapWidth*/getMapLength() - 1) {
                     if (i == 5 && j == 7) {
                         path = "res/sprites/map/floor.png";
                     } else {
@@ -202,100 +224,102 @@ public class MapSetup {
                     // Floor
                     path = "res/sprites/map/floor.png";
                 }
-                shop.getCell(new Position(i, j)).setFrame(path);
+                try {
+                    shop.getCell(new Position(i, j)).setFrame(path);
+                } catch (Exception e) {
+                    System.out.println("\nShop error: I = " + i + "\nJ = " + j + "\npath = " + path);
+                    throw e;
+                }
             }
         }
         fileManager.saveMap(shop, SHOP);
 
-        for (int i = 0; i < passage.getMapLength(); i++) {
-            for (int j = 0; j < passage.getMapWidth(); j++) {
-                // Horizontal borders
-                if (i == 0) {
-                    if (j == 0) {
-                        if (i >= 3 && i <= 6) {
-                            path = "res/sprites/map/grass.png";
-                        } else {
-                            path = "res/sprites/map/fence/upper-left.png";
-                        }
-                    } else if (j == village.getMapWidth() - 1) {
-                        path = "res/sprites/map/fence/upper-right.png";
-                    } else {
-                        path = "res/sprites/map/fence/width.png";
-                    }
-                } else if (i == village.getMapLength() - 1) {
-                    if (j == 0) {
+        for (int i = 0; i < passage./*getMapLength*/getMapWidth(); i++) {
+            for (int j = 0; j < passage./*getMapWidth*/getMapLength(); j++) {
+                if (j == 0) {
+                    if (i == 0) {
+                        path = "res/sprites/map/fence/upper-left.png";
+                    } else if (i >= 3 && i <= 6) {
+                        path = "res/sprites/map/grass.png";
+                    } else if (i == passage./*getMapLength*/getMapWidth() - 1) {
                         path = "res/sprites/map/fence/lower-left.png";
-                    } else if (j == village.getMapWidth() - 1) {
-                        path = "res/sprites/map/fence/lower-right.png";
-                    } else {
-                        path = "res/sprites/map/fence/width.png";
-                    }
-                    // Vertical borders
-                } else if (j == 0) {
-                    path = "res/sprites/map/fence/height.png";
-                } else if (j == village.getMapWidth() - 1) {
-                    if (i >= 4 && i <= 5) {
-                        path = /* "res/sprites/map/black.png" */"res/sprites/map/earth.png";
-                        ;
                     } else {
                         path = "res/sprites/map/fence/height.png";
                     }
-                    // NPCs
-                } else if (i == 7) {
-                    if (j == 3) {
-                        path = "";
-                    } else if (j == 10) {
-                        path = "";
+                } else if (j == passage./*getMapWidth*/getMapLength() - 1) {
+                    if (i == 0) {
+                        path = "res/sprites/map/fence/upper-right.png";
+                    } else if (i >= 4 && i <= 5) {
+                        path = "res/sprites/map/earth.png";
+                    } else if (i == passage./*getMapLength*/getMapWidth() - 1) {
+                        path = "res/sprites/map/fence/lower-right.png";
                     } else {
-                        path = "";
+                        path = "res/sprites/map/fence/height.png";
                     }
-                } else if (i == 2 && j == 5) {
-                    path = "";
-                } else if (i == 4 && j == 1) {
-                    path = "";
-                } else if (i == 4 && j == 10) {
-                    path = "";
+                } else if (i == 0 || i == passage./*getMapLength*/getMapWidth() - 1) {
+                    path = "res/sprites/map/fence/width.png";
+                } else if ((i == 7 && (j == 3 || j == 21)) || (i == 2 && j == 18)) {
+                    path = "res/sprites/map/item.png";
+                } else if (j == 6 && i == 3) {
+                    path = "res/sprites/npcs/grass/front-3.jpg";
+                } else if (j == 6 && i == 6) {
+                    path = "res/sprites/npcs/grass/front-4.jpg";
+                } else if (j == 16 && i == 7) {
+                    path = "res/sprites/npcs/grass/front-5.jpg";
                 } else {
-                    // Floor
-                    path = "";
+                    path = /* "res/sprites/map/black.png" */"res/sprites/map/grass.png";
                 }
-                passage.getCell(new Position(i, j)).setFrame(path);
+                try {
+                    passage.getCell(new Position(i, j)).setFrame(path);
+                } catch (Exception e) {
+                    System.out.println("\nPassage error: I = " + i + "\nJ = " + j + "\npath = " + path);
+                    throw e;
+                }
             }
         }
         fileManager.saveMap(passage, PASSAGE);
 
-        for (
-
-                int i = 0; i < dungeonEntrance.getMapLength(); i++) {
-            for (int j = 0; j < dungeonEntrance.getMapWidth(); j++) {
+        for (int i = 0; i < dungeonEntrance./*getMapLength*/getMapWidth(); i++) {
+            for (int j = 0; j < dungeonEntrance./*getMapWidth*/getMapLength(); j++) {
                 // Borders
-                if (i == 0 || i == dungeonEntrance.getMapLength() - 1 || j == 0
-                        || j == dungeonEntrance.getMapWidth() - 1) {
-                    if (i == 5 && j == 7) {
-                        path = "";
+                if (j == 0) {
+                    if (i == 0) {
+                        path = "res/sprites/map/fence/upper-left.png";
+                    } else if (i >= 5 && i <= 6) {
+                        path = "res/sprites/map/earth.png";
+                    } else if (i == passage./*getMapLength*/getMapWidth() - 1) {
+                        path = "res/sprites/map/fence/lower-left.png";
                     } else {
-                        path = "";
+                        path = "res/sprites/map/fence/height.png";
                     }
-                    // NPCs
-                } else if (i == 3) {
-                    if (j == 1) {
-                        path = "";
-                    } else if (j == 10) {
-                        path = "";
+                } else if (j == passage./*getMapWidth*/getMapLength()) {
+                    if (i == 0) {
+                        path = "res/sprites/map/fence/upper-right.png";
+                    } else if (i == passage./*getMapLength*/getMapWidth() - 1) {
+                        path = "res/sprites/map/fence/lower-right.png";
                     } else {
-                        path = "";
+                        path = "res/sprites/map/fence/height.png";
                     }
-                } else if (i == 2 && j == 5) {
-                    path = "";
-                } else if (i == 4 && j == 1) {
-                    path = "";
-                } else if (i == 4 && j == 10) {
-                    path = "";
+                } else if (i == 0 || i == passage./*getMapLength*/getMapWidth() - 1) {
+                    path = "res/sprites/map/fence/width.png";
+                } else if (j == 9 && (i == 2 || i == 8)) {
+                    path = "res/sprites/map/item.png";
+                } else if (i == 8 && j == 2) {
+                    path = "res/sprites/npcs/earth/front-1.jpg";
+                } else if (((j == 4 || j == 6) && (i <= 6 && i >= 4)) || ((i == 4 || i == 5) && j == 5)) {
+                    path = "res/sprites/map/border-1.png";
+                } else if (i == 6 && j == 5) {
+                    path = "res/sprites/map/black.png";
                 } else {
                     // Floor
-                    path = "";
+                    path = "res/sprites/map/earth.png";
                 }
-                dungeonEntrance.getCell(new Position(i, j)).setFrame(path);
+                try {
+                    dungeonEntrance.getCell(new Position(i, j)).setFrame(path);
+                } catch (Exception e) {
+                    System.out.println("\nDungeon entrance error: I = " + i + "\nJ = " + j + "\npath = " + path);
+                    throw e;
+                }
             }
         }
         fileManager.saveMap(dungeonEntrance, DUNGEON_ENTRANCE);

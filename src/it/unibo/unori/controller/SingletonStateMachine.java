@@ -128,11 +128,13 @@ public final class SingletonStateMachine {
                     try {
                         SingletonParty.getParty().getHeroTeam().addHero(new HeroImpl(entry.getKey(), entry.getValue()));
                     } catch (IllegalArgumentException e) {
-                        this.stack.push(new DialogState(e.getMessage(), DialogState.ErrorSeverity.SERIUOS));
-                        this.stack.render();
+                        /*this.stack.push(new DialogState(e.getMessage(), DialogState.ErrorSeverity.SERIUOS));
+                        this.stack.render();*/
+                        e.printStackTrace();
                     } catch (MaxHeroException e) {
-                        this.stack.push(new DialogState(e.getMessage(), DialogState.ErrorSeverity.SERIUOS));
-                        this.stack.render();
+                        /*this.stack.push(new DialogState(e.getMessage(), DialogState.ErrorSeverity.SERIUOS));
+                        this.stack.render();*/
+                        e.printStackTrace();
                     }
                 });
 
@@ -140,16 +142,18 @@ public final class SingletonStateMachine {
                     this.stack.push(new MapState(SingletonParty.getParty().getCurrentGameMap()));
                     this.stack.render();
                 } catch (SpriteNotFoundException e) {
-                    this.stack.push(new DialogState(e.getMessage(), DialogState.ErrorSeverity.SERIUOS));
-                    this.stack.render();
+                    /*this.stack.push(new DialogState(e.getMessage(), DialogState.ErrorSeverity.SERIUOS));
+                    this.stack.render();*/
+                    e.printStackTrace();
                 }
 
             } else {
                 try {
                     throw new NotValidStateException();
                 } catch (NotValidStateException e) {
-                    this.stack.push(new DialogState(e.getMessage(), DialogState.ErrorSeverity.SERIUOS));
-                    this.stack.render();
+                    /*this.stack.push(new DialogState(e.getMessage(), DialogState.ErrorSeverity.SERIUOS));
+                    this.stack.render();*/
+                    e.printStackTrace();
                 }
             }
 
