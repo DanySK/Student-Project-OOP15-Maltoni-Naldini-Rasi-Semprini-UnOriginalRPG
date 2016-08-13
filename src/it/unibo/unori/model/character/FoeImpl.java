@@ -25,8 +25,9 @@ public class FoeImpl extends CharacterImpl implements Foe {
      */
     public FoeImpl(final int intelligence, final String name, 
             final String battleFrame, final FoesFindable type) {
-        super(name, battleFrame, 
-                FoesFactory.getGrowingStats(intelligence), FoesFactory.getWeaponGrown(intelligence));
+        super(name, battleFrame, FoesFactory.getGrowingStats(intelligence),
+                intelligence, FoesFactory.getGrownMagics(intelligence),
+                FoesFactory.getWeaponGrown(intelligence));
         this.ia = intelligence;
         this.type = type;
         FoesFactory.getGrownMagics(intelligence).stream().forEach(m -> this.addSpell(m));
