@@ -323,7 +323,6 @@ public class BattleImpl implements Battle {
 
     @Override
     public DialogueInterface acquireExp() {
-        this.checkWhoAttacks();
         if (this.isOver() && this.outCome.equals(Optional.of(OUTCOMEPOSITIVE))) {
             final List<String> toReturn = new ArrayList<>();
             this.squad.getAliveHeroes().forEach(h -> {
@@ -332,7 +331,7 @@ public class BattleImpl implements Battle {
                             if (h.equals(e.getKey())) {
                                 h.addExp(e.getValue());
                                 toReturn.add(h.getName() + " riceve " 
-                                + e.getValue() + " punti Esperienza!\n");
+                                + e.getValue() + " punti Esperienza! ");
                             }
                         });
             });
