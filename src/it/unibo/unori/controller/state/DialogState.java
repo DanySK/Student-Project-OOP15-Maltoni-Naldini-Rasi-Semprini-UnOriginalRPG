@@ -1,5 +1,6 @@
 package it.unibo.unori.controller.state;
 
+import it.unibo.unori.controller.actionlistener.DialogActionListener;
 import it.unibo.unori.view.Button;
 import it.unibo.unori.view.layers.DialogLayer;
 

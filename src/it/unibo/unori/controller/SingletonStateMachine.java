@@ -11,6 +11,7 @@ import com.google.gson.JsonSyntaxException;
 import it.unibo.unori.controller.exceptions.NotValidStateException;
 import it.unibo.unori.controller.json.JsonFileManager;
 import it.unibo.unori.controller.state.CharacterSelectionState;
+import it.unibo.unori.controller.state.DialogState;
 import it.unibo.unori.controller.state.GameState;
 import it.unibo.unori.controller.state.InGameMenuState;
 import it.unibo.unori.controller.state.MainMenuState;
@@ -127,29 +128,29 @@ public final class SingletonStateMachine {
                     try {
                         SingletonParty.getParty().getHeroTeam().addHero(new HeroImpl(entry.getKey(), entry.getValue()));
                     } catch (IllegalArgumentException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
+                        this.stack.push(new DialogState(e.getMessage(), DialogState.ErrorSeverity.SERIUOS));
+                        this.stack.render();
                     } catch (MaxHeroException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
+                        this.stack.push(new DialogState(e.getMessage(), DialogState.ErrorSeverity.SERIUOS));
+                        this.stack.render();
                     }
                 });
 
                 try {
                     this.stack.push(new MapState(SingletonParty.getParty().getCurrentGameMap()));
+                    this.stack.render();
                 } catch (SpriteNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    this.stack.push(new DialogState(e.getMessage(), DialogState.ErrorSeverity.SERIUOS));
+                    this.stack.render();
                 }
 
             } else {
                 try {
                     throw new NotValidStateException();
                 } catch (NotValidStateException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    this.stack.push(new DialogState(e.getMessage(), DialogState.ErrorSeverity.SERIUOS));
+                    this.stack.render();
                 }
-                // TODO Modifica assolutamente
             }
 
         }
@@ -211,6 +212,7 @@ public final class SingletonStateMachine {
         @Override
         public void closeGame() {
             this.stack.closeTheView();
+            // System.exit(0);
         }
 
         @Override
