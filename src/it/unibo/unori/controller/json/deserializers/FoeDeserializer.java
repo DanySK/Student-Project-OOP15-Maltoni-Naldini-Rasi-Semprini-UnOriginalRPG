@@ -16,6 +16,7 @@ import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.FoeImpl;
 import it.unibo.unori.model.character.Statistics;
 import it.unibo.unori.model.character.Status;
+import it.unibo.unori.model.character.factory.FoesFindable;
 import it.unibo.unori.model.items.Weapon;
 
 public class FoeDeserializer implements JsonDeserializer<Foe> {
@@ -26,11 +27,12 @@ public class FoeDeserializer implements JsonDeserializer<Foe> {
     private static final String CURRENT_MP = "currentMP";
     private static final String LEVEL = "level";
     private static final String STATUS = "status";
-    private static final String STATISTIC = "statistic";
+    // private static final String STATISTIC = "statistic";
+    // private static final String WEAPON = "wep";
     private static final String SPELL_LIST = "spellList";
     // FoeImpl
     private static final String SMARTNESS = "ia";
-    private static final String WEAPON = "wep";
+    private static final String TYPE = "type";
 
     @Override
     public Foe deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
@@ -39,14 +41,15 @@ public class FoeDeserializer implements JsonDeserializer<Foe> {
 
         // Deserializing fields for constructor
         final String name = jObj.get(NAME).getAsString();
-        final Map<Statistics, Integer> params = context.deserialize(jObj.get(STATISTIC),
+        /*final Map<Statistics, Integer> params = context.deserialize(jObj.get(STATISTIC),
                 new TypeToken<Map<Statistics, Integer>>() {
                 }.getType());
-        final Weapon weapon = context.deserialize(jObj.get(WEAPON), Weapon.class);
+        final Weapon weapon = context.deserialize(jObj.get(WEAPON), Weapon.class);*/
+        final FoesFindable type = context.deserialize(jObj.get(TYPE), FoesFindable.class);
         final int smartness = jObj.get(SMARTNESS).getAsInt();
         final String battleFrame = jObj.get(BATTLE_FRAME).getAsString();
         // Instantiation
-        final Foe returnFoe = new FoeImpl(smartness, name, battleFrame, params, weapon);
+        final Foe returnFoe = new FoeImpl(smartness, name, battleFrame, type);
         // Other fields
         final int currentHP = jObj.get(CURRENT_HP).getAsInt();
         if (returnFoe.getRemainingHP() > currentHP) {
