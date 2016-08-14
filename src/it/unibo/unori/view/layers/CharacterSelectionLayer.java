@@ -55,7 +55,7 @@ public class CharacterSelectionLayer extends Layer {
      * @param button the button to be displayed when finished
      * @throws SpriteNotFoundException if the sprite is not found
      */
-    public CharacterSelectionLayer(final int maxHero,
+    public CharacterSelectionLayer(final int maxHero, // TODO bottone che aggiunge il job
                                    final Button button) throws SpriteNotFoundException {
         super();
         this.button = button;
