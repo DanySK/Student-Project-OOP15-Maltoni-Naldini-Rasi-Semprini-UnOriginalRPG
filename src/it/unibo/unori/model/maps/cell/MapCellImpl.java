@@ -20,16 +20,14 @@ public class MapCellImpl extends SimpleCellImpl {
 
     /**
      * Constructor.
-     * @param path
-     *        the path of image object to set
      * @param mapToLink
      *        the map to set in party 
      * @param initialPos
      *         initial position of the map to link
      */
-    public MapCellImpl(final String path, final GameMap mapToLink, 
+    public MapCellImpl(final GameMap mapToLink, 
                        final Position initialPos) {
-        super(path, CellState.BLOCKED);
+        super("res/sprites/map/black.png", CellState.BLOCKED);
         this.mapToLink = mapToLink;
         this.initialPos = initialPos;
     }

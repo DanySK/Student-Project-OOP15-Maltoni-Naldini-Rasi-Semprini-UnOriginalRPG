@@ -51,7 +51,7 @@ public class GameMapFactory {
         map.setColumn(MAXSIZE, FACT.getBlockedCell());
         IntStream.range(0, MAXSIZE).forEachOrdered(i -> {
             final Position pos = new Position(0, i);
-            final Cell cell = new MapCellImpl("", LINKINGMAP,
+            final Cell cell = new MapCellImpl(LINKINGMAP,
                                     new Position(MAXSIZE - 1, i));
             map.setCell(pos, cell);
         });

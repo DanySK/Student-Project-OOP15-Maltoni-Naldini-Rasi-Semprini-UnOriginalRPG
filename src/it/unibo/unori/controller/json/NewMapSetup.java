@@ -120,10 +120,10 @@ public class NewMapSetup {
     private static void setDoorLink(GameMap firstMap, GameMap secondMap, Position doorPosition,
             Position entrancePosition, boolean setLink) {
         firstMap.setCell(doorPosition,
-                setLink ? new MapCellImpl("res/sprites/map/door.png", secondMap, entrancePosition)
+                setLink ? new MapCellImpl(secondMap, entrancePosition)
                         : new SimpleCellImpl("res/sprites/map/door.png", CellState.BLOCKED));
         secondMap.setCell(entrancePosition,
-                setLink ? new MapCellImpl("res/sprites/map/black.png", firstMap, doorPosition)
+                setLink ? new MapCellImpl(firstMap, doorPosition)
                         : new SimpleCellImpl("res/sprites/map/black.png", CellState.BLOCKED));
     }
 
@@ -135,9 +135,9 @@ public class NewMapSetup {
                 || j <= secondLast.getPosX(); i++, j++) {
             from = new Position(i, firstFirst.getPosY());
             to = new Position(j, secondFirst.getPosY());
-            firstMap.setCell(from, setLink ? new MapCellImpl(floorPath, secondMap, to)
+            firstMap.setCell(from, setLink ? new MapCellImpl(secondMap, to)
                     : new SimpleCellImpl(floorPath, CellState.BLOCKED));
-            secondMap.setCell(to, setLink ? new MapCellImpl(floorPath, firstMap, from)
+            secondMap.setCell(to, setLink ? new MapCellImpl(firstMap, from)
                     : new SimpleCellImpl(floorPath, CellState.BLOCKED));
         }
     }
@@ -150,9 +150,9 @@ public class NewMapSetup {
                 || j <= secondLast.getPosY(); i++, j++) {
             from = new Position(i, firstFirst.getPosX());
             to = new Position(j, secondFirst.getPosX());
-            firstMap.setCell(from, setLink ? new MapCellImpl(floorPath, secondMap, to)
+            firstMap.setCell(from, setLink ? new MapCellImpl(secondMap, to)
                     : new SimpleCellImpl(floorPath, CellState.BLOCKED));
-            secondMap.setCell(to, setLink ? new MapCellImpl(floorPath, firstMap, from)
+            secondMap.setCell(to, setLink ? new MapCellImpl(firstMap, from)
                     : new SimpleCellImpl(floorPath, CellState.BLOCKED));
         }
     }
