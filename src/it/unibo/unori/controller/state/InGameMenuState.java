@@ -22,26 +22,4 @@ public class InGameMenuState extends AbstractGameState {
         this.inGameMenuModel = new Object(); // TODO
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void update(final double elapsedTime) {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
-    public void onEnter() {
-        // TODO Auto-generated method stub
-
-        // TODO Probably useless method
-    }
-
-    @Override
-    public void onExit() {
-        // TODO Auto-generated method stub
-
-        // TODO Not sure, but probably useless method
-    }
-
 }
