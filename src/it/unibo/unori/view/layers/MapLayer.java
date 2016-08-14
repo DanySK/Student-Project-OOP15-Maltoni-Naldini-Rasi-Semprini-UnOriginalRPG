@@ -11,13 +11,13 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import javax.swing.Action;
-import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.InputMap;
 import javax.swing.ActionMap;
 import javax.swing.SwingConstants;
 
 import java.awt.Point;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -30,32 +30,34 @@ import java.awt.image.AffineTransformOp;
  * The game map.
  *
  */
-public class MapLayer extends JPanel {
-    private static final Dimension SIZE = new Dimension(800, 640); // dimensioni massime
-    private static final Dimension CELL_SIZE = new Dimension(32, 32); // dimensioni cella
+public class MapLayer extends Layer {
+    private static final Dimension SIZE = new Dimension(800, 640);
+    private static final Dimension CELL_SIZE = new Dimension(32, 32);
+
+    private Point mapStartingPoint;
 
     private Point position;
     private BufferedImage[][] map;
+    private BufferedImage spriteSheet;
 
     private boolean dialogueActive;
     private String dialogueText = "";
 
     private BufferedImage sprite;
-    private BufferedImage spriteSheet;
     private final BufferedImage[] frame = new BufferedImage[2];
 
     /**
      * Creates the game map.
      *
-     * @param menu the action that openes the in-game menu
      * @param movement the action that moves the character
+     * @param menu the action that openes the in-game menu
      * @param interact the action that interacts with the map
      *
-     * @param map the game map as a matrix of sprite paths
+     * @param map the game map as a matrix of image paths
      * @param position the initial position of the character
      * @param spriteSheetPath the path of the character's sprite sheet
      *
-     * @throws SpriteNotFoundException a sprite is not found
+     * @throws SpriteNotFoundException if a sprite is not found
      */
     public MapLayer(final Map<Integer, Action> movement,
                     final Action interact, final Action menu,
@@ -63,11 +65,12 @@ public class MapLayer extends JPanel {
                     final String spriteSheetPath) throws SpriteNotFoundException {
         super();
 
-        this.map = readMap(map); // reads the map
-        this.position = position; // reads the position
+        this.setBackground(Color.BLACK);
 
-        this.setPreferredSize(SIZE); // TODO è necessario?
-        this.setBounds(0, 0, SIZE.width, SIZE.height); // sets the size and position in the view
+        this.map = readMap(map);
+        this.position = position;
+
+        this.setBounds(0, 0, SIZE.width, SIZE.height);
 
         try {
             spriteSheet = ImageIO.read(new File(spriteSheetPath));
@@ -76,7 +79,8 @@ public class MapLayer extends JPanel {
 
             throw new SpriteNotFoundException(spriteSheetPath);
         }
-        sprite = getSprite(spriteSheet, JobSprite.FRONT); // loads the sprite sheet
+
+        sprite = getSprite(spriteSheet, JobSprite.FRONT);
 
         final ActionMap actionMap = getActionMap();
         final InputMap inputMap = getInputMap(WHEN_IN_FOCUSED_WINDOW);
@@ -85,22 +89,17 @@ public class MapLayer extends JPanel {
             switch (entry.getKey()) {
                 case SwingConstants.NORTH:
                     inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), "UP");
-                    actionMap.put("UP", entry.getValue());
-                    break;
+                    actionMap.put("UP", entry.getValue()); break;
                 case SwingConstants.SOUTH:
                     inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "DOWN");
-                    actionMap.put("DOWN", entry.getValue());
-                    break;
+                    actionMap.put("DOWN", entry.getValue()); break;
                 case SwingConstants.EAST:
                     inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "LEFT");
-                    actionMap.put("LEFT", entry.getValue());
-                    break;
+                    actionMap.put("LEFT", entry.getValue()); break;
                 case SwingConstants.WEST:
                     inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "RIGHT");
-                    actionMap.put("RIGHT", entry.getValue());
-                    break;
-                default: // TODO direzione non supportata?
-                    break;
+                    actionMap.put("RIGHT", entry.getValue()); break;
+                default: break;
             }
         }
 
@@ -119,20 +118,16 @@ public class MapLayer extends JPanel {
         switch (direction) {
             case SwingConstants.NORTH:
                 frame[0] = getSprite(spriteSheet, JobSprite.BACK);
-                frame[1] = getSprite(spriteSheet, JobSprite.BACK2);
-                break;
+                frame[1] = getSprite(spriteSheet, JobSprite.BACK2); break;
             case SwingConstants.SOUTH:
                 frame[0] = getSprite(spriteSheet, JobSprite.FRONT);
-                frame[1] = getSprite(spriteSheet, JobSprite.FRONT2);
-                break;
+                frame[1] = getSprite(spriteSheet, JobSprite.FRONT2); break;
             case SwingConstants.EAST:
                 frame[0] = getSprite(spriteSheet, JobSprite.LEFT);
-                frame[1] = getSprite(spriteSheet, JobSprite.LEFT2);
-                break;
+                frame[1] = getSprite(spriteSheet, JobSprite.LEFT2); break;
             case SwingConstants.WEST:
                 frame[0] = flipImage(getSprite(spriteSheet, JobSprite.LEFT));
-                frame[1] = flipImage(getSprite(spriteSheet, JobSprite.LEFT2));
-                break;
+                frame[1] = flipImage(getSprite(spriteSheet, JobSprite.LEFT2)); break;
             default: break;
         }
 
@@ -144,6 +139,18 @@ public class MapLayer extends JPanel {
                 sprite = frame[0]; repaint();
             }
         }.start();
+
+        switch (direction) {
+            case SwingConstants.NORTH:
+                position.translate(0, -1); break;
+            case SwingConstants.SOUTH:
+                position.translate(0, 1); break;
+            case SwingConstants.EAST:
+                position.translate(-1, 0); break;
+            case SwingConstants.WEST:
+                position.translate(1, 0); break;
+            default: break;
+        }
     }
 
     /**
@@ -194,45 +201,65 @@ public class MapLayer extends JPanel {
     protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
 
-        final int border = 10;
-        final int height = 100;
-
         for (int x = 0; x < map.length; x++) {
             for (int y = 0; y < map[0].length; y++) {
                 g.drawImage(map[x][y],
-                            x * CELL_SIZE.width, y * CELL_SIZE.height,
+                            mapStartingPoint.x + x * CELL_SIZE.width,
+                            mapStartingPoint.y + y * CELL_SIZE.height,
                             CELL_SIZE.width, CELL_SIZE.height, null);
             }
         }
 
         g.drawImage(sprite,
-                    position.x * CELL_SIZE.width,
-                    position.y * CELL_SIZE.height,
+                    mapStartingPoint.x + position.x * CELL_SIZE.width,
+                    mapStartingPoint.y + position.y * CELL_SIZE.height,
                     CELL_SIZE.width, CELL_SIZE.height, null);
 
+
+        final int border = 10;
+        final int height = 100;
+        final int x = border * 2;
+        int y = SIZE.height - height - border / 2;
+
         if (dialogueActive) {
-            g.drawRect(border, SIZE.height - border,
+            g.setColor(Color.WHITE);
+            g.fillRect(border, SIZE.height - border - height,
                        SIZE.width - border * 2, height);
 
+            g.setColor(Color.BLACK);
             final StringBuilder stringBuilder = new StringBuilder();
 
             for (final char c : dialogueText.toCharArray()) {
-                if (g.getFontMetrics().stringWidth(stringBuilder.toString() + c)
-                    > SIZE.width - border * 4) {
-                    stringBuilder.append('\n');
-                }
-                stringBuilder.append(c);
-            }
+                if (c == '\n') {
+                    g.drawString(stringBuilder.toString(),
+                                 x, y += g.getFontMetrics().getHeight());
 
-            g.drawString(stringBuilder.toString(), border * 2, SIZE.height - border * 2);
+                    stringBuilder.setLength(0);
+                }
+                else if (g.getFontMetrics().stringWidth(stringBuilder.toString() + c) >
+                    SIZE.width - border * 4.5) {
+                    g.drawString(stringBuilder.toString(),
+                                 x, y += g.getFontMetrics().getHeight());
+
+                    stringBuilder.setLength(0);
+                    stringBuilder.append(c);
+                }
+                else {
+                    stringBuilder.append(c);
+                }
+            }
+            g.drawString(stringBuilder.toString(), x, y + g.getFontMetrics().getHeight());
         }
     }
 
     private BufferedImage[][] readMap(final String[]... map) throws SpriteNotFoundException {
+        final int width = map.length;
+        final int height = map[0].length;
+
         final BufferedImage[][] mapImage = new BufferedImage[map.length][map[0].length];
 
-        for (int x = 0; x < map.length; x++) {
-            for (int y = 0; y < map[0].length; y++) {
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
                 try {
                     mapImage[x][y] = ImageIO.read(new File(map[x][y]));
                 } catch (final IOException e) {
@@ -241,6 +268,9 @@ public class MapLayer extends JPanel {
                 }
             }
         }
+
+        mapStartingPoint = new Point((SIZE.width - width * CELL_SIZE.width) / 2,
+                                     (SIZE.height - height * CELL_SIZE.height) / 2);
 
         return mapImage;
     }

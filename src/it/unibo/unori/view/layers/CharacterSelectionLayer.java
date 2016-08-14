@@ -12,8 +12,6 @@ import java.util.HashMap;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.FileNotFoundException;
-
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -36,7 +34,7 @@ import java.awt.event.ActionListener;
  * The character-selection menu.
  *
  */
-public class CharacterSelectionLayer extends JPanel {
+public class CharacterSelectionLayer extends Layer {
     private static final Dimension SIZE = View.SIZE;
     private static final Color BACKGROUND_COLOR = Color.BLACK;
 
@@ -235,17 +233,5 @@ public class CharacterSelectionLayer extends JPanel {
             job = Jobs.values()[Jobs.values().length - 2];
             sprite.setIcon(new ImageIcon(getSprite()));
         }
-    }
-
-    public static void main(final String... args) throws FileNotFoundException {
-        final View view = new View();
-        final Button button = new Button("Test");
-        final JPanel characterSelection = new CharacterSelectionLayer(5, button);
-
-        view.push(characterSelection);
-        view.resizeTo(characterSelection);
-
-        view.run();
-        view.centerToScreen();
     }
 }
