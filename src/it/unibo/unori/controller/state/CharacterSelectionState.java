@@ -12,24 +12,6 @@ public class CharacterSelectionState extends AbstractGameState {
         super(new CharacterSelectionLayer(HeroTeamImpl.MAXHERO, CharacterSelectionState.getButton()));
         // TODO Auto-generated constructor stub
     }
-
-    @Override
-    public void update(double elapsedTime) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void onEnter() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void onExit() {
-        // TODO Auto-generated method stub
-
-    }
     
     private static Button getButton() {
         Button button = new Button("OK");

@@ -30,25 +30,6 @@ public class MainMenuState extends AbstractGameState {
          */
     }
 
-    @Override
-    public void update(final double elapsedTime) {
-        // TODO Model implementation needed
-    }
-
-    @Override
-    public void onEnter() {
-        // TODO Auto-generated method stub
-
-        // TODO Probably useless method
-    }
-
-    @Override
-    public void onExit() {
-        // TODO Auto-generated method stub
-
-        // TODO Probably useless method
-    }
-
     private static List<Button> getButtons() {
         final ActionListener listener = new MainMenuActionListener();
         final List<Button> returnList = new ArrayList<>();
