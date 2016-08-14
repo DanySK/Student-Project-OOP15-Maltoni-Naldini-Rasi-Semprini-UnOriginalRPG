@@ -26,6 +26,7 @@ public class GameMapImpl implements GameMap {
     private static final int STDCELLS = 100; 
     private final Cell[][] floorMap;
     private Position initialPosition;
+    private final boolean battleState;
 
     /**
      * Constructor for a standard map.
@@ -43,8 +44,7 @@ public class GameMapImpl implements GameMap {
      *              length of the map to build
      */
     public GameMapImpl(final int width, final int length) {
-        this.floorMap = new Cell[width][length];
-        this.initializeMap();
+        this(width, length, true);
     }
 
     /**
@@ -64,6 +64,24 @@ public class GameMapImpl implements GameMap {
         this(width, length);
         this.setInitialCellPosition(pos);
     }
+    
+    /**
+     * Constructor for specified width and length maps.
+     * @param width
+     *              width of the map to build
+     * @param length
+     *              length of the map to build
+     * @param battleState
+     *              parameter to activate the random encounter in the map
+     */
+    public GameMapImpl(final int width, final int length,
+            final boolean battleState) {
+        this.floorMap = new Cell[width][length];
+        this.battleState = battleState;
+        this.initializeMap();
+    }
+    
+    
 
 
     /**
