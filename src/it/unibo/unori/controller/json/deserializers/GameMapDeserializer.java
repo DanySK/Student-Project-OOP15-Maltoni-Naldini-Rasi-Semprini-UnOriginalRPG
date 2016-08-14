@@ -24,6 +24,7 @@ import it.unibo.unori.model.maps.cell.SimpleCellImpl;
 public class GameMapDeserializer implements JsonDeserializer<GameMap> {
     private static final String FLOOR_MAP = "floorMap";
     private static final String INITIAL_POSITION = "initialPosition";
+    // TODO REMEMBER THE BOOLEAN
 
     @Override
     public GameMap deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
@@ -88,17 +89,20 @@ public class GameMapDeserializer implements JsonDeserializer<GameMap> {
 
             if (typeOfT.getClass().isInstance(ObjectCellImpl.class)) {
                 final Item obj = context.deserialize(jObj.get(OBJ), Item.class);
-                returnCell = new ObjectCellImpl(path, obj);
+                returnCell = new ObjectCellImpl(obj);
+                returnCell.setFrame(path);
             } else if (typeOfT.getClass().isInstance(NPCCellImpl.class)) {
                 final Npc npc = context.deserialize(jObj.get(NPC), Npc.class);
                 returnCell = new NPCCellImpl(path, npc);
             } else if (typeOfT.getClass().isInstance(MapCellImpl.class)) {
                 final GameMap mapToLink = context.deserialize(jObj.get(MAP_TO_LINK), GameMap.class);
                 final Position initialPos = context.deserialize(jObj.get(INITIAL_POS), Position.class);
-                returnCell = new MapCellImpl(path, mapToLink, initialPos);
+                returnCell = new MapCellImpl(mapToLink, initialPos);
+                returnCell.setFrame(path);
             } else if (typeOfT.getClass().isInstance(ChestCellImpl.class)) {
                 final Item item = context.deserialize(jObj.get(ITEM), Item.class);
-                returnCell = new ChestCellImpl(path, item);
+                returnCell = new ChestCellImpl(item);
+                returnCell.setFrame(path);
             } else {
                 returnCell = new SimpleCellImpl(path, state);
             }

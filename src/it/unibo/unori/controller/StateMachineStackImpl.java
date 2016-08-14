@@ -6,6 +6,7 @@ import javax.swing.SwingUtilities;
 
 import it.unibo.unori.controller.state.GameState;
 import it.unibo.unori.view.View;
+import it.unibo.unori.view.layers.DialogLayer;
 import it.unibo.unori.view.layers.Layer;
 
 /**
@@ -42,7 +43,11 @@ public class StateMachineStackImpl implements StateMachineStack {
     public final void render() {
         final Layer currentLayer = this.gsStack.peek().getLayer();
         this.layerStack.push(currentLayer);
-        this.layerStack.resizeTo(currentLayer);
+        if(!(currentLayer instanceof DialogLayer)) {
+            // DialogLayer should not resize the previous layer
+            this.layerStack.resizeTo(currentLayer);
+        }
+        
         this.layerStack.run();
         this.layerStack.centerToScreen();
     }
