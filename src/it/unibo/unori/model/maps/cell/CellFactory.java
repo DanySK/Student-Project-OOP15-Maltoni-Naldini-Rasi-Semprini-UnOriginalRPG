@@ -12,20 +12,24 @@ public class CellFactory {
 
     /**
      * create and return a Free cell object.
+     * @param path
+     *      the path of the sprite of cell.
      * @return
      *        a standard free cell 
      */
-    public Cell getFreeCell() {
-        return new SimpleCellImpl("", CellState.FREE);
+    public Cell getFreeCell(final String path) {
+        return new SimpleCellImpl(path, CellState.FREE);
     }
 
     /**
      * create and return a Blocked cell object.
+     * @param path
+     *      the path of the sprite of cell.
      * @return
      *         a standard blocked cell object
      */
-    public  Cell getBlockedCell() {
-        return new SimpleCellImpl("", CellState.BLOCKED);
+    public  Cell getBlockedCell(final String path) {
+        return new SimpleCellImpl(path, CellState.BLOCKED);
     }
 
     /**
