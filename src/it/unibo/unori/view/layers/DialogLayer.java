@@ -31,8 +31,7 @@ public class DialogLayer extends Layer {
      */
     public DialogLayer(final String message, final Button button) {
         this.setPreferredSize(SIZE);
-        this.setBounds(View.SIZE.width / 4, View.SIZE.height / 4,
-                       SIZE.width, SIZE.height);
+        this.setBounds(0, 0, SIZE.width, SIZE.height);
 
         this.setBackground(Color.BLACK);
         this.setForeground(Color.WHITE);

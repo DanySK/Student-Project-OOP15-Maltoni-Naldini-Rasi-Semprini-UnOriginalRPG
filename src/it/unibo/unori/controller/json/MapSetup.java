@@ -344,35 +344,35 @@ public class MapSetup {
         // Linking village to the shop
         from = new Position(15, 4);
         to = new Position(5, 7);
-        village.setCell(from, new MapCellImpl(village.getCell(from).getFrame(), shop, to));
-        shop.setCell(to, new MapCellImpl(shop.getCell(to).getFrame(), village, from));
+        village.setCell(from, /*new MapCellImpl(village.getCell(from).getFrame(), shop, to)*/new MapCellImpl(shop, to));
+        shop.setCell(to, /*new MapCellImpl(shop.getCell(to).getFrame(), village, from)*/new MapCellImpl(village, from));
 
         // Linking the village to the church
         from = new Position(7, 13);
         to = new Position(10, 4);
-        village.setCell(from, new MapCellImpl(village.getCell(from).getFrame(), church, to));
-        church.setCell(to, new MapCellImpl(church.getCell(to).getFrame(), village, from));
+        village.setCell(from, /*new MapCellImpl(village.getCell(from).getFrame(), church, to)*/new MapCellImpl(church, to));
+        church.setCell(to, /*new MapCellImpl(church.getCell(to).getFrame(), village, from)*/new MapCellImpl(village, from));
 
         // Linking the house to the village
         from = new Position(5, 4);
         to = new Position(5, 4);
-        village.setCell(from, new MapCellImpl(village.getCell(from).getFrame(), house, to));
-        house.setCell(to, new MapCellImpl(house.getCell(to).getFrame(), village, from));
+        village.setCell(from, /*new MapCellImpl(village.getCell(from).getFrame(), house, to)*/new MapCellImpl(house, to));
+        house.setCell(to, /*new MapCellImpl(house.getCell(to).getFrame(), village, from)*/new MapCellImpl(village, from));
 
         // Linking the village to the passage
         for (int i = 9; i <= 12; i++) {
             from = new Position(i, 19);
             to = new Position(i - 6, 0);
-            village.setCell(from, new MapCellImpl(village.getCell(from).getFrame(), passage, to));
-            passage.setCell(to, new MapCellImpl(passage.getCell(to).getFrame(), village, from));
+            village.setCell(from, /*new MapCellImpl(village.getCell(from).getFrame(), passage, to)*/new MapCellImpl(passage, to));
+            passage.setCell(to, /*new MapCellImpl(passage.getCell(to).getFrame(), village, from)*/new MapCellImpl(village, from));
         }
 
         // Linking the passage to the dungeon entrance
         for (int i = 4; i <= 5; i++) {
             from = new Position(i, 23);
             to = new Position(i + 1, 0);
-            passage.setCell(from, new MapCellImpl(village.getCell(from).getFrame(), dungeonEntrance, to));
-            dungeonEntrance.setCell(to, new MapCellImpl(dungeonEntrance.getCell(to).getFrame(), passage, from));
+            passage.setCell(from, /*new MapCellImpl(village.getCell(from).getFrame(), dungeonEntrance, to)*/new MapCellImpl(dungeonEntrance, to));
+            dungeonEntrance.setCell(to, /*new MapCellImpl(dungeonEntrance.getCell(to).getFrame(), passage, from)*/new MapCellImpl(passage, from));
         }
 
         // Inside the dungeon of dungeon
