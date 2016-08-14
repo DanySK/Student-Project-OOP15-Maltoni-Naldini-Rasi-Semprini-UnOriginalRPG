@@ -237,5 +237,10 @@ public class GameMapImpl implements GameMap {
         }
         return map;
     }
+    
+    @Override
+    public boolean getBattleState() {
+        return this.battleState;
+    }
 
 }

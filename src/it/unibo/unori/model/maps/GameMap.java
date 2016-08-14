@@ -111,5 +111,12 @@ public interface GameMap extends Serializable {
      */
     String[][] getFrames();
 
+    /**
+     * Get the battle state of the map.
+     * @return
+     *          true if battles are enabled on the map
+     */         
+    boolean getBattleState();
+
 
 }
