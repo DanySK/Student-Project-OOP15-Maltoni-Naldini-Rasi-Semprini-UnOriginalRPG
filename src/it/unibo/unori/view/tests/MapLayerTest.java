@@ -85,11 +85,7 @@ public class MapLayerTest {
     private class InteractAction extends AbstractAction {
         @Override
         public void actionPerformed(final ActionEvent e) {
-            try {
-                mapLayer.changeMap(createMap("res/sprites/map/rocks.png", 6, 7), new Point(0, 0));
-            } catch (final SpriteNotFoundException e1) {
-                System.out.println("Sprite not found");
-            }
+            view.close();
         }
     }
 
