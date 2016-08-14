@@ -26,9 +26,9 @@ public class GameMapSerializer implements JsonSerializer<GameMap> {
     @Override
     public JsonElement serialize(final GameMap src, final Type typeOfSrc, final JsonSerializationContext context) {
         JsonObject jObj = new JsonObject();
-        final Cell[][] floorMapMatrix = new Cell[src.getMapLength()][src.getMapWidth()];
-        for (int i = 0; i < src.getMapLength(); i++) {
-            for (int j = 0; j < src.getMapWidth(); j++) {
+        final Cell[][] floorMapMatrix = new Cell[src.getMapRows()][src.getMapColumns()];
+        for (int i = 0; i < src.getMapRows(); i++) {
+            for (int j = 0; j < src.getMapColumns(); j++) {
                 floorMapMatrix[i][j] = src.getCell(new Position(i, j));
             }
         }
