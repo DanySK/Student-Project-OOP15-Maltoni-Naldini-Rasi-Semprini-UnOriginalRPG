@@ -28,7 +28,10 @@ public class GameMapFactory {
     private static final CellFactory FACT = new CellFactory();
     private static final PotionFactory PACT = new PotionFactory();
     private static final int MAXSIZE = 99;
-
+    private static final String ROCKPATH = "res/sprites/map/rocks.png";
+    private static final String GRASSPATH = "res/sprites/map/grass.png";
+    private static final String CENTERPATH = "res/sprites/map/house/center.png";
+    private static final String TABLEPATH = "res/sprites/map/table.png";
     /**
      * Create a standard room, a map whose borders are blocked cells.
      * @return a Map which represent a room
@@ -94,7 +97,7 @@ public class GameMapFactory {
     public GameMap create4NPCRoomMap() {
         final GameMap map = this.getSizeableMap(4, 4,
                 "res/sprites/map/border-2.png", "res/sprites/map/floor.png");
-        map.setCell(new Position(2, 2), FACT.getBlockedCell());
+        map.setCell(new Position(2, 2), FACT.getBlockedCell(TABLEPATH));
         final Npc player1 = new NpcImpl("Caccia l'Asso!");
         final Npc player2 = new NpcImpl(new Dialogue("Full vince su tris eheheheh"));
         final Npc player3 = new NpcImpl(new Dialogue("Tutti combattono mostri e io sto a giocare a marafone"));
@@ -114,7 +117,7 @@ public class GameMapFactory {
     public GameMap createShop() {
         final GameMap map = this.getSizeableMap(4, 10, 
                 "res/sprites/map/border-2.png", "res/sprites/map/floor.png");
-        map.setRow(3, FACT.getBlockedCell("res/sprites/map/table.png"));
+        map.setRow(3, FACT.getBlockedCell(TABLEPATH));
         final Npc blackSmith = new NpcImpl("Fuori dalla mia palude!");
         final Npc assistant1 = new NpcImpl("Il fabbro si è barricato dietro il bancone!"
                 + " Nessuno portà andare a parlargli ora!");
@@ -138,10 +141,10 @@ public class GameMapFactory {
         final Npc complot = new NpcImpl("Hai notato che questo posto ha entrate ma non uscite? Devono essere gli Illuminati!");
         final Npc solider = new NpcImpl("Sono una guardia inutile, ma non quanto lui dalla parte opposta!");
         for (int i = 3; i < 8; i += 2) {
-            map.setCell(new Position(i, 2), FACT.getBlockedCell("res/sprites/map/table.png"));
-            map.setCell(new Position(i, 3), FACT.getBlockedCell("res/sprites/map/table.png"));
-            map.setCell(new Position(i, 5), FACT.getBlockedCell("res/sprites/map/table.png"));
-            map.setCell(new Position(i, 6), FACT.getBlockedCell("res/sprites/map/table.png"));
+            map.setCell(new Position(i, 2), FACT.getBlockedCell(TABLEPATH));
+            map.setCell(new Position(i, 3), FACT.getBlockedCell(TABLEPATH));
+            map.setCell(new Position(i, 5), FACT.getBlockedCell(TABLEPATH));
+            map.setCell(new Position(i, 6), FACT.getBlockedCell(TABLEPATH));
         }
         map.setCell(new Position(2, 4), new NPCCellImpl("res/sprites/npcs/floor/front-7.png", priest));
         map.setCell(new Position(9, 1), new NPCCellImpl("res/sprites/npcs/floor/front-4.png", solider));
@@ -156,21 +159,21 @@ public class GameMapFactory {
      */
    public GameMap getVillageMap() {
         final GameMap map = this.getSizeableMap(20, 18,
-                "res/sprites/map/rocks.png", "res/sprites/map/grass.png");
+                ROCKPATH, GRASSPATH );
         for (int i = 4; i < 6; i++) {
             map.setCell(new Position(i, 2), FACT.getBlockedCell("res/sprites/map/house/left.png"));
-            map.setCell(new Position(i, 3), FACT.getBlockedCell("res/sprites/map/house/center.png"));
-            map.setCell(new Position(i, 4), FACT.getBlockedCell("res/sprites/map/house/center.png"));
+            map.setCell(new Position(i, 3), FACT.getBlockedCell(CENTERPATH));
+            map.setCell(new Position(i, 4), FACT.getBlockedCell(CENTERPATH));
             map.setCell(new Position(i, 5), FACT.getBlockedCell("res/sprites/map/house/right.png"));
             map.setCell(new Position(i + 10, 2), FACT.getBlockedCell("res/sprites/map/house/left.png"));
-            map.setCell(new Position(i + 10, 3), FACT.getBlockedCell("res/sprites/map/house/center.png"));
-            map.setCell(new Position(i + 10, 4), FACT.getBlockedCell("res/sprites/map/house/center.png"));
+            map.setCell(new Position(i + 10, 3), FACT.getBlockedCell(CENTERPATH));
+            map.setCell(new Position(i + 10, 4), FACT.getBlockedCell(CENTERPATH));
             map.setCell(new Position(i + 10, 5), FACT.getBlockedCell("res/sprites/map/house/right.png"));
         }
         
             for (int j = 4; j < 8; j++) {
                 map.setCell(new Position(j, 12), FACT.getBlockedCell("res/sprites/map/church/left.png"));
-                map.setCell(new Position(j, 13), FACT.getBlockedCell("res/sprites/map/church/center.png"));
+                map.setCell(new Position(j, 13), FACT.getBlockedCell(CENTERPATH));
                 map.setCell(new Position(j, 14), FACT.getBlockedCell("res/sprites/map/church/right.png"));
             }
         
@@ -187,7 +190,7 @@ public class GameMapFactory {
     */
    public GameMap createAisle() {
        final GameMap map = this.getSizeableMap(8, 22,
-               "res/sprites/map/rocks.png", "res/sprites/map/grass.png");
+               ROCKPATH, GRASSPATH);
        final Npc link = new NpcImpl("Eyhaaaaaaa!");
        final Npc gigio = new NpcImpl("Quello lì è Link che si è perso e cerca di tornare a casa");
        final Npc sora = new NpcImpl("Siccome Kingdom Hearts 3 non esce mai, ho cambiato contratto e sono venuto qua!");
@@ -206,7 +209,7 @@ public class GameMapFactory {
     */
    public GameMap createDungeonEntrance() {
        final GameMap map = this.getSizeableMap(10, 10,
-               "res/sprites/map/rocks.png", "res/sprites/map/grass.png");
+               ROCKPATH, GRASSPATH);
        for (int i = 4; i < 7; i++) {
            for (int j = 4; j < 7; j++) {
               map.setCell(new Position(i, j), FACT.getBlockedCell("res/sprites/map/rocks.png")); 
