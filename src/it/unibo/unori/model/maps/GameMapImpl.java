@@ -121,6 +121,7 @@ public class GameMapImpl implements GameMap {
     public void setCell(final Position pos, final Cell cell) throws IllegalArgumentException {
         if (checkPosition(pos.getPosX(), this.floorMap.length) 
                 || checkPosition(pos.getPosY(), this.floorMap[0].length)) {
+            System.out.println("Mi sballo a " + pos.getPosX() + ", "+ pos.getPosY());
             throw new IllegalArgumentException();
         }
         this.floorMap[pos.getPosX()][pos.getPosY()] = cell;
@@ -150,7 +151,7 @@ public class GameMapImpl implements GameMap {
 
     @Override
     public void setRow(final int posX, final Cell cell) throws IllegalArgumentException {
-        if (checkPosition(posX, this.floorMap.length)) {
+        if (checkPosition(posX, this.getMapRows())) {
             throw new IllegalArgumentException();
         }
         for (int i = 0; i < this.floorMap[posX].length; i++) {
@@ -161,7 +162,7 @@ public class GameMapImpl implements GameMap {
 
     @Override
     public void setColumn(final int posY, final Cell cell) throws IllegalArgumentException {
-        if (checkPosition(posY, this.floorMap[0].length)) {
+        if (checkPosition(posY, this.getMapColumns())) {
             throw new IllegalArgumentException();
         }
         for (int i = 0; i < this.floorMap.length; i++) {
@@ -198,13 +199,13 @@ public class GameMapImpl implements GameMap {
     }
 
     @Override
-    public int getMapLength() {
-        return this.getRow(0).size();
+    public int getMapColumns() {
+        return this.floorMap[0].length;
     }
 
     @Override
-    public int getMapWidth() {
-        return this.getColumn(0).size();
+    public int getMapRows() {
+        return this.floorMap.length;
     }
 
     @Override
