@@ -35,10 +35,10 @@ public class GameMapFactory {
      */
     public GameMap getStdRoom() {
         final GameMap map = new GameMapImpl();
-        map.setRow(0, FACT.getBlockedCell());
-        map.setRow(MAXSIZE, FACT.getBlockedCell());
-        map.setColumn(0, FACT.getBlockedCell());
-        map.setColumn(MAXSIZE, FACT.getBlockedCell());
+        map.setRow(0, FACT.getBlockedCell(""));
+        map.setRow(MAXSIZE, FACT.getBlockedCell(""));
+        map.setColumn(0, FACT.getBlockedCell(""));
+        map.setColumn(MAXSIZE, FACT.getBlockedCell(""));
         return map;
     }
 
@@ -48,9 +48,9 @@ public class GameMapFactory {
      */
     public GameMap getSouthLinkedMap() {
         final GameMap map = new GameMapImpl();
-        map.setRow(MAXSIZE, FACT.getBlockedCell());
-        map.setColumn(0, FACT.getBlockedCell());
-        map.setColumn(MAXSIZE, FACT.getBlockedCell());
+        map.setRow(MAXSIZE, FACT.getBlockedCell(""));
+        map.setColumn(0, FACT.getBlockedCell(""));
+        map.setColumn(MAXSIZE, FACT.getBlockedCell(""));
         IntStream.range(0, MAXSIZE).forEachOrdered(i -> {
             final Position pos = new Position(0, i);
             final Cell cell = new MapCellImpl(LINKINGMAP,
@@ -77,6 +77,9 @@ public class GameMapFactory {
             final String borderPath, final String innerPath) {
         final GameMap map = new GameMapImpl(width + 2, length + 2);
         final Cell cell = new SimpleCellImpl(borderPath, CellState.BLOCKED);
+        for(int i = 0; i < map.getMapRows(); i++){
+            map.setRow(i, new SimpleCellImpl(innerPath, CellState.FREE));
+        }
         map.setRow(0, cell);
         map.setRow(width + 1, cell);
         map.setColumn(0, cell);
