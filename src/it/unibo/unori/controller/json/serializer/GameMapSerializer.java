@@ -22,6 +22,7 @@ import it.unibo.unori.model.maps.exceptions.NoObjectFoundException;
 public class GameMapSerializer implements JsonSerializer<GameMap> {
     private static final String FLOOR_MAP = "floorMap";
     private static final String INITIAL_POSITION = "initialPosition";
+    // TODO REMEMBER THE BOOLEAN
 
     @Override
     public JsonElement serialize(final GameMap src, final Type typeOfSrc, final JsonSerializationContext context) {

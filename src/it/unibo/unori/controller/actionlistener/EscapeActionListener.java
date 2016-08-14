@@ -1,5 +1,13 @@
 package it.unibo.unori.controller.actionlistener;
 
-public class EscapeActionListener {
+import java.awt.event.ActionEvent;
+
+public class EscapeActionListener extends AbstractUnoriActionListener {
+
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        // TODO Auto-generated method stub
+        
+    }
 
 }
