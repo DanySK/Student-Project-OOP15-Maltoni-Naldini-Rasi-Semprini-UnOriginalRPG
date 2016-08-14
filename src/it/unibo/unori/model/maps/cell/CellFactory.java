@@ -34,7 +34,7 @@ public class CellFactory {
      *          a  cell containing a sword
      */
     public Cell getObjectCell() {
-        return new ObjectCellImpl("", WeaponFactory.getStdSword());
+        return new ObjectCellImpl(WeaponFactory.getStdSword());
     }
 
     /**

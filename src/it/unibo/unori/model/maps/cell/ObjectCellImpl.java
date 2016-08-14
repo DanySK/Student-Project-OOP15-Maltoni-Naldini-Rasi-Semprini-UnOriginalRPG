@@ -17,13 +17,11 @@ public class ObjectCellImpl extends SimpleCellImpl {
 
     /**
      * Constructor.
-     * @param path
-     *              path of image to set in the cell
      * @param obj
      *              object to set in the cell
      */
-    public ObjectCellImpl(final String path, final Item obj) {
-        super(path, CellState.BLOCKED);
+    public ObjectCellImpl(final Item obj) {
+        super("res/sprites/map/item.png", CellState.BLOCKED);
         this.obj = obj;
     }
 
