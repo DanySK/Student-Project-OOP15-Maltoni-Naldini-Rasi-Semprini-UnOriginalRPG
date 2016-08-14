@@ -20,6 +20,24 @@ public class CellFactory {
     public Cell getFreeCell(final String path) {
         return new SimpleCellImpl(path, CellState.FREE);
     }
+    
+    /**
+     * create and return a Free cell object.
+     * @return
+     *        a standard free cell 
+     */
+    public Cell getFreeCell() {
+        return new SimpleCellImpl("", CellState.FREE);
+    }
+    
+    /**
+     * create and return a Blocked cell object.
+     * @return
+     *         a standard blocked cell object
+     */
+    public  Cell getBlockedCell() {
+        return new SimpleCellImpl("", CellState.BLOCKED);
+    }
 
     /**
      * create and return a Blocked cell object.
