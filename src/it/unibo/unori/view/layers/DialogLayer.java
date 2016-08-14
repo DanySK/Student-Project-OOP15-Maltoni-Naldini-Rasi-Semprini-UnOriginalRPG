@@ -4,7 +4,6 @@ import it.unibo.unori.view.View;
 import it.unibo.unori.view.Button;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.InputMap;
 import javax.swing.ActionMap;
 import javax.swing.KeyStroke;
@@ -16,14 +15,13 @@ import java.awt.Dimension;
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  *
  * This class displays a message to the user.
  *
  */
-public class DialogLayer extends JPanel {
+public class DialogLayer extends Layer {
     final private Button button;
     final private static Dimension SIZE = new Dimension(View.SIZE.width / 2,
                                                         View.SIZE.height / 2);
@@ -31,7 +29,7 @@ public class DialogLayer extends JPanel {
     /**
      * Creates a dialog.
      */
-    public DialogLayer(String message, Button button) {
+    public DialogLayer(final String message, final Button button) {
         this.setPreferredSize(SIZE);
         this.setBounds(View.SIZE.width / 4, View.SIZE.height / 4,
                        SIZE.width, SIZE.height);
@@ -43,7 +41,7 @@ public class DialogLayer extends JPanel {
 
         this.button = button;
 
-        JLabel label = new JLabel(message, SwingConstants.CENTER);
+        final JLabel label = new JLabel(message, SwingConstants.CENTER);
         label.setForeground(Color.WHITE);
 
         this.add(label, BorderLayout.CENTER);
@@ -68,19 +66,4 @@ public class DialogLayer extends JPanel {
             button.doClick();
         }
     }
-
-    public static void main(final String... args) {
-        final Button button = new Button("OK");
-
-        final View view = new View();
-        final JPanel dialog = new DialogLayer("C'è stato un errore di qualche tipo", button);
-
-        view.resize();
-        view.push(dialog);
-
-        view.run();
-
-        view.centerToScreen();
-    }
-
 }
