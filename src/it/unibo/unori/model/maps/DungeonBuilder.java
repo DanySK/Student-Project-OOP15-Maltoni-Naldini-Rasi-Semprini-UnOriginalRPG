@@ -232,5 +232,25 @@ public class DungeonBuilder {
         default: throw new IllegalArgumentException(); 
         }
     }
+    
+    /**
+     * Get a list of map as a floor of the dungeon.
+     * @param floorNum
+     *          number of the floor to set
+     * @param maps
+     *      list of the maps of the floor
+     * @throws IllegalArgumentException
+     *          if the number of the floor is not between 1 and 4
+     */
+    public List<GameMap> getFloor(final int floorNum, final List<GameMap> maps) 
+                            throws IllegalArgumentException {
+        switch (floorNum) {
+        case 1: return this.rList; 
+        case 2: return this.sList;
+        case 3: return this.tList;
+        case 4: return this.fList;
+        default: throw new IllegalArgumentException(); 
+        }
+    }
 
 }
