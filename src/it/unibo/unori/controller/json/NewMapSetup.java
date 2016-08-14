@@ -35,24 +35,31 @@ public class NewMapSetup {
 
         // Setting floors
         NewMapSetup.setAllCells(village, grass);
+        System.out.println("Villaggio settato");
         NewMapSetup.setAllCells(church, floor);
+        System.out.println("Chiesa settata");
         NewMapSetup.setAllCells(house, floor);
+        System.out.println("Casa settata");
         NewMapSetup.setAllCells(shop, floor);
         NewMapSetup.setAllCells(passage, grass);
         NewMapSetup.setAllCells(dungeonEntrance, earth);
+        System.out.println("Tutto settato");
 
         // Setting borders
         setFencesBorders(village);
+        System.out.println("Confini villaggio settato");
         setFencesBorders(passage);
         setFencesBorders(dungeonEntrance);
         NewMapSetup.setBorders(border, house);
         NewMapSetup.setBorders(border, shop);
         NewMapSetup.setBorders(border, church);
+        System.out.println("Confini tutti settato");
 
         // Setting village and link to passage ...
-        NewMapSetup.setVerticalLink(village, passage, new Position(8, village.getMapWidth() - 1),
-                new Position(12, village.getMapWidth() - 1), new Position(3, 0), new Position(6, 0), grass, true);
+        NewMapSetup.setVerticalLink(village, passage, new Position(8, village.getMapColumns() - 1),
+                new Position(12, village.getMapColumns() - 1), new Position(3, 0), new Position(6, 0), grass, true);
         // ... shop and house ceilings ...
+        System.out.println("Arrivato 1");
         for (int i = 2; i <= 5; i++) {
             village.setCell(new Position(4, i), new SimpleCellImpl(ceiling, CellState.BLOCKED));
             village.setCell(new Position(14, i), new SimpleCellImpl(ceiling, CellState.BLOCKED));
@@ -97,8 +104,8 @@ public class NewMapSetup {
         // TODO NPCs
 
         // Setting passage ...
-        NewMapSetup.setVerticalLink(passage, dungeonEntrance, new Position(4, dungeonEntrance.getMapWidth() - 1),
-                new Position(5, dungeonEntrance.getMapWidth() - 1), new Position(5, 0), new Position(6, 0), grass,
+        NewMapSetup.setVerticalLink(passage, dungeonEntrance, new Position(4, dungeonEntrance.getMapColumns() - 1),
+                new Position(5, dungeonEntrance.getMapColumns() - 1), new Position(5, 0), new Position(6, 0), grass,
                 true);
         // TODO items
         // TODO NPCs
@@ -158,8 +165,8 @@ public class NewMapSetup {
         final Cell upperLeftFence = new SimpleCellImpl("res/sprites/map/fence/upper-left.png", CellState.BLOCKED);
         final Cell upperRightFence = new SimpleCellImpl("res/sprites/map/fence/upper-right.png", CellState.BLOCKED);
 
-        final int maxWidth = map.getMapWidth()-1;
-        final int maxLength = map.getMapLength()-1;
+        final int maxWidth = map.getMapRows()-1;
+        final int maxLength = map.getMapColumns()-1;
 
         setHorizontalBorders(horizontalFence, map);
         setVerticalBorders(vericalFence, map);
@@ -176,17 +183,17 @@ public class NewMapSetup {
 
     private static void setVerticalBorders(final String bordersPath, final GameMap map) {
         map.setColumn(0, new SimpleCellImpl(bordersPath, CellState.BLOCKED));
-        map.setColumn(map./*getMapLength()*/getMapWidth()-1, new SimpleCellImpl(bordersPath, CellState.BLOCKED));
+        map.setColumn(map.getMapColumns() -1, new SimpleCellImpl(bordersPath, CellState.BLOCKED));
     }
 
     private static void setHorizontalBorders(final String bordersPath, final GameMap map) {
         map.setRow(0, new SimpleCellImpl(bordersPath, CellState.BLOCKED));
-        map.setRow(map./*getMapWidth()*/getMapLength()-1, new SimpleCellImpl(bordersPath, CellState.BLOCKED));
+        map.setRow(map.getMapRows() -1, new SimpleCellImpl(bordersPath, CellState.BLOCKED));
     }
 
     private static void setAllCells(final GameMap map, final String path) {
-        for (int i = 0; i < map.getMapWidth(); i++) {
-            for (int j = 0; j < map.getMapLength(); j++) {
+        for (int i = 0; i < map.getMapRows(); i++) {
+            for (int j = 0; j < map.getMapColumns(); j++) {
                 map.getCell(new Position(i, j)).setFrame(path);
             }
         }

@@ -14,15 +14,15 @@ import it.unibo.unori.model.maps.cell.Cell;
 public interface GameMap extends Serializable {
 
     /**
-     * Getter for length of the map.
-     * @return length of the map
+     * Getter for the number of rows in the map.
+     * @return rows in the map
      */
-    int getMapLength();
+    int getMapRows();
     /**
-     * Getter for width of the map.
-     * @return width of the map
+     * Getter for the number of columns in the map.
+     * @return columns in the map
      */
-    int getMapWidth();
+    int getMapColumns();
     /**
      * Get the cell at the specified position.
      * @param pos

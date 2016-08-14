@@ -142,7 +142,7 @@ public class GameMapFactory {
      * @return villageMap.
      */
    public GameMap getVillageMap() {
-        final GameMap map = this.getSizeableMap(19, 17);
+        final GameMap map = this.getSizeableMap(20, 18);
         for (int i = 2; i < 6; i++) {
             map.setCell(new Position(4, i), FACT.getBlockedCell());
             map.setCell(new Position(5, i), FACT.getBlockedCell());
