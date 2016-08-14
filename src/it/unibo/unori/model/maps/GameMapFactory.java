@@ -8,9 +8,11 @@ import it.unibo.unori.model.items.PotionFactory;
 import it.unibo.unori.model.items.WeaponFactory;
 import it.unibo.unori.model.maps.cell.Cell;
 import it.unibo.unori.model.maps.cell.CellFactory;
+import it.unibo.unori.model.maps.cell.CellState;
 import it.unibo.unori.model.maps.cell.MapCellImpl;
 import it.unibo.unori.model.maps.cell.NPCCellImpl;
 import it.unibo.unori.model.maps.cell.ObjectCellImpl;
+import it.unibo.unori.model.maps.cell.SimpleCellImpl;
 import it.unibo.unori.model.menu.Dialogue;
 
 /**
@@ -64,12 +66,17 @@ public class GameMapFactory {
      *          width of the map
      * @param length
      *          length of the map
+     * @param borderPath
+     *          path of the sprite to set in the border of the map
+     * @param innerPath
+     *        path of the sprite to set in the center of the map
      * @return
      *          a closed map sized as liked
      */
-    public GameMap getSizeableMap(final int width, final int length) {
+    public GameMap getSizeableMap(final int width, final int length, 
+            final String borderPath, final String innerPath) {
         final GameMap map = new GameMapImpl(width + 2, length + 2);
-        final Cell cell = new CellFactory().getBlockedCell();
+        final Cell cell = new SimpleCellImpl(borderPath, CellState.BLOCKED);
         map.setRow(0, cell);
         map.setRow(width + 1, cell);
         map.setColumn(0, cell);
