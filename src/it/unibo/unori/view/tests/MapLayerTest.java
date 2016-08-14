@@ -21,10 +21,10 @@ import java.awt.event.ActionEvent;
  */
 public class MapLayerTest {
     private MapLayer mapLayer;
-    private final View view = new View();
+    public final View view = new View();
 
     /**
-     * Test the map layer.
+     * Tests the map layer.
      */
     public MapLayerTest() {
         final Map<Integer, Action> movement = new HashMap<Integer, Action>();
@@ -42,14 +42,10 @@ public class MapLayerTest {
         final String[][] map = createMap("res/sprites/map/grass.png", 12, 12);
 
         try {
-            mapLayer = new MapLayer(movement,
-                                    interact, menu,
-                                    map, position, spriteSheetPath);
+            mapLayer = new MapLayer(movement, interact, menu, map, position, spriteSheetPath);
 
             view.push(mapLayer);
             view.resizeTo(mapLayer);
-
-            view.run();
         } catch (final SpriteNotFoundException e) {
             System.out.println("Sprite not found");
         }
@@ -59,7 +55,7 @@ public class MapLayerTest {
         view.run();
     }
 
-    private String[][] createMap(final String path,
+    public static String[][] createMap(final String path,
                                  final int width, final int height) {
         final String[][] map = new String[width][height];
 

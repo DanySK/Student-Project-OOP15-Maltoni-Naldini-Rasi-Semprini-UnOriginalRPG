@@ -198,6 +198,11 @@ public class MapLayer extends Layer {
     }
 
     @Override
+    public void disable() {
+        super.disable();
+    }
+
+    @Override
     protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
 
