@@ -173,8 +173,8 @@ public class GameMapFactory {
        map.setCell(new Position(3, 6), new NPCCellImpl("", link));
        map.setCell(new Position(7, 16), new NPCCellImpl("", sora));
        map.setCell(new Position(6, 6), new NPCCellImpl("", gigio));
-       map.setCell(new Position(7, 3), new ObjectCellImpl("", PACT.getPasticcheMagiche()));
-       map.setCell(new Position(7, 21), new ObjectCellImpl("", PACT.getRimedioDellaNonna()));
+       map.setCell(new Position(7, 3), new ObjectCellImpl(PACT.getPasticcheMagiche()));
+       map.setCell(new Position(7, 21), new ObjectCellImpl(PACT.getRimedioDellaNonna()));
        return map;
    }
 
@@ -193,8 +193,8 @@ public class GameMapFactory {
        map.setCell(new Position(6, 5), FACT.getFreeCell());
        final Npc crest = new NpcImpl("Questo dungeon mi fa paura, vado a lavorare a Train Simulator");
        map.setCell(new Position(3, 6), new NPCCellImpl("", crest));
-       map.setCell(new Position(8, 9), new ObjectCellImpl("", PACT.getPozioneVita()));
-       map.setCell(new Position(2, 9), new ObjectCellImpl("", WeaponFactory.getLanciafiamme()));
+       map.setCell(new Position(8, 9), new ObjectCellImpl(PACT.getPozioneVita()));
+       map.setCell(new Position(2, 9), new ObjectCellImpl(WeaponFactory.getLanciafiamme()));
        return map;
    }
 
