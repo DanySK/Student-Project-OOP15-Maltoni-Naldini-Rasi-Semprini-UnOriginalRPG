@@ -1,7 +1,7 @@
 package it.unibo.unori.view.layers;
 
+import it.unibo.unori.model.character.HeroTeam;
 import it.unibo.unori.model.items.Bag;
-import it.unibo.unori.model.maps.Party;
 
 /**
  *
@@ -12,7 +12,7 @@ public class InGameMenuLayer extends Layer {
     /**
      * Creates the in-game menu.
      */
-    public InGameMenuLayer(final Party party, final Bag bag) {
+    public InGameMenuLayer(final HeroTeam heroTeam, final Bag bag) {
         super();
 
     }
