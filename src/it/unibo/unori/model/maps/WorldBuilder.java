@@ -36,7 +36,7 @@ public class WorldBuilder {
         final GameMap map = this.mapsList.get(MAPS.CITY);
         final GameMap h1 = this.mapsList.get(MAPS.HOUSE);
         MapCellImpl c1 = new MapCellImpl("", map, new Position(6, 4));
-        h1.setCell(new Position(h1.getMapWidth() - 1, 4), c1);
+        h1.setCell(new Position(h1.getMapRows() - 1, 4), c1);
         MapCellImpl c2 = new MapCellImpl("", h1, new Position(4, 4));
         map.setCell(new Position(5, 4), c2);
         map.setInitialCellPosition(new Position(6, 4));
