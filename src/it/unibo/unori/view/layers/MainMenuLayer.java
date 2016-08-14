@@ -3,8 +3,6 @@ package it.unibo.unori.view.layers;
 import it.unibo.unori.view.View;
 import it.unibo.unori.view.Button;
 import java.util.List;
-import java.util.ArrayList;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -25,14 +23,13 @@ import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
-import java.awt.event.ActionListener;
 
 /**
  *
  * The main menu of the game.
  *
  */
-public class MainMenuLayer extends JPanel {
+public class MainMenuLayer extends Layer {
     private int focusedButton;
     private final List<Button> buttons;
 
@@ -129,29 +126,5 @@ public class MainMenuLayer extends JPanel {
                 }
             }
         }
-    }
-
-    public static void main(final String... args) {
-        final View view = new View();
-
-        final List<Button> buttons = new ArrayList<Button>();
-        final Button button = new Button("Resume Game");
-
-        buttons.add(button);
-        buttons.add(new Button("New Game"));
-
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
-                    view.close();
-            }
-        });
-
-        final JPanel mainMenu = new MainMenuLayer(buttons);
-
-        view.push(mainMenu);
-        view.resizeTo(mainMenu);
-
-        view.run();
-        view.centerToScreen();
     }
 }

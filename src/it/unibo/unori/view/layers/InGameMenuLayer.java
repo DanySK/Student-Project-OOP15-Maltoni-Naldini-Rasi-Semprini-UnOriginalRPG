@@ -1,33 +1,26 @@
 package it.unibo.unori.view.layers;
 
-import it.unibo.unori.view.View;
 import it.unibo.unori.view.Button;
 
 import java.util.List;
-import java.util.ArrayList;
-
-import javax.swing.JPanel;
 import javax.swing.InputMap;
 import javax.swing.ActionMap;
 import javax.swing.KeyStroke;
 import javax.swing.BoxLayout;
 import javax.swing.BorderFactory;
 import javax.swing.AbstractAction;
-import javax.swing.SwingUtilities;
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  *
  * A menu that can be opened in-game.
  *
  */
-public class InGameMenuLayer extends JPanel {
+public class InGameMenuLayer extends Layer {
     private int focusedButton = 0;
     private final List<Button> buttons;
 
@@ -111,47 +104,5 @@ public class InGameMenuLayer extends JPanel {
                 }
             }
         }
-    }
-
-    public static void main(final String... args) {
-        final View view = new View();
-
-        /* MAIN MENU */
-
-        final List<Button> buttons = new ArrayList<Button>();
-        final Button button = new Button("Resume Game");
-
-        buttons.add(button);
-        buttons.add(new Button("New Game"));
-
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e)
-            {
-                System.out.println("Resume Game");
-            }
-        });
-
-        final JPanel mainMenu = new MainMenuLayer(buttons);
-
-        view.push(mainMenu);
-        view.resizeTo(mainMenu);
-
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override public void run() { view.setVisible(true); }
-        });
-
-        view.centerToScreen();
-
-        /* IN-GAME MENU */
-
-        final List<Button> inGameButtons = new ArrayList<Button>();
-
-        inGameButtons.add(new Button("Party"));
-        inGameButtons.add(new Button("Stats"));
-
-        final JPanel inGameMenu = new InGameMenuLayer(inGameButtons);
-
-        mainMenu.disable();
-        view.push(inGameMenu);
     }
 }
