@@ -33,24 +33,6 @@ public class DialogState extends AbstractGameState {
         this(message, ErrorSeverity.MINOR);
     }
 
-    @Override
-    public void update(final double elapsedTime) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void onEnter() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void onExit() {
-        // TODO Auto-generated method stub
-
-    }
-
     private static Button getButton(final ErrorSeverity severity) {
         final Button returnButton = new Button("Ok");
 
