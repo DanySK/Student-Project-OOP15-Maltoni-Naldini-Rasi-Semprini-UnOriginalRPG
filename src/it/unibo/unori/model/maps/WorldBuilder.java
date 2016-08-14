@@ -35,36 +35,36 @@ public class WorldBuilder {
     public GameMap buildWorld() {
         final GameMap map = this.mapsList.get(MAPS.CITY);
         final GameMap h1 = this.mapsList.get(MAPS.HOUSE);
-        MapCellImpl c1 = new MapCellImpl("", map, new Position(6, 4));
+        MapCellImpl c1 = new MapCellImpl(map, new Position(6, 4));
         h1.setCell(new Position(h1.getMapRows() - 1, 4), c1);
-        MapCellImpl c2 = new MapCellImpl("", h1, new Position(4, 4));
+        MapCellImpl c2 = new MapCellImpl(h1, new Position(4, 4));
         map.setCell(new Position(5, 4), c2);
         map.setInitialCellPosition(new Position(6, 4));
         final GameMap ch = this.mapsList.get(MAPS.CHURCH);
-        c1 = new MapCellImpl("", ch, new Position(9, 4));
+        c1 = new MapCellImpl(ch, new Position(9, 4));
         map.setCell(new Position(7, 13), c1);
-        c2 = new MapCellImpl("", map, new Position(8, 13));
+        c2 = new MapCellImpl(map, new Position(8, 13));
         for (int i = 3; i < 6; i++) {
             ch.setCell(new Position(10, i), c2);
         }
         final GameMap sh = this.mapsList.get(MAPS.SHOP);
-        c1 = new MapCellImpl("", sh, new Position(4, 7)); 
+        c1 = new MapCellImpl(sh, new Position(4, 7)); 
         map.setCell(new Position(15, 4), c1);
-        c2 = new MapCellImpl("", map, new Position(16, 4));
+        c2 = new MapCellImpl(map, new Position(16, 4));
         sh.setCell(new Position(5, 7), c2);
 
         final GameMap ai = this.mapsList.get(MAPS.AISLE);
         for (int i = 3; i < 7; i++) {
-            c1 = new MapCellImpl("", ai, new Position(i, 1));
+            c1 = new MapCellImpl(ai, new Position(i, 1));
             map.setCell(new Position(i + 6, 19), c1);
-            c2 = new MapCellImpl("", map, new Position(i + 6, 18));
+            c2 = new MapCellImpl(map, new Position(i + 6, 18));
             ai.setCell(new Position(i, 0), c2);
             }
         final GameMap de = this.mapsList.get(MAPS.DENTRANCE);
         for (int i = 4; i < 6; i++) {
-            c1 = new MapCellImpl("", de, new Position(i + 1, 1));
+            c1 = new MapCellImpl(de, new Position(i + 1, 1));
             ai.setCell(new Position(i, 23), c1);
-            c2 = new MapCellImpl("", ai, new Position(i, 22));
+            c2 = new MapCellImpl(ai, new Position(i, 22));
             de.setCell(new Position(i + 1, 0), c2);
         }
         this.b.linkMap(b.dungeonBuild(), de);
