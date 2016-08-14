@@ -32,7 +32,7 @@ public class BattleState extends AbstractGameState {
     
     public BattleState(final HeroTeam party, final GameMap map, final FoeSquad foes, final Bag bag) {
         super(/* new BattleLayer() TODO */ null);
-        this.battleModel = new BattleImpl(party, null, bag); // TODO null will be replaced by Battle getter
+        this.battleModel = new BattleImpl(party, foes, bag); // TODO null will be replaced by Battle getter
     }
 
     /*
@@ -43,5 +43,9 @@ public class BattleState extends AbstractGameState {
     }
 
     */
+    
+    public Battle getModel() {
+        return this.battleModel;
+    }
 
 }
