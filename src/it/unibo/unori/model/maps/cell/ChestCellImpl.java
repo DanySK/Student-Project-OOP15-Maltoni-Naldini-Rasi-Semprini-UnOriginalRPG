@@ -25,13 +25,11 @@ public class ChestCellImpl extends SimpleCellImpl {
 
     /**
      * Constructor for the cell.
-     * @param path
-     *              the path of image to set in the cell
      * @param o
      *              object to put in the cell
      */
-    public ChestCellImpl(final String path, final Item o) {
-        super(path, CellState.BLOCKED);
+    public ChestCellImpl(final Item o) {
+        super("res/sprites/map/chest.png", CellState.BLOCKED);
         this.o = o;
         this.hasItem = true;
     }

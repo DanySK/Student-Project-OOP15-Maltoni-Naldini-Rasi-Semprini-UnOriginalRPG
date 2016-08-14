@@ -43,6 +43,6 @@ public class CellFactory {
      *          a simple chest cell, containing a nail
      */
     public Cell getChestCell() {
-        return new ChestCellImpl("", WeaponFactory.getChiodo());
+        return new ChestCellImpl(WeaponFactory.getChiodo());
     }
 }

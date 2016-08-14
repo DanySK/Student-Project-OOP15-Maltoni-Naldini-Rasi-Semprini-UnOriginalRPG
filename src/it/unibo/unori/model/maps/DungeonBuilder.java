@@ -86,7 +86,7 @@ public class DungeonBuilder {
     }
 
     private void storeChest(final Position pos, final GameMap map, final Item i) {
-        map.setCell(pos, new ChestCellImpl("", i));
+        map.setCell(pos, new ChestCellImpl(i));
     }
 
     /**
