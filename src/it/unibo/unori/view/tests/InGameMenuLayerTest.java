@@ -68,7 +68,7 @@ public class InGameMenuLayerTest { // TODO dialoguelayer
                 createParty();
             } catch (IllegalArgumentException | MaxHeroException e1) {
                 System.out.println("Party creation error");
-                final Layer inGameMenuLayer = new InGameMenuLayer(SingletonParty.getParty(),
+                final Layer inGameMenuLayer = new InGameMenuLayer(SingletonParty.getParty().getHeroTeam(),
                                                                   SingletonParty.getParty().getPartyBag());
 
                 view.push(inGameMenuLayer);
