@@ -2,11 +2,11 @@ package it.unibo.unori.controller;
 
 import java.util.Stack;
 
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import it.unibo.unori.controller.state.GameState;
 import it.unibo.unori.view.View;
+import it.unibo.unori.view.layers.Layer;
 
 /**
  * This class models a stack of
@@ -40,17 +40,10 @@ public class StateMachineStackImpl implements StateMachineStack {
      */
     @Override
     public final void render() {
-        final JPanel currentLayer = this.gsStack.peek().getLayer();
+        final Layer currentLayer = this.gsStack.peek().getLayer();
         this.layerStack.push(currentLayer);
         this.layerStack.resizeTo(currentLayer);
-
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                layerStack.setVisible(true);
-            }
-        });
-
+        this.layerStack.run();
         this.layerStack.centerToScreen();
     }
 

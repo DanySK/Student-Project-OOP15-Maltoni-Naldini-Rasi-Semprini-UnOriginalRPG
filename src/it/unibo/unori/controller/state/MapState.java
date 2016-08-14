@@ -41,23 +41,6 @@ public class MapState extends AbstractGameState {
         // TODO
     }
 
-    @Override
-    public void update(final double elapsedTime) {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
-    public void onEnter() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void onExit() {
-        // TODO Auto-generated method stub
-
-    }
-
     /**
      * Moves the party in the specified direction. Returns if it is possible.
      * 

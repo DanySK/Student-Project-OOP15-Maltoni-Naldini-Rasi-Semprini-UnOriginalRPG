@@ -2,7 +2,6 @@ package it.unibo.unori.controller.actionlistener;
 
 import java.awt.event.ActionEvent;
 
-import it.unibo.unori.controller.state.DialogState;
 import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 
 /**
