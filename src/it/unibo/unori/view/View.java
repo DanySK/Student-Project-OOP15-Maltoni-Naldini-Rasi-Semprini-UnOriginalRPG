@@ -42,6 +42,8 @@ public final class View extends JFrame {
         final WindowEvent closingEvent = new WindowEvent(View.this,
                                                          WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closingEvent);
+
+        this.dispose();
     }
 
     /**
