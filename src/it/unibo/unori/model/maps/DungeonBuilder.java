@@ -22,6 +22,8 @@ public class DungeonBuilder {
     private static final GameMapFactory FACT = new GameMapFactory();
     private static final ArmorFactory AACT = new ArmorFactory();
     private static final PotionFactory PACT = new PotionFactory();
+    private static final String ROCKPATH = "res/sprites/map/rocks.png";
+    private static final String FLOORPATH = "res/sprites/map/earth.png";
     private List<GameMap> rList = new ArrayList<>();
     private List<GameMap> sList = new ArrayList<>();
     private List<GameMap> tList = new ArrayList<>();
@@ -96,7 +98,7 @@ public class DungeonBuilder {
         if (fList.isEmpty()) {
             for (int i = 0; i < 2; i++) {
                 fList.add(FACT.getSizeableMap(8, 12,
-                        "res/sprites/map/rocks.png", "res/sprites/map/earth.png"));
+                        ROCKPATH, FLOORPATH));
             }
         }
         this.storeItem(POS1, fList.get(0), PACT.getGigaPozione());
@@ -111,7 +113,7 @@ public class DungeonBuilder {
         if (tList.isEmpty()) {
             for (int i = 0; i < 9; i++) {
                 tList.add(FACT.getSizeableMap(8, 12,
-                        "res/sprites/map/rocks.png", "res/sprites/map/earth.png"));
+                        ROCKPATH, FLOORPATH));
             }
         }
         this.northLink(tList.get(0), tList.get(2));
@@ -134,7 +136,7 @@ public class DungeonBuilder {
         if (sList.isEmpty()) {
             for (int i = 0; i < 18; i++) {
                 sList.add(FACT.getSizeableMap(8, 12,
-                        "res/sprites/map/rocks.png", "res/sprites/map/earth.png"));
+                        ROCKPATH, FLOORPATH));
             }
         }
         this.northLink(sList.get(1), sList.get(0));
@@ -168,7 +170,7 @@ public class DungeonBuilder {
         if (rList.isEmpty()) {
             for (int i = 0; i < 17; i++) {
                 rList.add(FACT.getSizeableMap(8, 12,
-                        "res/sprites/map/rocks.png", "res/sprites/map/earth.png"));
+                        ROCKPATH, FLOORPATH));
             }
         }
         this.westLink(rList.get(0), rList.get(2));
