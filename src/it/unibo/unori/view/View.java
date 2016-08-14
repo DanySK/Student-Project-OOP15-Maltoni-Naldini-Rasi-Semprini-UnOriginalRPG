@@ -1,11 +1,14 @@
 package it.unibo.unori.view;
 
+import it.unibo.unori.view.layers.Layer;
+
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
 
 import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 
 /**
  *
@@ -36,7 +39,9 @@ public final class View extends JFrame {
      * Closes the view.
      */
     public void close() {
-        this.dispose();
+        final WindowEvent closingEvent = new WindowEvent(View.this,
+                                                         WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closingEvent);
     }
 
     /**
@@ -59,7 +64,7 @@ public final class View extends JFrame {
      * Resizes the view to the specified layer.
      * @param layer the layer the view will resize to
      */
-    public void resizeTo(final JPanel layer) {
+    public void resizeTo(final Layer layer) {
         this.getContentPane().setPreferredSize(layer.getSize());
 
         this.pack();
@@ -69,7 +74,7 @@ public final class View extends JFrame {
      * Pushes a layer on top of the view.
      * @param layer the layer to be pushed
      */
-    public void push(final JPanel layer) {
+    public void push(final Layer layer) {
         this.layeredPane.add(layer, ++layers);
     }
 
