@@ -101,11 +101,12 @@ public class MapState extends AbstractGameState {
                 final int numberOfMonsters = this.random.nextInt(BattleState.MAX_NUMBER_OF_FOES + 1);
                 if (numberOfMonsters != 0) {
                     final List<FoesFindable> foesTypes = new ArrayList<>();
-                    // Random extract the enemies. The fallen hero boss EROE_CADUTO can't appear in dungeon randomly (this explains the "-1")
+                    // Random generate the enemies' types. The fallen hero boss EROE_CADUTO can't appear in dungeon randomly (this explains the "-1")
                     IntStream.range(0, FoesFindable.values().length - 1).limit(numberOfMonsters).forEach(i -> foesTypes.add(FoesFindable.values()[i]));
                     final List<Foe> foes = new ArrayList<>();
-                    IntStream.range(0, numberOfMonsters).forEach(i -> foes.add(new FoeImpl(this.random.nextInt(10)-this.random.nextInt(numberOfMonsters), "Nemico " + i+1, /*TODO*/"", foesTypes.get(i))));
-                    SingletonStateMachine.getController().startBattle(new FoeSquadImpl(foes));
+                    // Random generate the IA of the monsters. The more monsters are generated, the less intelligent should be
+                    IntStream.range(0, numberOfMonsters).forEach(i -> foes.add(new FoeImpl(this.random.nextInt(10) - this.random.nextInt(numberOfMonsters), "Nemico " + Integer.valueOf(i + 1), /*TODO*/"", foesTypes.get(i))));
+                    SingletonStateMachine.getController().startBattle(foes);
                 }
             }
         }

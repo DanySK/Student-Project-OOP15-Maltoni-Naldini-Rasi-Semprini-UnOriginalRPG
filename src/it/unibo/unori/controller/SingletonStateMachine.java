@@ -3,6 +3,7 @@ package it.unibo.unori.controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import com.google.gson.JsonIOException;
@@ -18,6 +19,7 @@ import it.unibo.unori.controller.state.GameState;
 import it.unibo.unori.controller.state.InGameMenuState;
 import it.unibo.unori.controller.state.MainMenuState;
 import it.unibo.unori.controller.state.MapState;
+import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.FoeSquadImpl;
 import it.unibo.unori.model.character.HeroImpl;
 import it.unibo.unori.model.character.exceptions.MaxHeroException;
@@ -234,9 +236,10 @@ public final class SingletonStateMachine {
         }
 
         @Override
-        public void startBattle(final FoeSquadImpl foeSquadImpl) {
+        public void startBattle(final List<Foe> foes) {
             final Party partyObject = SingletonParty.getParty();
-            this.stack.pushAndRender(new BattleState(partyObject.getHeroTeam(), foeSquadImpl, partyObject.getPartyBag()));
+            this.stack.pushAndRender(new BattleState(partyObject.getHeroTeam(), new FoeSquadImpl(foes), partyObject.getPartyBag()));
+            this.stats.increaseMonstersMet(foes.size());
         }
 
     }
