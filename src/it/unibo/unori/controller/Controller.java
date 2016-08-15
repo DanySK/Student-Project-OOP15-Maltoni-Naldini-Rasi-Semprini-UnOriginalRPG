@@ -2,6 +2,7 @@ package it.unibo.unori.controller;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
@@ -9,7 +10,7 @@ import com.google.gson.JsonSyntaxException;
 import it.unibo.unori.controller.exceptions.NotValidStateException;
 import it.unibo.unori.controller.state.DialogState;
 import it.unibo.unori.controller.state.GameState;
-import it.unibo.unori.model.character.FoeSquadImpl;
+import it.unibo.unori.model.character.Foe;
 
 /**
  * This is the interface for the main controller, started by the main object and
@@ -118,6 +119,6 @@ public interface Controller {
     
     void showError(final String error, final DialogState.ErrorSeverity severity);
 
-    void startBattle(final FoeSquadImpl foeSquadImpl);
+    void startBattle(final List<Foe> foes);
 
 }
