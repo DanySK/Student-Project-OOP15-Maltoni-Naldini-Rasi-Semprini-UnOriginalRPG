@@ -24,17 +24,20 @@ import it.unibo.unori.model.maps.cell.SimpleCellImpl;
 public class GameMapDeserializer implements JsonDeserializer<GameMap> {
     private static final String FLOOR_MAP = "floorMap";
     private static final String INITIAL_POSITION = "initialPosition";
-    // TODO REMEMBER THE BOOLEAN
+    private static final String BATTLE_STATE = "battleState";
 
     @Override
     public GameMap deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
             throws JsonParseException {
-
-        final Cell[][] floorMap = context.deserialize(((JsonObject) json).get(FLOOR_MAP), Cell[][].class);
+        JsonObject jObj = (JsonObject) json;
+        final Cell[][] floorMap = context.deserialize(jObj.get(FLOOR_MAP), Cell[][].class);
         // System.out.println(floorMap);
-        final Position initialPosition = context.deserialize(((JsonObject) json).get(INITIAL_POSITION), Position.class);
+        final Position initialPosition = context.deserialize(jObj.get(INITIAL_POSITION), Position.class);
         // System.out.println(initialPosition);
-        final GameMap returnMap = new GameMapImpl(floorMap.length, floorMap[0].length, initialPosition);
+        final boolean battleState = jObj.get(BATTLE_STATE).getAsBoolean();
+        // System.out.println(battleState);
+        final GameMap returnMap = new GameMapImpl(floorMap.length, floorMap[0].length, battleState);
+        returnMap.setInitialCellPosition(initialPosition);
 
         for (int i = 0; i < floorMap.length; i++) {
             for (int j = 0; j < floorMap[i].length; j++) {
