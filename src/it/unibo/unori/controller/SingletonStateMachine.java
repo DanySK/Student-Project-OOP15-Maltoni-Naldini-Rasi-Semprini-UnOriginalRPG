@@ -12,6 +12,7 @@ import it.unibo.unori.controller.exceptions.NotValidStateException;
 import it.unibo.unori.controller.json.JsonFileManager;
 import it.unibo.unori.controller.state.CharacterSelectionState;
 import it.unibo.unori.controller.state.DialogState;
+import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 import it.unibo.unori.controller.state.GameState;
 import it.unibo.unori.controller.state.InGameMenuState;
 import it.unibo.unori.controller.state.MainMenuState;
@@ -120,7 +121,7 @@ public final class SingletonStateMachine {
         }
 
         @Override
-        public void setParty() {
+        public void startGame() {
             if (CharacterSelectionLayer.class.isInstance(this.stack.peek().getLayer())) {
                 final Map<String, Jobs> selected = ((CharacterSelectionLayer) this.stack.pop().getLayer()).getParty();
 
@@ -222,6 +223,11 @@ public final class SingletonStateMachine {
         @Override
         public StateMachineStack getStack() {
             return this.stack;
+        }
+
+        @Override
+        public void showError(final String error, final ErrorSeverity severity) {
+            this.stack.pushAndRender(new DialogState(error, severity));
         }
 
     }
