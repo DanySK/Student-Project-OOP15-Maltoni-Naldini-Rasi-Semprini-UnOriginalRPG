@@ -50,16 +50,22 @@ public class MoveAction extends AbstractAction {
     public void actionPerformed(final ActionEvent event) {
         if (this.controller.getCurrentStateClass().isInstance(MapState.class)) {
             final MapState currentState = (MapState) this.controller.getCurrentState();
+
             if (currentState.moveParty(this.direction)) {
                 MapLayer currentLayer = (MapLayer) currentState.getLayer();
+
                 (currentLayer).move(MoveAction.convertCardinalPointsToSwingConstants(direction));
+
                 if (currentState.checkMapChanges()) {
                     try {
-                        currentLayer.changeMap(currentState.getMap().getFrames(), new Point(currentState.getCurrentPosition().getPosX(), currentState.getCurrentPosition().getPosY()));
+                        currentLayer.changeMap(currentState.getMap().getFrames(),
+                                new Point(currentState.getCurrentPosition().getPosX(),
+                                        currentState.getCurrentPosition().getPosY()));
                     } catch (SpriteNotFoundException e) {
                         this.controller.showError(e.getMessage(), ErrorSeverity.SERIUOS);
                     }
                 }
+                currentState.randomEncounters();
             }
         }
     }
