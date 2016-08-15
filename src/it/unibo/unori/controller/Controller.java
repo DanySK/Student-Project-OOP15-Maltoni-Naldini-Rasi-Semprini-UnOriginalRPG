@@ -7,6 +7,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
 import it.unibo.unori.controller.exceptions.NotValidStateException;
+import it.unibo.unori.controller.state.DialogState;
 import it.unibo.unori.controller.state.GameState;
 
 /**
@@ -81,19 +82,39 @@ public interface Controller {
      *             object of type
      */
     void newGame() throws IOException;
-    
+
+    /**
+     * This method closes completely the game.
+     */
     void closeGame();
-    
+
+    /**
+     * This method returns the state at the top of the stack, if any.
+     * 
+     * @return the state at the top of the stack
+     */
     GameState getCurrentState();
-    
+
+    /**
+     * This method returns the class of the state at the top of the stack, if
+     * any.
+     * 
+     * @return the class of state at the top of the stack
+     */
     Class<?> getCurrentStateClass();
 
-    void setParty();
-    
+    /**
+     * This method starts the game, loading the chosen heroes form graphics and
+     * loading the map.
+     */
+    void startGame();
+
     void openMenu() throws NotValidStateException;
 
     void closeMenu() throws NotValidStateException;
-    
+
     StateMachineStack getStack();
+    
+    void showError(final String error, final DialogState.ErrorSeverity severity);
 
 }

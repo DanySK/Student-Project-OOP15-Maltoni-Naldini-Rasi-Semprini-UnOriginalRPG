@@ -6,7 +6,7 @@ public class CharacterSelectionActionListener extends AbstractUnoriActionListene
 
     @Override
     public void actionPerformed(final ActionEvent event) {
-        this.getController().setParty();
+        this.getController().startGame();
     }
 
 }

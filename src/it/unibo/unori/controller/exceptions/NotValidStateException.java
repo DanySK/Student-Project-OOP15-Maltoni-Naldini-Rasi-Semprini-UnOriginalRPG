@@ -5,6 +5,9 @@ package it.unibo.unori.controller.exceptions;
  * the stack, but another was given instead.
  */
 public class NotValidStateException extends Exception {
+    private static final String DEFAULT_FIRST_PART = "Lo stato di gioco ";
+    private static final String DEFAULT_LAST_PART = " non corrisponde con nessuno degli stati previsti";
+    private static final String DEFAULT_MESSAGE = DEFAULT_FIRST_PART + "attuale" + DEFAULT_LAST_PART;
     /**
      * Generated serial version UID.
      */
@@ -14,6 +17,17 @@ public class NotValidStateException extends Exception {
      * Default constructor.
      */
     public NotValidStateException() {
-        super("The current GameState is not what was expected");
+        super(DEFAULT_MESSAGE);
+    }
+
+    /**
+     * Default constructor. It let the developer specify the instance of the
+     * unexpected GameState.
+     * 
+     * @param expectedStateName
+     *            the name of the instance of the unexpected GameState
+     */
+    public NotValidStateException(final String expectedStateName) {
+        super(DEFAULT_FIRST_PART + expectedStateName + DEFAULT_LAST_PART);
     }
 }
