@@ -258,7 +258,7 @@ public final class MagicLogics {
                 weakness = weaknessGeneral(powerOpponent, powerAtt) * SHIFTWEAKNESS;
             }
             return BattleLogics.getStandardDamage(att.getLevel(),
-                    atkTot + weakness.intValue() - opp.getDefense());
+                    atkTot + weakness.intValue() - (opp.getDefense() / 2));
         } else if (opp instanceof Hero) {
             
             return BattleLogics.getStandardDamage(att.getLevel(), atkTot 
