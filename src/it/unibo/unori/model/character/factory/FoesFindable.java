@@ -1,6 +1,7 @@
 package it.unibo.unori.model.character.factory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,51 +11,102 @@ import it.unibo.unori.model.character.Statistics;
 import it.unibo.unori.model.character.Status;
 import it.unibo.unori.model.items.Weapon;
 
+/**
+ * Enumeration that defines the types of Foes findable.
+ *
+ */
 public enum FoesFindable {
     
-    FOLLETTO(Status.NONE),
-    GNOMO_DA_GIARDINO(Status.ASLEEP),
-    DEMONE(Status.BLEEDING),
-    DRAGO(Status.POISONED),
-    SPIRITO(Status.CURSED),
-    BAMBINO(Status.BLEEDING),
-    STREGONE(Status.CURSED),
-    EROE_CADUTO(Status.ASLEEP);
+    /**
+     * Types of Foes.
+     * Folletto.
+     */
+    FOLLETTO(Status.NONE, FoeSetup.FOLLETTO),
+    
+    /**
+     * Gnomo da giardino.
+     */
+    GNOMO_DA_GIARDINO(Status.ASLEEP, FoeSetup.GNOMO_DA_GIARDINO),
+    
+    /**
+     * Demone.
+     */
+    DEMONE(Status.BLEEDING, FoeSetup.DEMONE),
+    
+    /**
+     * Drago.
+     */
+    DRAGO(Status.POISONED, FoeSetup.DRAGO),
+    
+    /**
+     * Spirito.
+     */
+    SPIRITO(Status.CURSED, FoeSetup.SPIRITO),
+    
+    /**
+     * Bamabino.
+     */
+    BAMBINO(Status.BLEEDING, FoeSetup.BAMBINO),
+    
+    /**
+     * Stregone.
+     */
+    STREGONE(Status.CURSED, FoeSetup.STREGONE),
+    
+    /**
+     * Eroe caduto.
+     */
+    EROE_CADUTO(Status.ASLEEP, FoeSetup.EROE_CADUTO);
     
     private final Status immunity;
     private final Map<Statistics, Integer> map;
     private final List<MagicAttackInterface> magics = new ArrayList<>();
     private final Weapon weap;
     
-    private FoesFindable(final Status immunity, final String filePath) {
+    FoesFindable(final Status immune, final String filePath) {
         FoeSetup js = new FoeSetup();
-        
-        this.immunity = immunity;
+        this.immunity = immune;
         this.map = js.getBasicStats(filePath);
         this.magics.add(js.getBasicMagic(filePath));
         this.weap = js.getBasicWeapon(filePath);
     }
     
-    private FoesFindable(final Status immunity) {
-        this.immunity = immunity;
+    FoesFindable(final Status immune) {
+        this.immunity = immune;
         this.map = FoesFactory.getBasicStats();
         this.magics.add(FoesFactory.getBasicMag());
         this.weap = FoesFactory.getBasicWeap();
     }
     
+    /**
+     * Getter method that returns the immunity of the Foe.
+     * @return the immunity Status.
+     */
     public Status getImmunity() {
         return this.immunity;
     }
-
+    
+    /**
+     * Getter method that returns the basic Map of Statistics for this Foe.
+     * @return a Map of Statistics, Integer. Defensive copy.
+     */
     public Map<Statistics, Integer> getMap() {
-        return map;
+        return new HashMap<>(map);
     }
-
+    
+    /**
+     * Getter method that returns the basic Weapon for the type of Foe.
+     * @return the basic Weapon equipped.
+     */
     public Weapon getWeap() {
         return weap;
     }
     
+    /**
+     * Getter method that returns the list of magic for the type of Foe.
+     * @return the list of magics. Defensive copy.
+     */
     public List<MagicAttackInterface> getMagic() {
-        return this.magics;
+        return new ArrayList<>(this.magics);
     }
 }

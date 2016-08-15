@@ -16,6 +16,9 @@ import it.unibo.unori.model.items.WeaponFactory;
 import it.unibo.unori.model.items.WeaponImpl;
 import it.unibo.unori.model.menu.utility.Pair;
 
+/**
+ * Utility class to generate Statistics for a Foe.
+ */
 public final class FoesFactory {
     
     private static final int SHIFT = 30;
@@ -28,7 +31,7 @@ public final class FoesFactory {
         //Empty private constructor, because this is a final utility class
     }
     
-    private static int getBasicOf(Statistics s) {
+    private static int getBasicOf(final Statistics s) {
         return getBasicStats().get(s);
     }
     
@@ -104,11 +107,11 @@ public final class FoesFactory {
         m.put(Statistics.PHYSICATK, getBasicOf(Statistics.PHYSICATK) + growth);
         m.put(Statistics.PHYSICDEF, getBasicOf(Statistics.PHYSICDEF) + growth);
         m.put(Statistics.EXPFACTOR, 0);
-        for(Entry<Statistics, Integer> e : m.entrySet()) {
+        for (Entry<Statistics, Integer> e : m.entrySet()) {
             if (best.getX().equals(e.getKey())) {
                 m.replace(e.getKey(), e.getValue() + SHIFT);
             }
-            if(best.getY().equals(e.getKey())) {
+            if (best.getY().equals(e.getKey())) {
                 m.replace(e.getKey(), e.getValue() + SHIFT);
             }
         }
@@ -174,18 +177,23 @@ public final class FoesFactory {
         return w;
     }
     
+    /**
+     * This method gives a list of Magic attacks, depending on the ia of the Foe.
+     * @param ia the ia of the interested Foe.
+     * @return the List of magics for a Foe.
+     */
     public static List<MagicAttackInterface> getGrownMagics(final int ia) {
         final List<MagicAttackInterface> l = new ArrayList<>();
-        if(ia > 0 && ia <= MEDIUMIA) {
-            for(Jobs j : Jobs.values()) {
+        if (ia > 0 && ia <= MEDIUMIA) {
+            for (Jobs j : Jobs.values()) {
                  l.add(MagicGenerator.getStandard(j));
             }
-        } else if(ia > MEDIUMIA && ia <= HIGHIA) {
-            for(Jobs j : Jobs.values()) {
+        } else if (ia > MEDIUMIA && ia <= HIGHIA) {
+            for (Jobs j : Jobs.values()) {
                 l.add(MagicGenerator.getMedium(j));
            }
         } else {
-            for(Jobs j : Jobs.values()) {
+            for (Jobs j : Jobs.values()) {
                 l.add(MagicGenerator.getAdvanced(j));
            }  
         }
