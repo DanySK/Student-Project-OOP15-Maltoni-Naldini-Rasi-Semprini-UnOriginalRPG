@@ -10,6 +10,7 @@ import com.google.gson.JsonSyntaxException;
 
 import it.unibo.unori.controller.exceptions.NotValidStateException;
 import it.unibo.unori.controller.json.JsonFileManager;
+import it.unibo.unori.controller.state.BattleState;
 import it.unibo.unori.controller.state.CharacterSelectionState;
 import it.unibo.unori.controller.state.DialogState;
 import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
@@ -17,9 +18,11 @@ import it.unibo.unori.controller.state.GameState;
 import it.unibo.unori.controller.state.InGameMenuState;
 import it.unibo.unori.controller.state.MainMenuState;
 import it.unibo.unori.controller.state.MapState;
+import it.unibo.unori.model.character.FoeSquadImpl;
 import it.unibo.unori.model.character.HeroImpl;
 import it.unibo.unori.model.character.exceptions.MaxHeroException;
 import it.unibo.unori.model.character.jobs.Jobs;
+import it.unibo.unori.model.maps.Party;
 import it.unibo.unori.model.maps.SingletonParty;
 import it.unibo.unori.view.exceptions.SpriteNotFoundException;
 import it.unibo.unori.view.layers.CharacterSelectionLayer;
@@ -228,6 +231,12 @@ public final class SingletonStateMachine {
         @Override
         public void showError(final String error, final ErrorSeverity severity) {
             this.stack.pushAndRender(new DialogState(error, severity));
+        }
+
+        @Override
+        public void startBattle(final FoeSquadImpl foeSquadImpl) {
+            final Party partyObject = SingletonParty.getParty();
+            this.stack.pushAndRender(new BattleState(partyObject.getHeroTeam(), foeSquadImpl, partyObject.getPartyBag()));
         }
 
     }
