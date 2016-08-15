@@ -1,12 +1,14 @@
 package it.unibo.unori.controller.state;
 
 import java.awt.Point;
+import java.util.Arrays;
 
 import it.unibo.unori.controller.action.InteractAction;
 import it.unibo.unori.controller.action.MoveAction;
 import it.unibo.unori.controller.action.OpenMenuAction;
 import it.unibo.unori.model.maps.GameMap;
 import it.unibo.unori.model.maps.Party;
+import it.unibo.unori.model.maps.Position;
 import it.unibo.unori.model.maps.SingletonParty;
 import it.unibo.unori.model.maps.exceptions.BlockedPathException;
 import it.unibo.unori.model.menu.DialogueInterface;
@@ -19,6 +21,7 @@ import it.unibo.unori.view.layers.MapLayer;
  */
 public class MapState extends AbstractGameState {
     private final Party party;
+    private String[][] previousSpritesMap;
 
     /**
      * Default constructor.
@@ -29,15 +32,13 @@ public class MapState extends AbstractGameState {
      *             if the sprite at the path provided does not exist
      */
     public MapState(final GameMap map) throws SpriteNotFoundException {
-        super(new MapLayer(MoveAction.getSupportedMovementsMap(), 
-              new InteractAction(), 
-              new OpenMenuAction(),
-              map.getFrames(),
-              new Point(map.getInitialCellPosition().getPosX(), 
-              map.getInitialCellPosition().getPosY()),
-              SingletonParty.getParty().getCurrentFrame()));
+        super(new MapLayer(MoveAction.getSupportedMovementsMap(), new InteractAction(), new OpenMenuAction(),
+                map.getFrames(),
+                new Point(map.getInitialCellPosition().getPosX(), map.getInitialCellPosition().getPosY()),
+                SingletonParty.getParty().getCurrentFrame()));
         party = SingletonParty.getParty();
         party.setCurrentMap(map);
+        previousSpritesMap = this.party.getCurrentGameMap().getFrames();
         // TODO
     }
 
@@ -49,11 +50,13 @@ public class MapState extends AbstractGameState {
      * @return true if the movement was possible and was done
      */
     public boolean moveParty(final Party.CardinalPoints direction) {
+        final String[][] currentSpritesMap = this.party.getCurrentGameMap().getFrames();
         try {
             this.party.moveParty(direction);
         } catch (BlockedPathException e) {
             return false;
         }
+        this.previousSpritesMap = currentSpritesMap;
         return true;
     }
 
@@ -64,5 +67,19 @@ public class MapState extends AbstractGameState {
      */
     public DialogueInterface interact() {
         return this.party.interact();
+    }
+
+    public GameMap getMap() {
+        return this.party.getCurrentGameMap();
+    }
+    
+    public Position getCurrentPosition() {
+        return this.party.getCurrentPosition();
+        
+    }
+
+    public boolean checkMapChanges() {
+        // TODO check
+        return !Arrays.deepEquals(this.previousSpritesMap, party.getCurrentGameMap().getFrames());
     }
 }
