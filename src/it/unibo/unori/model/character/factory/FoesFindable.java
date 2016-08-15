@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import it.unibo.unori.controller.json.FoeSetup;
 import it.unibo.unori.model.battle.MagicAttackInterface;
 import it.unibo.unori.model.character.Statistics;
 import it.unibo.unori.model.character.Status;
@@ -24,6 +25,15 @@ public enum FoesFindable {
     private final Map<Statistics, Integer> map;
     private final List<MagicAttackInterface> magics = new ArrayList<>();
     private final Weapon weap;
+    
+    private FoesFindable(final Status immunity, final String filePath) {
+        FoeSetup js = new FoeSetup();
+        
+        this.immunity = immunity;
+        this.map = js.getBasicStats(filePath);
+        this.magics.add(js.getBasicMagic(filePath));
+        this.weap = js.getBasicWeapon(filePath);
+    }
     
     private FoesFindable(final Status immunity) {
         this.immunity = immunity;

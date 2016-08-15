@@ -38,7 +38,7 @@ public final class FoesFactory {
      */
     public static Map<Statistics, Integer> getBasicStats() {
         final Map<Statistics, Integer> m = new HashMap<>();
-        m.put(Statistics.TOTALHP, 2000);
+        m.put(Statistics.TOTALHP, 1500);
         m.put(Statistics.TOTALMP, 700);
         m.put(Statistics.SPEED, 1200);
         m.put(Statistics.FIREATK, 1000);
@@ -47,8 +47,9 @@ public final class FoesFactory {
         m.put(Statistics.THUNDERDEF, 750);
         m.put(Statistics.ICEATK, 1000);
         m.put(Statistics.ICEDEF, 750);
-        m.put(Statistics.PHYSICATK, 2000);
-        m.put(Statistics.PHYSICDEF, 2000);
+        m.put(Statistics.PHYSICATK, 1000);
+        m.put(Statistics.PHYSICDEF, 1000);
+        m.put(Statistics.EXPFACTOR, 0);
         return m;
     }
     
@@ -102,6 +103,7 @@ public final class FoesFactory {
         m.put(Statistics.ICEDEF, getBasicOf(Statistics.ICEDEF) + growth);
         m.put(Statistics.PHYSICATK, getBasicOf(Statistics.PHYSICATK) + growth);
         m.put(Statistics.PHYSICDEF, getBasicOf(Statistics.PHYSICDEF) + growth);
+        m.put(Statistics.EXPFACTOR, 0);
         for(Entry<Statistics, Integer> e : m.entrySet()) {
             if (best.getX().equals(e.getKey())) {
                 m.replace(e.getKey(), e.getValue() + SHIFT);

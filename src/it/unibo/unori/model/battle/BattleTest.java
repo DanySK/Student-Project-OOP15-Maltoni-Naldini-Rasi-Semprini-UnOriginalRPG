@@ -101,10 +101,6 @@ public class BattleTest {
         System.out.println(this.battle.getHeroOnTurn().getCurrentBar());
         this.battle.getHeroOnTurn().setCurrentBar(100);
         System.out.println(battle.specialAttack());
-        assertEquals(this.battle.getEnemies().getAliveFoes().size(), 0);
-        assertTrue(this.battle.isOver());
-        battle.acquireExp().generate();
-        System.out.println(battle.getOutCome());
         
     }
     
