@@ -3,18 +3,13 @@ package it.unibo.unori.model.maps;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.unibo.unori.model.character.Foe;
-import it.unibo.unori.model.character.FoeImpl;
-import it.unibo.unori.model.character.factory.FoesFindable;
 import it.unibo.unori.model.items.Armor.ArmorPieces;
 import it.unibo.unori.model.items.ArmorFactory;
 import it.unibo.unori.model.items.Item;
 import it.unibo.unori.model.items.ItemImpl;
 import it.unibo.unori.model.items.PotionFactory;
 import it.unibo.unori.model.items.WeaponFactory;
-import it.unibo.unori.model.maps.cell.Cell;
 import it.unibo.unori.model.maps.cell.ChestCellImpl;
-import it.unibo.unori.model.maps.cell.FoeCellImpl;
 import it.unibo.unori.model.maps.cell.MapCellImpl;
 import it.unibo.unori.model.maps.cell.ObjectCellImpl;
 
