@@ -217,7 +217,7 @@ public class GameMapFactory {
        }
        map.setCell(new Position(6, 5), FACT.getFreeCell("res/sprites/map/grass.png"));
        final Npc crest = new NpcImpl("Questo dungeon mi fa paura, vado a lavorare a Train Simulator");
-       map.setCell(new Position(3, 6), new NPCCellImpl("res/sprites/npcs/grass/front-1", crest));
+       map.setCell(new Position(3, 6), new NPCCellImpl("res/sprites/npcs/grass/front-1.png", crest));
        map.setCell(new Position(8, 9), new ObjectCellImpl(PACT.getPozioneVita()));
        map.setCell(new Position(2, 9), new ObjectCellImpl(WeaponFactory.getLanciafiamme()));
        return map;
