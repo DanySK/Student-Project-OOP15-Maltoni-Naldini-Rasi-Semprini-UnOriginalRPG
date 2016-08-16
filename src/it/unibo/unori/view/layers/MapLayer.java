@@ -31,7 +31,9 @@ import java.awt.image.AffineTransformOp;
  *
  */
 public class MapLayer extends Layer {
-    private static final Dimension SIZE = new Dimension(800, 640);
+	private static final long serialVersionUID = 1L;
+	
+	private static final Dimension SIZE = new Dimension(800, 640);
     private static final Dimension CELL_SIZE = new Dimension(32, 32);
 
     private Point mapStartingPoint;
@@ -93,10 +95,10 @@ public class MapLayer extends Layer {
                 case SwingConstants.SOUTH:
                     inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "DOWN");
                     actionMap.put("DOWN", entry.getValue()); break;
-                case SwingConstants.EAST:
+                case SwingConstants.WEST:
                     inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "LEFT");
                     actionMap.put("LEFT", entry.getValue()); break;
-                case SwingConstants.WEST:
+                case SwingConstants.EAST:
                     inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "RIGHT");
                     actionMap.put("RIGHT", entry.getValue()); break;
                 default: break;
@@ -146,9 +148,9 @@ public class MapLayer extends Layer {
             case SwingConstants.SOUTH:
                 position.translate(0, 1); break;
             case SwingConstants.EAST:
-                position.translate(-1, 0); break;
-            case SwingConstants.WEST:
                 position.translate(1, 0); break;
+            case SwingConstants.WEST:
+                position.translate(-1, 0); break;
             default: break;
         }
     }

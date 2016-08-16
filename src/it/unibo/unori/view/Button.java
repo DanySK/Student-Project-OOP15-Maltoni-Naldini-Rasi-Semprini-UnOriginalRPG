@@ -25,7 +25,7 @@ public class Button extends JButton implements FocusListener
 
     /**
      * Creates a button with the specified label.
-     * @param label text to be shown inside the button
+     * @param label the text to be shown inside the button
      */
     public Button(final String label) {
         super(label);

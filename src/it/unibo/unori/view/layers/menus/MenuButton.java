@@ -7,7 +7,18 @@ import java.awt.event.FocusListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
+/**
+ *
+ * A custom button for the menu.
+ *
+ */
 public class MenuButton extends JButton implements FocusListener {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Creates a menu button
+	 * @param label the text to be shown inside the button
+	 */
     public MenuButton(final String label) {
         super(label);
 
