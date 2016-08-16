@@ -20,7 +20,7 @@ public class CellFactory {
     public Cell getFreeCell(final String path) {
         return new SimpleCellImpl(path, CellState.FREE);
     }
-    
+
     /**
      * create and return a Free cell object.
      * @return
@@ -29,7 +29,7 @@ public class CellFactory {
     public Cell getFreeCell() {
         return new SimpleCellImpl("", CellState.FREE);
     }
-    
+
     /**
      * create and return a Blocked cell object.
      * @return
