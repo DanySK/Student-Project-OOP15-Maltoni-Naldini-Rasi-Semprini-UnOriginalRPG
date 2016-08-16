@@ -124,10 +124,10 @@ public class MapLayer extends Layer {
             case SwingConstants.SOUTH:
                 frame[0] = getSprite(spriteSheet, JobSprite.FRONT);
                 frame[1] = getSprite(spriteSheet, JobSprite.FRONT2); break;
-            case SwingConstants.EAST:
+            case SwingConstants.WEST:
                 frame[0] = getSprite(spriteSheet, JobSprite.LEFT);
                 frame[1] = getSprite(spriteSheet, JobSprite.LEFT2); break;
-            case SwingConstants.WEST:
+            case SwingConstants.EAST:
                 frame[0] = flipImage(getSprite(spriteSheet, JobSprite.LEFT));
                 frame[1] = flipImage(getSprite(spriteSheet, JobSprite.LEFT2)); break;
             default: break;
