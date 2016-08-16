@@ -239,7 +239,7 @@ public class GameMapImpl implements GameMap {
     }
     
     @Override
-    public boolean getBattleState() {
+    public boolean isBattleState() {
         return this.battleState;
     }
 
