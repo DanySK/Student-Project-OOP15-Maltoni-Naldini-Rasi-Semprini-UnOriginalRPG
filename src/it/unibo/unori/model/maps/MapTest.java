@@ -91,7 +91,7 @@ public class MapTest {
      */
     @Test
     public void testCellSetting() {
-        final GameMap map = new GameMapImpl();
+        final GameMap map = new GameMapImpl(70, 70);
         final CellFactory fc = new CellFactory();
         final Position p = new Position(50, 50);
         map.setCell(p, fc.getBlockedCell());
