@@ -22,7 +22,9 @@ import java.awt.event.ActionEvent;
  *
  */
 public class DialogLayer extends Layer {
-    final private Button button;
+	private static final long serialVersionUID = 1L;
+	
+	private final Button button;
     final private static Dimension SIZE = new Dimension(View.SIZE.width / 2,
                                                         View.SIZE.height / 2);
 
