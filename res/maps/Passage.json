@@ -320,7 +320,7 @@
         "state": "FREE"
       },
       {
-        "path": "res/sprites/npcs/grass/front-2",
+        "path": "res/sprites/npcs/grass/front-2.png",
         "state": "BLOCKED"
       },
       {
@@ -614,7 +614,7 @@
         "state": "FREE"
       },
       {
-        "path": "res/sprites/npcs/grass/front-4",
+        "path": "res/sprites/npcs/grass/front-4.png",
         "state": "BLOCKED"
       },
       {
@@ -752,7 +752,7 @@
         "state": "FREE"
       },
       {
-        "path": "res/sprites/npcs/grass/front-3",
+        "path": "res/sprites/npcs/grass/front-3.png",
         "state": "BLOCKED"
       },
       {
