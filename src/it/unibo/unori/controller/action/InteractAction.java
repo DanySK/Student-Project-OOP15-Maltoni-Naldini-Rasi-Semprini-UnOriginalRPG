@@ -37,7 +37,7 @@ public class InteractAction extends AbstractAction {
 
     @Override
     public void actionPerformed(final ActionEvent event) {
-        if (this.controller.getCurrentStateClass().isInstance(MapState.class)) {
+        if (MapState.class.isInstance(this.controller)) {
             final MapState currentState = (MapState) this.controller.getCurrentState();
             // If another dialogue is open, it tries to  next line ...
             if (this.currentDialogue.isPresent()) {
