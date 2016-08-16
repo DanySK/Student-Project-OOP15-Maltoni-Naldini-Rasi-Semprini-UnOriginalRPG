@@ -11,6 +11,7 @@ public class FoeCellImpl extends SimpleCellImpl {
     /**
      * 
      */
+    public static final String ENC = "Parte la sfida con ";
     private static final long serialVersionUID = -4153132398113019125L;
     private final Foe foe;
 
