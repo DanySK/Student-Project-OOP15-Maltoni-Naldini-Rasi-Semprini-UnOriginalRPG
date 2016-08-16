@@ -103,9 +103,13 @@ public class WorldBuilder {
         return this.b;
     }
 
-    enum MAPS {
+    /**
+     * Enum for the GameMap.
+     *
+     */
+    public enum MAPS {
         /**
-         * Kind of maps ammitted in the enumeration
+         * Kind of maps ammitted in the enumeration.
          */
         CITY, DENTRANCE, SHOP, HOUSE, CHURCH, AISLE;
     }
