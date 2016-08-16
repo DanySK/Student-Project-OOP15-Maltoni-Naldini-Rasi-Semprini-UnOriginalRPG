@@ -30,7 +30,7 @@ public class OpenMenuAction extends AbstractAction {
 
     @Override
     public void actionPerformed(final ActionEvent event) {
-        if (this.controller.getCurrentStateClass().isInstance(MapState.class)) {
+        if (MapState.class.isInstance(this.controller.getCurrentState())) {
             try {
                 this.controller.openMenu();
             } catch (NotValidStateException e) {
