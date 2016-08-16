@@ -98,7 +98,7 @@ public class DungeonBuilder {
         if (fList.isEmpty()) {
             for (int i = 0; i < 2; i++) {
                 fList.add(FACT.getSizeableMap(8, 12,
-                        ROCKPATH, FLOORPATH));
+                        ROCKPATH, FLOORPATH, true));
             }
         }
         this.storeItem(POS1, fList.get(0), PACT.getGigaPozione());
@@ -118,7 +118,7 @@ public class DungeonBuilder {
         if (tList.isEmpty()) {
             for (int i = 0; i < 9; i++) {
                 tList.add(FACT.getSizeableMap(8, 12,
-                        ROCKPATH, FLOORPATH));
+                        ROCKPATH, FLOORPATH, true));
             }
         }
         this.northLink(tList.get(0), tList.get(2));
@@ -141,7 +141,7 @@ public class DungeonBuilder {
         if (sList.isEmpty()) {
             for (int i = 0; i < 18; i++) {
                 sList.add(FACT.getSizeableMap(8, 12,
-                        ROCKPATH, FLOORPATH));
+                        ROCKPATH, FLOORPATH, true));
             }
         }
         this.northLink(sList.get(1), sList.get(0));
@@ -175,7 +175,7 @@ public class DungeonBuilder {
         if (rList.isEmpty()) {
             for (int i = 0; i < 17; i++) {
                 rList.add(FACT.getSizeableMap(8, 12,
-                        ROCKPATH, FLOORPATH));
+                        ROCKPATH, FLOORPATH, true));
             }
         }
         this.westLink(rList.get(0), rList.get(2));
