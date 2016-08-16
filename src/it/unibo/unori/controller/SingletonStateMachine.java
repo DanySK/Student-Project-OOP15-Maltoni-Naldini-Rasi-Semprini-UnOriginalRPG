@@ -11,6 +11,7 @@ import com.google.gson.JsonSyntaxException;
 
 import it.unibo.unori.controller.exceptions.NotValidStateException;
 import it.unibo.unori.controller.json.JsonFileManager;
+import it.unibo.unori.controller.json.WorldLoader;
 import it.unibo.unori.controller.state.BattleState;
 import it.unibo.unori.controller.state.CharacterSelectionState;
 import it.unibo.unori.controller.state.DialogState;
@@ -133,34 +134,23 @@ public final class SingletonStateMachine {
                 selected.entrySet().forEach(entry -> {
                     try {
                         SingletonParty.getParty().getHeroTeam().addHero(new HeroImpl(entry.getKey(), entry.getValue()));
-                    } catch (IllegalArgumentException e) {
-                        this.stack.push(new DialogState(e.getMessage(), DialogState.ErrorSeverity.SERIUOS));
-                        this.stack.render();
-                        e.printStackTrace();
-                    } catch (MaxHeroException e) {
-                        this.stack.push(new DialogState(e.getMessage(), DialogState.ErrorSeverity.SERIUOS));
-                        this.stack.render();
+                    } catch (MaxHeroException | IllegalArgumentException e) {
+                        this.showError(e.getMessage(), ErrorSeverity.SERIUOS);
                         e.printStackTrace();
                     }
                 });
 
                 try {
-                    this.stack.push(new MapState(SingletonParty.getParty().getCurrentGameMap()));
-                    this.stack.render();
-                } catch (SpriteNotFoundException e) {
-                    this.stack.push(new DialogState(e.getMessage(), DialogState.ErrorSeverity.SERIUOS));
-                    this.stack.render();
+                    WorldLoader loader = new WorldLoader();
+                    SingletonParty.getParty().setCurrentMap(loader.loadWorld());
+                    this.stack.pushAndRender(new MapState(SingletonParty.getParty().getCurrentGameMap()));
+                } catch (IOException e) {
+                    this.showError(e.getMessage(), ErrorSeverity.SERIUOS);
                     e.printStackTrace();
                 }
 
             } else {
-                try {
-                    throw new NotValidStateException();
-                } catch (NotValidStateException e) {
-                    this.stack.push(new DialogState(e.getMessage(), DialogState.ErrorSeverity.SERIUOS));
-                    this.stack.render();
-                    e.printStackTrace();
-                }
+                this.showError(new NotValidStateException().getMessage(), ErrorSeverity.SERIUOS);
             }
 
         }
@@ -199,7 +189,7 @@ public final class SingletonStateMachine {
         public Class<?> getCurrentStateClass() {
             return this.stack.peek().getClass();
         }
-        
+
         @Override
         public void openMenu() throws NotValidStateException {
             if (this.stack.peek().getClass().isInstance(InGameMenuState.class)) {
@@ -238,7 +228,8 @@ public final class SingletonStateMachine {
         @Override
         public void startBattle(final List<Foe> foes) {
             final Party partyObject = SingletonParty.getParty();
-            this.stack.pushAndRender(new BattleState(partyObject.getHeroTeam(), new FoeSquadImpl(foes), partyObject.getPartyBag()));
+            this.stack.pushAndRender(
+                    new BattleState(partyObject.getHeroTeam(), new FoeSquadImpl(foes), partyObject.getPartyBag()));
             this.stats.increaseMonstersMet(foes.size());
         }
 

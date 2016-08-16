@@ -70,9 +70,6 @@ public class StateMachineStackImpl implements StateMachineStack {
 
     @Override
     public void closeTheView() {
-        while (!this.gsStack.isEmpty()) {
-            this.pop();
-        }
         this.layerStack.close();
     }
 }
