@@ -33,7 +33,7 @@ import java.awt.image.AffineTransformOp;
 public class MapLayer extends Layer {
 	private static final long serialVersionUID = 1L;
 	
-	private static final Dimension SIZE = new Dimension(800, 640);
+	private static final Dimension SIZE = new Dimension(1280, 720);
     private static final Dimension CELL_SIZE = new Dimension(32, 32);
 
     private Point mapStartingPoint;
