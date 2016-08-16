@@ -3,13 +3,18 @@ package it.unibo.unori.model.maps;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.unibo.unori.model.character.Foe;
+import it.unibo.unori.model.character.FoeImpl;
+import it.unibo.unori.model.character.factory.FoesFindable;
 import it.unibo.unori.model.items.Armor.ArmorPieces;
 import it.unibo.unori.model.items.ArmorFactory;
 import it.unibo.unori.model.items.Item;
 import it.unibo.unori.model.items.ItemImpl;
 import it.unibo.unori.model.items.PotionFactory;
 import it.unibo.unori.model.items.WeaponFactory;
+import it.unibo.unori.model.maps.cell.Cell;
 import it.unibo.unori.model.maps.cell.ChestCellImpl;
+import it.unibo.unori.model.maps.cell.FoeCellImpl;
 import it.unibo.unori.model.maps.cell.MapCellImpl;
 import it.unibo.unori.model.maps.cell.ObjectCellImpl;
 
@@ -104,6 +109,10 @@ public class DungeonBuilder {
         this.storeItem(POS1, fList.get(0), PACT.getGigaPozione());
         this.storeItem(POS2, fList.get(0), PACT.getTrapiantoMana());
         this.northLink(fList.get(0), fList.get(1));
+        final Foe boss = new FoeImpl(10, "Iinnapi", "res/sprites/warrior.png",
+                FoesFindable.EROE_CADUTO); 
+        final Cell c = new FoeCellImpl("res/sprites/npcs/earth/front-2.png", boss);
+        fList.get(1).setCell(POS1, c);
     }
 
     /**

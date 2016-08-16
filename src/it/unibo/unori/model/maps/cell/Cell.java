@@ -2,6 +2,7 @@ package it.unibo.unori.model.maps.cell;
 
 import java.io.Serializable;
 
+import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.Item;
 import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
@@ -95,6 +96,14 @@ public interface Cell extends Serializable {
     Item openChest(final Bag b) throws NoObjectFoundException, 
                                        NoKeyFoundException,
                                        ItemNotFoundException;
+
+    /**
+     * Return the boss in the cell, when the party interact with the cell.
+     * @return
+     *          a Foe object
+     * @throws IllegalStateException if there's no boss in the cell.
+     */
+    Foe getBoss() throws IllegalStateException;
 
 
 }
