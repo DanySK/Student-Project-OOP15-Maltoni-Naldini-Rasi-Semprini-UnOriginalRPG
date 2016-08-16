@@ -1,4 +1,4 @@
-package it.unibo.unori.view.layers.menus
+package it.unibo.unori.view.layers.menus;
 
 import java.awt.Dimension;
 import java.util.LinkedList;
