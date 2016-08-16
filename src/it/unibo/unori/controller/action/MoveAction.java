@@ -42,14 +42,14 @@ public class MoveAction extends AbstractAction {
      */
     public MoveAction(final CardinalPoints direction) {
         super();
-        System.out.println("Created MoveAction with direction: " + direction);
+        // System.out.println("Created MoveAction with direction: " + direction);
         this.direction = direction;
         this.controller = SingletonStateMachine.getController();
     }
 
     @Override
     public void actionPerformed(final ActionEvent event) {
-        System.out.println("Called MoveAction with direction: " + direction);
+        // System.out.println("Called MoveAction with direction: " + direction);
         if (MapState.class.isInstance(this.controller.getCurrentState())) {
             final MapState currentState = (MapState) this.controller.getCurrentState();
             final MapLayer currentLayer = (MapLayer) currentState.getLayer();
@@ -69,10 +69,10 @@ public class MoveAction extends AbstractAction {
                 }
                 currentState.randomEncounters();
             } else {
-                System.out.println("Can't move to " + this.direction);
+                // System.out.println("Can't move to " + this.direction);
             }
         } else {
-            System.out.println("Wrong State");
+            // System.out.println("Wrong State");
         }
     }
 
