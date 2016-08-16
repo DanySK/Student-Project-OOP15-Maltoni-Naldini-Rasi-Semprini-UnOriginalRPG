@@ -158,13 +158,13 @@ public class MapLayer extends Layer {
     public void rotate(int direction) {
     	switch (direction) {
 	        case SwingConstants.NORTH:
-	            frame[0] = getSprite(spriteSheet, JobSprite.BACK);
+	            frame[0] = getSprite(spriteSheet, JobSprite.BACK); break;
 	        case SwingConstants.SOUTH:
-	            frame[0] = getSprite(spriteSheet, JobSprite.FRONT);
+	            frame[0] = getSprite(spriteSheet, JobSprite.FRONT); break;
 	        case SwingConstants.WEST:
-	            frame[0] = getSprite(spriteSheet, JobSprite.LEFT);
+	            frame[0] = getSprite(spriteSheet, JobSprite.LEFT); break;
 	        case SwingConstants.EAST:
-	            frame[0] = flipImage(getSprite(spriteSheet, JobSprite.LEFT));
+	            frame[0] = flipImage(getSprite(spriteSheet, JobSprite.LEFT)); break;
 	        default: break;
     	}
 
