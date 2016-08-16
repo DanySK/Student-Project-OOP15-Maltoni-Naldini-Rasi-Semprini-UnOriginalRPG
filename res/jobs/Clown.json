@@ -1,0 +1,102 @@
+{
+  "defaultStats": {
+    "TOTALHP": 1500,
+    "THUNDERDEF": 1000,
+    "THUNDERATK": 1000,
+    "ICEATK": 1000,
+    "PHYSICATK": 1000,
+    "ICEDEF": 1000,
+    "EXPFACTOR": 100,
+    "TOTALMP": 1000,
+    "SPEED": 1000,
+    "FIREATK": 1000,
+    "PHYSICDEF": 1000,
+    "FIREDEF": 1000
+  },
+  "defaultIncrement": {
+    "TOTALHP": 100,
+    "THUNDERDEF": 30,
+    "ICEDEF": 30,
+    "THUNDERATK": 30,
+    "TOTALMP": 30,
+    "SPEED": 30,
+    "ICEATK": 30,
+    "PHYSICATK": 30,
+    "FIREATK": 30,
+    "PHYSICDEF": 30,
+    "FIREDEF": 30
+  },
+  "defaultArmor": {
+    "SHIELD": {
+      "name": "Scudo",
+      "piece": "SHIELD",
+      "desc": "Scudo piuttosto brutto",
+      "stats": {
+        "THUNDERDEF": 0,
+        "ICEDEF": 0,
+        "PHYSICDEF": 100,
+        "FIREDEF": 0
+      },
+      "immunity": "NONE"
+    },
+    "TROUSERS": {
+      "name": "Schinieri",
+      "piece": "TROUSERS",
+      "desc": "Schinieri piuttosto brutti",
+      "stats": {
+        "THUNDERDEF": 0,
+        "ICEDEF": 0,
+        "PHYSICDEF": 100,
+        "FIREDEF": 0
+      },
+      "immunity": "NONE"
+    },
+    "HELMET": {
+      "name": "Elmo",
+      "piece": "HELMET",
+      "desc": "Elmo piuttosto brutto",
+      "stats": {
+        "THUNDERDEF": 0,
+        "ICEDEF": 0,
+        "PHYSICDEF": 100,
+        "FIREDEF": 0
+      },
+      "immunity": "NONE"
+    },
+    "GLOVES": {
+      "name": "Guanti",
+      "piece": "GLOVES",
+      "desc": "Guanti piuttosto brutti",
+      "stats": {
+        "THUNDERDEF": 0,
+        "ICEDEF": 0,
+        "PHYSICDEF": 100,
+        "FIREDEF": 0
+      },
+      "immunity": "NONE"
+    },
+    "ARMOR": {
+      "name": "Cotta",
+      "piece": "ARMOR",
+      "desc": "Cotta piuttosto brutto",
+      "stats": {
+        "THUNDERDEF": 0,
+        "ICEDEF": 0,
+        "PHYSICDEF": 100,
+        "FIREDEF": 0
+      },
+      "immunity": "NONE"
+    }
+  },
+  "defaultWeapon": {
+    "name": "Spada Semplice",
+    "desc": "Adatta per tagliare il burro pi� che i nemici",
+    "stats": {
+      "FIREATK": 0,
+      "THUNDERATK": 0,
+      "PHYSICATK": 100,
+      "ICEATK": 0
+    },
+    "inflictedStatus": "NONE"
+  }
+}

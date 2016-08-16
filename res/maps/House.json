@@ -1,0 +1,165 @@
+{
+  "floorMap": [
+    [
+      {
+        "path": "res/sprites/map/border-2.png",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "res/sprites/map/border-2.png",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "res/sprites/map/border-2.png",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "res/sprites/map/border-2.png",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "res/sprites/map/border-2.png",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "res/sprites/map/border-2.png",
+        "state": "BLOCKED"
+      }
+    ],
+    [
+      {
+        "path": "res/sprites/map/border-2.png",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "res/sprites/map/floor.png",
+        "state": "FREE"
+      },
+      {
+        "path": "res/sprites/npcs/floor/front-1.png",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "res/sprites/map/floor.png",
+        "state": "FREE"
+      },
+      {
+        "path": "res/sprites/map/floor.png",
+        "state": "FREE"
+      },
+      {
+        "path": "res/sprites/map/border-2.png",
+        "state": "BLOCKED"
+      }
+    ],
+    [
+      {
+        "path": "res/sprites/map/border-2.png",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "res/sprites/npcs/floor/left.png",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "res/sprites/map/table.png",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "res/sprites/npcs/floor/rigth.png",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "res/sprites/map/floor.png",
+        "state": "FREE"
+      },
+      {
+        "path": "res/sprites/map/border-2.png",
+        "state": "BLOCKED"
+      }
+    ],
+    [
+      {
+        "path": "res/sprites/map/border-2.png",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "res/sprites/map/floor.png",
+        "state": "FREE"
+      },
+      {
+        "path": "res/sprites/npcs/floor/bottom.png",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "res/sprites/map/floor.png",
+        "state": "FREE"
+      },
+      {
+        "path": "res/sprites/map/floor.png",
+        "state": "FREE"
+      },
+      {
+        "path": "res/sprites/map/border-2.png",
+        "state": "BLOCKED"
+      }
+    ],
+    [
+      {
+        "path": "res/sprites/map/border-2.png",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "res/sprites/map/floor.png",
+        "state": "FREE"
+      },
+      {
+        "path": "res/sprites/map/floor.png",
+        "state": "FREE"
+      },
+      {
+        "path": "res/sprites/map/floor.png",
+        "state": "FREE"
+      },
+      {
+        "path": "res/sprites/map/floor.png",
+        "state": "FREE"
+      },
+      {
+        "path": "res/sprites/map/border-2.png",
+        "state": "BLOCKED"
+      }
+    ],
+    [
+      {
+        "path": "res/sprites/map/border-2.png",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "res/sprites/map/border-2.png",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "res/sprites/map/border-2.png",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "res/sprites/map/border-2.png",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "res/sprites/map/black.png",
+        "state": "BLOCKED"
+      },
+      {
+        "path": "res/sprites/map/border-2.png",
+        "state": "BLOCKED"
+      }
+    ]
+  ],
+  "initialPosition": {
+    "posX": 1,
+    "posY": 1
+  },
+  "battleState": true
+}
