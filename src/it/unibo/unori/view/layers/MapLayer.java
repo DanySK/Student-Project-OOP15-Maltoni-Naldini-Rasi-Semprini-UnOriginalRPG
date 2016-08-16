@@ -154,6 +154,22 @@ public class MapLayer extends Layer {
             default: break;
         }
     }
+    
+    public void rotate(int direction) {
+    	switch (direction) {
+	        case SwingConstants.NORTH:
+	            frame[0] = getSprite(spriteSheet, JobSprite.BACK);
+	        case SwingConstants.SOUTH:
+	            frame[0] = getSprite(spriteSheet, JobSprite.FRONT);
+	        case SwingConstants.WEST:
+	            frame[0] = getSprite(spriteSheet, JobSprite.LEFT);
+	        case SwingConstants.EAST:
+	            frame[0] = flipImage(getSprite(spriteSheet, JobSprite.LEFT));
+	        default: break;
+    	}
+
+        sprite = frame[0]; repaint();
+    }
 
     /**
      * Move the character to the specified position.
@@ -218,8 +234,8 @@ public class MapLayer extends Layer {
         }
 
         g.drawImage(sprite,
-                    mapStartingPoint.y + position.y * CELL_SIZE.height,
-                    mapStartingPoint.x + position.x * CELL_SIZE.width,
+                    mapStartingPoint.x + position.y * CELL_SIZE.height,
+                    mapStartingPoint.y + position.x * CELL_SIZE.width,
                     CELL_SIZE.height, CELL_SIZE.width, null);
 
         final int border = 10;
