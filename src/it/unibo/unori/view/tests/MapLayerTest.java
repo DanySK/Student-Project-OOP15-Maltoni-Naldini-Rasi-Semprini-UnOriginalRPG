@@ -69,7 +69,9 @@ public class MapLayerTest {
     }
 
     private class MoveAction extends AbstractAction {
-        private final int direction;
+		private static final long serialVersionUID = 1L;
+		
+		private final int direction;
 
         MoveAction(final int direction) {
             super();
@@ -83,7 +85,9 @@ public class MapLayerTest {
     }
 
     private class InteractAction extends AbstractAction {
-        @Override
+		private static final long serialVersionUID = 1L;
+
+		@Override
         public void actionPerformed(final ActionEvent e) {
             view.close();
         }
