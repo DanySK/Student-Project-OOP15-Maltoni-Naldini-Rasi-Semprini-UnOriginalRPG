@@ -148,9 +148,9 @@ public class MapLayer extends Layer {
             case SwingConstants.SOUTH:
                 position.translate(0, 1); break;
             case SwingConstants.EAST:
-                position.translate(-1, 0); break;
-            case SwingConstants.WEST:
                 position.translate(1, 0); break;
+            case SwingConstants.WEST:
+                position.translate(-1, 0); break;
             default: break;
         }
     }
