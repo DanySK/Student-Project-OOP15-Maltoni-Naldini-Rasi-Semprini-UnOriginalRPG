@@ -39,7 +39,7 @@ public class GameMapSerializer implements JsonSerializer<GameMap> {
         final JsonElement initalPosition = context.serialize(src.getInitialCellPosition(), Position.class);
         jObj.add(INITIAL_POSITION, initalPosition);
         
-        final boolean battleState = src.getBattleState();
+        final boolean battleState = src.isBattleState();
         jObj.addProperty(BATTLE_STATE, battleState);
 
         return jObj;
