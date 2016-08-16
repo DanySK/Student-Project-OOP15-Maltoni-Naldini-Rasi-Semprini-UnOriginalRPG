@@ -96,7 +96,7 @@ public class MapState extends AbstractGameState {
 
     public void randomEncounters() {
         if (this.getMap().getBattleState()) {
-            if (this.random.ints().limit(3).sum() % 2 != 0) {
+            if (this.random.ints().limit(2).sum() % 2 != 0) {
                 // If the number is odd (33%) the battle starts
                 final int numberOfMonsters = this.random.nextInt(BattleState.MAX_NUMBER_OF_FOES + 1);
                 if (numberOfMonsters != 0) {
