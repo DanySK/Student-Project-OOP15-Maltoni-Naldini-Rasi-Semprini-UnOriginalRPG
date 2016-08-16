@@ -178,9 +178,9 @@ public class GameMapFactory {
             }
 
         final Npc snm = new NpcImpl("Sto cercando la Lore, ma non la trovo!");
-        map.setCell(new Position(2, 18), new NPCCellImpl("res/sprites/npcs/grass/front-5", snm));
+        map.setCell(new Position(2, 18), new NPCCellImpl("res/sprites/npcs/grass/front-5.png", snm));
         final Npc lego = new NpcImpl("Stanno portando gli hobbit a Isengard!");
-        map.setCell(new Position(11, 4), new NPCCellImpl("res/sprites/npcs/grass/front-2", lego));
+        map.setCell(new Position(11, 4), new NPCCellImpl("res/sprites/npcs/grass/front-2.png", lego));
         return map;
     }
 
@@ -194,9 +194,9 @@ public class GameMapFactory {
        final Npc link = new NpcImpl("Eyhaaaaaaa!");
        final Npc gigio = new NpcImpl("Quello lì è Link che si è perso e cerca di tornare a casa");
        final Npc sora = new NpcImpl("Siccome Kingdom Hearts 3 non esce mai, ho cambiato contratto e sono venuto qua!");
-       map.setCell(new Position(3, 6), new NPCCellImpl("res/sprites/npcs/grass/front-2", link));
-       map.setCell(new Position(7, 16), new NPCCellImpl("res/sprites/npcs/grass/front-3", sora));
-       map.setCell(new Position(6, 6), new NPCCellImpl("res/sprites/npcs/grass/front-4", gigio));
+       map.setCell(new Position(3, 6), new NPCCellImpl("res/sprites/npcs/grass/front-2.png", link));
+       map.setCell(new Position(7, 16), new NPCCellImpl("res/sprites/npcs/grass/front-3.png", sora));
+       map.setCell(new Position(6, 6), new NPCCellImpl("res/sprites/npcs/grass/front-4.png", gigio));
        map.setCell(new Position(7, 3), new ObjectCellImpl(PACT.getPasticcheMagiche()));
        map.setCell(new Position(7, 21), new ObjectCellImpl(PACT.getRimedioDellaNonna()));
        return map;
