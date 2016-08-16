@@ -35,7 +35,9 @@ import java.awt.event.ActionListener;
  *
  */
 public class CharacterSelectionLayer extends Layer {
-    private static final Dimension SIZE = View.SIZE;
+	private static final long serialVersionUID = 1L;
+	
+	private static final Dimension SIZE = View.SIZE;
     private static final Color BACKGROUND_COLOR = Color.BLACK;
 
     private final int maxHero;

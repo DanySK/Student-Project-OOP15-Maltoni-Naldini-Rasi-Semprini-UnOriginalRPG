@@ -17,7 +17,9 @@ import java.awt.event.WindowEvent;
  *
  */
 public final class View extends JFrame {
-    private Integer layers = 0;
+	private static final long serialVersionUID = 1L;
+	
+	private Integer layers = 0;
     private final JLayeredPane layeredPane;
     private static final String TITLE = "UnOriginal.RPG";
 

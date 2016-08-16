@@ -16,7 +16,9 @@ import java.awt.Dimension;
  *
  */
 public class InGameMenuLayer extends Layer {
-    private static final Dimension SIZE = View.SIZE;
+	private static final long serialVersionUID = 1L;
+
+	private static final Dimension SIZE = View.SIZE;
 
     public final Bag bag;
     public final JLayeredPane layeredPane = new JLayeredPane();

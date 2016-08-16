@@ -30,7 +30,9 @@ import java.awt.image.BufferedImage;
  *
  */
 public class MainMenuLayer extends Layer {
-    private int focusedButton;
+	private static final long serialVersionUID = 1L;
+	
+	private int focusedButton;
     private final List<Button> buttons;
 
     private final JPanel buttonPanel = new JPanel();
