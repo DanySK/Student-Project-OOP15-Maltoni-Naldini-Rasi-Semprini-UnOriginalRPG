@@ -3,8 +3,11 @@ package it.unibo.unori.controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
@@ -26,13 +29,14 @@ import it.unibo.unori.model.character.HeroImpl;
 import it.unibo.unori.model.character.exceptions.MaxHeroException;
 import it.unibo.unori.model.character.jobs.Jobs;
 import it.unibo.unori.model.maps.Party;
+import it.unibo.unori.model.maps.Party.CardinalPoints;
 import it.unibo.unori.model.maps.SingletonParty;
+import it.unibo.unori.model.menu.utility.Pair;
 import it.unibo.unori.view.exceptions.SpriteNotFoundException;
 import it.unibo.unori.view.layers.CharacterSelectionLayer;
 
 /**
- * This class manages an implementation of
- * {@link it.unibo.controller.Controller} interface that matches the Singleton
+ * This class manages an implementation of {@link it.unibo.controller.Controller} interface that matches the Singleton
  * pattern. It is a final class in order to not be extended.
  */
 public final class SingletonStateMachine {
@@ -43,8 +47,8 @@ public final class SingletonStateMachine {
     }
 
     /**
-     * Method to get the controller instance inside the class. Multiple
-     * allocations are prevented also in a multi-thread system.
+     * Method to get the controller instance inside the class. Multiple allocations are prevented also in a multi-thread
+     * system.
      * 
      * @return the single instance of Controller created.
      */
@@ -58,11 +62,9 @@ public final class SingletonStateMachine {
     }
 
     /**
-     * This class implements the {@link it.unibo.controller.Controller}
-     * interface. It's declared private for encapsulation purpose: the only way
-     * to use an instance of this class is by the method
-     * {@link SingletonStateMachine#getController()} of the
-     * SingletonStateMachine class.
+     * This class implements the {@link it.unibo.controller.Controller} interface. It's declared private for
+     * encapsulation purpose: the only way to use an instance of this class is by the method
+     * {@link SingletonStateMachine#getController()} of the SingletonStateMachine class.
      */
     private static final class StateMachineImpl implements Controller {
         private final StateMachineStack stack;
@@ -70,12 +72,10 @@ public final class SingletonStateMachine {
         private final JsonFileManager fileManager;
 
         /**
-         * This default constructor instantiates a new StateMachine controller
-         * class, adding a new
+         * This default constructor instantiates a new StateMachine controller class, adding a new
          * {@link it.unibo.unori.Controller.StateMachineStack} with a new
-         * {@link it.unibo.unori.controller.state.MainMenuState} pushed at the
-         * top. It also counts time, but the timer needs to be started. It is a
-         * final class because it has no need to be extendible.
+         * {@link it.unibo.unori.controller.state.MainMenuState} pushed at the top. It also counts time, but the timer
+         * needs to be started. It is a final class because it has no need to be extendible.
          */
         StateMachineImpl() {
             this.stack = new StateMachineStackImpl();
@@ -84,8 +84,7 @@ public final class SingletonStateMachine {
         }
 
         /**
-         * {@inheritDoc} This is done by pushing a new MainMenuState and
-         * updating and rendering it.
+         * {@inheritDoc} This is done by pushing a new MainMenuState and updating and rendering it.
          */
         @Override
         public void begin() {
@@ -143,6 +142,11 @@ public final class SingletonStateMachine {
                 try {
                     WorldLoader loader = new WorldLoader();
                     SingletonParty.getParty().setCurrentMap(loader.loadWorld());
+                    Map<CardinalPoints, String> framesMap = new HashMap<>();
+                    for(CardinalPoints cp : CardinalPoints.values()) {
+                        framesMap.put(cp, SingletonParty.getParty().getHeroTeam().getAllHeroes().get(0).getBattleFrame());
+                    }
+                    SingletonParty.getParty().setFrames(framesMap);
                     this.stack.pushAndRender(new MapState(SingletonParty.getParty().getCurrentGameMap()));
                 } catch (IOException e) {
                     this.showError(e.getMessage(), ErrorSeverity.SERIUOS);
@@ -156,23 +160,19 @@ public final class SingletonStateMachine {
         }
 
         /**
-         * If the statistics file exists from previous plays, it should be
-         * loaded. This method does that.
+         * If the statistics file exists from previous plays, it should be loaded. This method does that.
          * 
          * @throws IOException
          *             if an error occurs
          * @throws SecurityException
-         *             if a security manager exists and it denies read access to
-         *             the file or directory
+         *             if a security manager exists and it denies read access to the file or directory
          * @throws FileNotFoundException
-         *             if the file does not exist, is a directory rather than a
-         *             regular file, or for some other reason cannot be opened
-         *             for reading.
+         *             if the file does not exist, is a directory rather than a regular file, or for some other reason
+         *             cannot be opened for reading.
          * @throws JsonIOException
          *             if there was a problem reading from the Reader
          * @throws JsonSyntaxException
-         *             if the file does not contain a valid representation for
-         *             an object of type
+         *             if the file does not contain a valid representation for an object of type
          */
         private void restoreStatsIfNeeded() throws IOException {
             if (new File(JsonFileManager.STATS_FILE).exists()) {
@@ -228,8 +228,8 @@ public final class SingletonStateMachine {
         @Override
         public void startBattle(final List<Foe> foes) {
             final Party partyObject = SingletonParty.getParty();
-            this.stack.pushAndRender(
-                    new BattleState(partyObject.getHeroTeam(), new FoeSquadImpl(foes), partyObject.getPartyBag()));
+            this.stack.pushAndRender(new BattleState(partyObject.getHeroTeam(), new FoeSquadImpl(foes),
+                            partyObject.getPartyBag()));
             this.stats.increaseMonstersMet(foes.size());
         }
 
