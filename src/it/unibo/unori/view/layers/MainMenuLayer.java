@@ -44,7 +44,6 @@ public class MainMenuLayer extends Layer {
      public MainMenuLayer(final List<Button> buttons) {
         super();
 
-        this.setPreferredSize(SIZE);
         this.setBounds(0, 0, SIZE.width, SIZE.height);
 
         this.setLayout(new BorderLayout());

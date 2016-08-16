@@ -26,6 +26,7 @@ public class DialogLayer extends Layer {
     final private static Dimension SIZE = new Dimension(View.SIZE.width / 2,
                                                         View.SIZE.height / 2);
 
+    // TODO sfondo non nero
     /**
      * Creates a dialog.
      */
