@@ -173,7 +173,7 @@ public class GameMapFactory {
 
             for (int j = 4; j < 8; j++) {
                 map.setCell(new Position(j, 12), FACT.getBlockedCell("res/sprites/map/church/left.png"));
-                map.setCell(new Position(j, 13), FACT.getBlockedCell(CENTERPATH));
+                map.setCell(new Position(j, 13), FACT.getBlockedCell("res/sprites/map/church/center.png"));
                 map.setCell(new Position(j, 14), FACT.getBlockedCell("res/sprites/map/church/right.png"));
             }
 

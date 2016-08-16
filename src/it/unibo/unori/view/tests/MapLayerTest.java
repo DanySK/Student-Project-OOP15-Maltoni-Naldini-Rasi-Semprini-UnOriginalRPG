@@ -39,7 +39,7 @@ public class MapLayerTest {
 
         final Point position = new Point(2, 2);
         final String spriteSheetPath = "res/sprites/cook.png";
-        final String[][] map = createMap("res/sprites/map/grass.png", 12, 12);
+        final String[][] map = createMap("res/sprites/map/grass.png", 12, 6);
 
         try {
             mapLayer = new MapLayer(movement, interact, menu, map, position, spriteSheetPath);
