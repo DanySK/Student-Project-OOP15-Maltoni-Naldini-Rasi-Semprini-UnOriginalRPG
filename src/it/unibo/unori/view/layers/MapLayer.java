@@ -227,8 +227,8 @@ public class MapLayer extends Layer {
         for (int x = 0; x < map.length; x++) {
             for (int y = 0; y < map[0].length; y++) {
                 g.drawImage(map[x][y],
-                            mapStartingPoint.y + y * CELL_SIZE.height,
-                            mapStartingPoint.x + x * CELL_SIZE.width,
+                            mapStartingPoint.x + y * CELL_SIZE.height,
+                            mapStartingPoint.y + x * CELL_SIZE.width,
                             CELL_SIZE.height, CELL_SIZE.width, null);
             }
         }
