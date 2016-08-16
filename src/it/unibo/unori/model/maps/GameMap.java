@@ -115,7 +115,7 @@ public interface GameMap extends Serializable {
      * Get the battle state of the map.
      * @return
      *          true if battles are enabled on the map
-     */         
+     */
     boolean isBattleState();
 
 
