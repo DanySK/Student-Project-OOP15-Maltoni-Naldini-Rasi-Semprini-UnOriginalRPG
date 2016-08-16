@@ -43,7 +43,8 @@ public class DialogLayer extends Layer {
 
         this.button = button;
 
-        final JLabel label = new JLabel(message, SwingConstants.CENTER);
+        String htmlText = "<html>" + message.replaceAll("\n", "<br/>") + "</html>";
+        final JLabel label = new JLabel(htmlText, SwingConstants.CENTER);
         label.setForeground(Color.WHITE);
 
         this.add(label, BorderLayout.CENTER);
