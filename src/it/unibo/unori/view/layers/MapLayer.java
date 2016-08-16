@@ -211,16 +211,16 @@ public class MapLayer extends Layer {
         for (int x = 0; x < map.length; x++) {
             for (int y = 0; y < map[0].length; y++) {
                 g.drawImage(map[x][y],
-                            mapStartingPoint.x + x * CELL_SIZE.width,
                             mapStartingPoint.y + y * CELL_SIZE.height,
-                            CELL_SIZE.width, CELL_SIZE.height, null);
+                            mapStartingPoint.x + x * CELL_SIZE.width,
+                            CELL_SIZE.height, CELL_SIZE.width, null);
             }
         }
 
         g.drawImage(sprite,
-                    mapStartingPoint.x + position.x * CELL_SIZE.width,
                     mapStartingPoint.y + position.y * CELL_SIZE.height,
-                    CELL_SIZE.width, CELL_SIZE.height, null);
+                    mapStartingPoint.x + position.x * CELL_SIZE.width,
+                    CELL_SIZE.height, CELL_SIZE.width, null);
 
 
         final int border = 10;
