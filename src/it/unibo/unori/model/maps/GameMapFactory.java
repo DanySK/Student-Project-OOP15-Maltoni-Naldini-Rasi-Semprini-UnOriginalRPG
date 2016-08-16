@@ -80,7 +80,7 @@ public class GameMapFactory {
             final String borderPath, final String innerPath) {
         final GameMap map = new GameMapImpl(width + 2, length + 2);
         final Cell cell = new SimpleCellImpl(borderPath, CellState.BLOCKED);
-        for(int i = 0; i < map.getMapRows(); i++){
+        for (int i = 0; i < map.getMapRows(); i++) {
             map.setRow(i, new SimpleCellImpl(innerPath, CellState.FREE));
         }
         map.setRow(0, cell);
@@ -159,7 +159,7 @@ public class GameMapFactory {
      */
    public GameMap getVillageMap() {
         final GameMap map = this.getSizeableMap(20, 18,
-                ROCKPATH, GRASSPATH );
+                ROCKPATH, GRASSPATH);
         for (int i = 4; i < 6; i++) {
             map.setCell(new Position(i, 2), FACT.getBlockedCell("res/sprites/map/house/left.png"));
             map.setCell(new Position(i, 3), FACT.getBlockedCell(CENTERPATH));
@@ -170,13 +170,13 @@ public class GameMapFactory {
             map.setCell(new Position(i + 10, 4), FACT.getBlockedCell(CENTERPATH));
             map.setCell(new Position(i + 10, 5), FACT.getBlockedCell("res/sprites/map/house/right.png"));
         }
-        
+
             for (int j = 4; j < 8; j++) {
                 map.setCell(new Position(j, 12), FACT.getBlockedCell("res/sprites/map/church/left.png"));
                 map.setCell(new Position(j, 13), FACT.getBlockedCell(CENTERPATH));
                 map.setCell(new Position(j, 14), FACT.getBlockedCell("res/sprites/map/church/right.png"));
             }
-        
+
         final Npc snm = new NpcImpl("Sto cercando la Lore, ma non la trovo!");
         map.setCell(new Position(2, 18), new NPCCellImpl("res/sprites/npcs/grass/front-5", snm));
         final Npc lego = new NpcImpl("Stanno portando gli hobbit a Isengard!");
