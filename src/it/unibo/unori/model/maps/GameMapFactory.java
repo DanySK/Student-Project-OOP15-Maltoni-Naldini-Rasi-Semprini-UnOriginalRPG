@@ -191,7 +191,7 @@ public class GameMapFactory {
     */
    public GameMap createAisle() {
        final GameMap map = this.getSizeableMap(8, 22,
-               ROCKPATH, GRASSPATH, false);
+               ROCKPATH, GRASSPATH, true);
        final Npc link = new NpcImpl("Eyhaaaaaaa!");
        final Npc gigio = new NpcImpl("Quello lì è Link che si è perso e cerca di tornare a casa");
        final Npc sora = new NpcImpl("Siccome Kingdom Hearts 3 non esce mai, ho cambiato contratto e sono venuto qua!");
@@ -210,7 +210,7 @@ public class GameMapFactory {
     */
    public GameMap createDungeonEntrance() {
        final GameMap map = this.getSizeableMap(10, 10,
-               ROCKPATH, GRASSPATH, false);
+               ROCKPATH, GRASSPATH, true);
        for (int i = 4; i < 7; i++) {
            for (int j = 4; j < 7; j++) {
               map.setCell(new Position(i, j), FACT.getBlockedCell("res/sprites/map/rocks.png")); 
