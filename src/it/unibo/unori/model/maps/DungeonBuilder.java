@@ -234,13 +234,15 @@ public class DungeonBuilder {
         default: throw new IllegalArgumentException(); 
         }
     }
-    
+
     /**
      * Get a list of map as a floor of the dungeon.
      * @param floorNum
      *          number of the floor to set
      * @param maps
      *      list of the maps of the floor
+     * @return
+     *          the floor specified in a List.
      * @throws IllegalArgumentException
      *          if the number of the floor is not between 1 and 4
      */

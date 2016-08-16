@@ -64,7 +64,7 @@ public class GameMapImpl implements GameMap {
         this(width, length);
         this.setInitialCellPosition(pos);
     }
-    
+
     /**
      * Constructor for specified width and length maps.
      * @param width
@@ -80,8 +80,7 @@ public class GameMapImpl implements GameMap {
         this.battleState = battleState;
         this.initializeMap();
     }
-    
-    
+
 
 
     /**
@@ -139,7 +138,7 @@ public class GameMapImpl implements GameMap {
     public void setCell(final Position pos, final Cell cell) throws IllegalArgumentException {
         if (checkPosition(pos.getPosX(), this.floorMap.length) 
                 || checkPosition(pos.getPosY(), this.floorMap[0].length)) {
-            System.out.println("Mi sballo a " + pos.getPosX() + ", "+ pos.getPosY());
+            System.out.println("Mi sballo a " + pos.getPosX() + ", " + pos.getPosY());
             throw new IllegalArgumentException();
         }
         this.floorMap[pos.getPosX()][pos.getPosY()] = cell;
@@ -237,9 +236,9 @@ public class GameMapImpl implements GameMap {
         }
         return map;
     }
-    
+
     @Override
-    public boolean getBattleState() {
+    public boolean isBattleState() {
         return this.battleState;
     }
 
