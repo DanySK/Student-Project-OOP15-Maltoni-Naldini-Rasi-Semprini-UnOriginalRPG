@@ -103,9 +103,9 @@ public class GameMapFactory {
         final Npc player3 = new NpcImpl(new Dialogue("Tutti combattono mostri e io sto a giocare a marafone"));
         final Npc player4 = new NpcImpl(new Dialogue("Io gioco drago bianco occhi blu! Ah no aspetta..."));
         map.setCell(new Position(1, 2), new NPCCellImpl("res/sprites/npcs/floor/front-1.png", player1));
-        map.setCell(new Position(2, 1), new NPCCellImpl("res/sprites/npcs/floor/left.png", player2));
+        map.setCell(new Position(2, 1), new NPCCellImpl("res/sprites/npcs/floor/right.png", player2));
         map.setCell(new Position(3, 2), new NPCCellImpl("res/sprites/npcs/floor/bottom.png", player3));
-        map.setCell(new Position(2, 3), new NPCCellImpl("res/sprites/npcs/floor/rigth.png", player4));
+        map.setCell(new Position(2, 3), new NPCCellImpl("res/sprites/npcs/floor/left.png", player4));
         return map;
     }
 
