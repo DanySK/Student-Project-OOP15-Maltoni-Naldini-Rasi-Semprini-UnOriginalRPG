@@ -382,7 +382,7 @@
         "state": "BLOCKED"
       },
       {
-        "path": "res/sprites/map/house/center.png",
+        "path": "res/sprites/map/church/center.png",
         "state": "BLOCKED"
       },
       {
@@ -464,7 +464,7 @@
         "state": "BLOCKED"
       },
       {
-        "path": "res/sprites/map/house/center.png",
+        "path": "res/sprites/map/church/center.png",
         "state": "BLOCKED"
       },
       {
@@ -546,7 +546,7 @@
         "state": "BLOCKED"
       },
       {
-        "path": "res/sprites/map/house/center.png",
+        "path": "res/sprites/map/church/center.png",
         "state": "BLOCKED"
       },
       {

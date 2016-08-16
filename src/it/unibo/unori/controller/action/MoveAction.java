@@ -42,21 +42,23 @@ public class MoveAction extends AbstractAction {
      */
     public MoveAction(final CardinalPoints direction) {
         super();
+        System.out.println("Created MoveAction with direction: " + direction);
         this.direction = direction;
         this.controller = SingletonStateMachine.getController();
     }
 
     @Override
     public void actionPerformed(final ActionEvent event) {
-        if (this.controller.getCurrentStateClass().isInstance(MapState.class)) {
+        System.out.println("Called MoveAction with direction: " + direction);
+        if (MapState.class.isInstance(this.controller.getCurrentState())) {
             final MapState currentState = (MapState) this.controller.getCurrentState();
-
+            final MapLayer currentLayer = (MapLayer) currentState.getLayer();
+            currentLayer.rotate(MoveAction.convertCardinalPointsToSwingConstants(direction));
             if (currentState.moveParty(this.direction)) {
-                MapLayer currentLayer = (MapLayer) currentState.getLayer();
-
                 (currentLayer).move(MoveAction.convertCardinalPointsToSwingConstants(direction));
 
                 if (currentState.checkMapChanges()) {
+                    System.out.println("Update");
                     try {
                         currentLayer.changeMap(currentState.getMap().getFrames(),
                                 new Point(currentState.getCurrentPosition().getPosX(),
@@ -66,7 +68,11 @@ public class MoveAction extends AbstractAction {
                     }
                 }
                 currentState.randomEncounters();
+            } else {
+                System.out.println("Can't move to " + this.direction);
             }
+        } else {
+            System.out.println("Wrong State");
         }
     }
 
