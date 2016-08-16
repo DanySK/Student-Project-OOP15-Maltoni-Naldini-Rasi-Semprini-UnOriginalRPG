@@ -144,13 +144,13 @@ public class MapLayer extends Layer {
 
         switch (direction) {
             case SwingConstants.NORTH:
-                position.translate(0, -1); break;
-            case SwingConstants.SOUTH:
-                position.translate(0, 1); break;
-            case SwingConstants.EAST:
-                position.translate(1, 0); break;
-            case SwingConstants.WEST:
                 position.translate(-1, 0); break;
+            case SwingConstants.SOUTH:
+                position.translate(1, 0); break;
+            case SwingConstants.EAST:
+                position.translate(0, 1); break;
+            case SwingConstants.WEST:
+                position.translate(0, -1); break;
             default: break;
         }
     }
@@ -221,7 +221,6 @@ public class MapLayer extends Layer {
                     mapStartingPoint.y + position.y * CELL_SIZE.height,
                     mapStartingPoint.x + position.x * CELL_SIZE.width,
                     CELL_SIZE.height, CELL_SIZE.width, null);
-
 
         final int border = 10;
         final int height = 100;
