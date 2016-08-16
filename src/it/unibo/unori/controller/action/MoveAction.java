@@ -52,10 +52,9 @@ public class MoveAction extends AbstractAction {
         System.out.println("Called MoveAction with direction: " + direction);
         if (MapState.class.isInstance(this.controller.getCurrentState())) {
             final MapState currentState = (MapState) this.controller.getCurrentState();
-
+            final MapLayer currentLayer = (MapLayer) currentState.getLayer();
+            currentLayer.rotate(MoveAction.convertCardinalPointsToSwingConstants(direction));
             if (currentState.moveParty(this.direction)) {
-                MapLayer currentLayer = (MapLayer) currentState.getLayer();
-
                 (currentLayer).move(MoveAction.convertCardinalPointsToSwingConstants(direction));
 
                 if (currentState.checkMapChanges()) {
