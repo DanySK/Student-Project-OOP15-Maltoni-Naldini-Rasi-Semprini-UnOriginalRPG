@@ -43,7 +43,7 @@ public enum Jobs {
     private final String battleFrame;
 
      Jobs(final String filePath) {
-        JobsSetup js = new JobsSetup();
+         final JobsSetup js = new JobsSetup();
          
         this.basicEquip = js.getDefaultArmorMap(filePath);
         this.basicStats = js.getDefaultStatsMap(filePath);

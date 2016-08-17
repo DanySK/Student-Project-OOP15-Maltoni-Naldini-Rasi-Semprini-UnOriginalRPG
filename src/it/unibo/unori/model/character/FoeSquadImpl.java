@@ -22,7 +22,7 @@ public class FoeSquadImpl implements FoeSquad {
      * Max number of Foes allowed in a Team.
      */
     public static final int MAXEN = 4;
-    private List<Foe> enemies;
+    private final List<Foe> enemies;
     
     /**
      * Constructor for a FoeSquad having already a List of Foes as a parameter.
@@ -123,7 +123,7 @@ public class FoeSquadImpl implements FoeSquad {
     public Foe getNextFoe() {
         int maxV = 0;
         Foe toReturn = this.getAliveFoes().get(0);
-        for (Foe f : this.getAliveFoes()) {
+        for (final Foe f : this.getAliveFoes()) {
             if (maxV < f.getSpeed()) {
                 maxV = f.getSpeed();
                 toReturn = f;
