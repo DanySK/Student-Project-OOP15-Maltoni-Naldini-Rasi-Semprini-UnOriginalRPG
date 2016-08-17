@@ -55,6 +55,7 @@ public class InteractAction extends AbstractAction {
                 ((MapLayer) currentState.getLayer()).showDialogue(this.currentDialogue.get().showNext());
             }
         } else {
+            System.out.println("Error current state is not MapState in InteractAction:");
             this.controller.showError(new NotValidStateException().getMessage(), ErrorSeverity.SERIUOS);
         }
 

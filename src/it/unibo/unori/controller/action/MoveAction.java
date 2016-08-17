@@ -12,6 +12,7 @@ import javax.swing.SwingConstants;
 
 import it.unibo.unori.controller.Controller;
 import it.unibo.unori.controller.SingletonStateMachine;
+import it.unibo.unori.controller.exceptions.NotValidStateException;
 import it.unibo.unori.controller.exceptions.UnsupportedSwingConstantException;
 import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 import it.unibo.unori.controller.state.MapState;
@@ -42,14 +43,12 @@ public class MoveAction extends AbstractAction {
      */
     public MoveAction(final CardinalPoints direction) {
         super();
-        // System.out.println("Created MoveAction with direction: " + direction);
         this.direction = direction;
         this.controller = SingletonStateMachine.getController();
     }
 
     @Override
     public void actionPerformed(final ActionEvent event) {
-        // System.out.println("Called MoveAction with direction: " + direction);
         if (MapState.class.isInstance(this.controller.getCurrentState())) {
             final MapState currentState = (MapState) this.controller.getCurrentState();
             final MapLayer currentLayer = (MapLayer) currentState.getLayer();
@@ -58,21 +57,21 @@ public class MoveAction extends AbstractAction {
                 (currentLayer).move(MoveAction.convertCardinalPointsToSwingConstants(direction));
 
                 if (currentState.checkMapChanges()) {
-                    System.out.println("Update");
                     try {
                         currentLayer.changeMap(currentState.getMap().getFrames(),
                                 new Point(currentState.getCurrentPosition().getPosX(),
                                         currentState.getCurrentPosition().getPosY()));
                     } catch (SpriteNotFoundException e) {
+                        System.out.println("Error changing map in MoveAction:");
                         this.controller.showError(e.getMessage(), ErrorSeverity.SERIUOS);
+                        e.printStackTrace();
                     }
                 }
                 currentState.randomEncounters();
-            } else {
-                // System.out.println("Can't move to " + this.direction);
             }
         } else {
-            // System.out.println("Wrong State");
+            System.out.println("Error current state is not MapState in MoveAction:");
+            this.controller.showError(new NotValidStateException().getMessage(), ErrorSeverity.SERIUOS);
         }
     }
 
