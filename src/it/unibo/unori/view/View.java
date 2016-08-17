@@ -18,7 +18,7 @@ import java.awt.event.WindowEvent;
  */
 public final class View extends JFrame {
 	private static final long serialVersionUID = 1L;
-	
+
 	private Integer layers = 0;
     private final JLayeredPane layeredPane;
     private static final String TITLE = "UnOriginal.RPG";
@@ -35,6 +35,21 @@ public final class View extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         layeredPane = this.getLayeredPane();
+    }
+
+    /**
+     * Disables the view.
+     */
+    @Override
+    public void disable() {
+        super.setEnabled(false);
+    }
+
+    /**
+     * @return the highest layer
+     */
+    public Layer peek() {
+        return (Layer) this.layeredPane.getComponentsInLayer(this.layeredPane.highestLayer())[0];
     }
 
     /**
