@@ -67,8 +67,8 @@ public class HeroDeserializer implements JsonDeserializer<Hero> {
         returnHero.setLevel(level);
         final int currentBar = jObj.get(CURRENT_BAR).getAsInt();
         returnHero.setCurrentBar(currentBar); // TODO check
-        // final int totExp = jObj.get(TOT_EXP).getAsInt();
-        // TODO set totExp
+        final int totExp = jObj.get(TOT_EXP).getAsInt();
+        returnHero.addExp(totExp); // TODO check, probably it doesn't work yet
         final int currentExp = jObj.get(CURRENT_EXP).getAsInt();
         returnHero.addExp(currentExp);
         final boolean defended = jObj.get(DEFENDED).getAsBoolean();
@@ -92,5 +92,7 @@ public class HeroDeserializer implements JsonDeserializer<Hero> {
 
         return returnHero; // TODO
     }
+    
+    
 
 }

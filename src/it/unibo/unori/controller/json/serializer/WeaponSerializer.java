@@ -1,6 +1,7 @@
 package it.unibo.unori.controller.json.serializer;
 
 import java.lang.reflect.Type;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gson.JsonElement;
@@ -27,9 +28,15 @@ public class WeaponSerializer implements JsonSerializer<Weapon> {
         jObj.addProperty(NAME, name);
         final String desc = src.getDescription();
         jObj.addProperty(DESC, desc);
-        final JsonElement stats = context.serialize(src.getStats(), new TypeToken<Map<Statistics, Integer>>() {
+        final Map<Statistics, Integer> statsMap = new HashMap<>();
+        statsMap.put(Statistics.PHYSICATK, src.getPhysicalAtk());
+        statsMap.put(Statistics.FIREATK, src.getFireAtk());
+        statsMap.put(Statistics.ICEATK, src.getIceAtk());
+        statsMap.put(Statistics.THUNDERATK, src.getThunderAtk());
+        final JsonElement stats = context.serialize(statsMap, new TypeToken<Map<Statistics, Integer>>() {
         }.getType());
         jObj.add(STATS, stats);
+        System.out.println("Mappa: " + statsMap + "\n" + src.getFireAtk() + "\n" + src.getIceAtk() + "\n" + src.getThunderAtk() + "\n" + src.getPhysicalAtk());
         final JsonElement inflictedStatus = context.serialize(src.getWeaponStatus(), Status.class);
         jObj.add(INFLICTED_STATUS, inflictedStatus);
 

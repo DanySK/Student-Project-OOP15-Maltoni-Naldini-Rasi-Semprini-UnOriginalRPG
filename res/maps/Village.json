@@ -239,7 +239,16 @@
       },
       {
         "path": "res/sprites/npcs/grass/front-5.png",
-        "state": "BLOCKED"
+        "state": "BLOCKED",
+        "npc": {
+          "sentence": {
+            "sentence": "Sto cercando la Lore, ma non la trovo!",
+            "nextToShow": 0,
+            "listOfRows": [
+              "Sto cercando la Lore, ma non la trovo!"
+            ]
+          }
+        }
       },
       {
         "path": "res/sprites/map/rocks.png",
@@ -429,7 +438,11 @@
       },
       {
         "path": "res/sprites/map/black.png",
-        "state": "BLOCKED"
+        "state": "BLOCKED",
+        "initialPos": {
+          "posX": 4,
+          "posY": 4
+        }
       },
       {
         "path": "res/sprites/map/house/right.png",
@@ -629,7 +642,11 @@
       },
       {
         "path": "res/sprites/map/black.png",
-        "state": "BLOCKED"
+        "state": "BLOCKED",
+        "initialPos": {
+          "posX": 9,
+          "posY": 4
+        }
       },
       {
         "path": "res/sprites/map/church/right.png",
@@ -817,7 +834,11 @@
       },
       {
         "path": "res/sprites/map/black.png",
-        "state": "BLOCKED"
+        "state": "BLOCKED",
+        "initialPos": {
+          "posX": 3,
+          "posY": 1
+        }
       }
     ],
     [
@@ -899,7 +920,11 @@
       },
       {
         "path": "res/sprites/map/black.png",
-        "state": "BLOCKED"
+        "state": "BLOCKED",
+        "initialPos": {
+          "posX": 4,
+          "posY": 1
+        }
       }
     ],
     [
@@ -921,7 +946,16 @@
       },
       {
         "path": "res/sprites/npcs/grass/front-2.png",
-        "state": "BLOCKED"
+        "state": "BLOCKED",
+        "npc": {
+          "sentence": {
+            "sentence": "Stanno portando gli hobbit a Isengard!",
+            "nextToShow": 0,
+            "listOfRows": [
+              "Stanno portando gli hobbit a Isengard!"
+            ]
+          }
+        }
       },
       {
         "path": "res/sprites/map/grass.png",
@@ -981,7 +1015,11 @@
       },
       {
         "path": "res/sprites/map/black.png",
-        "state": "BLOCKED"
+        "state": "BLOCKED",
+        "initialPos": {
+          "posX": 5,
+          "posY": 1
+        }
       }
     ],
     [
@@ -1063,7 +1101,11 @@
       },
       {
         "path": "res/sprites/map/black.png",
-        "state": "BLOCKED"
+        "state": "BLOCKED",
+        "initialPos": {
+          "posX": 6,
+          "posY": 1
+        }
       }
     ],
     [
@@ -1249,7 +1291,11 @@
       },
       {
         "path": "res/sprites/map/black.png",
-        "state": "BLOCKED"
+        "state": "BLOCKED",
+        "initialPos": {
+          "posX": 4,
+          "posY": 7
+        }
       },
       {
         "path": "res/sprites/map/house/right.png",
@@ -1809,5 +1855,5 @@
     "posX": 10,
     "posY": 10
   },
-  "battleState": true
+  "battleState": false
 }
