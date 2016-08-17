@@ -95,7 +95,7 @@ public final class View extends JFrame {
         if (!stack.isEmpty()) {
             stack.peek().setEnabled(true);
         }
-        this.layeredPane.remove(layeredPane.highestLayer() - 1);
+        this.layeredPane.remove(--layers);
     }
 
     /**
