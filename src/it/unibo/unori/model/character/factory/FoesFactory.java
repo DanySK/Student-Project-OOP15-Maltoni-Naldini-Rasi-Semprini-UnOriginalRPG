@@ -186,15 +186,15 @@ public final class FoesFactory {
         final List<MagicAttackInterface> l = new ArrayList<>();
         if (ia > 0 && ia <= MEDIUMIA) {
             for (final Jobs j : Jobs.values()) {
-                 l.add(MagicGenerator.getStandard(j));
+                 l.add(new MagicGenerator().getStandard(j));
             }
         } else if (ia > MEDIUMIA && ia <= HIGHIA) {
             for (final Jobs j : Jobs.values()) {
-                l.add(MagicGenerator.getMedium(j));
+                l.add(new MagicGenerator().getMedium(j));
            }
         } else {
             for (final Jobs j : Jobs.values()) {
-                l.add(MagicGenerator.getAdvanced(j));
+                l.add(new MagicGenerator().getAdvanced(j));
            }  
         }
         return l;
