@@ -1,6 +1,7 @@
 package it.unibo.unori.view;
 
 import it.unibo.unori.view.layers.Layer;
+import it.unibo.unori.view.layers.MapLayer;
 
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
@@ -81,7 +82,11 @@ public final class View extends JFrame {
     public void push(final Layer layer) {
         if (!stack.isEmpty()) {
             stack.peek().setEnabled(false);
+            if (!(stack.peek() instanceof MapLayer)) {
+                stack.peek().setVisible(false);
+            }
         }
+
         stack.push(layer);
         this.layeredPane.add(stack.peek(), stack.stream().count() - 1);
         this.layeredPane.moveToFront(stack.peek());
