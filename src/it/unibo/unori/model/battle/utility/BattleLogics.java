@@ -56,7 +56,7 @@ public final class BattleLogics {
         final int toMult = charLevel > 1 ? charLevel - 1 : 1;
         final int toRet = SHIFT + (MULT * charLevel * toMult
                 + (atck * 3 * charLevel) / 2);
-        return toRet < 0 ? toRet : 10;
+        return toRet <= 0 ? toRet : 10;
     }
 
     /**

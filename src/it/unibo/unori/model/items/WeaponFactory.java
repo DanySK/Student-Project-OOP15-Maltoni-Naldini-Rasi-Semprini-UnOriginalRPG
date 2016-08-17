@@ -13,7 +13,7 @@ import it.unibo.unori.model.character.Status;
 public final class WeaponFactory {
     
     private WeaponFactory() {
-        //Empty private constructor because this is an utility Class
+        //Empty private constructor.
     }
     
     private static Map<Statistics, Integer> generateMap(final Statistics phys, final int first,
