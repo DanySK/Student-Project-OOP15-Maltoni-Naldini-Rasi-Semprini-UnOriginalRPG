@@ -142,4 +142,10 @@ public class Dialogue implements DialogueInterface {
         }
         return s;
     }
+
+    @Override
+    public void resetNextToShow() {
+        this.nextToShow = 0;
+        
+    }
 }
