@@ -32,7 +32,7 @@ import java.awt.image.AffineTransformOp;
  */
 public class MapLayer extends Layer {
 	private static final long serialVersionUID = 1L;
-	
+
 	private static final Dimension SIZE = new Dimension(1280, 720);
     private static final Dimension CELL_SIZE = new Dimension(32, 32);
 
@@ -154,8 +154,8 @@ public class MapLayer extends Layer {
             default: break;
         }
     }
-    
-    public void rotate(int direction) {
+
+    public void rotate(final int direction) {
     	switch (direction) {
 	        case SwingConstants.NORTH:
 	            frame[0] = getSprite(spriteSheet, JobSprite.BACK); break;
