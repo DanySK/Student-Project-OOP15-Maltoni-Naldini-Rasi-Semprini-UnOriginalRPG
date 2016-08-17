@@ -47,11 +47,15 @@ public interface DialogueInterface extends Serializable {
      * @return true if the Dialogue is over, false otherwise.
      */
     boolean isOver();
-    
+
     /**
      * Method that generates the Dialogue and prints it on console.
      * For test purposes.
      */
     void generate();
     
+    /**
+     * Reset the nextToShow variable.
+     */
+    void resetNextToShow();
 }

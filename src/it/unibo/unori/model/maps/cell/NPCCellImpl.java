@@ -34,6 +34,7 @@ public class NPCCellImpl extends SimpleCellImpl {
 
     @Override
     public DialogueInterface talkToNpc() throws NoNPCFoundException {
+        npc.getDialogue().resetNextToShow();
         return npc.getDialogue();
     }
 
