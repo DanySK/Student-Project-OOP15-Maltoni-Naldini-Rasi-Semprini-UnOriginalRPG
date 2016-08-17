@@ -37,7 +37,16 @@
       },
       {
         "path": "res/sprites/npcs/floor/front-1.png",
-        "state": "BLOCKED"
+        "state": "BLOCKED",
+        "npc": {
+          "sentence": {
+            "sentence": "Caccia l\u0027Asso!",
+            "nextToShow": 0,
+            "listOfRows": [
+              "Caccia l\u0027Asso!"
+            ]
+          }
+        }
       },
       {
         "path": "res/sprites/map/floor.png",
@@ -59,7 +68,16 @@
       },
       {
         "path": "res/sprites/npcs/floor/right.png",
-        "state": "BLOCKED"
+        "state": "BLOCKED",
+        "npc": {
+          "sentence": {
+            "sentence": "Full vince su tris eheheheh",
+            "nextToShow": 0,
+            "listOfRows": [
+              "Full vince su tris eheheheh "
+            ]
+          }
+        }
       },
       {
         "path": "res/sprites/map/table.png",
@@ -67,7 +85,17 @@
       },
       {
         "path": "res/sprites/npcs/floor/left.png",
-        "state": "BLOCKED"
+        "state": "BLOCKED",
+        "npc": {
+          "sentence": {
+            "sentence": "Io gioco drago bianco occhi blu! Ah no aspetta...",
+            "nextToShow": 0,
+            "listOfRows": [
+              "Io gioco drago bianco occhi blu!",
+              "Ah no aspetta..."
+            ]
+          }
+        }
       },
       {
         "path": "res/sprites/map/floor.png",
@@ -89,7 +117,17 @@
       },
       {
         "path": "res/sprites/npcs/floor/bottom.png",
-        "state": "BLOCKED"
+        "state": "BLOCKED",
+        "npc": {
+          "sentence": {
+            "sentence": "Tutti combattono mostri e io sto a giocare a marafone",
+            "nextToShow": 0,
+            "listOfRows": [
+              "Tutti combattono mostri e io sto a giocare a ",
+              "marafone "
+            ]
+          }
+        }
       },
       {
         "path": "res/sprites/map/floor.png",
@@ -149,7 +187,11 @@
       },
       {
         "path": "res/sprites/map/black.png",
-        "state": "BLOCKED"
+        "state": "BLOCKED",
+        "initialPos": {
+          "posX": 6,
+          "posY": 4
+        }
       },
       {
         "path": "res/sprites/map/border-2.png",
@@ -158,8 +200,8 @@
     ]
   ],
   "initialPosition": {
-    "posX": 1,
-    "posY": 1
+    "posX": 4,
+    "posY": 4
   },
-  "battleState": true
+  "battleState": false
 }
