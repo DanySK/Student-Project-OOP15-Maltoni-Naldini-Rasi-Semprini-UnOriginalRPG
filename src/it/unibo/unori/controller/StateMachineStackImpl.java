@@ -5,6 +5,7 @@ import java.util.Stack;
 import it.unibo.unori.controller.state.GameState;
 import it.unibo.unori.view.View;
 import it.unibo.unori.view.layers.DialogLayer;
+import it.unibo.unori.view.layers.InGameMenuLayer;
 import it.unibo.unori.view.layers.Layer;
 
 /**
@@ -16,7 +17,7 @@ import it.unibo.unori.view.layers.Layer;
  */
 public class StateMachineStackImpl implements StateMachineStack {
     private final Stack<GameState> gsStack;
-    private View layerStack = null;
+    private View layerStack = new View();
 
     /**
      * Default constructor.
@@ -39,14 +40,9 @@ public class StateMachineStackImpl implements StateMachineStack {
      */
     @Override
     public final void render() {
-        if(this.layerStack == null) {
-            this.layerStack = new View();
-        } else {
-            this.layerStack.peek().disable();
-        }
         final Layer currentLayer = this.gsStack.peek().getLayer();
         this.layerStack.push(currentLayer);
-        if (!(currentLayer instanceof DialogLayer)) {
+        if (!(currentLayer instanceof DialogLayer || currentLayer instanceof InGameMenuLayer)) {
             // DialogLayer should not resize the previous layer
             this.layerStack.resizeTo(currentLayer);
         }
