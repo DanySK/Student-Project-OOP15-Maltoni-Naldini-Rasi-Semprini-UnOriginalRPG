@@ -29,6 +29,7 @@ import it.unibo.unori.model.character.jobs.Jobs;
 import it.unibo.unori.model.maps.Party;
 import it.unibo.unori.model.maps.Party.CardinalPoints;
 import it.unibo.unori.model.maps.SingletonParty;
+import it.unibo.unori.model.maps.WorldBuilder;
 import it.unibo.unori.view.layers.CharacterSelectionLayer;
 
 /**
@@ -135,7 +136,8 @@ public final class SingletonStateMachine {
 
                 try {
                     WorldLoader loader = new WorldLoader();
-                    SingletonParty.getParty().setCurrentMap(loader.loadWorld());
+                    WorldBuilder builder = new WorldBuilder();
+                    SingletonParty.getParty().setCurrentMap(/*loader.loadWorld()*/builder.buildWorld());
                     Map<CardinalPoints, String> framesMap = new HashMap<>();
                     for(CardinalPoints cp : CardinalPoints.values()) {
                         framesMap.put(cp, SingletonParty.getParty().getHeroTeam().getAllHeroes().get(0).getBattleFrame());
