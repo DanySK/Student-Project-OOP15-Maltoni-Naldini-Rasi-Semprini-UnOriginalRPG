@@ -15,26 +15,24 @@ import it.unibo.unori.model.menu.BagMenuInterface;
  */
 public class TestBagMenu {
     
-    private BagMenuInterface toTest;
-    
     /**
      * Standard test for BagMenu.
      */
     @Test
     public void testStandard() {
-        final WeaponFactory fact = new WeaponFactory();
+        final BagMenuInterface toTest;
         final PotionFactory factP = new PotionFactory();
         final Bag bag = new BagImpl();
-        bag.storeItem(fact.getBalestra());
-        bag.storeItem(fact.getBalestra());
-        bag.storeItem(fact.getBalestra());
-        bag.storeItem(fact.getBalestra());
-        bag.storeItem(fact.getCannone());
-        bag.storeItem(fact.getCannone());
-        bag.storeItem(fact.getCannone());
-        bag.storeItem(fact.getCannone());
-        bag.storeItem(fact.getCannone());
-        bag.storeItem(fact.getCannone());
+        bag.storeItem(WeaponFactory.getBalestra());
+        bag.storeItem(WeaponFactory.getBalestra());
+        bag.storeItem(WeaponFactory.getBalestra());
+        bag.storeItem(WeaponFactory.getBalestra());
+        bag.storeItem(WeaponFactory.getCannone());
+        bag.storeItem(WeaponFactory.getCannone());
+        bag.storeItem(WeaponFactory.getCannone());
+        bag.storeItem(WeaponFactory.getCannone());
+        bag.storeItem(WeaponFactory.getCannone());
+        bag.storeItem(WeaponFactory.getCannone());
         bag.storeItem(factP.getAspirinaMagica());
         bag.storeItem(factP.getAspirinaMagica());
         bag.storeItem(factP.getAspirinaMagica());
@@ -50,12 +48,12 @@ public class TestBagMenu {
         bag.storeItem(factP.getPozioneDio());
         System.out.println(bag.getMiscellaneous());
         System.out.println(bag.getMiscellaneous().values());
-        this.toTest = new BagMenu(bag);
-        bag.storeItem(fact.getColtre());
-        this.toTest.update(bag);
+        toTest = new BagMenu(bag);
+        bag.storeItem(WeaponFactory.getColtre());
+        toTest.update(bag);
         System.out.println(bag.getMiscellaneous());
         System.out.println(toTest.getAllItems());
-        System.out.println(this.toTest.getList());
-        System.out.println(this.toTest.getSelected());
+        System.out.println(toTest.getList());
+        System.out.println(toTest.getSelected());
     }
 }
