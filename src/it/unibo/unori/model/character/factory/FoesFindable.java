@@ -21,42 +21,42 @@ public enum FoesFindable {
      * Types of Foes.
      * Folletto.
      */
-    FOLLETTO(Status.NONE, FoeSetup.FOLLETTO),
+    FOLLETTO(Status.NONE, FoeSetup.DEFAULT),
     
     /**
      * Gnomo da giardino.
      */
-    GNOMO_DA_GIARDINO(Status.ASLEEP, FoeSetup.GNOMO_DA_GIARDINO),
+    GNOMO_DA_GIARDINO(Status.ASLEEP, FoeSetup.DEFAULT),
     
     /**
      * Demone.
      */
-    DEMONE(Status.BLEEDING, FoeSetup.DEMONE),
+    DEMONE(Status.BLEEDING, FoeSetup.DEFAULT),
     
     /**
      * Drago.
      */
-    DRAGO(Status.POISONED, FoeSetup.DRAGO),
+    DRAGO(Status.POISONED, FoeSetup.DEFAULT),
     
     /**
      * Spirito.
      */
-    SPIRITO(Status.CURSED, FoeSetup.SPIRITO),
+    SPIRITO(Status.CURSED, FoeSetup.DEFAULT),
     
     /**
      * Bamabino.
      */
-    BAMBINO(Status.BLEEDING, FoeSetup.BAMBINO),
+    BAMBINO(Status.BLEEDING, FoeSetup.DEFAULT),
     
     /**
      * Stregone.
      */
-    STREGONE(Status.CURSED, FoeSetup.STREGONE),
+    STREGONE(Status.CURSED, FoeSetup.DEFAULT),
     
     /**
      * Eroe caduto.
      */
-    EROE_CADUTO(Status.ASLEEP, FoeSetup.EROE_CADUTO);
+    EROE_CADUTO(Status.ASLEEP, FoeSetup.DEFAULT);
     
     private final Status immunity;
     private final Map<Statistics, Integer> map;
