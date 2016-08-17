@@ -131,9 +131,9 @@ public class PartyTest {
         } catch (BlockedPathException e) {
             System.out.println(e);
         }
-       assertTrue(m.getCell(new Position(2, 2)).getObject().equals(WeaponFactory.getStdSword()));
+       assertTrue(m.getCell(new Position(2, 2)).getObject().equals(new WeaponFactory().getStdSword()));
        p.interact();
-       assertTrue(p.getPartyBag().contains(WeaponFactory.getStdSword()));
+       assertTrue(p.getPartyBag().contains(new WeaponFactory().getStdSword()));
        try {
            p.moveParty(CardinalPoints.SOUTH);
        } catch (Exception e) {
