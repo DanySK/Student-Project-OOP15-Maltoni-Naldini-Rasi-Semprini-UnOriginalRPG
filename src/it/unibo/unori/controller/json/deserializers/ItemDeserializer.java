@@ -81,24 +81,24 @@ public class ItemDeserializer implements JsonDeserializer<Item> {
     @Override
     public Item deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
             throws JsonParseException {
-        JsonObject jObj = (JsonObject) json;
-        final Item deserializedItem;
-        //System.out.println("class of typeOfT = " + TypeToken.get(typeOfT).getRawType());
+        final JsonObject jObj = (JsonObject) json;
+        Item deserializedItem = null;
+        // System.out.println("class of typeOfT = " + TypeToken.get(typeOfT).getRawType());
         if (jObj.has("piece")) {
-            //System.out.println("E' un pezzo di armatura");
-            deserializedItem = context.deserialize(json, Armor.class);
+            System.out.println("E' un pezzo di armatura");
+            // deserializedItem = context.deserialize(json, Armor.class);
         } else if (jObj.has("inflictedStatus")) {
-            //System.out.println("E' un'arma");
+            // System.out.println("E' un'arma");
             deserializedItem = context.deserialize(json, Weapon.class);
         } else if (jObj.has("statusRestorable")) {
-            //System.out.println("E' una pozione");
+            // System.out.println("E' una pozione");
             deserializedItem = context.deserialize(json, Potion.class);
         } else {
-            //System.out.println("E' un normale oggetto");
+            // System.out.println("E' un normale oggetto");
             final String name = ((JsonObject) json).get(NAME).getAsString();
-            //System.out.println("NAME = " + name);
+            // System.out.println("NAME = " + name);
             final String desc = ((JsonObject) json).get(DESC).getAsString();
-            //System.out.println("DESCRIPTION = " + desc);
+            // System.out.println("DESCRIPTION = " + desc);
             deserializedItem = new ItemImpl(name, desc);
         }
 

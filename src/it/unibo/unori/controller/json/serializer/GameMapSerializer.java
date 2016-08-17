@@ -87,7 +87,7 @@ public class GameMapSerializer implements JsonSerializer<GameMap> {
             final JsonElement state = context.serialize(src.getState(), CellState.class);
             jObj.add(STATE, state);
 
-            if (typeOfSrc.getClass().isAssignableFrom(ObjectCellImpl.class)) {
+            if (ObjectCellImpl.class.isInstance(src)) {
                 JsonElement obj;
                 try {
                     obj = context.serialize(((ObjectCellImpl) src).getObject(), Item.class);
@@ -95,16 +95,16 @@ public class GameMapSerializer implements JsonSerializer<GameMap> {
                     obj = null;
                 }
                 jObj.add(OBJ, obj);
-            } else if (typeOfSrc.getClass().isAssignableFrom(NPCCellImpl.class)) {
+            } else if (NPCCellImpl.class.isInstance(src)) {
                 final JsonElement npc = context.serialize(((NPCCellImpl) src).getNpc(), Npc.class);
                 jObj.add(NPC, npc);
-            } else if (typeOfSrc.getClass().isAssignableFrom(MapCellImpl.class)) {
-                final JsonElement mapToLink = context.serialize(((MapCellImpl) src).getCellMap(), GameMap.class);
-                jObj.add(MAP_TO_LINK, mapToLink);
+            } else if (MapCellImpl.class.isInstance(src)) {
+                // final JsonElement mapToLink = context.serialize(((MapCellImpl) src).getCellMap(), GameMap.class);
+                // jObj.add(MAP_TO_LINK, mapToLink);
                 final JsonElement initialPos = context
                         .serialize(((MapCellImpl) src).getCellMap().getInitialCellPosition(), Position.class);
                 jObj.add(INITIAL_POS, initialPos);
-            } else if (typeOfSrc.getClass().isAssignableFrom(ChestCellImpl.class)) {
+            } else if (ChestCellImpl.class.isInstance(src)) {
                 JsonElement item;
                 try {
                     item = context.serialize(((ChestCellImpl) src).getObject(), Item.class);

@@ -136,8 +136,8 @@ public final class SingletonStateMachine {
 
                 try {
                     WorldLoader loader = new WorldLoader();
-                    WorldBuilder builder = new WorldBuilder();
-                    SingletonParty.getParty().setCurrentMap(/*loader.loadWorld()*/builder.buildWorld());
+                    // WorldBuilder builder = new WorldBuilder();
+                    SingletonParty.getParty().setCurrentMap(loader.loadWorld()/*builder.buildWorld()*/);
                     Map<CardinalPoints, String> framesMap = new HashMap<>();
                     for(CardinalPoints cp : CardinalPoints.values()) {
                         framesMap.put(cp, SingletonParty.getParty().getHeroTeam().getAllHeroes().get(0).getBattleFrame());

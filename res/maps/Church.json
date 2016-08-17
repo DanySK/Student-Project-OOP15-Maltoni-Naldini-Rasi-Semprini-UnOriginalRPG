@@ -95,7 +95,17 @@
       },
       {
         "path": "res/sprites/npcs/floor/front-7.png",
-        "state": "BLOCKED"
+        "state": "BLOCKED",
+        "npc": {
+          "sentence": {
+            "sentence": "Mi hanno sbattuto quaggi� perch� mi mangiavo tutte le ostie!",
+            "nextToShow": 0,
+            "listOfRows": [
+              "Mi hanno sbattuto quaggi� perch� mi mangiavo tutte",
+              "le ostie!"
+            ]
+          }
+        }
       },
       {
         "path": "res/sprites/map/floor.png",
@@ -197,7 +207,17 @@
       },
       {
         "path": "res/sprites/npcs/floor/right.png",
-        "state": "BLOCKED"
+        "state": "BLOCKED",
+        "npc": {
+          "sentence": {
+            "sentence": "Hai notato che questo posto ha entrate ma non uscite? Devono essere gli Illuminati!",
+            "nextToShow": 0,
+            "listOfRows": [
+              "Hai notato che questo posto ha entrate ma non uscite?",
+              "Devono essere gli Illuminati!"
+            ]
+          }
+        }
       },
       {
         "path": "res/sprites/map/table.png",
@@ -349,7 +369,17 @@
       },
       {
         "path": "res/sprites/npcs/floor/front-4.png",
-        "state": "BLOCKED"
+        "state": "BLOCKED",
+        "npc": {
+          "sentence": {
+            "sentence": "Sono una guardia inutile, ma non quanto lui dalla parte opposta!",
+            "nextToShow": 0,
+            "listOfRows": [
+              "Sono una guardia inutile, ma non quanto lui dalla ",
+              "parte opposta!"
+            ]
+          }
+        }
       },
       {
         "path": "res/sprites/map/floor.png",
@@ -373,7 +403,17 @@
       },
       {
         "path": "res/sprites/npcs/floor/front-4.png",
-        "state": "BLOCKED"
+        "state": "BLOCKED",
+        "npc": {
+          "sentence": {
+            "sentence": "Sono una guardia inutile, ma non quanto lui dalla parte opposta!",
+            "nextToShow": 0,
+            "listOfRows": [
+              "Sono una guardia inutile, ma non quanto lui dalla ",
+              "parte opposta!"
+            ]
+          }
+        }
       },
       {
         "path": "res/sprites/map/border-2.png",
@@ -395,15 +435,27 @@
       },
       {
         "path": "res/sprites/map/black.png",
-        "state": "BLOCKED"
+        "state": "BLOCKED",
+        "initialPos": {
+          "posX": 8,
+          "posY": 13
+        }
       },
       {
         "path": "res/sprites/map/black.png",
-        "state": "BLOCKED"
+        "state": "BLOCKED",
+        "initialPos": {
+          "posX": 8,
+          "posY": 13
+        }
       },
       {
         "path": "res/sprites/map/black.png",
-        "state": "BLOCKED"
+        "state": "BLOCKED",
+        "initialPos": {
+          "posX": 8,
+          "posY": 13
+        }
       },
       {
         "path": "res/sprites/map/border-2.png",
@@ -420,8 +472,8 @@
     ]
   ],
   "initialPosition": {
-    "posX": 1,
-    "posY": 1
+    "posX": 9,
+    "posY": 4
   },
-  "battleState": true
+  "battleState": false
 }

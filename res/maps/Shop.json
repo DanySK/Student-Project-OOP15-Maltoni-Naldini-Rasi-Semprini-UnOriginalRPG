@@ -123,7 +123,16 @@
       },
       {
         "path": "res/sprites/npcs/floor/front-4.png",
-        "state": "BLOCKED"
+        "state": "BLOCKED",
+        "npc": {
+          "sentence": {
+            "sentence": "Fuori dalla mia palude!",
+            "nextToShow": 0,
+            "listOfRows": [
+              "Fuori dalla mia palude!"
+            ]
+          }
+        }
       },
       {
         "path": "res/sprites/map/floor.png",
@@ -207,7 +216,17 @@
       },
       {
         "path": "res/sprites/npcs/floor/front-5.png",
-        "state": "BLOCKED"
+        "state": "BLOCKED",
+        "npc": {
+          "sentence": {
+            "sentence": "Il fabbro si � barricato dietro il bancone! Nessuno port� andare a parlargli ora!",
+            "nextToShow": 0,
+            "listOfRows": [
+              "Il fabbro si � barricato dietro il bancone!",
+              "Nessuno port� andare a parlargli ora!"
+            ]
+          }
+        }
       },
       {
         "path": "res/sprites/map/floor.png",
@@ -243,7 +262,17 @@
       },
       {
         "path": "res/sprites/npcs/floor/front-5.png",
-        "state": "BLOCKED"
+        "state": "BLOCKED",
+        "npc": {
+          "sentence": {
+            "sentence": "Il fabbro � arrabbiato perch� i ladri gli hanno rubato tutti i suoi averi!",
+            "nextToShow": 0,
+            "listOfRows": [
+              "Il fabbro � arrabbiato perch� i ladri gli hanno ",
+              "rubato tutti i suoi averi!"
+            ]
+          }
+        }
       },
       {
         "path": "res/sprites/map/border-2.png",
@@ -281,7 +310,11 @@
       },
       {
         "path": "res/sprites/map/black.png",
-        "state": "BLOCKED"
+        "state": "BLOCKED",
+        "initialPos": {
+          "posX": 16,
+          "posY": 4
+        }
       },
       {
         "path": "res/sprites/map/border-2.png",
@@ -302,8 +335,8 @@
     ]
   ],
   "initialPosition": {
-    "posX": 1,
-    "posY": 1
+    "posX": 4,
+    "posY": 7
   },
-  "battleState": true
+  "battleState": false
 }
