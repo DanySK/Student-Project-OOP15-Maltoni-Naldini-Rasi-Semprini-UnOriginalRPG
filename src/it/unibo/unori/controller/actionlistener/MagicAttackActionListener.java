@@ -8,8 +8,7 @@ public class MagicAttackActionListener extends AbstractUnoriActionListener {
         // TODO
     }
     @Override
-    public void actionPerformed(ActionEvent event) {
-        // TODO Auto-generated method stub
+    public void actionPerformed(final ActionEvent event) {
         
     }
 
