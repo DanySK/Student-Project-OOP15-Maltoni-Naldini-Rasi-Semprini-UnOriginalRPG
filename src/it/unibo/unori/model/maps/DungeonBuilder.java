@@ -22,6 +22,7 @@ public class DungeonBuilder {
     private static final GameMapFactory FACT = new GameMapFactory();
     private static final ArmorFactory AACT = new ArmorFactory();
     private static final PotionFactory PACT = new PotionFactory();
+    private static final WeaponFactory WACT = new WeaponFactory();
     private static final String ROCKPATH = "res/sprites/map/rocks.png";
     private static final String FLOORPATH = "res/sprites/map/earth.png";
     private List<GameMap> rList = new ArrayList<>();
@@ -131,7 +132,7 @@ public class DungeonBuilder {
         this.westLink(tList.get(3), tList.get(4));
         this.storeChest(POS1, tList.get(0), AACT.getGoldEquip().get(ArmorPieces.SHIELD));
         this.storeChest(POS1, tList.get(4), ItemImpl.KEY);
-        this.storeChest(POS2, tList.get(7), WeaponFactory.getSpadaMistica());
+        this.storeChest(POS2, tList.get(7), WACT.getSpadaMistica());
     }
 
     /**
@@ -153,7 +154,7 @@ public class DungeonBuilder {
         this.northLink(sList.get(7), sList.get(6));
         this.northLink(sList.get(8), sList.get(7));
         this.westLink(sList.get(8), sList.get(9));
-        this.storeChest(POS2, sList.get(9), WeaponFactory.getSpadaMistica());
+        this.storeChest(POS2, sList.get(9), WACT.getSpadaMistica());
         this.northLink(sList.get(6), sList.get(5));
         this.northLink(sList.get(5), sList.get(10));
         this.storeItem(POS1, sList.get(10), AACT.getSilverEquip().get(ArmorPieces.SHIELD));
@@ -184,13 +185,13 @@ public class DungeonBuilder {
         this.westLink(rList.get(1), rList.get(0));
         this.northLink(rList.get(0), rList.get(3));
         this.northLink(rList.get(3), rList.get(4));
-        this.storeItem(POS2, rList.get(4), WeaponFactory.getChiodo());
+        this.storeItem(POS2, rList.get(4), WACT.getChiodo());
         this.westLink(rList.get(4), rList.get(13));
         this.storeItem(POS1, rList.get(13), AACT.getBronzeEquip().get(ArmorPieces.SHIELD));
         this.westLink(rList.get(5), rList.get(4));
         this.northLink(rList.get(5), rList.get(6));
         this.westLink(rList.get(7), rList.get(6));
-        this.storeItem(POS1, rList.get(7), WeaponFactory.getCannone());
+        this.storeItem(POS1, rList.get(7), WACT.getCannone());
         this.westLink(rList.get(6), rList.get(8));
         this.northLink(rList.get(8), rList.get(9));
         this.storeItem(POS1, rList.get(9), PACT.getRimedioDellaNonna());

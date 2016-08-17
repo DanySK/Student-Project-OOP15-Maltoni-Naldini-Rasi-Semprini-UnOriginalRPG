@@ -27,6 +27,7 @@ public class GameMapFactory {
     public static final GameMap LINKINGMAP = new GameMapImpl();
     private static final CellFactory FACT = new CellFactory();
     private static final PotionFactory PACT = new PotionFactory();
+    private static final WeaponFactory WACT = new WeaponFactory();
     private static final int MAXSIZE = 99;
     private static final String ROCKPATH = "res/sprites/map/rocks.png";
     private static final String GRASSPATH = "res/sprites/map/grass.png";
@@ -220,7 +221,7 @@ public class GameMapFactory {
        final Npc crest = new NpcImpl("Questo dungeon mi fa paura, vado a lavorare a Train Simulator");
        map.setCell(new Position(3, 6), new NPCCellImpl("res/sprites/npcs/grass/front-1.png", crest));
        map.setCell(new Position(8, 9), new ObjectCellImpl(PACT.getPozioneVita()));
-       map.setCell(new Position(2, 9), new ObjectCellImpl(WeaponFactory.getLanciafiamme()));
+       map.setCell(new Position(2, 9), new ObjectCellImpl(WACT.getLanciafiamme()));
        return map;
    }
 
