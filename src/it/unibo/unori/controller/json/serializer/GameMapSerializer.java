@@ -22,7 +22,7 @@ import it.unibo.unori.model.maps.exceptions.NoObjectFoundException;
 public class GameMapSerializer implements JsonSerializer<GameMap> {
     private static final String FLOOR_MAP = "floorMap";
     private static final String INITIAL_POSITION = "initialPosition";
-    // TODO REMEMBER THE BOOLEAN
+    private static final String BATTLE_STATE = "battleState";
 
     @Override
     public JsonElement serialize(final GameMap src, final Type typeOfSrc, final JsonSerializationContext context) {
@@ -38,6 +38,9 @@ public class GameMapSerializer implements JsonSerializer<GameMap> {
 
         final JsonElement initalPosition = context.serialize(src.getInitialCellPosition(), Position.class);
         jObj.add(INITIAL_POSITION, initalPosition);
+        
+        final boolean battleState = src.isBattleState();
+        jObj.addProperty(BATTLE_STATE, battleState);
 
         return jObj;
     }

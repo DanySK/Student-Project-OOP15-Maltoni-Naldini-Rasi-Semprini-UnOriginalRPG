@@ -9,6 +9,7 @@ import javax.swing.SwingUtilities;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import java.util.Stack;
 
 /**
  *
@@ -17,9 +18,13 @@ import java.awt.event.WindowEvent;
  *
  */
 public final class View extends JFrame {
-    private Integer layers = 0;
+	private static final long serialVersionUID = 1L;
+
+	private Integer layers = 0;
     private final JLayeredPane layeredPane;
     private static final String TITLE = "UnOriginal.RPG";
+
+    Stack<Layer> stack = new Stack<Layer>();
 
     public static final Dimension SIZE = new Dimension(640, 480); // TODO
 
@@ -75,6 +80,10 @@ public final class View extends JFrame {
      * @param layer the layer to be pushed
      */
     public void push(final Layer layer) {
+        if (!stack.isEmpty()) {
+            stack.peek().setEnabled(false);
+        }
+        stack.push(layer);
         this.layeredPane.add(layer, ++layers);
     }
 
@@ -82,6 +91,10 @@ public final class View extends JFrame {
      * Removes the layer on top of the view.
      */
     public void pop() {
+        stack.pop();
+        if (!stack.isEmpty()) {
+            stack.peek().setEnabled(true);
+        }
         this.layeredPane.remove(layeredPane.highestLayer() - 1);
     }
 

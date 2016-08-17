@@ -2,7 +2,6 @@ package it.unibo.unori.controller.json.deserializers;
 
 import java.lang.reflect.Type;
 import java.util.List;
-import java.util.Map;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
@@ -14,10 +13,8 @@ import com.google.gson.reflect.TypeToken;
 import it.unibo.unori.model.battle.MagicAttackInterface;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.FoeImpl;
-import it.unibo.unori.model.character.Statistics;
 import it.unibo.unori.model.character.Status;
 import it.unibo.unori.model.character.factory.FoesFindable;
-import it.unibo.unori.model.items.Weapon;
 
 public class FoeDeserializer implements JsonDeserializer<Foe> {
     // CharacterImpl

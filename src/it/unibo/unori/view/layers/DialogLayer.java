@@ -22,10 +22,13 @@ import java.awt.event.ActionEvent;
  *
  */
 public class DialogLayer extends Layer {
-    final private Button button;
+	private static final long serialVersionUID = 1L;
+	
+	private final Button button;
     final private static Dimension SIZE = new Dimension(View.SIZE.width / 2,
                                                         View.SIZE.height / 2);
 
+    // TODO sfondo non nero
     /**
      * Creates a dialog.
      */
@@ -40,7 +43,8 @@ public class DialogLayer extends Layer {
 
         this.button = button;
 
-        final JLabel label = new JLabel(message, SwingConstants.CENTER);
+        String htmlText = "<html>" + message.replaceAll("\n", "<br/>") + "</html>";
+        final JLabel label = new JLabel(htmlText, SwingConstants.CENTER);
         label.setForeground(Color.WHITE);
 
         this.add(label, BorderLayout.CENTER);

@@ -31,7 +31,9 @@ import java.awt.image.AffineTransformOp;
  *
  */
 public class MapLayer extends Layer {
-    private static final Dimension SIZE = new Dimension(800, 640);
+	private static final long serialVersionUID = 1L;
+	
+	private static final Dimension SIZE = new Dimension(1280, 720);
     private static final Dimension CELL_SIZE = new Dimension(32, 32);
 
     private Point mapStartingPoint;
@@ -93,10 +95,10 @@ public class MapLayer extends Layer {
                 case SwingConstants.SOUTH:
                     inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "DOWN");
                     actionMap.put("DOWN", entry.getValue()); break;
-                case SwingConstants.EAST:
+                case SwingConstants.WEST:
                     inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "LEFT");
                     actionMap.put("LEFT", entry.getValue()); break;
-                case SwingConstants.WEST:
+                case SwingConstants.EAST:
                     inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "RIGHT");
                     actionMap.put("RIGHT", entry.getValue()); break;
                 default: break;
@@ -122,10 +124,10 @@ public class MapLayer extends Layer {
             case SwingConstants.SOUTH:
                 frame[0] = getSprite(spriteSheet, JobSprite.FRONT);
                 frame[1] = getSprite(spriteSheet, JobSprite.FRONT2); break;
-            case SwingConstants.EAST:
+            case SwingConstants.WEST:
                 frame[0] = getSprite(spriteSheet, JobSprite.LEFT);
                 frame[1] = getSprite(spriteSheet, JobSprite.LEFT2); break;
-            case SwingConstants.WEST:
+            case SwingConstants.EAST:
                 frame[0] = flipImage(getSprite(spriteSheet, JobSprite.LEFT));
                 frame[1] = flipImage(getSprite(spriteSheet, JobSprite.LEFT2)); break;
             default: break;
@@ -142,15 +144,31 @@ public class MapLayer extends Layer {
 
         switch (direction) {
             case SwingConstants.NORTH:
-                position.translate(0, -1); break;
-            case SwingConstants.SOUTH:
-                position.translate(0, 1); break;
-            case SwingConstants.EAST:
                 position.translate(-1, 0); break;
-            case SwingConstants.WEST:
+            case SwingConstants.SOUTH:
                 position.translate(1, 0); break;
+            case SwingConstants.EAST:
+                position.translate(0, 1); break;
+            case SwingConstants.WEST:
+                position.translate(0, -1); break;
             default: break;
         }
+    }
+    
+    public void rotate(int direction) {
+    	switch (direction) {
+	        case SwingConstants.NORTH:
+	            frame[0] = getSprite(spriteSheet, JobSprite.BACK); break;
+	        case SwingConstants.SOUTH:
+	            frame[0] = getSprite(spriteSheet, JobSprite.FRONT); break;
+	        case SwingConstants.WEST:
+	            frame[0] = getSprite(spriteSheet, JobSprite.LEFT); break;
+	        case SwingConstants.EAST:
+	            frame[0] = flipImage(getSprite(spriteSheet, JobSprite.LEFT)); break;
+	        default: break;
+    	}
+
+        sprite = frame[0]; repaint();
     }
 
     /**
@@ -209,17 +227,16 @@ public class MapLayer extends Layer {
         for (int x = 0; x < map.length; x++) {
             for (int y = 0; y < map[0].length; y++) {
                 g.drawImage(map[x][y],
-                            mapStartingPoint.x + x * CELL_SIZE.width,
                             mapStartingPoint.y + y * CELL_SIZE.height,
-                            CELL_SIZE.width, CELL_SIZE.height, null);
+                            mapStartingPoint.x + x * CELL_SIZE.width,
+                            CELL_SIZE.height, CELL_SIZE.width, null);
             }
         }
 
         g.drawImage(sprite,
-                    mapStartingPoint.x + position.x * CELL_SIZE.width,
                     mapStartingPoint.y + position.y * CELL_SIZE.height,
-                    CELL_SIZE.width, CELL_SIZE.height, null);
-
+                    mapStartingPoint.x + position.x * CELL_SIZE.width,
+                    CELL_SIZE.height, CELL_SIZE.width, null);
 
         final int border = 10;
         final int height = 100;
@@ -274,8 +291,8 @@ public class MapLayer extends Layer {
             }
         }
 
-        mapStartingPoint = new Point((SIZE.width - width * CELL_SIZE.width) / 2,
-                                     (SIZE.height - height * CELL_SIZE.height) / 2);
+        mapStartingPoint = new Point((SIZE.height - width * CELL_SIZE.width) / 2,
+                                     (SIZE.width - height * CELL_SIZE.height) / 2);
 
         return mapImage;
     }

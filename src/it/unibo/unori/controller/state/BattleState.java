@@ -9,28 +9,27 @@ import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.HeroTeam;
 import it.unibo.unori.model.character.HeroTeamImpl;
 import it.unibo.unori.model.items.Bag;
-import it.unibo.unori.model.maps.GameMap;
 
 /**
  * This GameState models the state of battle with some encountered monsters.
  */
 public class BattleState extends AbstractGameState {
+    public static final int MAX_NUMBER_OF_FOES = 4;
     private final Battle battleModel;
     private int currentTurn; 
 
     /**
      * Default constructor. It instantiates a new battle with given foes.
      * @param party the list of the alive heroes in the party
-     * @param map the map in which the battle started; used for the background
      * @param foes the list of enemies that the heroes must defeat
      * @param bag the bag containing the items of the party
      */
-    public BattleState(final List<Hero> party, final GameMap map, final FoeSquad foes, final Bag bag) {
+    public BattleState(final List<Hero> party, final FoeSquad foes, final Bag bag) {
         super(null/* new BattleLayer() TODO */);
         this.battleModel = new BattleImpl(new HeroTeamImpl(party), null, bag); // TODO null will be replaced by Battle getter
     }
     
-    public BattleState(final HeroTeam party, final GameMap map, final FoeSquad foes, final Bag bag) {
+    public BattleState(final HeroTeam party, final FoeSquad foes, final Bag bag) {
         super(/* new BattleLayer() TODO */ null);
         this.battleModel = new BattleImpl(party, foes, bag); // TODO null will be replaced by Battle getter
     }

@@ -1,10 +1,10 @@
 package it.unibo.unori.controller.action;
 
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Supplier;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -12,9 +12,13 @@ import javax.swing.SwingConstants;
 
 import it.unibo.unori.controller.Controller;
 import it.unibo.unori.controller.SingletonStateMachine;
+import it.unibo.unori.controller.exceptions.NotValidStateException;
 import it.unibo.unori.controller.exceptions.UnsupportedSwingConstantException;
+import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 import it.unibo.unori.controller.state.MapState;
-import it.unibo.unori.model.maps.Party;
+import it.unibo.unori.model.maps.Party.CardinalPoints;
+import it.unibo.unori.view.exceptions.SpriteNotFoundException;
+import it.unibo.unori.view.layers.MapLayer;
 
 /**
  * Action that should be linked with movement dedicated buttons as WASD or UP,
@@ -28,7 +32,7 @@ public class MoveAction extends AbstractAction {
      */
     private static final long serialVersionUID = -7895803067785268380L;
 
-    private final Party.CardinalPoints direction;
+    private final CardinalPoints direction;
     private final Controller controller;
 
     /**
@@ -37,7 +41,7 @@ public class MoveAction extends AbstractAction {
      * @param direction
      *            the direction to move to
      */
-    public MoveAction(final Party.CardinalPoints direction) {
+    public MoveAction(final CardinalPoints direction) {
         super();
         this.direction = direction;
         this.controller = SingletonStateMachine.getController();
@@ -45,41 +49,60 @@ public class MoveAction extends AbstractAction {
 
     @Override
     public void actionPerformed(final ActionEvent event) {
-        if (this.controller.getCurrentStateClass().isInstance(MapState.class)) {
+        if (MapState.class.isInstance(this.controller.getCurrentState())) {
             final MapState currentState = (MapState) this.controller.getCurrentState();
+            final MapLayer currentLayer = (MapLayer) currentState.getLayer();
+            currentLayer.rotate(MoveAction.convertCardinalPointsToSwingConstants(direction));
             if (currentState.moveParty(this.direction)) {
-                // ((MapLayer)
-                // currentState.getLayer()).moveParty(this.direction);
+                (currentLayer).move(MoveAction.convertCardinalPointsToSwingConstants(direction));
+
+                if (currentState.checkMapChanges()) {
+                    try {
+                        currentLayer.changeMap(currentState.getMap().getFrames(),
+                                new Point(currentState.getCurrentPosition().getPosX(),
+                                        currentState.getCurrentPosition().getPosY()));
+                    } catch (SpriteNotFoundException e) {
+                        System.out.println("Error changing map in MoveAction:");
+                        this.controller.showError(e.getMessage(), ErrorSeverity.SERIUOS);
+                        e.printStackTrace();
+                    }
+                }
+                currentState.randomEncounters();
             }
+        } else {
+            System.out.println("Error current state is not MapState in MoveAction:");
+            this.controller.showError(new NotValidStateException().getMessage(), ErrorSeverity.SERIUOS);
         }
     }
 
     public static Map<Integer, Action> getSupportedMovementsMap() {
         final Map<Integer, Action> returnMap = new HashMap<>();
 
-        returnMap.put(SwingConstants.NORTH, new MoveAction(convertSwingConstantsToCardinalPoints(SwingConstants.NORTH)));
-        returnMap.put(SwingConstants.SOUTH, new MoveAction(convertSwingConstantsToCardinalPoints(SwingConstants.SOUTH)));
+        returnMap.put(SwingConstants.NORTH,
+                new MoveAction(convertSwingConstantsToCardinalPoints(SwingConstants.NORTH)));
+        returnMap.put(SwingConstants.SOUTH,
+                new MoveAction(convertSwingConstantsToCardinalPoints(SwingConstants.SOUTH)));
         returnMap.put(SwingConstants.WEST, new MoveAction(convertSwingConstantsToCardinalPoints(SwingConstants.WEST)));
         returnMap.put(SwingConstants.EAST, new MoveAction(convertSwingConstantsToCardinalPoints(SwingConstants.EAST)));
 
         return returnMap;
     }
 
-    public static Party.CardinalPoints convertSwingConstantsToCardinalPoints(final int swingConstant)
+    public static CardinalPoints convertSwingConstantsToCardinalPoints(final int swingConstant)
             throws UnsupportedSwingConstantException {
-        final Optional<Party.CardinalPoints> cardinal;
+        final Optional<CardinalPoints> cardinal;
         switch (swingConstant) {
             case SwingConstants.NORTH:
-                cardinal = Optional.of(Party.CardinalPoints.NORTH);
+                cardinal = Optional.of(CardinalPoints.NORTH);
                 break;
             case SwingConstants.SOUTH:
-                cardinal = Optional.of(Party.CardinalPoints.SOUTH);
+                cardinal = Optional.of(CardinalPoints.SOUTH);
                 break;
             case SwingConstants.EAST:
-                cardinal = Optional.of(Party.CardinalPoints.EAST);
+                cardinal = Optional.of(CardinalPoints.EAST);
                 break;
             case SwingConstants.WEST:
-                cardinal = Optional.of(Party.CardinalPoints.WEST);
+                cardinal = Optional.of(CardinalPoints.WEST);
                 break;
             default:
                 cardinal = Optional.empty();
@@ -87,5 +110,23 @@ public class MoveAction extends AbstractAction {
         }
 
         return cardinal.orElseThrow(() -> new UnsupportedSwingConstantException());
+    }
+
+    public static int convertCardinalPointsToSwingConstants(final CardinalPoints direction)
+            throws UnsupportedSwingConstantException {
+        final Optional<Integer> swingConstant;
+        if (direction.equals(CardinalPoints.NORTH)) {
+            swingConstant = Optional.of(SwingConstants.NORTH);
+        } else if (direction.equals(CardinalPoints.SOUTH)) {
+            swingConstant = Optional.of(SwingConstants.SOUTH);
+        } else if (direction.equals(CardinalPoints.WEST)) {
+            swingConstant = Optional.of(SwingConstants.WEST);
+        } else if (direction.equals(CardinalPoints.EAST)) {
+            swingConstant = Optional.of(SwingConstants.EAST);
+        } else {
+            swingConstant = Optional.empty();
+        }
+
+        return swingConstant.orElseThrow(() -> new UnsupportedSwingConstantException());
     }
 }

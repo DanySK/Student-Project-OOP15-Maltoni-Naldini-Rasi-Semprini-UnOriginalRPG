@@ -3,6 +3,8 @@ package it.unibo.unori.controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.google.gson.JsonIOException;
@@ -10,22 +12,27 @@ import com.google.gson.JsonSyntaxException;
 
 import it.unibo.unori.controller.exceptions.NotValidStateException;
 import it.unibo.unori.controller.json.JsonFileManager;
+import it.unibo.unori.controller.json.WorldLoader;
+import it.unibo.unori.controller.state.BattleState;
 import it.unibo.unori.controller.state.CharacterSelectionState;
 import it.unibo.unori.controller.state.DialogState;
+import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 import it.unibo.unori.controller.state.GameState;
 import it.unibo.unori.controller.state.InGameMenuState;
 import it.unibo.unori.controller.state.MainMenuState;
 import it.unibo.unori.controller.state.MapState;
+import it.unibo.unori.model.character.Foe;
+import it.unibo.unori.model.character.FoeSquadImpl;
 import it.unibo.unori.model.character.HeroImpl;
 import it.unibo.unori.model.character.exceptions.MaxHeroException;
 import it.unibo.unori.model.character.jobs.Jobs;
+import it.unibo.unori.model.maps.Party;
+import it.unibo.unori.model.maps.Party.CardinalPoints;
 import it.unibo.unori.model.maps.SingletonParty;
-import it.unibo.unori.view.exceptions.SpriteNotFoundException;
 import it.unibo.unori.view.layers.CharacterSelectionLayer;
 
 /**
- * This class manages an implementation of
- * {@link it.unibo.controller.Controller} interface that matches the Singleton
+ * This class manages an implementation of {@link it.unibo.controller.Controller} interface that matches the Singleton
  * pattern. It is a final class in order to not be extended.
  */
 public final class SingletonStateMachine {
@@ -36,8 +43,8 @@ public final class SingletonStateMachine {
     }
 
     /**
-     * Method to get the controller instance inside the class. Multiple
-     * allocations are prevented also in a multi-thread system.
+     * Method to get the controller instance inside the class. Multiple allocations are prevented also in a multi-thread
+     * system.
      * 
      * @return the single instance of Controller created.
      */
@@ -51,11 +58,9 @@ public final class SingletonStateMachine {
     }
 
     /**
-     * This class implements the {@link it.unibo.controller.Controller}
-     * interface. It's declared private for encapsulation purpose: the only way
-     * to use an instance of this class is by the method
-     * {@link SingletonStateMachine#getController()} of the
-     * SingletonStateMachine class.
+     * This class implements the {@link it.unibo.controller.Controller} interface. It's declared private for
+     * encapsulation purpose: the only way to use an instance of this class is by the method
+     * {@link SingletonStateMachine#getController()} of the SingletonStateMachine class.
      */
     private static final class StateMachineImpl implements Controller {
         private final StateMachineStack stack;
@@ -63,12 +68,10 @@ public final class SingletonStateMachine {
         private final JsonFileManager fileManager;
 
         /**
-         * This default constructor instantiates a new StateMachine controller
-         * class, adding a new
+         * This default constructor instantiates a new StateMachine controller class, adding a new
          * {@link it.unibo.unori.Controller.StateMachineStack} with a new
-         * {@link it.unibo.unori.controller.state.MainMenuState} pushed at the
-         * top. It also counts time, but the timer needs to be started. It is a
-         * final class because it has no need to be extendible.
+         * {@link it.unibo.unori.controller.state.MainMenuState} pushed at the top. It also counts time, but the timer
+         * needs to be started. It is a final class because it has no need to be extendible.
          */
         StateMachineImpl() {
             this.stack = new StateMachineStackImpl();
@@ -77,8 +80,7 @@ public final class SingletonStateMachine {
         }
 
         /**
-         * {@inheritDoc} This is done by pushing a new MainMenuState and
-         * updating and rendering it.
+         * {@inheritDoc} This is done by pushing a new MainMenuState and updating and rendering it.
          */
         @Override
         public void begin() {
@@ -105,8 +107,7 @@ public final class SingletonStateMachine {
             SingletonParty.loadParty(this.fileManager.loadGame());
             final GameState loadedGame = new MapState(SingletonParty.getParty().getCurrentGameMap());
 
-            this.stack.push(loadedGame);
-            this.stack.render();
+            this.stack.pushAndRender(loadedGame);
         }
 
         @Override
@@ -115,68 +116,61 @@ public final class SingletonStateMachine {
 
             // TODO maybe we should check if the SingletonParty should be reset
 
-            this.stack.push(new CharacterSelectionState());
-            this.stack.render();
+            this.stack.pushAndRender(new CharacterSelectionState());
         }
 
         @Override
-        public void setParty() {
+        public void startGame() {
             if (CharacterSelectionLayer.class.isInstance(this.stack.peek().getLayer())) {
                 final Map<String, Jobs> selected = ((CharacterSelectionLayer) this.stack.pop().getLayer()).getParty();
 
                 selected.entrySet().forEach(entry -> {
                     try {
                         SingletonParty.getParty().getHeroTeam().addHero(new HeroImpl(entry.getKey(), entry.getValue()));
-                    } catch (IllegalArgumentException e) {
-                        this.stack.push(new DialogState(e.getMessage(), DialogState.ErrorSeverity.SERIUOS));
-                        this.stack.render();
-                        e.printStackTrace();
-                    } catch (MaxHeroException e) {
-                        this.stack.push(new DialogState(e.getMessage(), DialogState.ErrorSeverity.SERIUOS));
-                        this.stack.render();
+                    } catch (MaxHeroException | IllegalArgumentException e) {
+                        System.out.println("Error in starting game:");
+                        this.showError(e.getMessage(), ErrorSeverity.SERIUOS);
                         e.printStackTrace();
                     }
                 });
 
                 try {
-                    this.stack.push(new MapState(SingletonParty.getParty().getCurrentGameMap()));
-                    this.stack.render();
-                } catch (SpriteNotFoundException e) {
-                    this.stack.push(new DialogState(e.getMessage(), DialogState.ErrorSeverity.SERIUOS));
-                    this.stack.render();
+                    WorldLoader loader = new WorldLoader();
+                    SingletonParty.getParty().setCurrentMap(loader.loadWorld());
+                    Map<CardinalPoints, String> framesMap = new HashMap<>();
+                    for(CardinalPoints cp : CardinalPoints.values()) {
+                        framesMap.put(cp, SingletonParty.getParty().getHeroTeam().getAllHeroes().get(0).getBattleFrame());
+                    }
+                    SingletonParty.getParty().setFrames(framesMap);
+                    this.stack.pushAndRender(new MapState(SingletonParty.getParty().getCurrentGameMap()));
+                    this.startTimer();
+                } catch (IOException e) {
+                    System.out.println("Error in starting game:");
+                    this.showError(e.getMessage(), ErrorSeverity.SERIUOS);
                     e.printStackTrace();
                 }
 
             } else {
-                try {
-                    throw new NotValidStateException();
-                } catch (NotValidStateException e) {
-                    this.stack.push(new DialogState(e.getMessage(), DialogState.ErrorSeverity.SERIUOS));
-                    this.stack.render();
-                    e.printStackTrace();
-                }
+                System.out.println("Error in starting game:");
+                this.showError(new NotValidStateException().getMessage(), ErrorSeverity.SERIUOS);
             }
 
         }
 
         /**
-         * If the statistics file exists from previous plays, it should be
-         * loaded. This method does that.
+         * If the statistics file exists from previous plays, it should be loaded. This method does that.
          * 
          * @throws IOException
          *             if an error occurs
          * @throws SecurityException
-         *             if a security manager exists and it denies read access to
-         *             the file or directory
+         *             if a security manager exists and it denies read access to the file or directory
          * @throws FileNotFoundException
-         *             if the file does not exist, is a directory rather than a
-         *             regular file, or for some other reason cannot be opened
-         *             for reading.
+         *             if the file does not exist, is a directory rather than a regular file, or for some other reason
+         *             cannot be opened for reading.
          * @throws JsonIOException
          *             if there was a problem reading from the Reader
          * @throws JsonSyntaxException
-         *             if the file does not contain a valid representation for
-         *             an object of type
+         *             if the file does not contain a valid representation for an object of type
          */
         private void restoreStatsIfNeeded() throws IOException {
             if (new File(JsonFileManager.STATS_FILE).exists()) {
@@ -193,10 +187,10 @@ public final class SingletonStateMachine {
         public Class<?> getCurrentStateClass() {
             return this.stack.peek().getClass();
         }
-        
+
         @Override
         public void openMenu() throws NotValidStateException {
-            if (this.stack.peek().getClass().isInstance(InGameMenuState.class)) {
+            if (MapState.class.isInstance(this.stack.peek())) {
                 this.stack.push(new InGameMenuState());
                 this.stack.render();
             } else {
@@ -206,7 +200,7 @@ public final class SingletonStateMachine {
 
         @Override
         public void closeMenu() throws NotValidStateException {
-            if (this.stack.peek().getClass().isInstance(InGameMenuState.class)) {
+            if (InGameMenuState.class.isInstance(this.stack.peek())) {
                 this.stack.pop();
             } else {
                 throw new NotValidStateException();
@@ -222,6 +216,19 @@ public final class SingletonStateMachine {
         @Override
         public StateMachineStack getStack() {
             return this.stack;
+        }
+
+        @Override
+        public void showError(final String error, final ErrorSeverity severity) {
+            this.stack.pushAndRender(new DialogState(error, severity));
+        }
+
+        @Override
+        public void startBattle(final List<Foe> foes) {
+            final Party partyObject = SingletonParty.getParty();
+            this.stack.pushAndRender(new BattleState(partyObject.getHeroTeam(), new FoeSquadImpl(foes),
+                            partyObject.getPartyBag()));
+            this.stats.increaseMonstersMet(foes.size());
         }
 
     }

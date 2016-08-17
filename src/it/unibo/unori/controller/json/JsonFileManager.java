@@ -39,6 +39,7 @@ import it.unibo.unori.controller.json.deserializers.WeaponDeserializer;
 import it.unibo.unori.controller.json.serializer.ArmorSerializer;
 import it.unibo.unori.controller.json.serializer.GameMapSerializer;
 import it.unibo.unori.controller.json.serializer.HeroTeamSerializer;
+import it.unibo.unori.controller.json.serializer.MagicAttackSerializer;
 import it.unibo.unori.controller.json.serializer.WeaponSerializer;
 import it.unibo.unori.model.battle.MagicAttackInterface;
 import it.unibo.unori.model.character.Foe;
@@ -105,6 +106,7 @@ public class JsonFileManager {
                 .registerTypeAdapter(Weapon.class, new WeaponDeserializer())
                 .registerTypeAdapter(Potion.class, new PotionDeserializer())
                 .registerTypeAdapter(Bag.class, new BagDeserializer())
+                .registerTypeAdapter(MagicAttackInterface.class, new MagicAttackSerializer())
                 .registerTypeAdapter(MagicAttackInterface.class, new MagicAttackDeserializer())
                 .registerTypeAdapter(Character.class, new CharacterDeserializer())
                 .registerTypeAdapter(Foe.class, new FoeDeserializer())
@@ -113,18 +115,7 @@ public class JsonFileManager {
                 .registerTypeAdapter(HeroTeam.class, new HeroTeamSerializer())
                 .registerTypeAdapter(HeroTeam.class, new HeroTeamDeserializer())
                 .registerTypeAdapter(Npc.class, new NpcDeserializer())
-                .registerTypeAdapter(DialogueInterface.class, new DialogueDeserializer()) // TODO
-                                                                                          // not
-                                                                                          // sure
-                                                                                          // what
-                                                                                          // to
-                                                                                          // keep
-                .registerTypeAdapter(Dialogue.class, new DialogueDeserializer()) // TODO
-                                                                                 // not
-                                                                                 // sure
-                                                                                 // what
-                                                                                 // to
-                                                                                 // keep
+                .registerTypeAdapter(DialogueInterface.class, new DialogueDeserializer())
                 .registerTypeAdapter(Position.class, new GameMapSerializer.PositionSerializer())
                 .registerTypeAdapter(Position.class, new GameMapDeserializer.PositionDeserializer())
                 .registerTypeAdapter(Cell.class, new GameMapSerializer.CellSerializer())

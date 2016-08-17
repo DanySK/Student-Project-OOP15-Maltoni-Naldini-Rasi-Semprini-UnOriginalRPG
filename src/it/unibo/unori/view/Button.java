@@ -8,9 +8,6 @@ import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-import javax.swing.JFrame;
-import java.awt.FlowLayout;
-
 /**
  *
  * A custom JButton for the game's menus.
@@ -28,7 +25,7 @@ public class Button extends JButton implements FocusListener
 
     /**
      * Creates a button with the specified label.
-     * @param label text to be shown inside the button
+     * @param label the text to be shown inside the button
      */
     public Button(final String label) {
         super(label);
@@ -64,15 +61,5 @@ public class Button extends JButton implements FocusListener
     public void focusLost(final FocusEvent e) {
         this.setIcon(new ImageIcon(DEFAULT_ICON));
         this.setRolloverIcon(new ImageIcon(ROLLOVER_ICON));
-    }
-
-    public static void main(final String... args) {
-        final JFrame frame = new JFrame();
-        frame.getContentPane().setLayout(new FlowLayout());
-        
-        frame.getContentPane().add(new Button("Text"));
-
-        frame.pack();
-        frame.setVisible(true);
     }
 }

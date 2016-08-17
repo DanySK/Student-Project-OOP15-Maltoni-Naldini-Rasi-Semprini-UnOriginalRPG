@@ -98,12 +98,17 @@ public class DungeonBuilder {
         if (fList.isEmpty()) {
             for (int i = 0; i < 2; i++) {
                 fList.add(FACT.getSizeableMap(8, 12,
-                        ROCKPATH, FLOORPATH));
+                        ROCKPATH, FLOORPATH, true));
             }
         }
         this.storeItem(POS1, fList.get(0), PACT.getGigaPozione());
         this.storeItem(POS2, fList.get(0), PACT.getTrapiantoMana());
         this.northLink(fList.get(0), fList.get(1));
+        /*
+        final Foe boss = new FoeImpl(10, "Iinnapi", "res/sprites/warrior.png",
+                FoesFindable.EROE_CADUTO); 
+        final Cell c = new FoeCellImpl("res/sprites/npcs/earth/front-2.png", boss);
+        fList.get(1).setCell(POS1, c);*/
     }
 
     /**
@@ -113,7 +118,7 @@ public class DungeonBuilder {
         if (tList.isEmpty()) {
             for (int i = 0; i < 9; i++) {
                 tList.add(FACT.getSizeableMap(8, 12,
-                        ROCKPATH, FLOORPATH));
+                        ROCKPATH, FLOORPATH, true));
             }
         }
         this.northLink(tList.get(0), tList.get(2));
@@ -136,7 +141,7 @@ public class DungeonBuilder {
         if (sList.isEmpty()) {
             for (int i = 0; i < 18; i++) {
                 sList.add(FACT.getSizeableMap(8, 12,
-                        ROCKPATH, FLOORPATH));
+                        ROCKPATH, FLOORPATH, true));
             }
         }
         this.northLink(sList.get(1), sList.get(0));
@@ -170,7 +175,7 @@ public class DungeonBuilder {
         if (rList.isEmpty()) {
             for (int i = 0; i < 17; i++) {
                 rList.add(FACT.getSizeableMap(8, 12,
-                        ROCKPATH, FLOORPATH));
+                        ROCKPATH, FLOORPATH, true));
             }
         }
         this.westLink(rList.get(0), rList.get(2));
@@ -234,13 +239,15 @@ public class DungeonBuilder {
         default: throw new IllegalArgumentException(); 
         }
     }
-    
+
     /**
      * Get a list of map as a floor of the dungeon.
      * @param floorNum
      *          number of the floor to set
      * @param maps
      *      list of the maps of the floor
+     * @return
+     *          the floor specified in a List.
      * @throws IllegalArgumentException
      *          if the number of the floor is not between 1 and 4
      */
