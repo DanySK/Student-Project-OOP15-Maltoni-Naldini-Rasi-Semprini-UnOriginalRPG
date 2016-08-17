@@ -1,6 +1,7 @@
 package it.unibo.unori.view;
 
 import it.unibo.unori.view.layers.Layer;
+import it.unibo.unori.view.layers.MapLayer;
 
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
@@ -20,7 +21,6 @@ import java.util.Stack;
 public final class View extends JFrame {
 	private static final long serialVersionUID = 1L;
 
-	private Integer layers = 0;
     private final JLayeredPane layeredPane;
     private static final String TITLE = "UnOriginal.RPG";
 
@@ -82,20 +82,25 @@ public final class View extends JFrame {
     public void push(final Layer layer) {
         if (!stack.isEmpty()) {
             stack.peek().setEnabled(false);
+            if (!(stack.peek() instanceof MapLayer)) {
+                stack.peek().setVisible(false);
+            }
         }
+
         stack.push(layer);
-        this.layeredPane.add(layer, ++layers);
+        this.layeredPane.add(stack.peek(), stack.stream().count() - 1);
+        this.layeredPane.moveToFront(stack.peek());
     }
 
     /**
      * Removes the layer on top of the view.
      */
     public void pop() {
-        stack.pop();
         if (!stack.isEmpty()) {
             stack.peek().setEnabled(true);
+            stack.peek().setVisible(false);
         }
-        this.layeredPane.remove(--layers);
+        this.layeredPane.remove(stack.pop());
     }
 
     /**

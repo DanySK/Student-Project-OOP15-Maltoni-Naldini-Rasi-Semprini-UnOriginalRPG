@@ -70,7 +70,7 @@ public class MapLayerTest {
 
     private class MoveAction extends AbstractAction {
 		private static final long serialVersionUID = 1L;
-		
+
 		private final int direction;
 
         MoveAction(final int direction) {
