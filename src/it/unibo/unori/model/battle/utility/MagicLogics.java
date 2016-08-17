@@ -48,8 +48,8 @@ public final class MagicLogics {
     private static boolean isSuccessfull(final MagicAttackInterface m) {
         final int accuracy = m.getAccuracy();
         final int toCalc = accuracy + 4;
-        Random rand = new Random();
-        int luck = rand.nextInt(toCalc);
+        final Random rand = new Random();
+        final int luck = rand.nextInt(toCalc);
         if (accuracy >= HIGHIA) {
             return !(luck == YOURELUCKY);
         } else {
@@ -69,9 +69,9 @@ public final class MagicLogics {
             return WEAKNESSMEDIUM;
         }
         
-        Statistics powerMagic = getBestStat(magic.getMap()).getX();
-        Map<Statistics, Integer> mapToCheck = generateMapFor(true, ch);
-        Pair<Statistics, Integer> powerOpponent = getBestStat(mapToCheck);
+        final Statistics powerMagic = getBestStat(magic.getMap()).getX();
+        final Map<Statistics, Integer> mapToCheck = generateMapFor(true, ch);
+        final Pair<Statistics, Integer> powerOpponent = getBestStat(mapToCheck);
         
         return weaknessGeneral(powerOpponent.getX(), powerMagic);
     }
@@ -87,8 +87,8 @@ public final class MagicLogics {
      */
     private static Pair<Statistics, Integer> getBestStat(final Map<Statistics, Integer> map) {
         Pair<Statistics, Integer> power = new Pair<>(null, 0);
-        for (Entry<Statistics, Integer> s : map.entrySet()) {
-            int temp = map.get(s.getKey());
+        for (final Entry<Statistics, Integer> s : map.entrySet()) {
+            final int temp = map.get(s.getKey());
             if (power.getY() <= temp) {
                 power = new Pair<>(s.getKey(), temp);
             }
@@ -162,7 +162,7 @@ public final class MagicLogics {
     
     
     /**
-     * Method supposed to calculate weakness in a MagicAttack.
+     * Method supposed to calculate damage in a MagicAttack.
      * Note: possible Exceptions are handled in BattleImpl.
      * @param att the Character that throws the MagicAttack.
      * @param opp the Character that suffers the MagicAttack.
@@ -195,8 +195,8 @@ public final class MagicLogics {
             weakness = SHIFTNOTWEAK;
         } else {
             final Statistics powerWeap = getBestStat(w.getStats()).getX();
-            Map<Statistics, Integer> mapToCheck = generateMapFor(true, opp);
-            Pair<Statistics, Integer> powerOpponent = getBestStat(mapToCheck);
+            final Map<Statistics, Integer> mapToCheck = generateMapFor(true, opp);
+            final Pair<Statistics, Integer> powerOpponent = getBestStat(mapToCheck);
             weakness = weaknessGeneral(powerWeap, powerOpponent.getX()) * SHIFTWEAKNESS;
         }
         return weakness.intValue() + w.getPhysicalAtk();
@@ -215,7 +215,7 @@ public final class MagicLogics {
         int iceDef = 0;
         int thunDef = 0;
         int physDef = 0;
-        for (Entry<ArmorPieces, Armor> armor : ar.entrySet()) {
+        for (final Entry<ArmorPieces, Armor> armor : ar.entrySet()) {
             fireDef += armor.getValue().getFireDef();
             iceDef += armor.getValue().getIceDefense();
             thunDef += armor.getValue().getThunderDefense();
@@ -229,8 +229,8 @@ public final class MagicLogics {
             m.put(Statistics.THUNDERATK, thunDef);
             
             final Statistics powerArm = getBestStat(m).getX();
-            Map<Statistics, Integer> mapToCheck = generateMapFor(true, opp);
-            Pair<Statistics, Integer> powerOpponent = getBestStat(mapToCheck);
+            final Map<Statistics, Integer> mapToCheck = generateMapFor(true, opp);
+            final Pair<Statistics, Integer> powerOpponent = getBestStat(mapToCheck);
             weakness = weaknessGeneral(powerArm, powerOpponent.getX()) * SHIFTWEAKNESS;
         }
         return weakness.intValue() + physDef;
@@ -251,10 +251,10 @@ public final class MagicLogics {
                     && opp.getFireDefense() == opp.getThunderDefense()) {
                 weakness = SHIFTNOTWEAK - MULT;
             } else {
-                Map<Statistics, Integer> mapToCheck = generateMapFor(false, opp);
-                Statistics powerOpponent = getBestStat(mapToCheck).getX();
-                Map<Statistics, Integer> mapToCheckAtt = generateMapFor(true, att);
-                Statistics powerAtt = getBestStat(mapToCheckAtt).getX();
+                final Map<Statistics, Integer> mapToCheck = generateMapFor(false, opp);
+                final Statistics powerOpponent = getBestStat(mapToCheck).getX();
+                final Map<Statistics, Integer> mapToCheckAtt = generateMapFor(true, att);
+                final Statistics powerAtt = getBestStat(mapToCheckAtt).getX();
                 weakness = weaknessGeneral(powerOpponent, powerAtt) * SHIFTWEAKNESS;
             }
             return BattleLogics.getStandardDamage(att.getLevel(),

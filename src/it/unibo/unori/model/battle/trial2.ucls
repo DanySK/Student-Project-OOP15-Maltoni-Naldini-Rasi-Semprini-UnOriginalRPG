@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.10" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
-  associations="true" dependencies="false" nesting-relationships="true">  
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <interface id="1" language="java" name="it.unibo.unori.model.battle.Battle" 
+    project="oop15-maltoni-niccol-naldini-federico-semprini-luca-rasi" 
+    file="/oop15-maltoni-niccol-naldini-federico-semprini-luca-rasi/src/it/unibo/unori/model/battle/Battle.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="390" width="364" x="268" y="1"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

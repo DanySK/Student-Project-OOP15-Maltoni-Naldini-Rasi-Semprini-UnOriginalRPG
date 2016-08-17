@@ -36,8 +36,8 @@ import it.unibo.unori.model.menu.DialogueInterface;
 public class BattleTest {
     
     private Battle battle;
-    private HeroTeam team = new HeroTeamImpl();
-    private FoeSquad enemies = new FoeSquadImpl();
+    private final HeroTeam team = new HeroTeamImpl();
+    private final FoeSquad enemies = new FoeSquadImpl();
     private final Bag bag = new BagImpl();
     
     private void setBattle() {
@@ -87,13 +87,13 @@ public class BattleTest {
         }
         System.out.println(battle.setHeroOnTUrn(battle.getSquad().getFirstHeroOnTurn()));
         System.out.println(battle.setFoeOnTurn(battle.getEnemies().getFirstFoeOnTurn()));
-        System.out.println("" + this.battle.getHeroOnTurn().getRemainingHP());
-        System.out.println("" + this.battle.getHeroOnTurn().getAttack());
+        System.out.println(this.battle.getHeroOnTurn().getRemainingHP());
+        System.out.println(this.battle.getHeroOnTurn().getAttack());
         final DialogueInterface firstDamage  = battle.attack(true);
         System.out.println(this.battle.getFoeOnTurn().getSpeed() + " "
                 + this.battle.getHeroOnTurn().getSpeed());
         System.out.println(firstDamage);
-        System.out.println("" + this.battle.getHeroOnTurn().getRemainingHP());
+        System.out.println(this.battle.getHeroOnTurn().getRemainingHP());
         System.out.println(this.battle.getHeroOnTurn().getCurrentBar());
         battle.setFoeOnTurn(battle.getEnemies().getAliveFoes().get(0));
         final DialogueInterface secndDamage  = battle.attack(true);

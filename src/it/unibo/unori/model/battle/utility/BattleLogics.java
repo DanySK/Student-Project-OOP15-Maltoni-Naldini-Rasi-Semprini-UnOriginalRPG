@@ -53,7 +53,7 @@ public final class BattleLogics {
      * @return the damage calculated by the algorithm.
      */
     public static int getStandardDamage(final int charLevel, final int atck) {
-        int toMult = charLevel > 1 ? charLevel - 1 : 1;
+        final int toMult = charLevel > 1 ? charLevel - 1 : 1;
         return SHIFT + (MULT * charLevel * toMult
                + (atck * 3 * charLevel) / 2);
     }
@@ -145,7 +145,6 @@ public final class BattleLogics {
      */
     public static Status causingStatus(final Character my, final Character en) 
             throws NoWeaponException {
-        final int diff = my.getLevel() - en.getLevel();
         final Status toReturn;
         if (my instanceof Hero) {
             if (((Foe) en).getImmunity().equals(my.getWeapon().getWeaponStatus())) {
@@ -154,7 +153,7 @@ public final class BattleLogics {
                 toReturn = my.getWeapon().getWeaponStatus();
             }
         } else if (my instanceof Foe) {
-            for (Armor arm : ((Hero) en).getWholeArmor().values()) {
+            for (final Armor arm : ((Hero) en).getWholeArmor().values()) {
                 if (en.getWeapon().getWeaponStatus().equals(arm.getImmunity())) {
                     return Status.NONE;
                 }
@@ -163,7 +162,7 @@ public final class BattleLogics {
         } else {
             throw new IllegalStateException();
         }
-        
+        final int diff = my.getLevel() - en.getLevel();
         if (diff >= DIFFERENCE_MAX) {
             return toReturn;
         } else if (diff > 2 && diff < DIFFERENCE_MAX) {
