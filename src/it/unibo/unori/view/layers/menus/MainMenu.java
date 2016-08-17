@@ -3,6 +3,7 @@ package it.unibo.unori.view.layers.menus;
 import it.unibo.unori.controller.actionlistener.SaveActionListener;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.util.List;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -13,31 +14,35 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 import javax.swing.InputMap;
+import javax.swing.JLayeredPane;
 import javax.swing.ActionMap;
 import javax.swing.KeyStroke;
 import javax.swing.BorderFactory;
 import javax.swing.AbstractAction;
 
-public class MainMenu extends JPanel {
-    private static final int BORDER = 5;
+public class MainMenu extends JPanel { // TODO esc
     private final Dimension size = new Dimension(160, 160);
 
     private int focusedButton;
     private final List<MenuButton> buttons = new LinkedList<MenuButton>();
 
-    public MainMenu() {
+    public MainMenu(final JLayeredPane layeredPane, final JPanel bottom, final int x, final int y) {
         super();
 
         this.setBackground(Color.WHITE);
         this.setLayout(new GridLayout(0, 1, 5, 5));
-        this.setBounds(BORDER * 2, BORDER, size.width, size.height);
+        this.setBounds(x, y, size.width, size.height);
 
         this.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+        if (bottom != null) {
+            bottom.disable();
+        }
 
         final MenuButton party = new MenuButton("Party");
         party.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
-
+                layeredPane.add(new MainMenu(layeredPane, MainMenu.this, 100, 100));
             }
         });
 
@@ -45,7 +50,7 @@ public class MainMenu extends JPanel {
         final MenuButton items = new MenuButton("Items");
         items.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
-
+                layeredPane.add(new MainMenu(layeredPane, MainMenu.this, 100, 200));
             }
         });
 
@@ -71,6 +76,19 @@ public class MainMenu extends JPanel {
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "DOWN");
         actionMap.put("ENTER", new ButtonAction(0));
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "ENTER");
+
+        buttons.get(focusedButton).repaint();
+        this.repaint();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void disable() {
+        for (final Component component : this.getComponents()) {
+            component.setEnabled(false);
+        }
     }
 
     private class ButtonAction extends AbstractAction {

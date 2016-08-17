@@ -23,7 +23,7 @@ import it.unibo.unori.view.layers.MapLayer;
  * This class is used to test the in-game menu.
  *
  */
-public class InGameMenuLayerTest { // TODO dialoguelayer
+public class InGameMenuLayerTest {
     private MapLayer mapLayer;
     private final View view = new View();
 

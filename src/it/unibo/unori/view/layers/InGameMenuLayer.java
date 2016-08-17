@@ -19,8 +19,6 @@ public class InGameMenuLayer extends Layer {
 	private static final long serialVersionUID = 1L;
 
 	private static final Dimension SIZE = View.SIZE;
-
-    public final Bag bag;
     public final JLayeredPane layeredPane = new JLayeredPane();
 
     /**
@@ -29,16 +27,13 @@ public class InGameMenuLayer extends Layer {
     public InGameMenuLayer(final HeroTeam heroTeam, final Bag bag) {
         super();
 
-        this.bag = bag;
-
         this.setOpaque(false);
         this.setBounds(0, 0, SIZE.width, SIZE.height);
 
         layeredPane.setPreferredSize(new Dimension(SIZE.width, SIZE.height));
 
-        final MainMenu mainMenu = new MainMenu();
-        layeredPane.add(mainMenu);
-
         this.add(layeredPane);
+
+        layeredPane.add(new MainMenu(layeredPane, null, 5, 5));
     }
 }
