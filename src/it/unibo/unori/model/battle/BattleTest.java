@@ -131,7 +131,7 @@ public class BattleTest {
         System.out.println(battle.getHeroOnTurn().getAttack());
         try {
             battle.getHeroOnTurn().unsetWeapon();
-            battle.getHeroOnTurn().setWeapon(WeaponFactory.getMazza());
+            battle.getHeroOnTurn().setWeapon(new WeaponFactory().getMazza());
         } catch (WeaponAlreadyException e) {
             e.printStackTrace();
         }
