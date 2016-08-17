@@ -71,7 +71,7 @@ public class SimpleCellImpl implements Cell {
 
     @Override
     public Item getObject() throws NoObjectFoundException {
-        throw new NoObjectFoundException();
+        throw new IllegalStateException();
     }
 
     @Override
