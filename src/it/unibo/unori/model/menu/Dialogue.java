@@ -38,7 +38,7 @@ public class Dialogue implements DialogueInterface {
         int count = 0;
         String s = "";
         boolean longWord = false;
-        String[] splitted = this.sentence.split(" ");
+        final String[] splitted = this.sentence.split(" ");
         for (final String str : splitted) {
             if (str.endsWith(".\n") || str.endsWith("\n") || str.endsWith(".") 
                     || str.endsWith("!") || str.endsWith("?")) {
@@ -65,7 +65,7 @@ public class Dialogue implements DialogueInterface {
                         s = str + " ";
                         count = str.length() + 1;
                     } else {
-                        for (Character ch : str.toCharArray()) {
+                        for (final Character ch : str.toCharArray()) {
                             longWord = true;
                             if (count < MAX_CHARS) {
                                 s = s.concat(ch.toString());
@@ -137,7 +137,7 @@ public class Dialogue implements DialogueInterface {
     @Override
     public String toString() {
         String s = "";
-        for (String str : this.listOfRows) {
+        for (final String str : this.listOfRows) {
             s = s.concat(str + "\n");
         }
         return s;

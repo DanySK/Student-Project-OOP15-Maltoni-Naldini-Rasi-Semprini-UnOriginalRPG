@@ -15,7 +15,7 @@ public class Pair<X, Y> {
 	 * @param x the Object in position X.
 	 * @param y the Object in position Y.
 	 */
-	public Pair(X x, Y y) {
+	public Pair(final X x, final Y y) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -67,7 +67,7 @@ public class Pair<X, Y> {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		Pair other = (Pair) obj;
+		final Pair other = (Pair) obj;
 		if (x == null) {
 			if (other.x != null) {
 				return false;
