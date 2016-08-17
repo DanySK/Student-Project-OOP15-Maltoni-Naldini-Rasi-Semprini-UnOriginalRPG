@@ -9,6 +9,7 @@ import javax.swing.SwingUtilities;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import java.util.Stack;
 
 /**
  *
@@ -23,6 +24,8 @@ public final class View extends JFrame {
     private final JLayeredPane layeredPane;
     private static final String TITLE = "UnOriginal.RPG";
 
+    Stack<Layer> stack = new Stack<Layer>();
+
     public static final Dimension SIZE = new Dimension(640, 480); // TODO
 
     /**
@@ -35,21 +38,6 @@ public final class View extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         layeredPane = this.getLayeredPane();
-    }
-
-    /**
-     * Disables the view.
-     */
-    @Override
-    public void disable() {
-        super.setEnabled(false);
-    }
-
-    /**
-     * @return the highest layer
-     */
-    public Layer peek() {
-        return (Layer) this.layeredPane.getComponentsInLayer(this.layeredPane.highestLayer())[0];
     }
 
     /**
@@ -92,6 +80,10 @@ public final class View extends JFrame {
      * @param layer the layer to be pushed
      */
     public void push(final Layer layer) {
+        if (!stack.isEmpty()) {
+            stack.peek().setEnabled(false);
+        }
+        stack.push(layer);
         this.layeredPane.add(layer, ++layers);
     }
 
@@ -99,6 +91,10 @@ public final class View extends JFrame {
      * Removes the layer on top of the view.
      */
     public void pop() {
+        stack.pop();
+        if (!stack.isEmpty()) {
+            stack.peek().setEnabled(true);
+        }
         this.layeredPane.remove(layeredPane.highestLayer() - 1);
     }
 
