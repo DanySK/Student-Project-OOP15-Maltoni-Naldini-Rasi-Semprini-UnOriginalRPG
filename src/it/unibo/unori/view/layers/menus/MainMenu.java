@@ -135,7 +135,10 @@ public class MainMenu extends JPanel { // TODO esc
         }
 
         public void actionPerformed(final ActionEvent e) {
-            layeredPane.remove(0);
+            System.out.println("test");
+            MainMenu.this.setVisible(false);
+            MainMenu.this.setEnabled(false);
+            layeredPane.remove(MainMenu.this);
         }
     }
 }

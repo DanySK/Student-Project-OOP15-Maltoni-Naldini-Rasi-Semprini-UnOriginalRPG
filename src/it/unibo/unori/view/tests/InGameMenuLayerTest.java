@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.SwingConstants;
 
 import it.unibo.unori.model.character.HeroImpl;
 import it.unibo.unori.model.character.exceptions.MaxHeroException;
@@ -32,6 +33,11 @@ public class InGameMenuLayerTest {
      */
     public InGameMenuLayerTest() {
         final Map<Integer, Action> movement = new HashMap<Integer, Action>();
+
+        movement.put(SwingConstants.EAST, new MoveAction(SwingConstants.EAST));
+        movement.put(SwingConstants.WEST, new MoveAction(SwingConstants.WEST));
+        movement.put(SwingConstants.NORTH, new MoveAction(SwingConstants.NORTH));
+        movement.put(SwingConstants.SOUTH, new MoveAction(SwingConstants.SOUTH));
 
         final Action interact = null;
         final Action menu = new MenuAction();
@@ -83,5 +89,21 @@ public class InGameMenuLayerTest {
     public static void main(final String... args) {
         final InGameMenuLayerTest inGameMenuTest = new InGameMenuLayerTest();
         inGameMenuTest.run();
+    }
+
+    private class MoveAction extends AbstractAction {
+        private static final long serialVersionUID = 1L;
+
+        private final int direction;
+
+        MoveAction(final int direction) {
+            super();
+            this.direction = direction;
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            mapLayer.move(direction);
+        }
     }
 }

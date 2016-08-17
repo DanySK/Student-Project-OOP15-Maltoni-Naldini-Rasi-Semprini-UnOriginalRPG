@@ -98,6 +98,7 @@ public final class View extends JFrame {
     public void pop() {
         if (!stack.isEmpty()) {
             stack.peek().setEnabled(true);
+            stack.peek().setVisible(false);
         }
         this.layeredPane.remove(stack.pop());
     }
