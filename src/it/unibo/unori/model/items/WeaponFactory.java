@@ -10,11 +10,7 @@ import it.unibo.unori.model.character.Status;
  * Factory to create some common weapon.
  *
  */
-public final class WeaponFactory {
-    
-    private WeaponFactory() {
-        //Empty private constructor.
-    }
+public class WeaponFactory {
     
     private static Map<Statistics, Integer> generateMap(final Statistics phys, final int first,
             final Statistics fire, final int secnd, final Statistics ice,
@@ -32,7 +28,7 @@ public final class WeaponFactory {
      * Create a standard sword.
      * @return Standard Sword object
      */
-    public static Weapon getStdSword() {
+    public Weapon getStdSword() {
         return new WeaponImpl("Spada Semplice",
                 "Adatta per tagliare il burro più che i nemici",
                 generateMap(
@@ -48,7 +44,7 @@ public final class WeaponFactory {
      * Create Pugnale.
      * @return Weapon Pugnale.
      */
-    public static Weapon getPugnale() {
+    public Weapon getPugnale() {
         return new WeaponImpl("Pugnale",
                 "Un'arma adatta per gli attacchi fisici. Non ha nulla di magico",
                 generateMap(
@@ -64,7 +60,7 @@ public final class WeaponFactory {
      * Create Clava.
      * @return Weapon Clava.
      */
-    public static Weapon getClava() {
+    public Weapon getClava() {
         return new WeaponImpl("Clava Pesante",
                 "Una Clava può ferire nell'orgoglio e nel corpo",
                 generateMap(
@@ -80,7 +76,7 @@ public final class WeaponFactory {
      * Create Balestra.
      * @return Weapon Balestra.
      */
-    public static Weapon getBalestra() {
+    public Weapon getBalestra() {
         return new WeaponImpl("Balestra Antica",
                 "Arma appartenuta a gloriosi guerrieri del passato",
                 generateMap(
@@ -96,7 +92,7 @@ public final class WeaponFactory {
      * Create Maledizione.
      * @return Weapon Maledizione.
      */
-    public static Weapon getMaledizione() {
+    public Weapon getMaledizione() {
         return new WeaponImpl("Maledizione Verbale",
                 "Anche se è un'arma verbale, una maledizione non è da sottovalutare",
                 generateMap(
@@ -112,7 +108,7 @@ public final class WeaponFactory {
      * Create Chiodo.
      * @return Weapon Chiodo.
      */
-    public static Weapon getChiodo() {
+    public Weapon getChiodo() {
         return new WeaponImpl("Chiodo Arrugginito",
                 "Enorme chiodo appuntito in grado di avvelenare",
                 generateMap(
@@ -128,7 +124,7 @@ public final class WeaponFactory {
      * Create Lancia.
      * @return Weapon Lancia.
      */
-    public static Weapon getLancia() {
+    public Weapon getLancia() {
         return new WeaponImpl("Lancia Elettrica",
                 "Una lancia elettrificata che può causare gravi danni",
                 generateMap(
@@ -144,7 +140,7 @@ public final class WeaponFactory {
      * Create Ocarina.
      * @return Weapon Ocarina.
      */
-    public static Weapon getOcarina() {
+    public Weapon getOcarina() {
         return new WeaponImpl("Ocarina Maledetta",
                 "Suona una melodia maledetta che causa danni al corpo e allo spirito",
                 generateMap(
@@ -160,7 +156,7 @@ public final class WeaponFactory {
      * Create Fionda.
      * @return Weapon Fionda.
      */
-    public static Weapon getFionda() {
+    public Weapon getFionda() {
         return new WeaponImpl("Fionda Incandescente",
                 "Un'arma molto potente nel tipo Fuoco",
                 generateMap(
@@ -177,7 +173,7 @@ public final class WeaponFactory {
      * Create Cannone.
      * @return Weapon Cannone.
      */
-    public static Weapon getCannone() {
+    public Weapon getCannone() {
         return new WeaponImpl("Cannone Espandibile",
                 "Un cannone portatile, che può essere, all'occorrenza, espanso per magia",
                 generateMap(
@@ -193,7 +189,7 @@ public final class WeaponFactory {
      * Create Mazza.
      * @return Weapon Mazza.
      */
-    public static Weapon getMazza() {
+    public Weapon getMazza() {
         return new WeaponImpl("Mazza Chiodata",
                 "Una mazza molto speciale, che può anche provocare una maledizione",
                 generateMap(
@@ -209,7 +205,7 @@ public final class WeaponFactory {
      * Create Lanciafiamme.
      * @return Weapon Lanciafiamme.
      */
-    public static Weapon getLanciafiamme() {
+    public Weapon getLanciafiamme() {
         return new WeaponImpl("Lanciafiamme",
                 "C'è davvero bisogno di una descrizione?",
                 generateMap(
@@ -225,7 +221,7 @@ public final class WeaponFactory {
      * Create Cerbottana.
      * @return Weapon Cerbottana.
      */
-    public static Weapon getCerbottana() {
+    public Weapon getCerbottana() {
         return new WeaponImpl("Cerbottana",
                 "Arma meschina, silenziosa e letale",
                 generateMap(
@@ -241,7 +237,7 @@ public final class WeaponFactory {
      * Create Spada.
      * @return Weapon Spada.
      */
-    public static Weapon getSpadaMistica() {
+    public Weapon getSpadaMistica() {
         return new WeaponImpl("Spada Mistica",
                 "Una spada leggendaria, non per pivelli",
                 generateMap(
@@ -257,7 +253,7 @@ public final class WeaponFactory {
      * Create Coltre.
      * @return Weapon Coltre.
      */
-    public static Weapon getColtre() {
+    public Weapon getColtre() {
         return new WeaponImpl("Coltre Tossica",
                 "Una coltre di fumo capace di avvelenare il nemico",
                 generateMap(

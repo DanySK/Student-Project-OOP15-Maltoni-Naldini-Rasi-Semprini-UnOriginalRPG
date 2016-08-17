@@ -129,13 +129,13 @@ public final class FoesFactory {
             final Random randLow = new Random();
             final int luckLow = randLow.nextInt(LUCKFORSTATS);
             switch (luckLow) {
-            case 0 : w = WeaponFactory.getStdSword();
+            case 0 : w = new WeaponFactory().getStdSword();
                 break;
-            case 1 : w = WeaponFactory.getPugnale();
+            case 1 : w = new WeaponFactory().getPugnale();
                 break;
-            case 2 :  w = WeaponFactory.getClava();
+            case 2 :  w = new WeaponFactory().getClava();
                 break;
-            case 3 : w = WeaponFactory.getBalestra();
+            case 3 : w = new WeaponFactory().getBalestra();
                 break;
             default : break;
             }
@@ -143,17 +143,17 @@ public final class FoesFactory {
             final Random randMed = new Random();
             final int luckMed = randMed.nextInt(LUCKMED);
             switch (luckMed) {
-            case 0 : w = WeaponFactory.getMaledizione();
+            case 0 : w = new WeaponFactory().getMaledizione();
                 break;
-            case 1 : w = WeaponFactory.getChiodo();
+            case 1 : w = new WeaponFactory().getChiodo();
                 break;
-            case 2 :  w = WeaponFactory.getLancia();
+            case 2 :  w = new WeaponFactory().getLancia();
                 break;
-            case 3 : w = WeaponFactory.getOcarina();
+            case 3 : w = new WeaponFactory().getOcarina();
                 break;
-            case 4 : w = WeaponFactory.getFionda();
+            case 4 : w = new WeaponFactory().getFionda();
                 break;
-            case 5 : w = WeaponFactory.getCannone();
+            case 5 : w = new WeaponFactory().getCannone();
                 break;
             default : break;
             }
@@ -161,15 +161,15 @@ public final class FoesFactory {
             final Random randHi = new Random();
             final int luckHi = randHi.nextInt(LUCKFORSTATS + 1);
             switch (luckHi) {
-            case 0 : w = WeaponFactory.getMazza();
+            case 0 : w = new WeaponFactory().getMazza();
                 break;
-            case 1 : w = WeaponFactory.getLanciafiamme();
+            case 1 : w = new WeaponFactory().getLanciafiamme();
                 break;
-            case 2 :  w = WeaponFactory.getCerbottana();
+            case 2 :  w = new WeaponFactory().getCerbottana();
                 break;
-            case 3 : w = WeaponFactory.getSpadaMistica();
+            case 3 : w = new WeaponFactory().getSpadaMistica();
                 break;
-            case 4 : w = WeaponFactory.getColtre();
+            case 4 : w = new WeaponFactory().getColtre();
                 break;
             default : break;
             }

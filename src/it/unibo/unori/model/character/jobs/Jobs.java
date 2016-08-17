@@ -54,7 +54,7 @@ public enum Jobs {
 
     Jobs() {
        this.basicEquip = new ArmorFactory().getStdEquip();
-       this.basicWeapon = WeaponFactory.getStdSword();
+       this.basicWeapon = new WeaponFactory().getStdSword();
        this.basicStats = new StatisticsFactory().createDumpStats();
        this.growthStats = new GrowthFactory().createDumpGrowth();
        this.battleFrame = "";
