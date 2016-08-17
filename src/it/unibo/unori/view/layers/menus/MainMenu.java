@@ -26,8 +26,13 @@ public class MainMenu extends JPanel { // TODO esc
     private int focusedButton;
     private final List<MenuButton> buttons = new LinkedList<MenuButton>();
 
-    public MainMenu(final JLayeredPane layeredPane, final JPanel bottom, final int x, final int y) {
+    private final JLayeredPane layeredPane;
+
+    public MainMenu(final JLayeredPane layeredPane, final JPanel bottom,
+                    final int x, final int y) {
         super();
+
+        this.layeredPane = layeredPane;
 
         this.setBackground(Color.WHITE);
         this.setLayout(new GridLayout(0, 1, 5, 5));
@@ -77,6 +82,9 @@ public class MainMenu extends JPanel { // TODO esc
         actionMap.put("ENTER", new ButtonAction(0));
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "ENTER");
 
+        actionMap.put("CLOSE", new CloseAction(this));
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "CLOSE");
+
         buttons.get(focusedButton).repaint();
         this.repaint();
     }
@@ -118,6 +126,16 @@ public class MainMenu extends JPanel { // TODO esc
                     buttons.get(focusedButton).requestFocus();
                 }
             }
+        }
+    }
+
+    private class CloseAction extends AbstractAction {
+        CloseAction(final JPanel panel) {
+            super();
+        }
+
+        public void actionPerformed(final ActionEvent e) {
+            layeredPane.remove(0);
         }
     }
 }
