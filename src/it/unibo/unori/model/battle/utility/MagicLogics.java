@@ -51,7 +51,7 @@ public final class MagicLogics {
         final Random rand = new Random();
         final int luck = rand.nextInt(toCalc);
         if (accuracy >= HIGHIA) {
-            return !(luck == YOURELUCKY);
+            return luck != YOURELUCKY;
         } else {
             return !(luck == YOURELUCKY || luck == 0);
         }
