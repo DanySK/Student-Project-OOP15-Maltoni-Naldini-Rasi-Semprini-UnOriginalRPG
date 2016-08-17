@@ -152,8 +152,10 @@ public class BattleImpl implements Battle {
     @Override
     public DialogueInterface attack(final boolean whosFirst) throws NoWeaponException {
         this.checkWhoAttacks();
-        final Character whoAttacks = whosFirst ? this.heroOnTurn : this.foeOnTurn;
-        final Character whoSuffers = whosFirst ? this.foeOnTurn : this.heroOnTurn;
+        final Character whoAttacks;
+        final Character whoSuffers;
+        whoAttacks = whosFirst ? this.heroOnTurn : this.foeOnTurn;
+        whoSuffers = whosFirst ? this.foeOnTurn : this.heroOnTurn;
         if (this.setUndefendedAndNotify(whoSuffers)) {
             return new Dialogue(whoSuffers.getName() + " e' difeso! Non subisce danni");
         }
@@ -227,7 +229,7 @@ public class BattleImpl implements Battle {
     @Override
     public DialogueInterface specialAttack() throws BarNotFullException {
         this.checkWhoAttacks();
-        List<String> list = new ArrayList<>();
+        final List<String> list = new ArrayList<>();
         if (this.heroOnTurn.getCurrentBar() == this.heroOnTurn.getTotBar()) {
             final String toReturn = 
                     this.heroOnTurn.getName() + " ha usato l'attacco speciale!";
@@ -257,7 +259,7 @@ public class BattleImpl implements Battle {
             }
             this.heroOnTurn.resetSpecialBar();
             String finale = "";
-            for (String s : list) {
+            for (final String s : list) {
                 finale = finale.concat(s);
             }
             return new Dialogue(finale);
@@ -271,12 +273,13 @@ public class BattleImpl implements Battle {
             final Foe enemy, final boolean whosFirst)
             throws NotEnoughMPExcpetion, MagicNotFoundException {
         this.checkWhoAttacks();
-        final Character whoAttacks = whosFirst ? this.heroOnTurn : this.foeOnTurn;
-        final Character whoSuffers = whosFirst ? this.foeOnTurn : this.heroOnTurn;
-        final int damage;
+        final Character whoAttacks;
+        final Character whoSuffers;
+        whoAttacks = whosFirst ? this.heroOnTurn : this.foeOnTurn;
+        whoSuffers = whosFirst ? this.foeOnTurn : this.heroOnTurn;
         String toShow = whoAttacks.getName() + " usa una Magia!";
         if (this.setUndefendedAndNotify(whoSuffers)) {
-            return new Dialogue(whoSuffers.getName() + " e' difeso! Non subisce danni");
+            return new Dialogue(toShow + " " + whoSuffers.getName() + " e' difeso! Non subisce danni");
         }
         if (whoAttacks.getMagics().contains(m)) {
             if (whoAttacks.getCurrentMP() > m.getMPRequired()) {
@@ -286,6 +289,7 @@ public class BattleImpl implements Battle {
             }
             
             try {
+                final int damage;
                 damage = MagicLogics.calculateMagic(whoAttacks, whoSuffers, m);
                 whoSuffers.takeDamage(damage);
                 toShow = toShow.concat(" " + whoAttacks.getName() + " " + m.getStringToShow() 
@@ -336,7 +340,7 @@ public class BattleImpl implements Battle {
                         });
             });
             String s = "";
-            for (String str : toReturn) {
+            for (final String str : toReturn) {
                 s = s.concat(str);
             }
             return new Dialogue(s);
