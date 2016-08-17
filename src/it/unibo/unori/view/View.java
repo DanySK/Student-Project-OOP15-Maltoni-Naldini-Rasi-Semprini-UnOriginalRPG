@@ -20,7 +20,6 @@ import java.util.Stack;
 public final class View extends JFrame {
 	private static final long serialVersionUID = 1L;
 
-	private Integer layers = 0;
     private final JLayeredPane layeredPane;
     private static final String TITLE = "UnOriginal.RPG";
 
@@ -84,18 +83,18 @@ public final class View extends JFrame {
             stack.peek().setEnabled(false);
         }
         stack.push(layer);
-        this.layeredPane.add(layer, ++layers);
+        this.layeredPane.add(stack.peek(), stack.stream().count() - 1);
+        this.layeredPane.moveToFront(stack.peek());
     }
 
     /**
      * Removes the layer on top of the view.
      */
     public void pop() {
-        stack.pop();
         if (!stack.isEmpty()) {
             stack.peek().setEnabled(true);
         }
-        this.layeredPane.remove(--layers);
+        this.layeredPane.remove(stack.pop());
     }
 
     /**
