@@ -88,7 +88,7 @@ public final class View extends JFrame {
         }
 
         stack.push(layer);
-        this.layeredPane.add(stack.peek(), stack.stream().count() - 1);
+        this.layeredPane.add(stack.peek(), stack.stream().count());
         this.layeredPane.moveToFront(stack.peek());
     }
 

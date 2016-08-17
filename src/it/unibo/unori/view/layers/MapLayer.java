@@ -48,6 +48,10 @@ public class MapLayer extends Layer {
     private BufferedImage sprite;
     private final BufferedImage[] frame = new BufferedImage[2];
 
+    private final Action menu;
+    private final Action interact;
+    private final Map<Integer, Action> movement;
+
     /**
      * Creates the game map.
      *
@@ -66,6 +70,11 @@ public class MapLayer extends Layer {
                     final String[][] map, final Point position,
                     final String spriteSheetPath) throws SpriteNotFoundException {
         super();
+
+
+        this.menu = menu;
+        this.movement = movement;
+        this.interact = interact;
 
         this.setBackground(Color.BLACK);
 
@@ -218,6 +227,9 @@ public class MapLayer extends Layer {
     @Override
     public void disable() {
         super.disable();
+
+        menu.setEnabled(false);
+        movement.forEach((i, a)->a.setEnabled(false));
     }
 
     @Override
