@@ -2,14 +2,11 @@ package it.unibo.unori.controller.test;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -105,6 +102,7 @@ public class NewJsonFileMangerTest {
     @Test
     public void testWeapon() throws IOException {
         final JsonFileManager jsonManager = new JsonFileManager();
+        final WeaponFactory wf = new WeaponFactory();
 
         // Items
         final Weapon itemWeapon = new WeaponImpl("ItemWeapon", "A weapon item", generateStdWeaponStats(), Status.NONE);
@@ -121,20 +119,20 @@ public class NewJsonFileMangerTest {
 
         // WeaponList
         weaponList = new ArrayList<>();
-        weaponList.add(WeaponFactory.getBalestra());
-        weaponList.add(WeaponFactory.getCannone());
-        weaponList.add(WeaponFactory.getCerbottana());
-        weaponList.add(WeaponFactory.getChiodo());
-        weaponList.add(WeaponFactory.getClava());
-        weaponList.add(WeaponFactory.getColtre());
-        weaponList.add(WeaponFactory.getFionda());
-        weaponList.add(WeaponFactory.getLancia());
-        weaponList.add(WeaponFactory.getLanciafiamme());
-        weaponList.add(WeaponFactory.getMaledizione());
-        weaponList.add(WeaponFactory.getMazza());
-        weaponList.add(WeaponFactory.getOcarina());
-        weaponList.add(WeaponFactory.getPugnale());
-        weaponList.add(WeaponFactory.getSpadaMistica());
+        weaponList.add(wf.getBalestra());
+        weaponList.add(wf.getCannone());
+        weaponList.add(wf.getCerbottana());
+        weaponList.add(wf.getChiodo());
+        weaponList.add(wf.getClava());
+        weaponList.add(wf.getColtre());
+        weaponList.add(wf.getFionda());
+        weaponList.add(wf.getLancia());
+        weaponList.add(wf.getLanciafiamme());
+        weaponList.add(wf.getMaledizione());
+        weaponList.add(wf.getMazza());
+        weaponList.add(wf.getOcarina());
+        weaponList.add(wf.getPugnale());
+        weaponList.add(wf.getSpadaMistica());
 
         jsonManager.serializeJSON(weaponList, TEST_FILE);
         deserializedList = jsonManager.loadList(Weapon.class, TEST_FILE);

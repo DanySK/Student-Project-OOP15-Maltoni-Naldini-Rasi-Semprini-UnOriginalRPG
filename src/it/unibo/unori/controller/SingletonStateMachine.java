@@ -123,12 +123,11 @@ public final class SingletonStateMachine {
         public void startGame() {
             if (CharacterSelectionLayer.class.isInstance(this.stack.peek().getLayer())) {
                 final Map<String, Jobs> selected = ((CharacterSelectionLayer) this.stack.pop().getLayer()).getParty();
-
                 selected.entrySet().forEach(entry -> {
                     try {
                         SingletonParty.getParty().getHeroTeam().addHero(new HeroImpl(entry.getKey(), entry.getValue()));
                     } catch (MaxHeroException | IllegalArgumentException e) {
-                        System.out.println("Error in starting game:");
+                        System.out.println("Error in starting game: 0");
                         this.showError(e.getMessage(), ErrorSeverity.SERIUOS);
                         e.printStackTrace();
                     }
@@ -145,13 +144,13 @@ public final class SingletonStateMachine {
                     this.stack.pushAndRender(new MapState(SingletonParty.getParty().getCurrentGameMap()));
                     this.startTimer();
                 } catch (IOException e) {
-                    System.out.println("Error in starting game:");
+                    System.out.println("Error in starting game: 1");
                     this.showError(e.getMessage(), ErrorSeverity.SERIUOS);
                     e.printStackTrace();
                 }
 
             } else {
-                System.out.println("Error in starting game:");
+                System.out.println("Error in starting game: 2");
                 this.showError(new NotValidStateException().getMessage(), ErrorSeverity.SERIUOS);
             }
 
