@@ -8,7 +8,9 @@ import javax.swing.JPanel;
  *
  */
 public abstract class Layer extends JPanel {
-    /**
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Make this layer inactive.
      */
     @Override

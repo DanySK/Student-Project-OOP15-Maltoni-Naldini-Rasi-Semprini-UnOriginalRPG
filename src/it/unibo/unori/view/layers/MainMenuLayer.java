@@ -30,7 +30,9 @@ import java.awt.image.BufferedImage;
  *
  */
 public class MainMenuLayer extends Layer {
-    private int focusedButton;
+	private static final long serialVersionUID = 1L;
+	
+	private int focusedButton;
     private final List<Button> buttons;
 
     private final JPanel buttonPanel = new JPanel();
@@ -44,7 +46,6 @@ public class MainMenuLayer extends Layer {
      public MainMenuLayer(final List<Button> buttons) {
         super();
 
-        this.setPreferredSize(SIZE);
         this.setBounds(0, 0, SIZE.width, SIZE.height);
 
         this.setLayout(new BorderLayout());

@@ -1,5 +1,6 @@
 package it.unibo.unori.model.maps.cell;
 
+import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.Item;
 import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
@@ -81,6 +82,11 @@ public class SimpleCellImpl implements Cell {
     @Override
     public Item openChest(final Bag b) throws NoObjectFoundException, NoKeyFoundException, ItemNotFoundException {
         throw new NoObjectFoundException();
+    }
+
+    @Override
+    public Foe getBoss() throws IllegalStateException {
+        throw new IllegalStateException();
     }
 
 

@@ -11,6 +11,7 @@ import it.unibo.unori.model.items.BagImpl;
 import it.unibo.unori.model.items.Item;
 import it.unibo.unori.model.maps.cell.Cell;
 import it.unibo.unori.model.maps.cell.CellState;
+import it.unibo.unori.model.maps.cell.FoeCellImpl;
 import it.unibo.unori.model.maps.exceptions.BlockedPathException;
 import it.unibo.unori.model.maps.exceptions.NoKeyFoundException;
 import it.unibo.unori.model.maps.exceptions.NoMapFoundException;
@@ -163,17 +164,17 @@ public final class SingletonParty {
                     this.currentPosition.getPosY() + this.orientation.getYSkidding());
             final Cell c = this.currentMap.getCell(pos);
             try {
-                System.out.println("Provo a parlare con un NPC");
+                return new Dialogue(FoeCellImpl.ENC + c.getBoss().getName());
+            } catch (IllegalStateException e) {
+            try {
                 return c.talkToNpc();
-            } catch (NoNPCFoundException e) {
+            } catch (NoNPCFoundException e0) {
                 try {
-                    System.out.println("Provo a raccogliere un oggetto");
                     this.partyBag.storeItem(c.getObject());
                     this.currentMap.replaceCell(pos, currentPosition);
                     return new Dialogue("Che fortuna! Hai trovato " + c.getObject().getName());
                 } catch (NoObjectFoundException e1) {
                     try {
-                        System.out.println("Provo a aprire una cassa");
                         final Item i = c.openChest(partyBag);
                         this.partyBag.storeItem(i);
                         return new Dialogue("Hai aperto un baule! Hai trovato " + i.getName());
@@ -186,7 +187,7 @@ public final class SingletonParty {
                 }
             }
         }
-
+       }
     }
 
 }

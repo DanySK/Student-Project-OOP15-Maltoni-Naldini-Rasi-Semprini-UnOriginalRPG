@@ -7,7 +7,7 @@ import javax.swing.AbstractAction;
 import it.unibo.unori.controller.Controller;
 import it.unibo.unori.controller.SingletonStateMachine;
 import it.unibo.unori.controller.exceptions.NotValidStateException;
-import it.unibo.unori.controller.state.MapState;
+import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 
 /**
  * Action that should be linked to menu dedicated buttons as for example ESC.
@@ -30,15 +30,12 @@ public class OpenMenuAction extends AbstractAction {
 
     @Override
     public void actionPerformed(final ActionEvent event) {
-        if (this.controller.getCurrentStateClass().isInstance(MapState.class)) {
-            try {
-                this.controller.openMenu();
-            } catch (NotValidStateException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        } else {
-            // TODO
+        try {
+            this.controller.openMenu();
+        } catch (NotValidStateException e) {
+            this.controller.showError(e.getMessage(), ErrorSeverity.SERIUOS);
+            System.out.println("Error in open menu action:");
+            e.printStackTrace();
         }
     }
 

@@ -35,7 +35,9 @@ import java.awt.event.ActionListener;
  *
  */
 public class CharacterSelectionLayer extends Layer {
-    private static final Dimension SIZE = View.SIZE;
+	private static final long serialVersionUID = 1L;
+	
+	private static final Dimension SIZE = View.SIZE;
     private static final Color BACKGROUND_COLOR = Color.BLACK;
 
     private final int maxHero;
@@ -49,13 +51,16 @@ public class CharacterSelectionLayer extends Layer {
 
     private final Map<String, Jobs> party = new HashMap<String, Jobs>();
 
+    // TODO bottone che aggiunge il job
+    // TODO visualizzazione personaggio nome uguale
+    // TODO disabilitare il campo testo
     /**
      * Displays the character-selection menu.
      * @param maxHero the number of heroes in the party
      * @param button the button to be displayed when finished
      * @throws SpriteNotFoundException if the sprite is not found
      */
-    public CharacterSelectionLayer(final int maxHero, // TODO bottone che aggiunge il job
+    public CharacterSelectionLayer(final int maxHero,
                                    final Button button) throws SpriteNotFoundException {
         super();
         this.button = button;

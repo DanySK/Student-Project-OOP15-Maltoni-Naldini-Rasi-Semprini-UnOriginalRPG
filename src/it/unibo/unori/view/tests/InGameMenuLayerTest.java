@@ -23,7 +23,7 @@ import it.unibo.unori.view.layers.MapLayer;
  * This class is used to test the in-game menu.
  *
  */
-public class InGameMenuLayerTest { // TODO dialoguelayer
+public class InGameMenuLayerTest {
     private MapLayer mapLayer;
     private final View view = new View();
 
@@ -38,7 +38,7 @@ public class InGameMenuLayerTest { // TODO dialoguelayer
 
         final Point position = new Point(2, 2);
         final String spriteSheetPath = "res/sprites/clown.png";
-        final String[][] map = MapLayerTest.createMap("res/sprites/map/rocks.png", 12, 12);
+        final String[][] map = MapLayerTest.createMap("res/sprites/map/rocks.png", 26, 20);
 
         try {
             mapLayer = new MapLayer(movement, interact, menu, map, position, spriteSheetPath);
@@ -50,15 +50,6 @@ public class InGameMenuLayerTest { // TODO dialoguelayer
         }
     }
 
-    private void createParty() throws IllegalArgumentException, MaxHeroException {
-        SingletonParty.getParty().getHeroTeam().addHero(new HeroImpl("Cook", Jobs.COOK));
-        SingletonParty.getParty().getHeroTeam().addHero(new HeroImpl("Clown", Jobs.CLOWN));
-    }
-
-    public void run() {
-        view.run();
-    }
-
     private class MenuAction extends AbstractAction {
         @Override
         public void actionPerformed(final ActionEvent e) {
@@ -66,14 +57,27 @@ public class InGameMenuLayerTest { // TODO dialoguelayer
 
             try {
                 createParty();
-            } catch (IllegalArgumentException | MaxHeroException e1) {
-                System.out.println("Party creation error");
                 final Layer inGameMenuLayer = new InGameMenuLayer(SingletonParty.getParty().getHeroTeam(),
                                                                   SingletonParty.getParty().getPartyBag());
+                 view.push(inGameMenuLayer);
 
-                view.push(inGameMenuLayer);
+                 mapLayer.disable();
+            } catch (IllegalArgumentException | MaxHeroException e1) {
+                System.out.println("Party creation error");
             }
         }
+    }
+
+    /**
+     * Runs this test.
+     */
+    public void run() {
+        view.run();
+    }
+
+    private void createParty() throws IllegalArgumentException, MaxHeroException {
+        SingletonParty.getParty().getHeroTeam().addHero(new HeroImpl("Cook", Jobs.COOK));
+        SingletonParty.getParty().getHeroTeam().addHero(new HeroImpl("Clown", Jobs.CLOWN));
     }
 
     public static void main(final String... args) {
