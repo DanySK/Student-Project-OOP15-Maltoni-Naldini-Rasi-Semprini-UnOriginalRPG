@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import it.unibo.unori.model.battle.utility.MagicGenerator;
+import it.unibo.unori.model.battle.MagicGenerator;
 import it.unibo.unori.model.character.exceptions.ArmorAlreadyException;
 import it.unibo.unori.model.character.exceptions.NoArmorException;
 import it.unibo.unori.model.character.jobs.Jobs;
