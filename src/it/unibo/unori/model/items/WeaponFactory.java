@@ -12,6 +12,10 @@ import it.unibo.unori.model.character.Status;
  */
 public final class WeaponFactory {
     
+    private WeaponFactory() {
+        //Empty private constructor because this is an utility Class
+    }
+    
     private static Map<Statistics, Integer> generateMap(final Statistics phys, final int first,
             final Statistics fire, final int secnd, final Statistics ice,
             final int third, final Statistics thun, final int fourth) {

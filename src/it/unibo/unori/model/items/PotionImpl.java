@@ -62,10 +62,10 @@ public class PotionImpl implements Potion {
             hero.setStatus(Status.NONE);
         }
         if (hero.getStatus().equals(Status.DEAD)
-                && (this.name != "Pozione della Vita" || this.name != "Pozione di Dio")) {
+                && (!this.name.equals("Pozione della Vita") || !this.name.equals("Pozione di Dio"))) {
                 throw new HeroDeadException();
         } else {
-            if (this.name == "Pozione della Vita" || this.name == "Pozione di Dio") {
+            if (this.name.equals("Pozione della Vita") || this.name.equals("Pozione di Dio")) {
                 throw new HeroNotDeadException();
             }
         }
