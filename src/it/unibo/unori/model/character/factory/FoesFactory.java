@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 
 import it.unibo.unori.model.battle.MagicAttackInterface;
-import it.unibo.unori.model.battle.utility.MagicGenerator;
+import it.unibo.unori.model.battle.MagicGenerator;
 import it.unibo.unori.model.character.Statistics;
 import it.unibo.unori.model.character.jobs.Jobs;
 import it.unibo.unori.model.items.Weapon;

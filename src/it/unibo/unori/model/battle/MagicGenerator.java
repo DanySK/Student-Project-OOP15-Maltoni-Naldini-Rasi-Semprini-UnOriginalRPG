@@ -1,7 +1,5 @@
-package it.unibo.unori.model.battle.utility;
+package it.unibo.unori.model.battle;
 
-import it.unibo.unori.model.battle.MagicAttack;
-import it.unibo.unori.model.battle.MagicAttackInterface;
 import it.unibo.unori.model.character.jobs.Jobs;
 
 /**

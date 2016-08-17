@@ -11,7 +11,6 @@ import it.unibo.unori.model.character.HeroImpl;
 import it.unibo.unori.model.battle.exceptions.BarNotFullException;
 import it.unibo.unori.model.battle.exceptions.NotDefendableException;
 import it.unibo.unori.model.battle.exceptions.NotEnoughMPExcpetion;
-import it.unibo.unori.model.battle.utility.MagicGenerator;
 import it.unibo.unori.model.character.FoeImpl;
 import it.unibo.unori.model.character.FoeSquad;
 import it.unibo.unori.model.character.FoeSquadImpl;
