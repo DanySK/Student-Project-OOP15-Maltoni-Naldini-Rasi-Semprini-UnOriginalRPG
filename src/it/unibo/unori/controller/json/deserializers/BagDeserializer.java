@@ -1,25 +1,33 @@
 package it.unibo.unori.controller.json.deserializers;
 
 import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.google.gson.reflect.TypeToken;
 
+import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.BagImpl;
+import it.unibo.unori.model.items.Item;
+import it.unibo.unori.model.items.Potion;
+import it.unibo.unori.model.items.Weapon;
 
 public class BagDeserializer implements JsonDeserializer<Bag> {
-    // private static final String ARMORS = "armors";
-    // private static final String WEAPONS = "weapons";
-    // private static final String POTIONS = "potions";
-    // private static final String MISCELLANOUS = "miscellaneous";
+    private static final String ARMORS = "armors";
+    private static final String WEAPONS = "weapons";
+    private static final String POTIONS = "potions";
+    private static final String MISCELLANOUS = "miscellaneous";
 
     @Override
     public Bag deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException {
-        /*final JsonObject jObj = (JsonObject) json;
+        final JsonObject jObj = (JsonObject) json;
         final Bag returnBag = new BagImpl();
 
         final Map<Armor, Integer> armors = new HashMap<Armor, Integer>(
@@ -58,7 +66,7 @@ public class BagDeserializer implements JsonDeserializer<Bag> {
             }
         });
 
-        return returnBag;*/ return context.deserialize(json, BagImpl.class); // TODO I'm not sure this would work, but for now it's OK
+        return returnBag;
     }
 
 }
