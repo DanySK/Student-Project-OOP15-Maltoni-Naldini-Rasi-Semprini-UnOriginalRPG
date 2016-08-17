@@ -175,12 +175,5 @@ public class PartyTest {
         }
         
     }
-    
-    @Test
-    void objectTest() {
-        
-       
-        
-    }
 
 }
