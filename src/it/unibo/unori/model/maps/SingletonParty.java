@@ -166,15 +166,16 @@ public final class SingletonParty {
             try {
                 return new Dialogue(FoeCellImpl.ENC + c.getBoss().getName());
             } catch (IllegalStateException e) {
+                System.out.println("INTERCETTO NO BOSS EXECPTION");
             try {
-                return c.talkToNpc();
-            } catch (NoNPCFoundException e0) {
+                c.getObject();
+                return new Dialogue("Che fortuna! Hai trovato " );
+            } catch (NoObjectFoundException e0) {
+                System.out.println("INTERCETTO NPC EXECPTION");
                 try {
-                    this.partyBag.storeItem(c.getObject());
-                    this.currentMap.replaceCell(pos, currentPosition);
-                    System.out.println("Sostituisco il mondo!");
-                    return new Dialogue("Che fortuna! Hai trovato " + c.getObject().getName());
-                } catch (NoObjectFoundException e1) {
+                    return c.talkToNpc();
+                } catch (NoNPCFoundException e1) {
+                    System.out.println("INTERCETTO NOOBJECT EXECPTION");
                     try {
                         final Item i = c.openChest(partyBag);
                         this.partyBag.storeItem(i);
