@@ -39,7 +39,10 @@ import it.unibo.unori.controller.json.deserializers.WeaponDeserializer;
 import it.unibo.unori.controller.json.serializer.ArmorSerializer;
 import it.unibo.unori.controller.json.serializer.GameMapSerializer;
 import it.unibo.unori.controller.json.serializer.HeroTeamSerializer;
+import it.unibo.unori.controller.json.serializer.ItemSerializer;
 import it.unibo.unori.controller.json.serializer.MagicAttackSerializer;
+import it.unibo.unori.controller.json.serializer.NpcSerializer;
+import it.unibo.unori.controller.json.serializer.PotionSerializer;
 import it.unibo.unori.controller.json.serializer.WeaponSerializer;
 import it.unibo.unori.model.battle.MagicAttackInterface;
 import it.unibo.unori.model.character.Foe;
@@ -56,7 +59,6 @@ import it.unibo.unori.model.maps.GameMap;
 import it.unibo.unori.model.maps.Party;
 import it.unibo.unori.model.maps.Position;
 import it.unibo.unori.model.maps.cell.Cell;
-import it.unibo.unori.model.menu.Dialogue;
 import it.unibo.unori.model.menu.DialogueInterface;
 
 /**
@@ -99,11 +101,13 @@ public class JsonFileManager {
          */
 
         gson = new GsonBuilder()/* .enableComplexMapKeySerialization() */.setPrettyPrinting()
+                .registerTypeAdapter(Item.class, new ItemSerializer())
                 .registerTypeAdapter(Item.class, new ItemDeserializer())
                 .registerTypeAdapter(Armor.class, new ArmorSerializer())
                 .registerTypeAdapter(Armor.class, new ArmorDeserializer())
                 .registerTypeAdapter(Weapon.class, new WeaponSerializer())
                 .registerTypeAdapter(Weapon.class, new WeaponDeserializer())
+                .registerTypeAdapter(Potion.class, new PotionSerializer())
                 .registerTypeAdapter(Potion.class, new PotionDeserializer())
                 .registerTypeAdapter(Bag.class, new BagDeserializer())
                 .registerTypeAdapter(MagicAttackInterface.class, new MagicAttackSerializer())
@@ -114,6 +118,7 @@ public class JsonFileManager {
                 .registerTypeAdapter(Hero.class, new HeroDeserializer())
                 .registerTypeAdapter(HeroTeam.class, new HeroTeamSerializer())
                 .registerTypeAdapter(HeroTeam.class, new HeroTeamDeserializer())
+                .registerTypeAdapter(Npc.class, new NpcSerializer())
                 .registerTypeAdapter(Npc.class, new NpcDeserializer())
                 .registerTypeAdapter(DialogueInterface.class, new DialogueDeserializer())
                 .registerTypeAdapter(Position.class, new GameMapSerializer.PositionSerializer())
@@ -122,8 +127,7 @@ public class JsonFileManager {
                 .registerTypeAdapter(Cell.class, new GameMapDeserializer.CellDeserializer())
                 .registerTypeAdapter(GameMap.class, new GameMapSerializer())
                 .registerTypeAdapter(GameMap.class, new GameMapDeserializer())
-                .registerTypeAdapter(Party.class, new PartyDeserializer())
-                .registerTypeAdapter(Position.class, new GameMapDeserializer.PositionDeserializer()).create();
+                .registerTypeAdapter(Party.class, new PartyDeserializer()).create();
     }
 
     /**

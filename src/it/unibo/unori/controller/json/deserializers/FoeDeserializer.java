@@ -69,7 +69,7 @@ public class FoeDeserializer implements JsonDeserializer<Foe> {
                 }.getType());
         spellList.forEach(returnFoe::addSpell); // TODO check
 
-        return returnFoe; // TODO
+        return returnFoe;
     }
 
 }
