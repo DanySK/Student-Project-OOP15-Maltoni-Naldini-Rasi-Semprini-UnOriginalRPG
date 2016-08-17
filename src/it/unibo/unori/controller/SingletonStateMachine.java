@@ -3,11 +3,9 @@ package it.unibo.unori.controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
@@ -31,8 +29,6 @@ import it.unibo.unori.model.character.jobs.Jobs;
 import it.unibo.unori.model.maps.Party;
 import it.unibo.unori.model.maps.Party.CardinalPoints;
 import it.unibo.unori.model.maps.SingletonParty;
-import it.unibo.unori.model.menu.utility.Pair;
-import it.unibo.unori.view.exceptions.SpriteNotFoundException;
 import it.unibo.unori.view.layers.CharacterSelectionLayer;
 
 /**
@@ -111,8 +107,7 @@ public final class SingletonStateMachine {
             SingletonParty.loadParty(this.fileManager.loadGame());
             final GameState loadedGame = new MapState(SingletonParty.getParty().getCurrentGameMap());
 
-            this.stack.push(loadedGame);
-            this.stack.render();
+            this.stack.pushAndRender(loadedGame);
         }
 
         @Override
@@ -121,8 +116,7 @@ public final class SingletonStateMachine {
 
             // TODO maybe we should check if the SingletonParty should be reset
 
-            this.stack.push(new CharacterSelectionState());
-            this.stack.render();
+            this.stack.pushAndRender(new CharacterSelectionState());
         }
 
         @Override
@@ -134,6 +128,7 @@ public final class SingletonStateMachine {
                     try {
                         SingletonParty.getParty().getHeroTeam().addHero(new HeroImpl(entry.getKey(), entry.getValue()));
                     } catch (MaxHeroException | IllegalArgumentException e) {
+                        System.out.println("Error in starting game:");
                         this.showError(e.getMessage(), ErrorSeverity.SERIUOS);
                         e.printStackTrace();
                     }
@@ -148,12 +143,15 @@ public final class SingletonStateMachine {
                     }
                     SingletonParty.getParty().setFrames(framesMap);
                     this.stack.pushAndRender(new MapState(SingletonParty.getParty().getCurrentGameMap()));
+                    this.startTimer();
                 } catch (IOException e) {
+                    System.out.println("Error in starting game:");
                     this.showError(e.getMessage(), ErrorSeverity.SERIUOS);
                     e.printStackTrace();
                 }
 
             } else {
+                System.out.println("Error in starting game:");
                 this.showError(new NotValidStateException().getMessage(), ErrorSeverity.SERIUOS);
             }
 
