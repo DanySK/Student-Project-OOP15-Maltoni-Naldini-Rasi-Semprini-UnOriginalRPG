@@ -64,7 +64,7 @@ public enum FoesFindable {
     private final Weapon weap;
     
     FoesFindable(final Status immune, final String filePath) {
-        FoeSetup js = new FoeSetup();
+        final FoeSetup js = new FoeSetup();
         this.immunity = immune;
         this.map = js.getBasicStats(filePath);
         this.magics.add(js.getBasicMagic(filePath));

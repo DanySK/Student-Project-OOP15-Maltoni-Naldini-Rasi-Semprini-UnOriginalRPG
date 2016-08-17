@@ -81,8 +81,8 @@ public final class FoesFactory {
         final Map<Statistics, Integer> m = new HashMap<>();
         final int growth = (ia ^ 2) * 10 + SHIFT;
         Pair<Statistics, Statistics> best = new Pair<>(Statistics.PHYSICATK, Statistics.PHYSICDEF);
-        Random rand = new Random();
-        int luck = rand.nextInt(LUCKFORSTATS);
+        final Random rand = new Random();
+        final int luck = rand.nextInt(LUCKFORSTATS);
         switch (luck) {
         case 0 : best = new Pair<>(Statistics.FIREATK, Statistics.FIREDEF);
             break;
@@ -107,7 +107,7 @@ public final class FoesFactory {
         m.put(Statistics.PHYSICATK, getBasicOf(Statistics.PHYSICATK) + growth);
         m.put(Statistics.PHYSICDEF, getBasicOf(Statistics.PHYSICDEF) + growth);
         m.put(Statistics.EXPFACTOR, 0);
-        for (Entry<Statistics, Integer> e : m.entrySet()) {
+        for (final Entry<Statistics, Integer> e : m.entrySet()) {
             if (best.getX().equals(e.getKey())) {
                 m.replace(e.getKey(), e.getValue() + SHIFT);
             }
@@ -126,8 +126,8 @@ public final class FoesFactory {
     public static Weapon getWeaponGrown(final int ia) {
         Weapon w = WeaponImpl.FISTS;
         if (ia > 0 && ia <= 3) {
-            Random randLow = new Random();
-            int luckLow = randLow.nextInt(LUCKFORSTATS);
+            final Random randLow = new Random();
+            final int luckLow = randLow.nextInt(LUCKFORSTATS);
             switch (luckLow) {
             case 0 : w = WeaponFactory.getStdSword();
                 break;
@@ -140,8 +140,8 @@ public final class FoesFactory {
             default : break;
             }
         } else if (ia > 3 && ia <= 7) {
-            Random randMed = new Random();
-            int luckMed = randMed.nextInt(LUCKMED);
+            final Random randMed = new Random();
+            final int luckMed = randMed.nextInt(LUCKMED);
             switch (luckMed) {
             case 0 : w = WeaponFactory.getMaledizione();
                 break;
@@ -158,8 +158,8 @@ public final class FoesFactory {
             default : break;
             }
         } else {
-            Random randHi = new Random();
-            int luckHi = randHi.nextInt(LUCKFORSTATS + 1);
+            final Random randHi = new Random();
+            final int luckHi = randHi.nextInt(LUCKFORSTATS + 1);
             switch (luckHi) {
             case 0 : w = WeaponFactory.getMazza();
                 break;
@@ -185,15 +185,15 @@ public final class FoesFactory {
     public static List<MagicAttackInterface> getGrownMagics(final int ia) {
         final List<MagicAttackInterface> l = new ArrayList<>();
         if (ia > 0 && ia <= MEDIUMIA) {
-            for (Jobs j : Jobs.values()) {
+            for (final Jobs j : Jobs.values()) {
                  l.add(MagicGenerator.getStandard(j));
             }
         } else if (ia > MEDIUMIA && ia <= HIGHIA) {
-            for (Jobs j : Jobs.values()) {
+            for (final Jobs j : Jobs.values()) {
                 l.add(MagicGenerator.getMedium(j));
            }
         } else {
-            for (Jobs j : Jobs.values()) {
+            for (final Jobs j : Jobs.values()) {
                 l.add(MagicGenerator.getAdvanced(j));
            }  
         }
