@@ -9,13 +9,16 @@ import it.unibo.unori.controller.SingletonStateMachine;
 import it.unibo.unori.controller.exceptions.NotValidStateException;
 import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 
+/**
+ * This action should be linked to the button dedicated to menu opening (like ESC). It closes an opened InGameMenu.
+ */
 public class CloseMenuAction extends AbstractAction {
     /**
      * Generated serial version UID.
      */
     private static final long serialVersionUID = -6379981391618059109L;
     private final Controller controller;
-    
+
     /**
      * Default constructor.
      */
@@ -25,7 +28,7 @@ public class CloseMenuAction extends AbstractAction {
     }
 
     @Override
-    public void actionPerformed(ActionEvent arg0) {
+    public void actionPerformed(final ActionEvent arg0) {
         try {
             this.controller.closeMenu();
         } catch (NotValidStateException e) {

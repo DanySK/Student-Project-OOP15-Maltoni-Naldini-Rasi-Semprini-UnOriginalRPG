@@ -19,7 +19,7 @@ public class GameMapSerializationTest {
 
     @Test
     public void test() throws IOException {
-        File test = folder.newFile();
+        final File test = folder.newFile();
 
         final GameMapFactory gmf = new GameMapFactory();
         final JsonFileManager jfm = new JsonFileManager();
