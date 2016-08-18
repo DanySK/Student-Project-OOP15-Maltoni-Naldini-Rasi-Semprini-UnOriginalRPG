@@ -66,8 +66,6 @@ public class ItemMenu extends JPanel {
         buttonPanel.setPreferredSize(new Dimension(size.width, size.height * 2));
         buttonPanel.setMaximumSize(new Dimension(size.width, size.height * 2));
 
-        // buttonPanel.add(button);
-
         final Map<Armor, Integer> armors = bag.getArmors();
         final Map<Weapon, Integer> weapons =  bag.getWeapons();
         final Map<Potion, Integer> potions = bag.getPotions();
@@ -97,6 +95,7 @@ public class ItemMenu extends JPanel {
             });
 
             buttons.add(button);
+            buttonPanel.add(button);
         }
 
         for (final Map.Entry<Potion, Integer> entry : potions.entrySet()) {
