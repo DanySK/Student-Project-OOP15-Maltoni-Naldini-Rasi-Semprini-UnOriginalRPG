@@ -1,8 +1,8 @@
 package it.unibo.unori.controller.json.deserializers;
 
 import java.lang.reflect.Type;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
@@ -26,45 +26,28 @@ public class BagDeserializer implements JsonDeserializer<Bag> {
 
     @Override
     public Bag deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-            throws JsonParseException {
+                    throws JsonParseException {
         final JsonObject jObj = (JsonObject) json;
         final Bag returnBag = new BagImpl();
 
-        final Map<Armor, Integer> armors = new HashMap<Armor, Integer>(
-                context.deserialize(jObj.get(ARMORS), new TypeToken<Map<Armor, Integer>>() {
-                }.getType())); // TODO Probably unnecessary new map)
-        armors.forEach((a, i) -> {
-            for (int count = 0; count < i; count++) {
-                returnBag.storeItem(a);
-            }
-        });
+        final Map<Armor, Integer> armors = context.deserialize(jObj.get(ARMORS), new TypeToken<Map<Armor, Integer>>() {
+        }.getType());
+        armors.forEach((a, i) -> IntStream.range(0, i).forEach( in -> returnBag.storeItem(a))); //TODO check
 
-        final Map<Weapon, Integer> weapons = new HashMap<Weapon, Integer>(
-                context.deserialize(jObj.get(WEAPONS), new TypeToken<Map<Weapon, Integer>>() {
-                }.getType())); // TODO Probably unnecessary new map)
-        weapons.forEach((w, i) -> {
-            for (int count = 0; count < i; count++) {
-                returnBag.storeItem(w);
-            }
-        });
+        final Map<Weapon, Integer> weapons = context.deserialize(jObj.get(WEAPONS),
+                        new TypeToken<Map<Weapon, Integer>>() {
+                        }.getType());
+        weapons.forEach((w, i) -> IntStream.range(0, i).forEach( in -> returnBag.storeItem(w))); //TODO check
 
-        final Map<Potion, Integer> potions = new HashMap<Potion, Integer>(
-                context.deserialize(jObj.get(POTIONS), new TypeToken<Map<Potion, Integer>>() {
-                }.getType())); // TODO Probably unnecessary new map)
-        potions.forEach((p, i) -> {
-            for (int count = 0; count < i; count++) {
-                returnBag.storeItem(p);
-            }
-        });
+        final Map<Potion, Integer> potions = context.deserialize(jObj.get(POTIONS),
+                        new TypeToken<Map<Potion, Integer>>() {
+                        }.getType());
+        potions.forEach((p, i) -> IntStream.range(0, i).forEach( in -> returnBag.storeItem(p))); //TODO check
 
-        final Map<Item, Integer> miscellaneous = new HashMap<Item, Integer>(
-                context.deserialize(jObj.get(MISCELLANOUS), new TypeToken<Map<Item, Integer>>() {
-                }.getType())); // TODO Probably unnecessary new map)
-        miscellaneous.forEach((m, i) -> {
-            for (int count = 0; count < i; count++) {
-                returnBag.storeItem(m);
-            }
-        });
+        final Map<Item, Integer> miscellaneous = context.deserialize(jObj.get(MISCELLANOUS),
+                        new TypeToken<Map<Item, Integer>>() {
+                        }.getType());
+        miscellaneous.forEach((m, i) -> IntStream.range(0, i).forEach( in -> returnBag.storeItem(m))); //TODO check
 
         return returnBag;
     }

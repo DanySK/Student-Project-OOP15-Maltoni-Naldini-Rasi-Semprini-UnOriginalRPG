@@ -22,7 +22,7 @@ public class MagicAttackSerializer implements JsonSerializer<MagicAttackInterfac
     private static final String MP_REQUIRED = "mpRequired";
 
     @Override
-    public JsonElement serialize(MagicAttackInterface src, Type typeOfSrc, JsonSerializationContext context) {
+    public JsonElement serialize(final MagicAttackInterface src, final Type typeOfSrc, final JsonSerializationContext context) {
         final JsonObject jObj = new JsonObject();
 
         final String name = src.toString();

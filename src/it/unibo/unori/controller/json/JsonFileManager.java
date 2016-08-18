@@ -37,6 +37,7 @@ import it.unibo.unori.controller.json.deserializers.PartyDeserializer;
 import it.unibo.unori.controller.json.deserializers.PotionDeserializer;
 import it.unibo.unori.controller.json.deserializers.WeaponDeserializer;
 import it.unibo.unori.controller.json.serializer.ArmorSerializer;
+import it.unibo.unori.controller.json.serializer.BagSerializer;
 import it.unibo.unori.controller.json.serializer.GameMapSerializer;
 import it.unibo.unori.controller.json.serializer.HeroSerializer;
 import it.unibo.unori.controller.json.serializer.HeroTeamSerializer;
@@ -93,6 +94,7 @@ public class JsonFileManager {
                 .registerTypeAdapter(Weapon.class, new WeaponDeserializer())
                 .registerTypeAdapter(Potion.class, new PotionSerializer())
                 .registerTypeAdapter(Potion.class, new PotionDeserializer())
+                .registerTypeAdapter(Bag.class, new BagSerializer())
                 .registerTypeAdapter(Bag.class, new BagDeserializer())
                 .registerTypeAdapter(MagicAttackInterface.class, new MagicAttackSerializer())
                 .registerTypeAdapter(MagicAttackInterface.class, new MagicAttackDeserializer())
