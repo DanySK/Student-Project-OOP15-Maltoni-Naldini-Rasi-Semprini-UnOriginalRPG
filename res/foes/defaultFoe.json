@@ -20,7 +20,8 @@
     "stats": {
       "ICEATK": 0,
       "FIREATK": 0,
-      "THUNDERATK": 0
+      "THUNDERATK": 0,
+      "PHYSICATK": 0
     },
     "inflictedStatus": "NONE"
   },

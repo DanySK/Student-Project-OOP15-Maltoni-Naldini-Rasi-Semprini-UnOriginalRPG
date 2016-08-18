@@ -50,7 +50,7 @@ public class WorldLoader {
     }
 
     public GameMap loadWorld() throws IOException {
-        WorldBuilder builder = new WorldBuilder();
+        final WorldBuilder builder = new WorldBuilder();
         builder.setGameMap(convertStandardPathToMapName(VILLAGE), this.fileManager.loadMap(VILLAGE));
         builder.setGameMap(convertStandardPathToMapName(SHOP), this.fileManager.loadMap(SHOP));
         builder.setGameMap(convertStandardPathToMapName(CHURCH), this.fileManager.loadMap(CHURCH));
