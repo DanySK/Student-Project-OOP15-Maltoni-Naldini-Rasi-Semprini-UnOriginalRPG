@@ -3,7 +3,6 @@ package it.unibo.unori.controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +26,6 @@ import it.unibo.unori.model.character.HeroImpl;
 import it.unibo.unori.model.character.exceptions.MaxHeroException;
 import it.unibo.unori.model.character.jobs.Jobs;
 import it.unibo.unori.model.maps.Party;
-import it.unibo.unori.model.maps.Party.CardinalPoints;
 import it.unibo.unori.model.maps.SingletonParty;
 import it.unibo.unori.view.layers.CharacterSelectionLayer;
 
@@ -131,12 +129,12 @@ public final class SingletonStateMachine {
                     final WorldLoader loader = new WorldLoader();
                     // final WorldBuilder builder = new WorldBuilder();
                     SingletonParty.getParty().setCurrentMap(loader.loadWorld()/* builder.buildWorld() */);
-                    final Map<CardinalPoints, String> framesMap = new HashMap<>();
+                    /*final Map<CardinalPoints, String> framesMap = new HashMap<>();
                     for (final CardinalPoints cp : CardinalPoints.values()) {
                         framesMap.put(cp,
                                         SingletonParty.getParty().getHeroTeam().getAllHeroes().get(0).getBattleFrame());
                     }
-                    SingletonParty.getParty().setFrames(framesMap);
+                    SingletonParty.getParty().setFrames(framesMap);*/
                     this.stack.pushAndRender(new MapState(SingletonParty.getParty().getCurrentGameMap()));
                     this.startTimer();
                 } catch (IOException e) {

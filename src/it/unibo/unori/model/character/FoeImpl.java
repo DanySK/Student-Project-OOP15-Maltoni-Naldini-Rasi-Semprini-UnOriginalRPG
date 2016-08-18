@@ -15,6 +15,11 @@ public class FoeImpl extends CharacterImpl implements Foe {
     private static final long serialVersionUID = -1168567801329410379L;
     private final int ia;
     private final FoesFindable type;
+    
+    /**
+     * Static field that represents the maximum IA reachable for a Foe.
+     */
+    public static final int MAXIA = 10;
 
     /**
      * Standard constructor for a Foe.
