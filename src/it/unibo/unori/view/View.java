@@ -99,11 +99,12 @@ public final class View extends JFrame {
      * Removes the layer on top of the view.
      */
     public void pop() {
+        stack.peek().setVisible(false);
+        this.layeredPane.remove(stack.pop());
         if (!stack.isEmpty()) {
             stack.peek().setEnabled(true);
-            stack.peek().setVisible(false);
+            stack.peek().setVisible(true);
         }
-        this.layeredPane.remove(stack.pop());
     }
 
     /**

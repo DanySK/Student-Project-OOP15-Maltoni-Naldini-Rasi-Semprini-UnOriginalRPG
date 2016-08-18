@@ -30,16 +30,16 @@ import java.awt.image.BufferedImage;
  *
  */
 public class MainMenuLayer extends Layer {
-	private static final long serialVersionUID = 1L;
-	
-	private int focusedButton;
+    private static final long serialVersionUID = 1L;
+
+    private int focusedButton;
     private final List<Button> buttons;
 
     private final JPanel buttonPanel = new JPanel();
     private static final Color BACKGROUND_COLOR = Color.BLACK;
     private static final Dimension SIZE = View.SIZE;
 
-     /*
+     /**
       * Creates the main menu.
       * @param buttons the list of buttons to be displayed
       */
