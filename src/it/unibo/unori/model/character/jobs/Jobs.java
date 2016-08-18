@@ -44,7 +44,6 @@ public enum Jobs {
 
      Jobs(final String filePath) {
          final JobsSetup js = new JobsSetup();
-         
         this.basicEquip = js.getDefaultArmorMap(filePath);
         this.basicStats = js.getDefaultStatsMap(filePath);
         this.growthStats = js.getDefaultIncrementsMap(filePath);
