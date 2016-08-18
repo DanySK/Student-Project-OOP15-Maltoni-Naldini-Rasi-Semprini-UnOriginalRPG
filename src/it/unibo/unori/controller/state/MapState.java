@@ -24,14 +24,12 @@ import it.unibo.unori.view.exceptions.SpriteNotFoundException;
 import it.unibo.unori.view.layers.MapLayer;
 
 /**
- * This GameState models the state of exploring a map (world, town or dungeon
- * room).
+ * This GameState models the state of exploring a map (world, town or dungeon room).
  */
 public class MapState extends AbstractGameState {
     private final Party party;
     private String[][] previousSpritesMap;
     private final Random random;
-    private int difficulty;
 
     /**
      * Default constructor.
@@ -43,9 +41,9 @@ public class MapState extends AbstractGameState {
      */
     public MapState(final GameMap map) throws SpriteNotFoundException {
         super(new MapLayer(MoveAction.getSupportedMovementsMap(), new InteractAction(), new OpenMenuAction(),
-                map.getFrames(),
-                new Point(map.getInitialCellPosition().getPosX(), map.getInitialCellPosition().getPosY()),
-                SingletonParty.getParty().getCurrentFrame()));
+                        map.getFrames(),
+                        new Point(map.getInitialCellPosition().getPosX(), map.getInitialCellPosition().getPosY()),
+                        SingletonParty.getParty().getCurrentFrame()));
         party = SingletonParty.getParty();
         party.setCurrentMap(map);
         previousSpritesMap = this.party.getCurrentGameMap().getFrames();
@@ -89,24 +87,34 @@ public class MapState extends AbstractGameState {
     }
 
     public boolean checkMapChanges() {
-        // TODO check
         return !Arrays.deepEquals(this.previousSpritesMap, party.getCurrentGameMap().getFrames());
     }
 
     public void randomEncounters() {
-        if (/*this.getMap().isBattleState()*/false) {
-            if (this.random.ints().limit(2).sum() % 2 != 0) {
-                // If the number is odd (33%) the battle starts
-                final int numberOfMonsters = this.random.nextInt(BattleState.MAX_NUMBER_OF_FOES + 1);
-                if (numberOfMonsters != 0) {
-                    final List<FoesFindable> foesTypes = new ArrayList<>();
-                    // Random generate the enemies' types. The fallen hero boss EROE_CADUTO can't appear in dungeon randomly (this explains the "-1")
-                    IntStream.range(0, FoesFindable.values().length - 1).limit(numberOfMonsters).forEach(i -> foesTypes.add(FoesFindable.values()[i]));
-                    final List<Foe> foes = new ArrayList<>();
-                    // Random generate the IA of the monsters. The more monsters are generated, the less intelligent should be
-                    IntStream.range(0, numberOfMonsters).forEach(i -> foes.add(new FoeImpl(this.random.nextInt(10) - this.random.nextInt(numberOfMonsters), "Nemico " + Integer.valueOf(i + 1), /*TODO*/"", foesTypes.get(i))));
-                    SingletonStateMachine.getController().startBattle(foes);
-                }
+        if (this.getMap().isBattleState() && this.random.ints().limit(2).sum() % 2 != 0) {
+            // If the number is odd (33%) the battle starts
+            final int numberOfMonsters = this.random.nextInt(BattleState.MAX_NUMBER_OF_FOES + 1);
+            if (numberOfMonsters != 0) {
+                final List<FoesFindable> foesTypes = new ArrayList<>();
+                /*
+                 * Random generate the enemies' types. The "fallen hero" boss (EROE_CADUTO) can't appear in dungeon
+                 * randomly (this explains the "-1")
+                 */
+                IntStream.range(0, FoesFindable.values().length - 1).limit(numberOfMonsters)
+                                .forEach(i -> foesTypes.add(FoesFindable.values()[i]));
+                final List<Foe> foes = new ArrayList<>();
+
+                /*
+                 * Random generate the IA of the monsters. The more monsters are generated, the less intelligent should
+                 * be; the higher heroes' level is, the more intelligent monsters are.
+                 */
+                IntStream.range(0, numberOfMonsters)
+                                .forEach(i -> foes.add(new FoeImpl(
+                                                this.random.nextInt(this.party.getHeroTeam().getAllHeroes().stream()
+                                                                .mapToInt(h -> h.getLevel()).max().getAsInt())
+                                                                - this.random.nextInt(numberOfMonsters),
+                                                "Nemico " + Integer.valueOf(i + 1), /* TODO */"", foesTypes.get(i))));
+                SingletonStateMachine.getController().startBattle(foes);
             }
         }
     }
