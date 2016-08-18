@@ -654,8 +654,7 @@
             "sentence": "Quello l� � Link che si � perso e cerca di tornare a casa",
             "nextToShow": 0,
             "listOfRows": [
-              "Quello l� � Link che si � perso e cerca di tornare",
-              "a casa "
+              "Quello l� � Link che si � perso e cerca di tornare a casa "
             ]
           }
         }
@@ -809,8 +808,8 @@
             "sentence": "Siccome Kingdom Hearts 3 non esce mai, ho cambiato contratto e sono venuto qua!",
             "nextToShow": 0,
             "listOfRows": [
-              "Siccome Kingdom Hearts 3 non esce mai, ho cambiato",
-              "contratto e sono venuto qua!"
+              "Siccome Kingdom Hearts 3 non esce mai, ho cambiato contratto e sono ",
+              "venuto qua!"
             ]
           }
         }
