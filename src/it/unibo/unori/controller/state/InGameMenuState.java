@@ -11,7 +11,7 @@ import it.unibo.unori.view.layers.InGameMenuLayer;
  */
 public class InGameMenuState extends AbstractGameState {
     private final Party party;
-    
+
     /**
      * Default constructor. It places a new layer with the in-game pop-up menu on the {@link it.unibo.unori.view.View}
      * of the {@link it.unibo.unori.controller.state.GameState} below in the stack.
@@ -20,19 +20,19 @@ public class InGameMenuState extends AbstractGameState {
         super(new InGameMenuLayer(SingletonParty.getParty().getHeroTeam(), SingletonParty.getParty().getPartyBag()));
         this.party = SingletonParty.getParty();
     }
-    
-    public InGameMenuState(final HeroTeam party, final Bag bag) {
-        super(new InGameMenuLayer(party, bag));
-        this.party = SingletonParty.getParty();
-        if (this.party.getHeroTeam() != party || this.party.getPartyBag() != bag) {
-            throw new IllegalArgumentException();
-        }
-    }
-    
+
+    /**
+     * Returns the hero team.
+     * @return the hero team
+     */
     public HeroTeam getTeam() {
         return this.party.getHeroTeam();
     }
-    
+
+    /**
+     * Returns the bag of the party.
+     * @return the bag
+     */
     public Bag getBag() {
         return this.party.getPartyBag();
     }
