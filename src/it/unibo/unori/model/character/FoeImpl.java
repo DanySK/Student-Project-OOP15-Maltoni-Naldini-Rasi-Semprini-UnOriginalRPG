@@ -51,6 +51,7 @@ public class FoeImpl extends CharacterImpl implements Foe {
         return null;
     }
     
+    @Override
     public FoesFindable getType() {
         return this.type;
     }
