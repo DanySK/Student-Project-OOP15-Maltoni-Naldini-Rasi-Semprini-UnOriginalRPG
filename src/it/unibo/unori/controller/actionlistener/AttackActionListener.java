@@ -11,10 +11,10 @@ public class AttackActionListener extends AbstractUnoriActionListener {
         super();
         // TODO
     }
-    
+
     @Override
     public void actionPerformed(final ActionEvent event) {
-        if(BattleState.class.isInstance(this.getController().getCurrentState())) {
+        if (BattleState.class.isInstance(this.getController().getCurrentState())) {
             final BattleState currentState = (BattleState) this.getController().getCurrentState();
             try {
                 currentState.getModel().attack(true);
@@ -24,5 +24,5 @@ public class AttackActionListener extends AbstractUnoriActionListener {
             }
         }
     }
-    
+
 }
