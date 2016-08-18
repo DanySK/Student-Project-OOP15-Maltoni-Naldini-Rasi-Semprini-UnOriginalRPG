@@ -98,11 +98,10 @@
         "state": "BLOCKED",
         "npc": {
           "sentence": {
-            "sentence": "Mi hanno sbattuto quaggi� perch� mi mangiavo tutte le ostie!",
+            "sentence": "Mi hanno sbattuto quaggiù perchè mi mangiavo tutte le ostie!",
             "nextToShow": 0,
             "listOfRows": [
-              "Mi hanno sbattuto quaggi� perch� mi mangiavo tutte",
-              "le ostie!"
+              "Mi hanno sbattuto quaggiù perchè mi mangiavo tutte le ostie!"
             ]
           }
         }
@@ -375,8 +374,7 @@
             "sentence": "Sono una guardia inutile, ma non quanto lui dalla parte opposta!",
             "nextToShow": 0,
             "listOfRows": [
-              "Sono una guardia inutile, ma non quanto lui dalla ",
-              "parte opposta!"
+              "Sono una guardia inutile, ma non quanto lui dalla parte opposta!"
             ]
           }
         }
@@ -409,8 +407,7 @@
             "sentence": "Sono una guardia inutile, ma non quanto lui dalla parte opposta!",
             "nextToShow": 0,
             "listOfRows": [
-              "Sono una guardia inutile, ma non quanto lui dalla ",
-              "parte opposta!"
+              "Sono una guardia inutile, ma non quanto lui dalla parte opposta!"
             ]
           }
         }
