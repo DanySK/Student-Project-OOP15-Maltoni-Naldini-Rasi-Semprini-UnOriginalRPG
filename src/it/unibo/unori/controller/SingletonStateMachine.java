@@ -203,6 +203,7 @@ public final class SingletonStateMachine {
         public void closeMenu() throws NotValidStateException {
             if (InGameMenuState.class.isInstance(this.stack.peek())) {
                 this.stack.pop();
+                this.stack.render();
             } else {
                 throw new NotValidStateException();
             }
