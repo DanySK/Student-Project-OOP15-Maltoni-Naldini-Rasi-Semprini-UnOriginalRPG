@@ -6,7 +6,9 @@ import it.unibo.unori.controller.exceptions.NotValidStateException;
 import it.unibo.unori.controller.state.BattleState;
 import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 import it.unibo.unori.model.battle.exceptions.CantEscapeException;
-
+/**
+ * This should be linked to the button that make the hero try to run away from the battle.
+ */
 public class EscapeActionListener extends AbstractUnoriActionListener {
 
     @Override
