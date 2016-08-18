@@ -38,6 +38,7 @@ import it.unibo.unori.controller.json.deserializers.PotionDeserializer;
 import it.unibo.unori.controller.json.deserializers.WeaponDeserializer;
 import it.unibo.unori.controller.json.serializer.ArmorSerializer;
 import it.unibo.unori.controller.json.serializer.GameMapSerializer;
+import it.unibo.unori.controller.json.serializer.HeroSerializer;
 import it.unibo.unori.controller.json.serializer.HeroTeamSerializer;
 import it.unibo.unori.controller.json.serializer.ItemSerializer;
 import it.unibo.unori.controller.json.serializer.MagicAttackSerializer;
@@ -83,23 +84,6 @@ public class JsonFileManager {
      * Default constructor.
      */
     public JsonFileManager() {
-        /*
-         * final InstanceCreator<Weapon> weaponDeserialize = (type) -> new
-         * WeaponImpl(); final InstanceCreator<Party> partyDeserialize = (type)
-         * -> SingletonParty.getParty(); final InstanceCreator<Potion>
-         * potionDeserialize = (type) -> new PotionFactory().getStdPotion();
-         * final InstanceCreator<Bag> bagDeserialize = (type) -> new BagImpl();
-         * final InstanceCreator<Item> itemDeserialize = (type) -> { if
-         * (type.getClass().isAssignableFrom(Armor.class)) { return
-         * ArmorImpl.NAKED; } else if
-         * (type.getClass().isAssignableFrom(Weapon.class)) { return
-         * WeaponImpl.FISTS; } else if
-         * (type.getClass().isAssignableFrom(Potion.class)) { return new
-         * PotionFactory().getStdPotion(); } else { return new ItemImpl("", "");
-         * } }; final InstanceCreator<GameMap> mapDeserialize = (type) -> new
-         * GameMapImpl();
-         */
-
         gson = new GsonBuilder()/* .enableComplexMapKeySerialization() */.setPrettyPrinting()
                 .registerTypeAdapter(Item.class, new ItemSerializer())
                 .registerTypeAdapter(Item.class, new ItemDeserializer())
@@ -115,6 +99,7 @@ public class JsonFileManager {
                 .registerTypeAdapter(Character.class, new CharacterDeserializer())
                 .registerTypeAdapter(Foe.class, new FoeDeserializer())
                 .registerTypeAdapter(FoeSquad.class, new FoeSquadDeserializer())
+                .registerTypeAdapter(Hero.class, new HeroSerializer())
                 .registerTypeAdapter(Hero.class, new HeroDeserializer())
                 .registerTypeAdapter(HeroTeam.class, new HeroTeamSerializer())
                 .registerTypeAdapter(HeroTeam.class, new HeroTeamDeserializer())
