@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -14,6 +15,10 @@ import it.unibo.unori.controller.action.OpenMenuAction;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.FoeImpl;
 import it.unibo.unori.model.character.factory.FoesFindable;
+import it.unibo.unori.model.items.Armor;
+import it.unibo.unori.model.items.Item;
+import it.unibo.unori.model.items.Potion;
+import it.unibo.unori.model.items.Weapon;
 import it.unibo.unori.model.maps.GameMap;
 import it.unibo.unori.model.maps.Party;
 import it.unibo.unori.model.maps.Position;
@@ -77,7 +82,25 @@ public class MapState extends AbstractGameState {
      * @return the dialogue from the model
      */
     public DialogueInterface interact() {
-        return this.party.interact();
+        final Map<Armor, Integer> armors = this.party.getPartyBag().getArmors();
+        final Map<Weapon, Integer> weapons = this.party.getPartyBag().getWeapons();
+        // final Map<Potion, Integer> potions = this.party.getPartyBag().getPotions();
+        // final Map<Item, Integer> miscellaneous = this.party.getPartyBag().getMiscellaneous();
+        final DialogueInterface dialogue = this.party.interact();
+        if (!armors.equals(this.party.getPartyBag().getArmors())) {
+            SingletonStateMachine.getController().getStatistics().increaseArmorsAcquired(1);
+        }
+        if (!weapons.equals(this.party.getPartyBag().getWeapons())) {
+            SingletonStateMachine.getController().getStatistics().increaseWeaponsAcquired(1);
+        }
+        //if (!potions.equals(this.party.getPartyBag().getPotions())) {
+        //    SingletonStateMachine.getController().getStatistics().increaseArmorsAcquired(1);
+        //}
+        //if (!miscellaneous.equals(this.party.getPartyBag().getMiscellaneous())) {
+        //    SingletonStateMachine.getController().getStatistics().increaseArmorsAcquired(1);
+        //}
+
+        return dialogue;
     }
 
     /**
@@ -96,7 +119,6 @@ public class MapState extends AbstractGameState {
      */
     public Position getCurrentPosition() {
         return this.party.getCurrentPosition();
-
     }
 
     /**

@@ -25,29 +25,29 @@ public class BagDeserializer implements JsonDeserializer<Bag> {
     private static final String MISCELLANOUS = "miscellaneous";
 
     @Override
-    public Bag deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+    public Bag deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
                     throws JsonParseException {
         final JsonObject jObj = (JsonObject) json;
         final Bag returnBag = new BagImpl();
 
         final Map<Armor, Integer> armors = context.deserialize(jObj.get(ARMORS), new TypeToken<Map<Armor, Integer>>() {
         }.getType());
-        armors.forEach((a, i) -> IntStream.range(0, i).forEach( in -> returnBag.storeItem(a))); //TODO check
+        armors.forEach((a, i) -> IntStream.range(0, i).forEach(in -> returnBag.storeItem(a))); // TODO check
 
         final Map<Weapon, Integer> weapons = context.deserialize(jObj.get(WEAPONS),
                         new TypeToken<Map<Weapon, Integer>>() {
                         }.getType());
-        weapons.forEach((w, i) -> IntStream.range(0, i).forEach( in -> returnBag.storeItem(w))); //TODO check
+        weapons.forEach((w, i) -> IntStream.range(0, i).forEach(in -> returnBag.storeItem(w))); // TODO check
 
         final Map<Potion, Integer> potions = context.deserialize(jObj.get(POTIONS),
                         new TypeToken<Map<Potion, Integer>>() {
                         }.getType());
-        potions.forEach((p, i) -> IntStream.range(0, i).forEach( in -> returnBag.storeItem(p))); //TODO check
+        potions.forEach((p, i) -> IntStream.range(0, i).forEach(in -> returnBag.storeItem(p))); // TODO check
 
         final Map<Item, Integer> miscellaneous = context.deserialize(jObj.get(MISCELLANOUS),
                         new TypeToken<Map<Item, Integer>>() {
                         }.getType());
-        miscellaneous.forEach((m, i) -> IntStream.range(0, i).forEach( in -> returnBag.storeItem(m))); //TODO check
+        miscellaneous.forEach((m, i) -> IntStream.range(0, i).forEach(in -> returnBag.storeItem(m))); // TODO check
 
         return returnBag;
     }

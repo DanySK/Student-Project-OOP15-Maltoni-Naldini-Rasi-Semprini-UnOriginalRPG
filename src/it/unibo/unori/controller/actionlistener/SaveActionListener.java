@@ -15,9 +15,7 @@ public class SaveActionListener extends AbstractUnoriActionListener {
         try {
             this.getController().saveGame();
         } catch (IOException e) {
-            System.out.println("Error in SaveActionListener:");
             this.getController().showError(e.getMessage(), ErrorSeverity.SERIUOS);
-            e.printStackTrace();
         }
     }
 

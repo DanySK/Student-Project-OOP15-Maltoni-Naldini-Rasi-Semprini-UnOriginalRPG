@@ -38,7 +38,7 @@ public class GameMapSerializer implements JsonSerializer<GameMap> {
 
         final JsonElement initalPosition = context.serialize(src.getInitialCellPosition(), Position.class);
         jObj.add(INITIAL_POSITION, initalPosition);
-        
+
         final boolean battleState = src.isBattleState();
         jObj.addProperty(BATTLE_STATE, battleState);
 
@@ -102,7 +102,7 @@ public class GameMapSerializer implements JsonSerializer<GameMap> {
                 // final JsonElement mapToLink = context.serialize(((MapCellImpl) src).getCellMap(), GameMap.class);
                 // jObj.add(MAP_TO_LINK, mapToLink);
                 final JsonElement initialPos = context
-                        .serialize(((MapCellImpl) src).getCellMap().getInitialCellPosition(), Position.class);
+                                .serialize(((MapCellImpl) src).getCellMap().getInitialCellPosition(), Position.class);
                 jObj.add(INITIAL_POS, initialPos);
             } else if (ChestCellImpl.class.isInstance(src)) {
                 JsonElement item;

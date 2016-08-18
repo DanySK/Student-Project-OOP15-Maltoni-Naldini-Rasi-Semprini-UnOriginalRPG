@@ -17,10 +17,10 @@ import it.unibo.unori.model.items.Weapon;
 public class ItemDeserializer implements JsonDeserializer<Item> {
     private static final String NAME = "name";
     private static final String DESC = "desc";
-    
+
     @Override
     public Item deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
-            throws JsonParseException {
+                    throws JsonParseException {
         final JsonObject jObj = (JsonObject) json;
         Item deserializedItem = null;
         if (jObj.has("piece")) {

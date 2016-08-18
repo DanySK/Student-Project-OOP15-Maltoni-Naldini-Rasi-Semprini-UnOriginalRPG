@@ -18,23 +18,15 @@ public class ItemSerializer implements JsonSerializer<Item> {
 
     @Override
     public JsonElement serialize(final Item src, final Type typeOfSrc, final JsonSerializationContext context) {
-        JsonElement e;
         if (Weapon.class.isInstance(src)) {
-            e = context.serialize(src, Weapon.class);
-            System.out.println("E' un'arma: " + e);
-            return e;
+            return context.serialize(src, Weapon.class);
         } else if (Armor.class.isInstance(src)) {
-            e = context.serialize(src, Armor.class);
-            System.out.println("E' un'armatura: " + e);
-            return e;
+            return context.serialize(src, Armor.class);
         } else if (Potion.class.isInstance(src)) {
-            e = context.serialize(src, Potion.class);
-            System.out.println("E' una pozione: " + e);
-            return e;
+            return context.serialize(src, Potion.class);
         } else {
-            System.out.println("E' un oggetto normale");
-            final String name = src.getName();
             final JsonObject jObj = new JsonObject();
+            final String name = src.getName();
             jObj.addProperty(NAME, name);
             final String desc = src.getDescription();
             jObj.addProperty(DESC, desc);

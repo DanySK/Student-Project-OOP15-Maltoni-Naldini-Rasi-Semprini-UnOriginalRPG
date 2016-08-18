@@ -16,11 +16,11 @@ public class PotionSerializer implements JsonSerializer<Potion> {
     private static final String POINTS = "points";
     private static final String STATS_TO_RESTORE = "statToRestore";
     private static final String STATUS_RESTORABLE = "statusRestorable";
-    
+
     @Override
     public JsonElement serialize(final Potion src, final Type typeOfSrc, final JsonSerializationContext context) {
         final JsonObject jObj = new JsonObject();
-        
+
         final String name = src.getName();
         jObj.addProperty(NAME, name);
         final String description = src.getDescription();
@@ -31,7 +31,7 @@ public class PotionSerializer implements JsonSerializer<Potion> {
         jObj.add(STATS_TO_RESTORE, statToRestore);
         final boolean statusRestorable = src.isStatusChanging();
         jObj.addProperty(STATUS_RESTORABLE, statusRestorable);
-        
+
         return jObj;
     }
 
