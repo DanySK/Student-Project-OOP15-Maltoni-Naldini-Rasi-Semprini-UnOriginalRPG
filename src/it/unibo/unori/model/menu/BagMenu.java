@@ -7,12 +7,18 @@ import java.util.Map;
 import java.util.Optional;
 
 import it.unibo.unori.model.battle.Battle;
+import it.unibo.unori.model.character.Hero;
+import it.unibo.unori.model.character.exceptions.ArmorAlreadyException;
+import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
 import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.BagImpl;
 import it.unibo.unori.model.items.Item;
 import it.unibo.unori.model.items.Potion;
 import it.unibo.unori.model.items.Weapon;
+import it.unibo.unori.model.items.exceptions.HeroDeadException;
+import it.unibo.unori.model.items.exceptions.HeroNotDeadException;
+import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
 import it.unibo.unori.model.menu.utility.Pair;
 
 /**
@@ -22,6 +28,7 @@ import it.unibo.unori.model.menu.utility.Pair;
 public class BagMenu implements BagMenuInterface {
     
     private Bag bag;
+    private final Optional<Battle> batt;
     private Optional<Pair<Item, Integer>> selected;
     private List<Item> listOfItems;
     private List<Integer> listOfQuantity;
@@ -33,6 +40,7 @@ public class BagMenu implements BagMenuInterface {
     public BagMenu(final Bag b) {
         this.bag = b;
         this.generateFromaBag();
+        this.batt = Optional.empty();
     }
     
     /**
@@ -42,6 +50,7 @@ public class BagMenu implements BagMenuInterface {
     public BagMenu(final Battle battle) {
         this.bag = battle.getItemBag();
         this.generateFromaBag();
+        this.batt = Optional.of(battle);
     }
     
     //Method to be called in the Constructor.
@@ -130,5 +139,60 @@ public class BagMenu implements BagMenuInterface {
             toReturn.add(toAdd);
         });
         return toReturn;
+    }
+    
+    public DialogueInterface useSelected(final Hero who) {
+        if (this.selected.get().getX() instanceof Potion) {
+            if (this.batt.isPresent()) {
+                try {
+                    return this.batt.get().usePotion(who,
+                            (Potion) this.selected.get().getX());
+                } catch (ItemNotFoundException | HeroDeadException | HeroNotDeadException e) {
+                    return new Dialogue(e.toString());
+                }
+            } else {
+                return new Dialogue(this.new UsePotionMenu().usePotion(who));
+            }
+        } else if (this.selected.get().getX() instanceof Weapon) {
+            return new Dialogue(this.new UsePotionMenu().useWeap(who));
+        } else if (this.selected.get().getX() instanceof Armor) {
+            return new Dialogue(this.new UsePotionMenu().useArm(who));
+        } else {
+            throw new IllegalStateException();
+        }
+    }
+    
+    public class UsePotionMenu {
+        public String usePotion(final Hero onWho) {
+           try {
+            ((Potion) BagMenu.this.getSelected().getX()).using(onWho);
+            return onWho.getName() + 
+                    " ha usato " + BagMenu.this.getSelected().getX().getName();
+            } catch (HeroDeadException | HeroNotDeadException e) {
+                return e.toString();
+            }
+        }
+        
+        public String useWeap(final Hero onWho) {
+            try {
+                onWho.setWeapon((Weapon) BagMenu.this.getSelected());
+                return onWho.getName() +
+                        " si equipaggia con " 
+                        + BagMenu.this.getSelected().getX().getName();
+            } catch (WeaponAlreadyException e) {
+                return e.toString();
+            }
+        }
+        
+        public String useArm(final Hero onWho) {
+            try {
+                onWho.setArmor((Armor) BagMenu.this.getSelected());
+                return onWho.getName() +
+                        " si equipaggia con " 
+                        + BagMenu.this.getSelected().getX().getName();
+            } catch (ArmorAlreadyException e) {
+                return e.toString();
+            }
+        }
     }
 }
