@@ -13,7 +13,7 @@ import it.unibo.unori.model.character.exceptions.NoWeaponException;
  * Interface to model a in-Battle Menu, fight session.
  *
  */
-public interface FightInterface {
+public interface FightInterface  extends BattleMenuInterface{
     
     /**
      * Method that has to call a special Attack from Battle.
