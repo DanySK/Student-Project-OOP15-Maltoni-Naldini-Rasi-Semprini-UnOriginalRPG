@@ -142,7 +142,7 @@
         "state": "BLOCKED",
         "obj": {
           "name": "Lanciafiamme",
-          "desc": "C\u0027� davvero bisogno di una descrizione?",
+          "desc": "C\u0027è davvero bisogno di una descrizione?",
           "stats": {
             "THUNDERATK": 0,
             "PHYSICATK": 580,
@@ -194,8 +194,7 @@
             "sentence": "Questo dungeon mi fa paura, vado a lavorare a Train Simulator",
             "nextToShow": 0,
             "listOfRows": [
-              "Questo dungeon mi fa paura, vado a lavorare a ",
-              "Train Simulator "
+              "Questo dungeon mi fa paura, vado a lavorare a Train Simulator "
             ]
           }
         }

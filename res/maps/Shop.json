@@ -219,11 +219,11 @@
         "state": "BLOCKED",
         "npc": {
           "sentence": {
-            "sentence": "Il fabbro si � barricato dietro il bancone! Nessuno port� andare a parlargli ora!",
+            "sentence": "Il fabbro si è barricato dietro il bancone! Nessuno portà andare a parlargli ora!",
             "nextToShow": 0,
             "listOfRows": [
-              "Il fabbro si � barricato dietro il bancone!",
-              "Nessuno port� andare a parlargli ora!"
+              "Il fabbro si è barricato dietro il bancone!",
+              "Nessuno portà andare a parlargli ora!"
             ]
           }
         }
@@ -265,11 +265,10 @@
         "state": "BLOCKED",
         "npc": {
           "sentence": {
-            "sentence": "Il fabbro � arrabbiato perch� i ladri gli hanno rubato tutti i suoi averi!",
+            "sentence": "Il fabbro è arrabbiato perchè i ladri gli hanno rubato tutti i suoi averi!",
             "nextToShow": 0,
             "listOfRows": [
-              "Il fabbro � arrabbiato perch� i ladri gli hanno ",
-              "rubato tutti i suoi averi!"
+              "Il fabbro è arrabbiato perchè i ladri gli hanno rubato tutti i suoi averi!"
             ]
           }
         }
