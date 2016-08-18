@@ -1,5 +1,7 @@
 package it.unibo.unori.model.character;
 
+import it.unibo.unori.model.character.factory.FoesFindable;
+
 /**
  * Interface modeling a generic Foe of the game.
  */
@@ -26,5 +28,11 @@ public interface Foe extends Character {
      * @return the Status to which the Foe is immune;
      */
     Status getImmunity();
+
+    /**
+     * Getter method that returns the type of the Foe.
+     * @return the type of the Foe.
+     */
+    FoesFindable getType();
 
 }
