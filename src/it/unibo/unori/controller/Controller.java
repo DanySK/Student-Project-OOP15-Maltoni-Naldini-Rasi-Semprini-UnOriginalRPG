@@ -129,4 +129,10 @@ public interface Controller {
      */
     void startBattle(final List<Foe> foes);
 
+    /**
+     * This method returns the object that keeps track of all statistics paramethers of the game.
+     * @return the GameStatistics object for this game
+     */
+    GameStatistics getStatistics();
+
 }

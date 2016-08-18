@@ -27,20 +27,16 @@ public class BagSerializer implements JsonSerializer<Bag> {
         final JsonElement armors = context.serialize(src.getArmors(), new TypeToken<Map<ArmorImpl, Integer>>() {
         }.getType());
         jObj.add(ARMORS, armors);
-        System.out.println(armors);
         final JsonElement weapons = context.serialize(src.getWeapons(), new TypeToken<Map<WeaponImpl, Integer>>() {
         }.getType());
-        System.out.println(weapons);
         jObj.add(WEAPONS, weapons);
         final JsonElement potions = context.serialize(src.getPotions(), new TypeToken<Map<PotionImpl, Integer>>() {
         }.getType());
         jObj.add(POTIONS, potions);
-        System.out.println(potions);
         final JsonElement miscellaneous = context.serialize(src.getMiscellaneous(),
                         new TypeToken<Map<ItemImpl, Integer>>() {
                         }.getType());
         jObj.add(MISCELLANOUS, miscellaneous);
-        System.out.println(miscellaneous);
 
         return jObj;
     }

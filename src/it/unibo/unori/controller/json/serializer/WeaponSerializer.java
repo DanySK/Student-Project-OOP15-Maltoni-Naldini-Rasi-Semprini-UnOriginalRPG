@@ -36,7 +36,6 @@ public class WeaponSerializer implements JsonSerializer<Weapon> {
         final JsonElement stats = context.serialize(statsMap, new TypeToken<Map<Statistics, Integer>>() {
         }.getType());
         jObj.add(STATS, stats);
-        System.out.println("Mappa: " + statsMap + "\n" + src.getFireAtk() + "\n" + src.getIceAtk() + "\n" + src.getThunderAtk() + "\n" + src.getPhysicalAtk());
         final JsonElement inflictedStatus = context.serialize(src.getWeaponStatus(), Status.class);
         jObj.add(INFLICTED_STATUS, inflictedStatus);
 

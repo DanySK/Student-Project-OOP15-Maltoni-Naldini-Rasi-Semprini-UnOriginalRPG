@@ -195,12 +195,15 @@ public final class SingletonStateMachine {
         @Override
         public void closeGame() {
             this.stack.closeTheView();
-            // System.exit(0);
         }
 
         @Override
         public StateMachineStack getStack() {
             return this.stack;
+        }
+        @Override
+        public GameStatistics getStatistics() {
+            return this.stats;
         }
 
         @Override

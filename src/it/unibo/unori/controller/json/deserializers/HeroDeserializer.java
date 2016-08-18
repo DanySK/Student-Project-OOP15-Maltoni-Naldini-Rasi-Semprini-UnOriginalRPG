@@ -90,9 +90,7 @@ public class HeroDeserializer implements JsonDeserializer<Hero> {
             returnHero.restoreMP(currentMP - returnHero.getCurrentMP());
         }
 
-        return returnHero; // TODO
+        return returnHero;
     }
-    
-    
 
 }
