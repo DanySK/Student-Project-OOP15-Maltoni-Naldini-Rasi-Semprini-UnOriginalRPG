@@ -3,6 +3,7 @@ package it.unibo.unori.model.menu;
 import java.util.List;
 import java.util.Map;
 
+import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.Item;
@@ -79,4 +80,11 @@ public interface BagMenuInterface {
      * @return the currently selected Item and its quantity.
      */
     Pair<Item, Integer> getSelected();
+
+    /**
+     * Method that allows to USE the selected Item on a specified Hero.
+     * @param who the Hero that uses the Item.
+     * @return a confirmation String in form of Dialogue.
+     */
+    DialogueInterface useSelected(Hero who);
 }
