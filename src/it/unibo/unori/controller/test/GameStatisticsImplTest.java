@@ -78,10 +78,10 @@ public class GameStatisticsImplTest {
          * Eclipse doesn't support @SuppressWarnings("PMD.EqualsNull")
          * annnotation, I decided to use // NOPMD comment
          */
-        assertFalse(gs1.equals(null)); 
-        assertFalse(gs2.equals(null)); 
-        assertFalse(gs3.equals(null)); 
-        assertFalse(gs4.equals(null)); 
+        assertFalse(gs1.equals(null)); // NOPMD comment
+        assertFalse(gs2.equals(null)); // NOPMD comment
+        assertFalse(gs3.equals(null)); // NOPMD comment
+        assertFalse(gs4.equals(null)); // NOPMD comment
     }
 
     /**
