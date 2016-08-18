@@ -225,11 +225,11 @@ public class MapLayer extends Layer {
     }
 
     @Override
-    public void disable() {
-        super.disable();
+    public void setEnabled(final boolean b) {
+        super.setEnabled(b);
 
-        menu.setEnabled(false);
-        movement.forEach((i, a)->a.setEnabled(false));
+        menu.setEnabled(b);
+        movement.forEach((i, a)->a.setEnabled(b));
     }
 
     @Override

@@ -11,6 +11,7 @@ import javax.swing.AbstractAction;
 import javax.swing.SwingConstants;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
@@ -23,7 +24,7 @@ import java.awt.event.ActionEvent;
  */
 public class DialogLayer extends Layer {
 	private static final long serialVersionUID = 1L;
-	
+
 	private final Button button;
     final private static Dimension SIZE = new Dimension(View.SIZE.width / 2,
                                                         View.SIZE.height / 2);
@@ -43,7 +44,7 @@ public class DialogLayer extends Layer {
 
         this.button = button;
 
-        String htmlText = "<html>" + message.replaceAll("\n", "<br/>") + "</html>";
+        final String htmlText = "<html>" + message.replaceAll("\n", "<br/>") + "</html>";
         final JLabel label = new JLabel(htmlText, SwingConstants.CENTER);
         label.setForeground(Color.WHITE);
 
@@ -57,6 +58,16 @@ public class DialogLayer extends Layer {
 
         actionMap.put("ENTER", new ButtonAction());
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "ENTER");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setEnabled(final boolean b) {
+        for (final Component component : this.getComponents()) {
+            component.setEnabled(b);
+        }
     }
 
     private class ButtonAction extends AbstractAction {

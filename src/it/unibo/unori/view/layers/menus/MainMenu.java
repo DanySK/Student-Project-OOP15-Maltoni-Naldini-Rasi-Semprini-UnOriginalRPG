@@ -93,9 +93,9 @@ public class MainMenu extends JPanel { // TODO esc
      * {@inheritDoc}
      */
     @Override
-    public void disable() {
+    public void setEnabled(final boolean b) {
         for (final Component component : this.getComponents()) {
-            component.setEnabled(false);
+            component.setEnabled(b);
         }
     }
 

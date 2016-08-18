@@ -11,8 +11,8 @@ public abstract class Layer extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	/**
-     * Make this layer inactive.
+     * Enable or disable this layer.
      */
     @Override
-    public void disable() { }
+    public void setEnabled(final boolean b) { }
 }

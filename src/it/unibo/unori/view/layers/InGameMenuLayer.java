@@ -8,6 +8,7 @@ import it.unibo.unori.model.character.HeroTeam;
 
 import javax.swing.JLayeredPane;
 
+import java.awt.Component;
 import java.awt.Dimension;
 
 /**
@@ -35,5 +36,15 @@ public class InGameMenuLayer extends Layer {
         this.add(layeredPane);
 
         layeredPane.add(new MainMenu(layeredPane, null, 5, 5));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setEnabled(final boolean b) {
+        for (final Component component : this.getComponents()) {
+            component.setEnabled(b);
+        }
     }
 }

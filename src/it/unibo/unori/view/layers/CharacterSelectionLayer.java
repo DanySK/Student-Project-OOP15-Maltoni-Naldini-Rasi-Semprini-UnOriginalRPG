@@ -36,7 +36,7 @@ import java.awt.event.ActionListener;
  */
 public class CharacterSelectionLayer extends Layer {
 	private static final long serialVersionUID = 1L;
-	
+
 	private static final Dimension SIZE = View.SIZE;
     private static final Color BACKGROUND_COLOR = Color.BLACK;
 
@@ -111,6 +111,16 @@ public class CharacterSelectionLayer extends Layer {
         this.add(statistics);
         this.add(partyPanel);
         this.add(button);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setEnabled(final boolean b) {
+        for (final Component component : this.getComponents()) {
+            component.setEnabled(b);
+        }
     }
 
     /**
