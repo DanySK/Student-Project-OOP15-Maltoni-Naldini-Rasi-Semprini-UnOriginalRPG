@@ -143,20 +143,20 @@ public class BagMenu implements BagMenuInterface {
     
     @Override
     public DialogueInterface useSelected(final Hero who) {
-        if (this.selected.get().getX() instanceof Potion) {
+        final Item toUse = this.selected.get().getX();
+        if (toUse instanceof Potion) {
             if (this.batt.isPresent()) {
                 try {
-                    return this.batt.get().usePotion(who,
-                            (Potion) this.selected.get().getX());
+                    return this.batt.get().usePotion(who, (Potion) toUse);
                 } catch (ItemNotFoundException | HeroDeadException | HeroNotDeadException e) {
                     return new Dialogue(e.toString());
                 }
             } else {
                 return new Dialogue(this.new UsePotionMenu().usePotion(who));
             }
-        } else if (this.selected.get().getX() instanceof Weapon) {
+        } else if (toUse instanceof Weapon) {
             return new Dialogue(this.new UsePotionMenu().useWeap(who));
-        } else if (this.selected.get().getX() instanceof Armor) {
+        } else if (toUse instanceof Armor) {
             return new Dialogue(this.new UsePotionMenu().useArm(who));
         } else {
             throw new IllegalStateException();
