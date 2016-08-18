@@ -8,7 +8,7 @@ import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
 
 /**
- * This should be linked to button that make the hero attack that turn.
+ * This should be linked to the button that make the hero attack that turn during battle.
  */
 public class AttackActionListener extends AbstractUnoriActionListener {
 
