@@ -14,37 +14,37 @@ import it.unibo.unori.model.character.exceptions.NoWeaponException;
  * Class that implements FightInterface, to model a fight menu in Battle.
  *
  */
-public class FightMenu implements FightInterface {
+public class FightMenu extends BattleMenu implements FightInterface {
     
-   private final Battle bat;
-   
    /**
     * Standard constructor for a Fight Menu.
     * @param battle the Battle from which generate the FightMenu.
     */
    public FightMenu(final Battle battle) {
-       this.bat = battle;
+       super(battle);
    }
    
     @Override
     public DialogueInterface attack(final boolean whoAttacks) throws NoWeaponException {
-        return this.bat.attack(whoAttacks);
+        return this.getBattle().attack(whoAttacks);
     }
 
     @Override
-    public DialogueInterface magic(final MagicAttack m, final Foe enemy, final boolean whosFirst) 
-            throws NotEnoughMPExcpetion, MagicNotFoundException {
-        return this.bat.useMagicAttack(m, enemy, whosFirst);
+    public DialogueInterface magic(final MagicAttack m,
+            final Foe enemy, final boolean whosFirst) 
+                    throws NotEnoughMPExcpetion, MagicNotFoundException {
+        return this.getBattle().useMagicAttack(m, enemy, whosFirst);
     }
 
     @Override
     public DialogueInterface specialAtk() throws BarNotFullException {
-        return this.bat.specialAttack();
+        return this.getBattle().specialAttack();
     }
 
     @Override
-    public DialogueInterface defend(final Hero toDefend) throws NotDefendableException {
-        return this.bat.defend(toDefend);
+    public DialogueInterface defend(final Hero toDefend) 
+            throws NotDefendableException {
+        return this.getBattle().defend(toDefend);
     }
 
 }

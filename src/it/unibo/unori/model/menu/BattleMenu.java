@@ -1,7 +1,6 @@
 package it.unibo.unori.model.menu;
 
 import it.unibo.unori.model.battle.Battle;
-import it.unibo.unori.model.battle.BattleImpl;
 import it.unibo.unori.model.battle.exceptions.CantEscapeException;
 import it.unibo.unori.model.items.Bag;
 
@@ -11,25 +10,27 @@ import it.unibo.unori.model.items.Bag;
 public class BattleMenu implements BattleMenuInterface {
     
     private final Battle battle;
-    private final Bag bag;
     
     /**
      * Standard constructor.
-     * @param battle the current Battle.
+     * @param batt the current Battle.
      */
-    public BattleMenu(final BattleImpl batt) {
+    public BattleMenu(final Battle batt) {
         this.battle = batt;
-        this.bag = this.battle.getItemBag();
     }
     
     @Override
-    public void runAway() throws CantEscapeException {
-        this.battle.runAway();
+    public DialogueInterface runAway() {
+        try {
+            return this.battle.runAway();
+        } catch (CantEscapeException e) {
+            return new Dialogue(e.toString());
+        }
     }
     
     @Override
     public BagMenuInterface useBag() {
-        return new BagMenu(this.bag);
+        return new BagMenu(this.battle);
     }
     
     @Override
@@ -40,5 +41,15 @@ public class BattleMenu implements BattleMenuInterface {
     @Override
     public int currentSpecialBar() {
         return this.battle.getHeroOnTurn().getCurrentBar();
+    }
+    
+    @Override
+    public Battle getBattle() {
+        return this.battle;
+    }
+    
+    @Override
+    public Bag getBag() {
+        return this.battle.getItemBag();
     }
 }

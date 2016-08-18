@@ -14,7 +14,7 @@ public class Dialogue implements DialogueInterface {
     private static final long serialVersionUID = -4424588982670056462L;
     
     private static final int MAX_ROWS = 2;
-    private static final int MAX_CHARS = 50;
+    private static final int MAX_CHARS = 70;
     private final String sentence;
     private int nextToShow;
     private final List<String> listOfRows;

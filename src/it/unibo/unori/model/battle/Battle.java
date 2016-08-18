@@ -30,13 +30,13 @@ public interface Battle {
      * @return a confirmation String if I manage to escape.
      * @throws CantEscapeException if the level is too low to escape.
      */
-    String runAway() throws CantEscapeException;
+    DialogueInterface runAway() throws CantEscapeException;
 
     /**
      * Method that allows to throw a regular attack (standard).
      * @param whosFirst true if the Hero is attacking, false otherwise.
      * Note: use BattleLogics.whosFirst().
-     * @return a confirmation String.
+     * @return a confirmation String in form of Dialogue.
      * @throws NoWeaponException if the Hero isn't holding any Weapon.
      */
     DialogueInterface attack(boolean whosFirst) throws NoWeaponException;
@@ -45,7 +45,7 @@ public interface Battle {
      * Method that allows to defend a personal team's character at choice, just for
      * one turn of Battle.
      * @param friend the character to defend.
-     * @return a confirmation String
+     * @return a confirmation String in form of Dialogue.
      * @throws NotDefendableException if the friend is not defendable.
      */
     DialogueInterface defend(Hero friend) throws NotDefendableException;
@@ -54,7 +54,7 @@ public interface Battle {
      * Method that allows to use a Potion from the item Bag.
      * @param my the Hero onto which use the Potion.
      * @param toUse the Potion to use.
-     * @return a confirmation String.
+     * @return a confirmation String in form of Dialogue.
      * @throws ItemNotFoundException if the Potion is not present in the Bag.
      * @throws HeroDeadException if the Hero is dead and tries to use a Potion
      *  that does not give life back.
@@ -65,7 +65,7 @@ public interface Battle {
     /**
      * Method that allows to throw a Special Attack if the bar is full.
      * @throws BarNotFullException if the bar is not filled.
-     * @return a confirmation String.
+     * @return a confirmation String in form of Dialogue.
      */
     DialogueInterface specialAttack() throws BarNotFullException;
     
@@ -76,7 +76,7 @@ public interface Battle {
      * @param enemy the enemy to which throw the attack.
      * @param whosFirst true if the Hero is attacking, false otherwise.
      * Note: use BattleLogics.whosFirst().
-     * @return A confirmation String.
+     * @return A confirmation String in form of Dialogue.
      * @throws NotEnoughMPExcpetion if the current MPs of the Character
      * is not enough to throw the attack.
      * @throws MagicNotFoundException 
@@ -93,14 +93,14 @@ public interface Battle {
     /**
      * Method to be called at the end of the Battle.
      * It adds the appropriate amount of exp points to each Character of my team.
-     * @return a confirmation String.
+     * @return a confirmation String in form of Dialogue.
      */
     DialogueInterface acquireExp();
     
     /**
      * Method that allows the Foe to restore a Statistic on his turn.
      * @param statToRestore the Statistic to be restored.
-     * @return a confirmation String.
+     * @return a confirmation String in form of Dialogue.
      */
     DialogueInterface foeUsesRestore(Statistics statToRestore);
     
@@ -156,8 +156,9 @@ public interface Battle {
     String getOutCome()throws IllegalStateException;
 
     /**
-     * Getter method to be called at the beginning of the Battle, it gives a presentation String.
-     * @return a presentation String
+     * Getter method to be called at the beginning of the Battle,
+     *  it gives a presentation String.
+     * @return a presentation String in form of Dialogue.
      */
     DialogueInterface getPresentation();
    

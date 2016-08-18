@@ -74,6 +74,8 @@ public class GameMapFactory {
      *          path of the sprite to set in the border of the map
      * @param innerPath
      *        path of the sprite to set in the center of the map
+     * @param battleState
+     *        parameter to set the random encounter on the map.
      * @return
      *          a closed map sized as liked
      */
