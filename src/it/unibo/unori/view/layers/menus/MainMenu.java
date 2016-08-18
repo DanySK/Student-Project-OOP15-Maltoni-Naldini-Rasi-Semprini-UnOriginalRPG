@@ -1,7 +1,7 @@
 package it.unibo.unori.view.layers.menus;
 
 import it.unibo.unori.controller.actionlistener.SaveActionListener;
-
+import it.unibo.unori.model.items.Bag;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.List;
@@ -20,42 +20,55 @@ import javax.swing.KeyStroke;
 import javax.swing.BorderFactory;
 import javax.swing.AbstractAction;
 
-public class MainMenu extends JPanel { // TODO esc
+/**
+ *
+ * The main in-game menu.
+ *
+ */
+public class MainMenu extends JPanel {
+    private static final int BORDER = 5;
     private final Dimension size = new Dimension(160, 160);
 
     private int focusedButton;
+    private final JLayeredPane layeredPane;
     private final List<MenuButton> buttons = new LinkedList<MenuButton>();
 
-    private final JLayeredPane layeredPane;
-
-    public MainMenu(final JLayeredPane layeredPane, final JPanel bottom,
+    /**
+     * Creates the first in-game menu.
+     * @param bag the bag of the party
+     * @param layeredPane the parent pane that contains this
+     * @param bottom the layer that called this
+     * @param x the x position
+     * @param y the y position
+     */
+    public MainMenu(final Bag bag,
+                    final JLayeredPane layeredPane, final JPanel bottom,
                     final int x, final int y) {
         super();
 
         this.layeredPane = layeredPane;
 
         this.setBackground(Color.WHITE);
-        this.setLayout(new GridLayout(0, 1, 5, 5));
+        this.setLayout(new GridLayout(0, 1, BORDER, BORDER));
         this.setBounds(x, y, size.width, size.height);
 
-        this.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        this.setBorder(BorderFactory.createEmptyBorder(BORDER, BORDER, BORDER, BORDER));
 
         if (bottom != null) {
-            bottom.disable();
+            bottom.setEnabled(false);
         }
 
         final MenuButton party = new MenuButton("Party");
         party.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
-                layeredPane.add(new MainMenu(layeredPane, MainMenu.this, 100, 100));
             }
         });
-
 
         final MenuButton items = new MenuButton("Items");
         items.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
-                layeredPane.add(new MainMenu(layeredPane, MainMenu.this, 100, 200));
+                layeredPane.add(new ItemMenu(bag, layeredPane, MainMenu.this,
+                                             x + size.width + BORDER, y));
             }
         });
 
@@ -83,19 +96,17 @@ public class MainMenu extends JPanel { // TODO esc
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "ENTER");
 
         actionMap.put("CLOSE", new CloseAction(this));
+        actionMap.put("CLOSE", new CloseMenuAction());
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "CLOSE");
-
-        buttons.get(focusedButton).repaint();
-        this.repaint();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void disable() {
+    public void setEnabled(final boolean b) {
         for (final Component component : this.getComponents()) {
-            component.setEnabled(false);
+            component.setEnabled(b);
         }
     }
 
@@ -111,8 +122,7 @@ public class MainMenu extends JPanel { // TODO esc
         public void actionPerformed(final ActionEvent e) {
             if (direction == 0) {
                 buttons.get(focusedButton).doClick();
-            }
-            else {
+            } else {
                 if (buttons.size() != 0) {
                     focusedButton += direction;
 
@@ -135,9 +145,7 @@ public class MainMenu extends JPanel { // TODO esc
         }
 
         public void actionPerformed(final ActionEvent e) {
-            System.out.println("test");
             MainMenu.this.setVisible(false);
-            MainMenu.this.setEnabled(false);
             layeredPane.remove(MainMenu.this);
         }
     }
