@@ -15,6 +15,7 @@ import it.unibo.unori.model.items.Bag;
  */
 public class BattleState extends AbstractGameState {
     public static final int MAX_NUMBER_OF_FOES = 4;
+    public static final int MAX_IA = 10;
     private final Battle battleModel;
     private int currentTurn; 
 

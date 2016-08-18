@@ -86,6 +86,11 @@ public class MapState extends AbstractGameState {
 
     }
 
+    /**
+     * Checks if the map in the model changed.
+     * 
+     * @return true if the the map changed after a movement
+     */
     public boolean checkMapChanges() {
         return !Arrays.deepEquals(this.previousSpritesMap, party.getCurrentGameMap().getFrames());
     }
@@ -108,12 +113,14 @@ public class MapState extends AbstractGameState {
                  * Random generate the IA of the monsters. The more monsters are generated, the less intelligent should
                  * be; the higher heroes' level is, the more intelligent monsters are.
                  */
-                IntStream.range(0, numberOfMonsters)
-                                .forEach(i -> foes.add(new FoeImpl(
-                                                this.random.nextInt(this.party.getHeroTeam().getAllHeroes().stream()
-                                                                .mapToInt(h -> h.getLevel()).max().getAsInt())
-                                                                - this.random.nextInt(numberOfMonsters),
-                                                "Nemico " + Integer.valueOf(i + 1), /* TODO */"", foesTypes.get(i))));
+                IntStream.range(0, numberOfMonsters).forEach(i -> {
+                    final int ia = this.random.nextInt(this.party.getHeroTeam().getAllHeroes().stream()
+                                    .mapToInt(h -> h.getLevel()).max().getAsInt())
+                                    - this.random.nextInt(numberOfMonsters);
+                    foes.add(new FoeImpl(ia <= BattleState.MAX_IA ? ia : 10, "Nemico " + Integer.valueOf(i + 1),
+                                    /* TODO */"", foesTypes.get(i)));
+                });
+
                 SingletonStateMachine.getController().startBattle(foes);
             }
         }
