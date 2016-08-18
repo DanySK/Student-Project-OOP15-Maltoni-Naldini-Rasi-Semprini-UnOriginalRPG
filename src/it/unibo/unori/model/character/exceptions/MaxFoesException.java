@@ -11,7 +11,6 @@ public class MaxFoesException extends Exception {
      * 
      */
     private static final long serialVersionUID = 5176361966683570767L;
-    
     @Override
     public String toString() {
         return "Max foes limit reached";
