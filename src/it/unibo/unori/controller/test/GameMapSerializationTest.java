@@ -23,12 +23,13 @@ public class GameMapSerializationTest {
 
         final GameMapFactory gmf = new GameMapFactory();
         final JsonFileManager jfm = new JsonFileManager();
-        
+
         final GameMap fourNPCRoom = gmf.create4NPCRoomMap();
 
         jfm.serializeJSON(fourNPCRoom, test.getAbsolutePath());
         assertEquals(fourNPCRoom.getMapRows(), jfm.deserializeJSON(GameMap.class, test.getAbsolutePath()).getMapRows());
-        assertEquals(fourNPCRoom.getMapColumns(), jfm.deserializeJSON(GameMap.class, test.getAbsolutePath()).getMapColumns());
+        assertEquals(fourNPCRoom.getMapColumns(),
+                        jfm.deserializeJSON(GameMap.class, test.getAbsolutePath()).getMapColumns());
     }
 
 }

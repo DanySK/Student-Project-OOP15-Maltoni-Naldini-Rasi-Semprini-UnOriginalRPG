@@ -4,10 +4,6 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.util.Optional;
 
-import javax.swing.AbstractAction;
-
-import it.unibo.unori.controller.Controller;
-import it.unibo.unori.controller.SingletonStateMachine;
 import it.unibo.unori.controller.exceptions.NotValidStateException;
 import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 import it.unibo.unori.controller.state.MapState;
@@ -18,15 +14,13 @@ import it.unibo.unori.view.layers.MapLayer;
 /**
  * Action that should be linked with interaction button(s). This makes the player interact with cells near him/her.
  */
-public class InteractAction extends AbstractAction {
+public class InteractAction extends AbstractUnoriAction {
     /**
      * Generated serial version UID.
      */
     private static final long serialVersionUID = -5686132045447650426L;
 
-    private Optional<DialogueInterface> currentDialogue; // TODO maybe it is more correct to put it inside the State,
-                                                         // TODO check
-    private final Controller controller;
+    private Optional<DialogueInterface> currentDialogue;
 
     /**
      * Default constructor.
@@ -34,13 +28,12 @@ public class InteractAction extends AbstractAction {
     public InteractAction() {
         super();
         currentDialogue = Optional.empty();
-        this.controller = SingletonStateMachine.getController();
     }
 
     @Override
     public void actionPerformed(final ActionEvent event) {
-        if (MapState.class.isInstance(this.controller.getCurrentState())) {
-            final MapState currentState = (MapState) this.controller.getCurrentState();
+        if (MapState.class.isInstance(this.getController().getCurrentState())) {
+            final MapState currentState = (MapState) this.getController().getCurrentState();
             final MapLayer currentLayer = (MapLayer) currentState.getLayer();
             // If another dialogue is open, it tries to next line ...
             if (this.currentDialogue.isPresent()) {
@@ -64,14 +57,11 @@ public class InteractAction extends AbstractAction {
                                     new Point(currentState.getCurrentPosition().getPosX(),
                                                     currentState.getCurrentPosition().getPosY()));
                 } catch (SpriteNotFoundException e) {
-                    System.out.println("Error changing map in MoveAction:");
-                    this.controller.showError(e.getMessage(), ErrorSeverity.SERIUOS);
-                    e.printStackTrace();
+                    this.getController().showError(e.getMessage(), ErrorSeverity.SERIUOS);
                 }
             }
         } else {
-            System.out.println("Error current state is not MapState in InteractAction:");
-            this.controller.showError(new NotValidStateException().getMessage(), ErrorSeverity.SERIUOS);
+            this.getController().showError(new NotValidStateException().getMessage(), ErrorSeverity.SERIUOS);
         }
 
     }
