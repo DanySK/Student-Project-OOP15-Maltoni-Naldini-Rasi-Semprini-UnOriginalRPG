@@ -1,7 +1,6 @@
 package it.unibo.unori.model.menu;
 
 import it.unibo.unori.model.battle.Battle;
-import it.unibo.unori.model.battle.BattleImpl;
 import it.unibo.unori.model.battle.exceptions.CantEscapeException;
 import it.unibo.unori.model.items.Bag;
 
@@ -15,9 +14,9 @@ public class BattleMenu implements BattleMenuInterface {
     
     /**
      * Standard constructor.
-     * @param battle the current Battle.
+     * @param batt the current Battle.
      */
-    public BattleMenu(final BattleImpl batt) {
+    public BattleMenu(final Battle batt) {
         this.battle = batt;
         this.bag = this.battle.getItemBag();
     }
@@ -40,5 +39,13 @@ public class BattleMenu implements BattleMenuInterface {
     @Override
     public int currentSpecialBar() {
         return this.battle.getHeroOnTurn().getCurrentBar();
+    }
+    
+    public Battle getBattle() {
+        return this.battle;
+    }
+    
+    public Bag getBag() {
+        return this.bag;
     }
 }
