@@ -129,13 +129,15 @@ public class DungeonBuilder {
         this.northLink(tList.get(0), tList.get(2));
         this.northLink(tList.get(5), tList.get(0));
         this.northLink(tList.get(6), tList.get(5));
-        this.northLink(tList.get(6), tList.get(7));
+        this.northLink(tList.get(7), tList.get(6));
         this.westLink(tList.get(8), tList.get(1));
         this.westLink(tList.get(1), tList.get(0));
         this.westLink(tList.get(0), tList.get(3));
         this.westLink(tList.get(3), tList.get(4));
-        this.storeChest(POS1, tList.get(0), AACT.getGoldEquip().get(ArmorPieces.SHIELD));
-        this.storeChest(POS1, tList.get(4), ItemImpl.KEY);
+        this.storeItem(POS1, tList.get(0), AACT.getGoldEquip().get(ArmorPieces.SHIELD));
+        this.storeItem(POS1, tList.get(4), ItemImpl.KEY);
+        this.storeItem(POS1, tList.get(5), ItemImpl.KEY);
+        this.storeChest(POS1, tList.get(6), ItemImpl.KEY);
         this.storeChest(POS2, tList.get(7), WACT.getSpadaMistica());
     }
 
