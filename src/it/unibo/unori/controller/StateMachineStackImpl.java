@@ -17,14 +17,14 @@ import it.unibo.unori.view.layers.Layer;
  */
 public class StateMachineStackImpl implements StateMachineStack {
     private final Stack<GameState> gsStack;
-    private View layerStack = new View();
+    private final View layerStack;
 
     /**
      * Default constructor.
      */
     public StateMachineStackImpl() {
         this.gsStack = new Stack<>();
-        // this.layerStack = new View();
+        this.layerStack = new View();
     }
 
     @Override

@@ -84,8 +84,7 @@ public final class SingletonStateMachine {
          */
         @Override
         public void begin() {
-            stack.push(new MainMenuState());
-            stack.render();
+            stack.pushAndRender(new MainMenuState());
         }
 
         @Override
@@ -112,10 +111,7 @@ public final class SingletonStateMachine {
 
         @Override
         public void newGame() throws IOException {
-            this.restoreStatsIfNeeded();
-
-            // TODO maybe we should check if the SingletonParty should be reset
-
+            this.restoreStatsIfNeeded(); // TODO check
             this.stack.pushAndRender(new CharacterSelectionState());
         }
 
@@ -127,16 +123,14 @@ public final class SingletonStateMachine {
                     try {
                         SingletonParty.getParty().getHeroTeam().addHero(new HeroImpl(entry.getKey(), entry.getValue()));
                     } catch (MaxHeroException | IllegalArgumentException e) {
-                        System.out.println("Error in starting game: 0");
                         this.showError(e.getMessage(), ErrorSeverity.SERIUOS);
-                        e.printStackTrace();
                     }
                 });
 
                 try {
                     final WorldLoader loader = new WorldLoader();
                     // final WorldBuilder builder = new WorldBuilder();
-                    SingletonParty.getParty().setCurrentMap(loader.loadWorld()/*builder.buildWorld()*/);
+                    SingletonParty.getParty().setCurrentMap(loader.loadWorld()/* builder.buildWorld() */);
                     final Map<CardinalPoints, String> framesMap = new HashMap<>();
                     for (final CardinalPoints cp : CardinalPoints.values()) {
                         framesMap.put(cp,
@@ -146,13 +140,10 @@ public final class SingletonStateMachine {
                     this.stack.pushAndRender(new MapState(SingletonParty.getParty().getCurrentGameMap()));
                     this.startTimer();
                 } catch (IOException e) {
-                    System.out.println("Error in starting game: 1");
                     this.showError(e.getMessage(), ErrorSeverity.SERIUOS);
-                    e.printStackTrace();
                 }
 
             } else {
-                System.out.println("Error in starting game: 2");
                 this.showError(new NotValidStateException().getMessage(), ErrorSeverity.SERIUOS);
             }
 
@@ -192,8 +183,7 @@ public final class SingletonStateMachine {
         @Override
         public void openMenu() throws NotValidStateException {
             if (MapState.class.isInstance(this.stack.peek())) {
-                this.stack.push(new InGameMenuState());
-                this.stack.render();
+                this.stack.pushAndRender(new InGameMenuState());
             } else {
                 throw new NotValidStateException();
             }

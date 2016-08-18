@@ -61,8 +61,6 @@ public class ObjectUseActionListener extends AbstractUnoriActionListener {
                 if (Potion.class.isInstance(this.itemUsed)) {
                     if (currentState.getBag().contains(this.itemUsed)) {
                         ((Potion) this.itemUsed).using(this.targetHero);
-                        // TODO new Dialogue("Hai usato " + toUse.getName() + "
-                        // su " + my.getName() + "!");
                     } else {
                         throw new ItemNotFoundException();
                     }
@@ -112,13 +110,9 @@ public class ObjectUseActionListener extends AbstractUnoriActionListener {
                 throw new NotValidStateException();
             }
         } catch (CantUseException | HeroDeadException | HeroNotDeadException e) {
-            System.out.println("Error in ObjectUseActionListener:");
             this.getController().showError(e.getMessage(), ErrorSeverity.MINOR);
-            e.printStackTrace();
         } catch (NotValidStateException | ItemNotFoundException e) {
-            System.out.println("Error in ObjectUseActionListener:");
             this.getController().showError(e.getMessage(), ErrorSeverity.SERIUOS);
-            e.printStackTrace();
         }
     }
 
