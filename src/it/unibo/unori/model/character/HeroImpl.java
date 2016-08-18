@@ -94,13 +94,12 @@ public class HeroImpl  extends CharacterImpl implements Hero {
 
     @Override
     public void addExp(final int expAcquired) {
-        if (this.currentExp + expAcquired > this.totExp) {
-            final int plus = this.currentExp + expAcquired - this.totExp;
+        int toAdd = this.currentExp + expAcquired;
+        while (toAdd > this.totExp) {
+            toAdd -= this.totExp;
             this.levelUp();
-            this.currentExp += plus;
-        } else {
-            this.currentExp += expAcquired;
         }
+        this.currentExp = toAdd;
     }
 
     @Override
