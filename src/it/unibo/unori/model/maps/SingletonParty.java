@@ -1,9 +1,5 @@
 package it.unibo.unori.model.maps;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
 import it.unibo.unori.model.character.HeroTeam;
 import it.unibo.unori.model.character.HeroTeamImpl;
 import it.unibo.unori.model.items.Bag;
@@ -75,7 +71,7 @@ public final class SingletonParty {
         private static final long serialVersionUID = 5037069095324356034L;
         private Position currentPosition;
         private GameMap currentMap;
-        private  Map<CardinalPoints, String> frames;
+        private String frame;
         private CardinalPoints orientation;
         private final Bag partyBag;
         private final HeroTeam heroteam;
@@ -90,14 +86,8 @@ public final class SingletonParty {
             this.orientation = CardinalPoints.NORTH;
             this.partyBag = new BagImpl();
             this.heroteam = new HeroTeamImpl();
-            this.frames = new HashMap<>();
+            this.frame = "";
         }
-
-        private boolean framesCheck(final Map<CardinalPoints, String> frames) {
-            return frames.keySet().containsAll(
-                    Arrays.asList(CardinalPoints.values()));
-        }
-
 
         @Override
         public Position getCurrentPosition() {
@@ -117,17 +107,13 @@ public final class SingletonParty {
 
 
         @Override
-        public void setFrames(final Map<CardinalPoints, String> frames)
-                                        throws IllegalArgumentException {
-            if (!this.framesCheck(frames)) {
-                throw new IllegalArgumentException();
-            }
-            this.frames = frames;
+        public void setFrame(final String frame) {
+            this.frame = frame;
         }
 
         @Override
         public String getCurrentFrame() {
-            return this.frames.get(orientation);
+            return this.frame;
         }
 
 
