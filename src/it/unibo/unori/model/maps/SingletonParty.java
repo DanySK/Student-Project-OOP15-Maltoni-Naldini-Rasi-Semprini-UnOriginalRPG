@@ -86,7 +86,7 @@ public final class SingletonParty {
             this.orientation = CardinalPoints.NORTH;
             this.partyBag = new BagImpl();
             this.heroteam = new HeroTeamImpl();
-            this.frame = "";
+            this.frame = this.heroteam.getAllHeroes().get(0).getBattleFrame();
         }
 
         @Override
