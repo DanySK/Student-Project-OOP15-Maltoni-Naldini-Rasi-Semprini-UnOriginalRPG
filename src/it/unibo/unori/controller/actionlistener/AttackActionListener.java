@@ -3,8 +3,12 @@ package it.unibo.unori.controller.actionlistener;
 import java.awt.event.ActionEvent;
 
 import it.unibo.unori.controller.state.BattleState;
+import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
 
+/**
+ * This should be linked to button that make the hero attack that turn.
+ */
 public class AttackActionListener extends AbstractUnoriActionListener {
 
     public AttackActionListener() {
@@ -19,10 +23,10 @@ public class AttackActionListener extends AbstractUnoriActionListener {
             try {
                 currentState.getModel().attack(true);
             } catch (NoWeaponException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                this.getController().showError(e.getMessage(), ErrorSeverity.MINOR);
             }
         }
+     // TODO not valid state exception
     }
 
 }
