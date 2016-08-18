@@ -29,8 +29,7 @@ public interface Hero extends Character {
     void addExp(int expAcquired);
 
     /**
-     * A getter method that gives the amount of Experience Points needed for the
-     * Character to level up.
+     * A getter method that gives the amount of Experience Points that are currently obtained by the Hero.
      * @return the amount of Experience Points needed to level up.
      */
     int getRemainingExp();
@@ -119,4 +118,10 @@ public interface Hero extends Character {
      * @return the whole Armor.
      */
     Map<ArmorPieces, Armor> getWholeArmor();
+    
+    /**
+     * Setter method for the value tot Exp.
+     * @param toFill the value to be associated with the total amount of exp.
+     */
+    void setTotExp(int toFill);
 }

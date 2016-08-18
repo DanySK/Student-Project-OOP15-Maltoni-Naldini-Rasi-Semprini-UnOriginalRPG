@@ -201,5 +201,10 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     public void setUndefended() {
         this.defended = false;
     }
+    
+    @Override
+    public void setTotExp(final int toFill) {
+        this.totExp = toFill;
+    }
 
 }
