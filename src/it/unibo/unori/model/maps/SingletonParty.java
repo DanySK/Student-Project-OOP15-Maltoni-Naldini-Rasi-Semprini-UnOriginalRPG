@@ -169,7 +169,7 @@ public final class SingletonParty {
             try {
                 this.partyBag.storeItem(c.getObject());
                 this.currentMap.replaceCell(pos, currentPosition);
-                return new Dialogue("Che fortuna! Hai trovato " + c.getObject().getName() );
+                return new Dialogue("Che fortuna! Hai trovato " + c.getObject().getName());
             } catch (NoObjectFoundException e0) {
                 try {
                     return c.talkToNpc();

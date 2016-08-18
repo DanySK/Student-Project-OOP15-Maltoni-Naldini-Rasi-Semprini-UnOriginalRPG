@@ -173,7 +173,6 @@ public class PartyTest {
         } catch (Exception e) {
             fail("Wrong Exception thrown");
         }
-        
     }
 
 }
