@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Random;
 
 import it.unibo.unori.model.character.Foe;
+import it.unibo.unori.model.character.FoeImpl;
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.Character;
 import it.unibo.unori.model.character.HeroTeam;
@@ -27,9 +28,9 @@ public final class BattleLogics {
     private static final int DIFFERENCE_MAX = 4;
     private static final int PERCENTAGE_MEDIUM = 12;
     private static final int PERCENTAGE_HIGH = 25;
-    private static final int LOWIA = 3;
-    private static final int MEDIUMIA = 6;
-    private static final int HIGHIA = 8;
+    private static final int LOWIA = FoeImpl.MAXIA / 3;
+    private static final int MEDIUMIA = (FoeImpl.MAXIA * 2) / 3;
+    private static final int HIGHIA = (FoeImpl.MAXIA * 4) / 5;
     private static final int TURNSFORMEDIUMIA = 7;
     private static final int TURNSFORHIGHIA = 5;
     private static final int MAGICFILL = 30;
