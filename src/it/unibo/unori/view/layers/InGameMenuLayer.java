@@ -1,6 +1,5 @@
 package it.unibo.unori.view.layers;
 
-import it.unibo.unori.view.View;
 import it.unibo.unori.view.layers.menus.MainMenu;
 
 import it.unibo.unori.model.items.Bag;
@@ -19,7 +18,7 @@ import java.awt.Dimension;
 public class InGameMenuLayer extends Layer {
 	private static final long serialVersionUID = 1L;
 
-	private static final Dimension SIZE = View.SIZE;
+	private static final Dimension SIZE = MapLayer.SIZE;
     public final JLayeredPane layeredPane = new JLayeredPane();
 
     /**
@@ -35,7 +34,7 @@ public class InGameMenuLayer extends Layer {
 
         this.add(layeredPane);
 
-        layeredPane.add(new MainMenu(layeredPane, null, 5, 5));
+        layeredPane.add(new MainMenu(bag, layeredPane, null, 5, 5));
     }
 
     /**

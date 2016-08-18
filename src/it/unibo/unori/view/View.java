@@ -19,13 +19,16 @@ import java.util.Stack;
  *
  */
 public final class View extends JFrame {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     private final JLayeredPane layeredPane;
     private static final String TITLE = "UnOriginal.RPG";
 
-    Stack<Layer> stack = new Stack<Layer>();
+    private final Stack<Layer> stack = new Stack<Layer>();
 
+    /**
+     * The default dimension of the view.
+     */
     public static final Dimension SIZE = new Dimension(640, 480); // TODO
 
     /**
@@ -108,7 +111,9 @@ public final class View extends JFrame {
      */
     public void run() {
         SwingUtilities.invokeLater(new Runnable() {
-             @Override public void run() { View.this.setVisible(true); }
+             @Override public void run() {
+                 View.this.setVisible(true);
+             }
          });
     }
 }

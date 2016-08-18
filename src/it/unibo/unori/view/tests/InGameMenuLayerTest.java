@@ -59,15 +59,13 @@ public class InGameMenuLayerTest {
     private class MenuAction extends AbstractAction {
         @Override
         public void actionPerformed(final ActionEvent e) {
-            mapLayer.disable();
-
             try {
+                mapLayer.setEnabled(false);
+
                 createParty();
                 final Layer inGameMenuLayer = new InGameMenuLayer(SingletonParty.getParty().getHeroTeam(),
                                                                   SingletonParty.getParty().getPartyBag());
                  view.push(inGameMenuLayer);
-
-                 mapLayer.disable();
             } catch (IllegalArgumentException | MaxHeroException e1) {
                 System.out.println("Party creation error");
             }

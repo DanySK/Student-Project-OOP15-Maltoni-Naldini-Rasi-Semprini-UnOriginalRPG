@@ -33,7 +33,7 @@ import java.awt.image.AffineTransformOp;
 public class MapLayer extends Layer {
 	private static final long serialVersionUID = 1L;
 
-	private static final Dimension SIZE = new Dimension(1280, 720);
+	public static final Dimension SIZE = new Dimension(1280, 720);
     private static final Dimension CELL_SIZE = new Dimension(32, 32);
 
     private Point mapStartingPoint;
@@ -65,7 +65,7 @@ public class MapLayer extends Layer {
      *
      * @throws SpriteNotFoundException if a sprite is not found
      */
-    public MapLayer(final Map<Integer, Action> movement,
+    public MapLayer(final Map<Integer, Action> movement, // TODO keybindings
                     final Action interact, final Action menu,
                     final String[][] map, final Point position,
                     final String spriteSheetPath) throws SpriteNotFoundException {
