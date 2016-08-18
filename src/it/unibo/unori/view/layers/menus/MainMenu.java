@@ -1,5 +1,6 @@
 package it.unibo.unori.view.layers.menus;
 
+import it.unibo.unori.controller.action.CloseMenuAction;
 import it.unibo.unori.controller.actionlistener.SaveActionListener;
 import it.unibo.unori.model.items.Bag;
 import java.awt.Color;

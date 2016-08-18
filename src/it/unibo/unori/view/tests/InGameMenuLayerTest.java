@@ -84,11 +84,6 @@ public class InGameMenuLayerTest {
         SingletonParty.getParty().getHeroTeam().addHero(new HeroImpl("Clown", Jobs.CLOWN));
     }
 
-    public static void main(final String... args) {
-        final InGameMenuLayerTest inGameMenuTest = new InGameMenuLayerTest();
-        inGameMenuTest.run();
-    }
-
     private class MoveAction extends AbstractAction {
         private static final long serialVersionUID = 1L;
 
@@ -103,5 +98,10 @@ public class InGameMenuLayerTest {
         public void actionPerformed(final ActionEvent e) {
             mapLayer.move(direction);
         }
+    }
+
+    public static void main(final String... args) {
+        final InGameMenuLayerTest inGameMenuTest = new InGameMenuLayerTest();
+        inGameMenuTest.run();
     }
 }
