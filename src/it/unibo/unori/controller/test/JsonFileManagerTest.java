@@ -20,15 +20,14 @@ import it.unibo.unori.model.character.jobs.Jobs;
 import it.unibo.unori.model.maps.SingletonParty;
 
 /**
- * This JUnit test class checks if JsonFileManager class works properly. I
- * tested save*ToPath and load*ToPath methods instead of default-path versions
- * to use the temporary folder, but they act exactly the same.
+ * This JUnit test class checks if JsonFileManager class works properly. I tested save*ToPath and load*ToPath methods
+ * instead of default-path versions to use the temporary folder, but they act exactly the same.
  */
 public class JsonFileManagerTest {
     private static final String SAVE_FILE = "Save.json";
     private static final String STATS_FILE = "Stats.json";
-    private static final String DUMP_JOB_FILE = "Dump.json";
-    
+    // private static final String DUMP_JOB_FILE = "Dump.json";
+
     /**
      * This rule instantiates a temporary folder where to check files.
      */
@@ -36,8 +35,7 @@ public class JsonFileManagerTest {
     public final TemporaryFolder folder = new TemporaryFolder();
 
     /**
-     * This tests if loadSave method throws JsonIOException if the file does not
-     * exist.
+     * This tests if loadSave method throws JsonIOException if the file does not exist.
      * 
      * @throws FileNotFoundException
      *             if the file does is not a JSON-serialized object
@@ -51,8 +49,7 @@ public class JsonFileManagerTest {
     }
 
     /**
-     * This tests if loadStats method throws IOException if the file does not
-     * exist.
+     * This tests if loadStats method throws IOException if the file does not exist.
      * 
      * @throws FileNotFoundException
      *             if the file does is not a JSON-serialized object
@@ -66,8 +63,7 @@ public class JsonFileManagerTest {
     }
 
     /**
-     * This tests if loadSave method throws JsonIOException if the file is not
-     * valid.
+     * This tests if loadSave method throws JsonIOException if the file is not valid.
      * 
      * @throws JsonIOException
      *             if the file does is not a JSON-serialized object
@@ -76,14 +72,13 @@ public class JsonFileManagerTest {
      */
     @Test(expected = JsonIOException.class)
     public void testSaveFileNotValid() throws IOException {
-        final File f = folder.newFile(SAVE_FILE);
+        final File f = folder.newFile();
         final JsonFileManager jsonManager = new JsonFileManager();
         jsonManager.loadGameFromPath(f.getAbsolutePath());
     }
 
     /**
-     * This tests if loadStats method throws JsonIOException if the file is not
-     * valid.
+     * This tests if loadStats method throws JsonIOException if the file is not valid.
      * 
      * @throws JsonIOException
      *             if the file does is not a JSON-serialized object
@@ -93,7 +88,7 @@ public class JsonFileManagerTest {
     @Test(expected = JsonIOException.class)
     public void testStatsFileNotValid() throws IOException {
         final JsonFileManager jsonManager = new JsonFileManager();
-        final File f = folder.newFile(STATS_FILE);
+        final File f = folder.newFile();
         jsonManager.loadStatsFromPath(f.getAbsolutePath());
     }
 
@@ -106,7 +101,7 @@ public class JsonFileManagerTest {
     @Test
     public void testSaveAndLoadGame() throws IOException {
         final JsonFileManager jsonManager = new JsonFileManager();
-        final File f = folder.newFile(SAVE_FILE);
+        final File f = folder.newFile();
         jsonManager.saveGameToPath(SingletonParty.getParty(), f.getAbsolutePath());
         assertEquals(SingletonParty.getParty(), jsonManager.loadGameFromPath(f.getAbsolutePath()));
     }
@@ -120,7 +115,7 @@ public class JsonFileManagerTest {
     @Test
     public void testSaveAndLoadStats() throws IOException {
         final JsonFileManager jsonManager = new JsonFileManager();
-        final File file = folder.newFile(STATS_FILE);
+        final File file = folder.newFile();
         final GameStatisticsImpl test = new GameStatisticsImpl();
         jsonManager.saveStatsToPath(test, file.getAbsolutePath());
         assertEquals(test, jsonManager.loadStatsFromPath(file.getAbsolutePath()));
@@ -143,25 +138,31 @@ public class JsonFileManagerTest {
             fail("Can't delete temporary " + file.getName() + " JSON test file");
         }
     }
-    
+
+    /**
+     * This tests if loadJob and saveJob methods work properly.
+     * 
+     * @throws IOException
+     *             if something worng happens
+     */
     @Test
     public void testSaveAndLoadJob() throws IOException {
         final JsonFileManager jsonManager = new JsonFileManager();
-        final File file = folder.newFile(DUMP_JOB_FILE);
+        final File file = folder.newFile();
         final Jobs jobsTest = Jobs.DUMP;
-        final JsonJobParameter parameterTest = new JsonJobParameter(jobsTest.getInitialStats(), jobsTest.getGrowthStats(), jobsTest.getInitialArmor(), jobsTest.getInitialWeapon());
-        
+        final JsonJobParameter parameterTest = new JsonJobParameter(jobsTest.getInitialStats(),
+                        jobsTest.getGrowthStats(), jobsTest.getInitialArmor(), jobsTest.getInitialWeapon());
+
         // System.out.println(parameterTest.getDefaultArmor());
         // System.out.println(parameterTest.getDefaultWeapon());
-        
-        jsonManager.saveJob(parameterTest, DUMP_JOB_FILE);
-        final JsonJobParameter loaded = jsonManager.loadJob(DUMP_JOB_FILE);
+
+        jsonManager.saveJob(parameterTest, file.getAbsolutePath());
+        final JsonJobParameter loaded = jsonManager.loadJob(file.getAbsolutePath());
         assertEquals(parameterTest.getDefaultStats(), loaded.getDefaultStats());
         assertEquals(parameterTest.getDefaultIncrement(), loaded.getDefaultIncrement());
         assertEquals(parameterTest.getDefaultArmor(), loaded.getDefaultArmor());
         assertEquals(parameterTest.getDefaultWeapon(), loaded.getDefaultWeapon());
-        
-        
+
     }
 
 }
