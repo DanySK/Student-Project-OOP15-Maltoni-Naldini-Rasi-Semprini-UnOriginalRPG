@@ -5,9 +5,9 @@ import java.awt.event.ActionEvent;
 public class EscapeActionListener extends AbstractUnoriActionListener {
 
     @Override
-    public void actionPerformed(ActionEvent event) {
+    public void actionPerformed(final ActionEvent event) {
         // TODO Auto-generated method stub
-        
+
     }
 
 }

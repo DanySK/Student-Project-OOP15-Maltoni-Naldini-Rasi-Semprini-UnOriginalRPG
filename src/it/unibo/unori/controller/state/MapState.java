@@ -58,14 +58,17 @@ public class MapState extends AbstractGameState {
      * @return true if the movement was possible and was done
      */
     public boolean moveParty(final Party.CardinalPoints direction) {
+        boolean canMove = true;
         final String[][] currentSpritesMap = this.party.getCurrentGameMap().getFrames();
         try {
             this.party.moveParty(direction);
         } catch (BlockedPathException e) {
-            return false;
+            canMove = false;
         }
-        this.previousSpritesMap = currentSpritesMap;
-        return true;
+        if (canMove) {
+            this.previousSpritesMap = currentSpritesMap;
+        }
+        return canMove;
     }
 
     /**
@@ -77,10 +80,20 @@ public class MapState extends AbstractGameState {
         return this.party.interact();
     }
 
+    /**
+     * Returns the current map.
+     * 
+     * @return the current map
+     */
     public GameMap getMap() {
         return this.party.getCurrentGameMap();
     }
 
+    /**
+     * Returns the current position on the current map.
+     * 
+     * @return the current position
+     */
     public Position getCurrentPosition() {
         return this.party.getCurrentPosition();
 
@@ -95,6 +108,9 @@ public class MapState extends AbstractGameState {
         return !Arrays.deepEquals(this.previousSpritesMap, party.getCurrentGameMap().getFrames());
     }
 
+    /**
+     * This method controls the random encounters when moving on a map that has that feature enabled.
+     */
     public void randomEncounters() {
         if (this.getMap().isBattleState() && this.random.ints().limit(2).sum() % 2 != 0) {
             // If the number is odd (33%) the battle starts
@@ -117,7 +133,7 @@ public class MapState extends AbstractGameState {
                     final int ia = this.random.nextInt(this.party.getHeroTeam().getAllHeroes().stream()
                                     .mapToInt(h -> h.getLevel()).max().getAsInt())
                                     - this.random.nextInt(numberOfMonsters);
-                    foes.add(new FoeImpl(ia <= BattleState.MAX_IA ? ia : 10, "Nemico " + Integer.valueOf(i + 1),
+                    foes.add(new FoeImpl(ia <= FoeImpl.MAXIA ? ia : 10, "Nemico " + Integer.valueOf(i + 1),
                                     /* TODO */"", foesTypes.get(i)));
                 });
 
