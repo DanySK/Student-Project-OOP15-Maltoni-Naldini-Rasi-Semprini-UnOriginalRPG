@@ -45,7 +45,7 @@ public final class SingletonStateMachine {
     /**
      * Method to get the controller instance inside the class. Multiple allocations are prevented also in a multi-thread
      * system.
-     * 
+     *
      * @return the single instance of Controller created.
      */
     public static Controller getController() {
@@ -145,7 +145,7 @@ public final class SingletonStateMachine {
                     SingletonParty.getParty().setFrames(framesMap);
                     this.stack.pushAndRender(new MapState(SingletonParty.getParty().getCurrentGameMap()));
                     this.startTimer();
-                } catch (IOException e) {
+                } catch (final IOException e) {
                     System.out.println("Error in starting game: 1");
                     this.showError(e.getMessage(), ErrorSeverity.SERIUOS);
                     e.printStackTrace();
@@ -160,7 +160,7 @@ public final class SingletonStateMachine {
 
         /**
          * If the statistics file exists from previous plays, it should be loaded. This method does that.
-         * 
+         *
          * @throws IOException
          *             if an error occurs
          * @throws SecurityException
@@ -203,7 +203,7 @@ public final class SingletonStateMachine {
         public void closeMenu() throws NotValidStateException {
             if (InGameMenuState.class.isInstance(this.stack.peek())) {
                 this.stack.pop();
-                this.stack.render();
+                //this.stack.render();
             } else {
                 throw new NotValidStateException();
             }

@@ -16,9 +16,9 @@ import java.awt.Dimension;
  *
  */
 public class InGameMenuLayer extends Layer {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private static final Dimension SIZE = MapLayer.SIZE;
+    private static final Dimension SIZE = MapLayer.SIZE;
     public final JLayeredPane layeredPane = new JLayeredPane();
 
     /**
