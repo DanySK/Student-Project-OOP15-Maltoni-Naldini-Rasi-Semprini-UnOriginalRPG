@@ -141,6 +141,7 @@ public class BagMenu implements BagMenuInterface {
         return toReturn;
     }
     
+    @Override
     public DialogueInterface useSelected(final Hero who) {
         if (this.selected.get().getX() instanceof Potion) {
             if (this.batt.isPresent()) {
@@ -162,33 +163,53 @@ public class BagMenu implements BagMenuInterface {
         }
     }
     
+    /**
+     * Inner class that allows to use the selected Item.
+     *
+     */
     public class UsePotionMenu {
+        
+        /**
+         * Method to be called if the selected Item is a Potion.
+         * @param onWho the Hero that uses the Item.
+         * @return a confirmation String.
+         */
         public String usePotion(final Hero onWho) {
            try {
             ((Potion) BagMenu.this.getSelected().getX()).using(onWho);
-            return onWho.getName() + 
-                    " ha usato " + BagMenu.this.getSelected().getX().getName();
+            return onWho.getName() 
+                    + " ha usato " + BagMenu.this.getSelected().getX().getName();
             } catch (HeroDeadException | HeroNotDeadException e) {
                 return e.toString();
             }
         }
         
+        /**
+         * Method to be called if the selected Item is a Weapon.
+         * @param onWho the Hero that uses the Item.
+         * @return a confirmation String.
+         */
         public String useWeap(final Hero onWho) {
             try {
                 onWho.setWeapon((Weapon) BagMenu.this.getSelected());
-                return onWho.getName() +
-                        " si equipaggia con " 
+                return onWho.getName() 
+                        + " si equipaggia con " 
                         + BagMenu.this.getSelected().getX().getName();
             } catch (WeaponAlreadyException e) {
                 return e.toString();
             }
         }
         
+        /**
+         * Method to be called if the selected Item is an Armor.
+         * @param onWho the Hero that uses the Item.
+         * @return a confirmation String.
+         */
         public String useArm(final Hero onWho) {
             try {
                 onWho.setArmor((Armor) BagMenu.this.getSelected());
-                return onWho.getName() +
-                        " si equipaggia con " 
+                return onWho.getName() 
+                        + " si equipaggia con " 
                         + BagMenu.this.getSelected().getX().getName();
             } catch (ArmorAlreadyException e) {
                 return e.toString();
