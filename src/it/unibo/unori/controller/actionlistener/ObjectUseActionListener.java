@@ -21,10 +21,9 @@ import it.unibo.unori.model.items.exceptions.HeroNotDeadException;
 import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
 
 /**
- * This ActionListener should be added to selection buttons in object use menus
- * (in {@link it.unibo.unori.view.layers.InGameMenuLayer} and
- * {@link it.unibo.unori.view.layers.BattleLayer}) for trigger the use/equipment
- * of the specified item on the specified hero.
+ * This ActionListener should be added to selection buttons in object use menus (in
+ * {@link it.unibo.unori.view.layers.InGameMenuLayer} and {@link it.unibo.unori.view.layers.BattleLayer}) for trigger
+ * the use/equipment of the specified item on the specified hero.
  */
 public class ObjectUseActionListener extends AbstractUnoriActionListener {
     private final Item itemUsed;
@@ -34,11 +33,9 @@ public class ObjectUseActionListener extends AbstractUnoriActionListener {
      * Default constructor.
      * 
      * @param item
-     *            the item that the player chose to use/equip by pressing the
-     *            button
+     *            the item that the player chose to use/equip by pressing the button
      * @param target
-     *            the hero that the player chose to use/equip the item on by
-     *            pressing the button
+     *            the hero that the player chose to use/equip the item on by pressing the button
      */
     public ObjectUseActionListener(final Item item, final Hero target) {
         super();
@@ -50,13 +47,13 @@ public class ObjectUseActionListener extends AbstractUnoriActionListener {
     public void actionPerformed(final ActionEvent event) {
         try {
             // If current state is a battle ...
-            if (this.getController().getCurrentStateClass().equals(BattleState.class)
-                    && Potion.class.isInstance(this.itemUsed)) {
+            if (BattleState.class.isInstance(this.getController().getCurrentState())
+                            && Potion.class.isInstance(this.itemUsed)) {
                 final BattleState currentState = (BattleState) this.getController().getCurrentState();
                 currentState.getModel().usePotion(targetHero, (Potion) itemUsed);
                 // TODO dialog
                 // ... else if it is not ...
-            } else if (this.getController().getCurrentStateClass().equals(InGameMenuState.class)) {
+            } else if (InGameMenuState.class.isInstance(this.getController().getCurrentState())) {
                 final InGameMenuState currentState = (InGameMenuState) this.getController().getCurrentState();
                 if (Potion.class.isInstance(this.itemUsed)) {
                     if (currentState.getBag().contains(this.itemUsed)) {
@@ -69,39 +66,35 @@ public class ObjectUseActionListener extends AbstractUnoriActionListener {
                         this.targetHero.unsetArmor(((Armor) this.itemUsed).getArmorClass());
                     } catch (NoArmorException e) {
                         /*
-                         * If this exception is thrown, it's not an error, but
-                         * simply the hero has no Armor of that ArmorPiece
-                         * equipped.
+                         * If this exception is thrown, it's not an error, but simply the hero has no Armor of that
+                         * ArmorPiece equipped.
                          */
                     }
                     try {
                         this.targetHero.setArmor(((Armor) this.itemUsed));
                     } catch (ArmorAlreadyException e) {
                         /*
-                         * If after armor removal it can't already equip the
-                         * armor, there is a problem.
+                         * If after armor removal it can't already equip the armor, there is a problem.
                          */
                         throw new CantUseException(
-                                "Impossibile rimuovere l'armatura precedente e settare quella attuale. Riprovare");
+                                        "Impossibile rimuovere l'armatura precedente e settare quella attuale. Riprovare");
                     }
                 } else if (Weapon.class.isInstance(this.itemUsed)) {
                     try {
                         this.targetHero.unsetWeapon();
                     } catch (NoWeaponException e) {
                         /*
-                         * If this exception is thrown, it's not an error, but
-                         * simply the hero has no Weapon equipped.
+                         * If this exception is thrown, it's not an error, but simply the hero has no Weapon equipped.
                          */
                     }
                     try {
                         this.targetHero.setWeapon((Weapon) this.itemUsed);
                     } catch (WeaponAlreadyException e) {
                         /*
-                         * If after armor removal it can't already equip the
-                         * weapon, there is a problem.
+                         * If after armor removal it can't already equip the weapon, there is a problem.
                          */
                         throw new CantUseException(
-                                "Impossibile rimuovere l'arma precedente e settare quella attuale. Riprovare");
+                                        "Impossibile rimuovere l'arma precedente e settare quella attuale. Riprovare");
                     }
                 } else {
                     throw new CantUseException();
@@ -117,8 +110,7 @@ public class ObjectUseActionListener extends AbstractUnoriActionListener {
     }
 
     /**
-     * Returns the item the button that implements this ActionListener is
-     * associated to.
+     * Returns the item the button that implements this ActionListener is associated to.
      * 
      * @return the item
      */
@@ -127,8 +119,7 @@ public class ObjectUseActionListener extends AbstractUnoriActionListener {
     }
 
     /**
-     * Returns the hero the button that implements this ActionListener is
-     * associated to.
+     * Returns the hero the button that implements this ActionListener is associated to.
      * 
      * @return the hero
      */

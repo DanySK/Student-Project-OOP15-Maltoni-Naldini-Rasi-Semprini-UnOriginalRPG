@@ -89,13 +89,6 @@ public interface Controller {
     GameState getCurrentState();
 
     /**
-     * This method returns the class of the state at the top of the stack, if any.
-     * 
-     * @return the class of state at the top of the stack
-     */
-    Class<?> getCurrentStateClass();
-
-    /**
      * This method starts the game, loading the chosen heroes form graphics and loading the map.
      */
     void startGame();

@@ -174,11 +174,6 @@ public final class SingletonStateMachine {
         }
 
         @Override
-        public Class<?> getCurrentStateClass() {
-            return this.stack.peek().getClass();
-        }
-
-        @Override
         public void openMenu() throws NotValidStateException {
             if (MapState.class.isInstance(this.stack.peek())) {
                 this.stack.pushAndRender(new InGameMenuState());
