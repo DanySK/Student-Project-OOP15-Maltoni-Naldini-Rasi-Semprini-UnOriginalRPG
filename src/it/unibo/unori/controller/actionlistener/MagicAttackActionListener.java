@@ -2,6 +2,7 @@ package it.unibo.unori.controller.actionlistener;
 
 import java.awt.event.ActionEvent;
 
+import it.unibo.unori.controller.exceptions.NotValidStateException;
 import it.unibo.unori.controller.state.BattleState;
 import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 import it.unibo.unori.model.battle.MagicAttackInterface;
@@ -9,6 +10,10 @@ import it.unibo.unori.model.battle.exceptions.NotEnoughMPExcpetion;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.exceptions.MagicNotFoundException;
 
+/**
+ * This should be linked to the button that make the hero launch a magic attack to a specified enemy that turn during
+ * battle.
+ */
 public class MagicAttackActionListener extends AbstractUnoriActionListener {
     private final MagicAttackInterface magic;
     private final Foe enemy;
@@ -38,8 +43,9 @@ public class MagicAttackActionListener extends AbstractUnoriActionListener {
             } catch (MagicNotFoundException e) {
                 this.getController().showError(e.getMessage(), ErrorSeverity.SERIUOS);
             }
+        } else {
+            this.getController().showError(new NotValidStateException().getMessage(), ErrorSeverity.SERIUOS);
         }
-        // TODO not valid state exception
     }
 
 }
