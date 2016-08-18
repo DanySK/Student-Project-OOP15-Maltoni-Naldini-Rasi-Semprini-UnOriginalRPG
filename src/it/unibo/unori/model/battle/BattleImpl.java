@@ -140,10 +140,10 @@ public class BattleImpl implements Battle {
     }
     
     @Override
-    public String runAway() throws CantEscapeException {
+    public DialogueInterface runAway() throws CantEscapeException {
         if (BattleLogics.canEscape(this.getHeroOnTurn().getLevel(), this.getFoeOnTurn().getLevel())) {
             this.over = true;
-            return "Sei riuscito a fuggire!";
+            return new Dialogue("Sei riuscito a fuggire!");
         } else {
             throw new CantEscapeException();
         }
