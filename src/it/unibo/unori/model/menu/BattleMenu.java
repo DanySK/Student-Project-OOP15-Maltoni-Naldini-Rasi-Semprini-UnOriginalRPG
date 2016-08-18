@@ -28,7 +28,7 @@ public class BattleMenu implements BattleMenuInterface {
     
     @Override
     public BagMenuInterface useBag() {
-        return new BagMenu(this.bag);
+        return new BagMenu(this.battle);
     }
     
     @Override
