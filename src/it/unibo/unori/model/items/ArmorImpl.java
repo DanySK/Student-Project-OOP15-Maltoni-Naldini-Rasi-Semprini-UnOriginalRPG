@@ -27,6 +27,7 @@ public class ArmorImpl implements Armor {
     private final Status immunity;
     private static final String STDNAME = "Nudo";
     private static final String STDDESC = "La semplice pelle";
+    private static final int PRIME = 31;
 
 
     /**
@@ -34,6 +35,7 @@ public class ArmorImpl implements Armor {
      */
     public static final ArmorImpl NAKED = new ArmorImpl();
 
+    //Generate the standard statistics for the void constructor of the class
     private Map<Statistics, Integer> generateStdStats() {
         final Map<Statistics, Integer> stats = new HashMap<>();
         stats.put(Statistics.PHYSICDEF, 0);
@@ -42,7 +44,7 @@ public class ArmorImpl implements Armor {
         stats.put(Statistics.THUNDERDEF, 0);
         return stats;
     }
-
+    // check if the input parameters of constructor are for the Naked object implementation.
     private boolean isNakedConstruction(final String name, final ArmorPieces piece, final String desc,
                 final Map<Statistics, Integer> stats, final Status immunity) {
         return STDNAME.equals(name) && piece.equals(ArmorPieces.NONE)
@@ -50,6 +52,9 @@ public class ArmorImpl implements Armor {
                 && STDDESC.equals(desc);
     }
 
+    /* check if the input set contains a value for each kind of defense and
+     * if the value of Enumeration armorPieces is different from None
+     */
     private boolean hasLegitStats(final Set<Statistics> s, final ArmorPieces arm) {
         return s.containsAll(Arrays.asList(Statistics.FIREDEF, Statistics.ICEDEF, 
                 Statistics.THUNDERDEF, Statistics.PHYSICDEF))
@@ -57,7 +62,7 @@ public class ArmorImpl implements Armor {
                 && !arm.equals(ArmorPieces.NONE);
     }
 
-
+    // Private constructor, called only to generate the Naked instance.
     private ArmorImpl() {
         this(STDNAME, ArmorPieces.NONE, STDDESC, new HashMap<>(), 
                    Status.NONE);
@@ -135,12 +140,12 @@ public class ArmorImpl implements Armor {
     public ArmorPieces getArmorClass() {
         return this.piece;
     }
-    
+
     @Override
     public Map<Statistics, Integer> getStats() {
         return new HashMap<>(this.stats);
     }
-    
+
     /**
      * HashCode method implemented using auto generation.
      * 
@@ -148,16 +153,15 @@ public class ArmorImpl implements Armor {
      */
     @Override
     public int hashCode() {
-        final int prime = 31;
         int result = 1;
-        result = prime * result + ((desc == null) ? 0 : desc.hashCode());
-        result = prime * result + ((immunity == null) ? 0 : immunity.hashCode());
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((piece == null) ? 0 : piece.hashCode());
-        result = prime * result + ((stats == null) ? 0 : stats.hashCode());
+        result = PRIME * result + ((desc == null) ? 0 : desc.hashCode());
+        result = PRIME * result + ((immunity == null) ? 0 : immunity.hashCode());
+        result = PRIME * result + ((name == null) ? 0 : name.hashCode());
+        result = PRIME * result + ((piece == null) ? 0 : piece.hashCode());
+        result = PRIME * result + ((stats == null) ? 0 : stats.hashCode());
         return result;
     }
-    
+
     /**
      * Equals method implemented for the serialization.
      * 
@@ -174,10 +178,9 @@ public class ArmorImpl implements Armor {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        
+
         final ArmorImpl other = (ArmorImpl) obj;
         final Map<Statistics, Integer> map = this.stats;
-        
         return this.desc.equals(other.getDescription()) 
                 && this.immunity.equals(other.getImmunity()) 
                 && this.name.equals(other.getName()) 
@@ -187,7 +190,7 @@ public class ArmorImpl implements Armor {
                 && other.getThunderDefense() == map.get(Statistics.THUNDERDEF)
                 && other.getPhysicalRes() == map.get(Statistics.PHYSICDEF);
     }
-    
+
     @Override
     public String toString() {
         return this.name;

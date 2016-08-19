@@ -83,9 +83,8 @@ public class GameMapImpl implements GameMap {
 
 
 
-    /**
-     * Private method to initialize the matrix of cells.
-     */ 
+
+    //Private method to initialize the matrix of cells.
     private void initializeMap() {
         for (int i = 0; i < this.floorMap.length; i++) {
             this.floorMap[i] = Stream.generate(new CellFactory() :: getFreeCell)
@@ -95,19 +94,25 @@ public class GameMapImpl implements GameMap {
         this.initialPosition = new Position(0, 0);
     }
 
-    /**
-     * Method to change automatically the initial position of the map,
-     * if the previous initial cell is blocked(Party can't be on a Blocked cell)
-     */
-    private void fixInitialCellPosition() {
+  /*Private method change the initial position if the previous initial position become Blocked
+   * If return on the initialCell, it means that every cell is blocked, so it throws 
+   * an IllegalStateException
+   */
+    private void fixInitialCellPosition() throws IllegalStateException {
         int initialX = this.initialPosition.getPosX();
         int initialY = this.initialPosition.getPosY();
         while (this.getCell(new Position(initialX, initialY)).getState().equals(CellState.BLOCKED)) {
             if (initialY == this.floorMap[0].length - 1) {
                 initialY = 0;
                 initialX++;
+                if (initialX == this.getMapRows()) {
+                    initialX = 0;
+                }
             } else {
                 initialY++;
+            }
+            if (this.initialPosition.equals(new Position(initialX, initialY))) {
+                throw new IllegalStateException();
             }
         }
         this.initialPosition = new Position(initialX, initialY);
@@ -138,7 +143,6 @@ public class GameMapImpl implements GameMap {
     public void setCell(final Position pos, final Cell cell) throws IllegalArgumentException {
         if (checkPosition(pos.getPosX(), this.floorMap.length) 
                 || checkPosition(pos.getPosY(), this.floorMap[0].length)) {
-            System.out.println("Mi sballo a " + pos.getPosX() + ", " + pos.getPosY());
             throw new IllegalArgumentException();
         }
         this.floorMap[pos.getPosX()][pos.getPosY()] = cell;
