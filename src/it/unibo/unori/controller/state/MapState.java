@@ -16,8 +16,6 @@ import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.FoeImpl;
 import it.unibo.unori.model.character.factory.FoesFindable;
 import it.unibo.unori.model.items.Armor;
-import it.unibo.unori.model.items.Item;
-import it.unibo.unori.model.items.Potion;
 import it.unibo.unori.model.items.Weapon;
 import it.unibo.unori.model.maps.GameMap;
 import it.unibo.unori.model.maps.Party;
@@ -155,7 +153,7 @@ public class MapState extends AbstractGameState {
                     final int ia = this.random.nextInt(this.party.getHeroTeam().getAllHeroes().stream()
                                     .mapToInt(h -> h.getLevel()).max().getAsInt())
                                     - this.random.nextInt(numberOfMonsters);
-                    foes.add(new FoeImpl(ia <= FoeImpl.MAXIA ? ia : 10, "Nemico " + Integer.valueOf(i + 1),
+                    foes.add(new FoeImpl(ia <= FoeImpl.MAXIA ? (ia > 0 ? ia : 1)  : 10, "Nemico " + Integer.valueOf(i + 1),
                                     /* TODO */"", foesTypes.get(i)));
                 });
 

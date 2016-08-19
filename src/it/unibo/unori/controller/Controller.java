@@ -7,7 +7,7 @@ import java.util.List;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
-import it.unibo.unori.controller.exceptions.NotValidStateException;
+import it.unibo.unori.controller.exceptions.UnexpectedStateException;
 import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 import it.unibo.unori.controller.state.GameState;
 import it.unibo.unori.model.character.Foe;
@@ -96,18 +96,18 @@ public interface Controller {
     /**
      * This method opens a new menu on a MapState.
      * 
-     * @throws NotValidStateException
+     * @throws UnexpectedStateException
      *             if the current GameState is not a MapState
      */
-    void openMenu() throws NotValidStateException;
+    void openMenu() throws UnexpectedStateException;
 
     /**
      * This method closes an open InGameMenu.
      * 
-     * @throws NotValidStateException
+     * @throws UnexpectedStateException
      *             if the current GameState is not an InGameMenu.
      */
-    void closeMenu() throws NotValidStateException;
+    void closeMenu() throws UnexpectedStateException;
 
     /**
      * This method returns the stack the controller uses to manage all the game states.
@@ -117,20 +117,36 @@ public interface Controller {
     StateMachineStack getStack();
 
     /**
-     * This method pushes on the stack a new DialogueState, which shows an error or communication to the user.
-     * @param error the explanation of the error to show to the user
-     * @param severity the severity of the error
+     * This method pushes on the stack a new DialogueState, which shows an error to the user. The error severity is set
+     * to {@link it.unibo.unori.controller.state.DialogState.ErrorSeverity#SERIUOS} (the program will be closed after
+     * pressing the OK button).
+     * 
+     * @param error
+     *            the explanation of the error to show to the user
      */
-    void showError(final String error, final ErrorSeverity severity);
+    void showError(final String error);
+
+    /**
+     * This method pushes on the stack a new DialogueState, which shows a communication to the user.The error severity
+     * is set to {@link it.unibo.unori.controller.state.DialogState.ErrorSeverity#MINOR} (only the dialog will be closed
+     * after pressing the OK button).
+     * 
+     * @param communication
+     *            the communication to show to the user
+     */
+    void showCommunication(final String communication);
 
     /**
      * This method starts a new battle with the specified foes.
-     * @param foes the foes encountered
+     * 
+     * @param foes
+     *            the foes encountered
      */
     void startBattle(final List<Foe> foes);
 
     /**
      * This method returns the object that keeps track of all statistics paramethers of the game.
+     * 
      * @return the GameStatistics object for this game
      */
     GameStatistics getStatistics();

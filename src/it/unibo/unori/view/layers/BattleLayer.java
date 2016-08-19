@@ -13,6 +13,7 @@ import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.view.exceptions.SpriteNotFoundException;
 import it.unibo.unori.view.sprites.JobSprite;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -58,6 +59,15 @@ public class BattleLayer extends Layer {
             } catch (final SpriteNotFoundException e) {
                 // TODO
             }
+        }
+    }
+
+    @Override
+    protected void paintComponent(final Graphics g) {
+        super.paintComponent(g);
+
+        for (final BufferedImage hero : heroSprites) {
+            // g.drawImage(hero, x, y, observer)
         }
     }
 

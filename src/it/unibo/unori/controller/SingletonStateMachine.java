@@ -9,7 +9,7 @@ import java.util.Map;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
-import it.unibo.unori.controller.exceptions.NotValidStateException;
+import it.unibo.unori.controller.exceptions.UnexpectedStateException;
 import it.unibo.unori.controller.json.JsonFileManager;
 import it.unibo.unori.controller.json.WorldLoader;
 import it.unibo.unori.controller.state.BattleState;
@@ -121,7 +121,7 @@ public final class SingletonStateMachine {
                     try {
                         SingletonParty.getParty().getHeroTeam().addHero(new HeroImpl(entry.getKey(), entry.getValue()));
                     } catch (MaxHeroException | IllegalArgumentException e) {
-                        this.showError(e.getMessage(), ErrorSeverity.SERIUOS);
+                        this.showDialog(e.getMessage(), ErrorSeverity.SERIUOS);
                     }
                 });
 
@@ -129,20 +129,21 @@ public final class SingletonStateMachine {
                     final WorldLoader loader = new WorldLoader();
                     // final WorldBuilder builder = new WorldBuilder();
                     SingletonParty.getParty().setCurrentMap(loader.loadWorld()/* builder.buildWorld() */);
-                    /*final Map<CardinalPoints, String> framesMap = new HashMap<>();
-                    for (final CardinalPoints cp : CardinalPoints.values()) {
-                        framesMap.put(cp,
-                                        SingletonParty.getParty().getHeroTeam().getAllHeroes().get(0).getBattleFrame());
-                    }
-                    SingletonParty.getParty().setFrames(framesMap);*/
+                    /*
+                     * final Map<CardinalPoints, String> framesMap = new HashMap<>(); for (final CardinalPoints cp :
+                     * CardinalPoints.values()) { framesMap.put(cp,
+                     * SingletonParty.getParty().getHeroTeam().getAllHeroes().get(0).getBattleFrame()); }
+                     */
+                    SingletonParty.getParty().setFrame(
+                                    SingletonParty.getParty().getHeroTeam().getAllHeroes().get(0).getBattleFrame());
                     this.stack.pushAndRender(new MapState(SingletonParty.getParty().getCurrentGameMap()));
                     this.startTimer();
                 } catch (IOException e) {
-                    this.showError(e.getMessage(), ErrorSeverity.SERIUOS);
+                    this.showDialog(e.getMessage(), ErrorSeverity.SERIUOS);
                 }
 
             } else {
-                this.showError(new NotValidStateException().getMessage(), ErrorSeverity.SERIUOS);
+                this.showDialog(new UnexpectedStateException().getMessage(), ErrorSeverity.SERIUOS);
             }
 
         }
@@ -174,21 +175,21 @@ public final class SingletonStateMachine {
         }
 
         @Override
-        public void openMenu() throws NotValidStateException {
+        public void openMenu() throws UnexpectedStateException {
             if (MapState.class.isInstance(this.stack.peek())) {
                 this.stack.pushAndRender(new InGameMenuState());
             } else {
-                throw new NotValidStateException();
+                throw new UnexpectedStateException();
             }
         }
 
         @Override
-        public void closeMenu() throws NotValidStateException {
-            if (InGameMenuState.class.isInstance(this.stack.peek())) {
+        public void closeMenu() throws UnexpectedStateException {
+            if (!this.stack.isEmpty() && InGameMenuState.class.isInstance(this.stack.peek())) {
                 this.stack.pop();
-                this.stack.render();
+                // this.stack.render(); //TODO here I should NOT render
             } else {
-                throw new NotValidStateException();
+                throw new UnexpectedStateException();
             }
         }
 
@@ -201,13 +202,23 @@ public final class SingletonStateMachine {
         public StateMachineStack getStack() {
             return this.stack;
         }
+
         @Override
         public GameStatistics getStatistics() {
             return this.stats;
         }
 
         @Override
-        public void showError(final String error, final ErrorSeverity severity) {
+        public void showError(final String error) {
+            this.showDialog(error, ErrorSeverity.SERIUOS);
+        }
+
+        @Override
+        public void showCommunication(final String communication) {
+            this.showDialog(communication, ErrorSeverity.MINOR);
+        }
+
+        private void showDialog(final String error, final ErrorSeverity severity) {
             this.stack.pushAndRender(new DialogState(error, severity));
         }
 

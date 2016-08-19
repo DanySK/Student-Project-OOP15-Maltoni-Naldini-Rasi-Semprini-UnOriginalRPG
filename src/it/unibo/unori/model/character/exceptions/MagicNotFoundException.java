@@ -9,7 +9,7 @@ public class MagicNotFoundException extends Exception {
      * 
      */
     private static final long serialVersionUID = 3072624152204680710L;
-    
+
     @Override
     public String toString() {
         return "Non possiedi questa magia!";

@@ -3,7 +3,6 @@ package it.unibo.unori.controller.actionlistener;
 import java.awt.event.ActionEvent;
 
 import it.unibo.unori.controller.exceptions.UnknownButtonException;
-import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 
 /**
  * ActionListener for the Buttons in the MainMenuLayer of a MainMenuState.
@@ -40,7 +39,7 @@ public class MainMenuActionListener extends AbstractUnoriActionListener {
                 throw new UnknownButtonException(command);
             }
         } catch (Exception e) {
-            this.getController().showError(e.getMessage(), ErrorSeverity.MINOR);
+            this.getController().showCommunication(e.getMessage());
         }
     }
 

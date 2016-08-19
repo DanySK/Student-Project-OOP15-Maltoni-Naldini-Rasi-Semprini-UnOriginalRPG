@@ -2,8 +2,7 @@ package it.unibo.unori.controller.action;
 
 import java.awt.event.ActionEvent;
 
-import it.unibo.unori.controller.exceptions.NotValidStateException;
-import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
+import it.unibo.unori.controller.exceptions.UnexpectedStateException;
 
 /**
  * This action should be linked to the button dedicated to menu opening (like ESC). It closes an opened InGameMenu.
@@ -18,8 +17,8 @@ public class CloseMenuAction extends AbstractUnoriAction {
     public void actionPerformed(final ActionEvent arg0) {
         try {
             this.getController().closeMenu();
-        } catch (NotValidStateException e) {
-            this.getController().showError(e.getMessage(), ErrorSeverity.SERIUOS);
+        } catch (UnexpectedStateException e) {
+            this.getController().showError(e.getMessage());
         }
     }
 
