@@ -35,6 +35,7 @@ public class ArmorImpl implements Armor {
      */
     public static final ArmorImpl NAKED = new ArmorImpl();
 
+    //Generate the standard statistics for the void constructor of the class
     private Map<Statistics, Integer> generateStdStats() {
         final Map<Statistics, Integer> stats = new HashMap<>();
         stats.put(Statistics.PHYSICDEF, 0);
@@ -43,7 +44,7 @@ public class ArmorImpl implements Armor {
         stats.put(Statistics.THUNDERDEF, 0);
         return stats;
     }
-
+    // check if the input parameters of constructor are for the Naked object implementation.
     private boolean isNakedConstruction(final String name, final ArmorPieces piece, final String desc,
                 final Map<Statistics, Integer> stats, final Status immunity) {
         return STDNAME.equals(name) && piece.equals(ArmorPieces.NONE)
@@ -51,6 +52,9 @@ public class ArmorImpl implements Armor {
                 && STDDESC.equals(desc);
     }
 
+    /* check if the input set contains a value for each kind of defense and
+     * if the value of Enumeration armorPieces is different from None
+     */
     private boolean hasLegitStats(final Set<Statistics> s, final ArmorPieces arm) {
         return s.containsAll(Arrays.asList(Statistics.FIREDEF, Statistics.ICEDEF, 
                 Statistics.THUNDERDEF, Statistics.PHYSICDEF))
@@ -58,7 +62,7 @@ public class ArmorImpl implements Armor {
                 && !arm.equals(ArmorPieces.NONE);
     }
 
-
+    // Private constructor, called only to generate the Naked instance.
     private ArmorImpl() {
         this(STDNAME, ArmorPieces.NONE, STDDESC, new HashMap<>(), 
                    Status.NONE);
