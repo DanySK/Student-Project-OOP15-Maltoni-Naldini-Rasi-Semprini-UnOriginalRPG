@@ -64,8 +64,10 @@ public final class MagicLogics {
      * @param powerMagic the most powerful statistic of the MagicAttack.
      * @return a weakness factor.
      */
-    private static double weakOrNot(final Character ch, final MagicAttackInterface magic) {
-        if (isWeaknessMedium(magic.getFireAtk(), magic.getIceAtk(), magic.getThunderAtk())) {
+    private static double weakOrNot(final Character ch,
+            final MagicAttackInterface magic) {
+        if (isWeaknessMedium(magic.getFireAtk(),
+                magic.getIceAtk(), magic.getThunderAtk())) {
             return WEAKNESSMEDIUM;
         }
         
@@ -76,16 +78,19 @@ public final class MagicLogics {
         return weaknessGeneral(powerOpponent.getX(), powerMagic);
     }
     
-    private static boolean isWeaknessMedium(final int fire, final int ice, final int thun) {
+    private static boolean isWeaknessMedium(final int fire,
+            final int ice, final int thun) {
         return fire == ice && fire == thun;
     }
     
     /**
-     * Private method that, given a Map of Statistics and Integer, returns the best Stat.
+     * Private method that, given a Map of Statistics and Integer,
+     *  returns the best Stat.
      * @param map the Map to check.
      * @return a Pair of Statistic and its relative value.
      */
-    private static Pair<Statistics, Integer> getBestStat(final Map<Statistics, Integer> map) {
+    private static Pair<Statistics, Integer> getBestStat(
+            final Map<Statistics, Integer> map) {
         Pair<Statistics, Integer> power = new Pair<>(null, 0);
         for (final Entry<Statistics, Integer> s : map.entrySet()) {
             final int temp = map.get(s.getKey());
@@ -98,10 +103,11 @@ public final class MagicLogics {
     
     /**
      * This private method generates a Map for a MagicAttack, a Weapon or an Armor.
-     * Explain: given a Character, the method takes the Stats of interest to compare with
-     * the stats of a MagicAttack, a Weapon or an Armor.
-     * @param atkOrDef true if we are using it in context of Weapon and MagicAttack (in that case
-     * we need Attack and not Defense), false in case of Armor (in this case we need Defense) .
+     * Explanation: given a Character, the method takes the Stats of interest 
+     * to compare with the stats of a MagicAttack, a Weapon or an Armor.
+     * @param atkOrDef true if we are using it in context of Weapon and MagicAttack 
+     * (in that case we need Attack and not Defense),
+     *  false in case of Armor (in this case we need Defense) .
      * @param opp the Character from which extrapolate the Map.
      * @return the Map itself.
      */
@@ -126,7 +132,8 @@ public final class MagicLogics {
      * @param best best Stat of mine.
      * @return a weakness factor.
      */
-    private static double weaknessGeneral(final Statistics opponent, final Statistics best) {
+    private static double weaknessGeneral(final Statistics opponent,
+            final Statistics best) {
         double weakness = 1;
         Statistics opp;
         if (opponent.equals(Statistics.THUNDERDEF)) {
@@ -184,7 +191,8 @@ public final class MagicLogics {
     }
 
     /**
-     * Method that calculates the value to add to the physic attack of a Weapon, calculating weakness.
+     * Method that calculates the value to add to the physic attack of a Weapon,
+     *  calculating weakness.
      * @param w the Weapon interested.
      * @param opp the opponent.
      * @return the value of a weapon attack.
@@ -203,12 +211,14 @@ public final class MagicLogics {
     }
     
     /**
-     * Method that calculates the value to add to the physic defense of an Armor, calculating weakness.
+     * Method that calculates the value to add to the physic defense of an Armor,
+     *  calculating weakness.
      * @param ar the Armor interested.
      * @param opp the opponent.
      * @return the value of a armor resistance.
      */
-    public static int toAddToArmor(final Map<ArmorPieces, Armor> ar, final Character opp) {
+    public static int toAddToArmor(final Map<ArmorPieces, Armor> ar,
+            final Character opp) {
         Double weakness;
         final Map<Statistics, Integer> m = new HashMap<>();
         int fireDef = 0;
@@ -237,13 +247,15 @@ public final class MagicLogics {
     }
     
     /**
-     * This method calculates the whole damage to inflict in Battle, merging Attack and Defense.
+     * This method calculates the whole damage to inflict in Battle,
+     *  merging Attack and Defense.
      * @param att the Character who attacks.
      * @param opp the Character who suffers.
      * @param w the Weapon of the Character who attacks.
      * @return the amount of damage to inflict.
      */
-    public static int mergeAtkAndDef(final Character att, final Character opp, final Weapon w) {
+    public static int mergeAtkAndDef(final Character att,
+            final Character opp, final Weapon w) {
         final int atkTot = att.getAttack() + toAddToWeapon(w, att);
         if (opp instanceof Foe) {
             Double weakness;
@@ -262,7 +274,8 @@ public final class MagicLogics {
         } else if (opp instanceof Hero) {
             
             return BattleLogics.getStandardDamage(att.getLevel(), atkTot 
-                    - (toAddToArmor(((Hero) opp).getWholeArmor(), att) + opp.getDefense() / 3));
+                    - (toAddToArmor(((Hero) opp).getWholeArmor(), att)
+                            + opp.getDefense() / 3));
         } else {
             throw new IllegalStateException();
         }
