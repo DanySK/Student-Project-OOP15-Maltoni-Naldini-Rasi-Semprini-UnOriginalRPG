@@ -121,7 +121,7 @@ public final class SingletonStateMachine {
                     try {
                         SingletonParty.getParty().getHeroTeam().addHero(new HeroImpl(entry.getKey(), entry.getValue()));
                     } catch (MaxHeroException | IllegalArgumentException e) {
-                        this.showError(e.getMessage(), ErrorSeverity.SERIUOS);
+                        this.showDialog(e.getMessage(), ErrorSeverity.SERIUOS);
                     }
                 });
 
@@ -129,20 +129,21 @@ public final class SingletonStateMachine {
                     final WorldLoader loader = new WorldLoader();
                     // final WorldBuilder builder = new WorldBuilder();
                     SingletonParty.getParty().setCurrentMap(loader.loadWorld()/* builder.buildWorld() */);
-                    /*final Map<CardinalPoints, String> framesMap = new HashMap<>();
-                    for (final CardinalPoints cp : CardinalPoints.values()) {
-                        framesMap.put(cp,
-                                        SingletonParty.getParty().getHeroTeam().getAllHeroes().get(0).getBattleFrame());
-                    }*/
-                    SingletonParty.getParty().setFrame(SingletonParty.getParty().getHeroTeam().getAllHeroes().get(0).getBattleFrame());
+                    /*
+                     * final Map<CardinalPoints, String> framesMap = new HashMap<>(); for (final CardinalPoints cp :
+                     * CardinalPoints.values()) { framesMap.put(cp,
+                     * SingletonParty.getParty().getHeroTeam().getAllHeroes().get(0).getBattleFrame()); }
+                     */
+                    SingletonParty.getParty().setFrame(
+                                    SingletonParty.getParty().getHeroTeam().getAllHeroes().get(0).getBattleFrame());
                     this.stack.pushAndRender(new MapState(SingletonParty.getParty().getCurrentGameMap()));
                     this.startTimer();
                 } catch (IOException e) {
-                    this.showError(e.getMessage(), ErrorSeverity.SERIUOS);
+                    this.showDialog(e.getMessage(), ErrorSeverity.SERIUOS);
                 }
 
             } else {
-                this.showError(new UnexpectedStateException().getMessage(), ErrorSeverity.SERIUOS);
+                this.showDialog(new UnexpectedStateException().getMessage(), ErrorSeverity.SERIUOS);
             }
 
         }
@@ -201,13 +202,23 @@ public final class SingletonStateMachine {
         public StateMachineStack getStack() {
             return this.stack;
         }
+
         @Override
         public GameStatistics getStatistics() {
             return this.stats;
         }
 
         @Override
-        public void showError(final String error, final ErrorSeverity severity) {
+        public void showError(final String error) {
+            this.showDialog(error, ErrorSeverity.SERIUOS);
+        }
+
+        @Override
+        public void showCommunication(final String communication) {
+            this.showDialog(communication, ErrorSeverity.MINOR);
+        }
+
+        private void showDialog(final String error, final ErrorSeverity severity) {
             this.stack.pushAndRender(new DialogState(error, severity));
         }
 

@@ -19,10 +19,10 @@ public class AttackActionListener extends AbstractUnoriActionListener {
             try {
                 currentState.getModel().attack(true);
             } catch (NoWeaponException e) {
-                this.getController().showError(e.getMessage(), ErrorSeverity.MINOR);
+                this.getController().showCommunication(e.getMessage());
             }
         } else {
-            this.getController().showError(new UnexpectedStateException().getMessage(), ErrorSeverity.SERIUOS);
+            this.getController().showError(new UnexpectedStateException().getMessage());
         }
     }
 

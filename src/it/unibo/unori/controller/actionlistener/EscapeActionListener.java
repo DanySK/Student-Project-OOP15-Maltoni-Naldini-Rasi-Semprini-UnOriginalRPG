@@ -18,10 +18,10 @@ public class EscapeActionListener extends AbstractUnoriActionListener {
             try {
                 currentState.getModel().runAway();
             } catch (CantEscapeException e) {
-                this.getController().showError(new UnexpectedStateException().getMessage(), ErrorSeverity.MINOR);
+                this.getController().showCommunication(new UnexpectedStateException().getMessage());
             }
         } else {
-            this.getController().showError(new UnexpectedStateException().getMessage(), ErrorSeverity.SERIUOS);
+            this.getController().showError(new UnexpectedStateException().getMessage());
         }
     }
 

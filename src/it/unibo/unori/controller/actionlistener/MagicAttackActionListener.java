@@ -39,12 +39,12 @@ public class MagicAttackActionListener extends AbstractUnoriActionListener {
             try {
                 currentState.getModel().useMagicAttack(magic, enemy, true);
             } catch (NotEnoughMPExcpetion e) {
-                this.getController().showError(e.getMessage(), ErrorSeverity.MINOR);
+                this.getController().showCommunication(e.getMessage());
             } catch (MagicNotFoundException e) {
-                this.getController().showError(e.getMessage(), ErrorSeverity.SERIUOS);
+                this.getController().showError(e.getMessage());
             }
         } else {
-            this.getController().showError(new UnexpectedStateException().getMessage(), ErrorSeverity.SERIUOS);
+            this.getController().showError(new UnexpectedStateException().getMessage());
         }
     }
 

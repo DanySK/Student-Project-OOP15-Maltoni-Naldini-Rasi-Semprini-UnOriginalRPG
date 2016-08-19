@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.util.Optional;
 
 import it.unibo.unori.controller.exceptions.UnexpectedStateException;
-import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 import it.unibo.unori.controller.state.MapState;
 import it.unibo.unori.model.menu.DialogueInterface;
 import it.unibo.unori.view.exceptions.SpriteNotFoundException;
@@ -57,11 +56,11 @@ public class InteractAction extends AbstractUnoriAction {
                                     new Point(currentState.getCurrentPosition().getPosX(),
                                                     currentState.getCurrentPosition().getPosY()));
                 } catch (SpriteNotFoundException e) {
-                    this.getController().showError(e.getMessage(), ErrorSeverity.SERIUOS);
+                    this.getController().showError(e.getMessage());
                 }
             }
         } else {
-            this.getController().showError(new UnexpectedStateException().getMessage(), ErrorSeverity.SERIUOS);
+            this.getController().showError(new UnexpectedStateException().getMessage());
         }
 
     }

@@ -3,7 +3,6 @@ package it.unibo.unori.controller.action;
 import java.awt.event.ActionEvent;
 
 import it.unibo.unori.controller.exceptions.UnexpectedStateException;
-import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 
 /**
  * Action that should be linked to menu dedicated buttons as for example ESC.
@@ -20,7 +19,7 @@ public class OpenMenuAction extends AbstractUnoriAction {
         try {
             this.getController().openMenu();
         } catch (UnexpectedStateException e) {
-            this.getController().showError(e.getMessage(), ErrorSeverity.SERIUOS);
+            this.getController().showError(e.getMessage());
         }
     }
 
