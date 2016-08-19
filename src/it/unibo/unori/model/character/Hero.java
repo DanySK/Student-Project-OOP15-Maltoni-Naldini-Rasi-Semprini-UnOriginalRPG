@@ -94,7 +94,6 @@ public interface Hero extends Character {
      * Method to increase hero's statistics when his level grows.
      */
     void levelUp();
-    
 
     /**
      * Method that sets the Hero as "defended" for a turn in Battle.
@@ -112,13 +111,13 @@ public interface Hero extends Character {
      * turn if the Hero was previously defended.
      */
     void setUndefended();
-    
+
     /**
      * Method that gets the whole equipment of Armor of the Hero.
      * @return the whole Armor.
      */
     Map<ArmorPieces, Armor> getWholeArmor();
-    
+
     /**
      * Setter method for the value tot Exp.
      * @param toFill the value to be associated with the total amount of exp.
