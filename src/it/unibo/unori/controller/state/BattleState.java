@@ -1,20 +1,23 @@
 package it.unibo.unori.controller.state;
 
 import java.util.Optional;
+import java.util.Random;
 
 import it.unibo.unori.controller.SingletonStateMachine;
 import it.unibo.unori.model.battle.Battle;
 import it.unibo.unori.model.battle.BattleImpl;
-import it.unibo.unori.model.battle.MagicAttack;
 import it.unibo.unori.model.battle.MagicAttackInterface;
 import it.unibo.unori.model.battle.exceptions.BarNotFullException;
 import it.unibo.unori.model.battle.exceptions.CantEscapeException;
 import it.unibo.unori.model.battle.exceptions.NotDefendableException;
 import it.unibo.unori.model.battle.exceptions.NotEnoughMPExcpetion;
+import it.unibo.unori.model.battle.utility.BattleLogics;
 import it.unibo.unori.model.character.Foe;
+import it.unibo.unori.model.character.FoeImpl;
 import it.unibo.unori.model.character.FoeSquad;
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.HeroTeam;
+import it.unibo.unori.model.character.Statistics;
 import it.unibo.unori.model.character.exceptions.MagicNotFoundException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.items.Bag;
@@ -37,9 +40,11 @@ public class BattleState extends AbstractGameState {
      * The maximum number of enemies that could take part of a battle.
      */
     public static final int MAX_NUMBER_OF_FOES = 4;
+    private static final double LOW_LIFE_PERCENTAGE = 15;
     private final FightInterface fightModel;
     private Optional<DialogueInterface> currentDialogue;
     private boolean heroTurn;
+    private int currentTurn; // Automatically initialized by Java to 0
 
     /**
      * Default constructor. It instantiates a new battle with given foes.
@@ -55,7 +60,15 @@ public class BattleState extends AbstractGameState {
         super(new BattleLayer(party, foes, bag));
         final Battle battle = new BattleImpl(party, foes, bag);
         this.fightModel = new FightMenu(battle);
-        this.heroTurn = true;
+        this.heroTurn = BattleLogics.whosFirst(battle.getHeroOnTurn().getSpeed(), battle.getFoeOnTurn().getSpeed());
+        this.currentDialogue = Optional.of(battle.getPresentation());
+        this.scrollMessage();
+        this.currentTurn++;
+        if (this.heroTurn) {
+            this.newTurn();
+        } else {
+            this.endTurn();
+        }
     }
 
     /**
@@ -78,6 +91,7 @@ public class BattleState extends AbstractGameState {
             this.currentDialogue = Optional.of(this.fightModel.attack(true));
             this.endHeroTurn();
         } catch (NoWeaponException e) {
+            // Also fists are a weapon, so no weapon means something wrong happened
             SingletonStateMachine.getController().showError(e.getMessage());
         }
     }
@@ -105,8 +119,7 @@ public class BattleState extends AbstractGameState {
      */
     public void magicAttack(final MagicAttackInterface magic, final Foe enemy) {
         try {
-            this.currentDialogue = Optional.of(this.fightModel.magic((MagicAttack) magic, enemy, true)); // TODO remove
-                                                                                                         // cast
+            this.currentDialogue = Optional.of(this.fightModel.magic(magic, enemy, true));
             this.endHeroTurn();
         } catch (NotEnoughMPExcpetion | MagicNotFoundException e) {
             this.showMessage(e.getMessage());
@@ -123,8 +136,10 @@ public class BattleState extends AbstractGameState {
      */
     public void usePotion(final Hero targetHero, final Potion itemUsed) {
         try {
-            this.fightModel.getBag().usePotion(targetHero, itemUsed);
-            this.fightModel.getBag().removeItem(itemUsed);
+            this.fightModel.getBattle().getItemBag().usePotion(targetHero, itemUsed);
+            this.fightModel.getBattle().getItemBag().removeItem(itemUsed);
+            this.currentDialogue = Optional
+                            .of(new Dialogue("Used " + itemUsed.getName() + " on " + targetHero.getName()));
             this.endHeroTurn();
         } catch (ItemNotFoundException | HeroDeadException | HeroNotDeadException e) {
             this.showMessage(e.getMessage());
@@ -151,7 +166,7 @@ public class BattleState extends AbstractGameState {
      */
     public void runAway() {
         try {
-            this.currentDialogue = Optional.of(this.fightModel.runAway());
+            this.currentDialogue = Optional.of(this.fightModel.getBattle().runAway());
             this.endHeroTurn();
         } catch (CantEscapeException e) {
             this.showMessage(e.getMessage());
@@ -159,9 +174,9 @@ public class BattleState extends AbstractGameState {
     }
 
     /**
-     * This method scrolls the dialog if open and closes it if ended.
+     * This method scrolls the dialog if open and closes it if ended. It is set final because it is used in constructor.
      */
-    public void scrollDialog() {
+    public final void scrollMessage() {
         if (this.currentDialogue.isPresent()) {
             if (this.currentDialogue.get().isOver()) {
                 this.currentDialogue = Optional.empty();
@@ -169,40 +184,93 @@ public class BattleState extends AbstractGameState {
                 try {
                     ((BattleLayer) this.getLayer()).showDialogue(this.currentDialogue.get().showNext());
                 } catch (IndexOutOfBoundsException e) {
-                    this.currentDialogue = Optional.empty();
+                    this.currentDialogue = Optional.empty(); // TODO check
                 }
             }
 
             if (!this.currentDialogue.isPresent()) {
-                ((BattleLayer) this.getLayer()).hideDialogue();
-                if (this.heroTurn) {
-                    this.startHeroTurn();
+                if (this.fightModel.getBattle().isOver()) {
+                    this.currentDialogue = Optional.of(new Dialogue(this.fightModel.getBattle().getOutCome()));
                 } else {
-                    this.startFoeTurn();
+                    ((BattleLayer) this.getLayer()).hideDialogue();
+                    if (this.heroTurn) {
+                        this.newTurn();
+                    } else {
+                        this.endTurn();
+                    }
                 }
             }
-
         }
     }
 
-    private void startFoeTurn() {
+    /**
+     * This method actually ends the user actions until the game has done the turn. This is called after the current
+     * dialog is ended.
+     */
+    private void endTurn() {
         final BattleLayer currentLayer = (BattleLayer) this.getLayer();
         currentLayer.updateView();
+        this.doTheTurn();
     }
 
-    private void startHeroTurn() {
+    private void doTheTurn() {
+        this.currentTurn++;
+        final Foe foe = this.fightModel.getBattle().getFoeOnTurn();
+        final Hero hero = this.fightModel.getBattle().getHeroOnTurn();
+        if (foe.getRemainingHP() / foe.getTotalHP() * 100 < LOW_LIFE_PERCENTAGE
+                        && BattleLogics.canFoeRestore(foe, currentTurn)) {
+            this.currentDialogue = Optional.of(this.fightModel.getBattle().foeUsesRestore(Statistics.TOTALHP));
+        } else if (!this.isLowLife(hero.getTotalHP(), hero.getRemainingHP()) && foe.getIA() > FoeImpl.MAXIA / 2
+                        && !foe.getMagics().isEmpty()) {
+            try {
+                this.currentDialogue = Optional.of(this.fightModel
+                                .magic(foe.getMagics().get(new Random().nextInt(foe.getMagics().size())), null, false));
+            } catch (NotEnoughMPExcpetion | MagicNotFoundException e) {
+                this.fightModel.getBattle().foeUsesRestore(Statistics.TOTALMP);
+            }
+        } else {
+            try {
+                this.currentDialogue = Optional.of(this.fightModel.attack(false));
+            } catch (NoWeaponException e) {
+                SingletonStateMachine.getController().showError(e.getMessage());
+            }
+        }
+        this.heroTurn = true;
+        this.scrollMessage();
+    }
+
+    /**
+     * This method starts a new turn, enabling showing buttons to the player. Used also to re-show the buttons after a
+     * dialog for a not allowed action.
+     */
+    private void newTurn() {
+        this.currentTurn++;
         final BattleLayer currentLayer = (BattleLayer) this.getLayer();
         currentLayer.updateView();
         currentLayer.newTurn();
     }
 
+    /**
+     * This method sets the selection of what to do is ended. After the dialog ends, the hero and the foe do this turn's
+     * moves.
+     */
     private void endHeroTurn() {
-        this.scrollDialog();
         this.heroTurn = false;
+        this.scrollMessage();
     }
 
+    /**
+     * This method shows a String message as a battle dialog onto the screen.
+     * 
+     * @param message
+     *            the text to show to the user
+     */
     private void showMessage(final String message) {
         this.currentDialogue = Optional.of(new Dialogue(message));
-        this.scrollDialog();
+        this.scrollMessage();
+    }
+
+    private boolean isLowLife(final int totalHP, final int currentHP) {
+        return currentHP / totalHP * 100 < LOW_LIFE_PERCENTAGE;
     }
 }

@@ -296,7 +296,7 @@ public final class JobsSetup {
      *         default provided file path for the given Job
      */
     public String getBattleSpritePath(final String job) {
-        final String spritePath;
+        String spritePath = null;
 
         switch (job) {
             case WARRIOR:
@@ -318,7 +318,6 @@ public final class JobsSetup {
                 spritePath = "res/sprites/clown.png";
                 break;
             default:
-                spritePath = null;
                 break;
         }
 

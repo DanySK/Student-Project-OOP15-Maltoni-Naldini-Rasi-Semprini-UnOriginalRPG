@@ -12,6 +12,7 @@ import it.unibo.unori.controller.SingletonStateMachine;
 import it.unibo.unori.controller.action.InteractAction;
 import it.unibo.unori.controller.action.MoveAction;
 import it.unibo.unori.controller.action.OpenMenuAction;
+import it.unibo.unori.controller.json.FoeSetup;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.FoeImpl;
 import it.unibo.unori.model.character.factory.FoesFindable;
@@ -153,8 +154,8 @@ public class MapState extends AbstractGameState {
                     final int ia = this.random.nextInt(this.party.getHeroTeam().getAllHeroes().stream()
                                     .mapToInt(h -> h.getLevel()).max().getAsInt())
                                     - this.random.nextInt(numberOfMonsters);
-                    foes.add(new FoeImpl(ia <= FoeImpl.MAXIA ? (ia > 0 ? ia : 1)  : 10, "Nemico " + Integer.valueOf(i + 1),
-                                    /* TODO */"", foesTypes.get(i)));
+                    foes.add(new FoeImpl(ia <= FoeImpl.MAXIA ? (ia > 0 ? ia : 1)  : 10, foesTypes.get(i).toString() + " " + Integer.valueOf(i + 1),
+                                    FoeSetup.getSpritePath(foesTypes.get(i), ia), foesTypes.get(i)));
                 });
 
                 SingletonStateMachine.getController().startBattle(foes);
