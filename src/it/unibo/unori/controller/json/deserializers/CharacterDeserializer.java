@@ -34,7 +34,7 @@ public class CharacterDeserializer implements JsonDeserializer<Character> {
     @Override
     public Character deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
             throws JsonParseException {
-        final Character returnChar;
+        Character returnChar;
 
         if (typeOfT.getClass().isAssignableFrom(Hero.class)) { // TODO check
             returnChar = context.deserialize(json, Hero.class);

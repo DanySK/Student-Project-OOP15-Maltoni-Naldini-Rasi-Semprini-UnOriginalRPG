@@ -42,7 +42,7 @@ public class MapSetup {
         final GameMap dungeonEntrance = gmf.createDungeonEntrance();
 
         String path;
-        
+
         System.out.println("Village: " + village./*getMapLength*/getMapColumns() + "x" + village./*getMapWidth*/getMapRows());
         System.out.println("Church: " + church./*getMapLength*/getMapColumns() + "x" + church./*getMapWidth*/getMapRows());
         System.out.println("House: " + house./*getMapLength*/getMapColumns() + "x" + house./*getMapWidth*/getMapRows());

@@ -1,9 +1,9 @@
 package it.unibo.unori.controller.json;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import it.unibo.unori.model.battle.MagicAttackInterface;
 import it.unibo.unori.model.character.Statistics;
@@ -24,9 +24,9 @@ public class FoeSetup {
     public static final String DEFAULT = "res/foes/defaultFoe.json";
     private final JsonFileManager fileManager;
     private final Map<String, Map<Statistics, Integer>> statsMap;
-    // private Map<String, Status> immunityMap;
-    private Map<String, Weapon> weaponMap;
-    private Map<String, /* List< */MagicAttackInterface>/* > */ magicsMap;
+    // private final Map<String, Status> immunityMap;
+    private final Map<String, Weapon> weaponMap;
+    private final Map<String, /* List< */MagicAttackInterface>/* > */ magicsMap;
 
     /**
      * Default constructor.
@@ -43,28 +43,28 @@ public class FoeSetup {
         final JsonFileManager jfm = new JsonFileManager();
 
         final JsonFoeParameters jsonFoe = new JsonFoeParameters(FoesFactory.getBasicStats(),
-                Status.NONE /* TODO check */, FoesFactory.getBasicWeap(), FoesFactory.getBasicMag());
+                        Status.NONE /* TODO check */, FoesFactory.getBasicWeap(), FoesFactory.getBasicMag());
         jfm.saveFoe(jsonFoe, DEFAULT);
 
     }
 
     public static String getPath(final FoesFindable j) {
         if (j.equals(FoesFindable.FOLLETTO)) {
-            return /*FOLLETTO*/DEFAULT;
+            return /* FOLLETTO */DEFAULT;
         } else if (j.equals(FoesFindable.GNOMO_DA_GIARDINO)) {
-            return /*GNOMO_DA_GIARDINO*/DEFAULT;
+            return /* GNOMO_DA_GIARDINO */DEFAULT;
         } else if (j.equals(FoesFindable.DEMONE)) {
-            return /*DEMONE*/DEFAULT;
+            return /* DEMONE */DEFAULT;
         } else if (j.equals(FoesFindable.DRAGO)) {
-            return /*DRAGO*/DEFAULT;
+            return /* DRAGO */DEFAULT;
         } else if (j.equals(FoesFindable.SPIRITO)) {
-            return /*SPIRITO*/DEFAULT;
+            return /* SPIRITO */DEFAULT;
         } else if (j.equals(FoesFindable.BAMBINO)) {
-            return /*BAMBINO*/DEFAULT;
+            return /* BAMBINO */DEFAULT;
         } else if (j.equals(FoesFindable.STREGONE)) {
-            return /*STREGONE*/DEFAULT;
+            return /* STREGONE */DEFAULT;
         } else if (j.equals(FoesFindable.EROE_CADUTO)) {
-            return /*EROE_CADUTO*/DEFAULT;
+            return /* EROE_CADUTO */DEFAULT;
         } else {
             return null;
         }
@@ -101,6 +101,61 @@ public class FoeSetup {
             }
         }
         return this.magicsMap.get(path)/* .get(0) */;
+    }
+
+    public static String getSpritePath(final FoesFindable ff, final int ia) throws IllegalArgumentException {
+        Optional<String> jobPath;
+
+        if (ff.equals(FoesFindable.BAMBINO)) {
+            if (ia <= 3) {
+                jobPath = Optional.of("res/sprites/foes/bambino2.png");
+            } else if (ia > 3 && ia <= 5) {
+                jobPath = Optional.of("res/sprites/foes/bambino.png");
+            } else if (ia > 5 && ia <= 9) {
+                jobPath = Optional.of("res/sprites/foes/bambino3.png");
+            } else {
+                jobPath = Optional.of("res/sprites/foes/bambino4.png");
+            }
+        } else if (ff.equals(FoesFindable.DEMONE)) {
+            if (ia <= 5) {
+                jobPath = Optional.of("res/sprites/foes/demone2.png");
+            } else {
+                jobPath = Optional.of("res/sprites/foes/demone.png");
+            }
+        } else if (ff.equals(FoesFindable.DRAGO)) {
+            if (ia <= 5) {
+                jobPath = Optional.of("res/sprites/foes/drago2.png");
+            } else {
+                jobPath = Optional.of("res/sprites/foes/drago.png");
+            }
+        } else if (ff.equals(FoesFindable.EROE_CADUTO)) {
+            jobPath = Optional.of("res/sprites/foes/cavaliere2.png");
+        } else if (ff.equals(FoesFindable.FOLLETTO)) {
+            if (ia <= 5) {
+                jobPath = Optional.of("res/sprites/foes/folletto.png");
+            } else {
+                jobPath = Optional.of("res/sprites/foes/folletto2.png");
+            }
+        } else if (ff.equals(FoesFindable.GNOMO_DA_GIARDINO)) {
+            jobPath = Optional.of("res/sprites/foes/gnomo.png");
+        } else if (ff.equals(FoesFindable.SPIRITO)) {
+            if (ia <= 5) {
+                jobPath = Optional.of("res/sprites/foes/spirito.png");
+            } else {
+                jobPath = Optional.of("res/sprites/foes/spirito2.png");
+            }
+        } else if (ff.equals(FoesFindable.STREGONE)) {
+            if (ia <= 5) {
+                jobPath = Optional.of("res/sprites/foes/stregone.png");
+            } else {
+                jobPath = Optional.of("res/sprites/foes/stregone2.png");
+            }
+        } else {
+            jobPath = Optional.empty();
+        }
+
+        return jobPath.orElseThrow(
+                        () -> new IllegalArgumentException("It is not provided any default file path for the Foe " + ff));
     }
 
 }

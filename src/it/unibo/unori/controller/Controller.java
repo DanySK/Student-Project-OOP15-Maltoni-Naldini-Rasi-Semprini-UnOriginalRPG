@@ -8,7 +8,6 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
 import it.unibo.unori.controller.exceptions.UnexpectedStateException;
-import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 import it.unibo.unori.controller.state.GameState;
 import it.unibo.unori.model.character.Foe;
 
