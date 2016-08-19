@@ -78,7 +78,7 @@ public class ItemMenu extends JPanel {
                         for (final Hero hero : heroTeam.getAllHeroes()) {
                             final MenuButton partyButton = new MenuButton(hero.getName());
 
-                            partyButton.addActionListener(new ObjectUseActionListener(entry.getKey(), hero));
+                            partyButton.addActionListener(new ObjectUseActionListener(entry.getKey(), hero, bag));
                             partyButton.addActionListener(new ActionListener() {
                                 @Override
                                 public void actionPerformed(final ActionEvent e) {
@@ -112,7 +112,7 @@ public class ItemMenu extends JPanel {
                         for (final Hero hero : heroTeam.getAllHeroes()) {
                             final MenuButton partyButton = new MenuButton(hero.getName());
 
-                            partyButton.addActionListener(new ObjectUseActionListener(entry.getKey(), hero));
+                            partyButton.addActionListener(new ObjectUseActionListener(entry.getKey(), hero, bag));
                             partyButton.addActionListener(new ActionListener() {
                                 @Override
                                 public void actionPerformed(final ActionEvent e) {
@@ -146,7 +146,7 @@ public class ItemMenu extends JPanel {
                         for (final Hero hero : heroTeam.getAllHeroes()) {
                             final MenuButton partyButton = new MenuButton(hero.getName());
 
-                            partyButton.addActionListener(new ObjectUseActionListener(entry.getKey(), hero));
+                            partyButton.addActionListener(new ObjectUseActionListener(entry.getKey(), hero, bag));
                             partyButton.addActionListener(new ActionListener() {
                                 @Override
                                 public void actionPerformed(final ActionEvent e) {
@@ -180,7 +180,7 @@ public class ItemMenu extends JPanel {
                         for (final Hero hero : heroTeam.getAllHeroes()) {
                             final MenuButton partyButton = new MenuButton(hero.getName());
 
-                            partyButton.addActionListener(new ObjectUseActionListener(entry.getKey(), hero));
+                            partyButton.addActionListener(new ObjectUseActionListener(entry.getKey(), hero, bag));
                             partyButton.addActionListener(new ActionListener() {
                                 @Override
                                 public void actionPerformed(final ActionEvent e) {
