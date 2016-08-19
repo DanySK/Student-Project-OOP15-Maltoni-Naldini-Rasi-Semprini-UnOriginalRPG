@@ -9,7 +9,7 @@ import java.util.Map;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
-import it.unibo.unori.controller.exceptions.NotValidStateException;
+import it.unibo.unori.controller.exceptions.UnexpectedStateException;
 import it.unibo.unori.controller.json.JsonFileManager;
 import it.unibo.unori.controller.json.WorldLoader;
 import it.unibo.unori.controller.state.BattleState;
@@ -142,7 +142,7 @@ public final class SingletonStateMachine {
                 }
 
             } else {
-                this.showError(new NotValidStateException().getMessage(), ErrorSeverity.SERIUOS);
+                this.showError(new UnexpectedStateException().getMessage(), ErrorSeverity.SERIUOS);
             }
 
         }
@@ -174,21 +174,21 @@ public final class SingletonStateMachine {
         }
 
         @Override
-        public void openMenu() throws NotValidStateException {
+        public void openMenu() throws UnexpectedStateException {
             if (MapState.class.isInstance(this.stack.peek())) {
                 this.stack.pushAndRender(new InGameMenuState());
             } else {
-                throw new NotValidStateException();
+                throw new UnexpectedStateException();
             }
         }
 
         @Override
-        public void closeMenu() throws NotValidStateException {
-            if (InGameMenuState.class.isInstance(this.stack.peek())) {
+        public void closeMenu() throws UnexpectedStateException {
+            if (!this.stack.isEmpty() && InGameMenuState.class.isInstance(this.stack.peek())) {
                 this.stack.pop();
                 // this.stack.render(); //TODO here I should NOT render
             } else {
-                throw new NotValidStateException();
+                throw new UnexpectedStateException();
             }
         }
 

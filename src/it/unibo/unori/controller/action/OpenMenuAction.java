@@ -2,7 +2,7 @@ package it.unibo.unori.controller.action;
 
 import java.awt.event.ActionEvent;
 
-import it.unibo.unori.controller.exceptions.NotValidStateException;
+import it.unibo.unori.controller.exceptions.UnexpectedStateException;
 import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 
 /**
@@ -19,7 +19,7 @@ public class OpenMenuAction extends AbstractUnoriAction {
     public void actionPerformed(final ActionEvent event) {
         try {
             this.getController().openMenu();
-        } catch (NotValidStateException e) {
+        } catch (UnexpectedStateException e) {
             this.getController().showError(e.getMessage(), ErrorSeverity.SERIUOS);
         }
     }

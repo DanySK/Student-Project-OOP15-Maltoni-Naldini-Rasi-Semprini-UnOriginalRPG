@@ -3,7 +3,7 @@ package it.unibo.unori.controller.actionlistener;
 import java.awt.event.ActionEvent;
 
 import it.unibo.unori.controller.exceptions.CantUseException;
-import it.unibo.unori.controller.exceptions.NotValidStateException;
+import it.unibo.unori.controller.exceptions.UnexpectedStateException;
 import it.unibo.unori.controller.state.BattleState;
 import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 import it.unibo.unori.controller.state.InGameMenuState;
@@ -100,11 +100,11 @@ public class ObjectUseActionListener extends AbstractUnoriActionListener {
                     throw new CantUseException();
                 }
             } else {
-                throw new NotValidStateException();
+                throw new UnexpectedStateException();
             }
         } catch (CantUseException | HeroDeadException | HeroNotDeadException e) {
             this.getController().showError(e.getMessage(), ErrorSeverity.MINOR);
-        } catch (NotValidStateException | ItemNotFoundException e) {
+        } catch (UnexpectedStateException | ItemNotFoundException e) {
             this.getController().showError(e.getMessage(), ErrorSeverity.SERIUOS);
         }
     }

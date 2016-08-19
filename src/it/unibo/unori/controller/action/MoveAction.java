@@ -9,7 +9,7 @@ import java.util.Optional;
 import javax.swing.Action;
 import javax.swing.SwingConstants;
 
-import it.unibo.unori.controller.exceptions.NotValidStateException;
+import it.unibo.unori.controller.exceptions.UnexpectedStateException;
 import it.unibo.unori.controller.exceptions.UnsupportedSwingConstantException;
 import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 import it.unibo.unori.controller.state.MapState;
@@ -62,7 +62,7 @@ public class MoveAction extends AbstractUnoriAction {
                 currentState.randomEncounters();
             }
         } else {
-            this.getController().showError(new NotValidStateException().getMessage(), ErrorSeverity.SERIUOS);
+            this.getController().showError(new UnexpectedStateException().getMessage(), ErrorSeverity.SERIUOS);
         }
     }
 
