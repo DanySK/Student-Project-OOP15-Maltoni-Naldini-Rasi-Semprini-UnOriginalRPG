@@ -16,8 +16,6 @@ import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.FoeImpl;
 import it.unibo.unori.model.character.factory.FoesFindable;
 import it.unibo.unori.model.items.Armor;
-import it.unibo.unori.model.items.Item;
-import it.unibo.unori.model.items.Potion;
 import it.unibo.unori.model.items.Weapon;
 import it.unibo.unori.model.maps.GameMap;
 import it.unibo.unori.model.maps.Party;
