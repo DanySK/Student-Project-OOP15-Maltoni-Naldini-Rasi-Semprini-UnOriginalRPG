@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.util.Optional;
 
-import it.unibo.unori.controller.exceptions.NotValidStateException;
+import it.unibo.unori.controller.exceptions.UnexpectedStateException;
 import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 import it.unibo.unori.controller.state.MapState;
 import it.unibo.unori.model.menu.DialogueInterface;
@@ -61,7 +61,7 @@ public class InteractAction extends AbstractUnoriAction {
                 }
             }
         } else {
-            this.getController().showError(new NotValidStateException().getMessage(), ErrorSeverity.SERIUOS);
+            this.getController().showError(new UnexpectedStateException().getMessage(), ErrorSeverity.SERIUOS);
         }
 
     }

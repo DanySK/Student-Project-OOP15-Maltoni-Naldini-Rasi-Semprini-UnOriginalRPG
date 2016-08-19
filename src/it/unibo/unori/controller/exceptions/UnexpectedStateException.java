@@ -4,7 +4,7 @@ package it.unibo.unori.controller.exceptions;
  * This exception should be thrown when a GameState instance was expected from
  * the stack, but another was given instead.
  */
-public class NotValidStateException extends Exception {
+public class UnexpectedStateException extends IllegalStateException {
     private static final String DEFAULT_FIRST_PART = "Lo stato di gioco ";
     private static final String DEFAULT_LAST_PART = " non corrisponde con nessuno degli stati previsti";
     private static final String DEFAULT_MESSAGE = DEFAULT_FIRST_PART + "attuale" + DEFAULT_LAST_PART;
@@ -16,7 +16,7 @@ public class NotValidStateException extends Exception {
     /**
      * Default constructor.
      */
-    public NotValidStateException() {
+    public UnexpectedStateException() {
         super(DEFAULT_MESSAGE);
     }
 
@@ -27,7 +27,7 @@ public class NotValidStateException extends Exception {
      * @param expectedStateName
      *            the name of the instance of the unexpected GameState
      */
-    public NotValidStateException(final String expectedStateName) {
+    public UnexpectedStateException(final String expectedStateName) {
         super(DEFAULT_FIRST_PART + expectedStateName + DEFAULT_LAST_PART);
     }
 }

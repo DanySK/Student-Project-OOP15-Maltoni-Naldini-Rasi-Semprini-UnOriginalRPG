@@ -2,7 +2,7 @@ package it.unibo.unori.controller.actionlistener;
 
 import java.awt.event.ActionEvent;
 
-import it.unibo.unori.controller.exceptions.NotValidStateException;
+import it.unibo.unori.controller.exceptions.UnexpectedStateException;
 import it.unibo.unori.controller.state.BattleState;
 import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 import it.unibo.unori.model.battle.MagicAttackInterface;
@@ -44,7 +44,7 @@ public class MagicAttackActionListener extends AbstractUnoriActionListener {
                 this.getController().showError(e.getMessage(), ErrorSeverity.SERIUOS);
             }
         } else {
-            this.getController().showError(new NotValidStateException().getMessage(), ErrorSeverity.SERIUOS);
+            this.getController().showError(new UnexpectedStateException().getMessage(), ErrorSeverity.SERIUOS);
         }
     }
 

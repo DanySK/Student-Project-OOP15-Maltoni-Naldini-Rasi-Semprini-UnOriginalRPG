@@ -7,7 +7,7 @@ import java.util.List;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
-import it.unibo.unori.controller.exceptions.NotValidStateException;
+import it.unibo.unori.controller.exceptions.UnexpectedStateException;
 import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 import it.unibo.unori.controller.state.GameState;
 import it.unibo.unori.model.character.Foe;
@@ -96,18 +96,18 @@ public interface Controller {
     /**
      * This method opens a new menu on a MapState.
      * 
-     * @throws NotValidStateException
+     * @throws UnexpectedStateException
      *             if the current GameState is not a MapState
      */
-    void openMenu() throws NotValidStateException;
+    void openMenu() throws UnexpectedStateException;
 
     /**
      * This method closes an open InGameMenu.
      * 
-     * @throws NotValidStateException
+     * @throws UnexpectedStateException
      *             if the current GameState is not an InGameMenu.
      */
-    void closeMenu() throws NotValidStateException;
+    void closeMenu() throws UnexpectedStateException;
 
     /**
      * This method returns the stack the controller uses to manage all the game states.
