@@ -54,7 +54,7 @@ public class ObjectUseActionListener extends AbstractUnoriActionListener {
             if (BattleState.class.isInstance(this.getController().getCurrentState())
                             && Potion.class.isInstance(this.itemUsed)) {
                 final BattleState currentState = (BattleState) this.getController().getCurrentState();
-                currentState.getModel().usePotion(targetHero, (Potion) itemUsed);
+                currentState.usePotion(targetHero, (Potion) itemUsed);
                 // TODO dialog
                 // ... else if it is not ...
             } else if (InGameMenuState.class.isInstance(this.getController().getCurrentState())) {
@@ -62,6 +62,7 @@ public class ObjectUseActionListener extends AbstractUnoriActionListener {
                 if (Potion.class.isInstance(this.itemUsed)) {
                     if (currentState.getBag().contains(this.itemUsed)) {
                         ((Potion) this.itemUsed).using(this.targetHero);
+                        currentState.getBag().removeItem(itemUsed); // TODO check
                     } else {
                         throw new ItemNotFoundException();
                     }
