@@ -121,7 +121,7 @@ public class WeaponImpl implements Weapon {
     public Status getWeaponStatus() {
         return this.inflictedStatus;
     }
-    
+
     @Override
     public Map<Statistics, Integer> getStats() {
         final Map<Statistics, Integer> toRet = new HashMap<>();
@@ -145,7 +145,7 @@ public class WeaponImpl implements Weapon {
         result = PRIME * result + ((stats == null) ? 0 : stats.hashCode());
         return result;
     }
-    
+
     /**
      * Equals method implemented for the serialization.
      * 
@@ -162,10 +162,9 @@ public class WeaponImpl implements Weapon {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        
+
         final WeaponImpl other = (WeaponImpl) obj;
         final Map<Statistics, Integer> map = this.stats;
-        
         return this.name.equals(other.getName()) && this.desc.equals(other.getDescription()) 
                 && this.inflictedStatus.equals(other.getWeaponStatus())
                 && other.getFireAtk() == map.get(Statistics.FIREATK)
@@ -173,7 +172,7 @@ public class WeaponImpl implements Weapon {
                 && other.getPhysicalAtk() == map.get(Statistics.PHYSICATK)
                 && other.getThunderAtk() == map.get(Statistics.THUNDERATK);
     }
-    
+
     @Override
     public String toString() {
         return this.name;

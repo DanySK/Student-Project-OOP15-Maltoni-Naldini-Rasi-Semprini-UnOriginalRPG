@@ -41,6 +41,8 @@ public class CharacterImpl implements Character {
      *              path of the battleFrame of the character
      * @param map
      *              statistics of the character.
+     * @param w
+     *              weapon of the character
      */
     public CharacterImpl(final String name, final String battleFrame, 
             final Map<Statistics, Integer> map, final Weapon w) {
@@ -56,13 +58,15 @@ public class CharacterImpl implements Character {
      * @param map
      *              statistics of the character.
      * @param level
-     *              the level of the character. 
+     *              the level of the character.
+     * @param w
+     *              weapon of the character 
      * @throws IllegalArgumentException if the level is equal or less than 0
      *                                  or the map does not define a value for all
      *                                  the statistics
      */
     public CharacterImpl(final String name, final String battleFrame,
-             final Map<Statistics, Integer> map, final int level, final Weapon w) 
+             final Map<Statistics, Integer> map, final int level, final Weapon w)
                         throws IllegalArgumentException {
         this(name, battleFrame, map, level, new LinkedList<MagicAttackInterface>(), w);
     }
@@ -79,6 +83,8 @@ public class CharacterImpl implements Character {
      *              the level of the character.
      * @param spellList
      *              the starter spellList of the character. 
+     * @param w
+     *              weapon of the character
      * @throws IllegalArgumentException if the level is equal or less than 0
      *                                  or the map does not define a value for all
      *                                  the statistics
@@ -105,7 +111,7 @@ public class CharacterImpl implements Character {
     private boolean checkParameters(final Map<Statistics, Integer> map, final int level) {
         return level <= 0 || !map.keySet().containsAll(Arrays.asList(Statistics.values()));
     }
-    
+
     // Method to check if a param is negative
     private void checkParam(final int param) throws IllegalArgumentException {
         if (param < 0) {
@@ -279,7 +285,7 @@ public class CharacterImpl implements Character {
     public String getBattleFrame() {
         return this.battleFrame;
     }
-    
+
 
     @Override
     public void setWeapon(final Weapon w) throws WeaponAlreadyException {
@@ -303,14 +309,14 @@ public class CharacterImpl implements Character {
     public Weapon getWeapon() throws NoWeaponException {
         return this.weapon;
     }
-    
+
     @Override
     public boolean hasWeapon() {
         return !this.isNotPresentWeapon();
     }
 
     @Override
-    public String toString() {  
+    public String toString() {
         return this.name;
     }
 
