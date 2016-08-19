@@ -1,8 +1,15 @@
-package it.unibo.unori.view.layers.menus;
+package it.unibo.unori.view.layers.ingame;
 
 import it.unibo.unori.controller.action.CloseMenuAction;
 import it.unibo.unori.controller.actionlistener.SaveActionListener;
+import it.unibo.unori.model.character.Hero;
+import it.unibo.unori.model.character.HeroTeam;
 import it.unibo.unori.model.items.Bag;
+import it.unibo.unori.view.layers.InGameMenuLayer.InGameMenuStack;
+import it.unibo.unori.view.layers.common.ItemMenu;
+import it.unibo.unori.view.layers.common.MenuButton;
+import it.unibo.unori.view.layers.common.PartyMenu;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.util.List;
@@ -15,7 +22,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 import javax.swing.InputMap;
-import javax.swing.JLayeredPane;
 import javax.swing.ActionMap;
 import javax.swing.KeyStroke;
 import javax.swing.BorderFactory;
@@ -29,47 +35,61 @@ import javax.swing.AbstractAction;
 public class MainMenu extends JPanel {
     private static final int BORDER = 5;
     private final Dimension size = new Dimension(160, 160);
-
-    private int focusedButton;
-    private final JLayeredPane layeredPane;
     private final List<MenuButton> buttons = new LinkedList<MenuButton>();
+
+    private final InGameMenuStack inGameStack;
 
     /**
      * Creates the first in-game menu.
-     * @param bag the bag of the party
-     * @param layeredPane the parent pane that contains this
-     * @param bottom the layer that called this
+     * @param inGameStack the in-game menu stack
+     * @param heroTeam the hero team
+     * @param bag the party bag
      * @param x the x position
      * @param y the y position
      */
-    public MainMenu(final Bag bag,
-                    final JLayeredPane layeredPane, final JPanel bottom,
+    public MainMenu(final InGameMenuStack inGameStack,
+                    final HeroTeam heroTeam, final Bag bag,
                     final int x, final int y) {
         super();
 
-        this.layeredPane = layeredPane;
+        this.inGameStack = inGameStack;
 
         this.setBackground(Color.WHITE);
-        this.setLayout(new GridLayout(0, 1, BORDER, BORDER));
         this.setBounds(x, y, size.width, size.height);
+        this.setLayout(new GridLayout(0, 1, BORDER, BORDER));
 
         this.setBorder(BorderFactory.createEmptyBorder(BORDER, BORDER, BORDER, BORDER));
-
-        if (bottom != null) {
-            bottom.setEnabled(false);
-        }
 
         final MenuButton party = new MenuButton("Party");
         party.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
+                final List<MenuButton> buttons = new LinkedList<MenuButton>();
+
+                for (final Hero hero : heroTeam.getAllHeroes()) {
+                    final MenuButton button = new MenuButton(hero.getName());
+                    button.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(final ActionEvent e) {
+                            inGameStack.push(new PartyInfoMenu(inGameStack, hero,
+                                                               BORDER + size.width + x
+                                                               + BORDER + PartyMenu.SIZE.width,
+                                                               y));
+                        }
+                    });
+                    buttons.add(button);
+                }
+
+                inGameStack.push(new PartyMenu(inGameStack, buttons,
+                                               BORDER + size.width + x, y));
             }
         });
 
         final MenuButton items = new MenuButton("Items");
         items.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
-                layeredPane.add(new ItemMenu(bag, layeredPane, MainMenu.this,
-                                             x + size.width + BORDER, y));
+                inGameStack.push(new ItemMenu(inGameStack,
+                                              heroTeam, bag,
+                                              BORDER + size.width + x, y));
             }
         });
 
@@ -84,19 +104,10 @@ public class MainMenu extends JPanel {
             this.add(button);
         }
 
-        buttons.get(focusedButton).requestFocus();
-
         final ActionMap actionMap = getActionMap();
         final InputMap inputMap = getInputMap(WHEN_IN_FOCUSED_WINDOW);
 
-        actionMap.put("UP", new ButtonAction(-1));
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), "UP");
-        actionMap.put("DOWN", new ButtonAction(1));
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "DOWN");
-        actionMap.put("ENTER", new ButtonAction(0));
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "ENTER");
-
-        actionMap.put("CLOSE", new CloseAction(this));
+        actionMap.put("CLOSE", new CloseAction());
         actionMap.put("CLOSE", new CloseMenuAction());
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "CLOSE");
     }
@@ -111,43 +122,13 @@ public class MainMenu extends JPanel {
         }
     }
 
-    private class ButtonAction extends AbstractAction {
-        private final int direction;
-
-        ButtonAction(final int direction) {
-            super();
-            this.direction = direction;
-        }
-
-        @Override
-        public void actionPerformed(final ActionEvent e) {
-            if (direction == 0) {
-                buttons.get(focusedButton).doClick();
-            } else {
-                if (buttons.size() != 0) {
-                    focusedButton += direction;
-
-                    if (focusedButton < 0) {
-                        focusedButton = buttons.size() - 1;
-                    }
-                    if (focusedButton > buttons.size() - 1) {
-                        focusedButton = 0;
-                    }
-
-                    buttons.get(focusedButton).requestFocus();
-                }
-            }
-        }
-    }
-
     private class CloseAction extends AbstractAction {
-        CloseAction(final JPanel panel) {
+        CloseAction() {
             super();
         }
 
         public void actionPerformed(final ActionEvent e) {
-            MainMenu.this.setVisible(false);
-            layeredPane.remove(MainMenu.this);
+            inGameStack.pop();
         }
     }
 }
