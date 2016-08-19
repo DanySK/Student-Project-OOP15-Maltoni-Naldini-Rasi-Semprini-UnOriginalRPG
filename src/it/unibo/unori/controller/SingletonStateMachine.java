@@ -133,8 +133,8 @@ public final class SingletonStateMachine {
                     for (final CardinalPoints cp : CardinalPoints.values()) {
                         framesMap.put(cp,
                                         SingletonParty.getParty().getHeroTeam().getAllHeroes().get(0).getBattleFrame());
-                    }
-                    SingletonParty.getParty().setFrames(framesMap);*/
+                    }*/
+                    SingletonParty.getParty().setFrame(SingletonParty.getParty().getHeroTeam().getAllHeroes().get(0).getBattleFrame());
                     this.stack.pushAndRender(new MapState(SingletonParty.getParty().getCurrentGameMap()));
                     this.startTimer();
                 } catch (IOException e) {
