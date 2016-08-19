@@ -13,6 +13,7 @@ import it.unibo.unori.model.character.exceptions.NoArmorException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
 import it.unibo.unori.model.items.Armor;
+import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.Item;
 import it.unibo.unori.model.items.Potion;
 import it.unibo.unori.model.items.Weapon;
@@ -28,19 +29,23 @@ import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
 public class ObjectUseActionListener extends AbstractUnoriActionListener {
     private final Item itemUsed;
     private final Hero targetHero;
+    private final Bag sourceBag;
 
     /**
      * Default constructor.
      * 
-     * @param item
+     * @param itemUsed
      *            the item that the player chose to use/equip by pressing the button
-     * @param target
+     * @param targetHero
      *            the hero that the player chose to use/equip the item on by pressing the button
+     * @param sourceBag
+     *            the bag the item to use is
      */
-    public ObjectUseActionListener(final Item item, final Hero target) {
+    public ObjectUseActionListener(final Item itemUsed, final Hero targetHero, final Bag sourceBag) {
         super();
-        this.itemUsed = item;
-        this.targetHero = target;
+        this.itemUsed = itemUsed;
+        this.targetHero = targetHero;
+        this.sourceBag = sourceBag;
     }
 
     @Override
