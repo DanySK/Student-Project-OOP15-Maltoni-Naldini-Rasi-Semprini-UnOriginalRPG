@@ -3,7 +3,6 @@ package it.unibo.unori.controller.action;
 import java.awt.event.ActionEvent;
 
 import it.unibo.unori.controller.exceptions.UnexpectedStateException;
-import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 
 /**
  * This action should be linked to the button dedicated to menu opening (like ESC). It closes an opened InGameMenu.
@@ -19,7 +18,7 @@ public class CloseMenuAction extends AbstractUnoriAction {
         try {
             this.getController().closeMenu();
         } catch (UnexpectedStateException e) {
-            this.getController().showError(e.getMessage(), ErrorSeverity.SERIUOS);
+            this.getController().showError(e.getMessage());
         }
     }
 

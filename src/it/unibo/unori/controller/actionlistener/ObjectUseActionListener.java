@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import it.unibo.unori.controller.exceptions.CantUseException;
 import it.unibo.unori.controller.exceptions.UnexpectedStateException;
 import it.unibo.unori.controller.state.BattleState;
-import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 import it.unibo.unori.controller.state.InGameMenuState;
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.exceptions.ArmorAlreadyException;
@@ -108,9 +107,9 @@ public class ObjectUseActionListener extends AbstractUnoriActionListener {
                 throw new UnexpectedStateException();
             }
         } catch (CantUseException | HeroDeadException | HeroNotDeadException e) {
-            this.getController().showError(e.getMessage(), ErrorSeverity.MINOR);
+            this.getController().showCommunication(e.getMessage());
         } catch (UnexpectedStateException | ItemNotFoundException e) {
-            this.getController().showError(e.getMessage(), ErrorSeverity.SERIUOS);
+            this.getController().showError(e.getMessage());
         }
     }
 

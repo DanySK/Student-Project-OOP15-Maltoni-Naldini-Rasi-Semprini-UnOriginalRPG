@@ -11,7 +11,6 @@ import javax.swing.SwingConstants;
 
 import it.unibo.unori.controller.exceptions.UnexpectedStateException;
 import it.unibo.unori.controller.exceptions.UnsupportedSwingConstantException;
-import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 import it.unibo.unori.controller.state.MapState;
 import it.unibo.unori.model.maps.Party.CardinalPoints;
 import it.unibo.unori.view.exceptions.SpriteNotFoundException;
@@ -56,13 +55,13 @@ public class MoveAction extends AbstractUnoriAction {
                                         new Point(currentState.getCurrentPosition().getPosX(),
                                                         currentState.getCurrentPosition().getPosY()));
                     } catch (SpriteNotFoundException e) {
-                        this.getController().showError(e.getMessage(), ErrorSeverity.SERIUOS);
+                        this.getController().showError(e.getMessage());
                     }
                 }
                 currentState.randomEncounters();
             }
         } else {
-            this.getController().showError(new UnexpectedStateException().getMessage(), ErrorSeverity.SERIUOS);
+            this.getController().showError(new UnexpectedStateException().getMessage());
         }
     }
 

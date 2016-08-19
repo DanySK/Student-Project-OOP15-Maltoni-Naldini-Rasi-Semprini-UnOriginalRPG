@@ -19,10 +19,10 @@ public class SpecialAttackActionListener extends AbstractUnoriActionListener {
             try {
                 currentState.getModel().specialAttack();
             } catch (BarNotFullException e) {
-                this.getController().showError(e.getMessage(), ErrorSeverity.MINOR);
+                this.getController().showCommunication(e.getMessage());
             }
         } else {
-            this.getController().showError(new UnexpectedStateException().getMessage(), ErrorSeverity.SERIUOS);
+            this.getController().showError(new UnexpectedStateException().getMessage());
         }
     }
 
