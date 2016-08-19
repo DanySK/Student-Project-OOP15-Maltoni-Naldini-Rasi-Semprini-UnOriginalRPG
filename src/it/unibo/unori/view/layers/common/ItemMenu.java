@@ -68,6 +68,9 @@ public class ItemMenu extends JPanel {
 
             for (final Map.Entry<Armor, Integer> entry : armors.entrySet()) {
                 final MenuButton button = new MenuButton(entry.getKey().getName() + ", " + entry.getValue());
+
+                System.out.println("armors " + entry.getKey().getName());
+
                 button.addActionListener(new ActionListener() {
                     public void actionPerformed(final ActionEvent e) {
                         final List<MenuButton> partyButtons = new LinkedList<MenuButton>();
@@ -99,6 +102,9 @@ public class ItemMenu extends JPanel {
             final Map<Weapon, Integer> weapons =  bag.getWeapons();
             for (final Map.Entry<Weapon, Integer> entry : weapons.entrySet()) {
                 final MenuButton button = new MenuButton(entry.getKey().getName() + ", " + entry.getValue());
+
+                System.out.println("weapons " + entry.getKey().getName());
+
                 button.addActionListener(new ActionListener() {
                     public void actionPerformed(final ActionEvent e) {
                         final List<MenuButton> partyButtons = new LinkedList<MenuButton>();
@@ -130,6 +136,9 @@ public class ItemMenu extends JPanel {
             final Map<Potion, Integer> potions = bag.getPotions();
             for (final Map.Entry<Potion, Integer> entry : potions.entrySet()) {
                 final MenuButton button = new MenuButton(entry.getKey().getName() + ", " + entry.getValue());
+
+                System.out.println("potions " + entry.getKey().getName());
+
                 button.addActionListener(new ActionListener() {
                     public void actionPerformed(final ActionEvent e) {
                         final List<MenuButton> partyButtons = new LinkedList<MenuButton>();
@@ -161,6 +170,9 @@ public class ItemMenu extends JPanel {
             final Map<Item, Integer> miscellaneous = bag.getMiscellaneous();
             for (final Map.Entry<Item, Integer> entry : miscellaneous.entrySet()) {
                 final MenuButton button = new MenuButton(entry.getKey().getName() + ", " + entry.getValue());
+
+                System.out.println("miscellaneous " + entry.getKey().getName());
+
                 button.addActionListener(new ActionListener() {
                     public void actionPerformed(final ActionEvent e) {
                         final List<MenuButton> partyButtons = new LinkedList<MenuButton>();

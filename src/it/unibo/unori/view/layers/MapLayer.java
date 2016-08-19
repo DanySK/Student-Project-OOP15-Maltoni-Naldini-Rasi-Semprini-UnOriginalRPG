@@ -52,6 +52,7 @@ public class MapLayer extends Layer {
     private final BufferedImage[] frame = new BufferedImage[2];
 
     private final Action menu;
+    private final Action interact;
     private final Map<Integer, Action> movement;
 
     /**
@@ -80,6 +81,7 @@ public class MapLayer extends Layer {
         super();
 
         this.menu = menu;
+        this.interact = interact;
         this.movement = movement;
 
         this.setBackground(Color.BLACK);
@@ -126,10 +128,10 @@ public class MapLayer extends Layer {
         }
 
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "ENTER");
-        actionMap.put("ENTER", interact);
+        actionMap.put("ENTER", this.interact);
 
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "ESCAPE");
-        actionMap.put("ESCAPE", menu);
+        actionMap.put("ESCAPE", this.menu);
     }
 
     /**
@@ -270,6 +272,7 @@ public class MapLayer extends Layer {
         super.setEnabled(b);
 
         menu.setEnabled(b);
+        interact.setEnabled(b);
         movement.forEach((i, a) -> a.setEnabled(b));
     }
 
