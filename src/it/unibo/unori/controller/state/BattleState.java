@@ -2,11 +2,13 @@ package it.unibo.unori.controller.state;
 
 import java.util.Optional;
 
+import it.unibo.unori.controller.SingletonStateMachine;
 import it.unibo.unori.model.battle.Battle;
 import it.unibo.unori.model.battle.BattleImpl;
 import it.unibo.unori.model.battle.MagicAttack;
 import it.unibo.unori.model.battle.MagicAttackInterface;
 import it.unibo.unori.model.battle.exceptions.BarNotFullException;
+import it.unibo.unori.model.battle.exceptions.CantEscapeException;
 import it.unibo.unori.model.battle.exceptions.NotDefendableException;
 import it.unibo.unori.model.battle.exceptions.NotEnoughMPExcpetion;
 import it.unibo.unori.model.character.Foe;
@@ -68,15 +70,6 @@ public class BattleState extends AbstractGameState {
         this(party.getHeroTeam(), foes, party.getPartyBag());
     }
 
-    /*
-     * TODO check This method return the battle model of the current state. Useful for actions and action listeners.
-     * 
-     * @return the battle model TODO check
-     */
-    public FightInterface getModel() {
-        return this.fightModel;
-    }
-
     /**
      * With this method, the current hero can do a basic attack to the current foe.
      */
@@ -85,8 +78,7 @@ public class BattleState extends AbstractGameState {
             this.currentDialogue = Optional.of(this.fightModel.attack(true));
             this.endHeroTurn();
         } catch (NoWeaponException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            SingletonStateMachine.getController().showError(e.getMessage());
         }
     }
 
@@ -99,18 +91,25 @@ public class BattleState extends AbstractGameState {
             this.currentDialogue = Optional.of(this.fightModel.specialAtk());
             this.endHeroTurn();
         } catch (BarNotFullException e) {
-            this.currentDialogue = Optional.of(new Dialogue(e.getMessage()));
-            this.scrollDialog();
+            this.showMessage(e.getMessage());
         }
     }
 
-    public void magicAttack(MagicAttackInterface magic, Foe enemy) {
+    /**
+     * With this method, the current hero can throw a magic attack to a specified enemy.
+     * 
+     * @param magic
+     *            the magic attack to throw
+     * @param enemy
+     *            the target of the attack
+     */
+    public void magicAttack(final MagicAttackInterface magic, final Foe enemy) {
         try {
-            this.currentDialogue = Optional.of(this.fightModel.magic((MagicAttack) magic, enemy, true)); // TODO remove cast
+            this.currentDialogue = Optional.of(this.fightModel.magic((MagicAttack) magic, enemy, true)); // TODO remove
+                                                                                                         // cast
             this.endHeroTurn();
         } catch (NotEnoughMPExcpetion | MagicNotFoundException e) {
-            this.currentDialogue = Optional.of(new Dialogue(e.getMessage()));
-            this.scrollDialog();
+            this.showMessage(e.getMessage());
         }
     }
 
@@ -128,8 +127,7 @@ public class BattleState extends AbstractGameState {
             this.fightModel.getBag().removeItem(itemUsed);
             this.endHeroTurn();
         } catch (ItemNotFoundException | HeroDeadException | HeroNotDeadException e) {
-            this.currentDialogue = Optional.of(new Dialogue(e.getMessage()));
-            this.scrollDialog();
+            this.showMessage(e.getMessage());
         }
     }
 
@@ -144,8 +142,19 @@ public class BattleState extends AbstractGameState {
             this.currentDialogue = Optional.of(this.fightModel.defend(heroToDefend));
             this.endHeroTurn();
         } catch (NotDefendableException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            this.showMessage(e.getMessage());
+        }
+    }
+
+    /**
+     * With this method, the current hero can try to run away from battle.
+     */
+    public void runAway() {
+        try {
+            this.currentDialogue = Optional.of(this.fightModel.runAway());
+            this.endHeroTurn();
+        } catch (CantEscapeException e) {
+            this.showMessage(e.getMessage());
         }
     }
 
@@ -177,12 +186,12 @@ public class BattleState extends AbstractGameState {
     }
 
     private void startFoeTurn() {
-        BattleLayer currentLayer = (BattleLayer) this.getLayer();
+        final BattleLayer currentLayer = (BattleLayer) this.getLayer();
         currentLayer.updateView();
     }
 
     private void startHeroTurn() {
-        BattleLayer currentLayer = (BattleLayer) this.getLayer();
+        final BattleLayer currentLayer = (BattleLayer) this.getLayer();
         currentLayer.updateView();
         currentLayer.newTurn();
     }
@@ -190,5 +199,10 @@ public class BattleState extends AbstractGameState {
     private void endHeroTurn() {
         this.scrollDialog();
         this.heroTurn = false;
+    }
+
+    private void showMessage(final String message) {
+        this.currentDialogue = Optional.of(new Dialogue(message));
+        this.scrollDialog();
     }
 }
