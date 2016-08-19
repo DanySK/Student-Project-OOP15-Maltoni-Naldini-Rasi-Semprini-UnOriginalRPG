@@ -1,4 +1,4 @@
-package it.unibo.unori.view.layers.menus;
+package it.unibo.unori.view.layers.common;
 
 import java.awt.Color;
 import java.awt.event.FocusEvent;
@@ -13,12 +13,12 @@ import javax.swing.JButton;
  *
  */
 public class MenuButton extends JButton implements FocusListener {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * Creates a menu button
-	 * @param label the text to be shown inside the button
-	 */
+    /**
+     * Creates a menu button.
+     * @param label the text to be shown inside the button
+     */
     public MenuButton(final String label) {
         super(label);
 
