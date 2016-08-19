@@ -3,9 +3,8 @@ package it.unibo.unori.controller.actionlistener;
 import java.awt.event.ActionEvent;
 
 import it.unibo.unori.controller.exceptions.CantUseException;
-import it.unibo.unori.controller.exceptions.NotValidStateException;
+import it.unibo.unori.controller.exceptions.UnexpectedStateException;
 import it.unibo.unori.controller.state.BattleState;
-import it.unibo.unori.controller.state.DialogState.ErrorSeverity;
 import it.unibo.unori.controller.state.InGameMenuState;
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.exceptions.ArmorAlreadyException;
@@ -13,6 +12,7 @@ import it.unibo.unori.model.character.exceptions.NoArmorException;
 import it.unibo.unori.model.character.exceptions.NoWeaponException;
 import it.unibo.unori.model.character.exceptions.WeaponAlreadyException;
 import it.unibo.unori.model.items.Armor;
+import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.Item;
 import it.unibo.unori.model.items.Potion;
 import it.unibo.unori.model.items.Weapon;
@@ -28,19 +28,23 @@ import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
 public class ObjectUseActionListener extends AbstractUnoriActionListener {
     private final Item itemUsed;
     private final Hero targetHero;
+    private final Bag sourceBag;
 
     /**
      * Default constructor.
      * 
-     * @param item
+     * @param itemUsed
      *            the item that the player chose to use/equip by pressing the button
-     * @param target
+     * @param targetHero
      *            the hero that the player chose to use/equip the item on by pressing the button
+     * @param sourceBag
+     *            the bag the item to use is
      */
-    public ObjectUseActionListener(final Item item, final Hero target) {
+    public ObjectUseActionListener(final Item itemUsed, final Hero targetHero, final Bag sourceBag) {
         super();
-        this.itemUsed = item;
-        this.targetHero = target;
+        this.itemUsed = itemUsed;
+        this.targetHero = targetHero;
+        this.sourceBag = sourceBag;
     }
 
     @Override
@@ -50,7 +54,7 @@ public class ObjectUseActionListener extends AbstractUnoriActionListener {
             if (BattleState.class.isInstance(this.getController().getCurrentState())
                             && Potion.class.isInstance(this.itemUsed)) {
                 final BattleState currentState = (BattleState) this.getController().getCurrentState();
-                currentState.getModel().usePotion(targetHero, (Potion) itemUsed);
+                currentState.usePotion(targetHero, (Potion) itemUsed);
                 // TODO dialog
                 // ... else if it is not ...
             } else if (InGameMenuState.class.isInstance(this.getController().getCurrentState())) {
@@ -58,6 +62,7 @@ public class ObjectUseActionListener extends AbstractUnoriActionListener {
                 if (Potion.class.isInstance(this.itemUsed)) {
                     if (currentState.getBag().contains(this.itemUsed)) {
                         ((Potion) this.itemUsed).using(this.targetHero);
+                        currentState.getBag().removeItem(itemUsed); // TODO check
                     } else {
                         throw new ItemNotFoundException();
                     }
@@ -100,12 +105,12 @@ public class ObjectUseActionListener extends AbstractUnoriActionListener {
                     throw new CantUseException();
                 }
             } else {
-                throw new NotValidStateException();
+                throw new UnexpectedStateException();
             }
         } catch (CantUseException | HeroDeadException | HeroNotDeadException e) {
-            this.getController().showError(e.getMessage(), ErrorSeverity.MINOR);
-        } catch (NotValidStateException | ItemNotFoundException e) {
-            this.getController().showError(e.getMessage(), ErrorSeverity.SERIUOS);
+            this.getController().showCommunication(e.getMessage());
+        } catch (UnexpectedStateException | ItemNotFoundException e) {
+            this.getController().showError(e.getMessage());
         }
     }
 

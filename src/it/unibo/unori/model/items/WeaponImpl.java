@@ -27,14 +27,16 @@ public class WeaponImpl implements Weapon {
     private static final String STDDESC = "Ma ti aspetta un pugno, ma è ovvio!";
     private static final int PRIME = 31;
     /**
-     * Basic weapon for every Character.
+     * Basic weapon to set when a character's weapon is removed.
      */
     public static final Weapon FISTS = new WeaponImpl();
 
+    //Private constructor to generate the FIST instance of the class.
     private WeaponImpl() {
         this(STDNAME, STDDESC, new HashMap<>(), Status.NONE);
     }
 
+    // Generate basic statistics for the FIST instance.
     private Map<Statistics, Integer> generateStdStats() {
         final Map<Statistics, Integer> stats = new HashMap<>();
         stats.put(Statistics.PHYSICATK, 0);
@@ -44,6 +46,7 @@ public class WeaponImpl implements Weapon {
         return stats;
     }
 
+    // Check if the constructor is building the FIST instance of the class
     private boolean isNakedConstruction(final String name, final String desc,
             final Map<Statistics, Integer> stats, final Status inflictedStatus) {
     return STDNAME.equals(name)
@@ -51,6 +54,7 @@ public class WeaponImpl implements Weapon {
             && STDDESC.equals(desc);
     }
 
+    // Check if the set contains all the four kind of attack and nothing else.
     private boolean hasLegitStats(final Set<Statistics> s) {
         return s.containsAll(Arrays.asList(Statistics.FIREATK, Statistics.ICEATK, 
                 Statistics.THUNDERATK, Statistics.PHYSICATK))
@@ -121,7 +125,7 @@ public class WeaponImpl implements Weapon {
     public Status getWeaponStatus() {
         return this.inflictedStatus;
     }
-    
+
     @Override
     public Map<Statistics, Integer> getStats() {
         final Map<Statistics, Integer> toRet = new HashMap<>();
@@ -145,7 +149,7 @@ public class WeaponImpl implements Weapon {
         result = PRIME * result + ((stats == null) ? 0 : stats.hashCode());
         return result;
     }
-    
+
     /**
      * Equals method implemented for the serialization.
      * 
@@ -162,10 +166,9 @@ public class WeaponImpl implements Weapon {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        
+
         final WeaponImpl other = (WeaponImpl) obj;
         final Map<Statistics, Integer> map = this.stats;
-        
         return this.name.equals(other.getName()) && this.desc.equals(other.getDescription()) 
                 && this.inflictedStatus.equals(other.getWeaponStatus())
                 && other.getFireAtk() == map.get(Statistics.FIREATK)
@@ -173,7 +176,7 @@ public class WeaponImpl implements Weapon {
                 && other.getPhysicalAtk() == map.get(Statistics.PHYSICATK)
                 && other.getThunderAtk() == map.get(Statistics.THUNDERATK);
     }
-    
+
     @Override
     public String toString() {
         return this.name;

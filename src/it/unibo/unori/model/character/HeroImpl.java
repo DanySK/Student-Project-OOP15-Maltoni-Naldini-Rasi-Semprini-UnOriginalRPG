@@ -134,7 +134,7 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     public Armor getArmor(final ArmorPieces p) {
         return this.armor.get(p);
     }
-    
+
     @Override
     public Map<ArmorPieces, Armor> getWholeArmor() {
         return new HashMap<>(this.armor);
@@ -200,7 +200,7 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     public void setUndefended() {
         this.defended = false;
     }
-    
+
     @Override
     public void setTotExp(final int toFill) {
         this.totExp = toFill;

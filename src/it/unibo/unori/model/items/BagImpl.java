@@ -134,8 +134,9 @@ public class BagImpl implements Bag {
             this.insertWeapon((Weapon) toAdd);
         } else if (toAdd instanceof Potion) {
             this.insertPotion((Potion) toAdd);
+        } else {
+            this.insertGenericItem(toAdd);
         }
-        this.insertGenericItem(toAdd);
     }
 
     @Override

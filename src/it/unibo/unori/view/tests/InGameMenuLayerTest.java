@@ -12,6 +12,7 @@ import javax.swing.SwingConstants;
 import it.unibo.unori.model.character.HeroImpl;
 import it.unibo.unori.model.character.exceptions.MaxHeroException;
 import it.unibo.unori.model.character.jobs.Jobs;
+import it.unibo.unori.model.items.ItemImpl;
 import it.unibo.unori.model.maps.SingletonParty;
 import it.unibo.unori.view.View;
 import it.unibo.unori.view.exceptions.SpriteNotFoundException;
@@ -65,7 +66,7 @@ public class InGameMenuLayerTest {
                 createParty();
                 final Layer inGameMenuLayer = new InGameMenuLayer(SingletonParty.getParty().getHeroTeam(),
                                                                   SingletonParty.getParty().getPartyBag());
-                 view.push(inGameMenuLayer);
+                view.push(inGameMenuLayer);
             } catch (IllegalArgumentException | MaxHeroException e1) {
                 System.out.println("Party creation error");
             }
@@ -82,6 +83,9 @@ public class InGameMenuLayerTest {
     private void createParty() throws IllegalArgumentException, MaxHeroException {
         SingletonParty.getParty().getHeroTeam().addHero(new HeroImpl("Cook", Jobs.COOK));
         SingletonParty.getParty().getHeroTeam().addHero(new HeroImpl("Clown", Jobs.CLOWN));
+
+        SingletonParty.getParty().getPartyBag().storeItem(new ItemImpl("Item1", "Desc1"));
+        SingletonParty.getParty().getPartyBag().storeItem(new ItemImpl("Item2", "Desc2"));
     }
 
     private class MoveAction extends AbstractAction {
