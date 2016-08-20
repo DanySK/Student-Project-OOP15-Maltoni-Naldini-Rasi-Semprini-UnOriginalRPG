@@ -81,6 +81,8 @@ public class BattleMainMenu extends JPanel {
         final MenuButton magic = new MenuButton("Magia");
         magic.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
+                battleMenuStack.push(new MagicMenu(battleMenuStack, heroTeam, foeTeam, BORDER + SIZE.width + x,
+                        y + SIZE.height - MagicMenu.SIZE.height));
             }
         });
 
