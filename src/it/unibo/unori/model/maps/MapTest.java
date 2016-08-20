@@ -35,6 +35,12 @@ public class MapTest {
     @Test
     public void testBasicFunction() {
         final GameMap map = new GameMapImpl();
+        final GameMap map2 = new GameMapImpl();
+        final GameMap map3 = new GameMapFactory().create4NPCRoomMap();
+        assertEquals(map, map2);
+        assertFalse(map.equals(map3));
+        assertFalse(map3.getCell(pos0).equals(new CellFactory().getBlockedCell()));
+        assertFalse(map3.getCell(pos0).equals(new CellFactory().getFreeCell()));
         assertEquals(map.getRow(0).size(), 100);
         assertEquals(map.getColumn(0).size(), 100);
         assertTrue(Optional.of(map.getCell(pos0)).isPresent());
