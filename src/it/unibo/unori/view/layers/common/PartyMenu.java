@@ -24,7 +24,7 @@ public class PartyMenu extends JPanel {
     /**
      * the size of this menu.
      */
-    public static final Dimension SIZE = new Dimension(160, 160);
+    public static final Dimension SIZE = ItemMenu.SIZE;
 
     private static final int BORDER = 5;
     private final MenuStack inGameStack;
