@@ -38,7 +38,7 @@ import it.unibo.unori.model.maps.SingletonParty;
  * This JUnit test class checks if JsonFileManager class works properly. I tested save*ToPath and load*ToPath methods
  * instead of default-path versions to use the temporary folder, but they act exactly the same.
  */
-public class DefinitiveJsonFileManagerTest {
+public class JsonFileManagerTest {
     private final JsonFileManager jsonManager = new JsonFileManager();
     /**
      * Temporary folder created before each test method, and deleted after each.
