@@ -17,6 +17,11 @@ import it.unibo.unori.model.character.HeroImpl;
 import it.unibo.unori.model.character.HeroTeam;
 import it.unibo.unori.model.character.HeroTeamImpl;
 
+/**
+ * This class should be registered in a {@link com.google.gson.GsonBuilder} to
+ * serialize and deserialize a {@link it.unibo.unori.model.character.HeroTeam}
+ * compatible class.
+ */
 public class HeroTeamSerializer implements JsonSerializer<HeroTeam>, JsonDeserializer<HeroTeam> {
 
     @Override
@@ -29,15 +34,9 @@ public class HeroTeamSerializer implements JsonSerializer<HeroTeam>, JsonDeseria
     @Override
     public HeroTeam deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
                     throws JsonParseException {
-        // final JsonArray array = ((JsonObject) json).get(HERO_LIST).getAsJsonArray();
         final List<Hero> heroList = new ArrayList<>();
-        /* array */json.getAsJsonArray().forEach(je -> heroList.add(context.deserialize(je, Hero.class)));
+        json.getAsJsonArray().forEach(je -> heroList.add(context.deserialize(je, Hero.class)));
         return new HeroTeamImpl(heroList);
-
-        /*
-         * final List<Hero> heroList = context.deserialize(((JsonObject) json).get(HERO_LIST), new
-         * TypeToken<List<Hero>>(){}.getType());
-         */
     }
 
 }

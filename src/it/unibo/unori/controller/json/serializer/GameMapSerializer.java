@@ -15,6 +15,13 @@ import it.unibo.unori.model.maps.GameMapImpl;
 import it.unibo.unori.model.maps.Position;
 import it.unibo.unori.model.maps.cell.Cell;
 
+/**
+ * This class should be registered in a {@link com.google.gson.GsonBuilder} to
+ * serialize and deserialize a {@link it.unibo.unori.model.maps.GameMap}
+ * compatible class. {@link it.unibo.unori.model.maps.cell.MapCellImpl}
+ * instances are serialized and deserialized without Linked maps, so the map
+ * should be manually re-linked.
+ */
 public class GameMapSerializer implements JsonSerializer<GameMap>, JsonDeserializer<GameMap> {
     private static final String FLOOR_MAP = "floorMap";
     private static final String INITIAL_POSITION = "initialPosition";

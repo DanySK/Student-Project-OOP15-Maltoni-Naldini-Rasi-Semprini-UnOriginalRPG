@@ -12,6 +12,11 @@ import com.google.gson.JsonSerializer;
 
 import it.unibo.unori.model.maps.Position;
 
+/**
+ * This class should be registered in a {@link com.google.gson.GsonBuilder} to
+ * serialize and deserialize a {@link it.unibo.unori.model.maps.Position}
+ * compatible class.
+ */
 public class PositionSerializer implements JsonSerializer<Position>, JsonDeserializer<Position> {
     private static final String POS_X = "posX";
     private static final String POS_Y = "posY";

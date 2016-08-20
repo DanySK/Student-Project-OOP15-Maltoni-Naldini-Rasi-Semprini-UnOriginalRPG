@@ -18,6 +18,11 @@ import it.unibo.unori.model.character.Status;
 import it.unibo.unori.model.items.Weapon;
 import it.unibo.unori.model.items.WeaponImpl;
 
+/**
+ * This class should be registered in a {@link com.google.gson.GsonBuilder} to
+ * serialize and deserialize a {@link it.unibo.unori.model.items.Weapon}
+ * compatible class.
+ */
 public class WeaponSerializer implements JsonSerializer<Weapon>, JsonDeserializer<Weapon> {
     private static final String NAME = "name";
     private static final String DESC = "desc";
