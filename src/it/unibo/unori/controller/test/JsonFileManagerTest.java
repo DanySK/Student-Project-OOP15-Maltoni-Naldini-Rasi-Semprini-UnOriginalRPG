@@ -56,17 +56,17 @@ public class JsonFileManagerTest {
     public void testSaveAndLoadGame() throws IOException {
         final File file = folder.newFile();
         final Party test = SingletonParty.getParty();
-        jsonManager.saveGameToPath(test, file.getAbsolutePath());
-        final Party deserialized = jsonManager.loadGameFromPath(file.getAbsolutePath());
+        jsonManager.savePartyToPath(test, file.getAbsolutePath());
+        final Party deserialized = jsonManager.loadPartyFromPath(file.getAbsolutePath());
         assertEquals(test.getCurrentFrame(), deserialized.getCurrentFrame());
         assertEquals(test.getCurrentGameMap(), deserialized.getCurrentGameMap());
         assertEquals(test.getCurrentPosition(), deserialized.getCurrentPosition());
         assertEquals(test.getHeroTeam(), deserialized.getHeroTeam());
         assertEquals(test.getPartyBag(), deserialized.getPartyBag());
         deserialized.setFrame("/res/sprites/cook.png");
-        jsonManager.saveGameToPath(deserialized, file.getAbsolutePath());
+        jsonManager.savePartyToPath(deserialized, file.getAbsolutePath());
         assertEquals(deserialized.getCurrentFrame(),
-                        jsonManager.loadGameFromPath(file.getAbsolutePath()).getCurrentFrame());
+                        jsonManager.loadPartyFromPath(file.getAbsolutePath()).getCurrentFrame());
     }
 
     /**
@@ -224,7 +224,7 @@ public class JsonFileManagerTest {
         final File file = folder.newFile();
         final String path = file.getAbsolutePath();
         if (file.delete()) {
-            jsonManager.loadGameFromPath(path);
+            jsonManager.loadPartyFromPath(path);
         }
         fail("It should throw exception");
     }
@@ -241,6 +241,6 @@ public class JsonFileManagerTest {
     @Test(expected = JsonIOException.class)
     public void testSaveFileNotValid() throws IOException {
         final File file = folder.newFile();
-        jsonManager.loadGameFromPath(file.getAbsolutePath());
+        jsonManager.loadPartyFromPath(file.getAbsolutePath());
     }
 }

@@ -1,7 +1,7 @@
 {
   "currentPosition": {
-    "posX": 12,
-    "posY": 11
+    "posX": 5,
+    "posY": 20
   },
   "currentMap": {
     "floorMap": [
@@ -85,84 +85,18 @@
         {
           "path": "res/sprites/map/rocks.png",
           "state": "BLOCKED"
-        }
-      ],
-      [
+        },
         {
           "path": "res/sprites/map/rocks.png",
           "state": "BLOCKED"
         },
         {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
+          "path": "res/sprites/map/rocks.png",
+          "state": "BLOCKED"
         },
         {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
+          "path": "res/sprites/map/rocks.png",
+          "state": "BLOCKED"
         },
         {
           "path": "res/sprites/map/rocks.png",
@@ -189,81 +123,6 @@
         {
           "path": "res/sprites/map/grass.png",
           "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/npcs/grass/front-5.png",
-          "state": "BLOCKED",
-          "npc": {
-            "sentence": {
-              "sentence": "Sto cercando la Lore, ma non la trovo!",
-              "nextToShow": 0,
-              "listOfRows": [
-                "Sto cercando la Lore, ma non la trovo!"
-              ]
-            }
-          }
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        }
-      ],
-      [
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
         },
         {
           "path": "res/sprites/map/grass.png",
@@ -352,20 +211,28 @@
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/house/left.png",
-          "state": "BLOCKED"
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
         },
         {
-          "path": "res/sprites/map/house/center.png",
-          "state": "BLOCKED"
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
         },
         {
-          "path": "res/sprites/map/house/center.png",
-          "state": "BLOCKED"
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
         },
         {
-          "path": "res/sprites/map/house/right.png",
-          "state": "BLOCKED"
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
         },
         {
           "path": "res/sprites/map/grass.png",
@@ -392,16 +259,24 @@
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/church/left.png",
-          "state": "BLOCKED"
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
         },
         {
-          "path": "res/sprites/map/church/center.png",
-          "state": "BLOCKED"
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
         },
         {
-          "path": "res/sprites/map/church/right.png",
-          "state": "BLOCKED"
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
         },
         {
           "path": "res/sprites/map/grass.png",
@@ -425,517 +300,21 @@
         }
       ],
       [
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/house/left.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/house/center.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/black.png",
-          "state": "BLOCKED",
-          "initialPos": {
-            "posX": 4,
-            "posY": 4
-          }
-        },
-        {
-          "path": "res/sprites/map/house/right.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/church/left.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/church/center.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/church/right.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        }
-      ],
-      [
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/church/left.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/church/center.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/church/right.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        }
-      ],
-      [
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/church/left.png",
-          "state": "BLOCKED"
-        },
         {
           "path": "res/sprites/map/black.png",
           "state": "BLOCKED",
           "initialPos": {
             "posX": 9,
-            "posY": 4
+            "posY": 18
           }
         },
         {
-          "path": "res/sprites/map/church/right.png",
-          "state": "BLOCKED"
-        },
-        {
           "path": "res/sprites/map/grass.png",
           "state": "FREE"
         },
         {
           "path": "res/sprites/map/grass.png",
           "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        }
-      ],
-      [
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        }
-      ],
-      [
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/black.png",
-          "state": "BLOCKED",
-          "initialPos": {
-            "posX": 3,
-            "posY": 1
-          }
-        }
-      ],
-      [
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/black.png",
-          "state": "BLOCKED",
-          "initialPos": {
-            "posX": 4,
-            "posY": 1
-          }
-        }
-      ],
-      [
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
         },
         {
           "path": "res/sprites/map/grass.png",
@@ -954,13 +333,123 @@
           "state": "BLOCKED",
           "npc": {
             "sentence": {
-              "sentence": "Stanno portando gli hobbit a Isengard!",
+              "sentence": "Eyhaaaaaaa!",
               "nextToShow": 0,
               "listOfRows": [
-                "Stanno portando gli hobbit a Isengard!"
+                "Eyhaaaaaaa!"
               ]
             }
           }
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/rocks.png",
+          "state": "BLOCKED"
+        }
+      ],
+      [
+        {
+          "path": "res/sprites/map/black.png",
+          "state": "BLOCKED",
+          "initialPos": {
+            "posX": 10,
+            "posY": 18
+          }
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
         },
         {
           "path": "res/sprites/map/grass.png",
@@ -1029,8 +518,28 @@
       ],
       [
         {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
+          "path": "res/sprites/map/black.png",
+          "state": "BLOCKED",
+          "initialPos": {
+            "posX": 11,
+            "posY": 18
+          }
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
         },
         {
           "path": "res/sprites/map/grass.png",
@@ -1115,198 +624,14 @@
       ],
       [
         {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        }
-      ],
-      [
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/house/left.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/house/center.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/house/center.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/house/right.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        }
-      ],
-      [
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/house/left.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/house/center.png",
-          "state": "BLOCKED"
-        },
-        {
           "path": "res/sprites/map/black.png",
           "state": "BLOCKED",
           "initialPos": {
-            "posX": 4,
-            "posY": 7
+            "posX": 12,
+            "posY": 18
           }
         },
         {
-          "path": "res/sprites/map/house/right.png",
-          "state": "BLOCKED"
-        },
-        {
           "path": "res/sprites/map/grass.png",
           "state": "FREE"
         },
@@ -1327,136 +652,17 @@
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        }
-      ],
-      [
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        }
-      ],
-      [
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
+          "path": "res/sprites/npcs/grass/front-4.png",
+          "state": "BLOCKED",
+          "npc": {
+            "sentence": {
+              "sentence": "Quello l� � Link che si � perso e cerca di tornare a casa",
+              "nextToShow": 0,
+              "listOfRows": [
+                "Quello l� � Link che si � perso e cerca di tornare a casa "
+              ]
+            }
+          }
         },
         {
           "path": "res/sprites/map/grass.png",
@@ -1593,74 +799,18 @@
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        }
-      ],
-      [
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
+          "path": "res/sprites/npcs/grass/front-3.png",
+          "state": "BLOCKED",
+          "npc": {
+            "sentence": {
+              "sentence": "Siccome Kingdom Hearts 3 non esce mai, ho cambiato contratto e sono venuto qua!",
+              "nextToShow": 0,
+              "listOfRows": [
+                "Siccome Kingdom Hearts 3 non esce mai, ho cambiato contratto e sono ",
+                "venuto qua!"
+              ]
+            }
+          }
         },
         {
           "path": "res/sprites/map/grass.png",
@@ -1769,11 +919,43 @@
           "state": "FREE"
         },
         {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/grass.png",
+          "state": "FREE"
+        },
+        {
           "path": "res/sprites/map/rocks.png",
           "state": "BLOCKED"
         }
       ],
       [
+        {
+          "path": "res/sprites/map/rocks.png",
+          "state": "BLOCKED"
+        },
+        {
+          "path": "res/sprites/map/rocks.png",
+          "state": "BLOCKED"
+        },
+        {
+          "path": "res/sprites/map/rocks.png",
+          "state": "BLOCKED"
+        },
+        {
+          "path": "res/sprites/map/rocks.png",
+          "state": "BLOCKED"
+        },
         {
           "path": "res/sprites/map/rocks.png",
           "state": "BLOCKED"
@@ -1857,31 +1039,52 @@
       ]
     ],
     "initialPosition": {
-      "posX": 10,
-      "posY": 10
+      "posX": 6,
+      "posY": 1
     },
-    "battleState": false
+    "battleState": true
   },
   "frame": "res/sprites/warrior.png",
-  "orientation": "WEST",
+  "orientation": "NORTH",
   "partyBag": {
     "armors": {},
     "weapons": {},
-    "potions": {},
+    "potions": [
+      [
+        {
+          "name": "Rimedio della Nonna",
+          "description": "Una rara tisana rigenerante che restituisce 600 HP e cura lo Stato",
+          "points": 600,
+          "statToRestore": "TOTALHP",
+          "statusRestorable": true
+        },
+        1
+      ],
+      [
+        {
+          "name": "Pasticche Magiche",
+          "description": "Pasticche che permettono di usare piu\u0027 magie",
+          "points": 300,
+          "statToRestore": "TOTALMP",
+          "statusRestorable": false
+        },
+        1
+      ]
+    ],
     "miscellaneous": {}
   },
   "heroteam": [
     {
       "armor": {
-        "HELMET": {
-          "name": "Elmo",
-          "piece": "HELMET",
-          "desc": "Elmo piuttosto brutto",
+        "TROUSERS": {
+          "name": "Schinieri",
+          "piece": "TROUSERS",
+          "desc": "Schinieri piuttosto brutti",
           "stats": {
-            "ICEDEF": 0,
-            "FIREDEF": 0,
             "PHYSICDEF": 100,
-            "THUNDERDEF": 0
+            "THUNDERDEF": 0,
+            "FIREDEF": 0,
+            "ICEDEF": 0
           },
           "immunity": "NONE"
         },
@@ -1890,10 +1093,22 @@
           "piece": "GLOVES",
           "desc": "Guanti piuttosto brutti",
           "stats": {
-            "ICEDEF": 0,
-            "FIREDEF": 0,
             "PHYSICDEF": 100,
-            "THUNDERDEF": 0
+            "THUNDERDEF": 0,
+            "FIREDEF": 0,
+            "ICEDEF": 0
+          },
+          "immunity": "NONE"
+        },
+        "HELMET": {
+          "name": "Elmo",
+          "piece": "HELMET",
+          "desc": "Elmo piuttosto brutto",
+          "stats": {
+            "PHYSICDEF": 100,
+            "THUNDERDEF": 0,
+            "FIREDEF": 0,
+            "ICEDEF": 0
           },
           "immunity": "NONE"
         },
@@ -1902,22 +1117,10 @@
           "piece": "SHIELD",
           "desc": "Scudo piuttosto brutto",
           "stats": {
-            "ICEDEF": 0,
-            "FIREDEF": 0,
             "PHYSICDEF": 100,
-            "THUNDERDEF": 0
-          },
-          "immunity": "NONE"
-        },
-        "TROUSERS": {
-          "name": "Schinieri",
-          "piece": "TROUSERS",
-          "desc": "Schinieri piuttosto brutti",
-          "stats": {
-            "ICEDEF": 0,
+            "THUNDERDEF": 0,
             "FIREDEF": 0,
-            "PHYSICDEF": 100,
-            "THUNDERDEF": 0
+            "ICEDEF": 0
           },
           "immunity": "NONE"
         },
@@ -1926,10 +1129,10 @@
           "piece": "ARMOR",
           "desc": "Cotta piuttosto brutto",
           "stats": {
-            "ICEDEF": 0,
-            "FIREDEF": 0,
             "PHYSICDEF": 100,
-            "THUNDERDEF": 0
+            "THUNDERDEF": 0,
+            "FIREDEF": 0,
+            "ICEDEF": 0
           },
           "immunity": "NONE"
         }
@@ -1940,36 +1143,36 @@
       "specialBar": 100,
       "currentBar": 0,
       "defended": false,
-      "name": "fadsadsfasdf",
+      "name": "aa",
       "battleFrame": "res/sprites/warrior.png",
-      "currentHP": 1500,
+      "currentHP": 1480,
       "currentMP": 500,
       "level": 1,
       "weapon": {
         "name": "Spada Semplice",
         "desc": "Adatta per tagliare il burro pi� che i nemici",
         "stats": {
-          "FIREATK": 0,
-          "ICEATK": 0,
           "PHYSICATK": 100,
-          "THUNDERATK": 0
+          "THUNDERATK": 0,
+          "FIREATK": 0,
+          "ICEATK": 0
         },
         "inflictedStatus": "NONE"
       },
       "status": "NONE",
       "statistic": {
-        "FIREATK": 800,
-        "ICEATK": 800,
-        "PHYSICDEF": 2000,
         "PHYSICATK": 2000,
-        "THUNDERATK": 800,
         "ICEDEF": 750,
-        "THUNDERDEF": 750,
-        "TOTALHP": 1500,
         "EXPFACTOR": 100,
+        "THUNDERATK": 800,
+        "PHYSICDEF": 2000,
+        "ICEATK": 800,
         "TOTALMP": 500,
+        "TOTALHP": 1500,
+        "FIREDEF": 750,
+        "FIREATK": 800,
         "SPEED": 1100,
-        "FIREDEF": 750
+        "THUNDERDEF": 750
       },
       "spellList": [
         {
@@ -1977,10 +1180,23 @@
           "shownString": "Che schiaffo!",
           "description": "Non c\u0027� nulla di magico in uno schiaffo",
           "stats": {
-            "FIREATK": 0,
-            "ICEATK": 0,
             "PHYSICATK": 1,
-            "THUNDERATK": 0
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
           },
           "accuracy": 10,
           "mpRequired": 1
@@ -1989,15 +1205,15 @@
     },
     {
       "armor": {
-        "HELMET": {
-          "name": "Elmo",
-          "piece": "HELMET",
-          "desc": "Elmo piuttosto brutto",
+        "TROUSERS": {
+          "name": "Schinieri",
+          "piece": "TROUSERS",
+          "desc": "Schinieri piuttosto brutti",
           "stats": {
-            "ICEDEF": 0,
-            "FIREDEF": 0,
             "PHYSICDEF": 100,
-            "THUNDERDEF": 0
+            "THUNDERDEF": 0,
+            "FIREDEF": 0,
+            "ICEDEF": 0
           },
           "immunity": "NONE"
         },
@@ -2006,10 +1222,22 @@
           "piece": "GLOVES",
           "desc": "Guanti piuttosto brutti",
           "stats": {
-            "ICEDEF": 0,
-            "FIREDEF": 0,
             "PHYSICDEF": 100,
-            "THUNDERDEF": 0
+            "THUNDERDEF": 0,
+            "FIREDEF": 0,
+            "ICEDEF": 0
+          },
+          "immunity": "NONE"
+        },
+        "HELMET": {
+          "name": "Elmo",
+          "piece": "HELMET",
+          "desc": "Elmo piuttosto brutto",
+          "stats": {
+            "PHYSICDEF": 100,
+            "THUNDERDEF": 0,
+            "FIREDEF": 0,
+            "ICEDEF": 0
           },
           "immunity": "NONE"
         },
@@ -2018,22 +1246,10 @@
           "piece": "SHIELD",
           "desc": "Scudo piuttosto brutto",
           "stats": {
-            "ICEDEF": 0,
-            "FIREDEF": 0,
             "PHYSICDEF": 100,
-            "THUNDERDEF": 0
-          },
-          "immunity": "NONE"
-        },
-        "TROUSERS": {
-          "name": "Schinieri",
-          "piece": "TROUSERS",
-          "desc": "Schinieri piuttosto brutti",
-          "stats": {
-            "ICEDEF": 0,
+            "THUNDERDEF": 0,
             "FIREDEF": 0,
-            "PHYSICDEF": 100,
-            "THUNDERDEF": 0
+            "ICEDEF": 0
           },
           "immunity": "NONE"
         },
@@ -2042,10 +1258,10 @@
           "piece": "ARMOR",
           "desc": "Cotta piuttosto brutto",
           "stats": {
-            "ICEDEF": 0,
-            "FIREDEF": 0,
             "PHYSICDEF": 100,
-            "THUNDERDEF": 0
+            "THUNDERDEF": 0,
+            "FIREDEF": 0,
+            "ICEDEF": 0
           },
           "immunity": "NONE"
         }
@@ -2056,7 +1272,7 @@
       "specialBar": 100,
       "currentBar": 0,
       "defended": false,
-      "name": "fads",
+      "name": "aaa",
       "battleFrame": "res/sprites/warrior.png",
       "currentHP": 1500,
       "currentMP": 500,
@@ -2065,27 +1281,27 @@
         "name": "Spada Semplice",
         "desc": "Adatta per tagliare il burro pi� che i nemici",
         "stats": {
-          "FIREATK": 0,
-          "ICEATK": 0,
           "PHYSICATK": 100,
-          "THUNDERATK": 0
+          "THUNDERATK": 0,
+          "FIREATK": 0,
+          "ICEATK": 0
         },
         "inflictedStatus": "NONE"
       },
       "status": "NONE",
       "statistic": {
-        "FIREATK": 800,
-        "ICEATK": 800,
-        "PHYSICDEF": 2000,
         "PHYSICATK": 2000,
-        "THUNDERATK": 800,
         "ICEDEF": 750,
-        "THUNDERDEF": 750,
-        "TOTALHP": 1500,
         "EXPFACTOR": 100,
+        "THUNDERATK": 800,
+        "PHYSICDEF": 2000,
+        "ICEATK": 800,
         "TOTALMP": 500,
+        "TOTALHP": 1500,
+        "FIREDEF": 750,
+        "FIREATK": 800,
         "SPEED": 1100,
-        "FIREDEF": 750
+        "THUNDERDEF": 750
       },
       "spellList": [
         {
@@ -2093,10 +1309,23 @@
           "shownString": "Che schiaffo!",
           "description": "Non c\u0027� nulla di magico in uno schiaffo",
           "stats": {
-            "FIREATK": 0,
-            "ICEATK": 0,
             "PHYSICATK": 1,
-            "THUNDERATK": 0
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
           },
           "accuracy": 10,
           "mpRequired": 1
@@ -2105,15 +1334,15 @@
     },
     {
       "armor": {
-        "HELMET": {
-          "name": "Elmo",
-          "piece": "HELMET",
-          "desc": "Elmo piuttosto brutto",
+        "TROUSERS": {
+          "name": "Schinieri",
+          "piece": "TROUSERS",
+          "desc": "Schinieri piuttosto brutti",
           "stats": {
-            "ICEDEF": 0,
-            "FIREDEF": 0,
             "PHYSICDEF": 100,
-            "THUNDERDEF": 0
+            "THUNDERDEF": 0,
+            "FIREDEF": 0,
+            "ICEDEF": 0
           },
           "immunity": "NONE"
         },
@@ -2122,10 +1351,22 @@
           "piece": "GLOVES",
           "desc": "Guanti piuttosto brutti",
           "stats": {
-            "ICEDEF": 0,
-            "FIREDEF": 0,
             "PHYSICDEF": 100,
-            "THUNDERDEF": 0
+            "THUNDERDEF": 0,
+            "FIREDEF": 0,
+            "ICEDEF": 0
+          },
+          "immunity": "NONE"
+        },
+        "HELMET": {
+          "name": "Elmo",
+          "piece": "HELMET",
+          "desc": "Elmo piuttosto brutto",
+          "stats": {
+            "PHYSICDEF": 100,
+            "THUNDERDEF": 0,
+            "FIREDEF": 0,
+            "ICEDEF": 0
           },
           "immunity": "NONE"
         },
@@ -2134,22 +1375,10 @@
           "piece": "SHIELD",
           "desc": "Scudo piuttosto brutto",
           "stats": {
-            "ICEDEF": 0,
-            "FIREDEF": 0,
             "PHYSICDEF": 100,
-            "THUNDERDEF": 0
-          },
-          "immunity": "NONE"
-        },
-        "TROUSERS": {
-          "name": "Schinieri",
-          "piece": "TROUSERS",
-          "desc": "Schinieri piuttosto brutti",
-          "stats": {
-            "ICEDEF": 0,
+            "THUNDERDEF": 0,
             "FIREDEF": 0,
-            "PHYSICDEF": 100,
-            "THUNDERDEF": 0
+            "ICEDEF": 0
           },
           "immunity": "NONE"
         },
@@ -2158,10 +1387,10 @@
           "piece": "ARMOR",
           "desc": "Cotta piuttosto brutto",
           "stats": {
-            "ICEDEF": 0,
-            "FIREDEF": 0,
             "PHYSICDEF": 100,
-            "THUNDERDEF": 0
+            "THUNDERDEF": 0,
+            "FIREDEF": 0,
+            "ICEDEF": 0
           },
           "immunity": "NONE"
         }
@@ -2172,7 +1401,7 @@
       "specialBar": 100,
       "currentBar": 0,
       "defended": false,
-      "name": "fadsadsfasdfaf",
+      "name": "a",
       "battleFrame": "res/sprites/warrior.png",
       "currentHP": 1500,
       "currentMP": 500,
@@ -2181,27 +1410,27 @@
         "name": "Spada Semplice",
         "desc": "Adatta per tagliare il burro pi� che i nemici",
         "stats": {
-          "FIREATK": 0,
-          "ICEATK": 0,
           "PHYSICATK": 100,
-          "THUNDERATK": 0
+          "THUNDERATK": 0,
+          "FIREATK": 0,
+          "ICEATK": 0
         },
         "inflictedStatus": "NONE"
       },
       "status": "NONE",
       "statistic": {
-        "FIREATK": 800,
-        "ICEATK": 800,
-        "PHYSICDEF": 2000,
         "PHYSICATK": 2000,
-        "THUNDERATK": 800,
         "ICEDEF": 750,
-        "THUNDERDEF": 750,
-        "TOTALHP": 1500,
         "EXPFACTOR": 100,
+        "THUNDERATK": 800,
+        "PHYSICDEF": 2000,
+        "ICEATK": 800,
         "TOTALMP": 500,
+        "TOTALHP": 1500,
+        "FIREDEF": 750,
+        "FIREATK": 800,
         "SPEED": 1100,
-        "FIREDEF": 750
+        "THUNDERDEF": 750
       },
       "spellList": [
         {
@@ -2209,10 +1438,23 @@
           "shownString": "Che schiaffo!",
           "description": "Non c\u0027� nulla di magico in uno schiaffo",
           "stats": {
-            "FIREATK": 0,
-            "ICEATK": 0,
             "PHYSICATK": 1,
-            "THUNDERATK": 0
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
           },
           "accuracy": 10,
           "mpRequired": 1
@@ -2221,15 +1463,15 @@
     },
     {
       "armor": {
-        "HELMET": {
-          "name": "Elmo",
-          "piece": "HELMET",
-          "desc": "Elmo piuttosto brutto",
+        "TROUSERS": {
+          "name": "Schinieri",
+          "piece": "TROUSERS",
+          "desc": "Schinieri piuttosto brutti",
           "stats": {
-            "ICEDEF": 0,
-            "FIREDEF": 0,
             "PHYSICDEF": 100,
-            "THUNDERDEF": 0
+            "THUNDERDEF": 0,
+            "FIREDEF": 0,
+            "ICEDEF": 0
           },
           "immunity": "NONE"
         },
@@ -2238,10 +1480,22 @@
           "piece": "GLOVES",
           "desc": "Guanti piuttosto brutti",
           "stats": {
-            "ICEDEF": 0,
-            "FIREDEF": 0,
             "PHYSICDEF": 100,
-            "THUNDERDEF": 0
+            "THUNDERDEF": 0,
+            "FIREDEF": 0,
+            "ICEDEF": 0
+          },
+          "immunity": "NONE"
+        },
+        "HELMET": {
+          "name": "Elmo",
+          "piece": "HELMET",
+          "desc": "Elmo piuttosto brutto",
+          "stats": {
+            "PHYSICDEF": 100,
+            "THUNDERDEF": 0,
+            "FIREDEF": 0,
+            "ICEDEF": 0
           },
           "immunity": "NONE"
         },
@@ -2250,22 +1504,10 @@
           "piece": "SHIELD",
           "desc": "Scudo piuttosto brutto",
           "stats": {
-            "ICEDEF": 0,
-            "FIREDEF": 0,
             "PHYSICDEF": 100,
-            "THUNDERDEF": 0
-          },
-          "immunity": "NONE"
-        },
-        "TROUSERS": {
-          "name": "Schinieri",
-          "piece": "TROUSERS",
-          "desc": "Schinieri piuttosto brutti",
-          "stats": {
-            "ICEDEF": 0,
+            "THUNDERDEF": 0,
             "FIREDEF": 0,
-            "PHYSICDEF": 100,
-            "THUNDERDEF": 0
+            "ICEDEF": 0
           },
           "immunity": "NONE"
         },
@@ -2274,10 +1516,10 @@
           "piece": "ARMOR",
           "desc": "Cotta piuttosto brutto",
           "stats": {
-            "ICEDEF": 0,
-            "FIREDEF": 0,
             "PHYSICDEF": 100,
-            "THUNDERDEF": 0
+            "THUNDERDEF": 0,
+            "FIREDEF": 0,
+            "ICEDEF": 0
           },
           "immunity": "NONE"
         }
@@ -2288,7 +1530,7 @@
       "specialBar": 100,
       "currentBar": 0,
       "defended": false,
-      "name": "fadsadsf",
+      "name": "aaaa",
       "battleFrame": "res/sprites/warrior.png",
       "currentHP": 1500,
       "currentMP": 500,
@@ -2297,27 +1539,27 @@
         "name": "Spada Semplice",
         "desc": "Adatta per tagliare il burro pi� che i nemici",
         "stats": {
-          "FIREATK": 0,
-          "ICEATK": 0,
           "PHYSICATK": 100,
-          "THUNDERATK": 0
+          "THUNDERATK": 0,
+          "FIREATK": 0,
+          "ICEATK": 0
         },
         "inflictedStatus": "NONE"
       },
       "status": "NONE",
       "statistic": {
-        "FIREATK": 800,
-        "ICEATK": 800,
-        "PHYSICDEF": 2000,
         "PHYSICATK": 2000,
-        "THUNDERATK": 800,
         "ICEDEF": 750,
-        "THUNDERDEF": 750,
-        "TOTALHP": 1500,
         "EXPFACTOR": 100,
+        "THUNDERATK": 800,
+        "PHYSICDEF": 2000,
+        "ICEATK": 800,
         "TOTALMP": 500,
+        "TOTALHP": 1500,
+        "FIREDEF": 750,
+        "FIREATK": 800,
         "SPEED": 1100,
-        "FIREDEF": 750
+        "THUNDERDEF": 750
       },
       "spellList": [
         {
@@ -2325,10 +1567,23 @@
           "shownString": "Che schiaffo!",
           "description": "Non c\u0027� nulla di magico in uno schiaffo",
           "stats": {
-            "FIREATK": 0,
-            "ICEATK": 0,
             "PHYSICATK": 1,
-            "THUNDERATK": 0
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
           },
           "accuracy": 10,
           "mpRequired": 1

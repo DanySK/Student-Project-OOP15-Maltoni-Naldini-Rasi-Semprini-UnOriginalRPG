@@ -111,6 +111,6 @@ public class WorldBuilder {
         /**
          * Kind of maps ammitted in the enumeration.
          */
-        CITY, DENTRANCE, SHOP, HOUSE, CHURCH, AISLE;
+        CITY, DENTRANCE, SHOP, HOUSE, CHURCH, AISLE, DUNGEON;
     }
 }

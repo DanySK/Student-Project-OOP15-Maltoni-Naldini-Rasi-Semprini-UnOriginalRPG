@@ -37,7 +37,7 @@ public class MainMenuState extends AbstractGameState {
         final Button loadGame = new Button("Carica parita");
         loadGame.addActionListener(listener);
         loadGame.setActionCommand(MainMenuActionListener.LOAD_GAME);
-        loadGame.setEnabled(new File(JsonFileManager.SAVE_FILE).isFile());
+        loadGame.setEnabled(new File(JsonFileManager.SAVE_FILE).isFile() && new File(JsonFileManager.MAP_TYPE).isFile());
         returnList.add(loadGame);
 
         final Button closeGame = new Button("Esci");

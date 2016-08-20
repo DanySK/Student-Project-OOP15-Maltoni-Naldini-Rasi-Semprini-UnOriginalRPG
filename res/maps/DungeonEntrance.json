@@ -144,8 +144,8 @@
           "name": "Lanciafiamme",
           "desc": "C\u0027� davvero bisogno di una descrizione?",
           "stats": {
-            "THUNDERATK": 0,
             "PHYSICATK": 580,
+            "THUNDERATK": 0,
             "FIREATK": 90,
             "ICEATK": 0
           },

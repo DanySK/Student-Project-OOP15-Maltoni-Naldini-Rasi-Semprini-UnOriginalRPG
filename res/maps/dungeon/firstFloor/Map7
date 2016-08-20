@@ -434,8 +434,8 @@
           "name": "Cannone Espandibile",
           "desc": "Un cannone portatile, che pu� essere, all\u0027occorrenza, espanso per magia",
           "stats": {
-            "THUNDERATK": 0,
             "PHYSICATK": 480,
+            "THUNDERATK": 0,
             "FIREATK": 30,
             "ICEATK": 0
           },

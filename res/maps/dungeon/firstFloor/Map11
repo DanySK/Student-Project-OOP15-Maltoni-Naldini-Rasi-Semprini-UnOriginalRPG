@@ -170,9 +170,9 @@
           "desc": "Guanti argentei, di grande qualit�",
           "stats": {
             "PHYSICDEF": 500,
-            "ICEDEF": 250,
+            "FIREDEF": 250,
             "THUNDERDEF": 250,
-            "FIREDEF": 250
+            "ICEDEF": 250
           },
           "immunity": "POISONED"
         }
