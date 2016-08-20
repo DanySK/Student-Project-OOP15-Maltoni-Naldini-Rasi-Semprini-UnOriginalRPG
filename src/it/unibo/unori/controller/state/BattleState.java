@@ -59,6 +59,7 @@ public class BattleState extends AbstractGameState {
      * @param bag
      *            the bag containing the items of the party
      * @throws SpriteNotFoundException
+     *             if it can't find some sprites
      */
     public BattleState(final HeroTeam party, final FoeSquad foes, final Bag bag) throws SpriteNotFoundException {
         super(new BattleLayer(party, foes, bag));
@@ -78,6 +79,7 @@ public class BattleState extends AbstractGameState {
      * @param foes
      *            the team of enemies that the heroes must defeat
      * @throws SpriteNotFoundException
+     *             if it can't find some sprites
      */
     public BattleState(final Party party, final FoeSquad foes) throws SpriteNotFoundException {
         this(party.getHeroTeam(), foes, party.getPartyBag());
