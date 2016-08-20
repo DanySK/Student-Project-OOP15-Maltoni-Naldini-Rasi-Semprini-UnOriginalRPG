@@ -19,6 +19,11 @@ import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.ArmorImpl;
 import it.unibo.unori.model.items.Armor.ArmorPieces;
 
+/**
+ * This class should be registered in a {@link com.google.gson.GsonBuilder} to serialize and 
+ * deserialize a {@link it.unibo.unori.model.items.Armor} compatible
+ * class.
+ */
 public class ArmorSerializer implements JsonSerializer<Armor>, JsonDeserializer<Armor> {
     private static final String NAME = "name";
     private static final String PIECE = "piece";

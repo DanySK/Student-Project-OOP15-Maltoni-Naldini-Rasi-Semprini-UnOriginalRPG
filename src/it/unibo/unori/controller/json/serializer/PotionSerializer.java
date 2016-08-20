@@ -14,7 +14,12 @@ import it.unibo.unori.model.character.Statistics;
 import it.unibo.unori.model.items.Potion;
 import it.unibo.unori.model.items.PotionImpl;
 
-public class PotionSerializer implements JsonSerializer<Potion>, JsonDeserializer<Potion>{
+/**
+ * This class should be registered in a {@link com.google.gson.GsonBuilder} to
+ * serialize and deserialize a {@link it.unibo.unori.model.items.Potion}
+ * compatible class.
+ */
+public class PotionSerializer implements JsonSerializer<Potion>, JsonDeserializer<Potion> {
     private static final String NAME = "name";
     private static final String DESCRIPTION = "description";
     private static final String POINTS = "points";

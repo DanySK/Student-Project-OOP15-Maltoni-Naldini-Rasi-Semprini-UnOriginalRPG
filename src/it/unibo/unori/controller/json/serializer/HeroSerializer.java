@@ -24,6 +24,11 @@ import it.unibo.unori.model.items.Armor;
 import it.unibo.unori.model.items.Armor.ArmorPieces;
 import it.unibo.unori.model.items.Weapon;
 
+/**
+ * This class should be registered in a {@link com.google.gson.GsonBuilder} to
+ * serialize and deserialize a {@link it.unibo.unori.model.character.Hero}
+ * compatible class.
+ */
 public class HeroSerializer implements JsonSerializer<Hero>, JsonDeserializer<Hero> {
     // CharacterImpl
     private static final String NAME = "name";
@@ -60,7 +65,7 @@ public class HeroSerializer implements JsonSerializer<Hero>, JsonDeserializer<He
         try {
             weapon = context.serialize(src.getWeapon(), Weapon.class);
         } catch (NoWeaponException e) {
-            weapon = null;
+            throw new IllegalArgumentException(e);
         }
         jObj.add(WEAPON, weapon);
         final JsonElement spellList = context.serialize(src.getMagics(), new TypeToken<List<MagicAttackInterface>>() {

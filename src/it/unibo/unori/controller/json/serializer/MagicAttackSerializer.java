@@ -16,7 +16,11 @@ import com.google.gson.reflect.TypeToken;
 import it.unibo.unori.model.battle.MagicAttack;
 import it.unibo.unori.model.battle.MagicAttackInterface;
 import it.unibo.unori.model.character.Statistics;
-
+/**
+ * This class should be registered in a {@link com.google.gson.GsonBuilder} to
+ * serialize and deserialize a {@link it.unibo.unori.model.battle.MagicAttackInterface}
+ * compatible class.
+ */
 public class MagicAttackSerializer implements JsonSerializer<MagicAttackInterface>, JsonDeserializer<MagicAttackInterface> {
     private static final String NAME = "name";
     private static final String SHOWN_STRING = "shownString";

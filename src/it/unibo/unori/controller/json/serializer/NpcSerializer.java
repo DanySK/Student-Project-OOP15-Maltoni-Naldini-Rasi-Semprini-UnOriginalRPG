@@ -14,6 +14,11 @@ import it.unibo.unori.model.character.Npc;
 import it.unibo.unori.model.character.NpcImpl;
 import it.unibo.unori.model.menu.Dialogue;
 
+/**
+ * This class should be registered in a {@link com.google.gson.GsonBuilder} to
+ * serialize and deserialize a {@link it.unibo.unori.model.character.Npc}
+ * compatible class.
+ */
 public class NpcSerializer implements JsonSerializer<Npc>, JsonDeserializer<Npc> {
     private static final String SENTENCE = "sentence";
 
@@ -29,7 +34,7 @@ public class NpcSerializer implements JsonSerializer<Npc>, JsonDeserializer<Npc>
 
     @Override
     public Npc deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
-                    throws JsonParseException {
+            throws JsonParseException {
         final Dialogue sentence = context.deserialize(((JsonObject) json).get(SENTENCE), Dialogue.class);
         return new NpcImpl(sentence);
     }

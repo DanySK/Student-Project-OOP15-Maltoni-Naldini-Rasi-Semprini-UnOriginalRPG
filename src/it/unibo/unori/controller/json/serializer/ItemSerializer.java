@@ -16,6 +16,11 @@ import it.unibo.unori.model.items.ItemImpl;
 import it.unibo.unori.model.items.Potion;
 import it.unibo.unori.model.items.Weapon;
 
+/**
+ * This class should be registered in a {@link com.google.gson.GsonBuilder} to
+ * serialize and deserialize a {@link it.unibo.unori.model.items.Item}
+ * compatible class.
+ */
 public class ItemSerializer implements JsonSerializer<Item>, JsonDeserializer<Item> {
     private static final String NAME = "name";
     private static final String DESC = "desc";
