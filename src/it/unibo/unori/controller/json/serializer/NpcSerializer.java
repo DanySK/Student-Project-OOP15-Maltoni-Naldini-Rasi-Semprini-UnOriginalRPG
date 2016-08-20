@@ -2,15 +2,19 @@ package it.unibo.unori.controller.json.serializer;
 
 import java.lang.reflect.Type;
 
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
 import it.unibo.unori.model.character.Npc;
+import it.unibo.unori.model.character.NpcImpl;
 import it.unibo.unori.model.menu.Dialogue;
 
-public class NpcSerializer implements JsonSerializer<Npc> {
+public class NpcSerializer implements JsonSerializer<Npc>, JsonDeserializer<Npc> {
     private static final String SENTENCE = "sentence";
 
     @Override
@@ -21,6 +25,13 @@ public class NpcSerializer implements JsonSerializer<Npc> {
         jObj.add(SENTENCE, sentence);
 
         return jObj;
+    }
+
+    @Override
+    public Npc deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
+                    throws JsonParseException {
+        final Dialogue sentence = context.deserialize(((JsonObject) json).get(SENTENCE), Dialogue.class);
+        return new NpcImpl(sentence);
     }
 
 }
