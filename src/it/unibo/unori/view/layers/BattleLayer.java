@@ -1,6 +1,7 @@
 package it.unibo.unori.view.layers;
 
 import it.unibo.unori.model.items.Bag;
+import it.unibo.unori.controller.action.InteractAction;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.FoeSquad;
 import it.unibo.unori.model.character.Hero;
@@ -18,8 +19,13 @@ import java.io.IOException;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.awt.Dimension;
 import javax.imageio.ImageIO;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
+import javax.swing.KeyStroke;
+
 import java.awt.image.BufferedImage;
 
 /**
@@ -40,7 +46,7 @@ public class BattleLayer extends Layer {
     private final FoeSquad foeTeam;
     private final HeroTeam heroTeam;
 
-    BufferedImage background;
+    private BufferedImage background;
 
     private final MenuStack battleMenuStack = new MenuStack();
 
@@ -83,6 +89,19 @@ public class BattleLayer extends Layer {
 
         this.setBackground(Color.WHITE);
         this.setBounds(0, 0, SIZE.width, SIZE.height);
+
+        final ActionMap actionMap = getActionMap();
+        final InputMap inputMap = getInputMap(WHEN_IN_FOCUSED_WINDOW);
+
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "ENTER");
+        actionMap.put("ENTER", new InteractAction());
+    }
+
+    /**
+     * Create new turn.
+     */
+    public void newTurn() {
+        battleMenuStack.push(new BattleMainMenu(battleMenuStack, heroTeam, foeTeam, bag, BORDER, BORDER));
     }
 
     private void drawHero(final Graphics g, final int x, final int y, final int hp, final int totalHp,
@@ -210,13 +229,6 @@ public class BattleLayer extends Layer {
         }
 
         return sprite;
-    }
-
-    /**
-     * Create new turn.
-     */
-    public void newTurn() {
-        battleMenuStack.push(new BattleMainMenu(battleMenuStack, heroTeam, foeTeam, bag, BORDER, BORDER));
     }
 
     /**

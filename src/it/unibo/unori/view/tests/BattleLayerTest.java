@@ -49,8 +49,7 @@ public class BattleLayerTest {
             view.push(battleLayer);
             view.resizeTo(battleLayer);
 
-            battleLayer.showDialogue("test");
-            battleLayer.hideDialogue();
+            battleLayer.newTurn();
         } catch (final IllegalArgumentException e) {
             System.out.println("Illegal argument");
         } catch (final SpriteNotFoundException e) {
