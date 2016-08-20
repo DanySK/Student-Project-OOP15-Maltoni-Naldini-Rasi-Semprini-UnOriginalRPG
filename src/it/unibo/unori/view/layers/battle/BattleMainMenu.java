@@ -29,7 +29,7 @@ public class BattleMainMenu extends JPanel {
     /**
      * The battle main menu size.
      */
-    public static final Dimension SIZE = new Dimension(320, 160);
+    public static final Dimension SIZE = new Dimension(320, 80);
 
     private static final int BORDER = 5;
     private final MenuStack battleMenuStack;
