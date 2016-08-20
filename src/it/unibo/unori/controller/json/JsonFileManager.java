@@ -8,10 +8,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -25,7 +22,6 @@ import it.unibo.unori.controller.json.deserializers.CharacterDeserializer;
 import it.unibo.unori.controller.json.deserializers.DialogueDeserializer;
 import it.unibo.unori.controller.json.deserializers.FoeDeserializer;
 import it.unibo.unori.controller.json.deserializers.FoeSquadDeserializer;
-import it.unibo.unori.controller.json.deserializers.ItemDeserializer;
 import it.unibo.unori.controller.json.deserializers.PartyDeserializer;
 import it.unibo.unori.controller.json.serializer.ArmorSerializer;
 import it.unibo.unori.controller.json.serializer.BagSerializer;
@@ -77,35 +73,23 @@ public class JsonFileManager {
      * Default constructor.
      */
     public JsonFileManager() {
-        gson = new GsonBuilder()/* .enableComplexMapKeySerialization() */.setPrettyPrinting()
+        gson = new GsonBuilder().setPrettyPrinting()
                         .registerTypeAdapter(Item.class, new ItemSerializer())
-                        // .registerTypeAdapter(Item.class, new ItemDeserializer())
                         .registerTypeAdapter(Armor.class, new ArmorSerializer())
-                        // .registerTypeAdapter(Armor.class, new ArmorDeserializer())
                         .registerTypeAdapter(Weapon.class, new WeaponSerializer())
-                        // .registerTypeAdapter(Weapon.class, new WeaponDeserializer())
                         .registerTypeAdapter(Potion.class, new PotionSerializer())
-                        // .registerTypeAdapter(Potion.class, new PotionDeserializer())
                         .registerTypeAdapter(Bag.class, new BagSerializer())
-                        // .registerTypeAdapter(Bag.class, new BagDeserializer())
                         .registerTypeAdapter(MagicAttackInterface.class, new MagicAttackSerializer())
-                        // .registerTypeAdapter(MagicAttackInterface.class, new MagicAttackDeserializer())
                         .registerTypeAdapter(Character.class, new CharacterDeserializer())
                         .registerTypeAdapter(Foe.class, new FoeDeserializer())
                         .registerTypeAdapter(FoeSquad.class, new FoeSquadDeserializer())
                         .registerTypeAdapter(Hero.class, new HeroSerializer())
-                        // .registerTypeAdapter(Hero.class, new HeroDeserializer())
                         .registerTypeAdapter(HeroTeam.class, new HeroTeamSerializer())
-                        // .registerTypeAdapter(HeroTeam.class, new HeroTeamDeserializer())
                         .registerTypeAdapter(Npc.class, new NpcSerializer())
-                        // .registerTypeAdapter(Npc.class, new NpcDeserializer())
                         .registerTypeAdapter(DialogueInterface.class, new DialogueDeserializer())
                         .registerTypeAdapter(Position.class, new PositionSerializer())
-                        // .registerTypeAdapter(Position.class, new GameMapDeserializer.PositionDeserializer())
                         .registerTypeAdapter(Cell.class, new CellSerializer())
-                        // .registerTypeAdapter(Cell.class, new GameMapDeserializer.CellDeserializer())
                         .registerTypeAdapter(GameMap.class, new GameMapSerializer())
-                        // .registerTypeAdapter(GameMap.class, new GameMapDeserializer())
                         .registerTypeAdapter(Party.class, new PartyDeserializer()).create();
     }
 

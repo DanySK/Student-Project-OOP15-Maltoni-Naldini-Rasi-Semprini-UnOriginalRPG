@@ -64,7 +64,7 @@ public class HeroSerializer implements JsonSerializer<Hero>, JsonDeserializer<He
         }
         jObj.add(WEAPON, weapon);
         final JsonElement spellList = context.serialize(src.getMagics(), new TypeToken<List<MagicAttackInterface>>() {
-                }.getType());
+        }.getType());
         jObj.add(SPELL_LIST, spellList);
         final JsonElement status = context.serialize(src.getStatus(), Status.class);
         jObj.add(STATUS, status);
@@ -85,28 +85,28 @@ public class HeroSerializer implements JsonSerializer<Hero>, JsonDeserializer<He
 
         return jObj;
     }
-    
+
     @Override
     public Hero deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
-            throws JsonParseException {
+                    throws JsonParseException {
         final JsonObject jObj = (JsonObject) json;
 
         // Deserializing fields for constructor
         final String name = jObj.get(NAME).getAsString();
         final Jobs job = context.deserialize(jObj.get(JOB), Jobs.class);
         final Map<Statistics, Integer> params = context.deserialize(jObj.get(STATISTIC),
-                new TypeToken<Map<Statistics, Integer>>() {
-                }.getType());
+                        new TypeToken<Map<Statistics, Integer>>() {
+                        }.getType());
         final Map<ArmorPieces, Armor> armor = context.deserialize(jObj.get(ARMOR),
-                new TypeToken<Map<ArmorPieces, Armor>>() {
-                }.getType());
+                        new TypeToken<Map<ArmorPieces, Armor>>() {
+                        }.getType());
         final Weapon weapon = context.deserialize(jObj.get(WEAPON), Weapon.class);
         // Instantiation
         final Hero returnHero = new HeroImpl(name, job, params, armor, weapon);
         // Other fields
         final List<MagicAttackInterface> spellList = context.deserialize(jObj.get(SPELL_LIST),
-                new TypeToken<List<MagicAttackInterface>>() {
-                }.getType());
+                        new TypeToken<List<MagicAttackInterface>>() {
+                        }.getType());
         spellList.forEach(returnHero::addSpell); // TODO check
         final Status status = context.deserialize(jObj.get(STATUS), Status.class);
         returnHero.setStatus(status);

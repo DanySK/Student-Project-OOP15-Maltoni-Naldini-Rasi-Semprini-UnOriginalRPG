@@ -32,7 +32,7 @@ public class CellSerializer implements JsonSerializer<Cell>, JsonDeserializer<Ce
     // NPCCellImpl
     private static final String NPC = "npc";
     // MapCellImpl
-    private static final String MAP_TO_LINK = "mapToLink";
+    // private static final String MAP_TO_LINK = "mapToLink";
     private static final String INITIAL_POS = "initialPos";
     // ChestCellImpl
     private static final String ITEM = "o";
@@ -60,8 +60,8 @@ public class CellSerializer implements JsonSerializer<Cell>, JsonDeserializer<Ce
         } else if (MapCellImpl.class.isInstance(src)) {
             // final JsonElement mapToLink = context.serialize(((MapCellImpl) src).getCellMap(), GameMap.class);
             // jObj.add(MAP_TO_LINK, mapToLink);
-            final JsonElement initialPos = context
-                            .serialize(((MapCellImpl) src).getCellMap().getInitialCellPosition(), Position.class);
+            final JsonElement initialPos = context.serialize(((MapCellImpl) src).getCellMap().getInitialCellPosition(),
+                            Position.class);
             jObj.add(INITIAL_POS, initialPos);
         } else if (ChestCellImpl.class.isInstance(src)) {
             JsonElement item;
@@ -75,10 +75,10 @@ public class CellSerializer implements JsonSerializer<Cell>, JsonDeserializer<Ce
 
         return jObj;
     }
-    
+
     @Override
     public Cell deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
-            throws JsonParseException {
+                    throws JsonParseException {
         final JsonObject jObj = (JsonObject) json;
 
         final String path = jObj.get(PATH).getAsString();
@@ -96,7 +96,7 @@ public class CellSerializer implements JsonSerializer<Cell>, JsonDeserializer<Ce
         } else if (jObj.has(INITIAL_POS)) {
             // final GameMap mapToLink = context.deserialize(jObj.get(MAP_TO_LINK), GameMap.class);
             final Position initialPos = context.deserialize(jObj.get(INITIAL_POS), Position.class);
-            returnCell = new MapCellImpl(/*mapToLink*/null, initialPos);
+            returnCell = new MapCellImpl(/* mapToLink */null, initialPos);
             returnCell.setFrame(path);
         } else if (jObj.has(ITEM)) {
             final Item item = context.deserialize(jObj.get(ITEM), Item.class);
@@ -107,8 +107,7 @@ public class CellSerializer implements JsonSerializer<Cell>, JsonDeserializer<Ce
         }
 
         /*
-         * The state is common, but automatically set by constructor;
-         * this is necessary because it can be changed. 
+         * The state is common, but automatically set by constructor; this is necessary because it can be changed.
          */
         if (!SimpleCellImpl.class.isInstance(returnCell)) { // TODO check, maybe unnecessary
             returnCell.setState(state);
