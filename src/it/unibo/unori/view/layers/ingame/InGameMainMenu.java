@@ -87,14 +87,14 @@ public class InGameMainMenu extends JPanel {
             }
         });
 
-        final MenuButton items = new MenuButton("Items");
+        final MenuButton items = new MenuButton("Oggetti");
         items.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
                 inGameStack.push(new ItemMenu(inGameStack, heroTeam, bag, BORDER + SIZE.width + x, y));
             }
         });
 
-        final MenuButton save = new MenuButton("Save");
+        final MenuButton save = new MenuButton("Salva");
         save.addActionListener(new SaveActionListener());
 
         buttons.add(party);

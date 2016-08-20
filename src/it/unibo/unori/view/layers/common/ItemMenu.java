@@ -35,7 +35,7 @@ import it.unibo.unori.model.items.Weapon;
 public class ItemMenu extends JPanel {
     private final int x, y;
     private static final int BORDER = 5;
-    private final Dimension size = new Dimension(160, 320);
+    public static final Dimension SIZE = new Dimension(160, 320);
 
     private final MenuStack inGameStack;
     private final JPanel buttonPanel = new JPanel();
@@ -62,7 +62,7 @@ public class ItemMenu extends JPanel {
         this.inGameStack = inGameStack;
 
         this.setBackground(Color.WHITE);
-        this.setBounds(x, y, size.width, size.height);
+        this.setBounds(x, y, SIZE.width, SIZE.height);
         this.setLayout(new GridLayout(0, 1, BORDER, BORDER));
 
         this.setBorder(BorderFactory.createEmptyBorder(BORDER, BORDER, BORDER, BORDER));
@@ -154,7 +154,7 @@ public class ItemMenu extends JPanel {
                     partyButtons.add(partyButton);
                 }
 
-                inGameStack.push(new PartyMenu(inGameStack, partyButtons, BORDER + size.width + x, y));
+                inGameStack.push(new PartyMenu(inGameStack, partyButtons, BORDER + SIZE.width + x, y));
             }
         });
     }

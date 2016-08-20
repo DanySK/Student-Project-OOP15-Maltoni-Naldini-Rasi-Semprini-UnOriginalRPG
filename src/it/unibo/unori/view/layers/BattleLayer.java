@@ -8,8 +8,8 @@ import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.HeroTeam;
 
 import it.unibo.unori.view.sprites.JobSprite;
+import it.unibo.unori.view.layers.battle.BattleMainMenu;
 import it.unibo.unori.view.layers.common.MenuStack;
-import it.unibo.unori.view.layers.ingame.InGameMainMenu;
 import it.unibo.unori.view.exceptions.SpriteNotFoundException;
 
 import java.util.Map;
@@ -90,6 +90,7 @@ public class BattleLayer extends Layer {
         this.setBackground(Color.WHITE);
         this.setBounds(0, 0, SIZE.width, SIZE.height);
 
+        battleMenuStack.setPreferredSize(new Dimension(SIZE.width, SIZE.height));
         this.add(battleMenuStack);
 
         final ActionMap actionMap = getActionMap();
@@ -103,9 +104,7 @@ public class BattleLayer extends Layer {
      * Create new turn.
      */
     public void newTurn() {
-        battleMenuStack.push(new InGameMainMenu(battleMenuStack, heroTeam, bag, BORDER, BORDER));
-
-        repaint();
+        battleMenuStack.push(new BattleMainMenu(battleMenuStack, heroTeam, foeTeam, bag, BORDER, SIZE.height - BattleMainMenu.SIZE.height - BORDER * 2));
     }
 
     private void drawHero(final Graphics g, final int x, final int y, final int hp, final int totalHp,
