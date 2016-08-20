@@ -10,12 +10,13 @@ public class BlockedPathException extends Exception {
      * 
      */
     private static final long serialVersionUID = 7282142092547170919L;
+    private static final String MESSAGE = "Error, Path is Blocked";
 
     /**
      * Empty Constructor.
      */
     public BlockedPathException() {
-        super();
+        super(MESSAGE);
     }
 
     /**
@@ -33,7 +34,7 @@ public class BlockedPathException extends Exception {
      * @return the message to show
      */
     public String toString() {
-        return "Error, Path is Blocked";
+        return MESSAGE;
     }
 
 }

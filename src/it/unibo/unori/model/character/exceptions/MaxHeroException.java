@@ -11,10 +11,18 @@ public class MaxHeroException extends Exception {
      * 
      */
     private static final long serialVersionUID = -5235716471024468297L;
+    private static final String MESSAGE = "Max hero limit reached";
+
+    /**
+     * Constructor.
+     */
+    public MaxHeroException() {
+        super(MESSAGE);
+    }
 
     @Override
     public String toString() {
-        return "Max hero limit reached";
+        return MESSAGE;
     }
 
 }

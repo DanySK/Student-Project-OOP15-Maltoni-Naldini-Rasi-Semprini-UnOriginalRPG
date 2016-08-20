@@ -10,6 +10,14 @@ public class NoNPCFoundException extends Exception {
      * 
      */
     private static final long serialVersionUID = -2001888144055465746L;
+    private static final String MESSAGE = "Error, NPC not found";
+
+    /**
+     * Constructor.
+     */
+    public NoNPCFoundException() {
+        super(MESSAGE);
+    }
 
     /**
      * Send a message when the Exception is thrown.
@@ -17,7 +25,7 @@ public class NoNPCFoundException extends Exception {
      * @return the message to show
      */
     public String toString() {
-        return "Error, NPC not found";
+        return MESSAGE;
     }
 
 }

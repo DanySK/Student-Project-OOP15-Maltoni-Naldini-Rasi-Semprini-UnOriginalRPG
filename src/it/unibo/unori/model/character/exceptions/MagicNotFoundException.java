@@ -9,9 +9,17 @@ public class MagicNotFoundException extends Exception {
      * 
      */
     private static final long serialVersionUID = 3072624152204680710L;
+    private static final String MESSAGE = "Non possiedi questa magia!";
+
+    /**
+     * Constructor.
+     */
+    public MagicNotFoundException() {
+        super(MESSAGE);
+    }
 
     @Override
     public String toString() {
-        return "Non possiedi questa magia!";
+        return MESSAGE;
     }
 }

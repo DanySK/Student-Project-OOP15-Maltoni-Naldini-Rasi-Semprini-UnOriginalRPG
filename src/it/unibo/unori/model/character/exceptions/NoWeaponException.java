@@ -10,9 +10,17 @@ public class NoWeaponException extends Exception {
      * 
      */
     private static final long serialVersionUID = -4526589412997774511L;
+    private static final String MESSAGE = "Non hai nessuna arma equipaggiata!";
+
+    /**
+     * Constructor.
+     */
+    public NoWeaponException() {
+        super(MESSAGE);
+    }
 
     @Override
     public String toString() {
-        return "Non hai nessuna arma equipaggiata!";
+        return MESSAGE;
     }
 }
