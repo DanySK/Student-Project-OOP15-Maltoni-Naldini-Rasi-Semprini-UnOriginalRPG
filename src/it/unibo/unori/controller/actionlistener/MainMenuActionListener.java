@@ -39,7 +39,6 @@ public class MainMenuActionListener extends AbstractUnoriActionListener {
                 throw new UnknownButtonException(command);
             }
         } catch (Exception e) {
-            e.printStackTrace();
             this.getController().showCommunication(e.getMessage());
         }
     }
