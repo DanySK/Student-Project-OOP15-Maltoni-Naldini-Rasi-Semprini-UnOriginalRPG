@@ -1,5 +1,5 @@
 {
-  "mapType": "AISLE",
-  "floor": -1,
-  "room": -1
+  "mapType": "DUNGEON",
+  "floor": 4,
+  "room": 1
 }

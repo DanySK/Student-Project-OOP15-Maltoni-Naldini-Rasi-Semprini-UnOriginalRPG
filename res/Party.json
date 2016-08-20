@@ -1,7 +1,7 @@
 {
   "currentPosition": {
-    "posX": 5,
-    "posY": 20
+    "posX": 6,
+    "posY": 4
   },
   "currentMap": {
     "floorMap": [
@@ -61,46 +61,6 @@
         {
           "path": "res/sprites/map/rocks.png",
           "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
         }
       ],
       [
@@ -109,91 +69,51 @@
           "state": "BLOCKED"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
@@ -207,91 +127,51 @@
           "state": "BLOCKED"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
@@ -301,108 +181,55 @@
       ],
       [
         {
-          "path": "res/sprites/map/black.png",
-          "state": "BLOCKED",
-          "initialPos": {
-            "posX": 9,
-            "posY": 18
-          }
+          "path": "res/sprites/map/rocks.png",
+          "state": "BLOCKED"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/npcs/grass/front-2.png",
-          "state": "BLOCKED",
-          "npc": {
-            "sentence": {
-              "sentence": "Eyhaaaaaaa!",
-              "nextToShow": 0,
-              "listOfRows": [
-                "Eyhaaaaaaa!"
-              ]
-            }
-          }
-        },
-        {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
@@ -412,605 +239,334 @@
       ],
       [
         {
-          "path": "res/sprites/map/black.png",
-          "state": "BLOCKED",
-          "initialPos": {
-            "posX": 10,
-            "posY": 18
-          }
+          "path": "res/sprites/map/rocks.png",
+          "state": "BLOCKED"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/black.png",
-          "state": "BLOCKED",
-          "initialPos": {
-            "posX": 5,
-            "posY": 1
-          }
+          "path": "res/sprites/map/rocks.png",
+          "state": "BLOCKED"
         }
       ],
       [
         {
-          "path": "res/sprites/map/black.png",
-          "state": "BLOCKED",
-          "initialPos": {
-            "posX": 11,
-            "posY": 18
-          }
+          "path": "res/sprites/map/rocks.png",
+          "state": "BLOCKED"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/rocks.png",
+          "state": "BLOCKED"
+        }
+      ],
+      [
+        {
+          "path": "res/sprites/map/rocks.png",
+          "state": "BLOCKED"
+        },
+        {
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
         },
         {
-          "path": "res/sprites/map/grass.png",
+          "path": "res/sprites/map/earth.png",
           "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/earth.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/earth.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/rocks.png",
+          "state": "BLOCKED"
+        }
+      ],
+      [
+        {
+          "path": "res/sprites/map/rocks.png",
+          "state": "BLOCKED"
+        },
+        {
+          "path": "res/sprites/map/earth.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/earth.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/npcs/earth/front-2.png",
+          "state": "BLOCKED"
+        },
+        {
+          "path": "res/sprites/map/earth.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/earth.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/earth.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/earth.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/earth.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/earth.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/earth.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/earth.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/earth.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/rocks.png",
+          "state": "BLOCKED"
+        }
+      ],
+      [
+        {
+          "path": "res/sprites/map/rocks.png",
+          "state": "BLOCKED"
+        },
+        {
+          "path": "res/sprites/map/earth.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/earth.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/earth.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/earth.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/earth.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/earth.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/earth.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/earth.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/earth.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/earth.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/earth.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/earth.png",
+          "state": "FREE"
+        },
+        {
+          "path": "res/sprites/map/rocks.png",
+          "state": "BLOCKED"
+        }
+      ],
+      [
+        {
+          "path": "res/sprites/map/rocks.png",
+          "state": "BLOCKED"
+        },
+        {
+          "path": "res/sprites/map/rocks.png",
+          "state": "BLOCKED"
+        },
+        {
+          "path": "res/sprites/map/rocks.png",
+          "state": "BLOCKED"
+        },
+        {
+          "path": "res/sprites/map/rocks.png",
+          "state": "BLOCKED"
+        },
+        {
+          "path": "res/sprites/map/rocks.png",
+          "state": "BLOCKED"
+        },
+        {
+          "path": "res/sprites/map/rocks.png",
+          "state": "BLOCKED"
         },
         {
           "path": "res/sprites/map/black.png",
           "state": "BLOCKED",
           "initialPos": {
-            "posX": 6,
-            "posY": 1
+            "posX": 1,
+            "posY": 6
           }
-        }
-      ],
-      [
+        },
         {
           "path": "res/sprites/map/black.png",
           "state": "BLOCKED",
           "initialPos": {
-            "posX": 12,
-            "posY": 18
+            "posX": 1,
+            "posY": 7
           }
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/npcs/grass/front-4.png",
-          "state": "BLOCKED",
-          "npc": {
-            "sentence": {
-              "sentence": "Quello l� � Link che si � perso e cerca di tornare a casa",
-              "nextToShow": 0,
-              "listOfRows": [
-                "Quello l� � Link che si � perso e cerca di tornare a casa "
-              ]
-            }
-          }
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        }
-      ],
-      [
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/npcs/grass/front-3.png",
-          "state": "BLOCKED",
-          "npc": {
-            "sentence": {
-              "sentence": "Siccome Kingdom Hearts 3 non esce mai, ho cambiato contratto e sono venuto qua!",
-              "nextToShow": 0,
-              "listOfRows": [
-                "Siccome Kingdom Hearts 3 non esce mai, ho cambiato contratto e sono ",
-                "venuto qua!"
-              ]
-            }
-          }
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        }
-      ],
-      [
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/grass.png",
-          "state": "FREE"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        }
-      ],
-      [
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
-        },
-        {
-          "path": "res/sprites/map/rocks.png",
-          "state": "BLOCKED"
         },
         {
           "path": "res/sprites/map/rocks.png",
@@ -1039,26 +595,42 @@
       ]
     ],
     "initialPosition": {
-      "posX": 6,
-      "posY": 1
+      "posX": 8,
+      "posY": 7
     },
     "battleState": true
   },
   "frame": "res/sprites/warrior.png",
-  "orientation": "NORTH",
+  "orientation": "WEST",
   "partyBag": {
-    "armors": {},
+    "armors": [
+      [
+        {
+          "name": "Scudo d\u0027oro",
+          "piece": "SHIELD",
+          "desc": "Scudo d\u0027oro, leggendario",
+          "stats": {
+            "ICEDEF": 500,
+            "PHYSICDEF": 1000,
+            "THUNDERDEF": 500,
+            "FIREDEF": 500
+          },
+          "immunity": "CURSED"
+        },
+        1
+      ]
+    ],
     "weapons": {},
     "potions": [
       [
         {
-          "name": "Rimedio della Nonna",
-          "description": "Una rara tisana rigenerante che restituisce 600 HP e cura lo Stato",
-          "points": 600,
+          "name": "Gran Pozione",
+          "description": "Rimedio piu\u0027 potente di una semplice Pozione, restituisce 800 HP",
+          "points": 800,
           "statToRestore": "TOTALHP",
-          "statusRestorable": true
+          "statusRestorable": false
         },
-        1
+        2
       ],
       [
         {
@@ -1067,6 +639,26 @@
           "points": 300,
           "statToRestore": "TOTALMP",
           "statusRestorable": false
+        },
+        1
+      ],
+      [
+        {
+          "name": "Giga Pozione",
+          "description": "Rimedio MOLTO piu\u0027 potente di una semplice Pozione, restituisce 2000 HP",
+          "points": 2000,
+          "statToRestore": "TOTALHP",
+          "statusRestorable": false
+        },
+        1
+      ],
+      [
+        {
+          "name": "Rimedio della Nonna",
+          "description": "Una rara tisana rigenerante che restituisce 600 HP e cura lo Stato",
+          "points": 600,
+          "statToRestore": "TOTALHP",
+          "statusRestorable": true
         },
         1
       ]
@@ -1081,10 +673,10 @@
           "piece": "TROUSERS",
           "desc": "Schinieri piuttosto brutti",
           "stats": {
+            "ICEDEF": 0,
             "PHYSICDEF": 100,
             "THUNDERDEF": 0,
-            "FIREDEF": 0,
-            "ICEDEF": 0
+            "FIREDEF": 0
           },
           "immunity": "NONE"
         },
@@ -1093,10 +685,10 @@
           "piece": "GLOVES",
           "desc": "Guanti piuttosto brutti",
           "stats": {
+            "ICEDEF": 0,
             "PHYSICDEF": 100,
             "THUNDERDEF": 0,
-            "FIREDEF": 0,
-            "ICEDEF": 0
+            "FIREDEF": 0
           },
           "immunity": "NONE"
         },
@@ -1105,10 +697,10 @@
           "piece": "HELMET",
           "desc": "Elmo piuttosto brutto",
           "stats": {
+            "ICEDEF": 0,
             "PHYSICDEF": 100,
             "THUNDERDEF": 0,
-            "FIREDEF": 0,
-            "ICEDEF": 0
+            "FIREDEF": 0
           },
           "immunity": "NONE"
         },
@@ -1117,10 +709,10 @@
           "piece": "SHIELD",
           "desc": "Scudo piuttosto brutto",
           "stats": {
+            "ICEDEF": 0,
             "PHYSICDEF": 100,
             "THUNDERDEF": 0,
-            "FIREDEF": 0,
-            "ICEDEF": 0
+            "FIREDEF": 0
           },
           "immunity": "NONE"
         },
@@ -1129,10 +721,10 @@
           "piece": "ARMOR",
           "desc": "Cotta piuttosto brutto",
           "stats": {
+            "ICEDEF": 0,
             "PHYSICDEF": 100,
             "THUNDERDEF": 0,
-            "FIREDEF": 0,
-            "ICEDEF": 0
+            "FIREDEF": 0
           },
           "immunity": "NONE"
         }
@@ -1200,6 +792,84 @@
           },
           "accuracy": 10,
           "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
         }
       ]
     },
@@ -1210,10 +880,10 @@
           "piece": "TROUSERS",
           "desc": "Schinieri piuttosto brutti",
           "stats": {
+            "ICEDEF": 0,
             "PHYSICDEF": 100,
             "THUNDERDEF": 0,
-            "FIREDEF": 0,
-            "ICEDEF": 0
+            "FIREDEF": 0
           },
           "immunity": "NONE"
         },
@@ -1222,10 +892,10 @@
           "piece": "GLOVES",
           "desc": "Guanti piuttosto brutti",
           "stats": {
+            "ICEDEF": 0,
             "PHYSICDEF": 100,
             "THUNDERDEF": 0,
-            "FIREDEF": 0,
-            "ICEDEF": 0
+            "FIREDEF": 0
           },
           "immunity": "NONE"
         },
@@ -1234,10 +904,10 @@
           "piece": "HELMET",
           "desc": "Elmo piuttosto brutto",
           "stats": {
+            "ICEDEF": 0,
             "PHYSICDEF": 100,
             "THUNDERDEF": 0,
-            "FIREDEF": 0,
-            "ICEDEF": 0
+            "FIREDEF": 0
           },
           "immunity": "NONE"
         },
@@ -1246,10 +916,10 @@
           "piece": "SHIELD",
           "desc": "Scudo piuttosto brutto",
           "stats": {
+            "ICEDEF": 0,
             "PHYSICDEF": 100,
             "THUNDERDEF": 0,
-            "FIREDEF": 0,
-            "ICEDEF": 0
+            "FIREDEF": 0
           },
           "immunity": "NONE"
         },
@@ -1258,10 +928,10 @@
           "piece": "ARMOR",
           "desc": "Cotta piuttosto brutto",
           "stats": {
+            "ICEDEF": 0,
             "PHYSICDEF": 100,
             "THUNDERDEF": 0,
-            "FIREDEF": 0,
-            "ICEDEF": 0
+            "FIREDEF": 0
           },
           "immunity": "NONE"
         }
@@ -1329,6 +999,84 @@
           },
           "accuracy": 10,
           "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
         }
       ]
     },
@@ -1339,10 +1087,10 @@
           "piece": "TROUSERS",
           "desc": "Schinieri piuttosto brutti",
           "stats": {
+            "ICEDEF": 0,
             "PHYSICDEF": 100,
             "THUNDERDEF": 0,
-            "FIREDEF": 0,
-            "ICEDEF": 0
+            "FIREDEF": 0
           },
           "immunity": "NONE"
         },
@@ -1351,10 +1099,10 @@
           "piece": "GLOVES",
           "desc": "Guanti piuttosto brutti",
           "stats": {
+            "ICEDEF": 0,
             "PHYSICDEF": 100,
             "THUNDERDEF": 0,
-            "FIREDEF": 0,
-            "ICEDEF": 0
+            "FIREDEF": 0
           },
           "immunity": "NONE"
         },
@@ -1363,10 +1111,10 @@
           "piece": "HELMET",
           "desc": "Elmo piuttosto brutto",
           "stats": {
+            "ICEDEF": 0,
             "PHYSICDEF": 100,
             "THUNDERDEF": 0,
-            "FIREDEF": 0,
-            "ICEDEF": 0
+            "FIREDEF": 0
           },
           "immunity": "NONE"
         },
@@ -1375,10 +1123,10 @@
           "piece": "SHIELD",
           "desc": "Scudo piuttosto brutto",
           "stats": {
+            "ICEDEF": 0,
             "PHYSICDEF": 100,
             "THUNDERDEF": 0,
-            "FIREDEF": 0,
-            "ICEDEF": 0
+            "FIREDEF": 0
           },
           "immunity": "NONE"
         },
@@ -1387,10 +1135,10 @@
           "piece": "ARMOR",
           "desc": "Cotta piuttosto brutto",
           "stats": {
+            "ICEDEF": 0,
             "PHYSICDEF": 100,
             "THUNDERDEF": 0,
-            "FIREDEF": 0,
-            "ICEDEF": 0
+            "FIREDEF": 0
           },
           "immunity": "NONE"
         }
@@ -1458,6 +1206,84 @@
           },
           "accuracy": 10,
           "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
         }
       ]
     },
@@ -1468,10 +1294,10 @@
           "piece": "TROUSERS",
           "desc": "Schinieri piuttosto brutti",
           "stats": {
+            "ICEDEF": 0,
             "PHYSICDEF": 100,
             "THUNDERDEF": 0,
-            "FIREDEF": 0,
-            "ICEDEF": 0
+            "FIREDEF": 0
           },
           "immunity": "NONE"
         },
@@ -1480,10 +1306,10 @@
           "piece": "GLOVES",
           "desc": "Guanti piuttosto brutti",
           "stats": {
+            "ICEDEF": 0,
             "PHYSICDEF": 100,
             "THUNDERDEF": 0,
-            "FIREDEF": 0,
-            "ICEDEF": 0
+            "FIREDEF": 0
           },
           "immunity": "NONE"
         },
@@ -1492,10 +1318,10 @@
           "piece": "HELMET",
           "desc": "Elmo piuttosto brutto",
           "stats": {
+            "ICEDEF": 0,
             "PHYSICDEF": 100,
             "THUNDERDEF": 0,
-            "FIREDEF": 0,
-            "ICEDEF": 0
+            "FIREDEF": 0
           },
           "immunity": "NONE"
         },
@@ -1504,10 +1330,10 @@
           "piece": "SHIELD",
           "desc": "Scudo piuttosto brutto",
           "stats": {
+            "ICEDEF": 0,
             "PHYSICDEF": 100,
             "THUNDERDEF": 0,
-            "FIREDEF": 0,
-            "ICEDEF": 0
+            "FIREDEF": 0
           },
           "immunity": "NONE"
         },
@@ -1516,10 +1342,10 @@
           "piece": "ARMOR",
           "desc": "Cotta piuttosto brutto",
           "stats": {
+            "ICEDEF": 0,
             "PHYSICDEF": 100,
             "THUNDERDEF": 0,
-            "FIREDEF": 0,
-            "ICEDEF": 0
+            "FIREDEF": 0
           },
           "immunity": "NONE"
         }
@@ -1562,6 +1388,84 @@
         "THUNDERDEF": 750
       },
       "spellList": [
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
+        },
+        {
+          "name": "Schiaffo",
+          "shownString": "Che schiaffo!",
+          "description": "Non c\u0027� nulla di magico in uno schiaffo",
+          "stats": {
+            "PHYSICATK": 1,
+            "THUNDERATK": 0,
+            "FIREATK": 0,
+            "ICEATK": 0
+          },
+          "accuracy": 10,
+          "mpRequired": 1
+        },
         {
           "name": "Schiaffo",
           "shownString": "Che schiaffo!",

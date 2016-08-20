@@ -252,26 +252,6 @@ public class WorldLoader {
         return mapName.orElseThrow(() -> new IllegalArgumentException());
     }
 
-    private String convertMapNameToStandardPath(final MAPS mapName) {
-        Optional<String> mapPath;
-        if (mapName.equals(MAPS.HOUSE)) {
-            mapPath = Optional.of(FOUR_NPC_ROOM);
-        } else if (mapName.equals(MAPS.SHOP)) {
-            mapPath = Optional.of(SHOP);
-        } else if (mapName.equals(MAPS.CHURCH)) {
-            mapPath = Optional.of(CHURCH);
-        } else if (mapName.equals(MAPS.CITY)) {
-            mapPath = Optional.of(VILLAGE);
-        } else if (mapName.equals(MAPS.AISLE)) {
-            mapPath = Optional.of(PASSAGE);
-        } else if (mapName.equals(MAPS.DENTRANCE)) {
-            mapPath = Optional.of(DUNGEON_ENTRANCE);
-        } else {
-            mapPath = Optional.empty();
-        }
-        return mapPath.orElseThrow(() -> new IllegalArgumentException());
-    }
-
     /**
      * This method returns the internal builder of the World.
      * 
@@ -287,7 +267,14 @@ public class WorldLoader {
     }
 
     public boolean isOutsideDungeonMap(final GameMap map) {
-        return Arrays.asList(MAPS.values()).stream().anyMatch(m -> this.builder.getGameMap(m).equals(map));
+        final List<MAPS> mapsList = new ArrayList<>();
+        for (final MAPS m : MAPS.values()) {
+            if (!m.equals(MAPS.DUNGEON)) {
+                mapsList.add(m);
+            }
+        }
+
+        return mapsList.stream().anyMatch(m -> this.builder.getGameMap(m).equals(map));
     }
 
     public MAPS getMapName(final GameMap map) {
@@ -312,7 +299,6 @@ public class WorldLoader {
                     && new File(getFloorRoomPath(FIRST_FLOOR_NUMBER, 0)).getParentFile().getParentFile()
                             .list().length > 0;
         } catch (Exception e) {
-            System.out.println("Eccezione");
             return false;
         }
     }
