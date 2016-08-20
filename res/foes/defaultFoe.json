@@ -1,0 +1,43 @@
+{
+  "immunity": "NONE",
+  "stats": {
+    "EXPFACTOR": 0,
+    "TOTALMP": 700,
+    "PHYSICDEF": 1000,
+    "ICEDEF": 750,
+    "PHYSICATK": 1000,
+    "ICEATK": 1000,
+    "FIREATK": 1000,
+    "THUNDERATK": 1000,
+    "FIREDEF": 750,
+    "SPEED": 1200,
+    "THUNDERDEF": 750,
+    "TOTALHP": 1500
+  },
+  "weapon": {
+    "name": "Pugno",
+    "desc": "Ma ti aspetta un pugno, ma è ovvio!",
+    "stats": {
+      "ICEATK": 0,
+      "FIREATK": 0,
+      "THUNDERATK": 0,
+      "PHYSICATK": 0
+    },
+    "inflictedStatus": "NONE"
+  },
+  "magics": [
+    {
+      "name": "Schiaffo",
+      "shownString": "Che schiaffo!",
+      "description": "Non c\u0027� nulla di magico in uno schiaffo",
+      "stats": {
+        "ICEATK": 0,
+        "FIREATK": 0,
+        "THUNDERATK": 0,
+        "PHYSICATK": 1
+      },
+      "accuracy": 10,
+      "mpRequired": 1
+    }
+  ]
+}
