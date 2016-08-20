@@ -59,5 +59,7 @@ public class BattleMainMenu extends JPanel {
                 battleMenuStack.push(new ItemMenu(battleMenuStack, heroTeam, bag, BORDER + SIZE.width + x, y));
             }
         });
+
+        this.add(items);
     }
 }
