@@ -10,9 +10,17 @@ public class ItemNotFoundException extends Exception {
      * 
      */
     private static final long serialVersionUID = -3929122411465156156L;
+    private static final String DEFAULT_MESSAGE = "Questo oggetto non e' presente nella Borsa!";
+    
+    /**
+     * Standard constructor.
+     */
+    public ItemNotFoundException() {
+        super(DEFAULT_MESSAGE);
+    }
     
     @Override
     public String toString() {
-        return "Questo oggetto non e' presente nella Borsa!";
+        return DEFAULT_MESSAGE;
     }
 }

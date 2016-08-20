@@ -10,9 +10,18 @@ public class HeroNotDeadException extends Exception {
      * 
      */
     private static final long serialVersionUID = -4328756049327627132L;
+    private static final String DEFAULT_MESSAGE = 
+            "Non puoi usare questo tipo di Pozione su un personaggio ancora in vita!";
+    
+    /**
+     * Standard constructor.
+     */
+    public HeroNotDeadException() {
+        super(DEFAULT_MESSAGE);
+    }
     
     @Override
     public String toString() {
-        return "Non puoi usare questo tipo di Pozione su un personaggio ancora in vita!";
+        return DEFAULT_MESSAGE;
     }
 }

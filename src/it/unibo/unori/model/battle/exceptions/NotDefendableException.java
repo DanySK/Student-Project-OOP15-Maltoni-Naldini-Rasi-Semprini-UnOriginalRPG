@@ -10,9 +10,17 @@ public class NotDefendableException extends Exception {
      * 
      */
     private static final long serialVersionUID = 1444825597955951678L;
+    private static final String DEFAULT_MESSAGE = "Non puoi difendere questo personaggio!";
+    
+    /**
+     * Standard constructor.
+     */
+    public NotDefendableException() {
+        super(DEFAULT_MESSAGE);
+    }
     
     @Override
     public String toString() {
-        return "Non puoi difendere questo personaggio!";
+        return DEFAULT_MESSAGE;
     }
 }
