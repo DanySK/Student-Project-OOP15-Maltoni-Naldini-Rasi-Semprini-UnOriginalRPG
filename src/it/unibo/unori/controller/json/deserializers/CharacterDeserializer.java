@@ -20,6 +20,13 @@ import it.unibo.unori.model.character.Statistics;
 import it.unibo.unori.model.character.Status;
 import it.unibo.unori.model.items.Weapon;
 
+/**
+ * This class should be registered in a {@link com.google.gson.GsonBuilder} to
+ * deserialize a {@link it.unibo.unori.model.character.Character} compatible
+ * class. It calls context to deserialize classes assignable to
+ * {@link it.unibo.unori.model.character.Hero} and
+ * {@link it.unibo.unori.model.character.Foe}.
+ */
 public class CharacterDeserializer implements JsonDeserializer<Character> {
     private static final String NAME = "name";
     private static final String BATTLE_FRAME = "battleFrame";
@@ -38,7 +45,8 @@ public class CharacterDeserializer implements JsonDeserializer<Character> {
 
         if (typeOfT.getClass().isAssignableFrom(Hero.class)) { // TODO check
             returnChar = context.deserialize(json, Hero.class);
-        } else if (typeOfT.getClass().isAssignableFrom(Foe.class)) { // TODO check
+        } else if (typeOfT.getClass().isAssignableFrom(Foe.class)) { // TODO
+                                                                     // check
             returnChar = context.deserialize(json, Foe.class);
         } else {
             final JsonObject jObj = (JsonObject) json;

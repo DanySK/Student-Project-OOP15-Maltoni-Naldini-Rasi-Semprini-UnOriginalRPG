@@ -28,7 +28,8 @@ import it.unibo.unori.view.exceptions.SpriteNotFoundException;
 import it.unibo.unori.view.layers.MapLayer;
 
 /**
- * This GameState models the state of exploring a map (world, town or dungeon room).
+ * This GameState models the state of exploring a map (world, town or dungeon
+ * room).
  */
 public class MapState extends AbstractGameState {
     private final Party party;
@@ -45,9 +46,9 @@ public class MapState extends AbstractGameState {
      */
     public MapState(final GameMap map) throws SpriteNotFoundException {
         super(new MapLayer(MoveAction.getSupportedMovementsMap(), new InteractAction(), new OpenMenuAction(),
-                        map.getFrames(),
-                        new Point(map.getInitialCellPosition().getPosX(), map.getInitialCellPosition().getPosY()),
-                        SingletonParty.getParty().getCurrentFrame()));
+                map.getFrames(),
+                new Point(map.getInitialCellPosition().getPosX(), map.getInitialCellPosition().getPosY()),
+                SingletonParty.getParty().getCurrentFrame()));
         party = SingletonParty.getParty();
         party.setCurrentMap(map);
         previousSpritesMap = this.party.getCurrentGameMap().getFrames();
@@ -83,8 +84,10 @@ public class MapState extends AbstractGameState {
     public DialogueInterface interact() {
         final Map<Armor, Integer> armors = this.party.getPartyBag().getArmors();
         final Map<Weapon, Integer> weapons = this.party.getPartyBag().getWeapons();
-        // final Map<Potion, Integer> potions = this.party.getPartyBag().getPotions();
-        // final Map<Item, Integer> miscellaneous = this.party.getPartyBag().getMiscellaneous();
+        // final Map<Potion, Integer> potions =
+        // this.party.getPartyBag().getPotions();
+        // final Map<Item, Integer> miscellaneous =
+        // this.party.getPartyBag().getMiscellaneous();
         final DialogueInterface dialogue = this.party.interact();
         if (!armors.equals(this.party.getPartyBag().getArmors())) {
             SingletonStateMachine.getController().getStatistics().increaseArmorsAcquired(1);
@@ -92,12 +95,14 @@ public class MapState extends AbstractGameState {
         if (!weapons.equals(this.party.getPartyBag().getWeapons())) {
             SingletonStateMachine.getController().getStatistics().increaseWeaponsAcquired(1);
         }
-        //if (!potions.equals(this.party.getPartyBag().getPotions())) {
-        //    SingletonStateMachine.getController().getStatistics().increaseArmorsAcquired(1);
-        //}
-        //if (!miscellaneous.equals(this.party.getPartyBag().getMiscellaneous())) {
-        //    SingletonStateMachine.getController().getStatistics().increaseArmorsAcquired(1);
-        //}
+        // if (!potions.equals(this.party.getPartyBag().getPotions())) {
+        // SingletonStateMachine.getController().getStatistics().increaseArmorsAcquired(1);
+        // }
+        // if
+        // (!miscellaneous.equals(this.party.getPartyBag().getMiscellaneous()))
+        // {
+        // SingletonStateMachine.getController().getStatistics().increaseArmorsAcquired(1);
+        // }
 
         return dialogue;
     }
@@ -130,31 +135,45 @@ public class MapState extends AbstractGameState {
     }
 
     /**
-     * This method controls the random encounters when moving on a map that has that feature enabled.
+     * This method controls the random encounters when moving on a map that has
+     * that feature enabled.
      */
     public void randomEncounters() {
-        if (this.getMap().isBattleState() && /*this.random.ints().limit(2).sum() % 2 != 0*/this.random.nextInt(10) == 0) {
-            // If the number is odd (33%) the battle starts
+        try {
+            /*
+             * With this method, if encounters a monster during map changing,
+             * View has enough time to refresh, and 10 milliseconds doesn't make
+             * too much input lag.
+             */
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        if (this.getMap().isBattleState() && this.random.nextInt(10) == 0) {
+            // 10% of possibilities to encounter an enemy
             final int numberOfMonsters = this.random.nextInt(BattleState.MAX_NUMBER_OF_FOES + 1);
             if (numberOfMonsters != 0) {
                 final List<FoesFindable> foesTypes = new ArrayList<>();
                 /*
-                 * Random generate the enemies' types. The "fallen hero" boss (EROE_CADUTO) can't appear in dungeon
-                 * randomly (this explains the "-1")
+                 * Random generate the enemies' types. The "fallen hero" boss
+                 * (EROE_CADUTO) can't appear in dungeon randomly (this explains
+                 * the "-1")
                  */
                 IntStream.range(0, FoesFindable.values().length - 1).limit(numberOfMonsters)
-                                .forEach(i -> foesTypes.add(FoesFindable.values()[i]));
+                        .forEach(i -> foesTypes.add(FoesFindable.values()[i]));
                 final List<Foe> foes = new ArrayList<>();
 
                 /*
-                 * Random generate the IA of the monsters. The higher heroes' level is, the more intelligent monsters are.
+                 * Random generate the IA of the monsters. The higher heroes'
+                 * level is, the more intelligent monsters are.
                  */
                 IntStream.range(0, numberOfMonsters).forEach(i -> {
                     final int ia = this.random.nextInt(this.party.getHeroTeam().getAllHeroes().stream()
-                                    .mapToInt(h -> h.getLevel()).max().getAsInt() + 1);
-                    System.out.println(ia);
-                    foes.add(new FoeImpl(ia <= FoeImpl.MAXIA ? (ia > 0 ? ia : 1)  : 10, foesTypes.get(i).toString() + " " + Integer.valueOf(i + 1),
-                                    FoeSetup.getSpritePath(foesTypes.get(i), ia), foesTypes.get(i)));
+                            .mapToInt(h -> h.getLevel()).max().getAsInt() + 1);
+                    foes.add(new FoeImpl(ia <= FoeImpl.MAXIA ? (ia > 0 ? ia : 1) : 10,
+                            foesTypes.get(i).toString() + " " + Integer.valueOf(i + 1),
+                            FoeSetup.getSpritePath(foesTypes.get(i), ia), foesTypes.get(i)));
                 });
 
                 SingletonStateMachine.getController().startBattle(foes);

@@ -16,6 +16,9 @@ import it.unibo.unori.model.character.FoeImpl;
 import it.unibo.unori.model.character.Status;
 import it.unibo.unori.model.character.factory.FoesFindable;
 
+/**
+ * 
+ */
 public class FoeDeserializer implements JsonDeserializer<Foe> {
     // CharacterImpl
     private static final String NAME = "name";
