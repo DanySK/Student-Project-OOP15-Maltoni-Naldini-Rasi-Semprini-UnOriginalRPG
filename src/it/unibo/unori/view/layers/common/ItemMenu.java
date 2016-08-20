@@ -31,7 +31,6 @@ import it.unibo.unori.model.items.Weapon;
  *
  */
 public class ItemMenu extends JPanel {
-    private final int x, y;
     private static final int BORDER = 5;
 
     /**
@@ -59,8 +58,6 @@ public class ItemMenu extends JPanel {
     public ItemMenu(final MenuStack inGameStack, final HeroTeam heroTeam, final Bag bag, final int x, final int y) {
         super();
 
-        this.x = x;
-        this.y = y;
         this.inGameStack = inGameStack;
 
         this.setBackground(Color.WHITE);
@@ -156,8 +153,6 @@ public class ItemMenu extends JPanel {
             final ActionListener battleActionListener) {
         super();
 
-        this.x = x;
-        this.y = y;
         this.inGameStack = inGameStack;
 
         this.setBackground(Color.WHITE);
@@ -175,8 +170,8 @@ public class ItemMenu extends JPanel {
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(final ActionEvent e) {
-                    inGameStack.push(
-                            new PartyMenu(inGameStack, entry.getKey(), heroTeam, bag, BORDER + SIZE.width + x, y, battleActionListener));
+                    inGameStack.push(new PartyMenu(inGameStack, entry.getKey(), heroTeam, bag, BORDER + SIZE.width + x,
+                            y, battleActionListener));
                 }
             });
             buttons.add(button);
@@ -189,8 +184,8 @@ public class ItemMenu extends JPanel {
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(final ActionEvent e) {
-                    inGameStack.push(
-                            new PartyMenu(inGameStack, entry.getKey(), heroTeam, bag, BORDER + SIZE.width + x, y, battleActionListener));
+                    inGameStack.push(new PartyMenu(inGameStack, entry.getKey(), heroTeam, bag, BORDER + SIZE.width + x,
+                            y, battleActionListener));
                 }
             });
             buttons.add(button);
@@ -202,8 +197,8 @@ public class ItemMenu extends JPanel {
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(final ActionEvent e) {
-                    inGameStack.push(
-                            new PartyMenu(inGameStack, entry.getKey(), heroTeam, bag, BORDER + SIZE.width + x, y, battleActionListener));
+                    inGameStack.push(new PartyMenu(inGameStack, entry.getKey(), heroTeam, bag, BORDER + SIZE.width + x,
+                            y, battleActionListener));
                 }
             });
             buttons.add(button);
@@ -216,7 +211,7 @@ public class ItemMenu extends JPanel {
                 @Override
                 public void actionPerformed(final ActionEvent e) {
                     inGameStack.push(
-                            new PartyMenu(inGameStack, entry.getKey(), heroTeam, bag, BORDER + SIZE.width + x, y, battleActionListener));
+                            new PartyMenu(inGameStack, entry.getKey(), heroTeam, bag, BORDER + SIZE.width + x, y));
                 }
             });
             buttons.add(button);

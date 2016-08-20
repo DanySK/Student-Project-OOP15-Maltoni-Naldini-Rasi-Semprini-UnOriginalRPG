@@ -42,9 +42,8 @@ public class BattleLayerTest {
         foeList.add(new FoeImpl(10, "Foe3", "res/sprites/foes/cavaliere.png", FoesFindable.EROE_CADUTO));
 
         try {
-            battleLayer = new BattleLayer(SingletonParty.getParty().getHeroTeam(),
-                                          new FoeSquadImpl(foeList),
-                                          SingletonParty.getParty().getPartyBag());
+            battleLayer = new BattleLayer(SingletonParty.getParty().getHeroTeam(), new FoeSquadImpl(foeList),
+                    SingletonParty.getParty().getPartyBag());
 
             view.push(battleLayer);
             view.resizeTo(battleLayer);
