@@ -104,7 +104,8 @@ public class BattleLayer extends Layer {
      * Create new turn.
      */
     public void newTurn() {
-        battleMenuStack.push(new BattleMainMenu(battleMenuStack, heroTeam, foeTeam, bag, BORDER, SIZE.height - BattleMainMenu.SIZE.height - BORDER * 2));
+        battleMenuStack.push(new BattleMainMenu(battleMenuStack, heroTeam, foeTeam, bag, BORDER,
+                SIZE.height - BattleMainMenu.SIZE.height - BORDER * 2));
     }
 
     private void drawHero(final Graphics g, final int x, final int y, final int hp, final int totalHp,
@@ -125,8 +126,8 @@ public class BattleLayer extends Layer {
         g.drawImage(sprite, x, newY, sprite.getWidth(), sprite.getHeight(), null);
     }
 
-    private int drawFoe(final Graphics g, final int x, final int y, final int hp, final int totalHp,
-            final String name, final BufferedImage sprite) {
+    private int drawFoe(final Graphics g, final int x, final int y, final int hp, final int totalHp, final String name,
+            final BufferedImage sprite) {
         final String health = hp + "/" + totalHp;
 
         int newY = y;
@@ -157,8 +158,7 @@ public class BattleLayer extends Layer {
         int x = xStart;
 
         for (final Hero hero : heroTeam.getAliveHeroes()) {
-            drawHero(g, x, y, hero.getRemainingHP(), hero.getTotalHP(), hero.getName(),
-                    heroSprites.get(hero));
+            drawHero(g, x, y, hero.getRemainingHP(), hero.getTotalHP(), hero.getName(), heroSprites.get(hero));
             y += 100;
         }
 
@@ -167,7 +167,8 @@ public class BattleLayer extends Layer {
         final int yStep = 50;
 
         for (final Foe foe : foeTeam.getAliveFoes()) {
-            final int step = drawFoe(g, 50, y, foe.getRemainingHP(), foe.getTotalHP(), foe.getName(), foeSprites.get(foe));
+            final int step = drawFoe(g, 50, y, foe.getRemainingHP(), foe.getTotalHP(), foe.getName(),
+                    foeSprites.get(foe));
 
             y += step + yStep;
         }
