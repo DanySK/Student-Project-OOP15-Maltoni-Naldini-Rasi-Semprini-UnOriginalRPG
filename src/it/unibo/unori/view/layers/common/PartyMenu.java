@@ -1,7 +1,5 @@
 package it.unibo.unori.view.layers.common;
 
-import it.unibo.unori.view.layers.InGameMenuLayer.InGameMenuStack;
-
 import java.awt.Color;
 import java.awt.Component;
 import java.util.List;
@@ -13,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.InputMap;
 import javax.swing.ActionMap;
 import javax.swing.KeyStroke;
+
 import javax.swing.BorderFactory;
 import javax.swing.AbstractAction;
 
@@ -28,7 +27,7 @@ public class PartyMenu extends JPanel {
     public static final Dimension SIZE = new Dimension(160, 160);
 
     private static final int BORDER = 5;
-    private final InGameMenuStack inGameStack;
+    private final MenuStack inGameStack;
 
     /**
      * Creates the first in-game menu.
@@ -37,7 +36,7 @@ public class PartyMenu extends JPanel {
      * @param x the x position
      * @param y the y position
      */
-    public PartyMenu(final InGameMenuStack inGameStack,
+    public PartyMenu(final MenuStack inGameStack,
                      final List<MenuButton> buttons,
                      final int x, final int y) {
         super();

@@ -26,7 +26,6 @@ import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.model.items.Item;
 import it.unibo.unori.model.items.Potion;
 import it.unibo.unori.model.items.Weapon;
-import it.unibo.unori.view.layers.InGameMenuLayer.InGameMenuStack;
 
 /**
  *
@@ -34,25 +33,32 @@ import it.unibo.unori.view.layers.InGameMenuLayer.InGameMenuStack;
  *
  */
 public class ItemMenu extends JPanel {
+    private final int x, y;
     private static final int BORDER = 5;
     private final Dimension size = new Dimension(160, 320);
 
+    private final MenuStack inGameStack;
     private final JPanel buttonPanel = new JPanel();
-    private final InGameMenuStack inGameStack;
 
     /**
      * Creates the item in-game menu.
-     * @param inGameStack the in-game menu stack
-     * @param heroTeam the hero team
-     * @param bag the party bag
-     * @param x the x position
-     * @param y the y position
+     *
+     * @param inGameStack
+     *            the in-game menu stack
+     * @param heroTeam
+     *            the hero team
+     * @param bag
+     *            the party bag
+     * @param x
+     *            the x position
+     * @param y
+     *            the y position
      */
-    public ItemMenu(final InGameMenuStack inGameStack,
-                    final HeroTeam heroTeam, final Bag bag,
-                    final int x, final int y) {
+    public ItemMenu(final MenuStack inGameStack, final HeroTeam heroTeam, final Bag bag, final int x, final int y) {
         super();
 
+        this.x = x;
+        this.y = y;
         this.inGameStack = inGameStack;
 
         this.setBackground(Color.WHITE);
@@ -68,134 +74,37 @@ public class ItemMenu extends JPanel {
 
             for (final Map.Entry<Armor, Integer> entry : armors.entrySet()) {
                 final MenuButton button = new MenuButton(entry.getKey().getName() + ", " + entry.getValue());
-
-                System.out.println("armors " + entry.getKey().getName());
-
-                button.addActionListener(new ActionListener() {
-                    public void actionPerformed(final ActionEvent e) {
-                        final List<MenuButton> partyButtons = new LinkedList<MenuButton>();
-
-                        for (final Hero hero : heroTeam.getAllHeroes()) {
-                            final MenuButton partyButton = new MenuButton(hero.getName());
-
-                            partyButton.addActionListener(new ObjectUseActionListener(entry.getKey(), hero, bag));
-                            partyButton.addActionListener(new ActionListener() {
-                                @Override
-                                public void actionPerformed(final ActionEvent e) {
-                                    inGameStack.pop();
-                                    inGameStack.pop();
-                                }
-                            });
-
-                            partyButtons.add(partyButton);
-                        }
-
-                        inGameStack.push(new PartyMenu(inGameStack, partyButtons,
-                                         BORDER + size.width + x, y));
-                    }
-                });
+                setAction(button, entry.getKey(), bag, heroTeam);
                 buttons.add(button);
             }
         }
 
         if (!bag.getWeapons().isEmpty()) {
-            final Map<Weapon, Integer> weapons =  bag.getWeapons();
+            final Map<Weapon, Integer> weapons = bag.getWeapons();
+
             for (final Map.Entry<Weapon, Integer> entry : weapons.entrySet()) {
                 final MenuButton button = new MenuButton(entry.getKey().getName() + ", " + entry.getValue());
-
-                System.out.println("weapons " + entry.getKey().getName());
-
-                button.addActionListener(new ActionListener() {
-                    public void actionPerformed(final ActionEvent e) {
-                        final List<MenuButton> partyButtons = new LinkedList<MenuButton>();
-
-                        for (final Hero hero : heroTeam.getAllHeroes()) {
-                            final MenuButton partyButton = new MenuButton(hero.getName());
-
-                            partyButton.addActionListener(new ObjectUseActionListener(entry.getKey(), hero, bag));
-                            partyButton.addActionListener(new ActionListener() {
-                                @Override
-                                public void actionPerformed(final ActionEvent e) {
-                                    inGameStack.pop();
-                                    inGameStack.pop();
-                                }
-                            });
-
-                            partyButtons.add(partyButton);
-                        }
-
-                        inGameStack.push(new PartyMenu(inGameStack, partyButtons,
-                                         BORDER + size.width + x, y));
-                    }
-                });
+                setAction(button, entry.getKey(), bag, heroTeam);
                 buttons.add(button);
             }
         }
 
         if (!bag.getPotions().isEmpty()) {
             final Map<Potion, Integer> potions = bag.getPotions();
+
             for (final Map.Entry<Potion, Integer> entry : potions.entrySet()) {
                 final MenuButton button = new MenuButton(entry.getKey().getName() + ", " + entry.getValue());
-
-                System.out.println("potions " + entry.getKey().getName());
-
-                button.addActionListener(new ActionListener() {
-                    public void actionPerformed(final ActionEvent e) {
-                        final List<MenuButton> partyButtons = new LinkedList<MenuButton>();
-
-                        for (final Hero hero : heroTeam.getAllHeroes()) {
-                            final MenuButton partyButton = new MenuButton(hero.getName());
-
-                            partyButton.addActionListener(new ObjectUseActionListener(entry.getKey(), hero, bag));
-                            partyButton.addActionListener(new ActionListener() {
-                                @Override
-                                public void actionPerformed(final ActionEvent e) {
-                                    inGameStack.pop();
-                                    inGameStack.pop();
-                                }
-                            });
-
-                            partyButtons.add(partyButton);
-                        }
-
-                        inGameStack.push(new PartyMenu(inGameStack, partyButtons,
-                                         BORDER + size.width + x, y));
-                    }
-                });
+                setAction(button, entry.getKey(), bag, heroTeam);
                 buttons.add(button);
             }
         }
 
         if (!bag.getMiscellaneous().isEmpty()) {
-            final Map<Item, Integer> miscellaneous = bag.getMiscellaneous();
-            for (final Map.Entry<Item, Integer> entry : miscellaneous.entrySet()) {
+            final Map<Item, Integer> weapons = bag.getMiscellaneous();
+
+            for (final Map.Entry<Item, Integer> entry : weapons.entrySet()) {
                 final MenuButton button = new MenuButton(entry.getKey().getName() + ", " + entry.getValue());
-
-                System.out.println("miscellaneous " + entry.getKey().getName());
-
-                button.addActionListener(new ActionListener() {
-                    public void actionPerformed(final ActionEvent e) {
-                        final List<MenuButton> partyButtons = new LinkedList<MenuButton>();
-
-                        for (final Hero hero : heroTeam.getAllHeroes()) {
-                            final MenuButton partyButton = new MenuButton(hero.getName());
-
-                            partyButton.addActionListener(new ObjectUseActionListener(entry.getKey(), hero, bag));
-                            partyButton.addActionListener(new ActionListener() {
-                                @Override
-                                public void actionPerformed(final ActionEvent e) {
-                                    inGameStack.pop();
-                                    inGameStack.pop();
-                                }
-                            });
-
-                            partyButtons.add(partyButton);
-                        }
-
-                        inGameStack.push(new PartyMenu(inGameStack, partyButtons,
-                                         BORDER + size.width + x, y));
-                    }
-                });
+                setAction(button, entry.getKey(), bag, heroTeam);
                 buttons.add(button);
             }
         }
@@ -223,6 +132,31 @@ public class ItemMenu extends JPanel {
         for (final Component component : buttonPanel.getComponents()) {
             component.setEnabled(b);
         }
+    }
+
+    private void setAction(final MenuButton button, final Item item, final Bag bag, final HeroTeam heroTeam) {
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(final ActionEvent e) {
+                final List<MenuButton> partyButtons = new LinkedList<MenuButton>();
+
+                for (final Hero hero : heroTeam.getAllHeroes()) {
+                    final MenuButton partyButton = new MenuButton(hero.getName());
+
+                    partyButton.addActionListener(new ObjectUseActionListener(item, hero, bag));
+                    partyButton.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(final ActionEvent e) {
+                            inGameStack.pop();
+                            inGameStack.pop();
+                        }
+                    });
+
+                    partyButtons.add(partyButton);
+                }
+
+                inGameStack.push(new PartyMenu(inGameStack, partyButtons, BORDER + size.width + x, y));
+            }
+        });
     }
 
     private class CloseAction extends AbstractAction {

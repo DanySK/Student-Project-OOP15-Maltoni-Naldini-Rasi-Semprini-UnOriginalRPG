@@ -5,9 +5,9 @@ import it.unibo.unori.controller.actionlistener.SaveActionListener;
 import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.HeroTeam;
 import it.unibo.unori.model.items.Bag;
-import it.unibo.unori.view.layers.InGameMenuLayer.InGameMenuStack;
 import it.unibo.unori.view.layers.common.ItemMenu;
 import it.unibo.unori.view.layers.common.MenuButton;
+import it.unibo.unori.view.layers.common.MenuStack;
 import it.unibo.unori.view.layers.common.PartyMenu;
 
 import java.awt.Color;
@@ -32,30 +32,36 @@ import javax.swing.AbstractAction;
  * The main in-game menu.
  *
  */
-public class MainMenu extends JPanel {
+public class InGameMainMenu extends JPanel {
     private static final int BORDER = 5;
-    private final Dimension size = new Dimension(160, 160);
+    private static final Dimension SIZE = new Dimension(160, 160);
+
     private final List<MenuButton> buttons = new LinkedList<MenuButton>();
 
-    private final InGameMenuStack inGameStack;
+    private final MenuStack inGameStack;
 
     /**
      * Creates the first in-game menu.
-     * @param inGameStack the in-game menu stack
-     * @param heroTeam the hero team
-     * @param bag the party bag
-     * @param x the x position
-     * @param y the y position
+     *
+     * @param inGameStack
+     *            the in-game menu stack
+     * @param heroTeam
+     *            the hero team
+     * @param bag
+     *            the party bag
+     * @param x
+     *            the x position
+     * @param y
+     *            the y position
      */
-    public MainMenu(final InGameMenuStack inGameStack,
-                    final HeroTeam heroTeam, final Bag bag,
-                    final int x, final int y) {
+    public InGameMainMenu(final MenuStack inGameStack, final HeroTeam heroTeam, final Bag bag, final int x,
+            final int y) {
         super();
 
         this.inGameStack = inGameStack;
 
         this.setBackground(Color.WHITE);
-        this.setBounds(x, y, size.width, size.height);
+        this.setBounds(x, y, SIZE.width, SIZE.height);
         this.setLayout(new GridLayout(0, 1, BORDER, BORDER));
 
         this.setBorder(BorderFactory.createEmptyBorder(BORDER, BORDER, BORDER, BORDER));
@@ -71,25 +77,20 @@ public class MainMenu extends JPanel {
                         @Override
                         public void actionPerformed(final ActionEvent e) {
                             inGameStack.push(new PartyInfoMenu(inGameStack, hero,
-                                                               BORDER + size.width + x
-                                                               + BORDER + PartyMenu.SIZE.width,
-                                                               y));
+                                    BORDER + SIZE.width + x + BORDER + PartyMenu.SIZE.width, y));
                         }
                     });
                     buttons.add(button);
                 }
 
-                inGameStack.push(new PartyMenu(inGameStack, buttons,
-                                               BORDER + size.width + x, y));
+                inGameStack.push(new PartyMenu(inGameStack, buttons, BORDER + SIZE.width + x, y));
             }
         });
 
         final MenuButton items = new MenuButton("Items");
         items.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
-                inGameStack.push(new ItemMenu(inGameStack,
-                                              heroTeam, bag,
-                                              BORDER + size.width + x, y));
+                inGameStack.push(new ItemMenu(inGameStack, heroTeam, bag, BORDER + SIZE.width + x, y));
             }
         });
 
