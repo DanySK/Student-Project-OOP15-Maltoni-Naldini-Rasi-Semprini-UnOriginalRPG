@@ -13,6 +13,7 @@ import it.unibo.unori.model.character.factory.FoesFindable;
 import it.unibo.unori.model.items.Weapon;
 
 public class FoeSetup {
+    /*
     public static final String FOLLETTO = "res/foes/fairy.json";
     public static final String GNOMO_DA_GIARDINO = "res/foes/gnome.json";
     public static final String DEMONE = "res/foes/demon.json";
@@ -21,6 +22,10 @@ public class FoeSetup {
     public static final String BAMBINO = "res/foes/baby.json";
     public static final String STREGONE = "res/foes/wizard.json";
     public static final String EROE_CADUTO = "res/foes/fallen.json";
+    */
+    /**
+     * Path to the file with default paramethers for generating foes.
+     */
     public static final String DEFAULT = "res/foes/defaultFoe.json";
     private final JsonFileManager fileManager;
     private final Map<String, Map<Statistics, Integer>> statsMap;
