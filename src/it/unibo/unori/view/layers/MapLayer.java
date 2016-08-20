@@ -36,7 +36,7 @@ public class MapLayer extends Layer {
     /**
      * The default map size.
      */
-    public static final Dimension SIZE = new Dimension(1280, 720);
+    public static final Dimension SIZE = new Dimension(960, 720);
     private static final Dimension CELL_SIZE = new Dimension(32, 32);
 
     private Point mapStartingPoint;
