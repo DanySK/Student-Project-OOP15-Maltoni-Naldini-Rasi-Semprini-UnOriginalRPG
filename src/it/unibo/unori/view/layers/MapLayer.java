@@ -165,10 +165,12 @@ public class MapLayer extends Layer {
         new Thread() {
             @Override
             public void run() {
+                final int delay = 50;
+
                 sprite = frame[1];
                 repaint();
                 try {
-                    sleep(50);
+                    sleep(delay);
                 } catch (final InterruptedException e) {
                 }
                 sprite = frame[0];
@@ -194,6 +196,12 @@ public class MapLayer extends Layer {
         }
     }
 
+    /**
+     * Make the character turn.
+     *
+     * @param direction
+     *            the direction to turn to.
+     */
     public void rotate(final int direction) {
         switch (direction) {
             case SwingConstants.NORTH:
@@ -229,7 +237,7 @@ public class MapLayer extends Layer {
     }
 
     /**
-     * Change the current map
+     * Change the current map.
      *
      * @param map
      *            the new map's sprite paths
@@ -290,12 +298,13 @@ public class MapLayer extends Layer {
         g.drawImage(sprite, mapStartingPoint.y + position.y * CELL_SIZE.height,
                 mapStartingPoint.x + position.x * CELL_SIZE.width, CELL_SIZE.height, CELL_SIZE.width, null);
 
-        final int border = 10;
-        final int height = 100;
-        final int x = border * 2;
-        int y = SIZE.height - height - border / 2;
-
         if (dialogueActive) {
+            final int border = 10;
+            final int height = 100;
+            final int x = border * 2;
+            final double leftBorder = 4.5;
+            int y = SIZE.height - height - border / 2;
+
             g.setColor(Color.WHITE);
             g.fillRect(border, SIZE.height - border - height, SIZE.width - border * 2, height);
 
@@ -304,11 +313,14 @@ public class MapLayer extends Layer {
 
             for (final char c : dialogueText.toCharArray()) {
                 if (c == '\n') {
-                    g.drawString(stringBuilder.toString(), x, y += g.getFontMetrics().getHeight());
+                    y += g.getFontMetrics().getHeight();
+                    g.drawString(stringBuilder.toString(), x, y);
 
                     stringBuilder.setLength(0);
-                } else if (g.getFontMetrics().stringWidth(stringBuilder.toString() + c) > SIZE.width - border * 4.5) {
-                    g.drawString(stringBuilder.toString(), x, y += g.getFontMetrics().getHeight());
+                } else if (g.getFontMetrics().stringWidth(stringBuilder.toString() + c) > SIZE.width
+                        - border * leftBorder) {
+                    y += g.getFontMetrics().getHeight();
+                    g.drawString(stringBuilder.toString(), x, y);
 
                     stringBuilder.setLength(0);
                     stringBuilder.append(c);

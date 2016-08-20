@@ -51,12 +51,22 @@ public class MapLayerTest {
         }
     }
 
-    public void run() {
+    private void run() {
         view.run();
     }
 
-    public static String[][] createMap(final String path,
-                                 final int width, final int height) {
+    /**
+     * Create a map.
+     *
+     * @param path
+     *            the path of the sprite
+     * @param width
+     *            the width of the map
+     * @param height
+     *            the hight of the map
+     * @return the map
+     */
+    public static String[][] createMap(final String path, final int width, final int height) {
         final String[][] map = new String[width][height];
 
         for (int x = 0; x < width; x++) {
@@ -69,9 +79,9 @@ public class MapLayerTest {
     }
 
     private class MoveAction extends AbstractAction {
-		private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = 1L;
 
-		private final int direction;
+        private final int direction;
 
         MoveAction(final int direction) {
             super();
@@ -85,9 +95,9 @@ public class MapLayerTest {
     }
 
     private class InteractAction extends AbstractAction {
-		private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = 1L;
 
-		@Override
+        @Override
         public void actionPerformed(final ActionEvent e) {
             view.close();
         }

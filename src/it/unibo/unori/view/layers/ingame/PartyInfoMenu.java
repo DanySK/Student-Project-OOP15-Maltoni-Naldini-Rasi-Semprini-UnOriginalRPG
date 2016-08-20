@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
 import it.unibo.unori.model.character.Hero;
-import it.unibo.unori.view.layers.InGameMenuLayer.InGameMenuStack;
+import it.unibo.unori.view.layers.common.MenuStack;
 
 /**
  *
@@ -21,19 +21,22 @@ import it.unibo.unori.view.layers.InGameMenuLayer.InGameMenuStack;
  *
  */
 public class PartyInfoMenu extends JPanel {
-    private final InGameMenuStack inGameStack;
+    private final MenuStack inGameStack;
     private static final Dimension SIZE = new Dimension(160, 160);
 
     /**
      * Creates the party info menu.
-     * @param inGameStack the in-game stack
-     * @param hero the hero whos infos will be displayed
-     * @param x the x coordinate
-     * @param y the y coordinate
+     *
+     * @param inGameStack
+     *            the in-game stack
+     * @param hero
+     *            the hero whos infos will be displayed
+     * @param x
+     *            the x coordinate
+     * @param y
+     *            the y coordinate
      */
-    public PartyInfoMenu(final InGameMenuStack inGameStack,
-                         final Hero hero,
-                         final int x, final int y) {
+    public PartyInfoMenu(final MenuStack inGameStack, final Hero hero, final int x, final int y) {
         super();
 
         this.inGameStack = inGameStack;
