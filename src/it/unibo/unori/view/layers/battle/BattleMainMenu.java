@@ -29,7 +29,7 @@ public class BattleMainMenu extends JPanel {
     /**
      * The battle main menu size.
      */
-    public static final Dimension SIZE = new Dimension(320, 160);
+    public static final Dimension SIZE = new Dimension(320, 80);
 
     private static final int BORDER = 5;
     private final MenuStack battleMenuStack;
@@ -81,6 +81,8 @@ public class BattleMainMenu extends JPanel {
         final MenuButton magic = new MenuButton("Magia");
         magic.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
+                battleMenuStack.push(new MagicMenu(battleMenuStack, heroTeam, foeTeam, BORDER + SIZE.width + x,
+                        y + SIZE.height - MagicMenu.SIZE.height));
             }
         });
 
