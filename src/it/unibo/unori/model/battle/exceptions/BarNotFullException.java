@@ -10,9 +10,17 @@ public class BarNotFullException extends Exception {
      * 
      */
     private static final long serialVersionUID = -1872344338627730987L;
+    private static final String DEFAULT_MESSAGE = "La barra non e' ancora piena!";
+    
+    /**
+     * Standard constructor.
+     */
+    public BarNotFullException() {
+        super(DEFAULT_MESSAGE);
+    }
 
     @Override
     public String toString() {
-        return "La barra non e' ancora piena!";
+        return DEFAULT_MESSAGE;
     }
 }

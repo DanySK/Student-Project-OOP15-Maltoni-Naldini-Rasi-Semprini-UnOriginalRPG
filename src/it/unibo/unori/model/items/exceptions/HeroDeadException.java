@@ -11,10 +11,19 @@ public class HeroDeadException extends Exception {
      * 
      */
     private static final long serialVersionUID = 9125960305416735834L;
+    private static final String DEFAULT_MESSAGE = 
+            "Non puoi resuscitare questo personaggio usando questa Pozione!";
+    
+    /**
+     * Standard constructor.
+     */
+    public HeroDeadException() {
+        super(DEFAULT_MESSAGE);
+    }
     
     @Override
     public String toString() {
-        return "Non puoi resuscitare questo personaggio usando questa Pozione!";
+        return DEFAULT_MESSAGE;
     }
 
 }
