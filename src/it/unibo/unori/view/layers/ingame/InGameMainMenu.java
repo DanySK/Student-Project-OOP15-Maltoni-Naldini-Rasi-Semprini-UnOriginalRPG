@@ -2,7 +2,6 @@ package it.unibo.unori.view.layers.ingame;
 
 import it.unibo.unori.controller.action.CloseMenuAction;
 import it.unibo.unori.controller.actionlistener.SaveActionListener;
-import it.unibo.unori.model.character.Hero;
 import it.unibo.unori.model.character.HeroTeam;
 import it.unibo.unori.model.items.Bag;
 import it.unibo.unori.view.layers.common.ItemMenu;
@@ -69,21 +68,7 @@ public class InGameMainMenu extends JPanel {
         final MenuButton party = new MenuButton("Party");
         party.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
-                final List<MenuButton> buttons = new LinkedList<MenuButton>();
-
-                for (final Hero hero : heroTeam.getAllHeroes()) {
-                    final MenuButton button = new MenuButton(hero.getName());
-                    button.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(final ActionEvent e) {
-                            inGameStack.push(new PartyInfoMenu(inGameStack, hero,
-                                    BORDER + SIZE.width + x + BORDER + PartyMenu.SIZE.width, y));
-                        }
-                    });
-                    buttons.add(button);
-                }
-
-                inGameStack.push(new PartyMenu(inGameStack, buttons, BORDER + SIZE.width + x, y));
+                inGameStack.push(new PartyMenu(inGameStack, heroTeam, BORDER + SIZE.width + x, y));
             }
         });
 
