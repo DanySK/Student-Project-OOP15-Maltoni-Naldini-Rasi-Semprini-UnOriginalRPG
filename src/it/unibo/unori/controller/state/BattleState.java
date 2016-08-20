@@ -30,6 +30,7 @@ import it.unibo.unori.model.menu.Dialogue;
 import it.unibo.unori.model.menu.DialogueInterface;
 import it.unibo.unori.model.menu.FightInterface;
 import it.unibo.unori.model.menu.FightMenu;
+import it.unibo.unori.view.exceptions.SpriteNotFoundException;
 import it.unibo.unori.view.layers.BattleLayer;
 
 /**
@@ -55,8 +56,9 @@ public class BattleState extends AbstractGameState {
      *            the team of enemies that the heroes must defeat
      * @param bag
      *            the bag containing the items of the party
+     * @throws SpriteNotFoundException 
      */
-    public BattleState(final HeroTeam party, final FoeSquad foes, final Bag bag) {
+    public BattleState(final HeroTeam party, final FoeSquad foes, final Bag bag) throws SpriteNotFoundException {
         super(new BattleLayer(party, foes, bag));
         final Battle battle = new BattleImpl(party, foes, bag);
         this.fightModel = new FightMenu(battle);
@@ -78,8 +80,9 @@ public class BattleState extends AbstractGameState {
      *            the party containing the team of heroes and the bag
      * @param foes
      *            the team of enemies that the heroes must defeat
+     * @throws SpriteNotFoundException 
      */
-    public BattleState(final Party party, final FoeSquad foes) {
+    public BattleState(final Party party, final FoeSquad foes) throws SpriteNotFoundException {
         this(party.getHeroTeam(), foes, party.getPartyBag());
     }
 
