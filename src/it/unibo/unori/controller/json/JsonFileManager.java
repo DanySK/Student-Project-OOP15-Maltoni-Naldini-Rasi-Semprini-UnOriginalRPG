@@ -18,6 +18,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
 import it.unibo.unori.controller.GameStatisticsImpl;
+import it.unibo.unori.controller.SingletonStateMachine;
 import it.unibo.unori.controller.json.deserializers.CharacterDeserializer;
 import it.unibo.unori.controller.json.deserializers.DialogueDeserializer;
 import it.unibo.unori.controller.json.deserializers.FoeDeserializer;
@@ -53,14 +54,20 @@ import it.unibo.unori.model.maps.cell.Cell;
 import it.unibo.unori.model.menu.DialogueInterface;
 
 /**
- * This class models a clean boundary between Google Gson library and the needs of this project, providing methods to
- * serialize and deserialize from JSON files instances of Party, GameStatistics and JsonJobsParamethers.
+ * This class models a clean boundary between Google Gson library and the needs
+ * of this project, providing methods to serialize and deserialize from JSON
+ * files instances of Party, GameStatistics and JsonJobsParamethers.
  */
 public class JsonFileManager {
     /**
      * Static parameter for standard JSON object serialization save file.
      */
-    public static final String SAVE_FILE = "res/Save.json";
+    public static final String SAVE_FILE = "res/Party.json";
+
+    /**
+     * Static parameter for standard JSON object serialization type of map file.
+     */
+    public static final String MAP_TYPE = "res/MapType.json";
 
     /**
      * Static parameter for standard JSON object serialization statistics file.
@@ -73,24 +80,23 @@ public class JsonFileManager {
      * Default constructor.
      */
     public JsonFileManager() {
-        gson = new GsonBuilder().setPrettyPrinting()
-                        .registerTypeAdapter(Item.class, new ItemSerializer())
-                        .registerTypeAdapter(Armor.class, new ArmorSerializer())
-                        .registerTypeAdapter(Weapon.class, new WeaponSerializer())
-                        .registerTypeAdapter(Potion.class, new PotionSerializer())
-                        .registerTypeAdapter(Bag.class, new BagSerializer())
-                        .registerTypeAdapter(MagicAttackInterface.class, new MagicAttackSerializer())
-                        .registerTypeAdapter(Character.class, new CharacterDeserializer())
-                        .registerTypeAdapter(Foe.class, new FoeDeserializer())
-                        .registerTypeAdapter(FoeSquad.class, new FoeSquadDeserializer())
-                        .registerTypeAdapter(Hero.class, new HeroSerializer())
-                        .registerTypeAdapter(HeroTeam.class, new HeroTeamSerializer())
-                        .registerTypeAdapter(Npc.class, new NpcSerializer())
-                        .registerTypeAdapter(DialogueInterface.class, new DialogueDeserializer())
-                        .registerTypeAdapter(Position.class, new PositionSerializer())
-                        .registerTypeAdapter(Cell.class, new CellSerializer())
-                        .registerTypeAdapter(GameMap.class, new GameMapSerializer())
-                        .registerTypeAdapter(Party.class, new PartyDeserializer()).create();
+        gson = new GsonBuilder().setPrettyPrinting().enableComplexMapKeySerialization().registerTypeAdapter(Item.class, new ItemSerializer())
+                .registerTypeAdapter(Armor.class, new ArmorSerializer())
+                .registerTypeAdapter(Weapon.class, new WeaponSerializer())
+                .registerTypeAdapter(Potion.class, new PotionSerializer())
+                .registerTypeAdapter(Bag.class, new BagSerializer())
+                .registerTypeAdapter(MagicAttackInterface.class, new MagicAttackSerializer())
+                .registerTypeAdapter(Character.class, new CharacterDeserializer())
+                .registerTypeAdapter(Foe.class, new FoeDeserializer())
+                .registerTypeAdapter(FoeSquad.class, new FoeSquadDeserializer())
+                .registerTypeAdapter(Hero.class, new HeroSerializer())
+                .registerTypeAdapter(HeroTeam.class, new HeroTeamSerializer())
+                .registerTypeAdapter(Npc.class, new NpcSerializer())
+                .registerTypeAdapter(DialogueInterface.class, new DialogueDeserializer())
+                .registerTypeAdapter(Position.class, new PositionSerializer())
+                .registerTypeAdapter(Cell.class, new CellSerializer())
+                .registerTypeAdapter(GameMap.class, new GameMapSerializer())
+                .registerTypeAdapter(Party.class, new PartyDeserializer()).create();
     }
 
     /**
@@ -102,14 +108,16 @@ public class JsonFileManager {
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
-     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
-     *             cannot be opened for reading
+     *             if the file does not exist, is a directory rather than a
+     *             regular file, or for some other reason cannot be opened for
+     *             reading
      * @throws JsonIOException
      *             if there was a problem reading from the Reader
      * @throws JsonSyntaxException
-     *             if the file does not contain a valid representation for an object of type
+     *             if the file does not contain a valid representation for an
+     *             object of type
      */
-    public Party loadGameFromPath(final String path) throws IOException {
+    public Party loadPartyFromPath(final String path) throws IOException {
         return deserializeJSON(Party.class, path);
     }
 
@@ -120,20 +128,23 @@ public class JsonFileManager {
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
-     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
-     *             cannot be opened for reading
+     *             if the file does not exist, is a directory rather than a
+     *             regular file, or for some other reason cannot be opened for
+     *             reading
      * @throws JsonIOException
      *             if there was a problem reading from the Reader
      * @throws JsonSyntaxException
-     *             if the file does not contain a valid representation for an object of type
+     *             if the file does not contain a valid representation for an
+     *             object of type
      */
-    public Party loadGame() throws IOException {
-        return loadGameFromPath(SAVE_FILE);
+    public Party loadParty() throws IOException {
+        return loadPartyFromPath(SAVE_FILE);
     }
 
     /**
-     * This method saves the state of the game by serializing the Party object (containing position on map, statistics,
-     * etc...) and the time played. It saves in a given-path file.
+     * This method saves the state of the game by serializing the Party object
+     * (containing position on map, statistics, etc...) and the time played. It
+     * saves in a given-path file.
      * 
      * @param party
      *            the party object
@@ -142,70 +153,81 @@ public class JsonFileManager {
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
-     *             if the file exists but is a directory rather than a regular file, does not exist but cannot be
-     *             created, or cannot be opened for any other reason
+     *             if the file exists but is a directory rather than a regular
+     *             file, does not exist but cannot be created, or cannot be
+     *             opened for any other reason
      * @throws SecurityException
-     *             if a security manager exists and its checkWrite method denies write access to the file
+     *             if a security manager exists and its checkWrite method denies
+     *             write access to the file
      * @throws JsonIOException
      *             if there was a problem writing to the writer
      */
-    public void saveGameToPath(final Party party, final String path) throws IOException {
+    public void savePartyToPath(final Party party, final String path) throws IOException {
         serializeJSON(party, path);
     }
 
     /**
-     * This method saves the state of the game by serializing the Party object (containing position on map, statistics,
-     * etc...) and the time played. It saves in default path.
+     * This method saves the state of the game by serializing the Party object
+     * (containing position on map, statistics, etc...) and the time played. It
+     * saves in default path.
      * 
      * @param party
      *            the party object
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
-     *             if the file exists but is a directory rather than a regular file, does not exist but cannot be
-     *             created, or cannot be opened for any other reason
+     *             if the file exists but is a directory rather than a regular
+     *             file, does not exist but cannot be created, or cannot be
+     *             opened for any other reason
      * @throws SecurityException
-     *             if a security manager exists and its checkWrite method denies write access to the file
+     *             if a security manager exists and its checkWrite method denies
+     *             write access to the file
      * @throws JsonIOException
      *             if there was a problem writing to the writer
      */
-    public void saveGame(final Party party) throws IOException {
-        saveGameToPath(party, SAVE_FILE);
+    public void saveParty(final Party party) throws IOException {
+        savePartyToPath(party, SAVE_FILE);
     }
 
     /**
-     * The method restores a previously saved game statistics object from a given-path file.
+     * The method restores a previously saved game statistics object from a
+     * given-path file.
      * 
      * @param path
      *            the path of the file
      * @return the GameStatistics object
      * @throws FileNotFoundException
-     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
-     *             cannot be opened for reading.
+     *             if the file does not exist, is a directory rather than a
+     *             regular file, or for some other reason cannot be opened for
+     *             reading.
      * @throws IOException
      *             if an error occurs
      * @throws JsonIOException
      *             if there was a problem reading from the Reader
      * @throws JsonSyntaxException
-     *             if the file does not contain a valid representation for an object of type
+     *             if the file does not contain a valid representation for an
+     *             object of type
      */
     public GameStatisticsImpl loadStatsFromPath(final String path) throws IOException {
         return deserializeJSON(GameStatisticsImpl.class, path);
     }
 
     /**
-     * The method restores a previously saved game statistics object from default path.
+     * The method restores a previously saved game statistics object from
+     * default path.
      * 
      * @return the GameStatistics object
      * @throws FileNotFoundException
-     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
-     *             cannot be opened for reading.
+     *             if the file does not exist, is a directory rather than a
+     *             regular file, or for some other reason cannot be opened for
+     *             reading.
      * @throws IOException
      *             if an error occurs
      * @throws JsonIOException
      *             if there was a problem reading from the Reader
      * @throws JsonSyntaxException
-     *             if the file does not contain a valid representation for an object of type
+     *             if the file does not contain a valid representation for an
+     *             object of type
      */
     public GameStatisticsImpl loadStats() throws IOException {
         return loadStatsFromPath(STATS_FILE);
@@ -221,10 +243,12 @@ public class JsonFileManager {
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
-     *             if the file exists but is a directory rather than a regular file, does not exist but cannot be
-     *             created, or cannot be opened for any other reason
+     *             if the file exists but is a directory rather than a regular
+     *             file, does not exist but cannot be created, or cannot be
+     *             opened for any other reason
      * @throws SecurityException
-     *             if a security manager exists and its checkWrite method denies write access to the file
+     *             if a security manager exists and its checkWrite method denies
+     *             write access to the file
      * @throws JsonIOException
      *             if there was a problem writing to the writer
      */
@@ -240,10 +264,12 @@ public class JsonFileManager {
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
-     *             if the file exists but is a directory rather than a regular file, does not exist but cannot be
-     *             created, or cannot be opened for any other reason
+     *             if the file exists but is a directory rather than a regular
+     *             file, does not exist but cannot be created, or cannot be
+     *             opened for any other reason
      * @throws SecurityException
-     *             if a security manager exists and its checkWrite method denies write access to the file
+     *             if a security manager exists and its checkWrite method denies
+     *             write access to the file
      * @throws JsonIOException
      *             if there was a problem writing to the writer
      */
@@ -252,7 +278,8 @@ public class JsonFileManager {
     }
 
     /**
-     * This method saves a JsonJobParameter object containing all the default parameters of a specific Job.
+     * This method saves a JsonJobParameter object containing all the default
+     * parameters of a specific Job.
      * 
      * @param job
      *            the object to serialize
@@ -261,10 +288,12 @@ public class JsonFileManager {
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
-     *             if the file exists but is a directory rather than a regular file, does not exist but cannot be
-     *             created, or cannot be opened for any other reason
+     *             if the file exists but is a directory rather than a regular
+     *             file, does not exist but cannot be created, or cannot be
+     *             opened for any other reason
      * @throws SecurityException
-     *             if a security manager exists and its checkWrite method denies write access to the file
+     *             if a security manager exists and its checkWrite method denies
+     *             write access to the file
      * @throws JsonIOException
      *             if there was a problem writing to the writer
      */
@@ -275,20 +304,23 @@ public class JsonFileManager {
     }
 
     /**
-     * This method returns a JsonJobParameter object containing all the default parameters of a specific Job.
+     * This method returns a JsonJobParameter object containing all the default
+     * parameters of a specific Job.
      * 
      * @param path
      *            the path where to find the JSON file
      * @return the deserialized JsonJobParameter object
      * @throws FileNotFoundException
-     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
-     *             cannot be opened for reading.
+     *             if the file does not exist, is a directory rather than a
+     *             regular file, or for some other reason cannot be opened for
+     *             reading.
      * @throws IOException
      *             if an error occurs
      * @throws JsonIOException
      *             if there was a problem reading from the Reader
      * @throws JsonSyntaxException
-     *             if the file does not contain a valid representation for an object of type
+     *             if the file does not contain a valid representation for an
+     *             object of type
      */
     public JsonJobParameter loadJob(final String path) throws IOException {
         return this.deserializeJSON(JsonJobParameter.class, path);
@@ -307,7 +339,8 @@ public class JsonFileManager {
     }
 
     /**
-     * This method loads from a file in a specified path a JSON-serialized GameMap.
+     * This method loads from a file in a specified path a JSON-serialized
+     * GameMap.
      * 
      * @param path
      *            the path where to find the file
@@ -315,12 +348,14 @@ public class JsonFileManager {
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
-     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
-     *             cannot be opened for reading
+     *             if the file does not exist, is a directory rather than a
+     *             regular file, or for some other reason cannot be opened for
+     *             reading
      * @throws JsonIOException
      *             if there was a problem reading from the Reader
      * @throws JsonSyntaxException
-     *             if the file does not contain a valid representation for an object of type
+     *             if the file does not contain a valid representation for an
+     *             object of type
      */
     public GameMap loadMap(final String path) throws IOException {
         return this.deserializeJSON(GameMap.class, path);
@@ -344,10 +379,12 @@ public class JsonFileManager {
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
-     *             if the file exists but is a directory rather than a regular file, does not exist but cannot be
-     *             created, or cannot be opened for any other reason
+     *             if the file exists but is a directory rather than a regular
+     *             file, does not exist but cannot be created, or cannot be
+     *             opened for any other reason
      * @throws SecurityException
-     *             if a security manager exists and its checkWrite method denies write access to the file
+     *             if a security manager exists and its checkWrite method denies
+     *             write access to the file
      * @throws JsonIOException
      *             if there was a problem writing to the writer
      */
@@ -358,14 +395,16 @@ public class JsonFileManager {
     }
 
     /**
-     * This method loads a file from a given path and returns a single object from what reads. It is private because
-     * tested only with the classes needed here. It does not work with Collections and Maps.
+     * This method loads a file from a given path and returns a single object
+     * from what reads. It is private because tested only with the classes
+     * needed here. It does not work with Collections and Maps.
      * 
      * @param <T>
      *            the type of the object serialized on the file
      * @param clazz
-     *            the type of the object serialized on the file; it needs to be specified because sometimes it can't
-     *            parse the correct type automatically
+     *            the type of the object serialized on the file; it needs to be
+     *            specified because sometimes it can't parse the correct type
+     *            automatically
      * @param path
      *            the path where to find the JSON file
      * @return the serialized object
@@ -374,12 +413,14 @@ public class JsonFileManager {
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
-     *             if the file does not exist, is a directory rather than a regular file, or for some other reason
-     *             cannot be opened for reading
+     *             if the file does not exist, is a directory rather than a
+     *             regular file, or for some other reason cannot be opened for
+     *             reading
      * @throws JsonIOException
      *             if there was a problem reading from the Reader
      * @throws JsonSyntaxException
-     *             if the file does not contain a valid representation for an object of type
+     *             if the file does not contain a valid representation for an
+     *             object of type
      */
     private <T> T deserializeJSON(final Class<T> clazz, final String path) throws IOException {
         Optional<T> returnObject = Optional.empty();
@@ -393,5 +434,21 @@ public class JsonFileManager {
         reader.close();
 
         return returnObject.orElseThrow(() -> new JsonIOException("The file provided is corrupted or non valid"));
+    }
+
+    public void saveMapType(final GameMap currentGameMap) throws IOException {
+        this.saveMapTypeToFile(currentGameMap, MAP_TYPE);
+    }
+
+    public void saveMapTypeToFile(final GameMap currentGameMap, final String path) throws IOException {
+        serializeJSON(new MapType(currentGameMap, SingletonStateMachine.getController().getLoader()), path);
+    }
+
+    public MapType loadMapType() throws IOException {
+        return this.loadMapTypeFromFile(JsonFileManager.MAP_TYPE);
+    }
+
+    public MapType loadMapTypeFromFile(final String path) throws IOException {
+        return this.deserializeJSON(MapType.class, path);
     }
 }

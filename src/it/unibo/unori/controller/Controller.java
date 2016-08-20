@@ -8,6 +8,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
 import it.unibo.unori.controller.exceptions.UnexpectedStateException;
+import it.unibo.unori.controller.json.WorldLoader;
 import it.unibo.unori.controller.state.GameState;
 import it.unibo.unori.model.character.Foe;
 
@@ -149,5 +150,11 @@ public interface Controller {
      * @return the GameStatistics object for this game
      */
     GameStatistics getStatistics();
+
+    /**
+     * This method returns the internal builder of the World.
+     * @return the WorldBuilder
+     */
+    WorldLoader getLoader();
 
 }

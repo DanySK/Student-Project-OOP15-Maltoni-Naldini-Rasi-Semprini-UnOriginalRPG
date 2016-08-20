@@ -133,7 +133,7 @@ public class MapState extends AbstractGameState {
      * This method controls the random encounters when moving on a map that has that feature enabled.
      */
     public void randomEncounters() {
-        if (this.getMap().isBattleState() && this.random.ints().limit(2).sum() % 2 != 0) {
+        if (this.getMap().isBattleState() && /*this.random.ints().limit(2).sum() % 2 != 0*/this.random.nextInt(10) == 0) {
             // If the number is odd (33%) the battle starts
             final int numberOfMonsters = this.random.nextInt(BattleState.MAX_NUMBER_OF_FOES + 1);
             if (numberOfMonsters != 0) {
@@ -147,13 +147,12 @@ public class MapState extends AbstractGameState {
                 final List<Foe> foes = new ArrayList<>();
 
                 /*
-                 * Random generate the IA of the monsters. The more monsters are generated, the less intelligent should
-                 * be; the higher heroes' level is, the more intelligent monsters are.
+                 * Random generate the IA of the monsters. The higher heroes' level is, the more intelligent monsters are.
                  */
                 IntStream.range(0, numberOfMonsters).forEach(i -> {
                     final int ia = this.random.nextInt(this.party.getHeroTeam().getAllHeroes().stream()
-                                    .mapToInt(h -> h.getLevel()).max().getAsInt())
-                                    - this.random.nextInt(numberOfMonsters);
+                                    .mapToInt(h -> h.getLevel()).max().getAsInt() + 1);
+                    System.out.println(ia);
                     foes.add(new FoeImpl(ia <= FoeImpl.MAXIA ? (ia > 0 ? ia : 1)  : 10, foesTypes.get(i).toString() + " " + Integer.valueOf(i + 1),
                                     FoeSetup.getSpritePath(foesTypes.get(i), ia), foesTypes.get(i)));
                 });
