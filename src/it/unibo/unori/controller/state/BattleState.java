@@ -45,6 +45,8 @@ public class BattleState extends AbstractGameState {
     private final FightInterface fightModel;
     private Optional<DialogueInterface> currentDialogue;
     private boolean heroTurn;
+    private boolean runAway = false;
+    private boolean outCome = false;
     private int currentTurn; // Automatically initialized by Java to 0
 
     /**
@@ -56,7 +58,7 @@ public class BattleState extends AbstractGameState {
      *            the team of enemies that the heroes must defeat
      * @param bag
      *            the bag containing the items of the party
-     * @throws SpriteNotFoundException 
+     * @throws SpriteNotFoundException
      */
     public BattleState(final HeroTeam party, final FoeSquad foes, final Bag bag) throws SpriteNotFoundException {
         super(new BattleLayer(party, foes, bag));
@@ -66,13 +68,6 @@ public class BattleState extends AbstractGameState {
         this.currentDialogue = Optional.of(battle.getPresentation());
         this.scrollMessage();
         this.currentTurn++;
-        /*
-        if (this.heroTurn) {
-            this.newTurn();
-        } else {
-            this.endTurn();
-        }
-        */
     }
 
     /**
@@ -82,7 +77,7 @@ public class BattleState extends AbstractGameState {
      *            the party containing the team of heroes and the bag
      * @param foes
      *            the team of enemies that the heroes must defeat
-     * @throws SpriteNotFoundException 
+     * @throws SpriteNotFoundException
      */
     public BattleState(final Party party, final FoeSquad foes) throws SpriteNotFoundException {
         this(party.getHeroTeam(), foes, party.getPartyBag());
@@ -172,9 +167,10 @@ public class BattleState extends AbstractGameState {
     public void runAway() {
         try {
             this.currentDialogue = Optional.of(this.fightModel.getBattle().runAway());
+            this.runAway = true;
             this.endHeroTurn();
         } catch (CantEscapeException e) {
-            this.showMessage(e.getMessage());
+            this.showMessage(e.toString());
         }
     }
 
@@ -185,17 +181,27 @@ public class BattleState extends AbstractGameState {
         if (this.currentDialogue.isPresent()) {
             if (this.currentDialogue.get().isOver()) {
                 this.currentDialogue = Optional.empty();
+                if (this.outCome) {
+                    this.outCome = false;
+                }
             } else {
                 try {
                     ((BattleLayer) this.getLayer()).showDialogue(this.currentDialogue.get().showNext());
                 } catch (IndexOutOfBoundsException e) {
                     this.currentDialogue = Optional.empty(); // TODO check
+                    if (this.outCome) {
+                        this.outCome = false;
+                    }
                 }
             }
 
             if (!this.currentDialogue.isPresent()) {
                 if (this.fightModel.getBattle().isOver()) {
-                    this.currentDialogue = Optional.of(new Dialogue(this.fightModel.getBattle().getOutCome()));
+                    if (!this.runAway) {
+                        this.outCome = true;
+                        this.currentDialogue = Optional.of(new Dialogue(this.fightModel.getBattle().getOutCome()));
+                    }
+                    SingletonStateMachine.getController().getStack().pop();
                 } else {
                     ((BattleLayer) this.getLayer()).hideDialogue();
                     if (this.heroTurn) {

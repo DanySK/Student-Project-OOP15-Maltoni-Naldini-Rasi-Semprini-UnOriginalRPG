@@ -13,6 +13,7 @@ public class EscapeActionListener extends AbstractUnoriActionListener {
     @Override
     public void actionPerformed(final ActionEvent event) {
         if (BattleState.class.isInstance(this.getController().getCurrentState())) {
+            System.out.println("Fuga");
             final BattleState currentState = (BattleState) this.getController().getCurrentState();
             currentState.runAway();
         } else {
