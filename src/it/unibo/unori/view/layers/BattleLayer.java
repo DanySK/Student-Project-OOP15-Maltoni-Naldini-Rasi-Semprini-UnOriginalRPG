@@ -9,7 +9,7 @@ import it.unibo.unori.model.character.HeroTeam;
 
 import it.unibo.unori.view.sprites.JobSprite;
 import it.unibo.unori.view.layers.common.MenuStack;
-import it.unibo.unori.view.layers.battle.BattleMainMenu;
+import it.unibo.unori.view.layers.ingame.InGameMainMenu;
 import it.unibo.unori.view.exceptions.SpriteNotFoundException;
 
 import java.util.Map;
@@ -90,6 +90,8 @@ public class BattleLayer extends Layer {
         this.setBackground(Color.WHITE);
         this.setBounds(0, 0, SIZE.width, SIZE.height);
 
+        this.add(battleMenuStack);
+
         final ActionMap actionMap = getActionMap();
         final InputMap inputMap = getInputMap(WHEN_IN_FOCUSED_WINDOW);
 
@@ -101,7 +103,9 @@ public class BattleLayer extends Layer {
      * Create new turn.
      */
     public void newTurn() {
-        battleMenuStack.push(new BattleMainMenu(battleMenuStack, heroTeam, foeTeam, bag, BORDER, BORDER));
+        battleMenuStack.push(new InGameMainMenu(battleMenuStack, heroTeam, bag, BORDER, BORDER));
+
+        repaint();
     }
 
     private void drawHero(final Graphics g, final int x, final int y, final int hp, final int totalHp,
@@ -240,6 +244,8 @@ public class BattleLayer extends Layer {
     public void showDialogue(final String dialogue) {
         this.dialogueText = dialogue;
         dialogueActive = true;
+
+        repaint();
     }
 
     /**
@@ -247,6 +253,8 @@ public class BattleLayer extends Layer {
      */
     public void hideDialogue() {
         dialogueActive = false;
+
+        repaint();
     }
 
     /**
