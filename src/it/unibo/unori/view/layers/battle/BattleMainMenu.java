@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.JPanel;
 
 import it.unibo.unori.controller.actionlistener.AttackActionListener;
@@ -25,12 +26,13 @@ import it.unibo.unori.view.layers.common.MenuStack;
  *
  */
 public class BattleMainMenu extends JPanel {
-    private static final int BORDER = 5;
-
     /**
      * The battle main menu size.
      */
-    public static final Dimension SIZE = new Dimension(240, 160);
+    public static final Dimension SIZE = new Dimension(320, 160);
+
+    private static final int BORDER = 5;
+    private final MenuStack battleMenuStack;
 
     /**
      * Creates a battle main menu.
@@ -50,6 +52,9 @@ public class BattleMainMenu extends JPanel {
      */
     public BattleMainMenu(final MenuStack battleMenuStack, final HeroTeam heroTeam, final FoeSquad foeTeam,
             final Bag bag, final int x, final int y) {
+        super();
+
+        this.battleMenuStack = battleMenuStack;
 
         this.setBackground(Color.WHITE);
         this.setBounds(x, y, SIZE.width, SIZE.height);
@@ -65,7 +70,7 @@ public class BattleMainMenu extends JPanel {
             }
         });
 
-        final MenuButton specialAttack = new MenuButton("Attacco Speciale");
+        final MenuButton specialAttack = new MenuButton("Attacco Sp.");
         specialAttack.addActionListener(new SpecialAttackActionListener());
         specialAttack.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
@@ -73,11 +78,17 @@ public class BattleMainMenu extends JPanel {
             }
         });
 
+        final MenuButton magic = new MenuButton("Magia");
+        magic.addActionListener(new ActionListener() {
+            public void actionPerformed(final ActionEvent e) {
+            }
+        });
+
         final MenuButton items = new MenuButton("Oggetti");
         items.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
                 battleMenuStack.push(new ItemMenu(battleMenuStack, heroTeam, bag, BORDER + SIZE.width + x,
-                        y + SIZE.height - ItemMenu.SIZE.height));
+                        y + SIZE.height - ItemMenu.SIZE.height, new BattleItemActionListener()));
             }
         });
 
@@ -91,8 +102,18 @@ public class BattleMainMenu extends JPanel {
 
         this.add(attack);
         this.add(specialAttack);
+        this.add(magic);
         this.add(items);
+        this.add(Box.createGlue());
         this.add(run);
+    }
+
+    private class BattleItemActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            battleMenuStack.pop();
+        }
+
     }
 
     /**
