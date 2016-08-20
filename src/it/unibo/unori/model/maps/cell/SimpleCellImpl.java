@@ -26,8 +26,10 @@ public class SimpleCellImpl implements Cell {
      * 
      */
     private static final long serialVersionUID = -8981471810277191248L;
+    private static final int PRIME = 31;
     private String path;
     private CellState state;
+
 
 
     /**
@@ -87,6 +89,42 @@ public class SimpleCellImpl implements Cell {
     @Override
     public Foe getBoss() throws IllegalStateException {
         throw new IllegalStateException();
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = PRIME * result + ((path == null) ? 0 : path.hashCode());
+        result = PRIME * result + ((state == null) ? 0 : state.hashCode());
+        return result;
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof SimpleCellImpl)) {
+            return false;
+        }
+        final SimpleCellImpl other = (SimpleCellImpl) obj;
+        if (path == null) {
+            if (other.path != null) {
+                return false;
+            }
+            return state.equals(other.state);
+        } else {
+            return path.equals(other.path) && state.equals(other.state); 
+        }
     }
 
 

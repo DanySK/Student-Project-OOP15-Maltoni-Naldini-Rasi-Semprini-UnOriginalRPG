@@ -24,6 +24,7 @@ public class GameMapImpl implements GameMap {
      */
     private static final long serialVersionUID = -887928696341560842L;
     private static final int STDCELLS = 100; 
+    private static final int PRIME = 31;
     private final Cell[][] floorMap;
     private Position initialPosition;
     private final boolean battleState;
@@ -246,4 +247,29 @@ public class GameMapImpl implements GameMap {
         return this.battleState;
     }
 
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = PRIME * result + (battleState ? 1231 : 1237);
+        result = PRIME * result + Arrays.deepHashCode(floorMap);
+        result = PRIME * result + ((initialPosition == null) ? 0 : initialPosition.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false; 
+        }
+        if (!(obj instanceof GameMapImpl)) {
+            return false;
+        }
+        final GameMapImpl other = (GameMapImpl) obj;
+        return this.battleState == other.battleState 
+                &&  Arrays.deepEquals(this.floorMap, other.floorMap);
+
+   }
 }
