@@ -9,7 +9,9 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
+import it.unibo.unori.controller.actionlistener.AttackActionListener;
 import it.unibo.unori.controller.actionlistener.EscapeActionListener;
+import it.unibo.unori.controller.actionlistener.SpecialAttackActionListener;
 import it.unibo.unori.model.character.FoeSquad;
 import it.unibo.unori.model.character.HeroTeam;
 import it.unibo.unori.model.items.Bag;
@@ -28,7 +30,7 @@ public class BattleMainMenu extends JPanel {
     /**
      * The battle main menu size.
      */
-    public static final Dimension SIZE = new Dimension(160, 160);
+    public static final Dimension SIZE = new Dimension(240, 160);
 
     /**
      * Creates a battle main menu.
@@ -55,6 +57,22 @@ public class BattleMainMenu extends JPanel {
 
         this.setBorder(BorderFactory.createEmptyBorder(BORDER, BORDER, BORDER, BORDER));
 
+        final MenuButton attack = new MenuButton("Attacco");
+        attack.addActionListener(new AttackActionListener());
+        attack.addActionListener(new ActionListener() {
+            public void actionPerformed(final ActionEvent e) {
+                battleMenuStack.pop();
+            }
+        });
+
+        final MenuButton specialAttack = new MenuButton("Attacco Speciale");
+        specialAttack.addActionListener(new SpecialAttackActionListener());
+        specialAttack.addActionListener(new ActionListener() {
+            public void actionPerformed(final ActionEvent e) {
+                battleMenuStack.pop();
+            }
+        });
+
         final MenuButton items = new MenuButton("Oggetti");
         items.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
@@ -71,6 +89,8 @@ public class BattleMainMenu extends JPanel {
             }
         });
 
+        this.add(attack);
+        this.add(specialAttack);
         this.add(items);
         this.add(run);
     }
