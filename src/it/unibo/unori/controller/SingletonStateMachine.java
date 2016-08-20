@@ -27,6 +27,7 @@ import it.unibo.unori.model.character.exceptions.MaxHeroException;
 import it.unibo.unori.model.character.jobs.Jobs;
 import it.unibo.unori.model.maps.Party;
 import it.unibo.unori.model.maps.SingletonParty;
+import it.unibo.unori.view.exceptions.SpriteNotFoundException;
 import it.unibo.unori.view.layers.CharacterSelectionLayer;
 
 /**
@@ -225,8 +226,12 @@ public final class SingletonStateMachine {
         @Override
         public void startBattle(final List<Foe> foes) {
             final Party partyObject = SingletonParty.getParty();
-            this.stack.pushAndRender(new BattleState(partyObject.getHeroTeam(), new FoeSquadImpl(foes),
-                            partyObject.getPartyBag()));
+            try {
+                this.stack.pushAndRender(new BattleState(partyObject.getHeroTeam(), new FoeSquadImpl(foes),
+                                partyObject.getPartyBag()));
+            } catch (SpriteNotFoundException | IllegalArgumentException e) {
+                this.showError(e.getMessage());
+            }
             this.stats.increaseMonstersMet(foes.size());
         }
 
