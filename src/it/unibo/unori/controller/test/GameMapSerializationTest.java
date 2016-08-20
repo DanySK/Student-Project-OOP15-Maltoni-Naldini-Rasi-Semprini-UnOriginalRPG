@@ -26,10 +26,9 @@ public class GameMapSerializationTest {
 
         final GameMap fourNPCRoom = gmf.create4NPCRoomMap();
 
-        jfm.serializeJSON(fourNPCRoom, test.getAbsolutePath());
-        assertEquals(fourNPCRoom.getMapRows(), jfm.deserializeJSON(GameMap.class, test.getAbsolutePath()).getMapRows());
-        assertEquals(fourNPCRoom.getMapColumns(),
-                        jfm.deserializeJSON(GameMap.class, test.getAbsolutePath()).getMapColumns());
+        jfm.saveMap(fourNPCRoom, test.getAbsolutePath());
+        assertEquals(fourNPCRoom.getMapRows(), jfm.loadMap(test.getAbsolutePath()).getMapRows());
+        assertEquals(fourNPCRoom.getMapColumns(), jfm.loadMap(test.getAbsolutePath()).getMapColumns());
     }
 
 }
