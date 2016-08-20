@@ -17,7 +17,9 @@ import it.unibo.unori.model.character.Status;
 import it.unibo.unori.model.character.factory.FoesFindable;
 
 /**
- * 
+ * This class should be registered in a {@link com.google.gson.GsonBuilder} to
+ * deserialize a {@link it.unibo.unori.model.character.Foe} compatible
+ * class.
  */
 public class FoeDeserializer implements JsonDeserializer<Foe> {
     // CharacterImpl

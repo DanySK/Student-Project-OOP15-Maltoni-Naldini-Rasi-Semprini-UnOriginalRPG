@@ -10,6 +10,10 @@ import com.google.gson.JsonParseException;
 import it.unibo.unori.model.maps.Party;
 import it.unibo.unori.model.maps.SingletonParty;
 
+/**
+ * This class should be registered in a {@link com.google.gson.GsonBuilder} to
+ * deserialize a {@link it.unibo.unori.model.maps.Party} compatible class.
+ */
 public class PartyDeserializer implements JsonDeserializer<Party> {
 
     @Override

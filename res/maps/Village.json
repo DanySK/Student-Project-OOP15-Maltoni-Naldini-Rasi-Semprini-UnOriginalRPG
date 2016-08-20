@@ -1852,8 +1852,8 @@
     ]
   ],
   "initialPosition": {
-    "posX": 12,
-    "posY": 18
+    "posX": 10,
+    "posY": 10
   },
   "battleState": false
 }
