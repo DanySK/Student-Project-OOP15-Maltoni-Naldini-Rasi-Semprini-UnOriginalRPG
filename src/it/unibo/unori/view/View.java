@@ -14,8 +14,7 @@ import java.util.Stack;
 
 /**
  *
- * This class displays the game layers with transparency,
- * behaving like a stack.
+ * This class displays the game layers with transparency, behaving like a stack.
  *
  */
 public final class View extends JFrame {
@@ -47,8 +46,7 @@ public final class View extends JFrame {
      * Closes the view.
      */
     public void close() {
-        final WindowEvent closingEvent = new WindowEvent(View.this,
-                                                         WindowEvent.WINDOW_CLOSING);
+        final WindowEvent closingEvent = new WindowEvent(View.this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closingEvent);
     }
 
@@ -70,7 +68,9 @@ public final class View extends JFrame {
 
     /**
      * Resizes the view to the specified layer.
-     * @param layer the layer the view will resize to
+     *
+     * @param layer
+     *            the layer the view will resize to
      */
     public void resizeTo(final Layer layer) {
         this.getContentPane().setPreferredSize(layer.getSize());
@@ -80,7 +80,9 @@ public final class View extends JFrame {
 
     /**
      * Pushes a layer on top of the view.
-     * @param layer the layer to be pushed
+     *
+     * @param layer
+     *            the layer to be pushed
      */
     public void push(final Layer layer) {
         if (!stack.isEmpty()) {
@@ -112,9 +114,10 @@ public final class View extends JFrame {
      */
     public void run() {
         SwingUtilities.invokeLater(new Runnable() {
-             @Override public void run() {
-                 View.this.setVisible(true);
-             }
-         });
+            @Override
+            public void run() {
+                View.this.setVisible(true);
+            }
+        });
     }
 }

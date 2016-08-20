@@ -58,7 +58,8 @@ public class BattleMainMenu extends JPanel {
         final MenuButton items = new MenuButton("Oggetti");
         items.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
-                battleMenuStack.push(new ItemMenu(battleMenuStack, heroTeam, bag, BORDER + SIZE.width + x, y + SIZE.height - ItemMenu.SIZE.height));
+                battleMenuStack.push(new ItemMenu(battleMenuStack, heroTeam, bag, BORDER + SIZE.width + x,
+                        y + SIZE.height - ItemMenu.SIZE.height));
             }
         });
 
@@ -66,7 +67,6 @@ public class BattleMainMenu extends JPanel {
         run.addActionListener(new EscapeActionListener());
         run.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
-                battleMenuStack.pop();
                 battleMenuStack.pop();
             }
         });
