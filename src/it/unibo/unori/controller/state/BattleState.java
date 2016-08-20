@@ -66,11 +66,13 @@ public class BattleState extends AbstractGameState {
         this.currentDialogue = Optional.of(battle.getPresentation());
         this.scrollMessage();
         this.currentTurn++;
+        /*
         if (this.heroTurn) {
             this.newTurn();
         } else {
             this.endTurn();
         }
+        */
     }
 
     /**

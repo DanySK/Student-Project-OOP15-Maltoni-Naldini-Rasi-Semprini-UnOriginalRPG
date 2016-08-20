@@ -28,7 +28,7 @@ import it.unibo.unori.model.items.exceptions.ItemNotFoundException;
 public class ObjectUseActionListener extends AbstractUnoriActionListener {
     private final Item itemUsed;
     private final Hero targetHero;
-    private final Bag sourceBag;
+    private final Bag sourceBag; // TODO check
 
     /**
      * Default constructor.
