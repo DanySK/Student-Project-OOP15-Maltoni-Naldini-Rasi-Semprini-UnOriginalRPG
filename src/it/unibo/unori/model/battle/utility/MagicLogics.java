@@ -184,7 +184,11 @@ public final class MagicLogics {
             final int toMultiply = toThrow.getPhysicAtk() * SHIFT + diff;
             final Double weaknessFactor;
             weaknessFactor = weakOrNot(opp, toThrow) * toMultiply;
-            return weaknessFactor.intValue() <= 0 ? weaknessFactor.intValue() : 10;
+            if (weaknessFactor.intValue() <= 0) {
+                return 100;
+            } else {
+                return weaknessFactor.intValue();
+            }
         } else {
             throw new FailedException();
         }
