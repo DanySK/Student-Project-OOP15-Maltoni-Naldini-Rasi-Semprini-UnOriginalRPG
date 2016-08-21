@@ -1,5 +1,5 @@
 {
-  "type": "DUNGEON",
-  "floor": 1,
-  "room": 2
+  "type": "DENTRANCE",
+  "floor": -1,
+  "room": -1
 }
