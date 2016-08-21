@@ -134,7 +134,7 @@ public class ItemMenu extends JPanel {
     }
 
     /**
-     * Creates the item in-game menu.
+     * Creates the item battle menu.
      *
      * @param inGameStack
      *            the in-game menu stack
@@ -162,34 +162,6 @@ public class ItemMenu extends JPanel {
         this.setBorder(BorderFactory.createEmptyBorder(BORDER, BORDER, BORDER, BORDER));
 
         final List<MenuButton> buttons = new LinkedList<MenuButton>();
-
-        final Map<Armor, Integer> armors = bag.getArmors();
-
-        for (final Map.Entry<Armor, Integer> entry : armors.entrySet()) {
-            final MenuButton button = new MenuButton(entry.getKey().getName() + ", " + entry.getValue());
-            button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(final ActionEvent e) {
-                    inGameStack.push(new PartyMenu(inGameStack, entry.getKey(), heroTeam, bag, BORDER + SIZE.width + x,
-                            y, battleActionListener));
-                }
-            });
-            buttons.add(button);
-        }
-
-        final Map<Weapon, Integer> weapons = bag.getWeapons();
-
-        for (final Map.Entry<Weapon, Integer> entry : weapons.entrySet()) {
-            final MenuButton button = new MenuButton(entry.getKey().getName() + ", " + entry.getValue());
-            button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(final ActionEvent e) {
-                    inGameStack.push(new PartyMenu(inGameStack, entry.getKey(), heroTeam, bag, BORDER + SIZE.width + x,
-                            y, battleActionListener));
-                }
-            });
-            buttons.add(button);
-        }
 
         final Map<Potion, Integer> potions = bag.getPotions();
         for (final Map.Entry<Potion, Integer> entry : potions.entrySet()) {
