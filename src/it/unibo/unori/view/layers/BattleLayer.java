@@ -1,32 +1,30 @@
 package it.unibo.unori.view.layers;
 
-import it.unibo.unori.model.items.Bag;
-import it.unibo.unori.controller.action.InteractAction;
-import it.unibo.unori.model.character.Foe;
-import it.unibo.unori.model.character.FoeSquad;
-import it.unibo.unori.model.character.Hero;
-import it.unibo.unori.model.character.HeroTeam;
-
-import it.unibo.unori.view.sprites.JobSprite;
-import it.unibo.unori.view.layers.battle.BattleMainMenu;
-import it.unibo.unori.view.layers.common.MenuStack;
-import it.unibo.unori.view.exceptions.SpriteNotFoundException;
-
-import java.util.Map;
-import java.util.HashMap;
-import java.io.File;
-import java.io.IOException;
-
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
-import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.imageio.ImageIO;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.KeyStroke;
 
-import java.awt.image.BufferedImage;
+import it.unibo.unori.ResourceLoader;
+import it.unibo.unori.controller.action.InteractAction;
+import it.unibo.unori.model.character.Foe;
+import it.unibo.unori.model.character.FoeSquad;
+import it.unibo.unori.model.character.Hero;
+import it.unibo.unori.model.character.HeroTeam;
+import it.unibo.unori.model.items.Bag;
+import it.unibo.unori.view.exceptions.SpriteNotFoundException;
+import it.unibo.unori.view.layers.battle.BattleMainMenu;
+import it.unibo.unori.view.layers.common.MenuStack;
+import it.unibo.unori.view.sprites.JobSprite;
 
 /**
  *
@@ -81,7 +79,7 @@ public class BattleLayer extends Layer {
         }
 
         try {
-            background = ImageIO.read(new File("res/sprites/battle/background.png"));
+            background = ImageIO.read(ResourceLoader.load("/sprites/battle/background.png"));
         } catch (final IOException e) {
             background = null;
             throw new SpriteNotFoundException("res/sprites/battle/backgdound.png");
@@ -226,7 +224,7 @@ public class BattleLayer extends Layer {
         BufferedImage spriteSheet;
 
         try {
-            spriteSheet = ImageIO.read(new File(spriteSheetPath));
+            spriteSheet = ImageIO.read(ResourceLoader.load(spriteSheetPath));
         } catch (final IOException e) {
             spriteSheet = null;
             throw new SpriteNotFoundException(spriteSheetPath);
@@ -240,7 +238,7 @@ public class BattleLayer extends Layer {
         BufferedImage sprite;
 
         try {
-            sprite = ImageIO.read(new File(spritePath));
+            sprite = ImageIO.read(ResourceLoader.load(spritePath));
         } catch (final IOException e) {
             sprite = null;
             throw new SpriteNotFoundException(spritePath);
