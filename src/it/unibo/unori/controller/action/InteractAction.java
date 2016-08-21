@@ -40,6 +40,7 @@ public class InteractAction extends AbstractUnoriAction {
 
     @Override
     public void actionPerformed(final ActionEvent event) {
+        System.out.println("ActionListener chiamato");
         if (MapState.class.isInstance(this.getController().getCurrentState())) {
             final MapState currentState = (MapState) this.getController().getCurrentState();
             final MapLayer currentLayer = (MapLayer) currentState.getLayer();
@@ -87,6 +88,7 @@ public class InteractAction extends AbstractUnoriAction {
                 }
             }
         } else if (BattleState.class.isInstance(this.getController().getCurrentState())) {
+            System.out.println("Enter premuto");
             final BattleState currentState = (BattleState) this.getController().getCurrentState();
             currentState.scrollMessage();
         } else {
