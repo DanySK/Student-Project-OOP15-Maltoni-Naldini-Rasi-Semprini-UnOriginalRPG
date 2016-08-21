@@ -98,10 +98,10 @@
         "state": "BLOCKED",
         "npc": {
           "sentence": {
-            "sentence": "Mi hanno sbattuto quaggi� perch� mi mangiavo tutte le ostie!",
+            "sentence": "Mi hanno sbattuto quaggiù perchè mi mangiavo tutte le ostie!",
             "nextToShow": 0,
             "listOfRows": [
-              "Mi hanno sbattuto quaggi� perch� mi mangiavo tutte le ostie!"
+              "Mi hanno sbattuto quaggiù perchè mi mangiavo tutte le ostie!"
             ]
           }
         }
