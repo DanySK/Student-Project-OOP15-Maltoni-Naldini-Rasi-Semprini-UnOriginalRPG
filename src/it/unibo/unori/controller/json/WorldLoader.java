@@ -24,7 +24,13 @@ import it.unibo.unori.model.maps.WorldBuilder.MAPS;
 public class WorldLoader {
     private static final String MAPS_DIRECTORY = "res/maps";
     private static final String DUNGEON_DIRECTORY = MAPS_DIRECTORY + "/dungeon";
+    /**
+     * The first floor number.
+     */
     public static final int FIRST_FLOOR_NUMBER = 1;
+    /**
+     * The last floor number.
+     */
     public static final int LAST_FLOOR_NUMBER = 4;
 
     /**
@@ -65,6 +71,18 @@ public class WorldLoader {
     private final Map<String, GameMap> maps;
     private final JsonFileManager fileManager;
     private final WorldBuilder builder;
+
+    /**
+     * Main method that simply serializes all the needed maps.
+     * 
+     * @param args
+     *            default main arguments. Unused
+     * @throws IOException
+     *             if something wrong happens
+     */
+    public static void main(final String[] args) throws IOException {
+        new WorldLoader().serializeMaps(true);
+    }
 
     /**
      * Default constructor.
@@ -261,11 +279,25 @@ public class WorldLoader {
         return this.builder;
     }
 
+    /**
+     * This method checks if the specified map is a room of the dungeon.
+     * 
+     * @param map
+     *            the map to check
+     * @return true if the map belongs to the dungeon
+     */
     public boolean isDungeonMap(final GameMap map) {
         return IntStream.rangeClosed(FIRST_FLOOR_NUMBER, LAST_FLOOR_NUMBER)
                 .anyMatch(i -> this.builder.getDungeonBuilder().getFloor(i).contains(map));
     }
 
+    /**
+     * This method checks if the specified map is a map outside the dungeon.
+     * 
+     * @param map
+     *            the map to check
+     * @return if the map belongs to something outside the dungeon
+     */
     public boolean isOutsideDungeonMap(final GameMap map) {
         final List<MAPS> mapsList = new ArrayList<>();
         for (final MAPS m : MAPS.values()) {
@@ -277,6 +309,16 @@ public class WorldLoader {
         return mapsList.stream().anyMatch(m -> this.builder.getGameMap(m).equals(map));
     }
 
+    /**
+     * This method returns the map name (the identifier) if the map is present
+     * in this loader.
+     * 
+     * @param map
+     *            the map to check
+     * @return the name of the map
+     * @throws IllegalArgumentException
+     *             if the map is not present
+     */
     public MAPS getMapName(final GameMap map) {
         for (final MAPS m : MAPS.values()) {
             if (this.builder.getGameMap(m).equals(map)) {
@@ -296,8 +338,9 @@ public class WorldLoader {
             return new File(FOUR_NPC_ROOM).isFile() && new File(DUNGEON_ENTRANCE).isFile() && new File(CHURCH).isFile()
                     && new File(PASSAGE).isFile() && new File(SHOP).isFile() && new File(VILLAGE).isFile()
                     && new File(getFloorRoomPath(FIRST_FLOOR_NUMBER, 0)).getParentFile().getParentFile().isDirectory()
-                    && new File(getFloorRoomPath(FIRST_FLOOR_NUMBER, 0)).getParentFile().getParentFile()
-                            .list().length > 0;
+                    && Arrays.asList(Optional.ofNullable(
+                            new File(getFloorRoomPath(FIRST_FLOOR_NUMBER, 0)).getParentFile().getParentFile().list())
+                            .orElse(new String[0])).size() > 0;
         } catch (Exception e) {
             return false;
         }

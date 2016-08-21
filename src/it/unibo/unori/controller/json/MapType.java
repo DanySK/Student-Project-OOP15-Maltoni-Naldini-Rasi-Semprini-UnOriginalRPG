@@ -3,13 +3,17 @@ package it.unibo.unori.controller.json;
 import it.unibo.unori.model.maps.GameMap;
 import it.unibo.unori.model.maps.WorldBuilder.MAPS;
 
+/**
+ * This object models a map type for better repositioning of the party after
+ * game loading.
+ */
 public class MapType {
-    private final MAPS mapType;
+    private final MAPS type;
     private int floor;
     private int room;
 
     /**
-     * Default constructor.
+     * Default constructor. Extracts parameters from map and loader.
      * 
      * @param map
      *            the map
@@ -18,12 +22,12 @@ public class MapType {
      */
     public MapType(final GameMap map, final WorldLoader loader) {
         if (loader.isOutsideDungeonMap(map)) {
-            mapType = loader.getMapName(map);
+            type = loader.getMapName(map);
             this.floor = -1;
             this.room = -1;
         } else if (loader.isDungeonMap(map)) {
             boolean check = false;
-            mapType = MAPS.DUNGEON;
+            type = MAPS.DUNGEON;
             for (int i = WorldLoader.FIRST_FLOOR_NUMBER; i <= WorldLoader.LAST_FLOOR_NUMBER && !check; i++) {
                 for (int j = 0; j < loader.getBuilder().getDungeonBuilder().getFloor(i).size() && !check; j++) {
                     if (loader.getBuilder().getDungeonBuilder().getFloor(i).get(j).equals(map)) {
@@ -40,12 +44,28 @@ public class MapType {
     }
 
     /**
+     * Default constructor.
+     * 
+     * @param type
+     *            the type of the map
+     * @param floor
+     *            the floor of the map
+     * @param room
+     *            the room of the map
+     */
+    public MapType(final MAPS type, final int floor, final int room) {
+        this.type = type;
+        this.floor = floor;
+        this.room = room;
+    }
+
+    /**
      * Returns the map type.
      * 
      * @return the map type
      */
     public MAPS getMapType() {
-        return mapType;
+        return type;
     }
 
     /**

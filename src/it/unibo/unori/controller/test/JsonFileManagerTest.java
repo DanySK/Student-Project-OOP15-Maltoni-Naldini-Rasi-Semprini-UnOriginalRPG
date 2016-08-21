@@ -15,7 +15,7 @@ import com.google.gson.JsonIOException;
 
 import it.unibo.unori.controller.GameStatisticsImpl;
 import it.unibo.unori.controller.json.JsonFileManager;
-import it.unibo.unori.controller.json.JsonFoeParameters;
+import it.unibo.unori.controller.json.JsonFoeParameter;
 import it.unibo.unori.controller.json.JsonJobParameter;
 import it.unibo.unori.model.character.Status;
 import it.unibo.unori.model.character.factory.FoesFactory;
@@ -127,11 +127,11 @@ public class JsonFileManagerTest {
     @Test
     public void testSaveAndLoadFoe() throws IOException {
         final File file = folder.newFile();
-        final JsonFoeParameters parameterTest = new JsonFoeParameters(FoesFactory.getBasicStats(), Status.NONE,
+        final JsonFoeParameter parameterTest = new JsonFoeParameter(FoesFactory.getBasicStats(), Status.NONE,
                         FoesFactory.getBasicWeap(), FoesFactory.getBasicMag());
 
         jsonManager.saveFoe(parameterTest, file.getAbsolutePath());
-        final JsonFoeParameters loaded = jsonManager.loadFoe(file.getAbsolutePath());
+        final JsonFoeParameter loaded = jsonManager.loadFoe(file.getAbsolutePath());
         // assertEquals(parameterTest.getImmunity(), loaded.getImmunity());
         // TODO assertEquals(parameterTest.getMagics(), loaded.getMagics()); // TODO check
         assertEquals(parameterTest.getStats(), loaded.getStats());

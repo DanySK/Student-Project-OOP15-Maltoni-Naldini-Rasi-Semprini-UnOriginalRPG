@@ -20,7 +20,7 @@ import it.unibo.unori.model.items.Weapon;
 import it.unibo.unori.model.items.WeaponFactory;
 
 /**
- * Utility class which provides default parameters for the jobs loading them
+ * Factory which provides default parameters for the jobs loading them
  * from file.
  */
 public final class JobsSetup {
