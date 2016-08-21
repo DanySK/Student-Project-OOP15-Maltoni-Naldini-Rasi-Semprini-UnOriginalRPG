@@ -3,6 +3,7 @@ package it.unibo.unori.model.maps;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.unibo.unori.controller.json.FoeSetup;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.FoeImpl;
 import it.unibo.unori.model.character.factory.FoesFindable;
@@ -110,7 +111,7 @@ public class DungeonBuilder {
         this.storeItem(POS1, fList.get(0), PACT.getGigaPozione());
         this.storeItem(POS2, fList.get(0), PACT.getTrapiantoMana());
         this.northLink(fList.get(0), fList.get(1));
-        final Foe boss = new FoeImpl(10, "Iinnapi", "res/sprites/warrior.png",
+        final Foe boss = new FoeImpl(10, "Iinnapi", FoeSetup.getPath(FoesFindable.EROE_CADUTO),
                 FoesFindable.EROE_CADUTO); 
         final Cell c = new FoeCellImpl("res/sprites/npcs/earth/front-2.png", boss);
         fList.get(1).setCell(POS1, c);
