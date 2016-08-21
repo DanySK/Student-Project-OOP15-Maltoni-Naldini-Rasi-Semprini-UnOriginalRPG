@@ -41,9 +41,9 @@ public final class FoesFactory {
      */
     public static Map<Statistics, Integer> getBasicStats() {
         final Map<Statistics, Integer> m = new HashMap<>();
-        m.put(Statistics.TOTALHP, 1500);
+        m.put(Statistics.TOTALHP, 1000);
         m.put(Statistics.TOTALMP, 700);
-        m.put(Statistics.SPEED, 1200);
+        m.put(Statistics.SPEED, 900);
         m.put(Statistics.FIREATK, 1000);
         m.put(Statistics.FIREDEF, 750);
         m.put(Statistics.THUNDERATK, 1000);
