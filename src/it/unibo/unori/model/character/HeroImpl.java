@@ -70,6 +70,10 @@ public class HeroImpl  extends CharacterImpl implements Hero {
         this.specialBar = 100;
         this.currentBar = 0;
         this.addSpell(MagicGenerator.getBasic());
+        this.addSpell(new MagicGenerator().getStandard(job));
+        if (job.equals(Jobs.MAGE)) {
+            this.addSpell(new MagicGenerator().getMedium(job));
+        }
         this.defended = false;
     }
 

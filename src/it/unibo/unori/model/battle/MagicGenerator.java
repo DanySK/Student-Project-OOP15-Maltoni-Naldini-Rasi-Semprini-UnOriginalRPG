@@ -32,7 +32,7 @@ public class MagicGenerator {
                         "Spada di basso livello, molto efficace per i danni fisici",
                         7, 7, 7, 20, 8, 20); break;
                 case PALADIN : mag = new MagicAttack("Lancia Magica",
-                        "ha colpito con la spada magica!",
+                        "ha colpito con la lancia magica!",
                         "Una lancia magica, efficace in tutti i campi",
                         8, 8, 8, 14, 8, 30); break;
                 case MAGE : mag = new MagicAttack("Scettro magico", 
