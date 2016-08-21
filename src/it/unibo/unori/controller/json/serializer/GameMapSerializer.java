@@ -53,11 +53,8 @@ public class GameMapSerializer implements JsonSerializer<GameMap>, JsonDeseriali
                     throws JsonParseException {
         final JsonObject jObj = (JsonObject) json;
         final Cell[][] floorMap = context.deserialize(jObj.get(FLOOR_MAP), Cell[][].class);
-        // System.out.println(floorMap);
         final Position initialPosition = context.deserialize(jObj.get(INITIAL_POSITION), Position.class);
-        // System.out.println(initialPosition);
         final boolean battleState = jObj.get(BATTLE_STATE).getAsBoolean();
-        // System.out.println(battleState);
         final GameMap returnMap = new GameMapImpl(floorMap.length, floorMap[0].length, battleState);
         returnMap.setInitialCellPosition(initialPosition);
 
