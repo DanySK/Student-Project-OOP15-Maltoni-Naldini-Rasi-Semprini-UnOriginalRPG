@@ -171,7 +171,7 @@ public class BattleImpl implements Battle {
             toReturn = toReturn.concat(" " + this.enemies.defeatFoe(this.foeOnTurn));
             if (this.enemies.isDefeated(this.foeOnTurn)) {
                 this.setOver();
-                if(!this.over) {
+                if (!this.over) {
                     this.setFoeOnTurn(this.enemies.getNextFoe());
                 }
                 return new Dialogue(toReturn);
@@ -180,7 +180,7 @@ public class BattleImpl implements Battle {
             toReturn = toReturn.concat(" " + this.squad.defeatHero(this.heroOnTurn));
             if (this.squad.isDefeated(this.heroOnTurn)) {
                 this.setOver();
-                if(!this.over) {
+                if (!this.over) {
                     this.setHeroOnTUrn(this.squad.getNextHero());
                 }
                 return new Dialogue(toReturn);
@@ -304,7 +304,7 @@ public class BattleImpl implements Battle {
                     toShow = toShow.concat(" " + this.enemies.defeatFoe(enemy));
                     if (this.enemies.isDefeated(enemy)) {
                         this.setOver();
-                        if(!this.over) {
+                        if (!this.over) {
                             this.setFoeOnTurn(this.enemies.getNextFoe());
                         }
                     }
@@ -312,7 +312,7 @@ public class BattleImpl implements Battle {
                     toShow = toShow.concat(" " + this.squad.defeatHero(this.heroOnTurn));
                     if (this.squad.isDefeated(this.heroOnTurn)) {
                         this.setOver();
-                        if(!this.isOver()) {
+                        if (!this.isOver()) {
                             this.setHeroOnTUrn(this.squad.getNextHero());
                         }
                     }
