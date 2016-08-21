@@ -114,15 +114,24 @@ public final class SingletonStateMachine {
             this.restoreStatsIfNeeded();
 
             this.loader.loadWorld();
+            System.out.println("World loaded");
             SingletonParty.loadParty(this.fileManager.loadParty());
+            System.out.println("Party loaded");
             final MapType type = this.fileManager.loadMapType();
-            if (type.getMapType().equals(MAPS.DUNGEON)) {
+            final MAPS ty = type.getMapType();
+            System.out.println("Map type loaded: " + ty);
+            if (/*type.getMapType()*/ty.equals(MAPS.DUNGEON)) {
+                System.out.println("If done: true");
                 SingletonParty.getParty().setCurrentMap(
                         this.loader.getBuilder().getDungeonBuilder().getFloor(type.getFloor()).get(type.getRoom()));
+                System.out.println("Current map set: dungeon");
             } else {
+                System.out.println("If done: false");
                 SingletonParty.getParty().setCurrentMap(this.loader.getBuilder().getGameMap(type.getMapType()));
+                System.out.println("Current map set: outside");
             }
             final GameState loadedGame = new MapState(SingletonParty.getParty().getCurrentGameMap());
+            System.out.println("GameState created");
 
             this.stack.pushAndRender(loadedGame);
         }
@@ -146,6 +155,7 @@ public final class SingletonStateMachine {
                 });
 
                 try {
+                    loader.serializeMaps(true);
                     SingletonParty.getParty().setCurrentMap(loader.loadWorld());
                     SingletonParty.getParty()
                             .setFrame(SingletonParty.getParty().getHeroTeam().getAllHeroes().get(0).getBattleFrame());

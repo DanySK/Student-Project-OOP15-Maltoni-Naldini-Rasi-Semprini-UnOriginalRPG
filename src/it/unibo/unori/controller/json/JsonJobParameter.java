@@ -9,7 +9,7 @@ import it.unibo.unori.model.items.Armor.ArmorPieces;
 import it.unibo.unori.model.items.Weapon;
 
 /**
- * This class models an object used to serialize the Jobs.
+ * This class models an object used to serialize the Jobs parameters.
  */
 public class JsonJobParameter {
     private final Map<Statistics, Integer> defaultStats;

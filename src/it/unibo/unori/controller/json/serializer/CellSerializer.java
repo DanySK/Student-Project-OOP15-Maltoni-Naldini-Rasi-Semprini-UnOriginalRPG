@@ -57,7 +57,7 @@ public class CellSerializer implements JsonSerializer<Cell>, JsonDeserializer<Ce
             try {
                 obj = context.serialize(((ObjectCellImpl) src).getObject(), Item.class);
             } catch (NoObjectFoundException e) {
-                throw new IllegalArgumentException(e);
+                obj = null;
             }
             jObj.add(OBJ, obj);
         } else if (NPCCellImpl.class.isInstance(src)) {
@@ -74,7 +74,7 @@ public class CellSerializer implements JsonSerializer<Cell>, JsonDeserializer<Ce
             try {
                 item = context.serialize(((ChestCellImpl) src).getObject(), Item.class);
             } catch (NoObjectFoundException e) {
-                throw new IllegalArgumentException(e);
+                item = null;
             }
             jObj.add(ITEM, item);
         }
@@ -117,8 +117,7 @@ public class CellSerializer implements JsonSerializer<Cell>, JsonDeserializer<Ce
          * The state is common, but automatically set by constructor; this is
          * necessary because it can be changed.
          */
-        if (!SimpleCellImpl.class.isInstance(returnCell)) { // SimpleCellImpl is
-                                                            // already OK
+        if (!SimpleCellImpl.class.isInstance(returnCell)) {
             returnCell.setState(state);
         }
 

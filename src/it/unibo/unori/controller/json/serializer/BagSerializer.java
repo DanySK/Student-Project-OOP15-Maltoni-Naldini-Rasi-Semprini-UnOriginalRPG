@@ -25,8 +25,8 @@ import it.unibo.unori.model.items.Weapon;
 import it.unibo.unori.model.items.WeaponImpl;
 
 /**
- * This class should be registered in a {@link com.google.gson.GsonBuilder} to serialize and
- * deserialize a {@link it.unibo.unori.model.items.Bag} compatible
+ * This class should be registered in a {@link com.google.gson.GsonBuilder} to
+ * serialize and deserialize a {@link it.unibo.unori.model.items.Bag} compatible
  * class.
  */
 public class BagSerializer implements JsonSerializer<Bag>, JsonDeserializer<Bag> {
@@ -48,8 +48,8 @@ public class BagSerializer implements JsonSerializer<Bag>, JsonDeserializer<Bag>
         }.getType());
         jObj.add(POTIONS, potions);
         final JsonElement miscellaneous = context.serialize(src.getMiscellaneous(),
-                        new TypeToken<Map<ItemImpl, Integer>>() {
-                        }.getType());
+                new TypeToken<Map<ItemImpl, Integer>>() {
+                }.getType());
         jObj.add(MISCELLANOUS, miscellaneous);
 
         return jObj;
@@ -57,28 +57,28 @@ public class BagSerializer implements JsonSerializer<Bag>, JsonDeserializer<Bag>
 
     @Override
     public Bag deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
-                    throws JsonParseException {
+            throws JsonParseException {
         final JsonObject jObj = (JsonObject) json;
         final Bag returnBag = new BagImpl();
 
         final Map<Armor, Integer> armors = context.deserialize(jObj.get(ARMORS), new TypeToken<Map<Armor, Integer>>() {
         }.getType());
-        armors.forEach((a, i) -> IntStream.range(0, i).forEach(in -> returnBag.storeItem(a))); // TODO check
+        armors.forEach((a, i) -> IntStream.range(0, i).forEach(in -> returnBag.storeItem(a)));
 
         final Map<Weapon, Integer> weapons = context.deserialize(jObj.get(WEAPONS),
-                        new TypeToken<Map<Weapon, Integer>>() {
-                        }.getType());
-        weapons.forEach((w, i) -> IntStream.range(0, i).forEach(in -> returnBag.storeItem(w))); // TODO check
+                new TypeToken<Map<Weapon, Integer>>() {
+                }.getType());
+        weapons.forEach((w, i) -> IntStream.range(0, i).forEach(in -> returnBag.storeItem(w)));
 
         final Map<Potion, Integer> potions = context.deserialize(jObj.get(POTIONS),
-                        new TypeToken<Map<Potion, Integer>>() {
-                        }.getType());
-        potions.forEach((p, i) -> IntStream.range(0, i).forEach(in -> returnBag.storeItem(p))); // TODO check
+                new TypeToken<Map<Potion, Integer>>() {
+                }.getType());
+        potions.forEach((p, i) -> IntStream.range(0, i).forEach(in -> returnBag.storeItem(p)));
 
         final Map<Item, Integer> miscellaneous = context.deserialize(jObj.get(MISCELLANOUS),
-                        new TypeToken<Map<Item, Integer>>() {
-                        }.getType());
-        miscellaneous.forEach((m, i) -> IntStream.range(0, i).forEach(in -> returnBag.storeItem(m))); // TODO check
+                new TypeToken<Map<Item, Integer>>() {
+                }.getType());
+        miscellaneous.forEach((m, i) -> IntStream.range(0, i).forEach(in -> returnBag.storeItem(m)));
 
         return returnBag;
     }
