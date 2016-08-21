@@ -61,15 +61,17 @@ public class PotionImpl implements Potion {
         if (this.statusRestorable) {
             hero.setStatus(Status.NONE);
         }
-        if (this.name.equals("Pozione della Vita") || this.name.equals("Pozione di Dio")) {
-            if (hero.getStatus().equals(Status.DEAD)) {
-                hero.setStatus(Status.NONE);
+        if (this.statToRestore.equals(Statistics.TOTALHP)) {
+            if (this.name.equals("Pozione della Vita") || this.name.equals("Pozione di Dio")) {
+                if (hero.getStatus().equals(Status.DEAD)) {
+                    hero.setStatus(Status.NONE);
+                } else {
+                    throw new HeroNotDeadException();
+                }
             } else {
-                throw new HeroNotDeadException();
-            }
-        } else {
-            if (hero.getStatus().equals(Status.DEAD)) {
-                throw new HeroDeadException();
+                if (hero.getStatus().equals(Status.DEAD)) {
+                    throw new HeroDeadException();
+                }
             }
         }
         
