@@ -151,14 +151,6 @@ public class HeroTeamImpl implements HeroTeam {
     
     @Override
     public Hero getNextHero() {
-        int maxV = 0;
-        Hero toReturn = this.getAliveHeroes().get(0);
-        for (final Hero h : this.getAliveHeroes()) {
-            if (maxV < h.getSpeed()) {
-                maxV = h.getSpeed();
-                toReturn = h;
-            }
-        }
-        return toReturn;
+        return this.getAliveHeroes().get(0);
     }
 }

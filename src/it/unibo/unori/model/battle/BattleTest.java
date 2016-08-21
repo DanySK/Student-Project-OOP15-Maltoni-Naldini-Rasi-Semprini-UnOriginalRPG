@@ -105,7 +105,6 @@ public class BattleTest {
         this.battle.getHeroOnTurn().setCurrentBar(100);
         System.out.println(battle.specialAttack());
         this.battle.getHeroOnTurn().setCurrentBar(100);
-        System.out.println(battle.specialAttack());
         System.out.println(this.battle.acquireExp());
         
     }
