@@ -98,7 +98,7 @@ public class HeroTeamImpl implements HeroTeam {
     @Override
     public Hero getFirstHeroOnTurn() throws IllegalStateException {
         this.checkListSize();
-        return this.heroList.get(0);
+        return this.getAliveHeroes().get(0);
     }
     
     /**
