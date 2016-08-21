@@ -606,8 +606,8 @@
     ]
   ],
   "initialPosition": {
-    "posX": 8,
-    "posY": 6
+    "posX": 1,
+    "posY": 1
   },
   "battleState": true
 }
