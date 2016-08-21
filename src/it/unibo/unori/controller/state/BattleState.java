@@ -191,24 +191,29 @@ public class BattleState extends AbstractGameState {
     public final void scrollMessage() {
         if (this.currentDialogue.isPresent()) {
             // If the dialog is over, remove it
+            System.out.println("Controllo il dialogo");
             if (this.currentDialogue.get().isOver()) {
                 this.currentDialogue = Optional.empty();
-
+                System.out.println("Controllo Esperienza");
                 // It sets if it was acquiring exp dialog or outcome dialog
                 if (this.acquiringExp) {
+                    System.out.println("Setto Esperienza");
                     this.acquiringExp = false;
                     this.acquiredExp = true;
                 } else if (this.outCome) {
+                    System.out.println("Setto outcome");
                     this.outCome = false;
                     this.shownOutcome = true;
                 }
             } else {
                 try {
                     ((BattleLayer) this.getLayer()).showDialogue(this.currentDialogue.get().showNext());
+                    System.out.println("Setto il battlestate");
                 } catch (IndexOutOfBoundsException e) {
                     this.currentDialogue = Optional.empty();
 
                     // It sets if it was acquiring exp dialog or outcome dialog
+                    System.out.println("Setto il Esperienza 2");
                     if (this.acquiringExp) {
                         this.acquiringExp = false;
                         this.acquiredExp = true;
@@ -222,12 +227,15 @@ public class BattleState extends AbstractGameState {
             // Now checks if the dialog is already present
             if (!this.currentDialogue.isPresent()) {
                 // It checks if battle is over
+                System.out.println("verifico battaglia finita");
                 if (this.fightModel.getBattle().isOver()) {
                     if (this.canRunAway) {
                         // If it can run away and the dialog ended, it
                         // terminates battle
+                        System.out.println("Setto runAway");
                         SingletonStateMachine.getController().getStack().pop();
                     } else if (this.fightModel.getBattle().getSquad().getAliveHeroes().isEmpty()) {
+                        System.out.println("Tutti morti");
                         // If it wasn't running away, and all heros were
                         // defeated, it returns to main menu
                         //while (/*!SingletonStateMachine.getController().getStack().isEmpty()*/!MainMenuState.class.isInstance(SingletonStateMachine.getController().getCurrentState())) {
@@ -237,18 +245,22 @@ public class BattleState extends AbstractGameState {
                         SingletonStateMachine.getController().getStack().pop();
                         // SingletonStateMachine.getController().begin();
                     } else if (this.fightModel.getBattle().getEnemies().getAliveFoes().isEmpty()) {
+                        System.out.println("Sconfiggo nemici");
                         if (!this.acquiredExp) {
                             this.acquiringExp = true;
                             this.currentDialogue = Optional.of(this.fightModel.getBattle().acquireExp());
                         } else if (!this.shownOutcome) {
+                            System.out.println("Setto shownOutCome");
                             this.outCome = true;
                             this.currentDialogue = Optional.of(new Dialogue(this.fightModel.getBattle().getOutCome()));
                         } else {
-                            SingletonStateMachine.getController().getStack().pop();
+                            System.out.println(SingletonStateMachine.getController().getStack().pop());
+                            System.out.println("Poppato con successo");
                         }
                     }
                 } else {
                     ((BattleLayer) this.getLayer()).hideDialogue();
+                    System.out.println("Continua la battaglia");
                     if (this.heroTurn) {
                         this.newTurn();
                     } else {
