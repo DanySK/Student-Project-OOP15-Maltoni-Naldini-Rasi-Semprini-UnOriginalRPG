@@ -108,19 +108,24 @@ public class BattleLayer extends Layer {
                 SIZE.height - BattleMainMenu.SIZE.height - BORDER * 2));
     }
 
-    private void drawHero(final Graphics g, final int x, final int y, final int hp, final int totalHp,
-            final String name, final BufferedImage sprite) {
+    private void drawHero(final Graphics g, final int x, final int y, final Hero hero, final BufferedImage sprite) {
 
-        final String health = hp + "/" + totalHp;
+        final String health = "HP: " + hero.getRemainingHP() + "/" + hero.getTotalHP();
+        final String magic = "MP: " + hero.getCurrentMP() + "/" + hero.getTotalMP();
+        final String special = "Attacco Speciale: " + hero.getCurrentBar() + "/" + hero.getTotBar();
 
         int newY = y;
         final int yStep = 15;
 
         g.setColor(Color.WHITE);
 
+        g.drawString(hero.getName(), x + 32 - g.getFontMetrics().stringWidth(hero.getName()), newY);
+        newY += yStep;
         g.drawString(health, x + 32 - g.getFontMetrics().stringWidth(health), newY);
         newY += yStep;
-        g.drawString(name, x + 32 - g.getFontMetrics().stringWidth(name), newY);
+        g.drawString(magic, x + 32 - g.getFontMetrics().stringWidth(magic), newY);
+        newY += yStep;
+        g.drawString(special, x + 32 - g.getFontMetrics().stringWidth(special), newY);
         newY += yStep;
 
         g.drawImage(sprite, x, newY, sprite.getWidth(), sprite.getHeight(), null);
@@ -157,9 +162,11 @@ public class BattleLayer extends Layer {
         int y = yStart;
         int x = xStart;
 
+        final int yStepHero = 130;
+
         for (final Hero hero : heroTeam.getAliveHeroes()) {
-            drawHero(g, x, y, hero.getRemainingHP(), hero.getTotalHP(), hero.getName(), heroSprites.get(hero));
-            y += 100;
+            drawHero(g, x, y, hero, heroSprites.get(hero));
+            y += yStepHero;
         }
 
         y = yStart;
