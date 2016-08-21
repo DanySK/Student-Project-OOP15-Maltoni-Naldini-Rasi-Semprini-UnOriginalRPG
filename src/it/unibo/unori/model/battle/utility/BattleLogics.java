@@ -85,7 +85,7 @@ public final class BattleLogics {
         } else if (myV == enemV) {
             rand = new Random();
             luck = rand.nextInt(2);
-            return luck == 0;
+            return luck == 1;
         } else {
             return myV > enemV;
         }
@@ -232,7 +232,7 @@ public final class BattleLogics {
             } else if (f.getIA() > MEDIUMIA && f.getIA() <= HIGHIA) {
                 return nOfTurnsPlayed >= TURNSFORHIGHIA;
             } else {
-                return nOfTurnsPlayed >= 3;
+                return nOfTurnsPlayed >= 4;
             }
         }
     }
