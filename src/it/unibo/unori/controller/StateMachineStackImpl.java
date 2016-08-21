@@ -57,12 +57,8 @@ public class StateMachineStackImpl implements StateMachineStack {
 
     @Override
     public GameState pop() {
-        System.out.println("Pre View pop");
         this.layerStack.pop();
-        System.out.println("Post View pop, pre stack pop");
-        final GameState gs = gsStack.pop();
-        System.out.println(gs);
-        return gs;
+        return gsStack.pop();
     }
 
     @Override

@@ -72,7 +72,7 @@ public class FoeDeserializer implements JsonDeserializer<Foe> {
         final List<MagicAttackInterface> spellList = context.deserialize(jObj.get(SPELL_LIST),
                 new TypeToken<List<MagicAttackInterface>>() {
                 }.getType());
-        spellList.forEach(returnFoe::addSpell); // TODO check
+        spellList.forEach(returnFoe::addSpell);
 
         return returnFoe;
     }

@@ -43,10 +43,9 @@ public class CharacterDeserializer implements JsonDeserializer<Character> {
             throws JsonParseException {
         Character returnChar;
 
-        if (typeOfT.getClass().isAssignableFrom(Hero.class)) { // TODO check
+        if (typeOfT.getClass().isAssignableFrom(Hero.class)) {
             returnChar = context.deserialize(json, Hero.class);
-        } else if (typeOfT.getClass().isAssignableFrom(Foe.class)) { // TODO
-                                                                     // check
+        } else if (typeOfT.getClass().isAssignableFrom(Foe.class)) {
             returnChar = context.deserialize(json, Foe.class);
         } else {
             final JsonObject jObj = (JsonObject) json;

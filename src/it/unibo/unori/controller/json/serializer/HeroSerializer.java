@@ -112,15 +112,15 @@ public class HeroSerializer implements JsonSerializer<Hero>, JsonDeserializer<He
         final List<MagicAttackInterface> spellList = context.deserialize(jObj.get(SPELL_LIST),
                         new TypeToken<List<MagicAttackInterface>>() {
                         }.getType());
-        spellList.forEach(returnHero::addSpell); // TODO check
+        spellList.forEach(returnHero::addSpell);
         final Status status = context.deserialize(jObj.get(STATUS), Status.class);
         returnHero.setStatus(status);
         final int level = jObj.get(LEVEL).getAsInt();
         returnHero.setLevel(level);
         final int currentBar = jObj.get(CURRENT_BAR).getAsInt();
-        returnHero.setCurrentBar(currentBar); // TODO check
+        returnHero.setCurrentBar(currentBar);
         final int totExp = jObj.get(TOT_EXP).getAsInt();
-        returnHero.setTotExp(totExp); // TODO check
+        returnHero.setTotExp(totExp);
         final int currentExp = jObj.get(CURRENT_EXP).getAsInt();
         returnHero.addExp(currentExp);
         final boolean defended = jObj.get(DEFENDED).getAsBoolean();

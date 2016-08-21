@@ -51,10 +51,6 @@ public interface StateMachineStack {
      */
     void closeTheView();
 
-    /*
-     * @throws {@link it.unibo.unori.controller.exceptions.DesynchronizedStackException} if stack does not contain the
-     * same states
-     */
     /**
      * It checks if the stack is empty.
      * 
