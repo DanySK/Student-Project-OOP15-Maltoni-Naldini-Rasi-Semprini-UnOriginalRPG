@@ -1,33 +1,32 @@
 package it.unibo.unori.view.layers;
 
-import it.unibo.unori.view.View;
-import it.unibo.unori.view.Button;
-import it.unibo.unori.view.sprites.JobSprite;
-import it.unibo.unori.model.character.Statistics;
-import it.unibo.unori.model.character.jobs.Jobs;
-import it.unibo.unori.view.exceptions.SpriteNotFoundException;
-
-import java.util.Map;
-import java.util.HashMap;
-
-import java.io.File;
-import java.io.IOException;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-import javax.swing.BoxLayout;
-import javax.imageio.ImageIO;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.plaf.basic.BasicArrowButton;
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
-import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.plaf.basic.BasicArrowButton;
+
+import it.unibo.unori.ResourceLoader;
+import it.unibo.unori.model.character.Statistics;
+import it.unibo.unori.model.character.jobs.Jobs;
+import it.unibo.unori.view.Button;
+import it.unibo.unori.view.View;
+import it.unibo.unori.view.exceptions.SpriteNotFoundException;
+import it.unibo.unori.view.sprites.JobSprite;
 
 /**
  *
@@ -220,7 +219,8 @@ public class CharacterSelectionLayer extends Layer {
         BufferedImage spriteSheet;
 
         try {
-            spriteSheet = ImageIO.read(new File(job.getBattleFrame()));
+            spriteSheet = ImageIO.read(ResourceLoader.load(job.getBattleFrame()));
+            System.out.println("Ciao");
         } catch (final IOException e) {
             spriteSheet = null;
             throw new SpriteNotFoundException(job.getBattleFrame());

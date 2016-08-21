@@ -1,29 +1,26 @@
 package it.unibo.unori.view.layers;
 
-import it.unibo.unori.view.sprites.JobSprite;
-import it.unibo.unori.view.exceptions.SpriteNotFoundException;
-
-import java.util.Map;
-
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
-import javax.swing.Action;
-import javax.swing.KeyStroke;
-import javax.swing.InputMap;
-import javax.swing.ActionMap;
-import javax.swing.SwingConstants;
-
-import java.awt.Point;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Map;
+
+import javax.imageio.ImageIO;
+import javax.swing.Action;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
+import javax.swing.KeyStroke;
+import javax.swing.SwingConstants;
+
+import it.unibo.unori.ResourceLoader;
+import it.unibo.unori.view.exceptions.SpriteNotFoundException;
+import it.unibo.unori.view.sprites.JobSprite;
 
 /**
  *
@@ -92,7 +89,7 @@ public class MapLayer extends Layer {
         this.setBounds(0, 0, SIZE.width, SIZE.height);
 
         try {
-            spriteSheet = ImageIO.read(new File(spriteSheetPath));
+            spriteSheet = ImageIO.read(ResourceLoader.load(spriteSheetPath));
         } catch (final IOException e) {
             spriteSheet = null;
 
@@ -341,7 +338,7 @@ public class MapLayer extends Layer {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 try {
-                    mapImage[x][y] = ImageIO.read(new File(map[x][y]));
+                    mapImage[x][y] = ImageIO.read(ResourceLoader.load(map[x][y]));
                 } catch (final IOException e) {
                     mapImage[x][y] = null;
                     throw new SpriteNotFoundException(map[x][y]);
