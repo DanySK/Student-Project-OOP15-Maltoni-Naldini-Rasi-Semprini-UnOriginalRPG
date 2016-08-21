@@ -169,10 +169,10 @@
           "piece": "GLOVES",
           "desc": "Guanti argentei, di grande qualità",
           "stats": {
-            "PHYSICDEF": 500,
-            "THUNDERDEF": 250,
             "FIREDEF": 250,
-            "ICEDEF": 250
+            "ICEDEF": 250,
+            "THUNDERDEF": 250,
+            "PHYSICDEF": 500
           },
           "immunity": "POISONED"
         }
