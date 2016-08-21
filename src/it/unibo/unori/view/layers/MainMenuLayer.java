@@ -1,28 +1,28 @@
 package it.unibo.unori.view.layers;
 
-import it.unibo.unori.view.View;
-import it.unibo.unori.view.Button;
-import java.util.List;
-import java.io.File;
-import java.io.IOException;
-
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.InputMap;
-import javax.swing.ActionMap;
-import javax.swing.KeyStroke;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.BorderFactory;
-import javax.swing.AbstractAction;
-
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.BorderLayout;
-import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.List;
+
+import javax.imageio.ImageIO;
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.InputMap;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.KeyStroke;
+
+import it.unibo.unori.ResourceLoader;
+import it.unibo.unori.view.Button;
+import it.unibo.unori.view.View;
 
 /**
  *
@@ -55,7 +55,7 @@ public class MainMenuLayer extends Layer {
 
         BufferedImage logoImage;
         try { // TODO se non trova il logo?
-            logoImage = ImageIO.read(new File("res/logo.png"));
+            logoImage = ImageIO.read(ResourceLoader.load("/logo.png")/*new File("res/logo.png")*/);
         } catch (final IOException e) {
             logoImage = null;
         }
