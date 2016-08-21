@@ -13,8 +13,7 @@ import java.awt.event.FocusListener;
  * A custom JButton for the game's menus.
  *
  */
-public class Button extends JButton implements FocusListener
-{
+public class Button extends JButton implements FocusListener {
     private static final int FONT_SIZE = 17;
     private static final String FONT_NAME = "Arial";
 
@@ -25,7 +24,9 @@ public class Button extends JButton implements FocusListener
 
     /**
      * Creates a button with the specified label.
-     * @param label the text to be shown inside the button
+     *
+     * @param label
+     *            the text to be shown inside the button
      */
     public Button(final String label) {
         super(label);

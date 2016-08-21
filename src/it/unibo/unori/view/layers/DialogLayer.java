@@ -23,17 +23,23 @@ import java.awt.event.ActionEvent;
  *
  */
 public class DialogLayer extends Layer {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private final Button button;
-    final private static Dimension SIZE = new Dimension(View.SIZE.width / 2,
-                                                        View.SIZE.height / 2);
+    private final Button button;
+    private static final Dimension SIZE = new Dimension(View.SIZE.width / 2, View.SIZE.height / 2);
 
     // TODO sfondo non nero
     /**
      * Creates a dialog.
+     *
+     * @param message
+     *            the message to be shown
+     * @param button
+     *            the button the be shown
      */
     public DialogLayer(final String message, final Button button) {
+        super();
+
         this.setPreferredSize(SIZE);
         this.setBounds(0, 0, SIZE.width, SIZE.height);
 
