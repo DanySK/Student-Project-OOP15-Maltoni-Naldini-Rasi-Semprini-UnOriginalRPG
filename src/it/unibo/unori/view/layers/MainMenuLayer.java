@@ -39,11 +39,13 @@ public class MainMenuLayer extends Layer {
     private static final Color BACKGROUND_COLOR = Color.BLACK;
     private static final Dimension SIZE = View.SIZE;
 
-     /**
-      * Creates the main menu.
-      * @param buttons the list of buttons to be displayed
-      */
-     public MainMenuLayer(final List<Button> buttons) {
+    /**
+     * Creates the main menu.
+     *
+     * @param buttons
+     *            the list of buttons to be displayed
+     */
+    public MainMenuLayer(final List<Button> buttons) {
         super();
 
         this.setBounds(0, 0, SIZE.width, SIZE.height);
@@ -87,17 +89,17 @@ public class MainMenuLayer extends Layer {
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "RIGHT");
         actionMap.put("ENTER", new ButtonAction(0));
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "ENTER");
-     }
+    }
 
-     /**
-      * {@inheritDoc}
-      */
-     @Override
-     public void disable() {
-         for (final Component component : buttonPanel.getComponents()) {
-             component.setEnabled(false);
-         }
-     }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void disable() {
+        for (final Component component : buttonPanel.getComponents()) {
+            component.setEnabled(false);
+        }
+    }
 
     private class ButtonAction extends AbstractAction {
         private final int direction;
@@ -111,9 +113,8 @@ public class MainMenuLayer extends Layer {
         public void actionPerformed(final ActionEvent e) {
             if (direction == 0) {
                 buttons.get(focusedButton).doClick();
-            }
-            else {
-                if (buttons.size() != 0) {
+            } else {
+                if (!buttons.isEmpty()) {
                     focusedButton += direction;
 
                     if (focusedButton < 0) {
