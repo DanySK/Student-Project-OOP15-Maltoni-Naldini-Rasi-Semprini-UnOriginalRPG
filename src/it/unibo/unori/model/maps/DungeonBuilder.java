@@ -107,14 +107,14 @@ public class DungeonBuilder {
                 fList.add(FACT.getSizeableMap(8, 12,
                         ROCKPATH, FLOORPATH, true));
             }
+            this.storeItem(POS1, fList.get(0), PACT.getGigaPozione());
+            this.storeItem(POS2, fList.get(0), PACT.getTrapiantoMana());
+            final Foe boss = new FoeImpl(10, "Iinnapi", FoeSetup.getPath(FoesFindable.EROE_CADUTO),
+                    FoesFindable.EROE_CADUTO); 
+            final Cell c = new FoeCellImpl("res/sprites/npcs/earth/front-2.png", boss);
+            fList.get(1).setCell(POS1, c);
         }
-        this.storeItem(POS1, fList.get(0), PACT.getGigaPozione());
-        this.storeItem(POS2, fList.get(0), PACT.getTrapiantoMana());
         this.northLink(fList.get(0), fList.get(1));
-        final Foe boss = new FoeImpl(10, "Iinnapi", FoeSetup.getPath(FoesFindable.EROE_CADUTO),
-                FoesFindable.EROE_CADUTO); 
-        final Cell c = new FoeCellImpl("res/sprites/npcs/earth/front-2.png", boss);
-        fList.get(1).setCell(POS1, c);
     }
 
     /**
@@ -126,6 +126,11 @@ public class DungeonBuilder {
                 tList.add(FACT.getSizeableMap(8, 12,
                         ROCKPATH, FLOORPATH, true));
             }
+            this.storeItem(POS1, tList.get(0), AACT.getGoldEquip().get(ArmorPieces.SHIELD));
+            this.storeItem(POS1, tList.get(4), ItemImpl.KEY);
+            this.storeItem(POS1, tList.get(5), ItemImpl.KEY);
+            this.storeChest(POS1, tList.get(6), ItemImpl.KEY);
+            this.storeChest(POS2, tList.get(7), WACT.getSpadaMistica());
         }
         this.northLink(tList.get(0), tList.get(2));
         this.northLink(tList.get(5), tList.get(0));
@@ -135,11 +140,6 @@ public class DungeonBuilder {
         this.westLink(tList.get(1), tList.get(0));
         this.westLink(tList.get(0), tList.get(3));
         this.westLink(tList.get(3), tList.get(4));
-        this.storeItem(POS1, tList.get(0), AACT.getGoldEquip().get(ArmorPieces.SHIELD));
-        this.storeItem(POS1, tList.get(4), ItemImpl.KEY);
-        this.storeItem(POS1, tList.get(5), ItemImpl.KEY);
-        this.storeChest(POS1, tList.get(6), ItemImpl.KEY);
-        this.storeChest(POS2, tList.get(7), WACT.getSpadaMistica());
     }
 
     /**
@@ -147,30 +147,31 @@ public class DungeonBuilder {
      */
     private void secondFloorBuilder() {
         if (sList.isEmpty()) {
+            System.out.println("Costruisco da 0");
             for (int i = 0; i < 18; i++) {
                 sList.add(FACT.getSizeableMap(8, 12,
                         ROCKPATH, FLOORPATH, true));
             }
-        }
+            this.storeItem(POS1, sList.get(15), PACT.getGranPozione());
+            this.storeItem(POS1, sList.get(4), PACT.getGranPozione());
+            this.storeChest(POS2, sList.get(9), WACT.getSpadaMistica());
+            this.storeItem(POS1, sList.get(10), AACT.getSilverEquip().get(ArmorPieces.SHIELD));
+            this.storeItem(POS1, sList.get(12), ItemImpl.KEY);
+        } 
         this.northLink(sList.get(1), sList.get(0));
         this.northLink(sList.get(2), sList.get(1));
         this.westLink(sList.get(4), sList.get(1));
         this.westLink(sList.get(3), sList.get(2));
-        this.storeItem(POS1, sList.get(4), PACT.getGranPozione());
         this.westLink(sList.get(6), sList.get(3));
         this.northLink(sList.get(7), sList.get(6));
         this.northLink(sList.get(8), sList.get(7));
         this.westLink(sList.get(8), sList.get(9));
-        this.storeChest(POS2, sList.get(9), WACT.getSpadaMistica());
         this.northLink(sList.get(6), sList.get(5));
         this.northLink(sList.get(5), sList.get(10));
-        this.storeItem(POS1, sList.get(10), AACT.getSilverEquip().get(ArmorPieces.SHIELD));
         this.northLink(sList.get(10), sList.get(11));
         this.westLink(sList.get(12), sList.get(11));
-        this.storeItem(POS1, sList.get(12), ItemImpl.KEY);
         this.westLink(sList.get(13), sList.get(5));
         this.westLink(sList.get(15), sList.get(13));
-        this.storeItem(POS1, sList.get(15), PACT.getGranPozione());
         this.northLink(sList.get(14), sList.get(13));
         this.westLink(sList.get(16), sList.get(14));
         this.northLink(sList.get(17), sList.get(16));
@@ -181,33 +182,34 @@ public class DungeonBuilder {
      */
     private void firstFloorBuilder() {
         if (rList.isEmpty()) {
+            System.out.println("Costruisco da 0");
             for (int i = 0; i < 17; i++) {
                 rList.add(FACT.getSizeableMap(8, 12,
                         ROCKPATH, FLOORPATH, true));
             }
-        }
+            this.storeItem(POS1, rList.get(1), PACT.getAspirinaMagica());
+            this.storeItem(POS2, rList.get(2), PACT.getIntruglio());
+            this.storeItem(POS2, rList.get(4), WACT.getChiodo());
+            this.storeItem(POS1, rList.get(13), AACT.getBronzeEquip().get(ArmorPieces.SHIELD));
+            this.storeItem(POS1, rList.get(7), WACT.getCannone());
+            this.storeItem(POS1, rList.get(9), PACT.getRimedioDellaNonna());
+            this.storeItem(POS2, rList.get(11), AACT.getSilverEquip().get(ArmorPieces.GLOVES));
+            this.storeItem(POS1, rList.get(14), PACT.getTrapiantoMana());
+        } 
         this.westLink(rList.get(0), rList.get(2));
-        this.storeItem(POS1, rList.get(1), PACT.getAspirinaMagica());
-        this.storeItem(POS2, rList.get(2), PACT.getIntruglio());
         this.westLink(rList.get(1), rList.get(0));
         this.northLink(rList.get(0), rList.get(3));
         this.northLink(rList.get(3), rList.get(4));
-        this.storeItem(POS2, rList.get(4), WACT.getChiodo());
         this.westLink(rList.get(4), rList.get(13));
-        this.storeItem(POS1, rList.get(13), AACT.getBronzeEquip().get(ArmorPieces.SHIELD));
         this.westLink(rList.get(5), rList.get(4));
         this.northLink(rList.get(5), rList.get(6));
         this.westLink(rList.get(7), rList.get(6));
-        this.storeItem(POS1, rList.get(7), WACT.getCannone());
         this.westLink(rList.get(6), rList.get(8));
         this.northLink(rList.get(8), rList.get(9));
-        this.storeItem(POS1, rList.get(9), PACT.getRimedioDellaNonna());
         this.northLink(rList.get(9), rList.get(10));
         this.westLink(rList.get(11), rList.get(10));
-        this.storeItem(POS2, rList.get(11), AACT.getSilverEquip().get(ArmorPieces.GLOVES));
         this.westLink(rList.get(8), rList.get(12));
         this.westLink(rList.get(12), rList.get(14));
-        this.storeItem(POS1, rList.get(14), PACT.getTrapiantoMana());
         this.northLink(rList.get(14), rList.get(15));
         this.westLink(rList.get(15), rList.get(16));
     }
