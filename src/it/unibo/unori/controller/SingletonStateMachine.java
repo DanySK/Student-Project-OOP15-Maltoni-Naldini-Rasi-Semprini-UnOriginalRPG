@@ -1,13 +1,8 @@
 package it.unibo.unori.controller;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonSyntaxException;
 
 import it.unibo.unori.controller.exceptions.UnexpectedStateException;
 import it.unibo.unori.controller.json.JsonFileManager;
@@ -69,7 +64,6 @@ public final class SingletonStateMachine {
     private static final class StateMachineImpl implements Controller {
         private static final String UNEXPECTED_ERROR = "Unexpected error";
         private final StateMachineStack stack;
-        private final GameStatistics stats;
         private final JsonFileManager fileManager;
         private final WorldLoader loader;
 
@@ -83,7 +77,6 @@ public final class SingletonStateMachine {
          */
         StateMachineImpl() {
             this.stack = new StateMachineStackImpl();
-            this.stats = new GameStatisticsImpl();
             this.fileManager = new JsonFileManager();
             this.loader = new WorldLoader();
         }
@@ -99,11 +92,6 @@ public final class SingletonStateMachine {
         }
 
         @Override
-        public void startTimer() {
-            this.stats.startCountingTime();
-        }
-
-        @Override
         public void saveGame() throws IOException {
             this.fileManager.saveParty(SingletonParty.getParty());
             this.fileManager.saveMapType(SingletonParty.getParty().getCurrentGameMap());
@@ -112,8 +100,6 @@ public final class SingletonStateMachine {
 
         @Override
         public void loadGame() throws IOException {
-            this.restoreStatsIfNeeded();
-
             this.loader.loadWorld();
             System.out.println("World loaded");
             SingletonParty.loadParty(this.fileManager.loadParty());
@@ -139,7 +125,6 @@ public final class SingletonStateMachine {
 
         @Override
         public void newGame() throws IOException {
-            this.restoreStatsIfNeeded(); // TODO check
             this.stack.pushAndRender(new CharacterSelectionState());
         }
 
@@ -161,7 +146,6 @@ public final class SingletonStateMachine {
                     SingletonParty.getParty()
                             .setFrame(SingletonParty.getParty().getHeroTeam().getAllHeroes().get(0).getBattleFrame());
                     this.stack.pushAndRender(new MapState(SingletonParty.getParty().getCurrentGameMap()));
-                    this.startTimer();
                 } catch (IOException e) {
                     this.showDialog(e.getMessage(), ErrorSeverity.SERIUOS);
                 }
@@ -170,31 +154,6 @@ public final class SingletonStateMachine {
                 this.showDialog(new UnexpectedStateException().getMessage(), ErrorSeverity.SERIUOS);
             }
 
-        }
-
-        /**
-         * If the statistics file exists from previous plays, it should be
-         * loaded. This method does that.
-         * 
-         * @throws IOException
-         *             if an error occurs
-         * @throws SecurityException
-         *             if a security manager exists and it denies read access to
-         *             the file or directory
-         * @throws FileNotFoundException
-         *             if the file does not exist, is a directory rather than a
-         *             regular file, or for some other reason cannot be opened
-         *             for reading.
-         * @throws JsonIOException
-         *             if there was a problem reading from the Reader
-         * @throws JsonSyntaxException
-         *             if the file does not contain a valid representation for
-         *             an object of type
-         */
-        private void restoreStatsIfNeeded() throws IOException {
-            if (new File(JsonFileManager.STATS_FILE).exists()) {
-                this.stats.restore(this.fileManager.loadStats());
-            }
         }
 
         @Override
@@ -232,11 +191,6 @@ public final class SingletonStateMachine {
         }
 
         @Override
-        public GameStatistics getStatistics() {
-            return this.stats;
-        }
-
-        @Override
         public void showError(final String error) {
             if (error == null) {
                 this.showDialog(UNEXPECTED_ERROR, ErrorSeverity.SERIUOS);
@@ -268,7 +222,6 @@ public final class SingletonStateMachine {
             } catch (SpriteNotFoundException | IllegalArgumentException e) {
                 this.showError(e.getMessage());
             }
-            this.stats.increaseMonstersMet(foes.size());
         }
 
         @Override

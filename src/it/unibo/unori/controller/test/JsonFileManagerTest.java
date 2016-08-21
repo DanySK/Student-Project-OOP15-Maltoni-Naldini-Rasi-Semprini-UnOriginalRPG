@@ -13,7 +13,6 @@ import org.junit.rules.TemporaryFolder;
 
 import com.google.gson.JsonIOException;
 
-import it.unibo.unori.controller.GameStatisticsImpl;
 import it.unibo.unori.controller.json.JsonFileManager;
 import it.unibo.unori.controller.json.JsonFoeParameter;
 import it.unibo.unori.controller.json.JsonJobParameter;
@@ -67,34 +66,6 @@ public class JsonFileManagerTest {
         jsonManager.savePartyToPath(deserialized, file.getAbsolutePath());
         assertEquals(deserialized.getCurrentFrame(),
                         jsonManager.loadPartyFromPath(file.getAbsolutePath()).getCurrentFrame());
-    }
-
-    /**
-     * This tests if loadStats and saveStats methods work properly.
-     * 
-     * @throws IOException
-     *             if something wrong happens
-     */
-    @Test
-    public void testSaveAndLoadStats() throws IOException {
-        final File file = folder.newFile();
-        final GameStatisticsImpl test = new GameStatisticsImpl();
-        jsonManager.saveStatsToPath(test, file.getAbsolutePath());
-        assertEquals(test, jsonManager.loadStatsFromPath(file.getAbsolutePath()));
-
-        final GameStatisticsImpl gameStats = new GameStatisticsImpl();
-        gameStats.increaseArmorsAcquired(10);
-        gameStats.increaseBossesKilled(10);
-        gameStats.increaseMonstersKilled(10);
-        gameStats.increaseMonstersMet(10);
-        gameStats.increaseNewGames(10);
-        gameStats.increaseTotalExpGained(10);
-        gameStats.increaseTotalTimePlayed(10);
-        gameStats.increaseWeaponsAcquired(10);
-
-        jsonManager.saveStatsToPath(gameStats, file.getAbsolutePath());
-        final GameStatisticsImpl ret = jsonManager.loadStatsFromPath(file.getAbsolutePath());
-        assertEquals(gameStats, ret);
     }
 
     /**

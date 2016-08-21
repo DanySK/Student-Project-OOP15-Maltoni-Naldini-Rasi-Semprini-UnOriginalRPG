@@ -17,7 +17,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
-import it.unibo.unori.controller.GameStatisticsImpl;
 import it.unibo.unori.controller.SingletonStateMachine;
 import it.unibo.unori.controller.json.deserializers.CharacterDeserializer;
 import it.unibo.unori.controller.json.deserializers.DialogueDeserializer;
@@ -190,94 +189,6 @@ public class JsonFileManager {
      */
     public void saveParty(final Party party) throws IOException {
         savePartyToPath(party, SAVE_FILE);
-    }
-
-    /**
-     * The method restores a previously saved game statistics object from a
-     * given-path file.
-     * 
-     * @param path
-     *            the path of the file
-     * @return the GameStatistics object
-     * @throws FileNotFoundException
-     *             if the file does not exist, is a directory rather than a
-     *             regular file, or for some other reason cannot be opened for
-     *             reading.
-     * @throws IOException
-     *             if an error occurs
-     * @throws JsonIOException
-     *             if there was a problem reading from the Reader
-     * @throws JsonSyntaxException
-     *             if the file does not contain a valid representation for an
-     *             object of type
-     */
-    public GameStatisticsImpl loadStatsFromPath(final String path) throws IOException {
-        return deserializeJSON(GameStatisticsImpl.class, path);
-    }
-
-    /**
-     * The method restores a previously saved game statistics object from
-     * default path.
-     * 
-     * @return the GameStatistics object
-     * @throws FileNotFoundException
-     *             if the file does not exist, is a directory rather than a
-     *             regular file, or for some other reason cannot be opened for
-     *             reading.
-     * @throws IOException
-     *             if an error occurs
-     * @throws JsonIOException
-     *             if there was a problem reading from the Reader
-     * @throws JsonSyntaxException
-     *             if the file does not contain a valid representation for an
-     *             object of type
-     */
-    public GameStatisticsImpl loadStats() throws IOException {
-        return loadStatsFromPath(STATS_FILE);
-    }
-
-    /**
-     * This method saves the statistics of the game. It saves in default path.
-     * 
-     * @param stats
-     *            the object which contains the game statistics
-     * @param path
-     *            the path of the file
-     * @throws IOException
-     *             if an error occurs
-     * @throws FileNotFoundException
-     *             if the file exists but is a directory rather than a regular
-     *             file, does not exist but cannot be created, or cannot be
-     *             opened for any other reason
-     * @throws SecurityException
-     *             if a security manager exists and its checkWrite method denies
-     *             write access to the file
-     * @throws JsonIOException
-     *             if there was a problem writing to the writer
-     */
-    public void saveStatsToPath(final GameStatisticsImpl stats, final String path) throws IOException {
-        serializeJSON(stats, path);
-    }
-
-    /**
-     * This method saves the statistics of the game. It saves in default path.
-     * 
-     * @param stats
-     *            the object which contains the game statistics
-     * @throws IOException
-     *             if an error occurs
-     * @throws FileNotFoundException
-     *             if the file exists but is a directory rather than a regular
-     *             file, does not exist but cannot be created, or cannot be
-     *             opened for any other reason
-     * @throws SecurityException
-     *             if a security manager exists and its checkWrite method denies
-     *             write access to the file
-     * @throws JsonIOException
-     *             if there was a problem writing to the writer
-     */
-    public void saveStats(final GameStatisticsImpl stats) throws IOException {
-        saveStatsToPath(stats, STATS_FILE);
     }
 
     /**
