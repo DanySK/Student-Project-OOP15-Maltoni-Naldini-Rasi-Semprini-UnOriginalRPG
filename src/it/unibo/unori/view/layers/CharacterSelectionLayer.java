@@ -96,6 +96,9 @@ public class CharacterSelectionLayer extends Layer {
         statistics.setForeground(Color.WHITE);
         statistics.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        final JPanel blankPanel = new JPanel();
+        blankPanel.setBackground(BACKGROUND_COLOR);
+
         partyPanel = new JPanel();
         partyPanel.setBackground(BACKGROUND_COLOR);
         partyPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -112,6 +115,7 @@ public class CharacterSelectionLayer extends Layer {
         this.add(textField);
         this.add(spritePanel);
         this.add(statistics);
+        this.add(blankPanel);
         this.add(partyPanel);
         this.add(button);
     }
