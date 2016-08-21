@@ -140,10 +140,10 @@ public class BattleTest {
         System.out.println(battle.attack(true));
         System.out.println(this.battle.getEnemies().getAliveFoes());
         this.battle.getHeroOnTurn().addSpell(
-                new MagicGenerator().getMedium(this.battle.getHeroOnTurn().getJob()));
+                new MagicGenerator().getStandard(this.battle.getHeroOnTurn().getJob()));
         try {
             this.battle.useMagicAttack(
-                    new MagicGenerator().getMedium(this.battle.getHeroOnTurn().getJob()),
+                    new MagicGenerator().getStandard(this.battle.getHeroOnTurn().getJob()),
                     this.battle.getFoeOnTurn(), true).generate();
         } catch (NotEnoughMPExcpetion e) {
             e.printStackTrace();
@@ -153,7 +153,7 @@ public class BattleTest {
         System.out.println(this.battle.getEnemies().getAliveFoes());
         try {
             this.battle.useMagicAttack(
-                    new MagicGenerator().getMedium(this.battle.getHeroOnTurn().getJob()),
+                    new MagicGenerator().getStandard(this.battle.getHeroOnTurn().getJob()),
                     this.battle.getFoeOnTurn(), true).generate();
         } catch (NotEnoughMPExcpetion e) {
             e.printStackTrace();
