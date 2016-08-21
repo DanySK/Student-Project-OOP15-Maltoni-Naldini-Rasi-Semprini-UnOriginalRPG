@@ -448,8 +448,20 @@
         "state": "FREE"
       },
       {
-        "path": "res/sprites/map/earth.png",
-        "state": "FREE"
+        "path": "res/sprites/map/item.png",
+        "state": "BLOCKED",
+        "obj": {
+          "name": "Scudo d\u0027oro",
+          "piece": "SHIELD",
+          "desc": "Scudo d\u0027oro, leggendario",
+          "stats": {
+            "THUNDERDEF": 500,
+            "PHYSICDEF": 1000,
+            "FIREDEF": 500,
+            "ICEDEF": 500
+          },
+          "immunity": "CURSED"
+        }
       },
       {
         "path": "res/sprites/map/earth.png",
