@@ -280,8 +280,8 @@ public class BattleImpl implements Battle {
         this.checkWhoAttacks();
         final Character whoAttacks;
         final Character whoSuffers;
-        whoAttacks = whosFirst ? this.heroOnTurn : this.foeOnTurn;
-        whoSuffers = whosFirst ? this.foeOnTurn : this.heroOnTurn;
+        whoAttacks = whosFirst ? this.heroOnTurn : enemy;
+        whoSuffers = whosFirst ? enemy : this.heroOnTurn;
         String toShow = whoAttacks.getName() + " usa una Magia!";
         if (this.setUndefendedAndNotify(whoSuffers)) {
             return new Dialogue(toShow + " " + whoSuffers.getName() + " e' difeso! Non subisce danni");
