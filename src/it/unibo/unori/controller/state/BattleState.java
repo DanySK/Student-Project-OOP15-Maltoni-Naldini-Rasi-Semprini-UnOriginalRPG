@@ -247,12 +247,15 @@ public class BattleState extends AbstractGameState {
                     } else if (this.fightModel.getBattle().getEnemies().getAliveFoes().isEmpty()) {
                         System.out.println("Sconfiggo nemici");
                         if (!this.acquiredExp) {
+                            System.out.println("Setto acquiredExp");
                             this.acquiringExp = true;
                             this.currentDialogue = Optional.of(this.fightModel.getBattle().acquireExp());
+                            System.out.println("Dialogue di acquisizione exp settato");
                         } else if (!this.shownOutcome) {
                             System.out.println("Setto shownOutCome");
                             this.outCome = true;
                             this.currentDialogue = Optional.of(new Dialogue(this.fightModel.getBattle().getOutCome()));
+                            System.out.println("Dialogue di outcome settato");
                         } else {
                             System.out.println(SingletonStateMachine.getController().getStack().pop());
                             System.out.println("Poppato con successo");
