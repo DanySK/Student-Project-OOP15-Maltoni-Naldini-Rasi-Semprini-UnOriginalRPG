@@ -436,9 +436,9 @@
           "desc": "Scudo bronzeo, protegge dal sonno",
           "stats": {
             "PHYSICDEF": 300,
+            "THUNDERDEF": 100,
             "ICEDEF": 100,
-            "FIREDEF": 100,
-            "THUNDERDEF": 100
+            "FIREDEF": 100
           },
           "immunity": "ASLEEP"
         }

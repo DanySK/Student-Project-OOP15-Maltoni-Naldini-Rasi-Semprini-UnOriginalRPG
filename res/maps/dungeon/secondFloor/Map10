@@ -436,9 +436,9 @@
           "desc": "Scudo di Dario Argento",
           "stats": {
             "PHYSICDEF": 500,
+            "THUNDERDEF": 250,
             "ICEDEF": 250,
-            "FIREDEF": 250,
-            "THUNDERDEF": 250
+            "FIREDEF": 250
           },
           "immunity": "POISONED"
         }
