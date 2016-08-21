@@ -110,6 +110,7 @@ public class BattleLayer extends Layer {
 
     private void drawHero(final Graphics g, final int x, final int y, final Hero hero, final BufferedImage sprite) {
 
+        final String status = "Status: " + hero.getStatus().name();
         final String health = "HP: " + hero.getRemainingHP() + "/" + hero.getTotalHP();
         final String magic = "MP: " + hero.getCurrentMP() + "/" + hero.getTotalMP();
         final String special = "Attacco Speciale: " + hero.getCurrentBar() + "/" + hero.getTotBar();
@@ -120,6 +121,8 @@ public class BattleLayer extends Layer {
         g.setColor(Color.WHITE);
 
         g.drawString(hero.getName(), x + 32 - g.getFontMetrics().stringWidth(hero.getName()), newY);
+        newY += yStep;
+        g.drawString(status, x + 32 - g.getFontMetrics().stringWidth(status), newY);
         newY += yStep;
         g.drawString(health, x + 32 - g.getFontMetrics().stringWidth(health), newY);
         newY += yStep;
@@ -162,7 +165,7 @@ public class BattleLayer extends Layer {
         int y = yStart;
         int x = xStart;
 
-        final int yStepHero = 130;
+        final int yStepHero = 145;
 
         for (final Hero hero : heroTeam.getAliveHeroes()) {
             drawHero(g, x, y, hero, heroSprites.get(hero));
