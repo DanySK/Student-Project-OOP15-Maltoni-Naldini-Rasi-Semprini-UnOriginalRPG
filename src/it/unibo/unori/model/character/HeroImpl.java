@@ -69,6 +69,7 @@ public class HeroImpl  extends CharacterImpl implements Hero {
         this.heroJob = job;
         this.specialBar = 100;
         this.currentBar = 0;
+        this.totExp = 3000;
         this.addSpell(MagicGenerator.getBasic());
         this.addSpell(new MagicGenerator().getStandard(job));
         if (job.equals(Jobs.MAGE)) {
@@ -181,6 +182,7 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     @Override
     public void levelUp() {
         this.setLevel(this.getLevel() + 1);
+        this.totExp += 500 * this.getLevel();
         final Map<Statistics, Integer> m = this.heroJob.getGrowthStats();
          Arrays.asList(Statistics.values()).stream().filter(i -> !i.equals(Statistics.EXPFACTOR))
          .forEach(i -> {
