@@ -47,7 +47,6 @@ public class MagicAttack implements MagicAttackInterface {
         this.stats.put(Statistics.PHYSICATK, physicAtk);
         this.accuracy = accuracy;
         this.mpRequired = mp;
-        
     }
     
     @Override

@@ -56,7 +56,7 @@ public final class BattleLogics {
     public static int getStandardDamage(final int charLevel, final int atck) {
         final int toMult = charLevel > 1 ? charLevel - 1 : 1;
         final int toRet = SHIFT + ((MULT * toMult + (atck * charLevel)) / 2);
-        if (toRet <= PERCENTAGE_HIGH) {
+        if (toRet <= SHIFT) {
             return 100;
         } else {
             return toRet;
@@ -117,10 +117,12 @@ public final class BattleLogics {
             final int mediumLevel, final int notBeaten) {
         final Map<Hero, Integer> exp = new HashMap<>();
         squad.getAliveHeroes().forEach(i -> {
-            final int value = ((mediumLevel * notBeaten)
-                    * ((mediumLevel + LEVELER + 1) ^ 2)
-                    / ((mediumLevel + i.getLevel() + LEVELER) ^ 2 + MULT) + 1)
+            final int value = (((mediumLevel * notBeaten) + 3)
+                    * ((mediumLevel + LEVELER + 2) ^ 2)
+                    / ((mediumLevel + i.getLevel() + LEVELER) ^ 2 + MULT))
                     * i.getExpFactor();
+            //System.out.println(mediumLevel + " x " + notBeaten + " x " + ((mediumLevel + LEVELER + 1) ^ 2) + " FRATTO (" 
+             //       + ((mediumLevel + i.getLevel() + LEVELER) ^ 2 + MULT) +  ") PER " + i.getExpFactor());
             exp.put(i, value);
         });
         return exp;
