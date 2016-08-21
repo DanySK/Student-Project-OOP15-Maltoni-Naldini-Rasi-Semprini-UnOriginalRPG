@@ -167,11 +167,11 @@
         "obj": {
           "name": "Guanti d\u0027argento",
           "piece": "GLOVES",
-          "desc": "Guanti argentei, di grande qualit‡",
+          "desc": "Guanti argentei, di grande qualit√†",
           "stats": {
             "THUNDERDEF": 250,
-            "PHYSICDEF": 500,
             "FIREDEF": 250,
+            "PHYSICDEF": 500,
             "ICEDEF": 250
           },
           "immunity": "POISONED"

@@ -23,7 +23,7 @@ import it.unibo.unori.model.menu.utility.Pair;
  */
 public final class MagicLogics {
     
-    private static final int SHIFT = 7;
+    private static final int SHIFT = 12;
     private static final int MULT = 10;
     private static final int YOURELUCKY = 3;
     private static final int HIGHIA = 8;

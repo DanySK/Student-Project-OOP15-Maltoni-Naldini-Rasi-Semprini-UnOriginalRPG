@@ -162,8 +162,15 @@
         "state": "FREE"
       },
       {
-        "path": "res/sprites/map/earth.png",
-        "state": "FREE"
+        "path": "res/sprites/map/item.png",
+        "state": "BLOCKED",
+        "obj": {
+          "name": "Intruglio",
+          "description": "Intruglio magico in grado di rigenerare 200 HP",
+          "points": 200,
+          "statToRestore": "TOTALHP",
+          "statusRestorable": false
+        }
       },
       {
         "path": "res/sprites/map/earth.png",

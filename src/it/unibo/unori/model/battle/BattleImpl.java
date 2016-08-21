@@ -194,6 +194,7 @@ public class BattleImpl implements Battle {
             toReturn = toReturn.concat(" " + whoSuffers.getName() 
                     + " ha subito un cambiamento di Stato! Ora è " + whoSuffers.getStatus());
         }
+
         return new Dialogue(toReturn);
     }
 
