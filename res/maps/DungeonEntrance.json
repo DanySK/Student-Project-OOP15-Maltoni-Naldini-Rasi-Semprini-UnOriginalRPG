@@ -474,8 +474,8 @@
         "state": "BLOCKED",
         "obj": {
           "name": "Pozione della Vita",
-          "description": "Pozione che riesce anche a ridare la vita, rigenerando 30 HP",
-          "points": 300,
+          "description": "Pozione che riesce anche a ridare la vita, rigenerando 600 HP",
+          "points": 600,
           "statToRestore": "TOTALHP",
           "statusRestorable": false
         }
