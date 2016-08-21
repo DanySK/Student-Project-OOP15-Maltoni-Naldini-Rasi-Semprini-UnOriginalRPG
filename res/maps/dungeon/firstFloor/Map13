@@ -435,18 +435,10 @@
           "piece": "SHIELD",
           "desc": "Scudo bronzeo, protegge dal sonno",
           "stats": {
-<<<<<<< local
-            "ICEDEF": 100,
-=======
             "THUNDERDEF": 100,
->>>>>>> other
-            "FIREDEF": 100,
             "PHYSICDEF": 300,
-<<<<<<< local
-            "THUNDERDEF": 100
-=======
+            "FIREDEF": 100,
             "ICEDEF": 100
->>>>>>> other
           },
           "immunity": "ASLEEP"
         }
