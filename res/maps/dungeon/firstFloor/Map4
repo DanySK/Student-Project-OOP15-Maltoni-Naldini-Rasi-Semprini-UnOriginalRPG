@@ -168,10 +168,10 @@
           "name": "Chiodo Arrugginito",
           "desc": "Enorme chiodo appuntito in grado di avvelenare",
           "stats": {
-            "ICEATK": 10,
             "PHYSICATK": 220,
             "THUNDERATK": 15,
-            "FIREATK": 8
+            "FIREATK": 8,
+            "ICEATK": 10
           },
           "inflictedStatus": "POISONED"
         }
