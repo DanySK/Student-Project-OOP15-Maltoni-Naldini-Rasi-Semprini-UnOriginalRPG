@@ -138,19 +138,8 @@
         "state": "FREE"
       },
       {
-        "path": "res/sprites/map/item.png",
-        "state": "BLOCKED",
-        "obj": {
-          "name": "Lanciafiamme",
-          "desc": "C\u0027è davvero bisogno di una descrizione?",
-          "stats": {
-            "PHYSICATK": 580,
-            "THUNDERATK": 0,
-            "FIREATK": 90,
-            "ICEATK": 0
-          },
-          "inflictedStatus": "NOT_DEFENDABLE"
-        }
+        "path": "res/sprites/map/grass.png",
+        "state": "FREE"
       },
       {
         "path": "res/sprites/map/grass.png",
