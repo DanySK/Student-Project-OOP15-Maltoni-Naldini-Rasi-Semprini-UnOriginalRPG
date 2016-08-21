@@ -118,7 +118,7 @@ public final class BattleLogics {
         final Map<Hero, Integer> exp = new HashMap<>();
         squad.getAllHeroes().forEach(i -> {
             final int value = ((mediumLevel * notBeaten)
-                    * ((LEVELER * mediumLevel + MULT) ^ 2)
+                    * ((mediumLevel + LEVELER + 1) ^ 2)
                     / ((mediumLevel + i.getLevel() + LEVELER) ^ 2 + MULT) + 1)
                     * i.getExpFactor();
             exp.put(i, value);
