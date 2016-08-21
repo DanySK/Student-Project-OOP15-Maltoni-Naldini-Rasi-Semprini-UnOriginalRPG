@@ -595,7 +595,7 @@
       ]
     ],
     "initialPosition": {
-      "posX": 4,
+      "posX": 5,
       "posY": 1
     },
     "battleState": true
@@ -622,39 +622,27 @@
   "heroteam": [
     {
       "armor": {
-        "SHIELD": {
-          "name": "Scudo",
-          "piece": "SHIELD",
-          "desc": "Scudo piuttosto brutto",
-          "stats": {
-            "PHYSICDEF": 100,
-            "ICEDEF": 0,
-            "THUNDERDEF": 0,
-            "FIREDEF": 0
-          },
-          "immunity": "NONE"
-        },
-        "TROUSERS": {
-          "name": "Schinieri",
-          "piece": "TROUSERS",
-          "desc": "Schinieri piuttosto brutti",
-          "stats": {
-            "PHYSICDEF": 100,
-            "ICEDEF": 0,
-            "THUNDERDEF": 0,
-            "FIREDEF": 0
-          },
-          "immunity": "NONE"
-        },
         "HELMET": {
           "name": "Elmo",
           "piece": "HELMET",
           "desc": "Elmo piuttosto brutto",
           "stats": {
-            "PHYSICDEF": 100,
             "ICEDEF": 0,
-            "THUNDERDEF": 0,
-            "FIREDEF": 0
+            "PHYSICDEF": 100,
+            "FIREDEF": 0,
+            "THUNDERDEF": 0
+          },
+          "immunity": "NONE"
+        },
+        "SHIELD": {
+          "name": "Scudo",
+          "piece": "SHIELD",
+          "desc": "Scudo piuttosto brutto",
+          "stats": {
+            "ICEDEF": 0,
+            "PHYSICDEF": 100,
+            "FIREDEF": 0,
+            "THUNDERDEF": 0
           },
           "immunity": "NONE"
         },
@@ -663,10 +651,10 @@
           "piece": "GLOVES",
           "desc": "Guanti piuttosto brutti",
           "stats": {
-            "PHYSICDEF": 100,
             "ICEDEF": 0,
-            "THUNDERDEF": 0,
-            "FIREDEF": 0
+            "PHYSICDEF": 100,
+            "FIREDEF": 0,
+            "THUNDERDEF": 0
           },
           "immunity": "NONE"
         },
@@ -675,10 +663,22 @@
           "piece": "ARMOR",
           "desc": "Cotta piuttosto brutto",
           "stats": {
-            "PHYSICDEF": 100,
             "ICEDEF": 0,
-            "THUNDERDEF": 0,
-            "FIREDEF": 0
+            "PHYSICDEF": 100,
+            "FIREDEF": 0,
+            "THUNDERDEF": 0
+          },
+          "immunity": "NONE"
+        },
+        "TROUSERS": {
+          "name": "Schinieri",
+          "piece": "TROUSERS",
+          "desc": "Schinieri piuttosto brutti",
+          "stats": {
+            "ICEDEF": 0,
+            "PHYSICDEF": 100,
+            "FIREDEF": 0,
+            "THUNDERDEF": 0
           },
           "immunity": "NONE"
         }
@@ -691,7 +691,7 @@
       "defended": false,
       "name": "aa",
       "battleFrame": "res/sprites/warrior.png",
-      "currentHP": 235,
+      "currentHP": 223,
       "currentMP": 500,
       "level": 1,
       "weapon": {
@@ -707,18 +707,18 @@
       },
       "status": "NONE",
       "statistic": {
-        "SPEED": 1100,
-        "ICEATK": 800,
-        "THUNDERDEF": 750,
+        "EXPFACTOR": 100,
         "FIREDEF": 750,
+        "ICEATK": 800,
+        "PHYSICDEF": 2000,
         "FIREATK": 800,
         "ICEDEF": 750,
-        "TOTALMP": 500,
         "TOTALHP": 1500,
-        "PHYSICDEF": 2000,
+        "TOTALMP": 500,
+        "THUNDERDEF": 750,
         "PHYSICATK": 2000,
         "THUNDERATK": 800,
-        "EXPFACTOR": 100
+        "SPEED": 1100
       },
       "spellList": [
         {
@@ -738,39 +738,27 @@
     },
     {
       "armor": {
-        "SHIELD": {
-          "name": "Scudo",
-          "piece": "SHIELD",
-          "desc": "Scudo piuttosto brutto",
-          "stats": {
-            "PHYSICDEF": 100,
-            "ICEDEF": 0,
-            "THUNDERDEF": 0,
-            "FIREDEF": 0
-          },
-          "immunity": "NONE"
-        },
-        "TROUSERS": {
-          "name": "Schinieri",
-          "piece": "TROUSERS",
-          "desc": "Schinieri piuttosto brutti",
-          "stats": {
-            "PHYSICDEF": 100,
-            "ICEDEF": 0,
-            "THUNDERDEF": 0,
-            "FIREDEF": 0
-          },
-          "immunity": "NONE"
-        },
         "HELMET": {
           "name": "Elmo",
           "piece": "HELMET",
           "desc": "Elmo piuttosto brutto",
           "stats": {
-            "PHYSICDEF": 100,
             "ICEDEF": 0,
-            "THUNDERDEF": 0,
-            "FIREDEF": 0
+            "PHYSICDEF": 100,
+            "FIREDEF": 0,
+            "THUNDERDEF": 0
+          },
+          "immunity": "NONE"
+        },
+        "SHIELD": {
+          "name": "Scudo",
+          "piece": "SHIELD",
+          "desc": "Scudo piuttosto brutto",
+          "stats": {
+            "ICEDEF": 0,
+            "PHYSICDEF": 100,
+            "FIREDEF": 0,
+            "THUNDERDEF": 0
           },
           "immunity": "NONE"
         },
@@ -779,10 +767,10 @@
           "piece": "GLOVES",
           "desc": "Guanti piuttosto brutti",
           "stats": {
-            "PHYSICDEF": 100,
             "ICEDEF": 0,
-            "THUNDERDEF": 0,
-            "FIREDEF": 0
+            "PHYSICDEF": 100,
+            "FIREDEF": 0,
+            "THUNDERDEF": 0
           },
           "immunity": "NONE"
         },
@@ -791,10 +779,22 @@
           "piece": "ARMOR",
           "desc": "Cotta piuttosto brutto",
           "stats": {
-            "PHYSICDEF": 100,
             "ICEDEF": 0,
-            "THUNDERDEF": 0,
-            "FIREDEF": 0
+            "PHYSICDEF": 100,
+            "FIREDEF": 0,
+            "THUNDERDEF": 0
+          },
+          "immunity": "NONE"
+        },
+        "TROUSERS": {
+          "name": "Schinieri",
+          "piece": "TROUSERS",
+          "desc": "Schinieri piuttosto brutti",
+          "stats": {
+            "ICEDEF": 0,
+            "PHYSICDEF": 100,
+            "FIREDEF": 0,
+            "THUNDERDEF": 0
           },
           "immunity": "NONE"
         }
@@ -823,18 +823,18 @@
       },
       "status": "NONE",
       "statistic": {
-        "SPEED": 1100,
-        "ICEATK": 800,
-        "THUNDERDEF": 750,
+        "EXPFACTOR": 100,
         "FIREDEF": 750,
+        "ICEATK": 800,
+        "PHYSICDEF": 2000,
         "FIREATK": 800,
         "ICEDEF": 750,
-        "TOTALMP": 500,
         "TOTALHP": 1500,
-        "PHYSICDEF": 2000,
+        "TOTALMP": 500,
+        "THUNDERDEF": 750,
         "PHYSICATK": 2000,
         "THUNDERATK": 800,
-        "EXPFACTOR": 100
+        "SPEED": 1100
       },
       "spellList": [
         {
@@ -854,39 +854,27 @@
     },
     {
       "armor": {
-        "SHIELD": {
-          "name": "Scudo",
-          "piece": "SHIELD",
-          "desc": "Scudo piuttosto brutto",
-          "stats": {
-            "PHYSICDEF": 100,
-            "ICEDEF": 0,
-            "THUNDERDEF": 0,
-            "FIREDEF": 0
-          },
-          "immunity": "NONE"
-        },
-        "TROUSERS": {
-          "name": "Schinieri",
-          "piece": "TROUSERS",
-          "desc": "Schinieri piuttosto brutti",
-          "stats": {
-            "PHYSICDEF": 100,
-            "ICEDEF": 0,
-            "THUNDERDEF": 0,
-            "FIREDEF": 0
-          },
-          "immunity": "NONE"
-        },
         "HELMET": {
           "name": "Elmo",
           "piece": "HELMET",
           "desc": "Elmo piuttosto brutto",
           "stats": {
-            "PHYSICDEF": 100,
             "ICEDEF": 0,
-            "THUNDERDEF": 0,
-            "FIREDEF": 0
+            "PHYSICDEF": 100,
+            "FIREDEF": 0,
+            "THUNDERDEF": 0
+          },
+          "immunity": "NONE"
+        },
+        "SHIELD": {
+          "name": "Scudo",
+          "piece": "SHIELD",
+          "desc": "Scudo piuttosto brutto",
+          "stats": {
+            "ICEDEF": 0,
+            "PHYSICDEF": 100,
+            "FIREDEF": 0,
+            "THUNDERDEF": 0
           },
           "immunity": "NONE"
         },
@@ -895,10 +883,10 @@
           "piece": "GLOVES",
           "desc": "Guanti piuttosto brutti",
           "stats": {
-            "PHYSICDEF": 100,
             "ICEDEF": 0,
-            "THUNDERDEF": 0,
-            "FIREDEF": 0
+            "PHYSICDEF": 100,
+            "FIREDEF": 0,
+            "THUNDERDEF": 0
           },
           "immunity": "NONE"
         },
@@ -907,10 +895,22 @@
           "piece": "ARMOR",
           "desc": "Cotta piuttosto brutto",
           "stats": {
-            "PHYSICDEF": 100,
             "ICEDEF": 0,
-            "THUNDERDEF": 0,
-            "FIREDEF": 0
+            "PHYSICDEF": 100,
+            "FIREDEF": 0,
+            "THUNDERDEF": 0
+          },
+          "immunity": "NONE"
+        },
+        "TROUSERS": {
+          "name": "Schinieri",
+          "piece": "TROUSERS",
+          "desc": "Schinieri piuttosto brutti",
+          "stats": {
+            "ICEDEF": 0,
+            "PHYSICDEF": 100,
+            "FIREDEF": 0,
+            "THUNDERDEF": 0
           },
           "immunity": "NONE"
         }
@@ -939,18 +939,18 @@
       },
       "status": "NONE",
       "statistic": {
-        "SPEED": 1100,
-        "ICEATK": 800,
-        "THUNDERDEF": 750,
+        "EXPFACTOR": 100,
         "FIREDEF": 750,
+        "ICEATK": 800,
+        "PHYSICDEF": 2000,
         "FIREATK": 800,
         "ICEDEF": 750,
-        "TOTALMP": 500,
         "TOTALHP": 1500,
-        "PHYSICDEF": 2000,
+        "TOTALMP": 500,
+        "THUNDERDEF": 750,
         "PHYSICATK": 2000,
         "THUNDERATK": 800,
-        "EXPFACTOR": 100
+        "SPEED": 1100
       },
       "spellList": [
         {
@@ -970,39 +970,27 @@
     },
     {
       "armor": {
-        "SHIELD": {
-          "name": "Scudo",
-          "piece": "SHIELD",
-          "desc": "Scudo piuttosto brutto",
-          "stats": {
-            "PHYSICDEF": 100,
-            "ICEDEF": 0,
-            "THUNDERDEF": 0,
-            "FIREDEF": 0
-          },
-          "immunity": "NONE"
-        },
-        "TROUSERS": {
-          "name": "Schinieri",
-          "piece": "TROUSERS",
-          "desc": "Schinieri piuttosto brutti",
-          "stats": {
-            "PHYSICDEF": 100,
-            "ICEDEF": 0,
-            "THUNDERDEF": 0,
-            "FIREDEF": 0
-          },
-          "immunity": "NONE"
-        },
         "HELMET": {
           "name": "Elmo",
           "piece": "HELMET",
           "desc": "Elmo piuttosto brutto",
           "stats": {
-            "PHYSICDEF": 100,
             "ICEDEF": 0,
-            "THUNDERDEF": 0,
-            "FIREDEF": 0
+            "PHYSICDEF": 100,
+            "FIREDEF": 0,
+            "THUNDERDEF": 0
+          },
+          "immunity": "NONE"
+        },
+        "SHIELD": {
+          "name": "Scudo",
+          "piece": "SHIELD",
+          "desc": "Scudo piuttosto brutto",
+          "stats": {
+            "ICEDEF": 0,
+            "PHYSICDEF": 100,
+            "FIREDEF": 0,
+            "THUNDERDEF": 0
           },
           "immunity": "NONE"
         },
@@ -1011,10 +999,10 @@
           "piece": "GLOVES",
           "desc": "Guanti piuttosto brutti",
           "stats": {
-            "PHYSICDEF": 100,
             "ICEDEF": 0,
-            "THUNDERDEF": 0,
-            "FIREDEF": 0
+            "PHYSICDEF": 100,
+            "FIREDEF": 0,
+            "THUNDERDEF": 0
           },
           "immunity": "NONE"
         },
@@ -1023,10 +1011,22 @@
           "piece": "ARMOR",
           "desc": "Cotta piuttosto brutto",
           "stats": {
-            "PHYSICDEF": 100,
             "ICEDEF": 0,
-            "THUNDERDEF": 0,
-            "FIREDEF": 0
+            "PHYSICDEF": 100,
+            "FIREDEF": 0,
+            "THUNDERDEF": 0
+          },
+          "immunity": "NONE"
+        },
+        "TROUSERS": {
+          "name": "Schinieri",
+          "piece": "TROUSERS",
+          "desc": "Schinieri piuttosto brutti",
+          "stats": {
+            "ICEDEF": 0,
+            "PHYSICDEF": 100,
+            "FIREDEF": 0,
+            "THUNDERDEF": 0
           },
           "immunity": "NONE"
         }
@@ -1055,18 +1055,18 @@
       },
       "status": "NONE",
       "statistic": {
-        "SPEED": 1100,
-        "ICEATK": 800,
-        "THUNDERDEF": 750,
+        "EXPFACTOR": 100,
         "FIREDEF": 750,
+        "ICEATK": 800,
+        "PHYSICDEF": 2000,
         "FIREATK": 800,
         "ICEDEF": 750,
-        "TOTALMP": 500,
         "TOTALHP": 1500,
-        "PHYSICDEF": 2000,
+        "TOTALMP": 500,
+        "THUNDERDEF": 750,
         "PHYSICATK": 2000,
         "THUNDERATK": 800,
-        "EXPFACTOR": 100
+        "SPEED": 1100
       },
       "spellList": [
         {
