@@ -144,10 +144,10 @@
           "name": "Lanciafiamme",
           "desc": "C\u0027� davvero bisogno di una descrizione?",
           "stats": {
+            "ICEATK": 0,
             "PHYSICATK": 580,
             "THUNDERATK": 0,
-            "FIREATK": 90,
-            "ICEATK": 0
+            "FIREATK": 90
           },
           "inflictedStatus": "NOT_DEFENDABLE"
         }
@@ -470,15 +470,8 @@
         "state": "FREE"
       },
       {
-        "path": "res/sprites/map/item.png",
-        "state": "BLOCKED",
-        "obj": {
-          "name": "Pozione della Vita",
-          "description": "Pozione che riesce anche a ridare la vita, rigenerando 30 HP",
-          "points": 300,
-          "statToRestore": "TOTALHP",
-          "statusRestorable": false
-        }
+        "path": "res/sprites/map/grass.png",
+        "state": "FREE"
       },
       {
         "path": "res/sprites/map/grass.png",

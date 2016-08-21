@@ -1,5 +1,5 @@
 {
-  "mapType": "DUNGEON",
+  "type": "DUNGEON",
   "floor": 4,
   "room": 1
 }

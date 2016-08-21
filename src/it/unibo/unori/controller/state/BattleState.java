@@ -45,8 +45,8 @@ public class BattleState extends AbstractGameState {
     private final FightInterface fightModel;
     private Optional<DialogueInterface> currentDialogue;
     private boolean heroTurn;
-    private boolean runAway = false;
-    private boolean outCome = false;
+    private boolean runAway; // Automatically initialized by Java to false
+    private boolean outCome; // Automatically initialized by Java to false
     private int currentTurn; // Automatically initialized by Java to 0
 
     /**
