@@ -46,10 +46,10 @@ public class BattleState extends AbstractGameState {
     private Optional<DialogueInterface> currentDialogue;
     private boolean heroTurn;
     private boolean acquiringExp; // Automatically initialized by Java to false
-    private boolean acquiredExp;
+    private boolean acquiredExp; // Automatically initialized by Java to false
     private boolean canRunAway; // Automatically initialized by Java to false
     private boolean outCome; // Automatically initialized by Java to false
-    private boolean shownOutcome;
+    private boolean shownOutcome; // Automatically initialized by Java to false
     private int turnCounter; // Automatically initialized by Java to 0
 
     /**
@@ -237,14 +237,8 @@ public class BattleState extends AbstractGameState {
                         SingletonStateMachine.getController().getStack().pop();
                     } else if (this.fightModel.getBattle().getSquad().getAliveHeroes().isEmpty()) {
                         System.out.println("Tutti morti");
-                        // If it wasn't running away, and all heros were
-                        // defeated, it returns to main menu
-                        //while (/*!SingletonStateMachine.getController().getStack().isEmpty()*/!MainMenuState.class.isInstance(SingletonStateMachine.getController().getCurrentState())) {
-                        //    SingletonStateMachine.getController().getStack().pop();
-                        //}
                         SingletonStateMachine.getController().getStack().pop();
                         SingletonStateMachine.getController().getStack().pop();
-                        // SingletonStateMachine.getController().begin();
                     } else if (this.fightModel.getBattle().getEnemies().getAliveFoes().isEmpty()) {
                         System.out.println("Sconfiggo nemici");
                         if (!this.acquiredExp) {
@@ -271,11 +265,7 @@ public class BattleState extends AbstractGameState {
                         this.endTurn();
                     }
                 }
-            } else {
-                // Do nothing, it is showing another dialog
             }
-        } else {
-            // Do nothing, there isn't any dialog to show
         }
     }
 
