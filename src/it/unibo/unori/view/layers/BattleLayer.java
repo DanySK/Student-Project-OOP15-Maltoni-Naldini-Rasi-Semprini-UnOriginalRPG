@@ -110,6 +110,7 @@ public class BattleLayer extends Layer {
 
     private void drawHero(final Graphics g, final int x, final int y, final Hero hero, final BufferedImage sprite) {
 
+        final String name = hero.getName() + ", Livello: " + hero.getLevel();
         final String status = "Status: " + hero.getStatus().name();
         final String health = "HP: " + hero.getRemainingHP() + "/" + hero.getTotalHP();
         final String magic = "MP: " + hero.getCurrentMP() + "/" + hero.getTotalMP();
@@ -120,7 +121,7 @@ public class BattleLayer extends Layer {
 
         g.setColor(Color.WHITE);
 
-        g.drawString(hero.getName(), x + 32 - g.getFontMetrics().stringWidth(hero.getName()), newY);
+        g.drawString(name, x + 32 - g.getFontMetrics().stringWidth(name), newY);
         newY += yStep;
         g.drawString(status, x + 32 - g.getFontMetrics().stringWidth(status), newY);
         newY += yStep;
@@ -134,18 +135,22 @@ public class BattleLayer extends Layer {
         g.drawImage(sprite, x, newY, sprite.getWidth(), sprite.getHeight(), null);
     }
 
-    private int drawFoe(final Graphics g, final int x, final int y, final int hp, final int totalHp, final String name,
-            final BufferedImage sprite) {
-        final String health = hp + "/" + totalHp;
+    private int drawFoe(final Graphics g, final int x, final int y, final Foe foe, final BufferedImage sprite) {
+
+        final String name = foe.getName() + ", Livello: " + foe.getLevel();
+        final String status = "Status: " + foe.getStatus().name();
+        final String health = "HP: " + foe.getRemainingHP() + "/" + foe.getTotalHP();
 
         int newY = y;
         final int yStep = 15;
 
         g.setColor(Color.WHITE);
 
-        g.drawString(health, x, newY);
-        newY += yStep;
         g.drawString(name, x, newY);
+        newY += yStep;
+        g.drawString(status, x, newY);
+        newY += yStep;
+        g.drawString(health, x, newY);
         newY += yStep;
 
         g.drawImage(sprite, x, newY, sprite.getWidth(), sprite.getHeight(), null);
@@ -174,11 +179,10 @@ public class BattleLayer extends Layer {
 
         y = yStart;
 
-        final int yStep = 50;
+        final int yStep = 65;
 
         for (final Foe foe : foeTeam.getAliveFoes()) {
-            final int step = drawFoe(g, 50, y, foe.getRemainingHP(), foe.getTotalHP(), foe.getName(),
-                    foeSprites.get(foe));
+            final int step = drawFoe(g, 50, y, foe, foeSprites.get(foe));
 
             y += step + yStep;
         }
