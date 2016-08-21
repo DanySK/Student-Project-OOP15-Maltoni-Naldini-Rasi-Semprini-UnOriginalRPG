@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
 import it.unibo.unori.model.character.Hero;
+import it.unibo.unori.model.character.exceptions.NoWeaponException;
+import it.unibo.unori.model.items.Armor.ArmorPieces;
 import it.unibo.unori.view.layers.common.MenuStack;
 
 /**
@@ -68,6 +70,29 @@ public class PartyInfoMenu extends JPanel {
         stringBuilder.append("<br>");
         stringBuilder.append("EXP: ");
         stringBuilder.append(hero.getRemainingExp());
+        stringBuilder.append("<br>");
+        stringBuilder.append("Arma: ");
+        try {
+            stringBuilder.append(hero.getWeapon().getName());
+        } catch (final NoWeaponException e) {
+            stringBuilder.append("Nessuna");
+            e.printStackTrace();
+        }
+        stringBuilder.append("<br>");
+        stringBuilder.append("Armatura: ");
+        stringBuilder.append(hero.getArmor(ArmorPieces.ARMOR).getName());
+        stringBuilder.append("<br>");
+        stringBuilder.append("Guanti: ");
+        stringBuilder.append(hero.getArmor(ArmorPieces.GLOVES).getName());
+        stringBuilder.append("<br>");
+        stringBuilder.append("Elmo: ");
+        stringBuilder.append(hero.getArmor(ArmorPieces.HELMET).getName());
+        stringBuilder.append("<br>");
+        stringBuilder.append("Scudo: ");
+        stringBuilder.append(hero.getArmor(ArmorPieces.SHIELD).getName());
+        stringBuilder.append("<br>");
+        stringBuilder.append("Pantaloni: ");
+        stringBuilder.append(hero.getArmor(ArmorPieces.TROUSERS).getName());
 
         stringBuilder.append("</html>");
 
