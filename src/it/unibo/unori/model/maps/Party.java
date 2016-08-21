@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import it.unibo.unori.model.character.HeroTeam;
 import it.unibo.unori.model.items.Bag;
-import it.unibo.unori.model.maps.Party.CardinalPoints;
 import it.unibo.unori.model.maps.exceptions.BlockedPathException;
 import it.unibo.unori.model.menu.DialogueInterface;
 
