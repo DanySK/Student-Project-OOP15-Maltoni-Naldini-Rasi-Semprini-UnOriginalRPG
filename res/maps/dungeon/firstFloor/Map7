@@ -432,12 +432,12 @@
         "state": "BLOCKED",
         "obj": {
           "name": "Cannone Espandibile",
-          "desc": "Un cannone portatile, che pu� essere, all\u0027occorrenza, espanso per magia",
+          "desc": "Un cannone portatile, che può essere, all\u0027occorrenza, espanso per magia",
           "stats": {
-            "ICEATK": 0,
             "PHYSICATK": 480,
             "THUNDERATK": 0,
-            "FIREATK": 30
+            "FIREATK": 30,
+            "ICEATK": 0
           },
           "inflictedStatus": "BLEEDING"
         }

@@ -24,11 +24,6 @@ public interface Controller {
     void begin();
 
     /**
-     * Starts counting the time played.
-     */
-    void startTimer();
-
-    /**
      * Saves the game.
      * 
      * @throws IOException
@@ -143,13 +138,6 @@ public interface Controller {
      *            the foes encountered
      */
     void startBattle(final List<Foe> foes);
-
-    /**
-     * This method returns the object that keeps track of all statistics paramethers of the game.
-     * 
-     * @return the GameStatistics object for this game
-     */
-    GameStatistics getStatistics();
 
     /**
      * This method returns the internal builder of the World.

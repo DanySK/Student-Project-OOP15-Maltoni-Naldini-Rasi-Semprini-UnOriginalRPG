@@ -88,7 +88,6 @@ public class InteractAction extends AbstractUnoriAction {
                 }
             }
         } else if (BattleState.class.isInstance(this.getController().getCurrentState())) {
-            System.out.println("Enter premuto");
             final BattleState currentState = (BattleState) this.getController().getCurrentState();
             currentState.scrollMessage();
         } else {

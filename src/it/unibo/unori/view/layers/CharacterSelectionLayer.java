@@ -35,9 +35,9 @@ import java.awt.event.ActionListener;
  *
  */
 public class CharacterSelectionLayer extends Layer {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private static final Dimension SIZE = View.SIZE;
+    private static final Dimension SIZE = View.SIZE;
     private static final Color BACKGROUND_COLOR = Color.BLACK;
 
     private final int maxHero;
@@ -56,12 +56,15 @@ public class CharacterSelectionLayer extends Layer {
     // TODO disabilitare il campo testo
     /**
      * Displays the character-selection menu.
-     * @param maxHero the number of heroes in the party
-     * @param button the button to be displayed when finished
-     * @throws SpriteNotFoundException if the sprite is not found
+     *
+     * @param maxHero
+     *            the number of heroes in the party
+     * @param button
+     *            the button to be displayed when finished
+     * @throws SpriteNotFoundException
+     *             if the sprite is not found
      */
-    public CharacterSelectionLayer(final int maxHero,
-                                   final Button button) throws SpriteNotFoundException {
+    public CharacterSelectionLayer(final int maxHero, final Button button) throws SpriteNotFoundException {
         super();
         this.button = button;
         this.maxHero = maxHero;
@@ -187,11 +190,9 @@ public class CharacterSelectionLayer extends Layer {
             try {
                 if (direction == 0) {
                     addCurrentJobToParty();
-                }
-                else if (direction == -1) {
+                } else if (direction == -1) {
                     previousJob();
-                }
-                else if (direction == 1) {
+                } else if (direction == 1) {
                     nextJob();
                 }
 
@@ -226,17 +227,15 @@ public class CharacterSelectionLayer extends Layer {
         }
 
         if (spriteSheet != null) {
-            return spriteSheet.getSubimage(JobSprite.BATTLE.getPosition().x,
-                                           JobSprite.BATTLE.getPosition().y,
-                                           JobSprite.BATTLE.getDimension().width,
-                                           JobSprite.BATTLE.getDimension().height);
+            return spriteSheet.getSubimage(JobSprite.BATTLE.getPosition().x, JobSprite.BATTLE.getPosition().y,
+                    JobSprite.BATTLE.getDimension().width, JobSprite.BATTLE.getDimension().height);
         } else {
             return null;
         }
     }
 
     private void nextJob() throws SpriteNotFoundException {
-        job = Jobs.values()[(job.ordinal() + 1)  % (Jobs.values().length - 1)];
+        job = Jobs.values()[(job.ordinal() + 1) % (Jobs.values().length - 1)];
         sprite.setIcon(new ImageIcon(getSprite()));
     }
 

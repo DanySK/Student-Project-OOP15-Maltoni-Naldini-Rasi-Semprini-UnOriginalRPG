@@ -651,10 +651,10 @@
         "state": "BLOCKED",
         "npc": {
           "sentence": {
-            "sentence": "Quello l� � Link che si � perso e cerca di tornare a casa",
+            "sentence": "Quello lì è Link che si è perso e cerca di tornare a casa",
             "nextToShow": 0,
             "listOfRows": [
-              "Quello l� � Link che si � perso e cerca di tornare a casa "
+              "Quello lì è Link che si è perso e cerca di tornare a casa "
             ]
           }
         }

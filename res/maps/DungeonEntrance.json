@@ -142,12 +142,12 @@
         "state": "BLOCKED",
         "obj": {
           "name": "Lanciafiamme",
-          "desc": "C\u0027� davvero bisogno di una descrizione?",
+          "desc": "C\u0027è davvero bisogno di una descrizione?",
           "stats": {
-            "ICEATK": 0,
             "PHYSICATK": 580,
             "THUNDERATK": 0,
-            "FIREATK": 90
+            "FIREATK": 90,
+            "ICEATK": 0
           },
           "inflictedStatus": "NOT_DEFENDABLE"
         }
@@ -474,8 +474,8 @@
         "state": "BLOCKED",
         "obj": {
           "name": "Pozione della Vita",
-          "description": "Pozione che riesce anche a ridare la vita, rigenerando 30 HP",
-          "points": 300,
+          "description": "Pozione che riesce anche a ridare la vita, rigenerando 600 HP",
+          "points": 600,
           "statToRestore": "TOTALHP",
           "statusRestorable": false
         }
