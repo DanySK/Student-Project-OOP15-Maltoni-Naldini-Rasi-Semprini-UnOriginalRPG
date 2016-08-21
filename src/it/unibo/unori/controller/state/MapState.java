@@ -126,7 +126,7 @@ public class MapState extends AbstractGameState {
     }
 
     /**
-     * Checks if the map in the model changed.
+     * Checks if the map sprites in the model changed.
      * 
      * @return true if the the map changed after a movement
      */

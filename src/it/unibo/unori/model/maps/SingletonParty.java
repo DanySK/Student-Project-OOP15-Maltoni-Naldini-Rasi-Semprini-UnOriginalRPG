@@ -168,11 +168,16 @@ public final class SingletonParty {
                         return new Dialogue("Non hai chiavi nell'inventario! "
                                 + "Cerca una chiave e ritorna");
                     } catch (Exception e3) {
-                        return new Dialogue("Non c'è niente qui, meglio andare!");
+                        return new Dialogue("Non c'ï¿½ niente qui, meglio andare!");
                     }
                 }
             }
         }
+       }
+
+       @Override
+       public CardinalPoints getOrientation() {
+           return this.orientation;
        }
     }
 
