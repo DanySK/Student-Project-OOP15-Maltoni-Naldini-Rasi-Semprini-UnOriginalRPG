@@ -128,6 +128,7 @@ public class BattleState extends AbstractGameState {
      */
     public void magicAttack(final MagicAttackInterface magic, final Foe enemy) {
         try {
+            System.out.println("Magia contro: " + enemy.getName());
             this.currentDialogue = Optional.of(this.fightModel.magic(magic, enemy, true));
             this.endHeroTurn();
         } catch (NotEnoughMPExcpetion | MagicNotFoundException e) {
