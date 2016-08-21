@@ -121,15 +121,7 @@ public class FoeSquadImpl implements FoeSquad {
     
     @Override
     public Foe getNextFoe() {
-        int maxV = 0;
-        Foe toReturn = this.getAliveFoes().get(0);
-        for (final Foe f : this.getAliveFoes()) {
-            if (maxV < f.getSpeed()) {
-                maxV = f.getSpeed();
-                toReturn = f;
-            }
-        }
-        return toReturn;
+        return this.getAliveFoes().get(0);
     }
     
     /**

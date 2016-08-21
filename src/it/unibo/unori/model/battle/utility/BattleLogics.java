@@ -56,7 +56,7 @@ public final class BattleLogics {
     public static int getStandardDamage(final int charLevel, final int atck) {
         final int toMult = charLevel > 1 ? charLevel - 1 : 1;
         final int toRet = SHIFT + ((MULT * toMult + (atck * charLevel)) / 2);
-        if (toRet <= 0) {
+        if (toRet <= SHIFT) {
             return 100;
         } else {
             return toRet;
@@ -85,7 +85,7 @@ public final class BattleLogics {
         } else if (myV == enemV) {
             rand = new Random();
             luck = rand.nextInt(2);
-            return luck == 0;
+            return luck == 1;
         } else {
             return myV > enemV;
         }
@@ -116,11 +116,13 @@ public final class BattleLogics {
     public static Map<Hero, Integer> expAcquired(final HeroTeam squad, 
             final int mediumLevel, final int notBeaten) {
         final Map<Hero, Integer> exp = new HashMap<>();
-        squad.getAllHeroes().forEach(i -> {
-            final int value = ((mediumLevel * notBeaten)
-                    * ((mediumLevel + LEVELER + 1) ^ 2)
-                    / ((mediumLevel + i.getLevel() + LEVELER) ^ 2 + MULT) + 1)
+        squad.getAliveHeroes().forEach(i -> {
+            final int value = (((mediumLevel * notBeaten) + 3)
+                    * ((mediumLevel + LEVELER + 2) ^ 2)
+                    / ((mediumLevel + i.getLevel() + LEVELER) ^ 2 + MULT))
                     * i.getExpFactor();
+            //System.out.println(mediumLevel + " x " + notBeaten + " x " + ((mediumLevel + LEVELER + 1) ^ 2) + " FRATTO (" 
+             //       + ((mediumLevel + i.getLevel() + LEVELER) ^ 2 + MULT) +  ") PER " + i.getExpFactor());
             exp.put(i, value);
         });
         return exp;
@@ -232,7 +234,7 @@ public final class BattleLogics {
             } else if (f.getIA() > MEDIUMIA && f.getIA() <= HIGHIA) {
                 return nOfTurnsPlayed >= TURNSFORHIGHIA;
             } else {
-                return nOfTurnsPlayed >= 3;
+                return nOfTurnsPlayed >= 4;
             }
         }
     }

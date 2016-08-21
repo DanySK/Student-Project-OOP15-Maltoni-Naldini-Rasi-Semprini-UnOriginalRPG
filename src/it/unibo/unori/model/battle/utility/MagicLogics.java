@@ -184,7 +184,7 @@ public final class MagicLogics {
             final int toMultiply = toThrow.getPhysicAtk() * SHIFT + diff;
             final Double weaknessFactor;
             weaknessFactor = weakOrNot(opp, toThrow) * toMultiply;
-            if (weaknessFactor.intValue() <= 0) {
+            if (weaknessFactor.intValue() <= SHIFTWEAKNESS) {
                 return 100;
             } else {
                 return weaknessFactor.intValue();
@@ -247,7 +247,7 @@ public final class MagicLogics {
             final Pair<Statistics, Integer> powerOpponent = getBestStat(mapToCheck);
             weakness = weaknessGeneral(powerArm, powerOpponent.getX()) * SHIFTWEAKNESS;
         }
-        return weakness.intValue() + physDef;
+        return weakness.intValue() + physDef + 10;
     }
     
     /**

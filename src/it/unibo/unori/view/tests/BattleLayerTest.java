@@ -22,7 +22,6 @@ import it.unibo.unori.view.layers.BattleLayer;
  *
  */
 public class BattleLayerTest {
-    private BattleLayer battleLayer;
     private final View view = new View();
 
     /**
@@ -40,6 +39,8 @@ public class BattleLayerTest {
         foeList.add(new FoeImpl(10, "Foe1", "res/sprites/foes/stregone2.png", FoesFindable.STREGONE));
         foeList.add(new FoeImpl(10, "Foe2", "res/sprites/foes/bambino.png", FoesFindable.BAMBINO));
         foeList.add(new FoeImpl(10, "Foe3", "res/sprites/foes/cavaliere.png", FoesFindable.EROE_CADUTO));
+
+        BattleLayer battleLayer;
 
         try {
             battleLayer = new BattleLayer(SingletonParty.getParty().getHeroTeam(), new FoeSquadImpl(foeList),

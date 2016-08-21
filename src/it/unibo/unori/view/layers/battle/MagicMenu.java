@@ -62,7 +62,7 @@ public class MagicMenu extends JPanel {
         this.setBorder(BorderFactory.createEmptyBorder(BORDER, BORDER, BORDER, BORDER));
 
         for (final MagicAttackInterface magic : heroTeam.getAliveHeroes().get(0).getMagics()) {
-            final MenuButton button = new MenuButton(magic.getStringToShow());
+            final MenuButton button = new MenuButton(magic.toString());
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(final ActionEvent e) {

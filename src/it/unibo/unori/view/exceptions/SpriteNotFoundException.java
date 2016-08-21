@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 
 /**
  *
- * This class is an exception thrown if the sprite file is not found
+ * This class is an exception thrown if the sprite file is not found.
  *
  */
 public class SpriteNotFoundException extends FileNotFoundException {
@@ -18,9 +18,11 @@ public class SpriteNotFoundException extends FileNotFoundException {
     }
 
     /**
-     * Constructor that let the developer specify which action command was not recognized.
+     * Constructor that let the developer specify which action command was not
+     * recognized.
      *
-     * @param command the ActionCommand
+     * @param path
+     *            the path of the sprite.
      */
     public SpriteNotFoundException(final String path) {
         super(DEFAULT_MESSAGE + " (" + path + ")");

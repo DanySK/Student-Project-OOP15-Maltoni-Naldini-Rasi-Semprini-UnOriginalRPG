@@ -49,8 +49,8 @@ public class PotionFactory {
      * @return Pozione della Vita
      */
     public Potion getPozioneVita() {
-        return new PotionImpl(300, Statistics.TOTALHP, "Pozione della Vita",
-                "Pozione che riesce anche a ridare la vita, rigenerando 30 HP");
+        return new PotionImpl(600, Statistics.TOTALHP, "Pozione della Vita",
+                "Pozione che riesce anche a ridare la vita, rigenerando 600 HP");
     }
     
     /**
