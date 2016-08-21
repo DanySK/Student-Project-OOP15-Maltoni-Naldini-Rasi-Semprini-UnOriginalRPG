@@ -56,7 +56,7 @@ public final class BattleLogics {
     public static int getStandardDamage(final int charLevel, final int atck) {
         final int toMult = charLevel > 1 ? charLevel - 1 : 1;
         final int toRet = SHIFT + ((MULT * toMult + (atck * charLevel)) / 2);
-        if (toRet <= 0) {
+        if (toRet <= PERCENTAGE_HIGH) {
             return 100;
         } else {
             return toRet;
