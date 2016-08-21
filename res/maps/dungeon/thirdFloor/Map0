@@ -455,28 +455,10 @@
           "piece": "SHIELD",
           "desc": "Scudo d\u0027oro, leggendario",
           "stats": {
-<<<<<<< local
-=======
-            "THUNDERDEF": 500,
->>>>>>> other
-            "FIREDEF": 500,
-<<<<<<< local
             "ICEDEF": 500,
             "THUNDERDEF": 500,
-<<<<<<< working copy
-            "PHYSICDEF": 1000
-=======
-            "PHYSICDEF": 1000,
             "FIREDEF": 500,
-=======
-            "PHYSICDEF": 1000,
->>>>>>> other
-            "ICEDEF": 500
-<<<<<<< local
->>>>>>> other
->>>>>>> destination
-=======
->>>>>>> other
+            "PHYSICDEF": 1000
           },
           "immunity": "CURSED"
         }

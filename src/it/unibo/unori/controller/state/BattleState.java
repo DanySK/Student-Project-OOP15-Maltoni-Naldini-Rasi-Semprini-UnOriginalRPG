@@ -45,8 +45,11 @@ public class BattleState extends AbstractGameState {
     private final FightInterface fightModel;
     private Optional<DialogueInterface> currentDialogue;
     private boolean heroTurn;
-    private boolean runAway; // Automatically initialized by Java to false
+    private boolean acquiringExp; // Automatically initialized by Java to false
+    private boolean acquiredExp;
+    private boolean canRunAway; // Automatically initialized by Java to false
     private boolean outCome; // Automatically initialized by Java to false
+    private boolean shownOutcome;
     private int turnCounter; // Automatically initialized by Java to 0
 
     /**
@@ -174,7 +177,7 @@ public class BattleState extends AbstractGameState {
     public void runAway() {
         try {
             this.currentDialogue = Optional.of(this.fightModel.getBattle().runAway());
-            this.runAway = true;
+            this.canRunAway = true;
             this.endHeroTurn();
         } catch (CantEscapeException e) {
             this.showMessage(e.toString());
@@ -187,29 +190,63 @@ public class BattleState extends AbstractGameState {
      */
     public final void scrollMessage() {
         if (this.currentDialogue.isPresent()) {
+            // If the dialog is over, remove it
             if (this.currentDialogue.get().isOver()) {
                 this.currentDialogue = Optional.empty();
-                if (this.outCome) {
+
+                // It sets if it was acquiring exp dialog or outcome dialog
+                if (this.acquiringExp) {
+                    this.acquiringExp = false;
+                    this.acquiredExp = true;
+                } else if (this.outCome) {
                     this.outCome = false;
+                    this.shownOutcome = true;
                 }
             } else {
                 try {
                     ((BattleLayer) this.getLayer()).showDialogue(this.currentDialogue.get().showNext());
                 } catch (IndexOutOfBoundsException e) {
-                    this.currentDialogue = Optional.empty(); // TODO check
-                    if (this.outCome) {
+                    this.currentDialogue = Optional.empty();
+
+                    // It sets if it was acquiring exp dialog or outcome dialog
+                    if (this.acquiringExp) {
+                        this.acquiringExp = false;
+                        this.acquiredExp = true;
+                    } else if (this.outCome) {
                         this.outCome = false;
+                        this.shownOutcome = true;
                     }
                 }
             }
 
+            // Now checks if the dialog is already present
             if (!this.currentDialogue.isPresent()) {
+                // It checks if battle is over
                 if (this.fightModel.getBattle().isOver()) {
-                    if (!this.runAway) {
-                        this.outCome = true;
-                        this.currentDialogue = Optional.of(new Dialogue(this.fightModel.getBattle().getOutCome()));
+                    if (this.canRunAway) {
+                        // If it can run away and the dialog ended, it
+                        // terminates battle
+                        SingletonStateMachine.getController().getStack().pop();
+                    } else if (this.fightModel.getBattle().getSquad().getAliveHeroes().isEmpty()) {
+                        // If it wasn't running away, and all heros were
+                        // defeated, it returns to main menu
+                        //while (/*!SingletonStateMachine.getController().getStack().isEmpty()*/!MainMenuState.class.isInstance(SingletonStateMachine.getController().getCurrentState())) {
+                        //    SingletonStateMachine.getController().getStack().pop();
+                        //}
+                        SingletonStateMachine.getController().getStack().pop();
+                        SingletonStateMachine.getController().getStack().pop();
+                        // SingletonStateMachine.getController().begin();
+                    } else if (this.fightModel.getBattle().getEnemies().getAliveFoes().isEmpty()) {
+                        if (!this.acquiredExp) {
+                            this.acquiringExp = true;
+                            this.currentDialogue = Optional.of(this.fightModel.getBattle().acquireExp());
+                        } else if (!this.shownOutcome) {
+                            this.outCome = true;
+                            this.currentDialogue = Optional.of(new Dialogue(this.fightModel.getBattle().getOutCome()));
+                        } else {
+                            SingletonStateMachine.getController().getStack().pop();
+                        }
                     }
-                    SingletonStateMachine.getController().getStack().pop();
                 } else {
                     ((BattleLayer) this.getLayer()).hideDialogue();
                     if (this.heroTurn) {
@@ -218,7 +255,11 @@ public class BattleState extends AbstractGameState {
                         this.endTurn();
                     }
                 }
+            } else {
+                // Do nothing, it is showing another dialog
             }
+        } else {
+            // Do nothing, there isn't any dialog to show
         }
     }
 
@@ -239,7 +280,9 @@ public class BattleState extends AbstractGameState {
         if (foe.getRemainingHP() / foe.getTotalHP() * 100 < LOW_LIFE_PERCENTAGE
                 && BattleLogics.canFoeRestore(foe, turnCounter)) {
             this.currentDialogue = Optional.of(this.fightModel.getBattle().foeUsesRestore(Statistics.TOTALHP));
-            this.turnCounter = 0 - this.turnCounter; // This solves many problems of immortal monsters
+            this.turnCounter = 0/* - this.turnCounter */; // This solves many
+                                                          // problems of
+                                                          // immortal monsters
         } else if (!this.isLowLife(hero.getTotalHP(), hero.getRemainingHP()) && foe.getIA() > FoeImpl.MAXIA / 2
                 && !foe.getMagics().isEmpty()) {
             try {

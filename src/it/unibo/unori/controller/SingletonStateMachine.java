@@ -94,6 +94,7 @@ public final class SingletonStateMachine {
          */
         @Override
         public void begin() {
+            System.out.println("Begin");
             stack.pushAndRender(new MainMenuState());
         }
 
