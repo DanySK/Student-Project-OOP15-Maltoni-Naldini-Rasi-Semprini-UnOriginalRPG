@@ -22,7 +22,9 @@ public class MenuButton extends JButton implements FocusListener {
     public MenuButton(final String label) {
         super(label);
 
+        this.setOpaque(true);
         this.addFocusListener(this);
+        this.setBackground(Color.WHITE);
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
     }
 
