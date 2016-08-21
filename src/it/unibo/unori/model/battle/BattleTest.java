@@ -54,9 +54,9 @@ public class BattleTest {
         team.addHero(new HeroImpl("Quarto", Jobs.RANGER));
         assertEquals(team.getAliveHeroes().size(), 4);
 
-        enemies.addFoe(new FoeImpl(1, "Primo Nemico", "", FoesFindable.GNOMO_DA_GIARDINO));
+        enemies.addFoe(new FoeImpl(4, "Primo Nemico", "", FoesFindable.BAMBINO));
         assertEquals(enemies.getAliveFoes().size(), 1);
-        enemies.addFoe(new FoeImpl(1, "Secondo Nemico", "", FoesFindable.GNOMO_DA_GIARDINO));
+        enemies.addFoe(new FoeImpl(2, "Secondo Nemico", "", FoesFindable.DRAGO));
         assertEquals(enemies.getAliveFoes().size(), 2);
         enemies.addFoe(new FoeImpl(1, "Terzo Nemico", "", FoesFindable.GNOMO_DA_GIARDINO));
         assertEquals(enemies.getAliveFoes().size(), 3);
