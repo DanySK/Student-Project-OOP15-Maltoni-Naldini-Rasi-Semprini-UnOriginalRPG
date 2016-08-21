@@ -435,18 +435,10 @@
           "piece": "SHIELD",
           "desc": "Scudo di Dario Argento",
           "stats": {
-<<<<<<< local
-            "ICEDEF": 250,
-=======
             "THUNDERDEF": 250,
->>>>>>> other
-            "FIREDEF": 250,
             "PHYSICDEF": 500,
-<<<<<<< local
-            "THUNDERDEF": 250
-=======
+            "FIREDEF": 250,
             "ICEDEF": 250
->>>>>>> other
           },
           "immunity": "POISONED"
         }
