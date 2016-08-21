@@ -651,10 +651,10 @@
         "state": "BLOCKED",
         "npc": {
           "sentence": {
-            "sentence": "Quello lì è Link che si è perso e cerca di tornare a casa",
+            "sentence": "Quello l� � Link che si � perso e cerca di tornare a casa",
             "nextToShow": 0,
             "listOfRows": [
-              "Quello lì è Link che si è perso e cerca di tornare a casa "
+              "Quello l� � Link che si � perso e cerca di tornare a casa "
             ]
           }
         }
@@ -831,8 +831,15 @@
         "state": "FREE"
       },
       {
-        "path": "res/sprites/map/grass.png",
-        "state": "FREE"
+        "path": "res/sprites/map/item.png",
+        "state": "BLOCKED",
+        "obj": {
+          "name": "Rimedio della Nonna",
+          "description": "Una rara tisana rigenerante che restituisce 600 HP e cura lo Stato",
+          "points": 600,
+          "statToRestore": "TOTALHP",
+          "statusRestorable": true
+        }
       },
       {
         "path": "res/sprites/map/grass.png",
