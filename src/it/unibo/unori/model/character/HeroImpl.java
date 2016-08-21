@@ -100,9 +100,7 @@ public class HeroImpl  extends CharacterImpl implements Hero {
     public void addExp(final int expAcquired) {
         int toAdd = this.currentExp + expAcquired;
         while (toAdd > this.totExp) {
-            System.out.println(toAdd + "TOTEXP: " + this.getExpTot());
             toAdd -= this.totExp;
-            System.out.println(toAdd);
             this.levelUp();
         }
         this.currentExp = toAdd;
