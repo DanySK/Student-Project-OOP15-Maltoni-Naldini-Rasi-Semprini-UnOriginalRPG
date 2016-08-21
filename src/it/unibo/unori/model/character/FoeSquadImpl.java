@@ -102,7 +102,7 @@ public class FoeSquadImpl implements FoeSquad {
     @Override
     public Foe getFirstFoeOnTurn() throws IllegalStateException {
         this.checkListSize();
-        return this.enemies.get(0);
+        return this.getAliveFoes().get(0);
     }
     
     @Override
