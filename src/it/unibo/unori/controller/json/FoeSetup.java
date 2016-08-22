@@ -23,7 +23,7 @@ public class FoeSetup {
     /**
      * Path to the file with default paramethers for generating foes.
      */
-    public static final String DEFAULT = "res/foes/defaultFoe.json";
+    public static final String DEFAULT = "/foes/defaultFoe.json";
     private static final int ONE_THIRD_IA = FoeImpl.MAXIA / 3;
     private static final int HALF_IA = FoeImpl.MAXIA / 2;
     private final JsonFileManager fileManager;
@@ -55,7 +55,7 @@ public class FoeSetup {
         final JsonFileManager jfm = new JsonFileManager();
 
         final JsonFoeParameter jsonFoe = new JsonFoeParameter(FoesFactory.getBasicStats(),
-                Status.NONE /* TODO check */, FoesFactory.getBasicWeap(), FoesFactory.getBasicMag());
+                Status.NONE, FoesFactory.getBasicWeap(), FoesFactory.getBasicMag());
         jfm.saveFoe(jsonFoe, DEFAULT);
 
     }
@@ -153,47 +153,47 @@ public class FoeSetup {
 
         if (ff.equals(FoesFindable.BAMBINO)) {
             if (ia <= ONE_THIRD_IA) {
-                jobPath = Optional.of("res/sprites/foes/bambino2.png");
+                jobPath = Optional.of("/sprites/foes/bambino2.png");
             } else if (ia > ONE_THIRD_IA && ia <= HALF_IA) {
-                jobPath = Optional.of("res/sprites/foes/bambino.png");
+                jobPath = Optional.of("/sprites/foes/bambino.png");
             } else if (ia > ONE_THIRD_IA && ia <= FoeImpl.MAXIA - 1) {
-                jobPath = Optional.of("res/sprites/foes/bambino3.png");
+                jobPath = Optional.of("/sprites/foes/bambino3.png");
             } else {
-                jobPath = Optional.of("res/sprites/foes/bambino4.png");
+                jobPath = Optional.of("/sprites/foes/bambino4.png");
             }
         } else if (ff.equals(FoesFindable.DEMONE)) {
             if (ia <= HALF_IA) {
-                jobPath = Optional.of("res/sprites/foes/demone2.png");
+                jobPath = Optional.of("/sprites/foes/demone2.png");
             } else {
-                jobPath = Optional.of("res/sprites/foes/demone.png");
+                jobPath = Optional.of("/sprites/foes/demone.png");
             }
         } else if (ff.equals(FoesFindable.DRAGO)) {
             if (ia <= HALF_IA) {
-                jobPath = Optional.of("res/sprites/foes/drago2.png");
+                jobPath = Optional.of("/sprites/foes/drago2.png");
             } else {
-                jobPath = Optional.of("res/sprites/foes/drago.png");
+                jobPath = Optional.of("/sprites/foes/drago.png");
             }
         } else if (ff.equals(FoesFindable.EROE_CADUTO)) {
-            jobPath = Optional.of("res/sprites/foes/cavaliere2.png");
+            jobPath = Optional.of("/sprites/foes/cavaliere2.png");
         } else if (ff.equals(FoesFindable.FOLLETTO)) {
             if (ia <= HALF_IA) {
-                jobPath = Optional.of("res/sprites/foes/folletto.png");
+                jobPath = Optional.of("/sprites/foes/folletto.png");
             } else {
-                jobPath = Optional.of("res/sprites/foes/folletto2.png");
+                jobPath = Optional.of("/sprites/foes/folletto2.png");
             }
         } else if (ff.equals(FoesFindable.GNOMO_DA_GIARDINO)) {
-            jobPath = Optional.of("res/sprites/foes/gnomo.png");
+            jobPath = Optional.of("/sprites/foes/gnomo.png");
         } else if (ff.equals(FoesFindable.SPIRITO)) {
             if (ia <= HALF_IA) {
-                jobPath = Optional.of("res/sprites/foes/spirito.png");
+                jobPath = Optional.of("/sprites/foes/spirito.png");
             } else {
-                jobPath = Optional.of("res/sprites/foes/spirito2.png");
+                jobPath = Optional.of("/sprites/foes/spirito2.png");
             }
         } else if (ff.equals(FoesFindable.STREGONE)) {
             if (ia <= HALF_IA) {
-                jobPath = Optional.of("res/sprites/foes/stregone.png");
+                jobPath = Optional.of("/sprites/foes/stregone.png");
             } else {
-                jobPath = Optional.of("res/sprites/foes/stregone2.png");
+                jobPath = Optional.of("/sprites/foes/stregone2.png");
             }
         } else {
             jobPath = Optional.empty();

@@ -60,6 +60,7 @@ import it.unibo.unori.model.menu.DialogueInterface;
  * files instances of Party, GameStatistics and JsonJobsParamethers.
  */
 public class JsonFileManager {
+    private static final String HOME = "user.home";
     /**
      * Static parameter for default folder path for this project.
      */
@@ -105,7 +106,7 @@ public class JsonFileManager {
      * The method restores a previously saved game from a given-path file.
      * 
      * @param path
-     *            the path of the file
+     *            the relative path of the file from home
      * @return the Party object, which is the de facto savegame
      * @throws IOException
      *             if an error occurs
@@ -120,7 +121,7 @@ public class JsonFileManager {
      *             object of type
      */
     public Party loadPartyFromPath(final String path) throws IOException {
-        return deserializeJSON(Party.class, path);
+        return deserializeJSON(Party.class, System.getProperty(HOME) + path);
     }
 
     /**
@@ -151,7 +152,7 @@ public class JsonFileManager {
      * @param party
      *            the party object
      * @param path
-     *            the path of the file
+     *            the relative path of the file from home directory
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
@@ -165,7 +166,7 @@ public class JsonFileManager {
      *             if there was a problem writing to the writer
      */
     public void savePartyToPath(final Party party, final String path) throws IOException {
-        serializeJSON(party, path);
+        serializeJSONToHome(party, path);
     }
 
     /**
@@ -292,7 +293,7 @@ public class JsonFileManager {
      * @param map
      *            the object to serialize
      * @param path
-     *            the path where to find the JSON file
+     *            the relative path from home where to find the JSON file
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
@@ -306,7 +307,7 @@ public class JsonFileManager {
      *             if there was a problem writing to the writer
      */
     public void saveMap(final GameMap map, final String path) throws IOException {
-        this.serializeJSON(map, path);
+        this.serializeJSONToHome(map, path);
     }
 
     /**
@@ -314,7 +315,7 @@ public class JsonFileManager {
      * GameMap. All links with other maps are lost.
      * 
      * @param path
-     *            the path where to find the file
+     *            the relative path from home where to find the file
      * @return the map serialized on the specified file
      * @throws IOException
      *             if an error occurs
@@ -329,7 +330,7 @@ public class JsonFileManager {
      *             object of type
      */
     public GameMap loadMap(final String path) throws IOException {
-        return this.deserializeJSON(GameMap.class, path);
+        return this.deserializeJSON(GameMap.class, System.getProperty(HOME) + path);
     }
 
     /**
@@ -404,7 +405,7 @@ public class JsonFileManager {
      * @param currentGameMap
      *            the map
      * @param path
-     *            the path where the file is
+     *            the relative path from home where the file is
      * @throws IOException
      *             if an error occurs
      * @throws FileNotFoundException
@@ -418,7 +419,8 @@ public class JsonFileManager {
      *             if there was a problem writing to the writer
      */
     public void saveMapTypeToFile(final GameMap currentGameMap, final String path) throws IOException {
-        serializeJSON(new MapType(currentGameMap, SingletonStateMachine.getController().getLoader()), path);
+        serializeJSON(new MapType(currentGameMap, SingletonStateMachine.getController().getLoader()),
+                System.getProperty(HOME) + path);
     }
 
     /**
@@ -447,7 +449,7 @@ public class JsonFileManager {
      * This method returns a map type from a specified file.
      * 
      * @param path
-     *            the path where to find the JSON file
+     *            the relative path from home where to find the JSON file
      * @return the type of the map
      * @throws IllegalArgumentException
      *             if passed a Collection or a Map
@@ -464,7 +466,38 @@ public class JsonFileManager {
      *             object of type
      */
     public MapType loadMapTypeFromFile(final String path) throws IOException {
-        return this.deserializeJSON(MapType.class, path);
+        return this.deserializeJSON(MapType.class, System.getProperty(HOME) + path);
+    }
+
+    /**
+     * This method serializes on a file in a given path a single object.
+     * 
+     * @param objectToSerialize
+     *            the object you want to serialize on the given file
+     * @param path
+     *            the path where to find or create the JSON file
+     * @throws IOException
+     *             if an error occurs
+     * @throws FileNotFoundException
+     *             if the file exists but is a directory rather than a regular
+     *             file, does not exist but cannot be created, or cannot be
+     *             opened for any other reason
+     * @throws SecurityException
+     *             if a security manager exists and its checkWrite method denies
+     *             write access to the file
+     * @throws JsonIOException
+     *             if there was a problem writing to the writer
+     */
+    private void serializeJSON(final Object objectToSerialize, final String path) throws IOException {
+        final File gameDir = new File(System.getProperty(HOME), DEFAULT_FOLDER);
+        if (gameDir.isDirectory() || gameDir.mkdir()) {
+            final Writer writer = new OutputStreamWriter(new FileOutputStream(new File(System.getProperty(HOME), path)),
+                    "UTF-8");
+            gson.toJson(objectToSerialize, writer);
+            writer.close();
+        } else {
+            throw new FileNotFoundException("The game's default directory is a file");
+        }
     }
 
     /**
@@ -488,11 +521,11 @@ public class JsonFileManager {
      * @throws JsonIOException
      *             if there was a problem writing to the writer
      */
-    private void serializeJSON(final Object objectToSerialize, final String path) throws IOException {
-        final File gameDir = new File(System.getProperty("user.home"), DEFAULT_FOLDER);
+    private void serializeJSONToHome(final Object objectToSerialize, final String path) throws IOException {
+        final File gameDir = new File(System.getProperty(HOME), DEFAULT_FOLDER);
         if (gameDir.isDirectory() || gameDir.mkdir()) {
-            final Writer writer = new OutputStreamWriter(
-                    new FileOutputStream(new File(System.getProperty("user.home"), path)), "UTF-8");
+            final Writer writer = new OutputStreamWriter(new FileOutputStream(new File(System.getProperty(HOME), path)),
+                    "UTF-8");
             gson.toJson(objectToSerialize, writer);
             writer.close();
         } else {
@@ -502,8 +535,8 @@ public class JsonFileManager {
 
     /**
      * This method loads a file from a given path and returns a single object
-     * from what reads. It is private because tested only with the classes
-     * needed here. It does not work correctly with Collections and Maps.
+     * from what reads. It is tested only with the classes needed here. It does
+     * not work correctly with Collections and Maps.
      * 
      * @param <T>
      *            the type of the object serialized on the file
@@ -529,14 +562,19 @@ public class JsonFileManager {
      *             object of type
      */
     private <T> T deserializeJSON(final Class<T> clazz, final String path) throws IOException {
-        if (Collection.class.isAssignableFrom(clazz) || Map.class.isAssignableFrom(clazz)) {
-            throw new IllegalArgumentException("The " + clazz.toString() + " is not deserializable by this method");
-        }
-        Optional<T> returnObject = Optional.empty();
-        final Reader reader = new InputStreamReader(ResourceLoader.load(path), "UTF-8");
-        returnObject = Optional.ofNullable(gson.fromJson(reader, clazz));
-        reader.close();
+        try {
+            if (Collection.class.isAssignableFrom(clazz) || Map.class.isAssignableFrom(clazz)) {
+                throw new IllegalArgumentException("The " + clazz.toString() + " is not deserializable by this method");
+            }
+            Optional<T> returnObject = Optional.empty();
+            final Reader reader = new InputStreamReader(ResourceLoader.load(path), "UTF-8");
+            returnObject = Optional.ofNullable(gson.fromJson(reader, clazz));
+            reader.close();
 
-        return returnObject.orElseThrow(() -> new JsonIOException("The file provided is corrupted or non valid"));
+            return returnObject.orElseThrow(() -> new JsonIOException("The file provided is corrupted or non valid"));
+        } catch (Exception e) {
+            System.out.println(path);
+            throw e;
+        }
     }
 }

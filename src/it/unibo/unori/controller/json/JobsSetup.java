@@ -28,32 +28,32 @@ public final class JobsSetup {
      * Path to the JSON file of the warrior's default statistics and
      * armors/weapons.
      */
-    public static final String WARRIOR = "res/jobs/Warrior.json";
+    public static final String WARRIOR = "/jobs/Warrior.json";
     /**
      * Path to the JSON file of the paladin's default statistics and
      * armors/weapons.
      */
-    public static final String PALADIN = "res/jobs/Paladin.json";
+    public static final String PALADIN = "/jobs/Paladin.json";
     /**
      * Path to the JSON file of the mage's default statistics and
      * armors/weapons.
      */
-    public static final String MAGE = "res/jobs/Mage.json";
+    public static final String MAGE = "/jobs/Mage.json";
     /**
      * Path to the JSON file of the ranger's default statistics and
      * armors/weapons.
      */
-    public static final String RANGER = "res/jobs/Ranger.json";
+    public static final String RANGER = "/jobs/Ranger.json";
     /**
      * Path to the JSON file of the cook's default statistics and
      * armors/weapons.
      */
-    public static final String COOK = "res/jobs/Cook.json";
+    public static final String COOK = "/jobs/Cook.json";
     /**
      * Path to the JSON file of the clown's default statistics and
      * armors/weapons.
      */
-    public static final String CLOWN = "res/jobs/Clown.json";
+    public static final String CLOWN = "/jobs/Clown.json";
 
     private final Map<String, Map<Statistics, Integer>> statsMap;
     private final Map<String, Map<Statistics, Integer>> growthMap;
@@ -300,22 +300,22 @@ public final class JobsSetup {
 
         switch (job) {
             case WARRIOR:
-                spritePath = "res/sprites/warrior.png";
+                spritePath = "/sprites/warrior.png";
                 break;
             case PALADIN:
-                spritePath = "res/sprites/paladin.png";
+                spritePath = "/sprites/paladin.png";
                 break;
             case MAGE:
-                spritePath = "res/sprites/mage.png";
+                spritePath = "/sprites/mage.png";
                 break;
             case RANGER:
-                spritePath = "res/sprites/ranger.png";
+                spritePath = "/sprites/ranger.png";
                 break;
             case COOK:
-                spritePath = "res/sprites/cook.png";
+                spritePath = "/sprites/cook.png";
                 break;
             case CLOWN:
-                spritePath = "res/sprites/clown.png";
+                spritePath = "/sprites/clown.png";
                 break;
             default:
                 break;
