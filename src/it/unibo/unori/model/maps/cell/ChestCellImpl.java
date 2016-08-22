@@ -20,6 +20,7 @@ public class ChestCellImpl extends SimpleCellImpl {
      * 
      */
     private static final long serialVersionUID = -7296644040007976176L;
+    private static final int PRIME = 31;
     private final Item o;
     private boolean hasItem;
 
@@ -50,4 +51,33 @@ public class ChestCellImpl extends SimpleCellImpl {
     }
 
    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = PRIME * result + ((o == null) ? 0 : o.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (!(obj instanceof ChestCellImpl)) {
+            return false;
+        }
+        final ChestCellImpl other = (ChestCellImpl) obj;
+        if (o == null) {
+            return other.o == null;
+        } else {
+            return o.equals(other.o); 
+        }
+    }
 }
