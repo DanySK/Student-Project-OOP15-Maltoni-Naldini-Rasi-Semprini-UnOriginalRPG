@@ -21,7 +21,7 @@ import java.awt.event.ActionEvent;
  */
 public class MapLayerTest {
     private MapLayer mapLayer;
-    public final View view = new View();
+    private final View view = new View();
 
     /**
      * Tests the map layer.
@@ -38,8 +38,8 @@ public class MapLayerTest {
         final Action interact = new InteractAction();
 
         final Point position = new Point(2, 2);
-        final String spriteSheetPath = "res/sprites/cook.png";
-        final String[][] map = createMap("res/sprites/map/grass.png", 12, 6);
+        final String spriteSheetPath = "/sprites/cook.png";
+        final String[][] map = createMap("/sprites/map/grass.png", 12, 6);
 
         try {
             mapLayer = new MapLayer(movement, interact, menu, map, position, spriteSheetPath);

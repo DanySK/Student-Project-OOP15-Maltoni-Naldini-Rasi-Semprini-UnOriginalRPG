@@ -32,7 +32,7 @@ public class Button extends JButton implements FocusListener {
      *
      * @param label
      *            the text to be shown inside the button
-     * @throws IOException 
+     * @throws IOException
      */
     public Button(final String label) {
         super(label);
@@ -45,10 +45,9 @@ public class Button extends JButton implements FocusListener {
             this.setIcon(new ImageIcon(ImageIO.read(ResourceLoader.load(DEFAULT_ICON))));
             this.setPressedIcon(new ImageIcon(ImageIO.read(ResourceLoader.load(DEFAULT_ICON))));
             this.setRolloverIcon(new ImageIcon(ImageIO.read(ResourceLoader.load(ROLLOVER_ICON))));
-        } catch (IOException e) {
-            System.out.println("image not found: button");
+        } catch (final IOException e) {
+            System.out.println("Button sprites not found.");
         }
-        
 
         this.setForeground(Color.WHITE);
         this.setHorizontalTextPosition(JButton.CENTER);
@@ -65,10 +64,9 @@ public class Button extends JButton implements FocusListener {
         try {
             this.setIcon(new ImageIcon(ImageIO.read(ResourceLoader.load(FOCUS_ICON))));
             this.setRolloverIcon(new ImageIcon(ImageIO.read(ResourceLoader.load(ROLLOVER2_ICON))));
-        } catch (IOException e1) {
-            System.out.println("image not found: button");
+        } catch (final IOException e1) {
+            System.out.println("Button sprites not found.");
         }
-        
     }
 
     /**
@@ -79,9 +77,8 @@ public class Button extends JButton implements FocusListener {
         try {
             this.setIcon(new ImageIcon(ImageIO.read(ResourceLoader.load(DEFAULT_ICON))));
             this.setRolloverIcon(new ImageIcon(ImageIO.read(ResourceLoader.load(ROLLOVER_ICON))));
-        } catch (IOException e1) {
-            System.out.println("image not found: button");
+        } catch (final IOException e1) {
+            System.out.println("Button sprites not found.");
         }
-        
     }
 }
