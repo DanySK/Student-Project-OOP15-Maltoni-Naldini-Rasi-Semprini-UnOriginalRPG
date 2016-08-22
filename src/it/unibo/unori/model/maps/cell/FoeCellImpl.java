@@ -13,6 +13,7 @@ public class FoeCellImpl extends SimpleCellImpl {
      */
     public static final String ENC = "Parte la sfida con ";
     private static final long serialVersionUID = -4153132398113019125L;
+    private static final int PRIME = 31;
     private final Foe foe;
 
     /**
@@ -32,4 +33,30 @@ public class FoeCellImpl extends SimpleCellImpl {
         return this.foe;
     }
 
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = PRIME * result + ((foe == null) ? 0 : foe.hashCode());
+        return result;
+    }
+
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (!(obj instanceof FoeCellImpl)) {
+            return false;
+        }
+        final FoeCellImpl other = (FoeCellImpl) obj;
+        if (foe == null) {
+            return other.foe == null;
+        } else  {
+            return foe.equals(other.foe);
+        }
+   }
 }

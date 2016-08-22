@@ -15,6 +15,7 @@ public class MapCellImpl extends SimpleCellImpl {
      * 
      */
     private static final long serialVersionUID = 7553361363890344023L;
+    private static final int PRIME = 31;
     private final GameMap mapToLink;
     private final Position initialPos;
 
@@ -36,6 +37,45 @@ public class MapCellImpl extends SimpleCellImpl {
     public GameMap getCellMap() {
         this.mapToLink.setInitialCellPosition(initialPos);
         return this.mapToLink;
+    }
+
+ 
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = PRIME * result + ((initialPos == null) ? 0 : initialPos.hashCode());
+        result = PRIME * result + ((mapToLink == null) ? 0 : mapToLink.hashCode());
+        return result;
+    }
+
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (!(obj instanceof MapCellImpl)) {
+            return false;
+        }
+        final MapCellImpl other = (MapCellImpl) obj;
+        if (initialPos == null) {
+            if (other.initialPos != null) {
+                return false;
+            }
+        } else if (!initialPos.equals(other.initialPos)) {
+            return false;
+        }
+        if (mapToLink == null) {
+            if (other.mapToLink != null) {
+                return false;
+            }
+        } else if (!mapToLink.equals(other.mapToLink)) {
+            return false;
+        }
+        return true;
     }
 
 }
