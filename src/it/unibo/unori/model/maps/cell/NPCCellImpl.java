@@ -15,6 +15,7 @@ public class NPCCellImpl extends SimpleCellImpl {
      * 
      */
     private static final long serialVersionUID = 1377338158619069850L;
+    private static final int PRIME = 31;
     private final Npc npc;
 
 
@@ -45,6 +46,35 @@ public class NPCCellImpl extends SimpleCellImpl {
      */
     public Npc getNpc() {
         return this.npc;
+    }
+
+
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = PRIME * result + ((npc == null) ? 0 : npc.hashCode());
+        return result;
+    }
+
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (!(obj instanceof NPCCellImpl)) {
+            return false;
+        }
+        final NPCCellImpl other = (NPCCellImpl) obj;
+        if (npc == null) {
+            return other.npc == null;
+        } else {
+            return this.npc.equals(other.npc);
+        }
     }
 
 }
