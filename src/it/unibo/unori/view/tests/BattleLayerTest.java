@@ -36,9 +36,9 @@ public class BattleLayerTest {
 
         final List<Foe> foeList = new LinkedList<Foe>();
 
-        foeList.add(new FoeImpl(10, "Foe1", "res/sprites/foes/stregone2.png", FoesFindable.STREGONE));
-        foeList.add(new FoeImpl(10, "Foe2", "res/sprites/foes/bambino.png", FoesFindable.BAMBINO));
-        foeList.add(new FoeImpl(10, "Foe3", "res/sprites/foes/cavaliere.png", FoesFindable.EROE_CADUTO));
+        foeList.add(new FoeImpl(10, "Foe1", "/sprites/foes/stregone2.png", FoesFindable.STREGONE));
+        foeList.add(new FoeImpl(10, "Foe2", "/sprites/foes/bambino.png", FoesFindable.BAMBINO));
+        foeList.add(new FoeImpl(10, "Foe3", "/sprites/foes/cavaliere.png", FoesFindable.EROE_CADUTO));
 
         BattleLayer battleLayer;
 

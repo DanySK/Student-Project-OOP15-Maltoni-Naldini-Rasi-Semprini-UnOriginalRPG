@@ -44,8 +44,8 @@ public class InGameMenuLayerTest {
         final Action menu = new MenuAction();
 
         final Point position = new Point(2, 2);
-        final String spriteSheetPath = "res/sprites/clown.png";
-        final String[][] map = MapLayerTest.createMap("res/sprites/map/rocks.png", 26, 20);
+        final String spriteSheetPath = "/sprites/clown.png";
+        final String[][] map = MapLayerTest.createMap("/sprites/map/rocks.png", 26, 20);
 
         try {
             mapLayer = new MapLayer(movement, interact, menu, map, position, spriteSheetPath);

@@ -82,7 +82,7 @@ public class BattleLayer extends Layer {
             background = ImageIO.read(ResourceLoader.load("/sprites/battle/background.png"));
         } catch (final IOException e) {
             background = null;
-            throw new SpriteNotFoundException("res/sprites/battle/backgdound.png");
+            throw new SpriteNotFoundException("/sprites/battle/backgdound.png");
         }
 
         this.setBackground(Color.WHITE);
