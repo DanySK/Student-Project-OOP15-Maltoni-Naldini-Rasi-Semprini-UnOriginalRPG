@@ -11,11 +11,13 @@ import it.unibo.unori.view.Button;
 import it.unibo.unori.view.layers.MainMenuLayer;
 
 /**
- * This GameState models the first state opened by the controller: the main menu.
+ * This GameState models the first state opened by the controller: the main
+ * menu.
  */
 public class MainMenuState extends AbstractGameState {
     /*
-     * A model for this state is not needed: everything this state does are modeled by controller classes.
+     * A model for this state is not needed: everything this state does are
+     * modeled by controller classes.
      */
 
     /**
@@ -37,7 +39,8 @@ public class MainMenuState extends AbstractGameState {
         final Button loadGame = new Button("Carica parita");
         loadGame.addActionListener(listener);
         loadGame.setActionCommand(MainMenuActionListener.LOAD_GAME);
-        loadGame.setEnabled(new File(JsonFileManager.SAVE_FILE).isFile() && new File(JsonFileManager.MAP_TYPE).isFile());
+        loadGame.setEnabled(new File(System.getProperty("user.home") + JsonFileManager.SAVE_FILE).isFile()
+                && new File(System.getProperty("user.home") + JsonFileManager.MAP_TYPE).isFile());
         returnList.add(loadGame);
 
         final Button closeGame = new Button("Esci");
