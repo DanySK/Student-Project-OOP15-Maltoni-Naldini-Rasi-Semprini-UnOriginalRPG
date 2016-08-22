@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicArrowButton;
 
-import it.unibo.unori.ResourceLoader;
+import it.unibo.unori.controller.utility.ResourceLoader;
 import it.unibo.unori.model.character.Statistics;
 import it.unibo.unori.model.character.jobs.Jobs;
 import it.unibo.unori.view.Button;
@@ -220,7 +220,6 @@ public class CharacterSelectionLayer extends Layer {
 
         try {
             spriteSheet = ImageIO.read(ResourceLoader.load(job.getBattleFrame()));
-            System.out.println("Ciao");
         } catch (final IOException e) {
             spriteSheet = null;
             throw new SpriteNotFoundException(job.getBattleFrame());

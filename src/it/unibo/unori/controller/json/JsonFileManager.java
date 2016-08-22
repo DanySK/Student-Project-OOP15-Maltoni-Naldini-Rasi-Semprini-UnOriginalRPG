@@ -1,6 +1,6 @@
 package it.unibo.unori.controller.json;
 
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -36,6 +36,7 @@ import it.unibo.unori.controller.json.serializer.NpcSerializer;
 import it.unibo.unori.controller.json.serializer.PositionSerializer;
 import it.unibo.unori.controller.json.serializer.PotionSerializer;
 import it.unibo.unori.controller.json.serializer.WeaponSerializer;
+import it.unibo.unori.controller.utility.ResourceLoader;
 import it.unibo.unori.model.battle.MagicAttackInterface;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.FoeSquad;
@@ -60,19 +61,18 @@ import it.unibo.unori.model.menu.DialogueInterface;
  */
 public class JsonFileManager {
     /**
+     * Static parameter for default folder path for this project.
+     */
+    public static final String DEFAULT_FOLDER = "/UnOriginalRPG";
+    /**
      * Static parameter for standard JSON object serialization save file.
      */
-    public static final String SAVE_FILE = "res/Party.json";
+    public static final String SAVE_FILE = DEFAULT_FOLDER + "/Party.json";
 
     /**
      * Static parameter for standard JSON object serialization type of map file.
      */
-    public static final String MAP_TYPE = "res/MapType.json";
-
-    /**
-     * Static parameter for standard JSON object serialization statistics file.
-     */
-    public static final String STATS_FILE = "res/Stats.json";
+    public static final String MAP_TYPE = DEFAULT_FOLDER + "/MapType.json";
 
     private final Gson gson;
 
@@ -378,71 +378,6 @@ public class JsonFileManager {
     }
 
     /**
-     * This method serializes on a file in a given path a single object.
-     * 
-     * @param objectToSerialize
-     *            the object you want to serialize on the given file
-     * @param path
-     *            the path where to find or create the JSON file
-     * @throws IOException
-     *             if an error occurs
-     * @throws FileNotFoundException
-     *             if the file exists but is a directory rather than a regular
-     *             file, does not exist but cannot be created, or cannot be
-     *             opened for any other reason
-     * @throws SecurityException
-     *             if a security manager exists and its checkWrite method denies
-     *             write access to the file
-     * @throws JsonIOException
-     *             if there was a problem writing to the writer
-     */
-    private void serializeJSON(final Object objectToSerialize, final String path) throws IOException {
-        final Writer writer = new OutputStreamWriter(new FileOutputStream(path), "UTF-8");
-        gson.toJson(objectToSerialize, writer);
-        writer.close();
-    }
-
-    /**
-     * This method loads a file from a given path and returns a single object
-     * from what reads. It is private because tested only with the classes
-     * needed here. It does not work correctly with Collections and Maps.
-     * 
-     * @param <T>
-     *            the type of the object serialized on the file
-     * @param clazz
-     *            the type of the object serialized on the file; it needs to be
-     *            specified because sometimes it can't parse the correct type
-     *            automatically
-     * @param path
-     *            the path where to find the JSON file
-     * @return the serialized object
-     * @throws IllegalArgumentException
-     *             if passed a Collection or a Map
-     * @throws IOException
-     *             if an error occurs
-     * @throws FileNotFoundException
-     *             if the file does not exist, is a directory rather than a
-     *             regular file, or for some other reason cannot be opened for
-     *             reading
-     * @throws JsonIOException
-     *             if there was a problem reading from the Reader
-     * @throws JsonSyntaxException
-     *             if the file does not contain a valid representation for an
-     *             object of type
-     */
-    private <T> T deserializeJSON(final Class<T> clazz, final String path) throws IOException {
-        if (Collection.class.isAssignableFrom(clazz) || Map.class.isAssignableFrom(clazz)) {
-            throw new IllegalArgumentException("The " + clazz.toString() + " is not deserializable by this method");
-        }
-        Optional<T> returnObject = Optional.empty();
-        final Reader reader = new InputStreamReader(new FileInputStream(path), "UTF-8");
-        returnObject = Optional.ofNullable(gson.fromJson(reader, clazz));
-        reader.close();
-
-        return returnObject.orElseThrow(() -> new JsonIOException("The file provided is corrupted or non valid"));
-    }
-
-    /**
      * This method serializes on default file the type of the specified map.
      * 
      * @param currentGameMap
@@ -530,5 +465,78 @@ public class JsonFileManager {
      */
     public MapType loadMapTypeFromFile(final String path) throws IOException {
         return this.deserializeJSON(MapType.class, path);
+    }
+
+    /**
+     * This method serializes on a file in a given path a single object. It
+     * starts the given relative path from user home directory.
+     * 
+     * @param objectToSerialize
+     *            the object you want to serialize on the given file
+     * @param path
+     *            the relative path from user home where to find or create the
+     *            JSON file
+     * @throws IOException
+     *             if an error occurs
+     * @throws FileNotFoundException
+     *             if the file exists but is a directory rather than a regular
+     *             file, does not exist but cannot be created, or cannot be
+     *             opened for any other reason
+     * @throws SecurityException
+     *             if a security manager exists and its checkWrite method denies
+     *             write access to the file
+     * @throws JsonIOException
+     *             if there was a problem writing to the writer
+     */
+    private void serializeJSON(final Object objectToSerialize, final String path) throws IOException {
+        final File gameDir = new File(System.getProperty("user.home"), DEFAULT_FOLDER);
+        if (gameDir.isDirectory() || gameDir.mkdir()) {
+            final Writer writer = new OutputStreamWriter(
+                    new FileOutputStream(new File(System.getProperty("user.home"), path)), "UTF-8");
+            gson.toJson(objectToSerialize, writer);
+            writer.close();
+        } else {
+            throw new FileNotFoundException("The game's default directory is a file");
+        }
+    }
+
+    /**
+     * This method loads a file from a given path and returns a single object
+     * from what reads. It is private because tested only with the classes
+     * needed here. It does not work correctly with Collections and Maps.
+     * 
+     * @param <T>
+     *            the type of the object serialized on the file
+     * @param clazz
+     *            the type of the object serialized on the file; it needs to be
+     *            specified because sometimes it can't parse the correct type
+     *            automatically
+     * @param path
+     *            the path where to find the JSON file
+     * @return the serialized object
+     * @throws IllegalArgumentException
+     *             if passed a Collection or a Map
+     * @throws IOException
+     *             if an error occurs
+     * @throws FileNotFoundException
+     *             if the file does not exist, is a directory rather than a
+     *             regular file, or for some other reason cannot be opened for
+     *             reading
+     * @throws JsonIOException
+     *             if there was a problem reading from the Reader
+     * @throws JsonSyntaxException
+     *             if the file does not contain a valid representation for an
+     *             object of type
+     */
+    private <T> T deserializeJSON(final Class<T> clazz, final String path) throws IOException {
+        if (Collection.class.isAssignableFrom(clazz) || Map.class.isAssignableFrom(clazz)) {
+            throw new IllegalArgumentException("The " + clazz.toString() + " is not deserializable by this method");
+        }
+        Optional<T> returnObject = Optional.empty();
+        final Reader reader = new InputStreamReader(ResourceLoader.load(path), "UTF-8");
+        returnObject = Optional.ofNullable(gson.fromJson(reader, clazz));
+        reader.close();
+
+        return returnObject.orElseThrow(() -> new JsonIOException("The file provided is corrupted or non valid"));
     }
 }

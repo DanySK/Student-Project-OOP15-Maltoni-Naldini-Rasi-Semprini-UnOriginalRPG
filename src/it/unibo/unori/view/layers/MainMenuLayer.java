@@ -20,7 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
-import it.unibo.unori.ResourceLoader;
+import it.unibo.unori.controller.utility.ResourceLoader;
 import it.unibo.unori.view.Button;
 import it.unibo.unori.view.View;
 
@@ -54,8 +54,8 @@ public class MainMenuLayer extends Layer {
         this.setBackground(BACKGROUND_COLOR);
 
         BufferedImage logoImage;
-        try { // TODO se non trova il logo?
-            logoImage = ImageIO.read(ResourceLoader.load("/logo.png")/*new File("res/logo.png")*/);
+        try {
+            logoImage = ImageIO.read(ResourceLoader.load("/logo.png"));
         } catch (final IOException e) {
             logoImage = null;
         }

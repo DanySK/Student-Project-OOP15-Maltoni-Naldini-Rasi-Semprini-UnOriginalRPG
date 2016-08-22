@@ -18,7 +18,7 @@ import javax.swing.InputMap;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 
-import it.unibo.unori.ResourceLoader;
+import it.unibo.unori.controller.utility.ResourceLoader;
 import it.unibo.unori.view.exceptions.SpriteNotFoundException;
 import it.unibo.unori.view.sprites.JobSprite;
 

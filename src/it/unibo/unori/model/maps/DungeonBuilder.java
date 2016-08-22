@@ -147,7 +147,6 @@ public class DungeonBuilder {
      */
     private void secondFloorBuilder() {
         if (sList.isEmpty()) {
-            System.out.println("Costruisco da 0");
             for (int i = 0; i < 18; i++) {
                 sList.add(FACT.getSizeableMap(8, 12,
                         ROCKPATH, FLOORPATH, true));
@@ -182,7 +181,6 @@ public class DungeonBuilder {
      */
     private void firstFloorBuilder() {
         if (rList.isEmpty()) {
-            System.out.println("Costruisco da 0");
             for (int i = 0; i < 17; i++) {
                 rList.add(FACT.getSizeableMap(8, 12,
                         ROCKPATH, FLOORPATH, true));
