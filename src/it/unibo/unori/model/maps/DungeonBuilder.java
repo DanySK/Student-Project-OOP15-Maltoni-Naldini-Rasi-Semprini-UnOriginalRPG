@@ -109,7 +109,7 @@ public class DungeonBuilder {
             }
             this.storeItem(POS1, fList.get(0), PACT.getGigaPozione());
             this.storeItem(POS2, fList.get(0), PACT.getTrapiantoMana());
-            final Foe boss = new FoeImpl(10, "Iinnapi", FoeSetup.getPath(FoesFindable.EROE_CADUTO),
+            final Foe boss = new FoeImpl(10, "Iinnapi", FoeSetup.getSpritePath(FoesFindable.EROE_CADUTO, 10),
                     FoesFindable.EROE_CADUTO); 
             final Cell c = new FoeCellImpl("res/sprites/npcs/earth/front-2.png", boss);
             fList.get(1).setCell(POS1, c);
