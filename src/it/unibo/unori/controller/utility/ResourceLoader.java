@@ -1,6 +1,6 @@
 package it.unibo.unori.controller.utility;
 
-import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -16,31 +16,22 @@ public final class ResourceLoader {
      * Static method that wraps class.getResourceAsStream() method to return an
      * input stream form a specified path.
      * <p>
-     * It corrects automatically paths specifying resource default folder
-     * (starting with "res") or without "/" starting separator.
+     * For compatibility purpose, it corrects automatically paths specifying resource default folder
+     * (starting with "res").
      * 
      * @param path
      *            the path to the file
      * @return A InputStream object or null if no resource with this name is
      *         found
+     * @throws IOException 
      */
     public static InputStream load(final String path) {
-        // InputStream input = ResourceLoader.class.getResourceAsStream(path);
-        String correctPath = path.replace('\\', File.separatorChar);
-        correctPath = correctPath.replace('/', File.separatorChar);
-        /*
+        String correctPath = path;
+        
         // This is for compatibility purpose
         if (correctPath.startsWith("res/")) {
-            correctPath = path.substring(3);
-            input = ResourceLoader.class.getResourceAsStream(correctPath);
+            correctPath = correctPath.substring(3);
         }
-
-        // Also this is for compatibility purpose
-        if (input == null && correctPath.charAt(0) != '/') {
-            correctPath = new StringBuilder("/").append(correctPath).toString();
-            input = ResourceLoader.class.getResourceAsStream(correctPath);
-        }*/
-        
 
         return ResourceLoader.class.getResourceAsStream(correctPath);
     }

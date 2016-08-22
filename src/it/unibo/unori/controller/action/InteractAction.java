@@ -40,7 +40,6 @@ public class InteractAction extends AbstractUnoriAction {
 
     @Override
     public void actionPerformed(final ActionEvent event) {
-        System.out.println("ActionListener chiamato");
         if (MapState.class.isInstance(this.getController().getCurrentState())) {
             final MapState currentState = (MapState) this.getController().getCurrentState();
             final MapLayer currentLayer = (MapLayer) currentState.getLayer();

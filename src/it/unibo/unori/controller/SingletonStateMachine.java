@@ -137,6 +137,7 @@ public final class SingletonStateMachine {
                     SingletonParty.getParty()
                             .setFrame(SingletonParty.getParty().getHeroTeam().getAllHeroes().get(0).getBattleFrame());
                     this.stack.pushAndRender(new MapState(SingletonParty.getParty().getCurrentGameMap()));
+                    this.saveGame();
                 } catch (IOException e) {
                     this.showDialog(e.getMessage(), ErrorSeverity.SERIUOS);
                 }
