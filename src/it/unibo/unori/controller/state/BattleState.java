@@ -273,7 +273,7 @@ public class BattleState extends AbstractGameState {
                 && !foe.getMagics().isEmpty()) {
             try {
                 this.currentDialogue = Optional.of(this.fightModel
-                        .magic(foe.getMagics().get(new Random().nextInt(foe.getMagics().size())), null, false));
+                        .magic(foe.getMagics().get(new Random().nextInt(foe.getMagics().size())), foe, false));
             } catch (NotEnoughMPExcpetion | MagicNotFoundException e) {
                 this.fightModel.getBattle().foeUsesRestore(Statistics.TOTALMP);
             }
