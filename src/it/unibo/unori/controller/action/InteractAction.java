@@ -52,14 +52,12 @@ public class InteractAction extends AbstractUnoriAction {
                     if (this.currentString.startsWith(FoeCellImpl.ENC)) {
                         final Party party = SingletonParty.getParty();
                         try {
-                            this.getController().getStack()
-                                    .pushAndRender(new BattleState(party, new FoeSquadImpl(party.getCurrentGameMap()
-                                            .getCell(new Position(
-                                                    party.getCurrentPosition().getPosX()
-                                                            + party.getOrientation().getXSkidding(),
-                                                    party.getCurrentPosition().getPosY()
-                                                            + party.getOrientation().getYSkidding()))
-                                            .getBoss())));
+                            final Position bossPos = new Position(
+                                    party.getCurrentPosition().getPosX() + party.getOrientation().getXSkidding(),
+                                    party.getCurrentPosition().getPosY() + party.getOrientation().getYSkidding());
+                            this.getController().getStack().pushAndRender(new BattleState(party,
+                                    new FoeSquadImpl(party.getCurrentGameMap().getCell(bossPos).getBoss())));
+                            party.getCurrentGameMap().replaceCell(bossPos, party.getCurrentPosition());
                         } catch (SpriteNotFoundException e) {
                             this.getController().showError(e.getMessage());
                         }
