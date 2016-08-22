@@ -50,9 +50,6 @@ public class CharacterSelectionLayer extends Layer {
 
     private final Map<String, Jobs> party = new HashMap<String, Jobs>();
 
-    // TODO bottone che aggiunge il job
-    // TODO visualizzazione personaggio nome uguale
-    // TODO disabilitare il campo testo
     /**
      * Displays the character-selection menu.
      *
@@ -212,7 +209,7 @@ public class CharacterSelectionLayer extends Layer {
 
             partyPanel.add(new JLabel(new ImageIcon(getSprite())));
             partyPanel.validate();
-        } // TODO errore
+        }
 
         if (party.size() == maxHero) {
             button.setEnabled(true);

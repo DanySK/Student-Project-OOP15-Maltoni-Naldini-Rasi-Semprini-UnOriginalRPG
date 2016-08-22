@@ -72,7 +72,7 @@ public class MapLayer extends Layer {
      * @throws SpriteNotFoundException
      *             if a sprite is not found
      */
-    public MapLayer(final Map<Integer, Action> movement, // TODO keybindings
+    public MapLayer(final Map<Integer, Action> movement,
             final Action interact, final Action menu, final String[][] map, final Point position,
             final String spriteSheetPath) throws SpriteNotFoundException {
         super();

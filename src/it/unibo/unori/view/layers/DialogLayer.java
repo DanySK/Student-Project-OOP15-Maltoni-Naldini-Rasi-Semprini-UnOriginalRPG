@@ -28,7 +28,6 @@ public class DialogLayer extends Layer {
     private final Button button;
     private static final Dimension SIZE = new Dimension(View.SIZE.width / 2, View.SIZE.height / 2);
 
-    // TODO sfondo non nero
     /**
      * Creates a dialog.
      *
