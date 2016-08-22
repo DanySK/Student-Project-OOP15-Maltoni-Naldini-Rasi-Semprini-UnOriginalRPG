@@ -10,12 +10,15 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
+import it.unibo.unori.model.character.Foe;
+import it.unibo.unori.model.character.FoeImpl;
 import it.unibo.unori.model.character.Npc;
 import it.unibo.unori.model.items.Item;
 import it.unibo.unori.model.maps.Position;
 import it.unibo.unori.model.maps.cell.Cell;
 import it.unibo.unori.model.maps.cell.CellState;
 import it.unibo.unori.model.maps.cell.ChestCellImpl;
+import it.unibo.unori.model.maps.cell.FoeCellImpl;
 import it.unibo.unori.model.maps.cell.MapCellImpl;
 import it.unibo.unori.model.maps.cell.NPCCellImpl;
 import it.unibo.unori.model.maps.cell.ObjectCellImpl;
@@ -42,6 +45,8 @@ public class CellSerializer implements JsonSerializer<Cell>, JsonDeserializer<Ce
     private static final String INITIAL_POS = "initialPos";
     // ChestCellImpl
     private static final String ITEM = "o";
+    // FoeCellImpl
+    private static final String FOE = "foe";
 
     @Override
     public JsonElement serialize(final Cell src, final Type typeOfSrc, final JsonSerializationContext context) {
@@ -77,6 +82,9 @@ public class CellSerializer implements JsonSerializer<Cell>, JsonDeserializer<Ce
                 item = null;
             }
             jObj.add(ITEM, item);
+        } else if (FoeCellImpl.class.isInstance(src)) {
+            final JsonElement foe = context.serialize(((FoeCellImpl) src).getBoss(), FoeImpl.class);
+            jObj.add(FOE, foe);
         }
 
         return jObj;
@@ -109,6 +117,9 @@ public class CellSerializer implements JsonSerializer<Cell>, JsonDeserializer<Ce
             final Item item = context.deserialize(jObj.get(ITEM), Item.class);
             returnCell = new ChestCellImpl(item);
             returnCell.setFrame(path);
+        } else if (jObj.has(FOE)) {
+            final Foe foe = context.deserialize(jObj.get(FOE), Foe.class);
+            returnCell = new FoeCellImpl(path, foe);
         } else {
             returnCell = new SimpleCellImpl(path, state);
         }
