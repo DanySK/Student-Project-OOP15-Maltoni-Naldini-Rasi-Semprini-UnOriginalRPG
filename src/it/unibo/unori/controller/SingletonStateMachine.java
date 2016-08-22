@@ -87,7 +87,6 @@ public final class SingletonStateMachine {
          */
         @Override
         public void begin() {
-            System.out.println("Begin");
             stack.pushAndRender(new MainMenuState());
         }
 
@@ -101,24 +100,16 @@ public final class SingletonStateMachine {
         @Override
         public void loadGame() throws IOException {
             this.loader.loadWorld();
-            System.out.println("World loaded");
             SingletonParty.loadParty(this.fileManager.loadParty());
-            System.out.println("Party loaded");
             final MapType type = this.fileManager.loadMapType();
             final MAPS ty = type.getMapType();
-            System.out.println("Map type loaded: " + ty);
-            if (/*type.getMapType()*/ty.equals(MAPS.DUNGEON)) {
-                System.out.println("If done: true");
+            if (ty.equals(MAPS.DUNGEON)) {
                 SingletonParty.getParty().setCurrentMap(
                         this.loader.getBuilder().getDungeonBuilder().getFloor(type.getFloor()).get(type.getRoom()));
-                System.out.println("Current map set: dungeon");
             } else {
-                System.out.println("If done: false");
                 SingletonParty.getParty().setCurrentMap(this.loader.getBuilder().getGameMap(type.getMapType()));
-                System.out.println("Current map set: outside");
             }
             final GameState loadedGame = new MapState(SingletonParty.getParty().getCurrentGameMap());
-            System.out.println("GameState created");
 
             this.stack.pushAndRender(loadedGame);
         }
@@ -174,7 +165,6 @@ public final class SingletonStateMachine {
         public void closeMenu() throws UnexpectedStateException {
             if (!this.stack.isEmpty() && InGameMenuState.class.isInstance(this.stack.peek())) {
                 this.stack.pop();
-                // this.stack.render(); //TODO here I should NOT render
             } else {
                 throw new UnexpectedStateException();
             }

@@ -14,8 +14,8 @@ import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.KeyStroke;
 
-import it.unibo.unori.ResourceLoader;
 import it.unibo.unori.controller.action.InteractAction;
+import it.unibo.unori.controller.utility.ResourceLoader;
 import it.unibo.unori.model.character.Foe;
 import it.unibo.unori.model.character.FoeSquad;
 import it.unibo.unori.model.character.Hero;

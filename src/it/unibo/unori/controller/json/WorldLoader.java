@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +21,8 @@ import it.unibo.unori.model.maps.WorldBuilder.MAPS;
  * This class loads all the world from files.
  */
 public class WorldLoader {
-    private static final String MAPS_DIRECTORY = "res/maps";
+    private static final String HOME = "user.home";
+    private static final String MAPS_DIRECTORY = JsonFileManager.DEFAULT_FOLDER + "/maps";
     private static final String DUNGEON_DIRECTORY = MAPS_DIRECTORY + "/dungeon";
     /**
      * The first floor number.
@@ -112,21 +112,31 @@ public class WorldLoader {
      *             if there was a problem writing to the writer
      */
     public void serializeMaps(final boolean rebuild) throws IOException {
-        final JsonFileManager fm = new JsonFileManager();
-        if (rebuild) {
-            builder.buildWorld();
-        }
-        fm.saveMap(builder.getGameMap(MAPS.CITY), VILLAGE);
-        fm.saveMap(builder.getGameMap(MAPS.SHOP), SHOP);
-        fm.saveMap(builder.getGameMap(MAPS.CHURCH), CHURCH);
-        fm.saveMap(builder.getGameMap(MAPS.HOUSE), FOUR_NPC_ROOM);
-        fm.saveMap(builder.getGameMap(MAPS.AISLE), PASSAGE);
-        fm.saveMap(builder.getGameMap(MAPS.DENTRANCE), DUNGEON_ENTRANCE);
+        final File mapsDir = new File(System.getProperty(HOME), MAPS_DIRECTORY);
+        final File dungeonDir = new File(System.getProperty(HOME), DUNGEON_DIRECTORY);
+        if ((mapsDir.isDirectory() || mapsDir.mkdirs()) && (dungeonDir.isDirectory() || dungeonDir.mkdirs())) {
 
-        for (int i = FIRST_FLOOR_NUMBER; i <= LAST_FLOOR_NUMBER; i++) {
-            final List<GameMap> currentFloor = builder.getDungeonBuilder().getFloor(i);
-            for (int j = 0; j < currentFloor.size(); j++) {
-                fm.saveMap(currentFloor.get(j), getFloorRoomPath(i, j));
+            final JsonFileManager fm = new JsonFileManager();
+            if (rebuild) {
+                builder.buildWorld();
+            }
+
+            fm.saveMap(builder.getGameMap(MAPS.CITY), VILLAGE);
+            fm.saveMap(builder.getGameMap(MAPS.SHOP), SHOP);
+            fm.saveMap(builder.getGameMap(MAPS.CHURCH), CHURCH);
+            fm.saveMap(builder.getGameMap(MAPS.HOUSE), FOUR_NPC_ROOM);
+            fm.saveMap(builder.getGameMap(MAPS.AISLE), PASSAGE);
+            fm.saveMap(builder.getGameMap(MAPS.DENTRANCE), DUNGEON_ENTRANCE);
+
+            for (int i = FIRST_FLOOR_NUMBER; i <= LAST_FLOOR_NUMBER; i++) {
+                final List<GameMap> currentFloor = builder.getDungeonBuilder().getFloor(i);
+                for (int j = 0; j < currentFloor.size(); j++) {
+                    final String path = getFloorRoomPath(i, j);
+                    final File dir = new File(System.getProperty(HOME), path).getParentFile();
+                    if (dir.isDirectory() || dir.mkdir()) {
+                        fm.saveMap(currentFloor.get(j), path);
+                    }
+                }
             }
         }
     }
@@ -160,7 +170,7 @@ public class WorldLoader {
             default:
                 throw new IllegalArgumentException("Floor not present");
         }
-        return directory.append("/Map").append(roomNumber).toString();
+        return directory.append("/Map").append(roomNumber).append(".json").toString();
     }
 
     /**
@@ -216,9 +226,7 @@ public class WorldLoader {
             builder.setGameMap(convertStandardPathToMapName(DUNGEON_ENTRANCE),
                     this.fileManager.loadMap(DUNGEON_ENTRANCE));
 
-            builder.getDungeonBuilder().dungeonBuild(); // Necessary to generate
-                                                        // maps to have floor
-                                                        // sizes
+            builder.getDungeonBuilder().dungeonBuild(); // Necessary to generate maps to have floor sizes
 
             for (int i = FIRST_FLOOR_NUMBER; i <= LAST_FLOOR_NUMBER; i++) {
                 final List<GameMap> currentFloor = new ArrayList<>();
@@ -335,12 +343,20 @@ public class WorldLoader {
      */
     private boolean checkFiles() {
         try {
-            return new File(FOUR_NPC_ROOM).isFile() && new File(DUNGEON_ENTRANCE).isFile() && new File(CHURCH).isFile()
-                    && new File(PASSAGE).isFile() && new File(SHOP).isFile() && new File(VILLAGE).isFile()
-                    && new File(getFloorRoomPath(FIRST_FLOOR_NUMBER, 0)).getParentFile().getParentFile().isDirectory()
-                    && Arrays.asList(Optional.ofNullable(
-                            new File(getFloorRoomPath(FIRST_FLOOR_NUMBER, 0)).getParentFile().getParentFile().list())
-                            .orElse(new String[0])).size() > 0;
+            boolean check = new File(System.getProperty(HOME), FOUR_NPC_ROOM).isFile()
+                    && new File(System.getProperty(HOME), DUNGEON_ENTRANCE).isFile()
+                    && new File(System.getProperty(HOME), CHURCH).isFile()
+                    && new File(System.getProperty(HOME), PASSAGE).isFile()
+                    && new File(System.getProperty(HOME), SHOP).isFile()
+                    && new File(System.getProperty(HOME), VILLAGE).isFile();
+
+            for (int i = FIRST_FLOOR_NUMBER; i <= LAST_FLOOR_NUMBER; i++) {
+                final List<GameMap> currentFloor = builder.getDungeonBuilder().getFloor(i);
+                for (int j = 0; j < currentFloor.size(); j++) {
+                    check = check & new File(System.getProperty(HOME), getFloorRoomPath(i, j)).isFile();
+                }
+            }
+            return check;
         } catch (Exception e) {
             return false;
         }
