@@ -1,0 +1,62 @@
+Violated encapsulation: 0
+
+Poor design: 4
+src/it/unibo/unori/view/layers/CharacterSelectionLayer.java:143:	The String literal "<br>" appears 11 times in this file; the first occurrence is on line 143
+src/it/unibo/unori/view/layers/common/ItemMenu.java:132:	The String literal "CLOSE" appears 4 times in this file; the first occurrence is on line 132
+src/it/unibo/unori/view/layers/common/PartyMenu.java:84:	The String literal "CLOSE" appears 6 times in this file; the first occurrence is on line 84
+src/it/unibo/unori/view/layers/ingame/PartyInfoMenu.java:67:	The String literal "<br>" appears 8 times in this file; the first occurrence is on line 67
+
+Very bad code practices and potential bugs: 0
+
+Bad exception handling: 0
+
+Portability issues: 0
+
+Bad naming: 0
+
+Bad code practices: 0
+
+Use modern Java: 0
+
+Performance and resource waste: 23
+src/it/unibo/unori/view/layers/CharacterSelectionLayer.java:137:	StringBuffer constructor is initialized with size 16, but has at least 192 characters appended.
+src/it/unibo/unori/view/layers/CharacterSelectionLayer.java:139:	StringBuffer (or StringBuilder).append is called 2 consecutive times with literal Strings. Use a single append with a single combined String.
+src/it/unibo/unori/view/layers/CharacterSelectionLayer.java:143:	StringBuffer (or StringBuilder).append is called 2 consecutive times with literal Strings. Use a single append with a single combined String.
+src/it/unibo/unori/view/layers/CharacterSelectionLayer.java:146:	StringBuffer (or StringBuilder).append is called 2 consecutive times with literal Strings. Use a single append with a single combined String.
+src/it/unibo/unori/view/layers/CharacterSelectionLayer.java:149:	StringBuffer (or StringBuilder).append is called 2 consecutive times with literal Strings. Use a single append with a single combined String.
+src/it/unibo/unori/view/layers/CharacterSelectionLayer.java:152:	StringBuffer (or StringBuilder).append is called 2 consecutive times with literal Strings. Use a single append with a single combined String.
+src/it/unibo/unori/view/layers/CharacterSelectionLayer.java:155:	StringBuffer (or StringBuilder).append is called 2 consecutive times with literal Strings. Use a single append with a single combined String.
+src/it/unibo/unori/view/layers/CharacterSelectionLayer.java:158:	StringBuffer (or StringBuilder).append is called 2 consecutive times with literal Strings. Use a single append with a single combined String.
+src/it/unibo/unori/view/layers/CharacterSelectionLayer.java:161:	StringBuffer (or StringBuilder).append is called 2 consecutive times with literal Strings. Use a single append with a single combined String.
+src/it/unibo/unori/view/layers/CharacterSelectionLayer.java:164:	StringBuffer (or StringBuilder).append is called 2 consecutive times with literal Strings. Use a single append with a single combined String.
+src/it/unibo/unori/view/layers/CharacterSelectionLayer.java:167:	StringBuffer (or StringBuilder).append is called 2 consecutive times with literal Strings. Use a single append with a single combined String.
+src/it/unibo/unori/view/layers/CharacterSelectionLayer.java:170:	StringBuffer (or StringBuilder).append is called 2 consecutive times with literal Strings. Use a single append with a single combined String.
+src/it/unibo/unori/view/layers/CharacterSelectionLayer.java:173:	StringBuffer (or StringBuilder).append is called 2 consecutive times with literal Strings. Use a single append with a single combined String.
+src/it/unibo/unori/view/layers/ingame/PartyInfoMenu.java:61:	StringBuffer constructor is initialized with size 16, but has at least 113 characters appended.
+src/it/unibo/unori/view/layers/ingame/PartyInfoMenu.java:63:	StringBuffer (or StringBuilder).append is called 2 consecutive times with literal Strings. Use a single append with a single combined String.
+src/it/unibo/unori/view/layers/ingame/PartyInfoMenu.java:67:	StringBuffer (or StringBuilder).append is called 2 consecutive times with literal Strings. Use a single append with a single combined String.
+src/it/unibo/unori/view/layers/ingame/PartyInfoMenu.java:70:	StringBuffer (or StringBuilder).append is called 2 consecutive times with literal Strings. Use a single append with a single combined String.
+src/it/unibo/unori/view/layers/ingame/PartyInfoMenu.java:73:	StringBuffer (or StringBuilder).append is called 2 consecutive times with literal Strings. Use a single append with a single combined String.
+src/it/unibo/unori/view/layers/ingame/PartyInfoMenu.java:78:	StringBuffer (or StringBuilder).append is called 3 consecutive times with literal Strings. Use a single append with a single combined String.
+src/it/unibo/unori/view/layers/ingame/PartyInfoMenu.java:84:	StringBuffer (or StringBuilder).append is called 2 consecutive times with literal Strings. Use a single append with a single combined String.
+src/it/unibo/unori/view/layers/ingame/PartyInfoMenu.java:87:	StringBuffer (or StringBuilder).append is called 2 consecutive times with literal Strings. Use a single append with a single combined String.
+src/it/unibo/unori/view/layers/ingame/PartyInfoMenu.java:90:	StringBuffer (or StringBuilder).append is called 2 consecutive times with literal Strings. Use a single append with a single combined String.
+src/it/unibo/unori/view/layers/ingame/PartyInfoMenu.java:93:	StringBuffer (or StringBuilder).append is called 2 consecutive times with literal Strings. Use a single append with a single combined String.
+
+Potentially dangerous side effects: 0
+
+Use final: 0
+
+Complex code: 0
+
+Concurrency issues: 0
+
+Testing issues: 0
+
+Android-specific issues: 0
+
+Minor issues: 1
+src/it/unibo/unori/controller/action/AbstractUnoriAction.java:23:	It is a good practice to call super() in a constructor
+
+Other errors: 0
+
