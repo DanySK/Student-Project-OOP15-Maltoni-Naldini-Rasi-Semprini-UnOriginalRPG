@@ -1,0 +1,921 @@
+Found a 30 line (216 tokens) duplication in the following files: 
+Starting at line 194 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/BattleLayer.java
+Starting at line 303 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/MapLayer.java
+
+            y = SIZE.height - height - border / 2;
+
+            g.setColor(Color.WHITE);
+            g.fillRect(border, SIZE.height - border - height, SIZE.width - border * 2, height);
+
+            g.setColor(Color.BLACK);
+            final StringBuilder stringBuilder = new StringBuilder();
+
+            for (final char c : dialogueText.toCharArray()) {
+                if (c == '\n') {
+                    y += g.getFontMetrics().getHeight();
+                    g.drawString(stringBuilder.toString(), x, y);
+
+                    stringBuilder.setLength(0);
+                } else if (g.getFontMetrics().stringWidth(stringBuilder.toString() + c) > SIZE.width
+                        - border * leftBorder) {
+                    y += g.getFontMetrics().getHeight();
+                    g.drawString(stringBuilder.toString(), x, y);
+
+                    stringBuilder.setLength(0);
+                    stringBuilder.append(c);
+                } else {
+                    stringBuilder.append(c);
+                }
+            }
+            g.drawString(stringBuilder.toString(), x, y + g.getFontMetrics().getHeight());
+        }
+    }
+
+    private BufferedImage getHeroSprite(final String spriteSheetPath) throws SpriteNotFoundException {
+=====================================================================
+Found a 29 line (191 tokens) duplication in the following files: 
+Starting at line 106 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+Starting at line 173 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+
+                            new PartyMenu(inGameStack, entry.getKey(), heroTeam, bag, BORDER + SIZE.width + x, y));
+                }
+            });
+            buttons.add(button);
+        }
+
+        final Map<Item, Integer> miscellaneous = bag.getMiscellaneous();
+        for (final Map.Entry<Item, Integer> entry : miscellaneous.entrySet()) {
+            final MenuButton button = new MenuButton(entry.getKey().getName() + ", " + entry.getValue());
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(final ActionEvent e) {
+                    inGameStack.push(
+                            new PartyMenu(inGameStack, entry.getKey(), heroTeam, bag, BORDER + SIZE.width + x, y));
+                }
+            });
+            buttons.add(button);
+        }
+
+        for (final MenuButton button : buttons) {
+            this.add(button);
+        }
+
+        final ActionMap actionMap = getActionMap();
+        final InputMap inputMap = getInputMap(WHEN_IN_FOCUSED_WINDOW);
+
+        actionMap.put("CLOSE", new CloseAction());
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "CLOSE");
+    }
+=====================================================================
+Found a 15 line (171 tokens) duplication in the following files: 
+Starting at line 22 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/character/jobs/GrowthFactory.java
+Starting at line 122 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/character/jobs/GrowthFactory.java
+
+    private Map<Statistics, Integer> createWarriorGrowth() {
+        final Map<Statistics, Integer> m = new HashMap<>();
+        m.put(Statistics.TOTALHP, MEDIUMGROWTHPV);
+        m.put(Statistics.TOTALMP, GrowthParameters.LOW.value);
+        m.put(Statistics.SPEED, GrowthParameters.MEDIUM.value);
+        m.put(Statistics.FIREATK, GrowthParameters.MEDIUM_LOW.value);
+        m.put(Statistics.FIREDEF, GrowthParameters.MEDIUM_LOW.value);
+        m.put(Statistics.THUNDERATK, GrowthParameters.MEDIUM_LOW.value);
+        m.put(Statistics.THUNDERDEF, GrowthParameters.MEDIUM_LOW.value);
+        m.put(Statistics.ICEATK, GrowthParameters.MEDIUM_LOW.value);
+        m.put(Statistics.ICEDEF, GrowthParameters.MEDIUM_LOW.value);
+        m.put(Statistics.PHYSICATK, GrowthParameters.HIGH.value);
+        m.put(Statistics.PHYSICDEF, GrowthParameters.HIGH.value);
+        return m;
+    }
+=====================================================================
+Found a 13 line (128 tokens) duplication in the following files: 
+Starting at line 15 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/character/jobs/StatisticsFactory.java
+Starting at line 135 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/character/jobs/StatisticsFactory.java
+
+    private Map<Statistics, Integer> createWarriorStats() {
+        final Map<Statistics, Integer> m = new HashMap<>();
+        m.put(Statistics.TOTALHP, 1500);
+        m.put(Statistics.TOTALMP, 500);
+        m.put(Statistics.SPEED, 1100);
+        m.put(Statistics.FIREATK, 800);
+        m.put(Statistics.FIREDEF, 750);
+        m.put(Statistics.THUNDERATK, 800);
+        m.put(Statistics.THUNDERDEF, 750);
+        m.put(Statistics.ICEATK, 800);
+        m.put(Statistics.ICEDEF, 750);
+        m.put(Statistics.PHYSICATK, 2000);
+        m.put(Statistics.PHYSICDEF, 2000);
+=====================================================================
+Found a 29 line (121 tokens) duplication in the following files: 
+Starting at line 69 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/battle/MagicMenu.java
+Starting at line 168 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/PartyMenu.java
+
+                    battleMenuStack.push(new EnemiesMenu(battleMenuStack, magic, foeTeam, SIZE.width + x + BORDER, y));
+                }
+            });
+            this.add(button);
+        }
+
+        final ActionMap actionMap = getActionMap();
+        final InputMap inputMap = getInputMap(WHEN_IN_FOCUSED_WINDOW);
+
+        actionMap.put("CLOSE", new CloseAction());
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "CLOSE");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setEnabled(final boolean b) {
+        for (final Component component : this.getComponents()) {
+            component.setEnabled(b);
+        }
+    }
+
+    private class CloseAction extends AbstractAction {
+        CloseAction() {
+            super();
+        }
+
+        public void actionPerformed(final ActionEvent e) {
+=====================================================================
+Found a 9 line (111 tokens) duplication in the following files: 
+Starting at line 25 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/character/jobs/GrowthFactory.java
+Starting at line 89 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/character/jobs/GrowthFactory.java
+Starting at line 125 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/character/jobs/GrowthFactory.java
+
+        m.put(Statistics.TOTALMP, GrowthParameters.LOW.value);
+        m.put(Statistics.SPEED, GrowthParameters.MEDIUM.value);
+        m.put(Statistics.FIREATK, GrowthParameters.MEDIUM_LOW.value);
+        m.put(Statistics.FIREDEF, GrowthParameters.MEDIUM_LOW.value);
+        m.put(Statistics.THUNDERATK, GrowthParameters.MEDIUM_LOW.value);
+        m.put(Statistics.THUNDERDEF, GrowthParameters.MEDIUM_LOW.value);
+        m.put(Statistics.ICEATK, GrowthParameters.MEDIUM_LOW.value);
+        m.put(Statistics.ICEDEF, GrowthParameters.MEDIUM_LOW.value);
+        m.put(Statistics.PHYSICATK, GrowthParameters.HIGH.value);
+=====================================================================
+Found a 15 line (111 tokens) duplication in the following files: 
+Starting at line 57 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/PartyMenu.java
+Starting at line 108 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/PartyMenu.java
+
+            final int y) {
+        super();
+
+        this.inGameStack = inGameStack;
+
+        this.setBackground(Color.WHITE);
+        this.setLayout(new GridLayout(0, 1, BORDER, BORDER));
+        this.setBounds(x, y, SIZE.width, SIZE.height);
+
+        this.setBorder(BorderFactory.createEmptyBorder(BORDER, BORDER, BORDER, BORDER));
+
+        for (final Hero hero : heroTeam.getAllHeroes()) {
+            final MenuButton button = new MenuButton(hero.getName());
+            button.addActionListener(new ObjectUseActionListener(item, hero, bag));
+            button.addActionListener(new ActionListener() {
+=====================================================================
+Found a 8 line (107 tokens) duplication in the following files: 
+Starting at line 99 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+Starting at line 166 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+
+        final Map<Potion, Integer> potions = bag.getPotions();
+        for (final Map.Entry<Potion, Integer> entry : potions.entrySet()) {
+            final MenuButton button = new MenuButton(entry.getKey().getName() + ", " + entry.getValue());
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(final ActionEvent e) {
+                    inGameStack.push(
+                            new PartyMenu(inGameStack, entry.getKey(), heroTeam, bag, BORDER + SIZE.width + x, y));
+=====================================================================
+Found a 15 line (106 tokens) duplication in the following files: 
+Starting at line 56 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/PartyMenu.java
+Starting at line 152 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/PartyMenu.java
+
+    public PartyMenu(final MenuStack inGameStack, final Item item, final HeroTeam heroTeam, final Bag bag, final int x,
+            final int y) {
+        super();
+
+        this.inGameStack = inGameStack;
+
+        this.setBackground(Color.WHITE);
+        this.setLayout(new GridLayout(0, 1, BORDER, BORDER));
+        this.setBounds(x, y, SIZE.width, SIZE.height);
+
+        this.setBorder(BorderFactory.createEmptyBorder(BORDER, BORDER, BORDER, BORDER));
+
+        for (final Hero hero : heroTeam.getAllHeroes()) {
+            final MenuButton button = new MenuButton(hero.getName());
+            button.addActionListener(new ObjectUseActionListener(item, hero, bag));
+=====================================================================
+Found a 17 line (103 tokens) duplication in the following files: 
+Starting at line 29 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/controller/test/JobsSetupTest.java
+Starting at line 57 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/controller/test/JobsSetupTest.java
+Starting at line 85 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/controller/test/JobsSetupTest.java
+Starting at line 113 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/controller/test/JobsSetupTest.java
+
+        final StatisticsFactory sf = new StatisticsFactory();
+        final JobsSetup js = new JobsSetup();
+        for (final Jobs j : Jobs.values()) {
+            Optional<String> path = Optional.empty();
+            try {
+                path = Optional.of(JobsSetup.getPath(j));
+                if (j.equals(Jobs.DUMP)) {
+                    fail(PATH_NOT_FOUND);
+                }
+            } catch (FileNotFoundException e) {
+                if (!j.equals(Jobs.DUMP)) {
+                    fail(PATH_NOT_FOUND);
+                }
+            }
+
+            if (path.isPresent()) {
+                assertEquals(sf.getJobStats(j), js.getDefaultStatsMap(path.get()));
+=====================================================================
+Found a 14 line (98 tokens) duplication in the following files: 
+Starting at line 108 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/PartyMenu.java
+Starting at line 152 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/PartyMenu.java
+
+            final int y, final ActionListener battleActionListener) {
+        super();
+
+        this.inGameStack = inGameStack;
+
+        this.setBackground(Color.WHITE);
+        this.setLayout(new GridLayout(0, 1, BORDER, BORDER));
+        this.setBounds(x, y, SIZE.width, SIZE.height);
+
+        this.setBorder(BorderFactory.createEmptyBorder(BORDER, BORDER, BORDER, BORDER));
+
+        for (final Hero hero : heroTeam.getAllHeroes()) {
+            final MenuButton button = new MenuButton(hero.getName());
+            button.addActionListener(new ObjectUseActionListener(item, hero, bag));
+=====================================================================
+Found a 13 line (94 tokens) duplication in the following files: 
+Starting at line 73 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+Starting at line 87 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+Starting at line 100 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+
+        for (final Map.Entry<Armor, Integer> entry : armors.entrySet()) {
+            final MenuButton button = new MenuButton(entry.getKey().getName() + ", " + entry.getValue());
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(final ActionEvent e) {
+                    inGameStack.push(
+                            new PartyMenu(inGameStack, entry.getKey(), heroTeam, bag, BORDER + SIZE.width + x, y));
+                }
+            });
+            buttons.add(button);
+        }
+
+        final Map<Weapon, Integer> weapons = bag.getWeapons();
+=====================================================================
+Found a 38 line (93 tokens) duplication in the following files: 
+Starting at line 70 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/PartyMenu.java
+Starting at line 122 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/PartyMenu.java
+
+            button.addActionListener(new ObjectUseActionListener(item, hero, bag));
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(final ActionEvent e) {
+                    inGameStack.pop();
+                    inGameStack.pop();
+                }
+            });
+            this.add(button);
+        }
+
+        final ActionMap actionMap = getActionMap();
+        final InputMap inputMap = getInputMap(WHEN_IN_FOCUSED_WINDOW);
+
+        actionMap.put("CLOSE", new CloseAction());
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "CLOSE");
+    }
+
+    /**
+     * Creates the party menu, in which every button call an action given.
+     *
+     * @param inGameStack
+     *            the in-game menu stack
+     * @param item
+     *            the item to be used
+     * @param heroTeam
+     *            the hero team
+     * @param bag
+     *            the party bag
+     * @param x
+     *            the x position
+     * @param y
+     *            the y position
+     * @param battleActionListener
+     *            the action to be called by every button
+     *
+     */
+    public PartyMenu(final MenuStack inGameStack, final Item item, final HeroTeam heroTeam, final Bag bag, final int x,
+=====================================================================
+Found a 11 line (91 tokens) duplication in the following files: 
+Starting at line 73 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+Starting at line 87 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+Starting at line 100 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+Starting at line 113 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+Starting at line 180 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+
+        for (final Map.Entry<Armor, Integer> entry : armors.entrySet()) {
+            final MenuButton button = new MenuButton(entry.getKey().getName() + ", " + entry.getValue());
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(final ActionEvent e) {
+                    inGameStack.push(
+                            new PartyMenu(inGameStack, entry.getKey(), heroTeam, bag, BORDER + SIZE.width + x, y));
+                }
+            });
+            buttons.add(button);
+        }
+=====================================================================
+Found a 12 line (88 tokens) duplication in the following files: 
+Starting at line 58 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+Starting at line 56 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/ingame/InGameMainMenu.java
+
+    public ItemMenu(final MenuStack inGameStack, final HeroTeam heroTeam, final Bag bag, final int x, final int y) {
+        super();
+
+        this.inGameStack = inGameStack;
+
+        this.setBackground(Color.WHITE);
+        this.setBounds(x, y, SIZE.width, SIZE.height);
+        this.setLayout(new GridLayout(0, 1, BORDER, BORDER));
+
+        this.setBorder(BorderFactory.createEmptyBorder(BORDER, BORDER, BORDER, BORDER));
+
+        final List<MenuButton> buttons = new LinkedList<MenuButton>();
+=====================================================================
+Found a 9 line (87 tokens) duplication in the following files: 
+Starting at line 35 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/tests/InGameMenuLayerTest.java
+Starting at line 29 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/tests/MapLayerTest.java
+
+    public InGameMenuLayerTest() {
+        final Map<Integer, Action> movement = new HashMap<Integer, Action>();
+
+        movement.put(SwingConstants.EAST, new MoveAction(SwingConstants.EAST));
+        movement.put(SwingConstants.WEST, new MoveAction(SwingConstants.WEST));
+        movement.put(SwingConstants.NORTH, new MoveAction(SwingConstants.NORTH));
+        movement.put(SwingConstants.SOUTH, new MoveAction(SwingConstants.SOUTH));
+
+        final Action interact = null;
+=====================================================================
+Found a 14 line (84 tokens) duplication in the following files: 
+Starting at line 58 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+Starting at line 153 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+
+    public ItemMenu(final MenuStack inGameStack, final HeroTeam heroTeam, final Bag bag, final int x, final int y) {
+        super();
+
+        this.inGameStack = inGameStack;
+
+        this.setBackground(Color.WHITE);
+        this.setBounds(x, y, SIZE.width, SIZE.height);
+        this.setLayout(new GridLayout(0, 1, BORDER, BORDER));
+
+        this.setBorder(BorderFactory.createEmptyBorder(BORDER, BORDER, BORDER, BORDER));
+
+        final List<MenuButton> buttons = new LinkedList<MenuButton>();
+
+        final Map<Armor, Integer> armors = bag.getArmors();
+=====================================================================
+Found a 24 line (84 tokens) duplication in the following files: 
+Starting at line 177 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/PartyMenu.java
+Starting at line 97 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/ingame/InGameMainMenu.java
+
+        actionMap.put("CLOSE", new CloseAction());
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "CLOSE");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setEnabled(final boolean b) {
+        for (final Component component : this.getComponents()) {
+            component.setEnabled(b);
+        }
+    }
+
+    private class CloseAction extends AbstractAction {
+        CloseAction() {
+            super();
+        }
+
+        public void actionPerformed(final ActionEvent e) {
+            inGameStack.pop();
+        }
+    }
+}
+=====================================================================
+Found a 13 line (82 tokens) duplication in the following files: 
+Starting at line 53 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/battle/EnemiesMenu.java
+Starting at line 53 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/battle/MagicMenu.java
+
+    public EnemiesMenu(final MenuStack battleMenuStack, final MagicAttackInterface magic, final FoeSquad foeTeam,
+            final int x, final int y) {
+
+        super();
+
+        this.battleMenuStack = battleMenuStack;
+
+        this.setBackground(Color.WHITE);
+        this.setBounds(x, y, SIZE.width, SIZE.height);
+        this.setLayout(new GridLayout(0, 1, BORDER, BORDER));
+        this.setBorder(BorderFactory.createEmptyBorder(BORDER, BORDER, BORDER, BORDER));
+
+        for (final Foe foe : foeTeam.getAliveFoes()) {
+=====================================================================
+Found a 18 line (82 tokens) duplication in the following files: 
+Starting at line 72 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/battle/MagicMenu.java
+Starting at line 193 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+Starting at line 171 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/PartyMenu.java
+
+            this.add(button);
+        }
+
+        final ActionMap actionMap = getActionMap();
+        final InputMap inputMap = getInputMap(WHEN_IN_FOCUSED_WINDOW);
+
+        actionMap.put("CLOSE", new CloseAction());
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "CLOSE");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setEnabled(final boolean b) {
+        for (final Component component : this.getComponents()) {
+            component.setEnabled(b);
+        }
+=====================================================================
+Found a 7 line (79 tokens) duplication in the following files: 
+Starting at line 73 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+Starting at line 87 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+Starting at line 113 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+Starting at line 167 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+Starting at line 180 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+
+        for (final Map.Entry<Armor, Integer> entry : armors.entrySet()) {
+            final MenuButton button = new MenuButton(entry.getKey().getName() + ", " + entry.getValue());
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(final ActionEvent e) {
+                    inGameStack.push(
+                            new PartyMenu(inGameStack, entry.getKey(), heroTeam, bag, BORDER + SIZE.width + x, y));
+=====================================================================
+Found a 23 line (77 tokens) duplication in the following files: 
+Starting at line 160 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/items/ArmorImpl.java
+Starting at line 148 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/items/WeaponImpl.java
+
+        result = PRIME * result + ((piece == null) ? 0 : piece.hashCode());
+        result = PRIME * result + ((stats == null) ? 0 : stats.hashCode());
+        return result;
+    }
+
+    /**
+     * Equals method implemented for the serialization.
+     * 
+     * @see java.lang.Object#equals(Object obj).
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+
+        final ArmorImpl other = (ArmorImpl) obj;
+=====================================================================
+Found a 20 line (76 tokens) duplication in the following files: 
+Starting at line 78 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/battle/MagicMenu.java
+Starting at line 97 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/ingame/InGameMainMenu.java
+
+        actionMap.put("CLOSE", new CloseAction());
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "CLOSE");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setEnabled(final boolean b) {
+        for (final Component component : this.getComponents()) {
+            component.setEnabled(b);
+        }
+    }
+
+    private class CloseAction extends AbstractAction {
+        CloseAction() {
+            super();
+        }
+
+        public void actionPerformed(final ActionEvent e) {
+=====================================================================
+Found a 8 line (72 tokens) duplication in the following files: 
+Starting at line 79 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/controller/action/InteractAction.java
+Starting at line 52 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/controller/action/MoveAction.java
+
+            if (currentState.checkMapChanges()) {
+                try {
+                    currentLayer.changeMap(currentState.getMap().getFrames(), new Point(
+                            currentState.getCurrentPosition().getPosX(), currentState.getCurrentPosition().getPosY()));
+                } catch (SpriteNotFoundException e) {
+                    this.getController().showError(e.getMessage());
+                }
+            }
+=====================================================================
+Found a 7 line (71 tokens) duplication in the following files: 
+Starting at line 531 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/controller/json/JsonFileManager.java
+Starting at line 576 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/controller/json/JsonFileManager.java
+
+    private <T> T deserializeJSON(final Class<T> clazz, final String path) throws IOException {
+        try {
+            if (Collection.class.isAssignableFrom(clazz) || Map.class.isAssignableFrom(clazz)) {
+                throw new IllegalArgumentException("The " + clazz.toString() + " is not deserializable by this method");
+            }
+            Optional<T> returnObject = Optional.empty();
+            final Reader reader = new InputStreamReader(ResourceLoader.load(path), "UTF-8");
+=====================================================================
+Found a 22 line (69 tokens) duplication in the following files: 
+Starting at line 120 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/battle/MagicAttack.java
+Starting at line 161 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/items/ArmorImpl.java
+Starting at line 149 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/items/WeaponImpl.java
+
+        result = prime * result + ((stats == null) ? 0 : stats.hashCode());
+        return result;
+    }
+    
+    /**
+     * Equals method implemented for the serialization.
+     * 
+     * @see java.lang.Object#equals(Object obj).
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true; 
+        }
+        if (obj == null) {
+            return false; 
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        
+        final MagicAttack other = (MagicAttack) obj;
+=====================================================================
+Found a 6 line (69 tokens) duplication in the following files: 
+Starting at line 58 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/character/jobs/GrowthFactory.java
+Starting at line 74 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/character/jobs/GrowthFactory.java
+
+        m.put(Statistics.SPEED, GrowthParameters.MEDIUM.value);
+        m.put(Statistics.FIREATK, GrowthParameters.MEDIUM.value);
+        m.put(Statistics.FIREDEF, GrowthParameters.MEDIUM_LOW.value);
+        m.put(Statistics.THUNDERATK, GrowthParameters.MEDIUM.value);
+        m.put(Statistics.THUNDERDEF, GrowthParameters.MEDIUM_LOW.value);
+        m.put(Statistics.ICEATK, GrowthParameters.MEDIUM.value);
+=====================================================================
+Found a 10 line (68 tokens) duplication in the following files: 
+Starting at line 149 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/battle/BattleTest.java
+Starting at line 159 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/battle/BattleTest.java
+
+                new MagicGenerator().getStandard(this.battle.getHeroOnTurn().getJob()));
+        try {
+            this.battle.useMagicAttack(
+                    new MagicGenerator().getStandard(this.battle.getHeroOnTurn().getJob()),
+                    this.battle.getFoeOnTurn(), true).generate();
+        } catch (NotEnoughMPExcpetion e) {
+            e.printStackTrace();
+        } catch (MagicNotFoundException e) {
+            fail("Magia non aggiunta correttamente!!");
+        }
+=====================================================================
+Found a 12 line (68 tokens) duplication in the following files: 
+Starting at line 153 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+Starting at line 57 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/ingame/InGameMainMenu.java
+
+            final ActionListener battleActionListener) {
+        super();
+
+        this.inGameStack = inGameStack;
+
+        this.setBackground(Color.WHITE);
+        this.setBounds(x, y, SIZE.width, SIZE.height);
+        this.setLayout(new GridLayout(0, 1, BORDER, BORDER));
+
+        this.setBorder(BorderFactory.createEmptyBorder(BORDER, BORDER, BORDER, BORDER));
+
+        final List<MenuButton> buttons = new LinkedList<MenuButton>();
+=====================================================================
+Found a 6 line (66 tokens) duplication in the following files: 
+Starting at line 86 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/character/jobs/GrowthFactory.java
+Starting at line 102 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/character/jobs/GrowthFactory.java
+
+    private Map<Statistics, Integer> createCookGrowth() {
+        final Map<Statistics, Integer> m = new HashMap<>();
+        m.put(Statistics.TOTALHP, MEDIUMGROWTHPV);
+        m.put(Statistics.TOTALMP, GrowthParameters.MEDIUM.value);
+        m.put(Statistics.SPEED, GrowthParameters.MEDIUM.value);
+        m.put(Statistics.FIREATK, GrowthParameters.MEDIUM_LOW.value);
+=====================================================================
+Found a 19 line (64 tokens) duplication in the following files: 
+Starting at line 60 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/battle/MagicAttack.java
+Starting at line 107 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/items/WeaponImpl.java
+
+    }
+    
+    @Override
+    public int getFireAtk() {
+        return this.stats.get(Statistics.FIREATK);
+    }
+    
+    @Override
+    public int getThunderAtk() {
+        return this.stats.get(Statistics.THUNDERATK);
+    }
+    
+    @Override
+    public int getIceAtk() {
+        return this.stats.get(Statistics.ICEATK);
+    }
+    
+    @Override
+    public int getPhysicAtk() {
+=====================================================================
+Found a 7 line (60 tokens) duplication in the following files: 
+Starting at line 39 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/controller/action/InteractAction.java
+Starting at line 41 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/controller/action/MoveAction.java
+
+    }
+
+    @Override
+    public void actionPerformed(final ActionEvent event) {
+        if (MapState.class.isInstance(this.getController().getCurrentState())) {
+            final MapState currentState = (MapState) this.getController().getCurrentState();
+            final MapLayer currentLayer = (MapLayer) currentState.getLayer();
+=====================================================================
+Found a 10 line (58 tokens) duplication in the following files: 
+Starting at line 537 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/controller/json/JsonFileManager.java
+Starting at line 582 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/controller/json/JsonFileManager.java
+
+            final Reader reader = new InputStreamReader(ResourceLoader.load(path), "UTF-8");
+            returnObject = Optional.ofNullable(gson.fromJson(reader, clazz));
+            reader.close();
+
+            return returnObject.orElseThrow(() -> new JsonIOException("The file provided is corrupted or non valid"));
+        } catch (Exception e) {
+            System.out.println(path);
+            throw e;
+        }
+    }
+=====================================================================
+Found a 13 line (58 tokens) duplication in the following files: 
+Starting at line 73 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/battle/EnemiesMenu.java
+Starting at line 75 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/PartyMenu.java
+Starting at line 127 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/PartyMenu.java
+
+                    battleMenuStack.pop();
+                }
+            });
+
+            this.add(button);
+        }
+
+        final ActionMap actionMap = getActionMap();
+        final InputMap inputMap = getInputMap(WHEN_IN_FOCUSED_WINDOW);
+
+        actionMap.put("CLOSE", new CloseAction());
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "CLOSE");
+    }
+=====================================================================
+Found a 4 line (57 tokens) duplication in the following files: 
+Starting at line 60 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/battle/EnemiesMenu.java
+Starting at line 59 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/battle/MagicMenu.java
+Starting at line 63 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+Starting at line 158 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+Starting at line 62 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/ingame/InGameMainMenu.java
+
+        this.setBackground(Color.WHITE);
+        this.setBounds(x, y, SIZE.width, SIZE.height);
+        this.setLayout(new GridLayout(0, 1, BORDER, BORDER));
+        this.setBorder(BorderFactory.createEmptyBorder(BORDER, BORDER, BORDER, BORDER));
+=====================================================================
+Found a 6 line (56 tokens) duplication in the following files: 
+Starting at line 57 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/controller/json/serializer/ArmorSerializer.java
+Starting at line 59 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/controller/json/serializer/WeaponSerializer.java
+
+        final ArmorPieces piece = context.deserialize(jObj.get(PIECE), ArmorPieces.class);
+        final String desc = jObj.get(DESC).getAsString();
+        final Map<Statistics, Integer> stats = context.deserialize(jObj.get(STATS),
+                new TypeToken<Map<Statistics, Integer>>() {
+                }.getType());
+        final Status immunity = context.deserialize(jObj.get(IMMUNITY), Status.class);
+=====================================================================
+Found a 22 line (56 tokens) duplication in the following files: 
+Starting at line 120 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/battle/MagicAttack.java
+Starting at line 136 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/character/FoeSquadImpl.java
+Starting at line 113 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/character/HeroTeamImpl.java
+Starting at line 161 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/items/ArmorImpl.java
+Starting at line 218 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/items/BagImpl.java
+Starting at line 125 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/items/PotionImpl.java
+Starting at line 149 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/items/WeaponImpl.java
+
+        result = prime * result + ((stats == null) ? 0 : stats.hashCode());
+        return result;
+    }
+    
+    /**
+     * Equals method implemented for the serialization.
+     * 
+     * @see java.lang.Object#equals(Object obj).
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true; 
+        }
+        if (obj == null) {
+            return false; 
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        
+        final MagicAttack other = (MagicAttack) obj;
+=====================================================================
+Found a 13 line (55 tokens) duplication in the following files: 
+Starting at line 73 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/battle/EnemiesMenu.java
+Starting at line 69 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/battle/MagicMenu.java
+Starting at line 75 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/PartyMenu.java
+Starting at line 127 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/PartyMenu.java
+Starting at line 168 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/PartyMenu.java
+
+                    battleMenuStack.pop();
+                }
+            });
+
+            this.add(button);
+        }
+
+        final ActionMap actionMap = getActionMap();
+        final InputMap inputMap = getInputMap(WHEN_IN_FOCUSED_WINDOW);
+
+        actionMap.put("CLOSE", new CloseAction());
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "CLOSE");
+    }
+=====================================================================
+Found a 17 line (53 tokens) duplication in the following files: 
+Starting at line 91 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/tests/InGameMenuLayerTest.java
+Starting at line 79 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/tests/MapLayerTest.java
+
+    }
+
+    private class MoveAction extends AbstractAction {
+        private static final long serialVersionUID = 1L;
+
+        private final int direction;
+
+        MoveAction(final int direction) {
+            super();
+            this.direction = direction;
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            mapLayer.move(direction);
+        }
+    }
+=====================================================================
+Found a 7 line (52 tokens) duplication in the following files: 
+Starting at line 11 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/controller/actionlistener/EscapeActionListener.java
+Starting at line 11 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/controller/actionlistener/SpecialAttackActionListener.java
+
+public class EscapeActionListener extends AbstractUnoriActionListener {
+
+    @Override
+    public void actionPerformed(final ActionEvent event) {
+        if (BattleState.class.isInstance(this.getController().getCurrentState())) {
+            final BattleState currentState = (BattleState) this.getController().getCurrentState();
+            currentState.runAway();
+=====================================================================
+Found a 9 line (52 tokens) duplication in the following files: 
+Starting at line 77 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/menu/BagMenu.java
+Starting at line 89 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/model/menu/BagMenu.java
+
+        }
+        if (this.selected.isPresent()) {
+            this.selected = Optional.of(new Pair<Item, Integer>(
+                    this.listOfItems.get(nextIndex), this.listOfQuantity.get(nextIndex)));
+        }
+    }
+    
+    @Override
+    public void scrollDown() {
+=====================================================================
+Found a 27 line (52 tokens) duplication in the following files: 
+Starting at line 126 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+Starting at line 78 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/PartyMenu.java
+Starting at line 130 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/PartyMenu.java
+
+            this.add(button);
+        }
+
+        final ActionMap actionMap = getActionMap();
+        final InputMap inputMap = getInputMap(WHEN_IN_FOCUSED_WINDOW);
+
+        actionMap.put("CLOSE", new CloseAction());
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "CLOSE");
+    }
+
+    /**
+     * Creates the item battle menu.
+     *
+     * @param inGameStack
+     *            the in-game menu stack
+     * @param heroTeam
+     *            the hero team
+     * @param bag
+     *            the party bag
+     * @param x
+     *            the x position
+     * @param y
+     *            the y position
+     * @param battleActionListener
+     *            the action to be called when using an object
+     */
+    public ItemMenu(final MenuStack inGameStack, final HeroTeam heroTeam, final Bag bag, final int x, final int y,
+=====================================================================
+Found a 12 line (52 tokens) duplication in the following files: 
+Starting at line 199 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+Starting at line 97 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/ingame/InGameMainMenu.java
+
+        actionMap.put("CLOSE", new CloseAction());
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "CLOSE");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setEnabled(final boolean b) {
+        for (final Component component : this.getComponents()) {
+            component.setEnabled(b);
+        }
+=====================================================================
+Found a 9 line (51 tokens) duplication in the following files: 
+Starting at line 77 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/battle/EnemiesMenu.java
+Starting at line 72 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/battle/MagicMenu.java
+Starting at line 126 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+Starting at line 193 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/ItemMenu.java
+Starting at line 78 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/PartyMenu.java
+Starting at line 130 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/PartyMenu.java
+Starting at line 171 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/layers/common/PartyMenu.java
+
+            this.add(button);
+        }
+
+        final ActionMap actionMap = getActionMap();
+        final InputMap inputMap = getInputMap(WHEN_IN_FOCUSED_WINDOW);
+
+        actionMap.put("CLOSE", new CloseAction());
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "CLOSE");
+    }
+=====================================================================
+Found a 13 line (51 tokens) duplication in the following files: 
+Starting at line 48 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/tests/InGameMenuLayerTest.java
+Starting at line 42 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/view/tests/MapLayerTest.java
+
+        final String[][] map = MapLayerTest.createMap("/sprites/map/rocks.png", 26, 20);
+
+        try {
+            mapLayer = new MapLayer(movement, interact, menu, map, position, spriteSheetPath);
+
+            view.push(mapLayer);
+            view.resizeTo(mapLayer);
+        } catch (final SpriteNotFoundException e) {
+            System.out.println("Sprite not found");
+        }
+    }
+
+    private class MenuAction extends AbstractAction {
+=====================================================================
+Found a 7 line (50 tokens) duplication in the following files: 
+Starting at line 24 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/controller/actionlistener/DefendActionListener.java
+Starting at line 30 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-unoriginalRPG-maltoni-naldini-rasi-semprini/src/it/unibo/unori/controller/actionlistener/MagicAttackActionListener.java
+
+    }
+
+    @Override
+    public void actionPerformed(final ActionEvent event) {
+        if (BattleState.class.isInstance(this.getController().getCurrentState())) {
+            final BattleState currentState = (BattleState) this.getController().getCurrentState();
+            currentState.defend(this.heroToDefend);
